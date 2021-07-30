@@ -1,0 +1,94 @@
+\documentclass{article} % For LaTeX2e
+
+%STANDARD PREAMBLE
+%https://tex.stackexchange.com/questions/68821/is-it-possible-to-create-a-latex-preamble-header
+\usepackage{/Users/mwojno01/Research/Learning/latex_preamble/preamble}
+
+\begin{document}
+
+\title{Notes on Ash's Probability and Measure Theory} 
+\maketitle
+\tableofcontents
+\newpage 
+\section{Section 1.2: Fields, $\sigma$-fields, measures}
+
+\subsection{Sec 1.2.1-1.2.2: Fields and $\sigma$-fields}
+
+Fields and $\sigma$-fields are important because they are the domain of measures.  Here are some definitions.
+
+\begin{definition}
+Let $\F$ be a collection of subsets of a set $\Omega$.  Then $\F$ is called a \textbf{field} if 
+
+\begin{enumerate}[label=\alph*)]
+	\item $\Omega \in \F$ 
+	\item If $A \in \F$, then $A^c \in \F$.
+	\item If $A_1,...A_n \in \F$ then $\cup_{i=1}^n A_i \in \F$. 
+\end{enumerate}
+that is, if $\Omega \in \F$ and $\F$ is closed under complementation and finite unions.
+\label{def:field}	
+\end{definition}
+
+\begin{definition}
+Let $\F$ be a collection of subsets of a set $\Omega$.  Then $\F$ is called a \textbf{sigma-field} if it satisfies Definition \ref{def:field} after replacing condition c) with
+
+\begin{enumerate}
+	\item[c')] If $A_1,A_2, ... \in \F$ then $\cup_{i=1}^\infty A_i \in \F$. 
+\end{enumerate}
+that is, if $\Omega \in \F$ and $\F$ is closed under complementation and \textit{countable} unions.
+\label{def:sigma-field}	
+\end{definition}
+
+\begin{example}
+$\F =\set{\emptyset, \Omega}$ is the smallest $\sigma$-field on $\Omega$. 
+\end{example}
+
+\begin{example}
+	$\F =2^\Omega$, i.e. the set of all subsets of $\Omega$, is the largest $\sigma$-field on $\Omega$.
+\end{example}
+
+\begin{example}
+If $A \in \Omega$ is non-empty, then $\F = \set{\emptyset, A, A^c, \Omega}$ is the smallest $\sigma$-field containing $A$.
+\end{example}
+
+\begin{question}
+Let $A_1,...,A_n$ be subsets of $\Omega$.  Describe $\sigma(\set{A_1,...,A_n})$, the smallest $\sigma$-field containing $A_1,...,A_n$.  Also describe the number of sets in $\F$.   \textit{This is Ash's Problem 1.2.8.  For answer, see GoodNotes.}	
+\end{question}
+
+\begin{example} What is an example of a collection that is a \textit{field}, but not a $\sigma$-\textit{field}?  
+
+Let $\Omega=\R$ and $\F_0 = \set{\text{finite disjoint unions of } [a,b), a \neq b}$.  Then $\F_0$ is a field, as can be easily verified.   But $\F_0$ is \underline{not} a $\sigma$-field.  Note that if $A_n = [0,\frac{1}{n})$, then $\bigcap_{n=1}^\infty A_n = \set{0}  \not\in \F_0$
+	
+\end{example}
+
+\begin{remark}
+Ash says that there is a type of reasoning that occurs so often in problems involving $\sigma$-fields that it deserves explicit mention.  It is called the \textit{good sets} principle.  See GoodNotes. 	
+\end{remark}
+
+\subsection{Sec 1.2.3-1.2.8: Measures, related set functions, and their properties}
+
+
+
+
+\begin{definition}
+A \textbf{measure} on a $\sigma$-field $\F$ is a non-negative, extended real-valued function $\mu$ on $\F$ such that whenever $A_1, A_2, ...$ form a finite or countably infinite collection of disjoint sets in $\F$, we have countable additivity; that is,
+\[ \mu \bigg( \bigcupdot_n A_n \bigg) = \ds\sum_n \mu(A_n) \]
+\label{def:measure}	
+\end{definition}
+
+\begin{definition}
+A \textbf{probability measure} is a measure (Definition \ref{def:measure}) where $\mu(\Omega)=1$.
+\label{def:prob_measure}		
+\end{definition}
+
+\begin{remark}{\remarktitle{Measure-like functions on fields}}
+A measure-like set function can be defined on \textit{fields} as well as \textit{sigma-fields} if the countable additivity condition is taken to hold whenever a countable unions \textit{does} happen to still be in the field.  	
+\end{remark}
+
+\begin{remark}
+Ash additionally assumes that a measure does not take $\mu(A) = \infty$ or $\mu(A) = -\infty$ for all $A \in \F$.  From this, we automatically obtain $\mu(\emptyset)=0$. For $\mu(A) < \infty$ for some $A$, and by considering the sequence $A, \emptyset, \emptyset, ...$, we have that $\mu(\emptyset)=0$ by countable additivity.   	
+\end{remark}
+
+\bibliography{references_ash_notes.bib}
+\bibliographystyle{unsrt}
+
+\end{document}
