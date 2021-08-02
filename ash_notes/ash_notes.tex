@@ -5,15 +5,32 @@
 \usepackage{/Users/mwojno01/Research/Learning/latex_preamble/preamble}
 
 %%% SPECIFIC TO THIS DOCUMENT
+% Sigma fields (text)
 \renewcommand{\sf}{$\sigma$-field}
 \newcommand{\sfs}{$\sigma$-fields}
 
+%Finitely additive set functions
+\newcommand{\fasf}{\tilde{\mu}_0}
 \begin{document}
 
 \title{Notes on Ash's Probability and Measure Theory} 
 \maketitle
 \tableofcontents
 \newpage 
+
+\section{Section 1.1: Some set theory practice}
+
+\begin{remark}
+If $A_1,A_2,...$ are subsets of some set $\Omega$, then
+\begin{align*} 
+\bigcup_{i=1}^\infty A_i = \bigcupdot_{i=1}^\infty \bigg(A_i \cap A_{i-1}^c \cap ... \cap A_1^c \bigg) 	
+\end{align*}
+
+In other words, any union can be re-represented as a disjoint union. This is useful because measures are countably additive on disjoint sets, so we prefer to work with collections of disjoint sets.
+\label{rk:rerepresenting_unions_as_disjoint_unions}
+\end{remark}
+
+
 \section{Section 1.2: Fields, \sfs, measures}
 
 \subsection{Sec 1.2.1-1.2.2: Fields and \sfs}
@@ -64,8 +81,8 @@ Let $A_1,...,A_n$ be subsets of $\Omega$.  Describe $\sigma(\set{A_1,...,A_n})$,
 
 \begin{example} What is an example of a collection that is a \textit{field}, but not a $\sigma$-\textit{field}?  
 
-Let $\Omega=\R$ and $\F_0 = \set{\text{finite disjoint unions of } [a,b), a \neq b}$.  Then $\F_0$ is a field, as can be easily verified.   But $\F_0$ is \underline{not} a \sf.  Note that if $A_n = [0,\frac{1}{n})$, then $\bigcap_{n=1}^\infty A_n = \set{0}  \not\in \F_0$.
-	
+Let $\Omega=\R$ and $\F_0 = \set{\text{finite disjoint unions of left semi-closed intervals } [a,b), a \neq b}$.  Then $\F_0$ is a field, as can be easily verified.\footnote{By convention, we also count $(-\infty, b)$ as left semi-closed for $-\infty<b\leq \infty$, which is necessary for the \sf\ to be closed under complements.}   But $\F_0$ is \underline{not} a \sf.  Note that if $A_n = [0,\frac{1}{n})$, then $\bigcap_{n=1}^\infty A_n = \set{0}  \not\in \F_0$.
+\label{ex:field_of_finite_disjoint_unions_of_lsc_intervals}
 \end{example}
 
 \subsubsection{``Good sets" strategy}
@@ -98,7 +115,7 @@ In the text, Ash uses this strategy to show that if $\C$ is a class of subsets o
 
  For another application, see handwritten homework exercises.	
 
-\subsection{Sec 1.2.3-1.2.8: Measures, related set functions, and their properties}
+\subsection{Sec 1.2.3-1.2.4: Measures}
 
 
 
@@ -114,13 +131,124 @@ A \textbf{probability measure} is a measure (Definition \ref{def:measure}) where
 \label{def:prob_measure}		
 \end{definition}
 
-\begin{remark}{\remarktitle{Measure-like functions on fields}}
-A measure-like set function can be defined on \textit{fields} as well as \textit{sigma-fields} if the countable additivity condition is taken to hold whenever a countable unions \textit{does} happen to still be in the field.  	
-\end{remark}
-
 \begin{remark}
 Ash additionally assumes that a measure does not take $\mu(A) = \infty$ or $\mu(A) = -\infty$ for all $A \in \F$.  From this, we automatically obtain $\mu(\emptyset)=0$. For $\mu(A) < \infty$ for some $A$, and by considering the sequence $A, \emptyset, \emptyset, ...$, we have that $\mu(\emptyset)=0$ by countable additivity.   	
 \end{remark}
+
+\begin{example}
+Let $\Omega = \set{x_1,x_2,...}$ be a finite or countably infinite set.  Let $p_1, p_2,...$ be non-negative reals.  Let $\F = 2^\Omega$.  Define
+\[\mu(A) = \ds\sum_{x_i \in A} p_i \quad \text{ for all } A \in \F\]
+Then $\mu$ is a measure on $\F$. We might call it the ``point weighting" measure. 
+\begin{itemize}
+\item If $p_i \equiv 1 \; \forall \, i$, then $\mu$ is called the \textbf{counting measure}.
+\item If $\sum_i p_i =1$, then $\mu$ is a probability measure.	
+\end{itemize}
+	
+\end{example}
+
+
+\begin{example}{\remarktitle{Lesbesgue measure}}
+Define $\mu$ such that 
+\[ \mu(a,b] = b-a \quad \forall \, a,b \in \R : b>a \]
+This requirement determines $\mu$ on a large collection of sets, the Borel Sets $\B(\R)$, defined as the smallest \sf\ of subsets of $\R$ containing all intervals $(a,b] \subset \R$.
+
+We may alternately characterize $\B(\R)$ as the smallest \sf\ containing
+\begin{itemize}
+\item all intervals $[a,b], \; a,b \in \R$.
+\item all intervals $(a,b), \; a,b \in \R$
+\item all intervals $(a,\infty), \; a \in \R$.
+\item  all intervals $[a,\infty), \; a \in \R$.
+\item 	 all intervals $(-\infty,b), \; b \in \R$.
+\item  all intervals $(-\infty,b], \; b \in \R$.
+\item  all intervals $[a,b], \; a,b \in \R$.
+\item all open sets of $\R$.\footnote{Recall that an open set is a countable union of open intervals.}
+\item all closed sets of $\R$.\footnote{Recall that a set is open iff its complement is closed.}
+\end{itemize}
+
+To illustrate these equivalences, let us equate the first two conditions. That is, let us show that a \sf\ contains all open intervals $(a,b)$ iff it contains all right semi-closed intervals $(a,b]$.  To see this, simply note
+
+\begin{align*}
+(a,b] &= \bigcap_{n=1}^\infty \bigg(a, b+\frac{1}{n}\bigg) \\
+	\intertext{and}
+(a,b) &= \bigcup_{n=1}^\infty \bigg(a, b-\frac{1}{n}\bigg] 
+\end{align*}
+
+\end{example}
+
+\begin{question}
+The text gives another description of the Borel sets $\B(\R)$ as the smallest \sf\ containing $\F_0$, the field of disjoint unions of right semi-closed intervals $(a,b]$.  Can we make the same statement about the field of finite disjoint unions of left semi-closed intervals (as presented in Example \ref{ex:field_of_finite_disjoint_unions_of_lsc_intervals})?
+\end{question}
+
+\subsection{Sec 1.2.5-1.2.6: Generalizations of measures, and their properties}
+
+The text considers some generalizations of measures that can be obtained by relaxing the domain to a field, by assuming merely finite additivity, or by allowing the range to be extended reals ($\bar{\R}$) instead of non-negative extended reals ($\bar{\R}_{\geq 0}$).  
+
+\begin{remark}
+The first two relaxations above often go together.
+However, a  countably additive function can be defined on a \textit{field} (rather than \sf) if the condition is taken to hold whenever a countable union \textit{does} happen to still be in the field.  In my notes, I will simply things by assuming that countably additive functions are always defined on \sfs.
+\label{rk:i_am_assuming_a_domain_based_on_the_type_of_additivity}
+\end{remark}	
+
+
+
+\begin{table}[!h]
+\centering	
+\begin{tabular}{rcc}
+&\multicolumn{2}{c}{\textbf{Range}} \\
+& \textbf{non-negative} & \textbf{signed} \\
+\textbf{finitely additive}& $\mu_0$ & $\tilde{\mu}_0$ \\	
+\textbf{countably additive}& $\mu$ measure  & $\tilde{\mu}$ signed measure \\
+
+\end{tabular}
+\caption{Notation for generalizations of measure (For assumed domain in each case, see Remark \ref{rk:i_am_assuming_a_domain_based_on_the_type_of_additivity}.)}
+\label{tab:notation_for_generalizations_of_measure}
+\end{table}
+
+In Table \ref{tab:notation_for_generalizations_of_measure},  we introduce some notation to try to clarify more immediately when results hold. Note the relations\footnote{So, for example, if something holds for $\tilde{\mu}_0$, it holds for $\mu$.  A simple mnemonic is that adding stuff to the notation generalizes the function.}  
+\[ \set{\mu} \subset \set{\mu_0}, \set{\tilde{\mu}} \subset \set{\tilde{\mu}_0}. \]
+ 
+ Using the notation in Table \ref{tab:notation_for_generalizations_of_measure}, we rewrite Theorem 1.2.5 of the text:
+ 
+ \begin{theorem}
+ Let $\fasf$ be a finitely additive set function on the field $\F_0$.  Then
+ \begin{enumerate}[label=\alph*)]
+ \item $\fasf(\emptyset)=0$
+ \item $\fasf(A \cup B) + \fasf (A \cap B) = \fasf(A) + \fasf(B)$ for all $A,B \in \F_0$.
+ \item If $A,B \in \F_0$ and $B \subset A$, then $\fasf(A) = \fasf(B) + \fasf(A-B)$. 
+ \item Subadditivity holds, i.e.
+ \begin{align*}
+ \mu_0 (\cup_{i=1}^n A_i)& \leq \sum_{i=1}^n \mu_0(A_i) \\
+  \mu (\cup_{i=1}^\infty A_i)& \leq \sum_{i=1}^\infty \mu(A_i) \\
+ \end{align*}
+ \end{enumerate}
+\label{thm:basic_properties_of_finitely_additive_set_functions}
+ \end{theorem}
+  
+\begin{proof}
+ We prove Theorem \ref{thm:basic_properties_of_finitely_additive_set_functions} (b).  The rest is an exercise for the reader (or see the text).
+ 
+ First, we break things into disjoint pieces
+ {\footnotesize 
+\begin{align*}
+A &= \bigg(A \cap B \bigg) \, \bigcupdot \, \bigg(A \cap B^c \bigg)	&& \implies \fasf(A) = \fasf (A \cap B) +  \fasf (A \cap B^c)  && (1) \\
+B &= \bigg(A \cap B \bigg) \, \bigcupdot \, \bigg(A^c \cap B \bigg)	&& \implies \fasf(B) = \fasf (A \cap B) +  \fasf (A^c \cap B)  && (2) \\
+A \cup B &= \bigg(A \cap B \bigg) \, \bigcupdot \, \bigg(A \cap B^c \bigg) \bigcupdot \, \bigg(A^c \cap B \bigg)	&& \implies \fasf(A \cup B) = \fasf (A \cap B) +  \fasf (A \cap B^c) + \fasf (A^c \cap B)   && (3) 
+\end{align*}
+}
+
+Summing (1) and (2), we obtain
+\[\fasf(A) + \fasf(B) = 2 \fasf(A \cap B) + \fasf(A \cap B^c) + \fasf(A^c \cap B). \]
+We use (3) to simplify the RHS, and the result follows.
+\end{proof}
+
+\begin{remark}
+In the proof of Theorem \ref{thm:basic_properties_of_finitely_additive_set_functions} (b), note that we use a common strategy -- breaking sets into disjoint pieces so that we can apply the assumed (finite or countable) additivity of the set function. 
+\end{remark}
+
+	
+ 
+
+
 
 %\bibliography{references_ash_notes.bib}
 %\bibliographystyle{unsrt}
