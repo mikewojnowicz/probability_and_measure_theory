@@ -81,7 +81,7 @@ Let $A_1,...,A_n$ be subsets of $\Omega$.  Describe $\sigma(\set{A_1,...,A_n})$,
 
 \begin{example} What is an example of a collection that is a \textit{field}, but not a $\sigma$-\textit{field}?  
 
-Let $\Omega=\R$ and $\F_0 = \set{\text{finite disjoint unions of left semi-closed intervals } [a,b), a \neq b}$.  Then $\F_0$ is a field, as can be easily verified.\footnote{By convention, we also count $(-\infty, b)$ as left semi-closed for $-\infty<b\leq \infty$, which is necessary for the \sf\ to be closed under complements.}   But $\F_0$ is \underline{not} a \sf.  Note that if $A_n = [0,\frac{1}{n})$, then $\bigcap_{n=1}^\infty A_n = \set{0}  \not\in \F_0$.
+Let $\Omega=\R$ and $\F_0 = \set{\text{finite disjoint unions of right semi-closed intervals } (a,b], a \neq b}$.  Then $\F_0$ is a field, as can be easily verified.\footnote{By convention, we also count $(a, \infty)$ as right semi-closed for $-\infty\leq a < \infty$, which is necessary for the \sf\ to be closed under complements.}   But $\F_0$ is \underline{not} a \sf.  Note that if $A_n = (-\frac{1}{n},0]$, then $\bigcap_{n=1}^\infty A_n = \set{0}  \not\in \F_0$.
 \label{ex:field_of_finite_disjoint_unions_of_lsc_intervals}
 \end{example}
 
@@ -176,12 +176,12 @@ To illustrate these equivalences, let us equate the first two conditions. That i
 \end{example}
 
 \begin{question}
-The text gives another description of the Borel sets $\B(\R)$ as the smallest \sf\ containing $\F_0$, the field of disjoint unions of right semi-closed intervals $(a,b]$.  Can we make the same statement about the field of finite disjoint unions of left semi-closed intervals (as presented in Example \ref{ex:field_of_finite_disjoint_unions_of_lsc_intervals})?
+The text gives another description of the Borel sets $\B(\R)$ as the smallest \sf\ containing $\F_0$, the field of disjoint unions of right semi-closed intervals $(a,b]$.  Can we make the same statement about the field of finite disjoint unions of left semi-closed intervals?
 \end{question}
 
 \subsection{Sec 1.2.5-1.2.6: Generalizations of measures, and their properties}
 
-The text considers some generalizations of measures that can be obtained by relaxing the domain to a field, by assuming merely finite additivity, or by allowing the range to be extended reals ($\bar{\R}$) instead of non-negative extended reals ($\bar{\R}_{\geq 0}$).  
+The text considers some generalizations of measures that can be obtained by restricting the domain to a field, by assuming merely finite additivity, or by allowing the range to be extended reals ($\bar{\R}$) instead of non-negative extended reals ($\bar{\R}_{\geq 0}$).  
 
 \begin{remark}
 The first two relaxations above often go together.
@@ -214,7 +214,8 @@ In Table \ref{tab:notation_for_generalizations_of_measure},  we introduce some n
  \begin{enumerate}[label=\alph*)]
  \item $\fasf(\emptyset)=0$
  \item $\fasf(A \cup B) + \fasf (A \cap B) = \fasf(A) + \fasf(B)$ for all $A,B \in \F_0$.
- \item If $A,B \in \F_0$ and $B \subset A$, then $\fasf(A) = \fasf(B) + \fasf(A-B)$. 
+ \item If $A,B \in \F_0$ and $B \subset A$, then $\fasf(A) = \fasf(B) + \fasf(A-B)$.  Moreover,
+ \[ \mu_0 (A) \leq \mu_0 (B) \quad \tinytext{(monotonicity)} \] 
  \item Subadditivity holds, i.e.
  \begin{align*}
  \mu_0 (\cup_{i=1}^n A_i)& \leq \sum_{i=1}^n \mu_0(A_i) \\
