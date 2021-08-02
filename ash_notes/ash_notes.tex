@@ -251,10 +251,10 @@ In Table \ref{tab:notation_for_generalizations_of_measure},  we introduce some n
  \begin{enumerate}[label=\alph*)]
  \item \label{itm:first} $\fasf(\emptyset)=0$
  \item \label{itm:second} $\fasf(A \cup B) + \fasf (A \cap B) = \fasf(A) + \fasf(B)$ for all $A,B \in \F_0$.
- \item \label{itm:part-to-whole} If $A,B \in \F_0$ and $B \subset A$, then   
-  \[ \fasf(A) = \fasf(B) + \fasf(A-B)\quad \text{(piece-to-whole)} \] 
- Moreover, under non-negativity,
- \[ \mu_0 (A) \leq \mu_0 (B) \quad \text{(monotonicity)} \] 
+ \item \label{itm:piece-and-difference} If $A,B \in \F_0$ and $B \subset A$, then   
+  \[ \fasf(A) = \fasf(B) + \fasf(A-B)\quad \text{(piece-and-difference)} \] 
+ So $\fasf(A) \geq \fasf(B)$ if $\fasf(A-B) \geq 0$. More generally, for non-negative set functions, we have
+ \[ \mu_0 (A) \geq \mu_0 (B) \quad \text{(monotonicity)} \] 
  \item \label{itm:subadditivity} Subadditivity holds, i.e.
  \begin{align*}
  \mu_0 (\cup_{i=1}^n A_i)& \leq \sum_{i=1}^n \mu_0(A_i) \\
@@ -308,7 +308,7 @@ We prove continuity from below, and leave continuity from above as an exercise t
 \begin{align*}
 A &= A_1 \cupdot A_2 - A_1 \cupdot A_3 - A_2 \cupdot ... && 	\text{ by } \eqref{eqn:union_as_disjoint_union_for_increasing_sequences} \\
 \implies \signedmu(A) &= \signedmu(A_1) + \signedmu(A_2 - A_1) + \signedmu(A_3 - A_2) + ... && \text{(countable additivity)}\\ 
-&= \signedmu(A_1) + \signedmu(A_2) - \signedmu(A_1) + \signedmu(A_3) - \signedmu(A_2) + ... && \text{(Theorem \ref{thm:basic_properties_of_finitely_additive_set_functions} \ref{itm:part-to-whole}, (*) }\\
+&= \signedmu(A_1) + \signedmu(A_2) - \signedmu(A_1) + \signedmu(A_3) - \signedmu(A_2) + ... && \text{(Theorem \ref{thm:basic_properties_of_finitely_additive_set_functions} \ref{itm:piece-and-difference}, (*) }\\
 &= \ds\lim_{n \to \infty} \signedmu(A_n) 
 \end{align*}
 Now suppose $\signedmu(A_n) = \infty$ for some $n$.   So write 
@@ -325,7 +325,7 @@ Finally suppose $\signedmu(A_n) = -\infty$ for some $n$. Then the result follows
 \end{proof}
 
 \begin{remark}
-The logic of the proof of Theorem \ref{thm:continuity_of_countably_additive_set_functions} under the finiteness assumption is as follows.  First, we re-represent the union as a disjoint union (the form is particularly simple since the sets are increasing).  This allows us to apply countable additivity. Then we apply the part-to-whole decomposition (and the subtraction is defined under the finiteness assumption). 	
+The logic of the proof of Theorem \ref{thm:continuity_of_countably_additive_set_functions} under the finiteness assumption is as follows.  First, we re-represent the union as a disjoint union (the form is particularly simple since the sets are increasing).  This allows us to apply countable additivity. Then we apply the piece-and-difference decomposition (and the subtraction is defined under the finiteness assumption). 	
 \end{remark}
 
 \begin{remark}
