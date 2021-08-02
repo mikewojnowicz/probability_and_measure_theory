@@ -18,18 +18,34 @@
 \tableofcontents
 \newpage 
 
-\section{Section 1.1: Some set theory practice}
+\section{Section 1.1: Some notes on set theory}
+
+\begin{definition}
+If $A_1 \subset A_2 \subset ...$ and $\cup_{n=1}^\infty A_n = A$, we say that the $A_n$ form a \textbf{increasing} sequence of sets with limit $A$ or that the $A_n$ increase to $A$; we write $A_n \uparrow A$.  If $A_1 \supset A_2 \supset ... $ and  	$\cap_{n=1}^\infty A_n = A$, we say that the $A_n$ form a \textbf{decreasing} sequence of sets with limit $A$ or that the $A_n$ decrease to $A$; we write $A_n \downarrow A$.
+\end{definition}
+
+
+Now some remarks on representing unions as disjoint unions. 
 
 \begin{remark}
 If $A_1,A_2,...$ are subsets of some set $\Omega$, then
 \begin{align*} 
-\bigcup_{i=1}^\infty A_i = \bigcupdot_{i=1}^\infty \bigg(A_i \cap A_{i-1}^c \cap ... \cap A_1^c \bigg) 	
+\bigcup_{n=1}^\infty A_n = \bigcupdot_{n=1}^\infty \bigg(A_n \cap A_{n-1}^c \cap ... \cap A_1^c \bigg) 	
+\labelit \label{eqn:union_as_disjoint_union}
 \end{align*}
 
 In other words, any union can be re-represented as a disjoint union. This is useful because measures are countably additive on disjoint sets, so we prefer to work with collections of disjoint sets.
 \label{rk:rerepresenting_unions_as_disjoint_unions}
 \end{remark}
 
+\begin{remark}
+If $A_n \uparrow A$, then \eqref{eqn:union_as_disjoint_union} becomes
+\begin{align*}
+	\bigcup_{n=1}^\infty A_n = \bigcupdot_{n=1}^\infty \bigg( A_n - A_{n-1} \bigg) 
+\labelit \label{eqn:union_as_disjoint_union}
+\end{align*}
+This is because $A_{n-1} \subset A_{n}$, so $A_{n-1}^c \supset A_{n}^c$ by contraposition.	
+\end{remark}
 
 \section{Section 1.2: Fields, \sfs, measures}
 
@@ -84,6 +100,11 @@ Let $A_1,...,A_n$ be subsets of $\Omega$.  Describe $\sigma(\set{A_1,...,A_n})$,
 Let $\Omega=\R$ and $\F_0 = \set{\text{finite disjoint unions of right semi-closed intervals } (a,b], a \neq b}$.  Then $\F_0$ is a field, as can be easily verified.\footnote{By convention, we also count $(a, \infty)$ as right semi-closed for $-\infty\leq a < \infty$, which is necessary for the \sf\ to be closed under complements.}   But $\F_0$ is \underline{not} a \sf.  Note that if $A_n = (-\frac{1}{n},0]$, then $\bigcap_{n=1}^\infty A_n = \set{0}  \not\in \F_0$.
 \label{ex:field_of_finite_disjoint_unions_of_lsc_intervals}
 \end{example}
+
+\begin{remark}
+A \sf\ can also be described as a field that is closed under limits of increasing sequences.  For if $A_n \in \F$ and $A_n \uparrow A$, then A is a countable union of sets in $\F$ by definition.  Conversely, if $A = \cup_{n=1}^\infty A_n$, then set $B_N := \cup_{n=1}^N A_n$ and $B_N \uparrow A$.	
+\end{remark}
+
 
 \subsubsection{``Good sets" strategy}
 
@@ -150,7 +171,7 @@ Then $\mu$ is a measure on $\F$. We might call it the ``point weighting" measure
 \begin{example}{\remarktitle{Lesbesgue measure}}
 Define $\mu$ such that 
 \[ \mu(a,b] = b-a \quad \forall \, a,b \in \R : b>a \]
-This requirement determines $\mu$ on a large collection of sets, the Borel Sets $\B(\R)$, defined as the smallest \sf\ of subsets of $\R$ containing all intervals $(a,b] \subset \R$.
+As we will see in Section \ref{sec:extension_of_measures}, this requirement determines $\mu$ on a large collection of sets, the Borel Sets $\B(\R)$, defined as the smallest \sf\ of subsets of $\R$ containing all intervals $(a,b] \subset \R$.
 
 We may alternately characterize $\B(\R)$ as the smallest \sf\ containing
 \begin{itemize}
@@ -246,7 +267,18 @@ We use (3) to simplify the RHS, and the result follows.
 In the proof of Theorem \ref{thm:basic_properties_of_finitely_additive_set_functions} (b), note that we use a common strategy -- breaking sets into disjoint pieces so that we can apply the assumed (finite or countable) additivity of the set function. 
 \end{remark}
 
-	
+\begin{remark}
+Being able to work with these generalizations will be important in Section \ref{sec:extension_of_measures} on extension of measures.  In particular, it will help us show that we can construct the Lesbesgue measure on the Borel sets.
+\end{remark}
+
+\subsection{Sec 1.2.7-1.2.8: Continuity of measure}
+
+%\begin{theorem}
+%Let $\wt{\mu}$ be a countably additice 	
+%\end{theorem}
+
+
+ \section{Section 1.3: Extension of measures} \label{sec:extension_of_measures}
  
 
 
