@@ -4,14 +4,30 @@
 %https://tex.stackexchange.com/questions/68821/is-it-possible-to-create-a-latex-preamble-header
 \usepackage{/Users/mwojno01/Research/Learning/latex_preamble/preamble}
 
-%%% SPECIFIC TO THIS DOCUMENT
+%%% 
+% SPECIFIC TO THIS DOCUMENT
+%%%
+
+% SIGMA-FIELDS 
 % Sigma fields (text)
 \renewcommand{\sf}{$\sigma$-field}
 \newcommand{\sfs}{$\sigma$-fields}
 
+
+% SET FUNCTIONS 
 %Finitely additive set functions
 \newcommand{\fasf}{\tilde{\mu}_0}
+% Signed measure
+\newcommand{\signedmu}{\wt{\mu}}
+
+
+% ENUMERATE BUT WITH LETTERS
+\newenvironment{alphabate}
+    {\begin{enumerate}[label=\alph*)]}
+	{\end{enumerate} }
+    
 \begin{document}
+
 
 \title{Notes on Ash's Probability and Measure Theory} 
 \maketitle
@@ -42,7 +58,7 @@ In other words, any union can be re-represented as a disjoint union. This is use
 If $A_n \uparrow A$, then \eqref{eqn:union_as_disjoint_union} becomes
 \begin{align*}
 	\bigcup_{n=1}^\infty A_n = \bigcupdot_{n=1}^\infty \bigg( A_n - A_{n-1} \bigg) 
-\labelit \label{eqn:union_as_disjoint_union}
+\labelit \label{eqn:union_as_disjoint_union_for_increasing_sequences}
 \end{align*}
 This is because $A_{n-1} \subset A_{n}$, so $A_{n-1}^c \supset A_{n}^c$ by contraposition.	
 \end{remark}
@@ -233,11 +249,13 @@ In Table \ref{tab:notation_for_generalizations_of_measure},  we introduce some n
  \begin{theorem}
  Let $\fasf$ be a finitely additive set function on the field $\F_0$.  Then
  \begin{enumerate}[label=\alph*)]
- \item $\fasf(\emptyset)=0$
- \item $\fasf(A \cup B) + \fasf (A \cap B) = \fasf(A) + \fasf(B)$ for all $A,B \in \F_0$.
- \item If $A,B \in \F_0$ and $B \subset A$, then $\fasf(A) = \fasf(B) + \fasf(A-B)$.  Moreover,
- \[ \mu_0 (A) \leq \mu_0 (B) \quad \tinytext{(monotonicity)} \] 
- \item Subadditivity holds, i.e.
+ \item \label{itm:first} $\fasf(\emptyset)=0$
+ \item \label{itm:second} $\fasf(A \cup B) + \fasf (A \cap B) = \fasf(A) + \fasf(B)$ for all $A,B \in \F_0$.
+ \item \label{itm:part-to-whole} If $A,B \in \F_0$ and $B \subset A$, then   
+  \[ \fasf(A) = \fasf(B) + \fasf(A-B)\quad \text{(piece-to-whole)} \] 
+ Moreover, under non-negativity,
+ \[ \mu_0 (A) \leq \mu_0 (B) \quad \text{(monotonicity)} \] 
+ \item \label{itm:subadditivity} Subadditivity holds, i.e.
  \begin{align*}
  \mu_0 (\cup_{i=1}^n A_i)& \leq \sum_{i=1}^n \mu_0(A_i) \\
   \mu (\cup_{i=1}^\infty A_i)& \leq \sum_{i=1}^\infty \mu(A_i) \\
@@ -271,11 +289,60 @@ In the proof of Theorem \ref{thm:basic_properties_of_finitely_additive_set_funct
 Being able to work with these generalizations will be important in Section \ref{sec:extension_of_measures} on extension of measures.  In particular, it will help us show that we can construct the Lesbesgue measure on the Borel sets.
 \end{remark}
 
-\subsection{Sec 1.2.7-1.2.8: Continuity of measure}
+\subsection{Sec 1.2.7-1.2.8: Continuity of countably additive set functions}
 
-%\begin{theorem}
-%Let $\wt{\mu}$ be a countably additice 	
-%\end{theorem}
+Countably additive set functions have a basic continuity property. Continuity of measure is a special case. 
+
+\begin{theorem}
+Let $\signedmu$ be a countably additive set function on the \sf\ $\F$. Then
+
+\begin{alphabate}
+\item (continuity from below) If $A_1, A_2, ... \in \F$ and $A_n \uparrow A$, then $\signedmu(A_n) \to \signedmu(A)$ as $n \to \infty$. 
+\item (continuity from above)  If $A_1, A_2, ... \in \F$, $A_n \downarrow A$, and $\signedmu(A_n)$ is finite, then $\signedmu(A_n) \to \signedmu(A)$ as $n \to \infty$. 
+\end{alphabate}
+\label{thm:continuity_of_countably_additive_set_functions}
+\end{theorem}
+
+\begin{proof}
+We prove continuity from below, and leave continuity from above as an exercise to the reader (or see text).  First let us assume that all $\signedmu(A_n)$ are finite (*). Then 
+\begin{align*}
+A &= A_1 \cupdot A_2 - A_1 \cupdot A_3 - A_2 \cupdot ... && 	\text{ by } \eqref{eqn:union_as_disjoint_union_for_increasing_sequences} \\
+\implies \signedmu(A) &= \signedmu(A_1) + \signedmu(A_2 - A_1) + \signedmu(A_3 - A_2) + ... && \text{(countable additivity)}\\ 
+&= \signedmu(A_1) + \signedmu(A_2) - \signedmu(A_1) + \signedmu(A_3) - \signedmu(A_2) + ... && \text{(Theorem \ref{thm:basic_properties_of_finitely_additive_set_functions} \ref{itm:part-to-whole}, (*) }\\
+&= \ds\lim_{n \to \infty} \signedmu(A_n) 
+\end{align*}
+Now suppose $\signedmu(A_n) = \infty$ for some $n$.   So write 
+\begin{align*}
+A &= A_n \cupdot A- A_n && \text{(increasing sequence)}\\ 
+\implies \signedmu(A) &= \signedmu(A_n) + \signedmu(A - A_n) && \text{(countable additivity)}\\  
+&= \infty + \signedmu(A - A_n) 
+\end{align*}
+
+So $\signedmu(A)=\infty$.\footnote{Note that we cannot have $\signedmu(A - A_n)=-\infty$, because that would violate additivity.} Replace $A$ by $A_k$ for any $k \geq n$ to also find $\signedmu(A_k)=\infty$ for all $k \geq n$ and the result follows.
+
+Finally suppose $\signedmu(A_n) = -\infty$ for some $n$. Then the result follows in the same way as for $\signedmu(A_n) = \infty$. 
+
+\end{proof}
+
+\begin{remark}
+The logic of the proof of Theorem \ref{thm:continuity_of_countably_additive_set_functions} under the finiteness assumption is as follows.  First, we re-represent the union as a disjoint union (the form is particularly simple since the sets are increasing).  This allows us to apply countable additivity. Then we apply the part-to-whole decomposition (and the subtraction is defined under the finiteness assumption). 	
+\end{remark}
+
+\begin{remark}
+In proving Theorem \ref{thm:continuity_of_countably_additive_set_functions}  for the case where $\mu(A_n) = \infty$ for some $n$, it is tempting to make the simpler argument 
+\begin{align*}
+\mu(A) & \geq \mu(A_n) && \text{(monotonicity)}\\	
+\mu(A_k) & \geq \mu(A_n) && \text{(monotonicity)}	 
+\end{align*}
+for $k \geq n$.  But recall from Theorem \ref{thm:basic_properties_of_finitely_additive_set_functions} that monotonicity only holds under non-negativity, and the theorem statement is more general, applying to \textit{signed} set functions as well. 
+\end{remark}
+
+
+%By , we have
+
+
+ %we break up the limit of the increasing sequence into a disjoint union as follows	
+
 
 
  \section{Section 1.3: Extension of measures} \label{sec:extension_of_measures}
