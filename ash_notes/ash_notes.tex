@@ -29,12 +29,37 @@
 \begin{document}
 
 
-\title{Notes on Ash's Probability and Measure Theory} 
+\title{Notes on Probability and Measure Theory} 
 \maketitle
 \tableofcontents
 \newpage 
 
-\section{Section 1.1: Some notes on set theory}
+\section{Overview}
+
+\subsection{References}
+The primary reference here is \cite{ash2000probability}.   Unless otherwise specified, all references to the ``text" refers to this textbook.  Likewise the symbol $\S$ refers to a Section of that textbook.
+
+\subsection{Motivation} \label{sec:motivation}
+
+Measure theory serves as a critical underpinning for some of the most interesting research in Bayesian statistics and probabilistic machine learning (see work from Stephen G. Walker, Michael Jordan, Tamara Broderick, David Dunson, and so on).   Thus, fluency with measure theory opens doors to a higher level of research consumption. 
+  
+It is convenient in unifying various kinds of random variables.  In particular, it allows one to work with discrete and absolutely continuous random variables in a unified way.  For example, the exponential family includes both types of random variables.
+
+Finally, measure theory is important to have a deeper level of understanding of probabilistic concepts.  Probability measures, and measures more generally, cannot be defined on all subsets of many spaces that we would like to deal with.  For instance, non-measurable sets can be shown to exist even for the uniform distribution.  Proposition 1.2.6 of \cite{rosenthal2006first} shows that there is no definition of $P(A)$ that is defined for all subsets $A \subseteq [0,1]$ satisfying all three conditions below
+\begin{enumerate}
+\item $P([a,b]) = b-a, \quad 0 \leq a \leq b \leq 1$.	
+\item $P(\bigcupdot_{n=1}^\infty A_n ) = \ds\sum_{n=1}^\infty A_n$ for $A_1, A_2, ...$ disjoint subsets of $[0,1]$.
+\item $P(A \bigoplus r) = P(A), \quad 0 \leq r \leq 1$, where $A \bigoplus r$ denotes the \textit{r-shift} of $A$, i.e. 
+\[ A \bigoplus r := \set{a+r : a \in A, a+r \leq 1} \cup \set{a+r-1 : a \in A, a +r >1}\]
+\end{enumerate}
+
+The solution to this problem is to define $P$ on a restricted domain, $\sigma$-fields.
+
+%We begin with a discussion of $\sigma$-fields, which are the domains of probability measures, and measures more generally.  As it turns out, measures cannot be defined on all subsets of many spaces that we would like to deal with. For instance, consider Proposition 1.2.6 of \cite{rosenthal2006first} which asserts the existence of non-measurable sets for the uniform distribution.  In particular, there is no definition of $P(A)$ that is defined for all subsets $A \subseteq [0,1]$ satisfying all three conditions below
+
+
+
+\section{$\S$ 1.1: Some notes on set theory}
 
 \begin{definition}
 If $A_1 \subset A_2 \subset ...$ and $\cup_{n=1}^\infty A_n = A$, we say that the $A_n$ form a \textbf{increasing} sequence of sets with limit $A$ or that the $A_n$ increase to $A$; we write $A_n \uparrow A$.  If $A_1 \supset A_2 \supset ... $ and  	$\cap_{n=1}^\infty A_n = A$, we say that the $A_n$ form a \textbf{decreasing} sequence of sets with limit $A$ or that the $A_n$ decrease to $A$; we write $A_n \downarrow A$.
@@ -63,11 +88,15 @@ If $A_n \uparrow A$, then \eqref{eqn:union_as_disjoint_union} becomes
 This is because $A_{n-1} \subset A_{n}$, so $A_{n-1}^c \supset A_{n}^c$ by contraposition.	
 \end{remark}
 
-\section{Section 1.2: Fields, \sfs, measures}
+\section{$\S$ 1.2: Fields, \sfs, measures}
 
-\subsection{Sec 1.2.1-1.2.2: Fields and \sfs}
+\subsection{$\S$ 1.2.1-1.2.2: Fields and \sfs}
 
-Fields and \sfs\ are important because they are the domain of measures.  Here are some definitions.
+We begin with a discussion of $\sigma$-fields, which are the domains of probability measures, and measures more generally.  As stated in the motivation (Section \ref{sec:motivation}), measures cannot be defined on all subsets of many spaces that we would like to deal with. 
+
+\sfs\ are important because they are the domain of measures.  Fields are important because measures are sometimes constructed by being defined on fields, and then extended to \sfs. 
+
+Here are some definitions.
 
 \begin{definition}
 Let $\F$ be a collection of subsets of a set $\Omega$.  Then $\F$ is called a \textbf{field} (or \textit{algebra})  if 
@@ -108,12 +137,19 @@ If $\C$ is a class of sets, the smallest \sf\ containing the sets of $\C$ is wri
 \end{notation}
 	
 \begin{question}
-Let $A_1,...,A_n$ be subsets of $\Omega$.  Describe $\sigma(\set{A_1,...,A_n})$, the smallest \sf\ containing $A_1,...,A_n$.  Also describe the number of sets in $\F$.   \textit{This is Ash's Problem 1.2.8.  For answer, see GoodNotes.}	
+Let $A_1,...,A_n$ be subsets of $\Omega$.  Describe $\F := \sigma(\set{A_1,...,A_n})$, the smallest \sf\ containing $A_1,...,A_n$.  Also describe the number of sets in $\F$.   \textit{This is Ash's Problem 1.2.8.  We can derive the strict upper bound $|\F| \leq 2^{2^n}$. For a complete answer, see GoodNotes. }	
 \end{question}
 
 \begin{example} What is an example of a collection that is a \textit{field}, but not a $\sigma$-\textit{field}?  
 
-Let $\Omega=\R$ and $\F_0 = \set{\text{finite disjoint unions of right semi-closed intervals } (a,b], a \neq b}$.  Then $\F_0$ is a field, as can be easily verified.\footnote{By convention, we also count $(a, \infty)$ as right semi-closed for $-\infty\leq a < \infty$, which is necessary for the \sf\ to be closed under complements.}   But $\F_0$ is \underline{not} a \sf.  Note that if $A_n = (-\frac{1}{n},0]$, then $\bigcap_{n=1}^\infty A_n = \set{0}  \not\in \F_0$.
+Let $\Omega=\R$ and $\F_0 = \set{\text{finite disjoint unions of right semi-closed intervals } (a,b], a \neq b}$.  Then $\F_0$ is a field, as can be easily verified.\footnote{By convention, we also count $(a, \infty)$ as right semi-closed for $-\infty\leq a < \infty$, which is necessary for the \sf\ to be closed under complements.}   
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=.6\textwidth]{images/rsc_intervals}	
+\end{figure}
+
+But $\F_0$ is \underline{not} a \sf.  Note that if $A_n = (-\frac{1}{n},0]$, then $\bigcap_{n=1}^\infty A_n = \set{0}  \not\in \F_0$.
 \label{ex:field_of_finite_disjoint_unions_of_lsc_intervals}
 \end{example}
 
@@ -152,7 +188,7 @@ In the text, Ash uses this strategy to show that if $\C$ is a class of subsets o
 
  For another application, see handwritten homework exercises.	
 
-\subsection{Sec 1.2.3-1.2.4: Measures}
+\subsection{$\S$ 1.2.3-1.2.4: Measures}
 
 
 
@@ -216,7 +252,7 @@ To illustrate these equivalences, let us equate the first two conditions. That i
 The text gives another description of the Borel sets $\B(\R)$ as the smallest \sf\ containing $\F_0$, the field of disjoint unions of right semi-closed intervals $(a,b]$.  Can we make the same statement about the field of finite disjoint unions of left semi-closed intervals?
 \end{question}
 
-\subsection{Sec 1.2.5-1.2.6: Generalizations of measures, and their properties}
+\subsection{$\S$ 1.2.5-1.2.6: Measure-like set functions, and their properties}
 
 The text considers some generalizations of measures that can be obtained by restricting the domain to a field, by assuming merely finite additivity, or by allowing the range to be extended reals ($\bar{\R}$) instead of non-negative extended reals ($\bar{\R}_{\geq 0}$).  
 
@@ -244,7 +280,21 @@ However, a  countably additive function can be defined on a \textit{field} (rath
 In Table \ref{tab:notation_for_generalizations_of_measure},  we introduce some notation to try to clarify more immediately when results hold. Note the relations\footnote{So, for example, if something holds for $\tilde{\mu}_0$, it holds for $\mu$.  A simple mnemonic is that adding stuff to the notation generalizes the function.}  
 \[ \set{\mu} \subset \set{\mu_0}, \set{\tilde{\mu}} \subset \set{\tilde{\mu}_0}. \]
  
- Using the notation in Table \ref{tab:notation_for_generalizations_of_measure}, we rewrite Theorem 1.2.5 of the text:
+ \begin{example} Let $\F_0$ be the field of finite disjoint unions of right semi-closed intervals (see Definition \ref{def:rsc_intervals} ), and define the set function $\fasf$ on $\F_0$ as follows\footnote{This example comes from Problem 4 in Section 1.2 of the text}:
+
+\begin{align*}
+\fasf(-\infty,a] &=a, && a \in \R  \\
+\fasf(a,b] &= b-a, && a,b \in \R, \quad a<b  \\
+\fasf(b, \infty) &= -b, && b \in \R \\
+\fasf(\R) &=0 &&\\
+\fasf(\bigcupdot_{i=1}^n I_i) &= \sum_{i=1}^n \fasf(I_i), && \text{if $I_1, ..., I_n$ are right semi-closed intervals} 
+\end{align*}
+	
+Then $\fasf$ is finitely additive, but not countably additive on $\F_0$.   For a proof, see GoodNotes.
+ \end{example}
+
+ 
+Measure-like set functions have useful properties. Using the notation in Table \ref{tab:notation_for_generalizations_of_measure}, we rewrite Theorem 1.2.5 of the text:
  
  \begin{theorem}
  Let $\fasf$ be a finitely additive set function on the field $\F_0$.  Then
@@ -255,7 +305,7 @@ In Table \ref{tab:notation_for_generalizations_of_measure},  we introduce some n
   \[ \fasf(A) = \fasf(B) + \fasf(A-B)\quad \text{(piece-and-difference)} \] 
  So $\fasf(A) \geq \fasf(B)$ if $\fasf(A-B) \geq 0$. More generally, for non-negative set functions, we have
  \[ \mu_0 (A) \geq \mu_0 (B) \quad \text{(monotonicity)} \] 
- \item \label{itm:subadditivity} Subadditivity holds, i.e.
+ \item \label{itm:subadditivity} Subadditivity holds if $\fasf$ is non-negative, i.e.
  \begin{align*}
  \mu_0 (\cup_{i=1}^n A_i)& \leq \sum_{i=1}^n \mu_0(A_i) \\
   \mu (\cup_{i=1}^\infty A_i)& \leq \sum_{i=1}^\infty \mu(A_i) \\
@@ -285,11 +335,22 @@ We use (3) to simplify the RHS, and the result follows.
 In the proof of Theorem \ref{thm:basic_properties_of_finitely_additive_set_functions} (b), note that we use a common strategy -- breaking sets into disjoint pieces so that we can apply the assumed (finite or countable) additivity of the set function. 
 \end{remark}
 
+
+\begin{remark}
+Is \textit{finiteness} ($|\mu_g (A)| < \infty \; \forall \; A \in \F_g$) equivalent to \textit{boundedness} ($\sup \set{|\mu_g (A)| : A \in \F_g} < \infty$)?
+\begin{itemize}
+\item $\mu_0, \signedmu$ ? \greencheck
+\item $\fasf$ ? \redx (too general)
+\end{itemize}
+The fact that equivalence holds for signed measures $\signedmu$ is surprising.  Somehow countable additivity compensates for the signedness. See Section 2.1.3 of the text. 
+\end{remark}
+
+ 
 \begin{remark}
 Being able to work with these generalizations will be important in Section \ref{sec:extension_of_measures} on extension of measures.  In particular, it will help us show that we can construct the Lesbesgue measure on the Borel sets.
 \end{remark}
 
-\subsection{Sec 1.2.7-1.2.8: Continuity of countably additive set functions}
+\subsection{$\S$ 1.2.7-1.2.8: Continuity of countably additive set functions}
 
 Countably additive set functions have a basic continuity property. Continuity of measure is a special case. 
 
@@ -337,6 +398,30 @@ In proving Theorem \ref{thm:continuity_of_countably_additive_set_functions}  for
 for $k \geq n$.  But recall from Theorem \ref{thm:basic_properties_of_finitely_additive_set_functions} that monotonicity only holds under non-negativity, and the theorem statement is more general, applying to \textit{signed} set functions as well. 
 \end{remark}
 
+We have the result that finite additivity plus continuity equals countable additivity. 
+
+\begin{theorem}
+Let $\fasf$ be a finitely additive set function on the field $\F_0$.  Then $\fasf$ is countably additive if either
+\begin{alphabate}
+\item $\fasf$ is continuous from below
+\item $\fasf$ is continuous from above at the empty set.	
+\end{alphabate}
+
+\begin{proof}
+We prove (a) and leave (b) as an exercise to the reader (or see text). 	%To show that $\fasf$ is countably additive, we need to show that  $ \fasf \bigg( \bigcupdot_{n=1}^\infty A_n \bigg) = \ds\sum_{n=1}^\infty \fasf(A_n)$.   
+
+Given $A = \bigcupdot_{n=1}^\infty A_n$, we define $P_n := \bigcup_{m \leq n} A_n$ and so $P_n \uparrow A$.   So we have
+\begin{align*}
+\fasf(P_n) &\to \fasf(A) && \text{(continuity from below)} \\
+\implies \fasf(\bigcup_{m \leq n} A_n) &\to \fasf(A) && \text{(definition)} \\	
+\implies \ds\sum_{m=1}^n \fasf(A_n) &\to \fasf(A) && \text{(finite additivity)} \\
+\end{align*}
+Taking $n \to \infty$ gives countable additivity.
+\end{proof}
+
+\end{theorem}
+
+
 
 %By , we have
 
@@ -345,12 +430,21 @@ for $k \geq n$.  But recall from Theorem \ref{thm:basic_properties_of_finitely_a
 
 
 
- \section{Section 1.3: Extension of measures} \label{sec:extension_of_measures}
+ \section{$\S$ 1.3: Extension of measures} \label{sec:extension_of_measures}
  
 
+\bibliography{references_ash_notes.bib}
+\bibliographystyle{unsrt}
+
+\appendix
+
+\section{Definitions}
+
+\begin{definition}
+A \textbf{right semi-closed interval} is a set of the form $(a,b] = \set{x : a < x \leq b}, -\infty \leq a < b < \infty$.  By convention, we also count $(a,\infty)$ as right semi-closed for $-\infty \leq a < \infty$. 
+\label{def:rsc_intervals}
+\end{definition}
 
 
-%\bibliography{references_ash_notes.bib}
-%\bibliographystyle{unsrt}
 
 \end{document}
