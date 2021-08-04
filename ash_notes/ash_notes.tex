@@ -45,7 +45,7 @@ Measure theory serves as a critical underpinning for some of the most interestin
   
 It is convenient in unifying various kinds of random variables.  In particular, it allows one to work with discrete and absolutely continuous random variables in a unified way.  For example, the exponential family includes both types of random variables.
 
-Finally, measure theory is important to have a deeper level of understanding of probabilistic concepts.  Probability measures, and measures more generally, cannot be defined on all subsets of many spaces that we would like to deal with.  For instance, non-measurable sets can be shown to exist even for the uniform distribution.  Proposition 1.2.6 of \cite{rosenthal2006first} shows that there is no definition of $P(A)$ that is defined for all subsets $A \subseteq [0,1]$ satisfying all three conditions below
+Probability measures, and measures more generally, cannot be defined on all subsets of many spaces that we would like to deal with.  For instance, non-measurable sets can be shown to exist even for the uniform distribution.  Proposition 1.2.6 of \cite{rosenthal2006first} shows that there is no definition of $P(A)$ that is defined for all subsets $A \subseteq [0,1]$ satisfying all three conditions below
 \begin{enumerate}
 \item $P([a,b]) = b-a, \quad 0 \leq a \leq b \leq 1$.	
 \item $P(\bigcupdot_{n=1}^\infty A_n ) = \ds\sum_{n=1}^\infty A_n$ for $A_1, A_2, ...$ disjoint subsets of $[0,1]$.
@@ -147,6 +147,11 @@ Let $\F$ be a collection of subsets of a set $\Omega$.  Then $\F$ is called a \t
 that is, if $\Omega \in \F$ and $\F$ is closed under complementation and finite unions.
 \label{def:sigma_field}	
 \end{definition}
+
+\begin{remark}
+It follows that $\sigma$-fields are closed under countable intersections, since
+\[ \cap_{i=1}^\infty A_i \stackrel{\text{DeMorgan's Law}}{=} \cup_{i=1}^\infty A_i^c \]	
+\end{remark}
 
 \begin{example}
 $\F =\set{\emptyset, \Omega}$ is the smallest \sf\ on $\Omega$. 
@@ -269,13 +274,14 @@ As we will see in Section \ref{sec:extension_of_measures}, this requirement dete
 
 We may alternately characterize $\B(\R)$ as the smallest \sf\ containing
 \begin{itemize}
-\item all intervals $[a,b], \; a,b \in \R$.
+\item all intervals $(a,b], \; a,b \in \R$
 \item all intervals $(a,b), \; a,b \in \R$
+\item all intervals $[a,b), \; a,b \in \R$
+\item all intervals $[a,b], \; a,b \in \R$.
 \item all intervals $(a,\infty), \; a \in \R$.
 \item  all intervals $[a,\infty), \; a \in \R$.
 \item 	 all intervals $(-\infty,b), \; b \in \R$.
 \item  all intervals $(-\infty,b], \; b \in \R$.
-\item  all intervals $[a,b], \; a,b \in \R$.
 \item all open sets of $\R$.\footnote{Recall that an open set is a countable union of open intervals.}
 \item all closed sets of $\R$.\footnote{Recall that a set is open iff its complement is closed.}
 \end{itemize}
@@ -296,7 +302,14 @@ The text gives another description of the Borel sets $\B(\R)$ as the smallest \s
 
 \subsection{$\S$ 1.2.5-1.2.6: Measure-like set functions, and their properties}
 
-The text considers some generalizations of measures that can be obtained by restricting the domain to a field, by assuming merely finite additivity, or by allowing the range to be extended reals ($\bar{\R}$) instead of non-negative extended reals ($\bar{\R}_{\geq 0}$).  
+The text considers some generalizations of measures that can be obtained
+\begin{itemize}
+\item  by restricting the domain to a field
+\item  by only assuming \textit{finite} additivity 
+\item by allowing the range to be extended reals ($\bar{\R}$) instead of non-negative extended reals ($\bar{\R}_{\geq 0}$).  
+\end{itemize}
+
+
 
 \begin{remark}
 The first two relaxations above often go together.
@@ -321,7 +334,11 @@ However, a  countably additive function can be defined on a \textit{field} (rath
 
 In Table \ref{tab:notation_for_generalizations_of_measure},  we introduce some notation to try to clarify more immediately when results hold. Note the relations\footnote{So, for example, if something holds for $\tilde{\mu}_0$, it holds for $\mu$.  A simple mnemonic is that adding stuff to the notation generalizes the function.}  
 \[ \set{\mu} \subset \set{\mu_0}, \set{\tilde{\mu}} \subset \set{\tilde{\mu}_0}. \]
- 
+
+\begin{remark}
+Being able to work with these generalizations will be important in Section \ref{sec:extension_of_measures} on extension of measures.  In particular, it will help us show that we can construct the Lesbesgue measure on the Borel sets.
+\end{remark}
+
  \begin{example} Let $\F_0$ be the field of finite disjoint unions of right semi-closed intervals (see Definition \ref{def:rsc_intervals} ), and define the set function $\fasf$ on $\F_0$ as follows\footnote{This example comes from Problem 4 in Section 1.2 of the text}:
 
 \begin{align*}
@@ -332,7 +349,7 @@ In Table \ref{tab:notation_for_generalizations_of_measure},  we introduce some n
 \fasf(\bigcupdot_{i=1}^n I_i) &= \sum_{i=1}^n \fasf(I_i), && \text{if $I_1, ..., I_n$ are right semi-closed intervals} 
 \end{align*}
 	
-Then $\fasf$ is finitely additive, but not countably additive on $\F_0$.   For a proof, see GoodNotes.
+Then $\fasf$ is finitely additive, but not countably additive on $\F_0$.  (Why?) For a proof, see GoodNotes.
  \end{example}
 
  
@@ -387,10 +404,6 @@ Is \textit{finiteness} ($|\mu_g (A)| < \infty \; \forall \; A \in \F_g$) equival
 The fact that equivalence holds for signed measures $\signedmu$ is surprising.  Somehow countable additivity compensates for the signedness. See Section 2.1.3 of the text. 
 \end{remark}
 
- 
-\begin{remark}
-Being able to work with these generalizations will be important in Section \ref{sec:extension_of_measures} on extension of measures.  In particular, it will help us show that we can construct the Lesbesgue measure on the Borel sets.
-\end{remark}
 
 \subsection{$\S$ 1.2.7-1.2.8: Continuity of countably additive set functions}
 
@@ -401,7 +414,7 @@ Let $\signedmu$ be a countably additive set function on the \sf\ $\F$. Then
 
 \begin{alphabate}
 \item (continuity from below) If $A_1, A_2, ... \in \F$ and $A_n \uparrow A$, then $\signedmu(A_n) \to \signedmu(A)$ as $n \to \infty$. 
-\item (continuity from above)  If $A_1, A_2, ... \in \F$, $A_n \downarrow A$, and $\signedmu(A_n)$ is finite, then $\signedmu(A_n) \to \signedmu(A)$ as $n \to \infty$. 
+\item (continuity from above)  If $A_1, A_2, ... \in \F$, $A_n \downarrow A$, and $\signedmu(A_1)$ is finite, then $\signedmu(A_n) \to \signedmu(A)$ as $n \to \infty$. 
 \end{alphabate}
 \label{thm:continuity_of_countably_additive_set_functions}
 \end{theorem}
