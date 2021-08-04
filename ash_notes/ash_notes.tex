@@ -176,8 +176,20 @@ If $\C$ is a class of sets, the smallest \sf\ containing the sets of $\C$ is wri
 \end{notation}
 	
 \begin{exercise}
+\label{exercise:minimal_sigma_field_containing_n_subsets}
 Let $A_1,...,A_n$ be subsets of $\Omega$.  Describe $\F := \sigma(\set{A_1,...,A_n})$, the smallest \sf\ containing $A_1,...,A_n$.  Also describe the number of sets in $\F$.   \textit{This is Ash's Problem 1.2.8.  We can derive the strict upper bound $|\F| \leq 2^{2^n}$. For a complete answer, see GoodNotes. }	
 \end{exercise}
+
+\begin{remark}
+The gist of exercise \ref{exercise:minimal_sigma_field_containing_n_subsets} is that the collection $\set{A_1,...,A_n}$ partitions $\Omega$ into up to $M=2^N$ pieces, and the minimal sigma field contains all possible finite unions of these pieces, so has at most $2^{M}$ elements.
+  
+\begin{figure}[h!]
+\centering 
+\includegraphics[width=.7\textwidth]{images/minimal_sigma_fields}
+%\caption{An increasing and decreasing sequence of sets, followed by a sequence of sets which is neither, but which has a limit.}
+\end{figure}
+
+\end{remark}
 
 \subsubsection{Fields}
 
