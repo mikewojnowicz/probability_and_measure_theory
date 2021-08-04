@@ -129,32 +129,23 @@ This is because $A_{n-1} \subset A_{n}$, so $A_{n-1}^c \supset A_{n}^c$ by contr
 
 \subsection{$\S$ 1.2.1-1.2.2: Fields and \sfs}
 
+\subsubsection{$\sigma$-fields}
+
 We begin with a discussion of $\sigma$-fields, which are the domains of probability measures, and measures more generally.  As stated in the motivation (Section \ref{sec:motivation}), measures cannot be defined on all subsets of many spaces that we would like to deal with. 
 
-\sfs\ are important because they are the domain of measures.  Fields are important because measures are sometimes constructed by being defined on fields, and then extended to \sfs. 
-
-Here are some definitions.
+%\sfs\ are important because they are the domain of measures.  
+%Here are some definitions.
 
 \begin{definition}
-Let $\F$ be a collection of subsets of a set $\Omega$.  Then $\F$ is called a \textbf{field} (or \textit{algebra})  if 
+Let $\F$ be a collection of subsets of a set $\Omega$.  Then $\F$ is called a \textbf{sigma-field} (or \textit{sigma-algebra}) if it satisfies
 
 \begin{enumerate}[label=\alph*)]
 	\item $\Omega \in \F$ 
 	\item If $A \in \F$, then $A^c \in \F$.
-	\item If $A_1,...A_n \in \F$ then $\cup_{i=1}^n A_i \in \F$. 
+	\item If $A_1,A_2, ... \in \F$ then $\cup_{i=1}^\infty A_i \in \F$.  
 \end{enumerate}
 that is, if $\Omega \in \F$ and $\F$ is closed under complementation and finite unions.
-\label{def:field}	
-\end{definition}
-
-\begin{definition}
-Let $\F$ be a collection of subsets of a set $\Omega$.  Then $\F$ is called a \textbf{sigma-field} (or \textit{sigma-algebra}) if it satisfies Definition \ref{def:field} after replacing condition c) with
-
-\begin{enumerate}
-	\item[c')] If $A_1,A_2, ... \in \F$ then $\cup_{i=1}^\infty A_i \in \F$. 
-\end{enumerate}
-that is, if $\Omega \in \F$ and $\F$ is closed under complementation and \textit{countable} unions.
-\label{def:sigma-field}	
+\label{def:sigma_field}	
 \end{definition}
 
 \begin{example}
@@ -176,6 +167,20 @@ If $\C$ is a class of sets, the smallest \sf\ containing the sets of $\C$ is wri
 \begin{question}
 Let $A_1,...,A_n$ be subsets of $\Omega$.  Describe $\F := \sigma(\set{A_1,...,A_n})$, the smallest \sf\ containing $A_1,...,A_n$.  Also describe the number of sets in $\F$.   \textit{This is Ash's Problem 1.2.8.  We can derive the strict upper bound $|\F| \leq 2^{2^n}$. For a complete answer, see GoodNotes. }	
 \end{question}
+
+\subsubsection{Fields}
+
+Fields are more general than $\sigma$-fields.  Measures are sometimes constructed by being defined on fields, and then extended to \sfs.  Indeed, we will see this strategy with Lesbesgue measure. 
+
+\begin{definition}
+Let $\F$ be a collection of subsets of a set $\Omega$.  Then $\F$ is called a \textbf{field} (or \textit{algebra})  if satisfies Definition \ref{def:sigma_field} after replacing condition c) with
+
+\begin{enumerate}
+	\item[c')] If $A_1,...A_n \in \F$ then $\cup_{i=1}^n A_i \in \F$.
+\end{enumerate}
+that is, if $\Omega \in \F$ and $\F$ is closed under complementation and \textit{finite} unions.
+\label{def:field}	
+\end{definition}
 
 \begin{example} What is an example of a collection that is a \textit{field}, but not a $\sigma$-\textit{field}?  
 
