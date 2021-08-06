@@ -37,7 +37,7 @@
 \section{Overview}
 
 \subsection{References}
-The primary reference here is \cite{ash2000probability}.   The book is wonderful for our purposes – it is rigorous,  but also accessible (prerequisites are undergrad-level real analysis and mathematical probability).  Most importantly, it is structured to build towards the kinds of applications in probability that we care about.   (A point of contrast would be a book like that of Stein and Shakarchi, which tends to dwell heavily on things that are of higher interest to pure mathematicians –- long existence proofs, Cantor sets and fractals, etc.) 
+The primary reference here is \cite{ash2000probability}.   The book is wonderful for statistical machine learning – it is rigorous,  but also accessible (prerequisites are undergrad-level real analysis and mathematical probability).  Most importantly, it is structured to build towards the kinds of applications in probability that we care about.   (A point of contrast would be a book like that of Stein and Shakarchi, which tends to dwell heavily on things that are of higher interest to pure mathematicians –- long existence proofs, Cantor sets and fractals, etc.) 
 
  Unless otherwise specified, all references to the ``text" refers to this textbook.  Likewise the symbol $\S$ refers to a Section of that textbook.
  
@@ -100,14 +100,18 @@ If $A_1 \subset A_2 \subset ...$ and $\cup_{n=1}^\infty A_n = A$, we say that th
 \end{definition}
 
 
-\begin{figure}
+\begin{figure}[h!]
 \centering 
 \includegraphics[width=.5\textwidth, angle=90]{images/increasing_and_decreasing_sequences}
 \caption{An increasing and decreasing sequence of sets, followed by a sequence of sets which is neither, but which has a limit.}
+\label{fig:increasing_and_decreasing_limits_of_sets}
 \end{figure}
 
 One can verify that this definition is consistent with the definition of limits, i.e.
 \[  \text{If } A_n \uparrow A \text{ or } A_n \downarrow A \text{ then } \lim\inf A_n = \lim\sup A_n = A.\]
+
+As shown in Figure \ref{fig:increasing_and_decreasing_limits_of_sets}, limits of increasing and decreasing sequences are very special kinds of limits.
+
 
 \subsection{Representing unions as disjoint unions}
  
@@ -137,7 +141,7 @@ This is because $A_{n-1} \subset A_{n}$, so $A_{n-1}^c \supset A_{n}^c$ by contr
 
 \subsubsection{$\sigma$-fields}
 
-We begin with a discussion of $\sigma$-fields, which are the domains of probability measures, and measures more generally.  As stated in the motivation (Section \ref{sec:motivation}), measures cannot be defined on all subsets of many spaces that we would like to deal with. 
+We begin with a discussion of $\sigma$-fields, which are typically the domains of probability measures, and measures more generally.\footnote{In the construction of Lesbesgue measure, Ash defines a probability measure on a field.  See 1.3.1 of \cite{ash2000probability}.}  As stated in the motivation (Section \ref{sec:motivation}), measures cannot be defined on all subsets of many spaces that we would like to deal with. 
 
 %\sfs\ are important because they are the domain of measures.  
 %Here are some definitions.
@@ -219,8 +223,9 @@ But $\F_0$ is \underline{not} a \sf.  Note that if $A_n = (-\frac{1}{n},0]$, the
 \end{example}
 
 \begin{remark}
-A \sf\ can also be described as a field that is closed under limits of increasing sequences.  For if $A_n \in \F$ and $A_n \uparrow A$, then A is a countable union of sets in $\F$ by definition.  Conversely, if $A = \cup_{n=1}^\infty A_n$, then set $B_N := \cup_{n=1}^N A_n$ and $B_N \uparrow A$.	
+A \sf\ can also be described as a field that is closed under limits of increasing sequences.  For if $A_n \in \F$ and $A_n \uparrow A$, then A is a countable union of sets in $\F$ by definition.  Conversely, if $A = \cup_{n=1}^\infty A_n$, then set $B_N := \cup_{n=1}^N A_n$ and $B_N \uparrow A$.	So if $\G$ is the collection of all limits of increasing sequences of sets in some field $\F_0$, we can also describe $\G$ as the collection of all countable unions of sets in $\F_0$. \label{rk:the_limits_of_increasing_and_decreasing_sequences_of_sets_in_a_field_are_also_the_countable_unions}
 \end{remark}
+%Recalling Figure \ref{fig:increasing_and_decreasing_limits_of_sets}, limits of increasing sequences are very special kinds of limits.
 
 
 \subsubsection{``Good sets" strategy}
@@ -274,6 +279,10 @@ Ash additionally assumes that a measure does not take $\mu(A) = \infty$ for all 
 \end{remark}
 
 \begin{example}
+Let $\Omega$ be any set.  Fix $x_0 \in \Omega$.  Let $\F = 2^\Omega$.  For any $A \in \F$ define $\mu(A) = 1$ if $x_0 \in A$ and $\mu(A) = 0$ if $x_0 \not\in A$.  Then $\mu$ may be called the \textbf{unit mass} concentrated at $x_0$.
+\end{example}
+
+\begin{example}
 Let $\Omega = \set{x_1,x_2,...}$ be a finite or countably infinite set.  Let $p_1, p_2,...$ be non-negative reals.  Let $\F = 2^\Omega$.  Define
 \[\mu(A) = \ds\sum_{x_i \in A} p_i \quad \text{ for all } A \in \F\]
 Then $\mu$ is a measure on $\F$. We might call it the ``point weighting" measure. 
@@ -318,7 +327,7 @@ To illustrate these equivalences, let us equate the first two conditions. That i
 The text gives another description of the Borel sets $\B(\R)$ as the smallest \sf\ containing $\F_0$, the field of disjoint unions of right semi-closed intervals $(a,b]$.  Can we make the same statement about the field of finite disjoint unions of left semi-closed intervals?
 \end{question}
 
-\subsection{$\S$ 1.2.5-1.2.6: Measure-like set functions, and their properties}
+\subsection{$\S$ 1.2.5-1.2.6: Properties of measures (and some more general set functions)}
 
 The text considers some generalizations of measures that can be obtained
 \begin{itemize}
