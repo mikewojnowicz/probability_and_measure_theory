@@ -45,17 +45,9 @@ The primary reference here is \cite{ash2000probability}.   The book is wonderful
 
 Measure theory serves as a critical underpinning for some of the most interesting research in Bayesian statistics and probabilistic machine learning (see work from Stephen G. Walker, Michael Jordan, Tamara Broderick, David Dunson, and so on).   Thus, fluency with measure theory opens doors to a higher level of research consumption. 
   
-Measure theory is convenient in unifying various kinds of random variables.  In particular, it allows one to work with discrete and absolutely continuous random variables in a unified way.  For example, the exponential family includes both types of random variables.
+Measure theory is convenient in unifying various kinds of random variables.\footnote{For example, it allows one to work with discrete and absolutely continuous random variables in a unified way.  For example, the exponential family includes both types of random variables.}  Lesbesgue integrals have nice limit theorems, and can be seen as the completion of Reimann integrals (in the same way that the real numbers complete the rationals). 
 
-Probability measures, and measures more generally, cannot be defined on all subsets of many spaces that we would like to deal with.  For instance, non-measurable sets can be shown to exist even for the uniform distribution.  Proposition 1.2.6 of \cite{rosenthal2006first} shows that there is no definition of $P(A)$ that is defined for all subsets $A \subseteq [0,1]$ satisfying all three conditions below
-\begin{enumerate}
-\item $P([a,b]) = b-a, \quad 0 \leq a \leq b \leq 1$.	
-\item $P(\bigcupdot_{n=1}^\infty A_n ) = \ds\sum_{n=1}^\infty A_n$ for $A_1, A_2, ...$ disjoint subsets of $[0,1]$.
-\item $P(A \bigoplus r) = P(A), \quad 0 \leq r \leq 1$, where $A \bigoplus r$ denotes the \textit{r-shift} of $A$, i.e. 
-\[ A \bigoplus r := \set{a+r : a \in A, a+r \leq 1} \cup \set{a+r-1 : a \in A, a +r >1}\]
-\end{enumerate}
 
-The solution to this problem is to define $P$ on a restricted domain, $\sigma$-fields.
 
 %We begin with a discussion of $\sigma$-fields, which are the domains of probability measures, and measures more generally.  As it turns out, measures cannot be defined on all subsets of many spaces that we would like to deal with. For instance, consider Proposition 1.2.6 of \cite{rosenthal2006first} which asserts the existence of non-measurable sets for the uniform distribution.  In particular, there is no definition of $P(A)$ that is defined for all subsets $A \subseteq [0,1]$ satisfying all three conditions below
 
@@ -139,9 +131,21 @@ This is because $A_{n-1} \subset A_{n}$, so $A_{n-1}^c \supset A_{n}^c$ by contr
 
 \subsection{$\S$ 1.2.1-1.2.2: Fields and \sfs}
 
+Probability measures, and measures more generally, cannot be defined on all subsets of many spaces that we would like to deal with.  For instance, non-measurable sets can be shown to exist even for Lesbesgue measure on the unit interval.  Proposition 1.2.6 of \cite{rosenthal2006first} shows that there is no definition of $P(A)$ that is defined for all subsets $A \subseteq [0,1]$ satisfying all three conditions below
+\begin{enumerate}
+\item $P([a,b]) = b-a, \quad 0 \leq a \leq b \leq 1$.	
+\item $P(\bigcupdot_{n=1}^\infty A_n ) = \ds\sum_{n=1}^\infty A_n$ for $A_1, A_2, ...$ disjoint subsets of $[0,1]$.
+\item $P(A \bigoplus r) = P(A), \quad 0 \leq r \leq 1$, where $A \bigoplus r$ denotes the \textit{r-shift} of $A$, i.e. 
+\[ A \bigoplus r := \set{a+r : a \in A, a+r \leq 1} \cup \set{a+r-1 : a \in A, a +r >1}\]
+\end{enumerate}
+
+The solution to this problem is to define measures on a restricted domain, $\sigma$-fields.
+
 \subsubsection{$\sigma$-fields}
 
-We begin with a discussion of $\sigma$-fields, which are typically the domains of probability measures, and measures more generally.\footnote{In the construction of Lesbesgue measure, Ash defines a probability measure on a field.  See 1.3.1 of \cite{ash2000probability}.}  As stated in the motivation (Section \ref{sec:motivation}), measures cannot be defined on all subsets of many spaces that we would like to deal with. 
+
+
+%We begin with a discussion of $\sigma$-fields, which are typically the domains of probability measures, and measures more generally.\footnote{In the construction of Lesbesgue measure, Ash defines a probability measure on a field.  See 1.3.1 of \cite{ash2000probability}.}  As stated in the motivation (Section \ref{sec:motivation}), measures cannot be defined on all subsets of many spaces that we would like to deal with. 
 
 %\sfs\ are important because they are the domain of measures.  
 %Here are some definitions.
@@ -258,7 +262,7 @@ Some example applications:
 
 \[ \explaintermbrace{take minimal sigma field first, then intersect}{\sigma_\Omega(\C) \cap A} = \explaintermbrace{intersect first, then take minimal sigma-field}{\sigma_A(\C \cap A)} \]
  \item  See my handwritten homework exercise for  $\S$ 1.2, Problem 6.
- \item See the proof of Caratheodory Extension Theorem (Theorem \ref{thm:caratheodory_extension}.)	
+ \item See the proof of Caratheodory Extension Theorem (Theorem \ref{thm:caratheodory_extension}).	
  \end{itemize}
 
 
