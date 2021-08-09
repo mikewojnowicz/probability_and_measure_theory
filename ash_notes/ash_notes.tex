@@ -219,7 +219,7 @@ Let $\Omega=\R$ and $\F_0 = \set{\text{finite disjoint unions of right semi-clos
 \end{figure}
 
 But $\F_0$ is \underline{not} a \sf.  Note that if $A_n = (-\frac{1}{n},0]$, then $\bigcap_{n=1}^\infty A_n = \set{0}  \not\in \F_0$.
-\label{ex:field_of_finite_disjoint_unions_of_lsc_intervals}
+\label{ex:field_of_finite_disjoint_unions_of_rsc_intervals}
 \end{example}
 
 \begin{remark}
@@ -228,9 +228,9 @@ A \sf\ can also be described as a field that is closed under limits of increasin
 %Recalling Figure \ref{fig:increasing_and_decreasing_limits_of_sets}, limits of increasing sequences are very special kinds of limits.
 
 
-\subsubsection{``Good sets" strategy}
+\subsubsection{``Good sets" strategy} \label{sec:good_sets_strategy}
 
-Ash says that there is a type of reasoning that occurs so often in problems involving \sfs that it deserves explicit mention.  It is called the \textit{good sets strategy}.   Suppose you want to show that all members of a $\sigma$-algebra   $\F$ have some property $P$.  Define ``good sets" as those that satisfy the property
+Ash says that there is a type of reasoning that occurs so often in problems involving \sfs\ that it deserves explicit mention.  It is called the \textit{good sets strategy}.   Suppose you want to show that all members of a $\sigma$-algebra   $\F$ have some property $P$.  Define ``good sets" as those that satisfy the property
 \[ \G := \{ G \in \F : G \text{ has property } P \} \]
 The strategy is then to simply
 \begin{enumerate}
@@ -252,11 +252,15 @@ Why does this work?
 & \text{ So all sets in $\F$ are good.} && \\
 \end{align*}
 
-In the text, Ash uses this strategy to show that if $\C$ is a class of subsets of $\Omega$, and $A \in \Omega$, then
+Some example applications:
+ \begin{itemize}
+ \item In the text, Ash uses this strategy (see pp.5) to show that if $\C$ is a class of subsets of $\Omega$, and $A \in \Omega$, then
 
 \[ \explaintermbrace{take minimal sigma field first, then intersect}{\sigma_\Omega(\C) \cap A} = \explaintermbrace{intersect first, then take minimal sigma-field}{\sigma_A(\C \cap A)} \]
+ \item  See my handwritten homework exercise for  $\S$ 1.2, Problem 6.
+ \item See the proof of Caratheodory Extension Theorem (Theorem \ref{thm:caratheodory_extension}.)	
+ \end{itemize}
 
- For another application, see handwritten homework exercises.	
 
 \subsection{$\S$ 1.2.3-1.2.4: Measures}
 
@@ -320,7 +324,7 @@ To illustrate these equivalences, let us equate the first two conditions. That i
 	\intertext{and}
 (a,b) &= \bigcup_{n=1}^\infty \bigg(a, b-\frac{1}{n}\bigg] 
 \end{align*}
-
+\label{ex:lesbesgue_measure}
 \end{example}
 
 \begin{question}
@@ -330,17 +334,16 @@ The text gives another description of the Borel sets $\B(\R)$ as the smallest \s
 \subsection{$\S$ 1.2.5-1.2.6: Properties of measures (and some more general set functions)}
 
 The text considers some generalizations of measures that can be obtained
-\begin{itemize}
-\item  by restricting the domain to a field
+\begin{enumerate}
+\item  by restricting the domain to a field {\footnotesize (in other texts, such functions are called \textit{pre-measures}) }
 \item  by only assuming \textit{finite} additivity 
 \item by allowing the range to be extended reals ($\bar{\R}$) instead of non-negative extended reals ($\bar{\R}_{\geq 0}$).  
-\end{itemize}
+\end{enumerate}
 
 
 
 \begin{remark}
-The first two relaxations above often go together.
-However, a  countably additive function can be defined on a \textit{field} (rather than \sf) if the condition is taken to hold whenever a countable union \textit{does} happen to still be in the field.  In my notes, I will simply things by assuming that countably additive functions are always defined on \sfs.
+With respect to pre-measures, a countably additive function can be defined on a \textit{field} (rather than \sf) if the condition is taken to hold whenever a countable union \textit{does} happen to still be in the field.  Unless otherwise specified, I will assume in these notes by that countably additive functions are always defined on \sfs, and finitely additive functions are defined on fields.
 \label{rk:i_am_assuming_a_domain_based_on_the_type_of_additivity}
 \end{remark}	
 
@@ -514,7 +517,83 @@ Taking $n \to \infty$ gives countable additivity.
 
  \section{$\S$ 1.3: Extension of measures} \label{sec:extension_of_measures}
  
+ 
+In Example \ref{ex:lesbesgue_measure}, we discussed the concept of length of a subset of $\R$; in particular, we mentioned extending the set function given on intervals by $\mu(a,b] = b-a$ to a larger class of subsets of $\R$.  As remarked in Example \ref{ex:field_of_finite_disjoint_unions_of_rsc_intervals}, if we define $\F_0$ as the disjoint unions of right semi-closed intervals, it is straightforward to show that $\F_0$ is a field.   But how can we extend $\mu$ to $\sigma(\F_0)$, the minimal $\sigma$-field containing $\F_0$?  
 
+In Section \ref{sec:ls_measures_and_distribution_functions}, we will show that $\mu$ is countably additive on $\F_0$, and we will generalize our problem to set functions given by $\mu(a,b] = F(b)-F(a)$, where $F$ is an increasing right-continuous function from $\R$ to $\R$.  For now, we will deal with the problem of extending a measure on $\F_0$ to a measure on $\sigma(\F_0)$. We do so using Theorem \ref{thm:caratheodory_extension}.  Along the way, we will use Theorem \ref{thm:extension_of_finite_measure} and Theorem \ref{thm:monotone_class_theorem} to prove Theorem \ref{thm:caratheodory_extension}. 
+
+ \begin{theorem}
+ (Theorem 1.3.6 \cite{ash2000probability}) A finite measure on a field $\F_0$ can be extended to a measure on $\sigma(\F_0)$. 	
+ \label{thm:extension_of_finite_measure}
+ \end{theorem}
+
+\begin{proof}
+See pp. 12-17 of \cite{ash2000probability}.	
+\end{proof}
+
+\begin{theorem}{\textbf{(Monotone Class Theorem)}}
+Let $\F_0$ be a field of subsets of $\Omega$ and $\C$ be a class of subsets of $\Omega$ that is monotone (if $A_n \in \C$ and $A_n \uparrow 
+A$ or $A_n \downarrow A$, then $A \in \C$).  If $\C \supset \F_0$ then $\C \supset \sigma(\F_0)$, then minimal $\sigma$-field over $\F_0$. 
+ \label{thm:monotone_class_theorem}
+\end{theorem}
+
+\begin{proof}
+See pp. 18-19 of \cite{ash2000probability}.	
+\end{proof}
+
+\begin{remark}
+Some key observations made during the proof of Theorem \ref{thm:monotone_class_theorem} are:
+\begin{itemize}
+\item A monotone class that is also field is a sigma-field.  (See Remark \ref{rk:the_limits_of_increasing_and_decreasing_sequences_of_sets_in_a_field_are_also_the_countable_unions}.)
+\item The smallest monotone class and smallest sigma-field over a field coincide. 
+\end{itemize}
+	
+\end{remark}
+
+\begin{theorem}{\textbf{(Caratheodory Extension Theorem)}} Let $\mu$ be a measure on the field $\F_0$ of subsets of $\Omega$, and assume that $\mu$ is $\sigma$-finite on $\F_0$, so that $\Omega$ can be decomposed as $\cup_{n=1}^\infty A_n$ where $A_n \in \F_0$ and $\mu(A_n) < \infty$ for all $n$.  Then $\mu$ has a unique extension to a measure on $\F := \sigma(\F_0)$, the minimal $\sigma$-field over $\F_0$. 
+ \label{thm:caratheodory_extension}
+\end{theorem}
+
+\begin{proof} (We follow the argument of \cite{ash2000probability}, but add some detail.) 
+First we prove existence.  {\footnotesize [Without loss of generality, we assume the $A_n$ are disjoint.  This is possible because we can use \eqref{eqn:union_as_disjoint_union} to re-express the countable union as a disjoint countable union:  $\Omega = \cup_{i=1}^\infty A_i = \cupdot_{i=1}^\infty B_i$, where $B_i := A_i \cap A_{i-1}^c ... \cap A_1^c$.]  } 
+
+If we define $\mu_n(A)=\mu(A \cap A_n)$ for each $A \in \F_0$, then we can decompose $\mu$ into a countable sum of finite measures:
+\begin{itemize}
+\item $\mu_n$ is a measure on $\F_0$. {\footnotesize   [Its countable additivity is inherited from $\mu$. If $\cupdot_{i=1}^\infty A_i$ is a disjoint union, then so is $\cupdot_{i=1}^\infty (A_i \cap A_n)$, and $\mu( \cupdot_{i=1}^\infty (A_i \cap A_n)) = \sum_{i=1}^\infty \mu(A_i \cap A_n) $ since $A_i \cap A_n$ are in $\F_0$. ] }
+\item $\mu_n$ is finite.  {\footnotesize  [True because $\mu_n(A) = \mu(A \cap A_n) \stackrel{\text{monotonicity}}{\leq} \mu(A_n) < \infty$.]	 }
+\item  $\mu = \sum_{n=1}^\infty \mu_n$. {\footnotesize  [True because $\mu(A) = \mu(A \cap \Omega) = \mu(A \cap (\cupdot_{n=1}^\infty A_n)) =\mu(\cupdot_{n=1}^\infty (A \cap A_n)) = \sum_{n=1}^\infty \mu(A \cap A_n) = \mu_n (A). $] }
+\end{itemize}
+Now by Theorem \ref{thm:extension_of_finite_measure}, we can extend each $\mu_n$ to a measure $\mu_n^*$ on $\F$.   Thus $\mu^* := \sum_{n=1}^\infty \mu_n^*$ extends $\mu$ to $\F$.  Moreover, $\mu^*$ is still a measure since the order of summation in a double series of nonnegative terms can be reversed.  {\footnotesize   [Countable additivity still holds  since:
+
+\begin{align*}
+\mu^*(\cupdot_{i=1}^\infty A_i) &= \ds\sum_{n=1}^\infty \mu_n^* (\cupdot_{i=1}^\infty A_i) && \\ &= \ds\sum_{n=1}^\infty \ds\sum_{i=1}^\infty \mu_n^* (A_i) && \tinytext{$\mu_n^*$ is measure, so countably additive}\\
+	&= \ds\sum_{i=1}^\infty \ds\sum_{n=1}^\infty \mu_n^*(A_i) && \tinytext{reverse order of summation for double series with non-negative terms} \\
+	&= \ds\sum_{i=1}^\infty \mu^*(A_i) && \tinytext{def. of $\mu^*$}
+\end{align*}
+
+]. }
+
+
+Now we prove uniqueness.   That is, we prove that if $\lambda$ is a measure on $\F$ and $\lambda = \mu^*$ on $\F_0$, then $\lambda = \mu^*$ on $\F$.    To see this, as before, we decompose the measure into a sum of finite measures: $\lambda = \sum_{n=1}^\infty \lambda_n$ where $\lambda_n := \lambda (A_n \cap A)$.  Now by assumption $\lambda_n = \mu_n^*$ on $\F_0$.  Where are they equal on $\F$?  Let us define the ``good sets" (recall Section \ref{sec:good_sets_strategy})
+\[ \G : = \set{A \in \F : \lambda_n (A) = \mu_n^* (A)} \]
+Now we can show $\G = \F$ -- that is, \textit{all} sets in the $\sigma$-field are good sets -- by observing
+\begin{itemize} 
+\item 	 $\G$ is a monotone class.  {\footnotesize 
+[This is true by continuity from below (see Theorem \ref{thm:continuity_of_countably_additive_set_functions}). In particular, a countable union can be considered the limit of an increasing sequence of partial unions (See Remark \ref{rk:the_limits_of_increasing_and_decreasing_sequences_of_sets_in_a_field_are_also_the_countable_unions}.) As a result, the measure of the limiting set is determined, as the limit of the the measure of the sets in that sequence.] }
+\item $\G \supset \F_0$. {\footnotesize 
+[This is true by construction.] }
+\end{itemize} 
+And so by Monotone Class Theorem (Theorem \ref{thm:monotone_class_theorem}), we have $\G \supset \F$.  But by construction $\G \subset \F$, and so $\G = \F$.  Therefore $\lambda = \sum_n \lambda_n = \sum_n \mu_n^* = \mu^*$, proving uniqueness.
+\end{proof}
+
+
+\begin{remark}
+The proof of Theorem \ref{thm:caratheodory_extension} reveals the appeal of $\sigma$-finite measures -- they can be decomposed as the countable sum of finite measures (and the order of summation of double series can be reversed for nonnegative series). 
+\end{remark}
+
+ \section{$\S$ 1.4: Lesbesgue-Stieltjes Measures and Distribution Functions} \label{sec:ls_measures_and_distribution_functions}
+ 
+ 
 \bibliography{references_ash_notes.bib}
 \bibliographystyle{unsrt}
 
