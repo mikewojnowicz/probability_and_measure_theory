@@ -522,6 +522,8 @@ Taking $n \to \infty$ gives countable additivity.
  \section{$\S$ 1.3: Extension of measures} \label{sec:extension_of_measures}
  
  
+\subsection{Extension and approximation}
+ 
 In Example \ref{ex:lesbesgue_measure}, we discussed the concept of length of a subset of $\R$; in particular, we mentioned extending the set function given on intervals by $\mu(a,b] = b-a$ to a larger class of subsets of $\R$.  As remarked in Example \ref{ex:field_of_finite_disjoint_unions_of_rsc_intervals}, if we define $\F_0$ as the disjoint unions of right semi-closed intervals, it is straightforward to show that $\F_0$ is a field.   But how can we extend $\mu$ to $\sigma(\F_0)$, the minimal $\sigma$-field containing $\F_0$?  
 
 In Section \ref{sec:ls_measures_and_distribution_functions}, we will show that $\mu$ is countably additive on $\F_0$, and we will generalize our problem to set functions given by $\mu(a,b] = F(b)-F(a)$, where $F$ is an increasing right-continuous function from $\R$ to $\R$.  For now, we will deal with the problem of extending a measure on $\F_0$ to a measure on $\sigma(\F_0)$. We do so using Theorem \ref{thm:caratheodory_extension}.  Along the way, we will use Theorem \ref{thm:extension_of_finite_measure} and Theorem \ref{thm:monotone_class_theorem} to prove Theorem \ref{thm:caratheodory_extension}. 
@@ -546,15 +548,15 @@ See pp. 18-19 of \cite{ash2000probability}.
 \end{proof}
 
 \begin{remark}
-Some key observations made during the proof of Theorem \ref{thm:monotone_class_theorem} are:
-\begin{itemize}
+During the proof of Theorem \ref{thm:monotone_class_theorem}, some key observations are made about the relationship between monotone classes and $\sigma$-fields:
+\begin{alphabate}
 \item A monotone class that is also field is a sigma-field.  (See Remark \ref{rk:the_limits_of_increasing_and_decreasing_sequences_of_sets_in_a_field_are_also_the_countable_unions}.)
 \item The smallest monotone class and smallest sigma-field over a field coincide. 
-\end{itemize}
-	
+\end{alphabate}
+\label{rk:monotone_classes_and_sigma_fields}
 \end{remark}
 
-\begin{theorem}{\textbf{(Caratheodory Extension Theorem)}} Let $\mu$ be a measure on the field $\F_0$ of subsets of $\Omega$, and assume that $\mu$ is $\sigma$-finite on $\F_0$, so that $\Omega$ can be decomposed as $\cup_{n=1}^\infty A_n$ where $A_n \in \F_0$ and $\mu(A_n) < \infty$ for all $n$.  Then $\mu$ has a unique extension to a measure on $\F := \sigma(\F_0)$, the minimal $\sigma$-field over $\F_0$. 
+\begin{theorem}{\textbf{(Carath\'eodory Extension Theorem)}} Let $\mu$ be a measure on the field $\F_0$ of subsets of $\Omega$, and assume that $\mu$ is $\sigma$-finite on $\F_0$, so that $\Omega$ can be decomposed as $\cup_{n=1}^\infty A_n$ where $A_n \in \F_0$ and $\mu(A_n) < \infty$ for all $n$.  Then $\mu$ has a unique extension to a measure on $\F := \sigma(\F_0)$, the minimal $\sigma$-field over $\F_0$. 
  \label{thm:caratheodory_extension}
 \end{theorem}
 
@@ -587,13 +589,107 @@ Now we can show $\G = \F$ -- that is, \textit{all} sets in the $\sigma$-field ar
 \item $\G \supset \F_0$. {\footnotesize 
 [This is true by construction.] }
 \end{itemize} 
-And so by Monotone Class Theorem (Theorem \ref{thm:monotone_class_theorem}), we have $\G \supset \F$.  But by construction $\G \subset \F$, and so $\G = \F$.  Therefore $\lambda = \sum_n \lambda_n = \sum_n \mu_n^* = \mu^*$, proving uniqueness.
+And so by Monotone Class Theorem (Theorem \ref{thm:monotone_class_theorem}), we have $\G \supset \F$.  But by construction $\G \subset \F$, and so $\G = \F$.  Therefore $\lambda_n = \mu_n^*$ for each $n$.  
+
+So 
+\[ \lambda \stackrel{\text{decomposition}}{=} \sum_n \lambda_n = \sum_n \mu_n^* \stackrel{\text{recomposition}}{=} \mu^*, \] proving uniqueness.
 \end{proof}
 
 
 \begin{remark}
-The proof of Theorem \ref{thm:caratheodory_extension} reveals the appeal of $\sigma$-finite measures -- they can be decomposed as the countable sum of finite measures (and the order of summation of double series can be reversed for nonnegative series). 
+The proof of Theorem \ref{thm:caratheodory_extension} reveals the appeal of $\sigma$-finite measures -- they can be decomposed as the countable sum of finite measures (and the order of summation of double series can be reversed for nonnegative series, so countable additivity still holds). 
 \end{remark}
+
+
+In Remark \ref{rk:monotone_classes_and_sigma_fields} (b), we observed that minimal $\sigma$-fields over a field can be characterized as the minimal monotone classes over a field -- so we merely need to close the field over increasing and decreasing sequences of sets.   This idea suggests that if $\F_0$ is a field and $\F = \sigma(\F_0)$, sets in $\F$ can be approximated in some sense by sets in $\F_0$.  The following result formalizes this notion. 
+
+
+\begin{theorem}{\textbf{(Approximation Theorem)}} Let $(\Omega, \F, \mu)$ be a measure space.  Let $\F = \sigma(\F_0)$ where $\F_0$ is a field of subsets of $\Omega$.  Let $\mu$ be $\sigma$-finite on $\F_0$.  Then for every $A \in \F$ and fixed $\epsilon >0$, there is a set $B \in \F_0$ such that $\mu( A \triangle B) < \epsilon$.  
+\label{thm:approximation theorem}	
+\end{theorem}
+
+
+\begin{example}
+
+This interesting example (from \cite{ash2000probability} pp. 20) provides a counterexample to the theorems when $\F_0$ is not $\sigma$-finite. 
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=1.\textwidth]{images/example_of_extension}	
+\end{figure}
+\end{example}
+
+\subsection{Completion of measure spaces}
+
+\begin{definition}
+A measure $\mu$ on a $\sigma$-field $\F$ is said to be \textit{complete} iff whenever $A \in F$ and $\mu(A) =0$, we have $B \in F$ for all $B \subset A$.
+\end{definition}
+
+\begin{definition}
+The \textit{completion} of a measure space $(\Omega, \F, \mu)$ is given by $(\Omega, \F_\mu, \mu)$, where 
+\[ \F_\mu := \set{A \cup S : A \in \F, S \subset N 
+\text{ for some } N \in \F \text { with } \mu(N) = 0 } \]
+and where $\mu$ is extended to $\F_\mu$ by setting $\mu (A \cup S) = \mu(A)$.
+\label{def:completion_of_measure_space}
+\end{definition}
+
+\begin{remark}
+Let us show that Definition \ref{def:completion_of_measure_space} is a valid definition by showing that
+
+\begin{enumerate}
+\item \textit{$\F_\mu$ is a $\sigma$-field.}
+\item \textit{$\mu$ is a measure on $\F_\mu$.}
+\item \textit{The completion is complete.} 	
+\end{enumerate}
+
+We justify these in turn:
+
+\begin{enumerate}
+\item $\F_\mu$ is closed under countable unions, since 
+\[ \cup_{i=1}^\infty (A_i \cup S_i) =  \explaintermbrace{$\in \F$}{(\cup_{i=1}^\infty A_i)} \; \cup \; \explaintermbrace{has measure 0}{(\cup_{i=1}^\infty S_i)} \]
+ where the term on the right has measure 0 because $\cup_{i=1}^\infty S_i \subset \cup_{i=1}^\infty N_i \in \F$, and $\mu(\cup_{i=1}^\infty N_i) = \sum_{i=1}^\infty \mu(N_i)= 0$.
+ 
+ $F_\mu$ is also closed under complements, since $S \subset N \implies N^c \subset S^c$, and so
+ \[ ( A \cup S)^c = (A^c \cap S^c) = \explaintermbrace{$\in \F$}{(A^c \cap N^c)} \cup \explaintermbrace{has measure 0}{(A^c \cap S^c - N^c)} \]
+ where the term on the right has measure 0 by monotonicity, because $A^c \cap S^c - N^c \subset S^c - N^c = S^c \cap (M^c)^c = S^c \cap N \subset N$.
+\item We need to show that if $A_1 \cup S_1 = A_2 \cup S_2$, then $\mu(A_1 \cup S_1) = \mu(A_2 \cup S_2)$, or more simply that $\mu(A_1)=\mu(A_2)$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.4\textwidth]{images/completion_of_measure_space}	
+\end{figure}
+
+We have    
+\[ \mu(A_1)  \stackexplain{countable additivity}{=} \mu(A_1 \cap A_2) + \mu(A_1 \cap A_2^c)\stackexplain{see below}{=} \mu(A_1 \cap A_2) \stackexplain{monotonicity}{\leq} \mu(A_2) \]
+where the second equality holds since $A_1 \cap A_2^c \subset S_2$ {\footnotesize (which, in turn, holds since $x \in A_1 \implies x \in A_2 \text{ or } x \in S_2$, so $x \in A_1 \text{ and } x \not\in A_2 \implies x \in S_2$)} .
+
+By symmetry, $\mu(A_2) \leq \mu(A_1)$, so $\mu(A_1)=\mu(A_2)$. 
+\item By the definition of a complete measure, we need to show that if $B \in \F_\mu$ and $\mu(B)=0$ then $C \in \F_\mu$ for all $C \subset B$.
+
+%Now $B \in \F_\mu \implies B = \explaintermbrace{$\in \F$}{A} \cup \explaintermbrace{has measure 0}{S}$.  
+
+Now $B \in \F_\mu \implies B = \explaintermbrace{$\in \F$}{A} \cup \explaintermbrace{$\subset N \in \F : \mu(N)=0$}{S}$.  
+
+So our assumption $\mu(B) = 0$ gives us $\mu(A) = 0$, since $\mu(B) = \mu(A \cup S) \stackrel{\text{choice of extension}}{=} \mu(A)  =0$.
+
+Now since we have assumed $C \subset B$ we have
+\[\mu(C) \stackexplain{monotonicity}{\leq} \mu(B) \stackrel{B \in \F_\mu}{=} \mu(A \cup S)  \stackexplain{subadditivity}{\leq} \mu(A)+\mu(S)  \stackexplain{see above}{=} 0 + \mu(S) = 0 + 0= 0\]
+
+Since $\mu$ is non-negative, this implies that $\mu(C) =0$.  
+
+We can therefore write $C = \explaintermbrace{$\in \F$}{\emptyset} \cup \explaintermbrace{has measure 0}{C}$, so $C \in \F_\mu$.
+
+Thus, $\mu$ on $\F_\mu$ is complete, since any subset of measure 0 is contained in $\F_\mu$.  
+\end{enumerate}
+\label{rk:completion_of_measure_space_is_well_defined} 
+\end{remark}
+
+\begin{question}
+Remark \ref{rk:completion_of_measure_space_is_well_defined} could be augmented to explicitly argue that countable additivity holds in $\F_\mu$. How to show that?
+\end{question}
+
+
+
 
  \section{$\S$ 1.4: Lesbesgue-Stieltjes Measures and Distribution Functions} \label{sec:ls_measures_and_distribution_functions}
  
