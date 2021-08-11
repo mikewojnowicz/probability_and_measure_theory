@@ -652,7 +652,11 @@ We justify these in turn:
  $F_\mu$ is also closed under complements, since $S \subset N \implies N^c \subset S^c$, and so
  \[ ( A \cup S)^c = (A^c \cap S^c) = \explaintermbrace{$\in \F$}{(A^c \cap N^c)} \cup \explaintermbrace{has measure 0}{(A^c \cap S^c - N^c)} \]
  where the term on the right has measure 0 by monotonicity, because $A^c \cap S^c - N^c \subset S^c - N^c = S^c \cap (M^c)^c = S^c \cap N \subset N$.
-\item We need to show that if $A_1 \cup S_1 = A_2 \cup S_2$, then $\mu(A_1 \cup S_1) = \mu(A_2 \cup S_2)$, or more simply that $\mu(A_1)=\mu(A_2)$.
+\item First, we show that countable additivity holds in $\F_\mu$. 
+\[ \mu(\cupdot_{i=1}^\infty  (A_i \cup S_i)) \stackexplain{see below}{=} \mu(\cupdot_{i=1}^\infty A_i) \stackexplain{$\mu$ countably additive on $\F$ \; }{=} \sum_{i=1}^\infty \mu(A_i) \stackexplain{construction of extension}{=}  \sum_{i=1}^\infty \mu(A_i \cup S_i)  \]
+The first equality holds because we can re-represent a disjoint union  $\cupdot_{i=1}^\infty  (A_i \cup S_i) = (\cupdot_{i=1}^\infty A_i) \cup (\cupdot_{i=1}^\infty S_i) $.  Since $\cupdot_{i=1}^\infty S_i  \subset \explaintermbrace{has measure 0 in $\F$}{\cupdot_{i=1}^\infty N_i}$, we have that $\mu((\cupdot_{i=1}^\infty A_i) \cup (\cupdot_{i=1}^\infty S_i)) = \mu(\cupdot_{i=1}^\infty A_i)$. 
+
+Next, we show that $\mu$ is invariant to decompositions: if $A_1 \cup S_1 = A_2 \cup S_2$, then $\mu(A_1 \cup S_1) = \mu(A_2 \cup S_2)$, or more simply $\mu(A_1)=\mu(A_2)$.
 
 \begin{figure}[H]
 \centering
@@ -683,12 +687,6 @@ Thus, $\mu$ on $\F_\mu$ is complete, since any subset of measure 0 is contained 
 \end{enumerate}
 \label{rk:completion_of_measure_space_is_well_defined} 
 \end{remark}
-
-\begin{question}
-Remark \ref{rk:completion_of_measure_space_is_well_defined} could be augmented to explicitly argue that countable additivity holds in $\F_\mu$. How to show that?
-\end{question}
-
-
 
 
  \section{$\S$ 1.4: Lesbesgue-Stieltjes Measures and Distribution Functions} \label{sec:ls_measures_and_distribution_functions}
