@@ -357,10 +357,9 @@ With respect to pre-measures, a countably additive function can be defined on a 
 \centering	
 \begin{tabular}{rcc}
 &\multicolumn{2}{c}{\textbf{Range}} \\
-& \textbf{non-negative} & \textbf{signed} \\
-\textbf{finitely additive}& $\mu_0$ & $\tilde{\mu}_0$ \\	
+& \textbf{non-negative extended reals} & \textbf{extended reals} \\
 \textbf{countably additive}& $\mu$ measure  & $\tilde{\mu}$ signed measure \\
-
+\textbf{finitely additive}& $\mu_0$ & $\tilde{\mu}_0$ \\	
 \end{tabular}
 \caption{Notation for generalizations of measure (For assumed domain in each case, see Remark \ref{rk:i_am_assuming_a_domain_based_on_the_type_of_additivity}.)}
 \label{tab:notation_for_generalizations_of_measure}
@@ -394,8 +393,18 @@ Measure-like set functions have useful properties. Using the notation in Table \
  \begin{enumerate}[label=\alph*)]
  \item \label{itm:first} $\fasf(\emptyset)=0$
  \item \label{itm:second} $\fasf(A \cup B) + \fasf (A \cap B) = \fasf(A) + \fasf(B)$ for all $A,B \in \F_0$.
+ \begin{figure}[H]
+ \centering
+ \includegraphics[width=.2\textwidth]{images/two_overlapping_sets}	
+ \end{figure}
+
  \item \label{itm:piece-and-difference} If $A,B \in \F_0$ and $B \subset A$, then   
   \[ \fasf(A) = \fasf(B) + \fasf(A-B)\quad \text{(piece-and-difference)} \] 
+ \begin{figure}[H]
+ \centering
+ \includegraphics[width=.2\textwidth]{images/whole_and_piece}	
+ \end{figure}
+ 
  So $\fasf(A) \geq \fasf(B)$ if $\fasf(A-B) \geq 0$. More generally, for non-negative set functions, we have
  \[ \mu_0 (A) \geq \mu_0 (B) \quad \text{(monotonicity)} \] 
  \item \label{itm:subadditivity} Subadditivity holds if $\fasf$ is non-negative, i.e.
@@ -447,19 +456,27 @@ Countably additive set functions have a basic continuity property. Continuity of
 Let $\signedmu$ be a countably additive set function on the \sf\ $\F$. Then
 
 \begin{alphabate}
-\item (continuity from below) If $A_1, A_2, ... \in \F$ and $A_n \uparrow A$, then $\signedmu(A_n) \to \signedmu(A)$ as $n \to \infty$. 
+\item (continuity from below) If $A_1, A_2, ... \in \F$ and $A_n \uparrow A$, then $\signedmu(A_n) \to \signedmu(A)$ as $n \to \infty$.
+
+\begin{figure}[H]
+ \centering
+\includegraphics[width=.2\textwidth, angle=90]{images/increasing_sequence_of_sets}	
+ \end{figure}
+   
 \item (continuity from above)  If $A_1, A_2, ... \in \F$, $A_n \downarrow A$, and $\signedmu(A_1)$ is finite, then $\signedmu(A_n) \to \signedmu(A)$ as $n \to \infty$. 
 \end{alphabate}
 \label{thm:continuity_of_countably_additive_set_functions}
 \end{theorem}
 
 \begin{proof}
-We prove continuity from below, and leave continuity from above as an exercise to the reader (or see text).  First let us assume that all $\signedmu(A_n)$ are finite (*). Then 
+We prove continuity from below, and leave continuity from above as an exercise to the reader (or see text). 
+ 
+First let us assume that all $\signedmu(A_n)$ are finite (*). Then 
 \begin{align*}
-A &= A_1 \cupdot A_2 - A_1 \cupdot A_3 - A_2 \cupdot ... && 	\text{ by } \eqref{eqn:union_as_disjoint_union_for_increasing_sequences} \\
+A &= A_1 \cupdot (A_2 - A_1) \cupdot (A_3 - A_2) \cupdot ... && 	\text{ by } \eqref{eqn:union_as_disjoint_union_for_increasing_sequences} \\
 \implies \signedmu(A) &= \signedmu(A_1) + \signedmu(A_2 - A_1) + \signedmu(A_3 - A_2) + ... && \text{(countable additivity)}\\ 
 &= \signedmu(A_1) + \signedmu(A_2) - \signedmu(A_1) + \signedmu(A_3) - \signedmu(A_2) + ... && \text{(Theorem \ref{thm:basic_properties_of_finitely_additive_set_functions} \ref{itm:piece-and-difference}, (*) }\\
-&= \ds\lim_{n \to \infty} \signedmu(A_n) 
+&= \ds\lim_{n \to \infty} \signedmu(A_n) && \text{(telescoping difference)}
 \end{align*}
 Now suppose $\signedmu(A_n) = \infty$ for some $n$.   So write 
 \begin{align*}
@@ -490,14 +507,15 @@ for $k \geq n$.  But recall from Theorem \ref{thm:basic_properties_of_finitely_a
 We have the result that finite additivity plus continuity equals countable additivity. 
 
 \begin{theorem}
-Let $\fasf$ be a finitely additive set function on the field $\F_0$.  Then $\fasf$ is countably additive if either
+Let $\fasf$ be a finitely additive set function on the field $\F_0$.  Suppose either
 \begin{alphabate}
 \item $\fasf$ is continuous from below
 \item $\fasf$ is continuous from above at the empty set.	
 \end{alphabate}
+Then $\fasf$ is countably additive.
 
 \begin{proof}
-We prove (a) and leave (b) as an exercise to the reader (or see text). 	%To show that $\fasf$ is countably additive, we need to show that  $ \fasf \bigg( \bigcupdot_{n=1}^\infty A_n \bigg) = \ds\sum_{n=1}^\infty \fasf(A_n)$.   
+We prove that the conclusion holds under (a) and leave doing the same for (b) as an exercise to the reader (or see text). 	%To show that $\fasf$ is countably additive, we need to show that  $ \fasf \bigg( \bigcupdot_{n=1}^\infty A_n \bigg) = \ds\sum_{n=1}^\infty \fasf(A_n)$.   
 
 Given $A = \bigcupdot_{n=1}^\infty A_n$, we define $P_n := \bigcup_{m \leq n} A_n$ and so $P_n \uparrow A$.   So we have
 \begin{align*}
@@ -524,9 +542,23 @@ Taking $n \to \infty$ gives countable additivity.
  
 \subsection{Extension and approximation}
  
-In Example \ref{ex:lesbesgue_measure}, we discussed the concept of length of a subset of $\R$; in particular, we mentioned extending the set function given on intervals by $\mu(a,b] = b-a$ to a larger class of subsets of $\R$.  As remarked in Example \ref{ex:field_of_finite_disjoint_unions_of_rsc_intervals}, if we define $\F_0$ as the disjoint unions of right semi-closed intervals, it is straightforward to show that $\F_0$ is a field.   But how can we extend $\mu$ to $\sigma(\F_0)$, the minimal $\sigma$-field containing $\F_0$?  
+In Example \ref{ex:lesbesgue_measure}, we discussed the concept of length of a subset of $\R$; in particular, we mentioned extending the set function given on intervals by $\mu(a,b] = b-a$ to a larger class of subsets of $\R$.  
 
-In Section \ref{sec:ls_measures_and_distribution_functions}, we will show that $\mu$ is countably additive on $\F_0$, and we will generalize our problem to set functions given by $\mu(a,b] = F(b)-F(a)$, where $F$ is an increasing right-continuous function from $\R$ to $\R$.  For now, we will deal with the problem of extending a measure on $\F_0$ to a measure on $\sigma(\F_0)$. We do so using Theorem \ref{thm:caratheodory_extension}.  Along the way, we will use Theorem \ref{thm:extension_of_finite_measure} and Theorem \ref{thm:monotone_class_theorem} to prove Theorem \ref{thm:caratheodory_extension}. 
+
+ As remarked in Example \ref{ex:field_of_finite_disjoint_unions_of_rsc_intervals}, if we define $\F_0 = \set{\text{finite disjoint unions of right semi-closed intervals } (a,b], a \neq b}$, then $\F_0$ is a field, as can be easily verified.  And $\mu$ can easily be seen to be a finitely additive set function on $\F_0$.   
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.6\textwidth]{images/rsc_intervals}	
+\end{figure}
+
+However, $\F_0$ is not a $\sigma$-field.  So how can we extend this function to a measure on a larger class of subsets?  The challenges are:
+
+\begin{itemize}
+\item \textit{We need to show that $\mu$ is countably additive.} We will do this in Section 5.   Moreover, in that section, we will generalize our problem to set functions given by $\mu(a,b] = F(b)-F(a)$, where $F$ is an increasing right-continuous function from $\R$ to $\R$.
+\item \textit{We need to extend $\mu$ to $\sigma(\F_0)$, the minimal $\sigma$-field containing $\F_0$.} In other words, we need to extend $\mu$ to the Borel sets.  We will handle the problem in this section more generally.  In this section, we will deal with the problem of extending a measure on $\F_0$ to a measure on $\sigma(\F_0)$. We do so using Carath\'eodory's Theorem  (Theorem \ref{thm:caratheodory_extension}).  Along the way, we will use Theorem \ref{thm:extension_of_finite_measure} and Theorem \ref{thm:monotone_class_theorem} to prove Theorem \ref{thm:caratheodory_extension}. 
+% We refer to a countably additive set function $\mu$ on a field $\F_0$ as a \textit{pre-measure}
+\end{itemize}
 
  \begin{theorem}
  (Theorem 1.3.6 \cite{ash2000probability}) A finite measure on a field $\F_0$ can be extended to a measure on $\sigma(\F_0)$. 	
