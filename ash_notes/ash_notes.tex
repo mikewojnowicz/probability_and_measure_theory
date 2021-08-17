@@ -879,12 +879,24 @@ For (j), we can write $\R = \cup_{n=1}^\infty [-n, n]$.  So by continuity from b
 \[\mu(\R) = \ds\lim_{n \to \infty}  \mu[-n,n] \stackrel{(c)}{=} \ds\lim_{n \to \infty} \big[ F(n) - F(-n) \big] = F(\infty) - F(-\infty) \]
 \end{proof}
 
-\begin{remark}
-Note that
-\[  \mu\set{x} = 0 \quad \Leftrightarrow \quad \text{F is continuous at } x\]
+\begin{remark}{\remarktitle{Continuity at a point iffi measure zero at a point}}
+\;
+\begin{enumerate}
+\item Note that
+\begin{align*} 
+\mu\set{x} = 0 \quad \Leftrightarrow \quad \text{F is continuous at } x
+\labelit\label {eqn:continuity_at_a_point_iffi_measure_zero_at_a_point}
+\end{align*} 
 
 which holds by Proposition \ref{prop:properties_of_LS_measures} part e) and the fact that $F$ is already right-continuous by definition. 
-	
+
+\item The magnitude of the discontinuity corresponds with the measure of $\set{x}$. 
+\end{enumerate}
+\label{rk:continuity_at_a_point_iffi_measure_zero_at_a_point}
+\end{remark}
+
+\begin{remark}
+The characterization of continuity in Remark \ref{rk:continuity_at_a_point_iffi_measure_zero_at_a_point} in terms of measure zero can be an interesting way to prove continuity, or prove the existence of functions with interesting properties.   For instance, take a countable set $S = \set{x_1, x_2, ...}$ and non-negative weights $\set{w_1, w_2, ...}.$ such that $\sum_i w_i < \infty$.   Then define $\mu(A) = \sum_{i} \set{w_i : x_i \in A}$.  Now $\mu$ is a Lesbesgue-Stietljes measure (and is in fact a finite measure), since $\mu(I) < \infty$ for each bounded interval $I$. By taking $S$ to be the rationals, we have proven the existence of an increasing function $F : \R \to \R$ that is continuous on the irrationals and discontinuous on the rationals {\footnotesize [since each Lesbesgue-Stieltjes measure determines a distribution function $F$ (up to additive constant), and the set of continuities is given by \eqref{eqn:continuity_at_a_point_iffi_measure_zero_at_a_point}]}.
 \end{remark}
 
  
