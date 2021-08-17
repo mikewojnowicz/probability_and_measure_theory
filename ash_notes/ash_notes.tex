@@ -744,6 +744,9 @@ Thus, $\mu$ on $\F_\mu$ is complete, since any subset of measure 0 is contained 
 \label{fig:distribution_function_with_positive_mass_on_points_that_is_not_concentrated_on_a_countable_set}
 \end{figure}
 
+
+
+
    
  
  \subsection{$\S$ 1.4.2 Each Lesbesgue-Stietljes measure uniquely determines a distribution function (up to an additive constant)}
@@ -879,6 +882,7 @@ For (j), we can write $\R = \cup_{n=1}^\infty [-n, n]$.  So by continuity from b
 \[\mu(\R) = \ds\lim_{n \to \infty}  \mu[-n,n] \stackrel{(c)}{=} \ds\lim_{n \to \infty} \big[ F(n) - F(-n) \big] = F(\infty) - F(-\infty) \]
 \end{proof}
 
+
 \begin{remark}{\remarktitle{Continuity at a point iffi measure zero at a point}}
 \;
 \begin{enumerate}
@@ -899,13 +903,60 @@ which holds by Proposition \ref{prop:properties_of_LS_measures} part e) and the 
 The characterization of continuity in Remark \ref{rk:continuity_at_a_point_iffi_measure_zero_at_a_point} in terms of measure zero can be an interesting way to prove continuity, or prove the existence of functions with interesting properties.   For instance, take a countable set $S = \set{x_1, x_2, ...}$ and non-negative weights $\set{w_1, w_2, ...}.$ such that $\sum_i w_i < \infty$.   Then define $\mu(A) = \sum_{i} \set{w_i : x_i \in A}$.  Now $\mu$ is a Lesbesgue-Stietljes measure (and is in fact a finite measure), since $\mu(I) < \infty$ for each bounded interval $I$. By taking $S$ to be the rationals, we have proven the existence of an increasing function $F : \R \to \R$ that is continuous on the irrationals and discontinuous on the rationals {\footnotesize [since each Lesbesgue-Stieltjes measure determines a distribution function $F$ (up to additive constant), and the set of continuities is given by \eqref{eqn:continuity_at_a_point_iffi_measure_zero_at_a_point}]}.
 \end{remark}
 
+\begin{remark}{\remarktitle{Lesbesgue-Stieltjes measures of intervals for continuous distribution functions}}
+When a distribution function $F$ is continuous rather than simply right continuous, the properties in Proposition \ref{prop:properties_of_LS_measures} reveal that the Lesbesgue-Stieltjes measure of an interval does not depend upon whether the intervals are open or closed, i.e. 
+\begin{subequations}
+\begin{align}
+\mu(a,b] &= \mu(a,b) = \mu[a,b) = \mu[a,b] = F(b)-F(a) &&  \text{for } a \leq b \\
+\mu(-\infty,x) &= \mu(-\infty,x] = F(x) - F(-\infty) && \text{for } x \in \R  \\
+\mu(x,\infty) &= \mu[x,\infty) = F(\infty) - F(x) && \text{for } x \in \R  
+\end{align}
+\label{eqn:LS_measures_with_continuous_distribution_function_dont_care_about_intervals_being_open_or_closed}
+\end{subequations}
+
+We will informally summarize this as $\mu(a,b]=\mu(a,b)=\mu[a,b)=\mu[a,b]$, where we may take $a,b \in \overline{\R}$ as long as we aren't closing the interval at $\pm \infty$.
+\label{rk:LS_measures_with_continuous_distribution_function_agnostic_to_open_vs_closed_intervals}
+\end{remark}
+
+
 \begin{remark}
 Note that the properties in Proposition \ref{prop:properties_of_LS_measures} hold even though differences (between a set and a subset) and measures don't commute outside of finite measures.\footnote{See Theorem \ref{thm:basic_properties_of_finitely_additive_set_functions}.}  For instance, if we determine $F$ from the equivalence class by setting $F(-\infty)=0$, then property d) of Proposition \ref{prop:properties_of_LS_measures} says 
 \[  \mu[a,b) = \mu(-\infty, b) - \mu(-\infty, a).\]
-But we couldn't make that statement by the piece-and-whole decomposition (see Theorem \ref{thm:basic_properties_of_finitely_additive_set_functions}), since $\mu$ isn't necessarily finite.
+But we couldn't make that statement by the piece-and-difference decomposition (see Theorem \ref{thm:basic_properties_of_finitely_additive_set_functions}), since $\mu$ isn't necessarily finite.  Thus, continuity of measure lets claim things that the piece-and-difference decomposition does not.
 \end{remark}
 
- 
+
+
+\subsection{Examples}
+
+\begin{example}{\remarktitle{Lesbesgue measure}}
+Under the identity distribution function ($F(x)=x$), we have $\mu(a,b]=F(b)-F(a)$.  This is known as Lebesgue measure.  Recall from Remark \ref{rk:LS_measures_with_continuous_distribution_function_agnostic_to_open_vs_closed_intervals} that since $F$ is continuous, we also have $\mu(a,b]=\mu(a,b)=\mu[a,b)=\mu[a,b]$.
+\label{ex:lesbesgue_measure_as_example_of_lesbesgue_stieltjes} 
+\end{example}
+
+\begin{example}{\remarktitle{Generating Lebesgue-Stieltjes measures via integration}}
+We can generate a large class of measures on $\B(\R)$ as follows.  Let $f$ be integrable (Reimann for now) on any finite interval, and define
+\[ F(b) - F(a) = \ds\int_{a}^b f(t) \, dt\]
+which determines $F$ up to an additive constant.   Then $F$ is a distribution function (as it is both increasing and continuous), so it gives rise to a Lesbesgue-Stieltjes measure $\mu(a,b] = F(b) - F(a)$.  One again, Remark \ref{rk:LS_measures_with_continuous_distribution_function_agnostic_to_open_vs_closed_intervals} reveals that by continuity of $F$, we have $\mu(a,b]=\mu(a,b)=\mu[a,b)=\mu[a,b]$.  Lesbesgue measure (Example \ref{ex:lesbesgue_measure_as_example_of_lesbesgue_stieltjes}) is a special case where $f \equiv 1$. 
+\end{example}
+
+\subsection{Lesbesgue measurable sets}
+
+\begin{definition}
+The completion of Lesbesgue measure relative to $\B(\R)$ gives what is known as the \textit{Lesbesgue measurable sets}, denoted $\overline{\B}(\R)$.   
+\end{definition}
+
+Each Lesbesgue measurable set is the union of a Borel set and a subset of a Borel set with Lesbesgue measure zero.
+
+Sometimes people use the term ``Lesbesgue measure" to refer to
+
+\begin{align*}
+\mu : \; & \overline{\B}(\R) \to \R^+
+\intertext{as well as}
+\mu : \; & \B(\R) \to \R^+
+\end{align*}
+
+
 \bibliography{references_ash_notes.bib}
 \bibliographystyle{unsrt}
 
