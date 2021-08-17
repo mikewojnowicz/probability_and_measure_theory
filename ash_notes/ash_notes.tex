@@ -322,12 +322,14 @@ We may alternately characterize $\B(\R)$ as the smallest \sf\ containing
 \end{itemize}
 
 To illustrate these equivalences, let us equate the first two conditions. That is, let us show that a \sf\ contains all open intervals $(a,b)$ iff it contains all right semi-closed intervals $(a,b]$.  To see this, simply note
-
-\begin{align*}
+\begin{subequations}
+\begin{align}
 (a,b] &= \bigcap_{n=1}^\infty \bigg(a, b+\frac{1}{n}\bigg) \\
 	\intertext{and}
 (a,b) &= \bigcup_{n=1}^\infty \bigg(a, b-\frac{1}{n}\bigg] 
-\end{align*}
+\end{align}
+\end{subequations}
+\label{eqn:open_intervals_as_rsc_intervals_and_vice_versa}
 \label{ex:lesbesgue_measure}
 \end{example}
 
@@ -733,7 +735,7 @@ Thus, $\mu$ on $\F_\mu$ is complete, since any subset of measure 0 is contained 
  A \textit{distribution function} on $\R$ is a map $F : \R \to \R$ that is increasing [ $a<b$ implies $F(a) \leq F(b)$] and right continuous [ $\lim_{x \to x_0^+} F(x) = F(x_0)$]. 
  \end{definition}
  
- Here we show that the formula $\mu(a,b] = F(b) - F(a)$ sets up a one-to-one correspondence between distribution functions and Lesbesgue-Stieltjes measures.    Figure \ref{fig:distribution_function_with_positive_mass_on_points_that_is_not_concentrated_on_a_countable_set} helps to illuminate how working with distribution functions allows us to cover both absolutely continuous, discrete, and mixed random variables. 
+ Here we show that the formula $\mu(a,b] = F(b) - F(a)$ sets up a one-to-one correspondence between distribution functions and Lesbesgue-Stieltjes measures.    Figure \ref{fig:distribution_function_with_positive_mass_on_points_that_is_not_concentrated_on_a_countable_set} helps to illuminate how working with distribution functions allows us to cover absolutely continuous, discrete, and mixed random variables in a single paradigm. 
    
  \begin{figure}[H]
  \centering
@@ -822,6 +824,67 @@ In summary, we have seen that for any fixed $\epsilon >0$, we have $\mu(A_n) < \
 
 \begin{remark}
 The proof of Lemma \ref{lemma:ls_measures_are_countably_additive_on_the_field_of_disjoint_rsc_intervals} is a very cool application of Heine-Borel!  In trying to show continuity from above, we started out with an \textit{infinite} intersection of sets.  But in showing that the measure of the sequence converged, we needed to work with \textit{finite} collection so that we could apply \textit{finite} subadditivity, since that's all we had to use, by assumption. 
+\end{remark}
+
+\begin{theorem}
+Let $F$ be a distribution function on $\R$, and let $\mu(a,b] = F(b) - F(a), a < b$.  Then there is a unique extension of $\mu$ to a Lesbesgue-Stietljes measure on $\R$.
+\label{thm:extension_for_lesbesgue_stietljes_measure}
+\end{theorem}
+
+\begin{proof}
+See text. 	
+\end{proof}
+
+\begin{remark}
+The proof of Theorem \ref{thm:extension_for_lesbesgue_stietljes_measure}
+essentially directly applies Carathe\'odory's Extension Theorem, since we know from Lemma \ref{lemma:ls_measures_are_countably_additive_on_the_field_of_disjoint_rsc_intervals} that $\mu$ is countably additive on $\F_0(\R)$, a field from which the Borel sets are generated.  The only real additional work is a tedious technical detail to identify a $\mu$-preserving correspondence between sets in $\F_0(\overline(\R))$ (over which we proved countable additivity) and sets in $\F_0(\R)$ (which is the field we actually want to extend).
+\end{remark}
+
+  \subsection{$\S$ 1.4.5 Properties of Lesbesgue-Stietljes measure }
+ Before extension, we had $\mu(a,b] =F(b) - F(a)$ for $a < b$ where $F$ is a distribution function. The set function $\mu$ was defined only on $\F_0(\R)$, the field of disjoint unions of r.s.c interval.  But after extension, $\mu$ is defined on $\B(\R) = \sigma(\F_0)(\R))$, which allows us to measure other types of intervals as well (by expressing those intervals as countable unions or intersections of r.s.c intervals; recall \eqref{eqn:open_intervals_as_rsc_intervals_and_vice_versa}.)
+ 
+ \begin{proposition}
+ Let $\mu$ be a Lesbesgue-Stieltjes measure, and let $F$ be its associated distribution function.    Let $F(x^-) = \lim_{y \to x^-} F(y)$. Then 
+
+ \begin{alphabate}
+ \item $\mu(a,b] = F(b) - F(a)$	
+ \item $\mu(a,b) = F(b^-) - F(a)$	
+ \item $\mu[a,b] = F(b) - F(a^-)$	
+ \item $\mu[a,b) = F(b^-) - F(a^-)$	
+ \item $\mu\set{x} = F(x) - F(x^-)$	
+ \item $\mu(-\infty,x] = F(x) - F(-\infty)$	
+ \item $\mu(-\infty,x) = F(x^-) - F(-\infty)$	
+ \item $\mu(x,\infty) = F(\infty) - F(x)$	
+ \item $\mu[x,\infty) = F(\infty) - F(x^-)$	
+ \item $\mu(\R) = F(\infty) - F(-\infty)$	
+ \end{alphabate}
+ \label{prop:properties_of_LS_measures}
+\end{proposition}
+
+\begin{proof}
+We prove some of these statements and leave the rest to the reader.  
+
+For (b), note that $(a,b) = \cup_{n=1}^\infty (a, b-\frac{1}{n}]$.  So let $A_n = (a, b-\frac{1}{n}]$. Then  by continuity from below,
+\[\mu(a,b) = \ds\lim_{n \to \infty}  \mu(A_n) = \ds\lim_{n \to \infty} \big[F(b-\frac{1}{n}) - F(a) \big] = F(b^-) - F (a) \]
+
+For (c), note that $[a,b] = \cap_{n=1}^\infty (a-\frac{1}{n}, b]$.   So by continuity from above (which applies since the sets in the intersection have finite measure),
+\[\mu(a,b] = \ds\lim_{n \to \infty} \big[F(b) - F(a - \frac{1}{n}) \big] = F(b) - F (a^-) \]
+
+For (e), note that $\set{x} = \cap_{n=1}^\infty (x-\frac{1}{n}, x]$.   So the statement follows by the same argument as used in (c).
+
+For (i), we can write $[x,\infty) = \cup_{n=1}^\infty [x, x+n)$.  So by continuity from below, 
+\[\mu[x,\infty) = \ds\lim_{n \to \infty}  \mu[x, x+n) \stackrel{(d)}{=} \ds\lim_{n \to \infty} \big[ F\big( (x+n)^- \big) - F(x^-) \big] = F(\infty) - F(x^-) \]
+
+For (j), we can write $\R = \cup_{n=1}^\infty [-n, n]$.  So by continuity from below, 
+\[\mu(\R) = \ds\lim_{n \to \infty}  \mu[-n,n] \stackrel{(c)}{=} \ds\lim_{n \to \infty} \big[ F(n) - F(-n) \big] = F(\infty) - F(-\infty) \]
+\end{proof}
+
+\begin{remark}
+Note that
+\[  \mu\set{x} = 0 \quad \Leftrightarrow \quad \text{F is continuous at } x\]
+
+which holds by Proposition \ref{prop:properties_of_LS_measures} part e) and the fact that $F$ is already right-continuous by definition. 
+	
 \end{remark}
 
  
