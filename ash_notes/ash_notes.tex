@@ -399,13 +399,13 @@ Measure-like set functions have useful properties. Using the notation in Table \
  \end{figure}
 
  \item \label{itm:piece-and-difference} If $A,B \in \F_0$ and $B \subset A$, then   
-  \[ \fasf(A) = \fasf(B) + \fasf(A-B)\quad \text{(piece-and-difference)} \] 
+  \[ \fasf(A) = \fasf(B) + \fasf(A-B)\quad \text{(piece-and-difference decomposition)} \] 
  \begin{figure}[H]
  \centering
  \includegraphics[width=.2\textwidth]{images/whole_and_piece}	
  \end{figure}
  
- So $\fasf(A) \geq \fasf(B)$ if $\fasf(A-B) \geq 0$. More generally, for non-negative set functions, we have
+ \footnote{If the ``piece" satisfies $\fasf(B) < \infty$, we have $\fasf(A-B) = \fasf(A) - \fasf(B) $.  One useful takeaway for piece-and-difference decompositions is that : \textit{the finite measure of the difference is the difference of the finite measures}.}So $\fasf(A) \geq \fasf(B)$ if $\fasf(A-B) \geq 0$. More generally, for non-negative set functions, we have
  \[ \mu_0 (A) \geq \mu_0 (B) \quad \text{(monotonicity)} \] 
  \item \label{itm:subadditivity} Subadditivity holds if $\fasf$ is non-negative, i.e.
  \begin{align*}
@@ -513,6 +513,8 @@ Let $\fasf$ be a finitely additive set function on the field $\F_0$.  Suppose ei
 \item $\fasf$ is continuous from above at the empty set.	
 \end{alphabate}
 Then $\fasf$ is countably additive.
+\label{thm:finite_additivity_plus_continuity_gives_countable_additivity}
+\end{theorem}
 
 \begin{proof}
 We prove that the conclusion holds under (a) and leave doing the same for (b) as an exercise to the reader (or see text). 	%To show that $\fasf$ is countably additive, we need to show that  $ \fasf \bigg( \bigcupdot_{n=1}^\infty A_n \bigg) = \ds\sum_{n=1}^\infty \fasf(A_n)$.   
@@ -526,7 +528,7 @@ Given $A = \bigcupdot_{n=1}^\infty A_n$, we define $P_n := \bigcup_{m \leq n} A_
 Taking $n \to \infty$ gives countable additivity.
 \end{proof}
 
-\end{theorem}
+
 
 
 
@@ -540,7 +542,7 @@ Taking $n \to \infty$ gives countable additivity.
  \section{$\S$ 1.3: Extension of measures} \label{sec:extension_of_measures}
  
  
-\subsection{Extension and approximation}
+\subsection{Extension and approximation} \label{sec:extension_and_approximation}
  
 In Example \ref{ex:lesbesgue_measure}, we discussed the concept of length of a subset of $\R$; in particular, we mentioned extending the set function given on intervals by $\mu(a,b] = b-a$ to a larger class of subsets of $\R$.  
 
@@ -723,19 +725,121 @@ Thus, $\mu$ on $\F_\mu$ is complete, since any subset of measure 0 is contained 
 
  \section{$\S$ 1.4: Lesbesgue-Stieltjes Measures and Distribution Functions} \label{sec:ls_measures_and_distribution_functions}
  
+ \begin{definition}
+ A \textit{Lesbesgue-Stieltjes measure} on $\R$ is a measure $\mu$ on $\B(\R)$ such that $\mu(I) < \infty$ for each bounded interval $I$.	
+ \end{definition}
+
+\begin{definition}
+ A \textit{distribution function} on $\R$ is a map $F : \R \to \R$ that is increasing [ $a<b$ implies $F(a) \leq F(b)$] and right continuous [ $\lim_{x \to x_0^+} F(x) = F(x_0)$]. 
+ \end{definition}
+ 
+ Here we show that the formula $\mu(a,b] = F(b) - F(a)$ sets up a one-to-one correspondence between distribution functions and Lesbesgue-Stieltjes measures.
+ 
+ \subsection{$\S$ 1.4.2 Each Lesbesgue-Stietljes measure uniquely determines a distribution function (up to an additive constant)}
+ First, we show that to every Lesbesgue-Stieltjes  measure, there is a unique distribution function (up to an additive constant).  This is the easy part.
+ 
+ \begin{theorem}
+ Let $\mu$ be a Lesbesgue-Stietljes measure on $\R$.  Let $\F : \R \to \R$ be defined (up to additive constant) by $F(b)-F(a) = \mu(a,b]$ for $a<b$. Then $F$ is a distribution function.
+ \end{theorem}
+
+\begin{proof}
+First we show that $F$ is increasing.  We have $F(b) - F(a) = \mu(a,b] \geq 0$, since $\mu$ is non-negative. 
+
+Next we show that $F$ is right continuous.  By the continuity (from above) of measure, 
+\[ \ds\lim_{b' \to b+}[F(b') - F(a)] = \ds\lim_{b' \to b+} \mu(a,b'] = \mu(a,b]\]
+and continuity from above applies since Lesbesgue-Stietljes measures are finite on any interval.
+
+Thus, rearranging,
+\[ \ds\lim_{b' \to b+} F(b') = \mu(a,b] + F(a) = \bigg(F(b)-F(a)\bigg) + F(a) = F(a)\]
+
+\end{proof}
+
+
+  \subsection{$\S$ 1.4.3-1.4.4 Each distribution function (identified up to additive constant) uniquely determines a Lesbesgue-Stietljes measure }
+  
+ Now the harder part.  We need to show that every distribution function $F$ (identified up to additive constant) uniquely determines a Lesbesgue-Stieltjes  measure.  
+ 
+ To start, by a similar reasoning as we've seen before (e.g. see Section \ref{sec:extension_and_approximation}), it is straightforward to show that the formula $\mu(a,b] = F(a)-F(b), a,b \in \overline{\R}, a <b$ defines a finitely additive set function on $\F_0(\overline{\R})$, the field of disjoint unions of right semi-closed intervals of the extended reals.  
+ 
+ The challenge will be to show that this set function is countably additive.  If we can do that, then we can apply Carath\'eodory's Extension Theorem to extend this function to $\B(\R)$. 
+
+\begin{lemma}
+The set function $\mu$ is countably additive on $\F_0(\overline{\R})$.
+\label{lemma:ls_measures_are_countably_additive_on_the_field_of_disjoint_rsc_intervals} 	
+\end{lemma}
+
+\begin{proof}
+We assume $F(\infty) - F(-\infty) < \infty$, so that $\mu$ is finite.   (We leave the case where $F(\infty) - F(-\infty) = \infty$	to the reader, or see the text.)  Our strategy will be to show that $\mu$ is continuous from above, in which case we can apply Theorem \ref{thm:finite_additivity_plus_continuity_gives_countable_additivity} (b) to show that the set function is countably additive.
+
+Let $A_n$ be a sequence of sets in $\F_0(\overline{\R})$ such that $A_n \downarrow \emptyset$.  Now each $A_n$ is a finite union of disjoint r.s.c. intervals.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.45\textwidth]{images/decreasing_sequence_of_union_of_rsc_intervals}	
+\end{figure}
+
+ Suppose one such interval is $(a,b]$.  By the right continuity of $F$, we can find intervals $(a',b]$ that approximate $(a,b]$ from the inside arbitrarily well, since
+\[ \mu(a',b] = F(b) - F(a') \to \mu(a,b] = F(b) - F(a) \text{ as } a' \to a \text{ from the right } \] 
+Thus, we can find sets $B_n \in \F_0(\overline{\R})$ whose closures $\overline{B}_n \subset A_n$ and where $\mu(B_n)$ approximates $\mu(A_n)$ to any desired $\epsilon > 0$. 
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.45\textwidth]{images/approximating_union_of_rsc_intervals}	
+\end{figure}
+
+For any fixed $\epsilon>0$, we can choose such a sequence $B_n$ such that $\mu(A_n) - \mu(B_n) < \epsilon 2^{-n} \; (*)$, and we find
+\begin{alphabate}
+\item $\cap_{n=1}^\infty \overline{B}_n = \emptyset$.	\quad  {[\footnotesize True because each $\overline{B}_n \subset A_n$, so $\cap_{n=1}^\infty \overline{B}_n \subset \cap_{n=1}^\infty A_n = \emptyset$.  ]} 
+\item $\cap_{k=1}^n \overline{B}_k = \emptyset$ for sufficiently large $n$.	\quad  {\footnotesize [We have $\overline{\R} \; \stackrel{ \text{item a)}}{=} \; (\overline{\R} - \cap_{n=1}^\infty \overline{B}_n) \; \stackrel{\text{DeMorgan } \eqref{eqn:demorgan_for_relative_complements}}{=} \; \cup_{n=1}^\infty (\overline{\R} - \overline{B}_n)$.   So $\set{\overline{\R} - \overline{B}_n}$ is an open cover of $\overline{\R}$. By the Heine-Borel theorem, there must be a finite subcover.  So for sufficiently large $n$, we have $\cup_{k=1}^n (\overline{\R} - \overline{B}_k) = \overline{\R}$.  Taking complements of both sides, and once again applying DeMorgan's law \eqref{eqn:demorgan_for_relative_complements} to the relative complement, we find $\cap_{k=1}^n \overline{B}_k = \emptyset$.  ]}
+\end{alphabate}
+
+So now we use a piece-and-difference decomposition (Theorem \ref{thm:basic_properties_of_finitely_additive_set_functions} (b) ):
+\begin{align*}
+A_n &= \bigg( \bigcap_{k=1}^n B_k \bigg) \; \bigcupdot \; \bigg(  A_n - \bigcap_{k=1}^n B_k \bigg) \\
+\implies \mu(A_n) &= \cancelto{0}{\mu(\cap_{k=1}^n B_k)} \; + \; \mu(A_n - \cap_{k=1}^n B_k) && \tinytext{countable additivity; item b) above}\\ 
+& \stackrel{1}{\leq} \mu( \cup_{k=1}^n (A_k - B_k))&& \tinytext{monotonicity} \\
+& \leq \sum_{k=1}^n \mu( A_k - B_k) && \tinytext{finite subadditivity} \\
+& = \sum_{k=1}^n \mu( A_k) - \mu(B_k) && \tinytext{piece-and-difference decomposition; also uses finiteness} \\
+&\leq \epsilon \sum_{k=1}^n 2^{-k} \\
+& < \epsilon. 
+\end{align*}
+where the monotonicity property in (1) applies because $A_n - \cap_{k=1}^n B_k \stackrel{\text{DeMorgan}}{=} \cup_{k=1}^n
+(A_n - B_k) \subset \cup_{k=1}^n
+(A_k - B_k)$.
+
+In summary, we have seen that for any fixed $\epsilon >0$, we have $\mu(A_n) < \epsilon$ for sufficiently large $n$. Thus, $\mu(A_n) \to 0$, and so $\mu$ is continuous from below.  So by Theorem \ref{thm:finite_additivity_plus_continuity_gives_countable_additivity} (b), $\mu$ is countably additive.
+\end{proof}
+
+\begin{remark}
+The proof of Lemma \ref{lemma:ls_measures_are_countably_additive_on_the_field_of_disjoint_rsc_intervals} is a very cool application of Heine-Borel!  In trying to show continuity from above, we started out with an \textit{infinite} intersection of sets.  But in showing that the measure of the sequence converged, we needed to work with \textit{finite} collection so that we could apply \textit{finite} subadditivity, since that's all we had to use, by assumption. 
+\end{remark}
+
  
 \bibliography{references_ash_notes.bib}
 \bibliographystyle{unsrt}
 
 \appendix
 
-\section{Definitions}
-
+\section{Appendix}
+\subsection{Right semi-closed intervals}
 \begin{definition}
 A \textbf{right semi-closed interval} is a set of the form $(a,b] = \set{x : a < x \leq b}, -\infty \leq a < b < \infty$.  By convention, we also count $(a,\infty)$ as right semi-closed for $-\infty \leq a < \infty$. 
 \label{def:rsc_intervals}
 \end{definition}
 
+\subsection{DeMorgan's Law applies to relative complements} 
+
+\begin{remark}
+DeMorgan's Law also holds for relative complements.  That is, given a sequence of sets $A_1, A_2, ...$ that are subsets of another set $X$, we have:
+
+\begin{align*}
+X - \bigcap_{n=1}^\infty A_n = \bigcup_{n=1}^\infty (X - A_n)
+\labelit \label{eqn:demorgan_for_relative_complements}	
+\end{align*}
+
+	
+\end{remark}
 
 
 \end{document}
