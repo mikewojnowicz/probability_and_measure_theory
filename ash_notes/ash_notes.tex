@@ -746,22 +746,24 @@ In this Section, we show that the formula $\mu(a,b] = F(b) - F(a)$ sets up a one
 
  
  \subsection{$\S$ 1.4.2 Each Lesbesgue-Stietljes measure uniquely determines a distribution function (up to an additive constant)}
- First, we show that to every Lesbesgue-Stieltjes  measure, there is a unique distribution function (up to an additive constant).  This is the easy part.
+ First, the easy part: we show that to every Lesbesgue-Stieltjes  measure, there is a unique distribution function (up to an additive constant). 
  
  \begin{theorem}
  Let $\mu$ be a Lesbesgue-Stietljes measure on $\R$.  Let $\F : \R \to \R$ be defined (up to additive constant) by $F(b)-F(a) = \mu(a,b]$ for $a<b$. Then $F$ is a distribution function.
  \end{theorem}
 
 \begin{proof}
-First we show that $F$ is increasing.  We have $F(b) - F(a) = \mu(a,b] \geq 0$, since $\mu$ is non-negative. 
+We must show that $F$ is increasing and right continuous.
 
-Next we show that $F$ is right continuous.  By the continuity (from above) of measure, 
+\begin{enumerate}
+\item We have $F(b) - F(a) = \mu(a,b] \geq 0$, since $\mu$ is non-negative. So $F$ is increasing.  
+\item By the continuity (from above) of measure (which can be applied since since Lesbesgue-Stietljes measures are finite on any interval), 
 \[ \ds\lim_{b' \downarrow b}[F(b') - F(a)] = \ds\lim_{b' \downarrow b} \mu(a,b'] = \mu(a,b]\]
-and continuity from above applies since Lesbesgue-Stietljes measures are finite on any interval.
 
 Thus, rearranging,
-\[ \ds\lim_{b' \downarrow b} F(b') = \mu(a,b] + F(a) = \bigg(F(b)-F(a)\bigg) + F(a) = F(a)\]
-
+\[ \ds\lim_{b' \downarrow b} F(b') = \mu(a,b] + F(a) = \bigg(F(b)-F(a)\bigg) + F(a) = F(b)\]
+So $F$ is right continuous.  
+\end{enumerate}
 \end{proof}
 
 
@@ -788,7 +790,7 @@ Let $A_n$ be a sequence of sets in $\F_0(\overline{\R})$ such that $A_n \downarr
 \includegraphics[width=.45\textwidth]{images/decreasing_sequence_of_union_of_rsc_intervals}	
 \end{figure}
 
- Suppose one such interval is $(a,b]$.  By the right continuity of $F$, we can find intervals $(a',b]$ that approximate $(a,b]$ from the inside arbitrarily well, since
+ Suppose one such interval is $(a,b]$.  By the right continuity of $F$, we can find intervals $(a',b]$ that approximate $(a,b]$ from the inside arbitrarily well, since by continuity from below
 \[ \mu(a',b] = F(b) - F(a') \to \mu(a,b] = F(b) - F(a) \text{ as } a' \downarrow a \] 
 Thus, we can find sets $B_n \in \F_0(\overline{\R})$ whose closures $\overline{B}_n \subset A_n$ and where $\mu(B_n)$ approximates $\mu(A_n)$ to any desired $\epsilon > 0$. 
 
@@ -822,7 +824,7 @@ In summary, we have seen that for any fixed $\epsilon >0$, we have $\mu(A_n) < \
 \end{proof}
 
 \begin{remark}
-The proof of Lemma \ref{lemma:ls_measures_are_countably_additive_on_the_field_of_disjoint_rsc_intervals} is a very cool application of Heine-Borel!  In trying to show continuity from above, we started out with an \textit{infinite} intersection of sets.  But in showing that the measure of the sequence converged, we needed to work with \textit{finite} collection so that we could apply \textit{finite} subadditivity, since that's all we had to use, by assumption. 
+The proof of Lemma \ref{lemma:ls_measures_are_countably_additive_on_the_field_of_disjoint_rsc_intervals} is a very cool application of Heine-Borel!  In trying to show continuity from above, we started out with an \textit{infinite} intersection of sets.  But in showing continuity, we needed to work with \textit{finite} collection so that we could apply \textit{finite} subadditivity, since that's all we had to use, by assumption. 
 \end{remark}
 
 \begin{theorem}
@@ -836,7 +838,7 @@ See text.
 
 \begin{remark}
 The proof of Theorem \ref{thm:extension_for_lesbesgue_stietljes_measure}
-essentially directly applies Carathe\'odory's Extension Theorem, since we know from Lemma \ref{lemma:ls_measures_are_countably_additive_on_the_field_of_disjoint_rsc_intervals} that $\mu$ is countably additive on $\F_0(\R)$, a field from which the Borel sets are generated.  The only real additional work is a tedious technical detail to identify a $\mu$-preserving correspondence between sets in $\F_0(\overline(\R))$ (over which we proved countable additivity) and sets in $\F_0(\R)$ (which is the field we actually want to extend).
+essentially directly applies Carathe\'odory's Extension Theorem, since we know from Lemma \ref{lemma:ls_measures_are_countably_additive_on_the_field_of_disjoint_rsc_intervals} that $\mu$ is countably additive on $\F_0(\R)$, a field from which the Borel sets are generated.  The only real additional work is a tedious technical detail to identify a $\mu$-preserving correspondence between sets in $\F_0(\overline{\R})$ (over which we proved countable additivity) and sets in $\F_0(\R)$ (which is the field we actually want to extend).
 \end{remark}
 
   \subsection{$\S$ 1.4.5 Properties of Lesbesgue-Stietljes measures}
