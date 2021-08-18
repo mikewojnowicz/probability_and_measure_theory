@@ -732,7 +732,7 @@ Thus, $\mu$ on $\F_\mu$ is complete, since any subset of measure 0 is contained 
  \end{definition}
 
 \begin{definition}
- A \textit{distribution function} on $\R$ is a map $F : \R \to \R$ that is increasing [ $a<b$ implies $F(a) \leq F(b)$] and right continuous [ $\lim_{x \to x_0^+} F(x) = F(x_0)$]. 
+ A \textit{distribution function} on $\R$ is a map $F : \R \to \R$ that is increasing [ $a<b$ implies $F(a) \leq F(b)$] and right continuous [ $\lim_{x \downarrow x_0} F(x) = F(x_0)$]. 
  \end{definition}
  
  Here we show that the formula $\mu(a,b] = F(b) - F(a)$ sets up a one-to-one correspondence between distribution functions and Lesbesgue-Stieltjes measures.    Figure \ref{fig:distribution_function_with_positive_mass_on_points_that_is_not_concentrated_on_a_countable_set} helps to illuminate how working with distribution functions allows us to cover absolutely continuous, discrete, and mixed random variables in a single paradigm. 
@@ -760,11 +760,11 @@ Thus, $\mu$ on $\F_\mu$ is complete, since any subset of measure 0 is contained 
 First we show that $F$ is increasing.  We have $F(b) - F(a) = \mu(a,b] \geq 0$, since $\mu$ is non-negative. 
 
 Next we show that $F$ is right continuous.  By the continuity (from above) of measure, 
-\[ \ds\lim_{b' \to b+}[F(b') - F(a)] = \ds\lim_{b' \to b+} \mu(a,b'] = \mu(a,b]\]
+\[ \ds\lim_{b' \downarrow b}[F(b') - F(a)] = \ds\lim_{b' \downarrow b} \mu(a,b'] = \mu(a,b]\]
 and continuity from above applies since Lesbesgue-Stietljes measures are finite on any interval.
 
 Thus, rearranging,
-\[ \ds\lim_{b' \to b+} F(b') = \mu(a,b] + F(a) = \bigg(F(b)-F(a)\bigg) + F(a) = F(a)\]
+\[ \ds\lim_{b' \downarrow b} F(b') = \mu(a,b] + F(a) = \bigg(F(b)-F(a)\bigg) + F(a) = F(a)\]
 
 \end{proof}
 
@@ -793,7 +793,7 @@ Let $A_n$ be a sequence of sets in $\F_0(\overline{\R})$ such that $A_n \downarr
 \end{figure}
 
  Suppose one such interval is $(a,b]$.  By the right continuity of $F$, we can find intervals $(a',b]$ that approximate $(a,b]$ from the inside arbitrarily well, since
-\[ \mu(a',b] = F(b) - F(a') \to \mu(a,b] = F(b) - F(a) \text{ as } a' \to a \text{ from the right } \] 
+\[ \mu(a',b] = F(b) - F(a') \to \mu(a,b] = F(b) - F(a) \text{ as } a' \downarrow a \] 
 Thus, we can find sets $B_n \in \F_0(\overline{\R})$ whose closures $\overline{B}_n \subset A_n$ and where $\mu(B_n)$ approximates $\mu(A_n)$ to any desired $\epsilon > 0$. 
 
 
@@ -847,7 +847,7 @@ essentially directly applies Carathe\'odory's Extension Theorem, since we know f
  Before extension, we had $\mu(a,b] =F(b) - F(a)$ for $a < b$ where $F$ is a distribution function. The set function $\mu$ was defined only on $\F_0(\R)$, the field of disjoint unions of r.s.c interval.  But after extension, $\mu$ is defined on $\B(\R) = \sigma(\F_0)(\R))$, which allows us to measure other types of intervals as well (by expressing those intervals as countable unions or intersections of r.s.c intervals; recall \eqref{eqn:open_intervals_as_rsc_intervals_and_vice_versa}.)
  
  \begin{proposition}
- Let $\mu$ be a Lesbesgue-Stieltjes measure, and let $F$ be its associated distribution function.    Let $F(x^-) = \lim_{y \to x^-} F(y)$. Then 
+ Let $\mu$ be a Lesbesgue-Stieltjes measure, and let $F$ be its associated distribution function.    Let $F(x^-) = \lim_{y \uparrow x} F(y)$. Then 
 
  \begin{alphabate}
  \item $\mu(a,b] = F(b) - F(a)$	
@@ -940,6 +940,10 @@ We can generate a large class of measures on $\B(\R)$ as follows.  Let $f$ be in
 which determines $F$ up to an additive constant.   Then $F$ is a distribution function (as it is both increasing and continuous), so it gives rise to a Lesbesgue-Stieltjes measure $\mu(a,b] = F(b) - F(a)$.  One again, Remark \ref{rk:LS_measures_with_continuous_distribution_function_agnostic_to_open_vs_closed_intervals} reveals that by continuity of $F$, we have $\mu(a,b]=\mu(a,b)=\mu[a,b)=\mu[a,b]$.  Lesbesgue measure (Example \ref{ex:lesbesgue_measure_as_example_of_lesbesgue_stieltjes}) is a special case where $f \equiv 1$. 
 \end{example}
 
+\paragraph{A counterexample.} All Lesbesgue-Stieltjes measures are sigma-finite. (To see this, simply $R = \cup_{n \in \N} (-n,n)$, and observe that $\mu(-n,n)<\infty$.). Here we provide an example of a sigma-finite measure that is not Lesbesgue-Stieltjes.   First, let $\mu$ be concentrated on $S$ (i.e. $\mu(S^c)=0$), where we set $S= \set{1/n : n=1,2,...}$.    Take $\mu\set{1/n}=1/n$ for all $n$.  Since $\R = \cup_{n=1}^\infty {1/n} \cup S^c$, $\mu$ is sigma-finite.  However,
+\[  \mu[0,1] \stackrel{\text{countable additivity}}{=} \ds\sum_{n=1}^\infty \df{1}{n} = \infty\]
+and so $\mu$ is not a Lesbesgue-Stieltjes measure. 
+ 
 \subsection{Lesbesgue measurable sets}
 
 \begin{definition}
@@ -1024,8 +1028,9 @@ does \textit{not} hold anymore! To see this, let us define  $F : \R^n \to \R$ vi
 
 Now consider Figure \ref{fig:distribution_functions_in_Rn}. We see that if $(a,b] = I_1 \times I_2 = (a_1,b_1] \times (a_2, b_2]$, then 
 \begin{align*}
-\mu(a,b] = F(b_1, b_2) - F(a_1, b_2) - F(b_1, a_2) + F(a_1, a_2)
-\labelit \label{eqn:measure_of_rsc_interval_in_R2}
+\mu(a,b] &= F(b_1, b_2) - F(a_1, b_2) - F(b_1, a_2) + F(a_1, a_2)
+\labelit \label{eqn:measure_of_rsc_interval_in_R2} \\
+& \neq F(b_1, b_2) - F(a_1, a_2)
 \end{align*}
 (Note that we add back in the region that we had double subtracted.)
 
@@ -1042,7 +1047,10 @@ Let $\mu$ is a finite measure on $\B(\R^n)$.  Then
 	\Delta_{b_ia_i} G(x_1,...,x_n) &:= G(x_1,....,x_{i-1}, b_i, x_{i+1}, ..., x_n) - G(x_1,....,x_{i-1}, a_i, x_{i+1}, ..., x_n)
 	\end{align*}
 \item We have
-\[\Delta_{(a,b)} F = \sum_{v \in V(a,b]} (-1)^{\# \text{ of a's in v}} \; F(v) \]
+	\begin{align*}
+\Delta_{(a,b]} F = \sum_{v \in V(a,b]} (-1)^{\# \text{ of $a_i$'s in v}} \; F(v)
+\labelit \label{eqn:computing_area_of_a_rectangle_via_a_distribution}	
+	\end{align*}
 where $V(a,b]$ are the vertices of $(a,b]$ (see Definition \ref{def:vertices_of_rsc_interval_in_Rn}). 
 \end{alphabate}
 \label{thm:measure_of_rsc_interval_in_Rn_via_distribution_function}
@@ -1078,6 +1086,10 @@ Note from the proof of Theorem \ref{thm:measure_of_rsc_interval_in_Rn_via_distri
 \end{figure}
 
 
+\end{remark}
+
+\begin{remark}
+Equation \eqref{eqn:computing_area_of_a_rectangle_via_a_distribution} tells us that we can measure any $n$-dimensional rectangle in $\R^n$ via $2^n$ evaluations of the distribution function. 
 \end{remark}
 
 
@@ -1117,15 +1129,17 @@ When defining distribution functions on $\R^n$,  we must alter our notion of \te
 
 \subsubsection{Examples}
 
+Here we provide some examples of how Lesbesgue-Stieltjes measures can be constructed on $\R^n$ via distribution functions.
+
 \begin{enumerate}
 \item Let $F_1,F_2,...,F_n$ be distribution functions on $\R$, and define $F(x_1,...,x_n) = F_1(x_1) F_2(x_2) \cdots F_n(x_n)$.  Then $F$ is a distribution function on $\R^n$; it is clearly right-continuous, and it is increasing since
 \[ \Delta_{(a,b]} F =\ds\prod_{i=1}^n [F(b_i) - F(a_i)] \geq 0 \]
 	
-A special case is where each $F_i(x_i) = x_i$, in which case each $F_i$ is Lesbesgue measure on $\B(\R)$.  Then we have
+A special case is where each $F_i$ is the distribution function corresponding to Lesbesgue measure on $\B(\R)$.  Then each $F_i(x_i) = x_i$, and so we have
 \[ F(x_1,...,x_n) = x_1x_2 \cdots x_n\]
-and so 
+This $\mu$ is \textit{Lesbesgue measure} on $\B(\R^n)$.  Note that 
 \[ \mu(a,b] = \Delta_{(a,b]} F = \ds\prod_{i=1}^n (b_i-a_i) \]
-This $\mu$ is \textit{Lesbesgue measure} on $\B(\R^n)$. The measure of any rectangular box is its volume. 
+and more generally, the Lesbesgue measure of any rectangular box is its volume (which can be seen by using a slight tweak to the arguments of parts (b)-(d) of the proof of Proposition \ref{prop:properties_of_LS_measures}). 
 \item Let $f$ be any non-negative function from $\R^n$ to $\R$ such that 
 \[ \ds\int_{-\infty}^\infty \cdots  \ds\int_{-\infty}^\infty f(x_1,...,x_n) \; dx_1 \cdots dx_n < \infty \]
 (For now, we assume the integration is in the Reimann sense.)
@@ -1136,9 +1150,15 @@ Then $F$ is a distribution function. It is continuous by the fundamental theorem
 \[ \Delta_{(a,b]} F(x) = \ds\int_{a_1}^{b_1} \cdots  \ds\int_{a_n}^{b_n} f(x_1,...,x_n) \; dx_1 \cdots dx_n < \infty \]  
 \end{enumerate}
 
+%\begin{exercise}
+%We wrote ``more generally, the Lesbesgue measure of any rectangular box is its volume."  Show that, indeed, 
+%\[  \mu(a,b]  = \mu(a,b) = \mu[a,b) = \mu[a,b] \]
+%for Lesbesgue measure on $\B(\R^n)$.  (Recall that we have shown that these equalities hold for Lesbesgue measure on $\B(\R)$.)
+%\end{exercise}
+
 \subsubsection{Summary}
 
-Let us summarize.\footnote{This passage is basically a paragraph from \cite{ash2000probability} pp. 32 verbatim. However, we alter it slightly here to match our notation.} We have seen that if $F$ is a distribution function on $\R^n$, then there is a unique Lesbesgue-Stieltjes measure determined by $\mu(a,b] = \Delta_{(a,b]} F, a \leq b$.  Also, if $\mu$ is a finite measure on $\B(\R^n)$ and $F(x) = \mu(-\infty, x], x \in \R^n$, then $F$ is a distribution function on $\R^n$ and $\mu(a,b] =  \Delta_{(a,b]} F, a \leq b$.   It is possible to associate a distribution function with arbitrary Lesbesgue-Stieltjes measure on $\R^n$, and thus to establish a one-to-one correspondence between Lesbesgue-Stieltjes measures and distribution fucntions (provided distribution functions with the same increments $\Delta_{(a,b)} F, a,b \in \R^n, a \leq b$ are identified.  However, the result will not be needed, and the details are quite tedious. 
+Let us summarize.\footnote{This passage is basically a paragraph from \cite{ash2000probability} pp. 32 verbatim. However, we alter it slightly here to match our notation.} We have seen that if $F$ is a distribution function on $\R^n$, then there is a unique Lesbesgue-Stieltjes measure determined by $\mu(a,b] = \Delta_{(a,b]} F, a \leq b$.  Also, if $\mu$ is a finite measure on $\B(\R^n)$ and $F(x) = \mu(-\infty, x], x \in \R^n$, then $F$ is a distribution function on $\R^n$ and $\mu(a,b] =  \Delta_{(a,b]} F, a \leq b$.   It is possible to associate a distribution function with arbitrary Lesbesgue-Stieltjes measure on $\R^n$, and thus to establish a one-to-one correspondence between Lesbesgue-Stieltjes measures and distribution fucntions (provided distribution functions with the same increments $\Delta_{(a,b)} F, a,b \in \R^n, a \leq b$ are identified).  However, the result will not be needed, and the details are quite tedious. 
 
 %applying_the_difference_operator_to_distribution_functions_in_R2
 
