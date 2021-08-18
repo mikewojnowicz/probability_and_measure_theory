@@ -950,7 +950,7 @@ We can generate a large class of measures on $\B(\R)$ as follows.  Let $f$ be in
 which determines $F$ up to an additive constant.   Then $F$ is a distribution function (as it is both increasing and continuous), so it gives rise to a Lesbesgue-Stieltjes measure $\mu(a,b] = F(b) - F(a)$.  Lesbesgue measure (Example \ref{ex:lesbesgue_measure_as_example_of_lesbesgue_stieltjes}) is a special case where $f \equiv 1$.  Once again, Remark \ref{rk:LS_measures_with_continuous_distribution_function_agnostic_to_open_vs_closed_intervals} reveals that by continuity of $F$, we have $\mu(a,b]=\mu(a,b)=\mu[a,b)=\mu[a,b]$.  
 \end{example}
 
-\paragraph{A counterexample.} All Lesbesgue-Stieltjes measures are sigma-finite. (To see this, simply set $\R = \cup_{n \in \mathbb{N}} (-n,n)$, and observe that $\mu(-n,n)<\infty$.). Here we provide an example of a sigma-finite measure that is not Lesbesgue-Stieltjes.   First, let $\mu$ be concentrated on $S$ (i.e. $\mu(S^c)=0$), where we set $S= \set{1/n : n=1,2,...}$.    Take $\mu\set{1/n}=1/n$ for all $n$.  Since $\R = \cup_{n=1}^\infty {1/n} \cup S^c$, $\mu$ is sigma-finite.  However,
+\paragraph{A non-example.} All Lesbesgue-Stieltjes measures are sigma-finite. (To see this, simply set $\R = \cup_{n \in \mathbb{N}} (-n,n)$, and observe that $\mu(-n,n)<\infty$.). Here we provide an example of a sigma-finite measure that is not Lesbesgue-Stieltjes.   First, let $\mu$ be concentrated on $S$ (i.e. $\mu(S^c)=0$), where we set $S= \set{1/n : n=1,2,...}$.    Take $\mu\set{1/n}=1/n$ for all $n$.  Since $\R = \cup_{n=1}^\infty {1/n} \cup S^c$, $\mu$ is sigma-finite.  However,
 \[  \mu[0,1] \stackrel{\text{countable additivity}}{=} \ds\sum_{n=1}^\infty \df{1}{n} = \infty\]
 and so $\mu$ is not a Lesbesgue-Stieltjes measure. 
  
@@ -1112,9 +1112,14 @@ When defining distribution functions on $\R^n$,  we must alter our notion of \te
  A \textit{distribution function} on $\R^n$ is a map $F : \R^n \to \R$ that is:
  
  \begin{alphabate}
- \item \textit{increasing}, in the sense that
- \[ \Delta_{(a,b]} F \geq 0 \]
- for all r.s.c. intervals $(a,b]$
+ \item \textit{increasing}, i.e. its increments must be non-negative in the sense that
+ \begin{align*}
+ \Delta_{(a,b]} F \geq 0 \quad \text{ for all r.s.c. intervals $(a,b]$}
+ \labelit \label{eqn:increasing_condition_for_distribution_functions_on_Rn}
+ \end{align*}
+
+
+
  \item \textit{right continuous}, that is
  \[ \ds\lim_{y \downarrow x} F(y) = F(x) \]
  where $y \downarrow x$ means $y_i \downarrow x_i$ for each $i=1,...,n$.
@@ -1166,6 +1171,11 @@ Then $F$ is a distribution function. It is continuous by the fundamental theorem
 %\[  \mu(a,b]  = \mu(a,b) = \mu[a,b) = \mu[a,b] \]
 %for Lesbesgue measure on $\B(\R^n)$.  (Recall that we have shown that these equalities hold for Lesbesgue measure on $\B(\R)$.)
 %\end{exercise}
+
+\begin{remark}
+
+It may seem hard to verify \eqref{eqn:increasing_condition_for_distribution_functions_on_Rn}, the condition that a distribution function on $\R^n$ must be increasing.  Not to worry, the recipes above provide straightforward mechanisms for constructing distribution functions on $\R^n$ in which the condition will automatically be verified.
+\end{remark}
 
 \subsubsection{Summary}
 
