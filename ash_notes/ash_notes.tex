@@ -927,7 +927,7 @@ But we couldn't make that statement by the piece-and-difference decomposition (s
 
 
 
-\subsection{Examples}
+\subsection{Examples of Lesbesgue-Stieltjes measures on $\R$}
 
 \begin{example}{\remarktitle{Lesbesgue measure}}
 Under the identity distribution function ($F(x)=x$), we have $\mu(a,b]=F(b)-F(a)$.  This is known as Lebesgue measure.  Recall from Remark \ref{rk:LS_measures_with_continuous_distribution_function_agnostic_to_open_vs_closed_intervals} that since $F$ is continuous, we also have $\mu(a,b]=\mu(a,b)=\mu[a,b)=\mu[a,b]$.
@@ -960,6 +960,18 @@ Sometimes people use the term ``Lesbesgue measure" to refer to
 
 \subsection{$\S$ 1.4.6 Lesbesgue-Stieltjes Measures in $\R^n$}
 
+\subsubsection{Overview}
+In $\R^n$, as with $\R$, is it possible to establish a one-to-one correspondence between Lebesgue-Stieltjes measures and distribution functions (up to some identification conditions).  However, the details are quite tedious.  
+
+For our purposes, we will focus on
+\begin{itemize}
+\item Pointing out that, and motivating why, the definition of a distribution function must change in $\R^n$.
+\item Showing that if $\mu$ is a \textit{finite} measure on the Borel sets of $\R^n$ and $F(x) = \mu(-\infty, x], x \in \R^n$, then $F$ is a distribution function on $\R^n$ and $\mu(a,b]$ can be provided in terms of it.     (The finite condition can be relaxed, but we omit this here.) %#= \Delta_{(a,b]} F$.
+\item Stating the converse -- that if $F$ is a distribution on $\R^n$, there there is a unique Lebesgue-Stieltjes measure associated to it, with $\mu(a,b]$ determined by it. 	
+\end{itemize}
+
+ 
+\subsubsection{Definitions}
 The definition of Lesbesgue-Stieltjes measures on $\R^n$ parallels those on $\R$.
 
 \begin{definition}
@@ -982,21 +994,24 @@ A \textit{Lesbesgue-Stieltjes measure} on $\R^n$ is a measure $\mu$ on $\B(\R^n)
 
 %We have established how to relate distribution functions and measures when the underlying space is $\R$.  When the underlying space is $\R^n$, the situation is different.
 
+\subsubsection{From (finite) measures on $\B(\R^n)$ to distribution functions}
 Recall that in $\R$, we observed the following relation between distribution functions  and Lesbesgue-Stieltjes measures on right semi-closed intervals 
 \begin{align*}
 \mu(a,b] = F(b) - F(a), \quad a,b \in \R, a<b 
 \labelit \label{eqn:measure_as_distribution_function_difference_for_motivating_LS_in_Rn}
 \end{align*}
+In particular, we observed that given $\mu$, we could construct an $F$ (up to additive constant) via the above relationship.   If we defined $F(-\infty) = 0$, then we could construct $F$ from $\mu$ directly via 
+\[ F(x)=\mu(-\infty, x] = \mu(\omega \in \R : \omega \leq x) \]
 
-We would like to to do the same for $\R^n$.  However, note that the equation
+We would like to to do the same for $\R^n$.  However, note that the equation 
 \begin{align*}
 \mu(a,b] = F(b) - F(a), \quad a,b \in \R^n, a<b 	
 \labelit \label{eqn:measure_as_distribution_function_difference_for_motivating_LS_in_Rn}
 \end{align*}
-does \textit{not} hold! To see this, for now let us construct a distribution function $F : \R^n \to \R$ via 
-\[  F(a) = \mu(-\infty, a] = \mu(\omega \in \R^n : \omega_1 \leq x_1, ..., \omega_n \leq x_n)\]
+does \textit{not} hold anymore! To see this, let us define  $F : \R^n \to \R$ via 
+\[  F(x) = \mu(-\infty, x] = \mu(\omega \in \R^n : \omega_1 \leq x_1, ..., \omega_n \leq x_n)\]
 
-{\footnotesize We note that that this parallels the situation in $\R$, where  we have $\mu(-\infty, a]=F(a)$ if we identify a member from the equivalence classes of distribution functions by assuming $F(-\infty)=0$.}
+%{\footnotesize We note that that this parallels the situation in $\R$, where  we have $\mu(-\infty, a]=F(a)$ if we identify a member from the equivalence classes of distribution functions by assuming $F(-\infty)=0$.}
 
 
 \begin{figure}[H]
@@ -1007,14 +1022,14 @@ does \textit{not} hold! To see this, for now let us construct a distribution fun
 \end{figure}
 
 
-For example, in Figure \ref{fig:distribution_functions_in_Rn}, we see that if $(a,b] = I_1 \times I_2 = (a_1,b_1] \times (a_2, b_2]$, then 
+Now consider Figure \ref{fig:distribution_functions_in_Rn}. We see that if $(a,b] = I_1 \times I_2 = (a_1,b_1] \times (a_2, b_2]$, then 
 \begin{align*}
 \mu(a,b] = F(b_1, b_2) - F(a_1, b_2) - F(b_1, a_2) + F(a_1, a_2)
 \labelit \label{eqn:measure_of_rsc_interval_in_R2}
 \end{align*}
 (Note that we add back in the region that we had double subtracted.)
 
-If $\mu$ is a finite measure on $\B(\R^n)$, we can generalize \eqref{eqn:measure_of_rsc_interval_in_R2} for measuring r.s.c. intervals to $\R^n$.
+Now we generalize \eqref{eqn:measure_of_rsc_interval_in_R2} to a formula for measuring r.s.c. intervals in $n$ dimensions, rather than just $2$ dimensions.
 
 \begin{theorem}
 Let $\mu$ is a finite measure on $\B(\R^n)$.  Then 
@@ -1030,7 +1045,7 @@ Let $\mu$ is a finite measure on $\B(\R^n)$.  Then
 \[\Delta_{(a,b)} F = \sum_{v \in V(a,b]} (-1)^{\# \text{ of a's in v}} \; F(v) \]
 where $V(a,b]$ are the vertices of $(a,b]$ (see Definition \ref{def:vertices_of_rsc_interval_in_Rn}). 
 \end{alphabate}
-\label{eqn:measure_of_rsc_interval_in_Rn_via_distribution_function}
+\label{thm:measure_of_rsc_interval_in_Rn_via_distribution_function}
 \end{theorem}
 
 \begin{proof}
@@ -1053,7 +1068,7 @@ Repeating this, we obtain
 \end{proof}
 
 \begin{remark}
-Note from the proof of Theorem \ref{eqn:measure_of_rsc_interval_in_Rn_via_distribution_function} part (a) that the application of the $n$th difference operator restricts the set being measured to the bounds given in the $n$th dimension.  See Figure \ref{fig:applying_the_difference_operator_to_distribution_functions_in_R2}.
+Note from the proof of Theorem \ref{thm:measure_of_rsc_interval_in_Rn_via_distribution_function} part (a) that the application of the $n$th difference operator restricts the set being measured to the bounds given in the $n$th dimension.  See Figure \ref{fig:applying_the_difference_operator_to_distribution_functions_in_R2}.
 
 \begin{figure}[H]
 \centering
@@ -1065,7 +1080,10 @@ Note from the proof of Theorem \ref{eqn:measure_of_rsc_interval_in_Rn_via_distri
 
 \end{remark}
 
-Due to Theorem \ref{eqn:measure_of_rsc_interval_in_Rn_via_distribution_function} part (a), we must alter our notion of \textit{increasing} when defining distribution functions on $\R^n$.  
+
+\subsubsection{Defining distribution functions in $\R^n$}
+
+When defining distribution functions on $\R^n$,  we must alter our notion of \textit{increasing}.     This is due to Theorem \ref{thm:measure_of_rsc_interval_in_Rn_via_distribution_function} part (a).
 
 \begin{definition}
  A \textit{distribution function} on $\R^n$ is a map $F : \R^n \to \R$ that is:
@@ -1084,10 +1102,44 @@ Due to Theorem \ref{eqn:measure_of_rsc_interval_in_Rn_via_distribution_function}
  \begin{remark}
  Note that Definition \ref{def:distribution_function_on_Rn} defines increasing in a different manner than what might be intuitive:
  \[ F(y) \geq F(x) \; \text { if } \; y_i \geq x_i \quad \text{ for all } i=1,...,n\]
- However, such a condition would be insufficient to describe a distribution function in $\R^n.$ For an example of a distribution function that is right continuous and increasing in this sense, but which assigns negative measure to intervals, see pp. 6-7 of \cite{durrett2010probability}.
+ However, such a condition would be insufficient to describe a distribution function in $\R^n.$ For an example of a distribution function that is right continuous and increasing in this sense, but which can assign negative measure to an interval, see pp. 6-7 of \cite{durrett2010probability}.
  \end{remark}
 
+ \subsubsection{From distribution functions on $\R^n$ to Lesbesgue-Stieltjes measures}
  
+ \begin{theorem}
+ Let $F$ be a distribution function on $\R^n$, and let $\mu(a,b] = F(a,b], a,b \in \R^n, a \leq b$. Then there is a unique extension of $\mu$ to a Lesbesgue-Stieltjes measure on $\R^n$.	
+ \end{theorem}
+ 
+ \begin{proof}
+ See text. 	
+ \end{proof}
+
+\subsubsection{Examples}
+
+\begin{enumerate}
+\item Let $F_1,F_2,...,F_n$ be distribution functions on $\R$, and define $F(x_1,...,x_n) = F_1(x_1) F_2(x_2) \cdots F_n(x_n)$.  Then $F$ is a distribution function on $\R^n$; it is clearly right-continuous, and it is increasing since
+\[ \Delta_{(a,b]} F =\ds\prod_{i=1}^n [F(b_i) - F(a_i)] \geq 0 \]
+	
+A special case is where each $F_i(x_i) = x_i$, in which case each $F_i$ is Lesbesgue measure on $\B(\R)$.  Then we have
+\[ F(x_1,...,x_n) = x_1x_2 \cdots x_n\]
+and so 
+\[ \mu(a,b] = \Delta_{(a,b]} F = \ds\prod_{i=1}^n (b_i-a_i) \]
+This $\mu$ is \textit{Lesbesgue measure} on $\B(\R^n)$. The measure of any rectangular box is its volume. 
+\item Let $f$ be any non-negative function from $\R^n$ to $\R$ such that 
+\[ \ds\int_{-\infty}^\infty \cdots  \ds\int_{-\infty}^\infty f(x_1,...,x_n) \; dx_1 \cdots dx_n < \infty \]
+(For now, we assume the integration is in the Reimann sense.)
+
+Define 
+\[ F(x) = \ds\int_{(-\infty,x]} f(t) dt \]
+Then $F$ is a distribution function. It is continuous by the fundamental theorem of calculus, and it is increasing since
+\[ \Delta_{(a,b]} F(x) = \ds\int_{a_1}^{b_1} \cdots  \ds\int_{a_n}^{b_n} f(x_1,...,x_n) \; dx_1 \cdots dx_n < \infty \]  
+\end{enumerate}
+
+\subsubsection{Summary}
+
+Let us summarize.\footnote{This passage is basically a paragraph from \cite{ash2000probability} pp. 32 verbatim. However, we alter it slightly here to match our notation.} We have seen that if $F$ is a distribution function on $\R^n$, then there is a unique Lesbesgue-Stieltjes measure determined by $\mu(a,b] = \Delta_{(a,b]} F, a \leq b$.  Also, if $\mu$ is a finite measure on $\B(\R^n)$ and $F(x) = \mu(-\infty, x], x \in \R^n$, then $F$ is a distribution function on $\R^n$ and $\mu(a,b] =  \Delta_{(a,b]} F, a \leq b$.   It is possible to associate a distribution function with arbitrary Lesbesgue-Stieltjes measure on $\R^n$, and thus to establish a one-to-one correspondence between Lesbesgue-Stieltjes measures and distribution fucntions (provided distribution functions with the same increments $\Delta_{(a,b)} F, a,b \in \R^n, a \leq b$ are identified.  However, the result will not be needed, and the details are quite tedious. 
+
 %applying_the_difference_operator_to_distribution_functions_in_R2
 
 % TODO: Define the difference operator, give theorem 1.4.8 but for (b) use the Durrett statement, prove (a) like my notes.  Skip the proof of (b).   Perhaps give the Ash statement for (b) in a remark.  Make a picture and remark for (a) giving the intuition: the $n$th application of the difference operator restricts the set being measured to the bounds given in the $n$th dimension.   Then define distribution functions in R^n.  Finally give the extension statement for $R^n$. 
