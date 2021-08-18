@@ -497,13 +497,20 @@ Finally suppose $\signedmu(A_n) = -\infty$ for some $n$. Then the result follows
 The logic of the proof of Theorem \ref{thm:continuity_of_countably_additive_set_functions} under the finiteness assumption is as follows.  First, we re-represent the union as a disjoint union (the form is particularly simple since the sets are increasing).  This allows us to apply countable additivity. Then we apply the piece-and-difference decomposition (and the subtraction is defined under the finiteness assumption). 	
 \end{remark}
 
+
+
 \begin{remark}
+
 In proving Theorem \ref{thm:continuity_of_countably_additive_set_functions}  for the case where $\mu(A_n) = \infty$ for some $n$, it is tempting to make the simpler argument 
 \begin{align*}
 \mu(A) & \geq \mu(A_n) && \text{(monotonicity)}\\	
 \mu(A_k) & \geq \mu(A_n) && \text{(monotonicity)}	 
 \end{align*}
 for $k \geq n$.  But recall from Theorem \ref{thm:basic_properties_of_finitely_additive_set_functions} that monotonicity only holds under non-negativity, and the theorem statement is more general, applying to \textit{signed} set functions as well. 
+\end{remark}
+
+\begin{remark}
+Theorem \ref{thm:continuity_of_countably_additive_set_functions} still holds if $\F$ is only assumed to be a field, so long as the limit sets $A$ belong to $\F$.  %We will use this formulation later when we want to extend the set function $\mu(a,b]=b-a$ from a field (of disjoint unions of right semi-closed intervals) to a sigma field. 
 \end{remark}
 
 We have the result that finite additivity plus continuity equals countable additivity. 
@@ -549,14 +556,14 @@ Taking $n \to \infty$ gives countable additivity.
 In Example \ref{ex:lesbesgue_measure}, we discussed the concept of length of a subset of $\R$; in particular, we mentioned extending the set function given on intervals by $\mu(a,b] = b-a$ to a larger class of subsets of $\R$.  
 
 
- As remarked in Example \ref{ex:field_of_finite_disjoint_unions_of_rsc_intervals}, if we define $\F_0 = \set{\text{finite disjoint unions of right semi-closed intervals } (a,b], a \neq b}$, then $\F_0$ is a field, as can be easily verified.  And $\mu$ can easily be seen to be a finitely additive set function on $\F_0$.   
+ As remarked in Example \ref{ex:field_of_finite_disjoint_unions_of_rsc_intervals}, if we define $\F_0 = \set{\text{finite disjoint unions of right semi-closed intervals } (a,b], a < b}$, then $\F_0$ is a field, as can be easily verified.  And $\mu$ can easily be seen to be a finitely additive set function on $\F_0$.   
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=.6\textwidth]{images/rsc_intervals}	
 \end{figure}
 
-However, $\F_0$ is not a $\sigma$-field.  So how can we extend this function to a measure on a larger class of subsets?  The challenges are:
+However, $\F_0$ is not a $\sigma$-field.   So how can we extend this function to a measure on a larger class of subsets?  For instance, we would at least like to be able to measure intervals such as $(a,b), [a,b)$ or $[a,b]$ and points $\set{x}$.   The challenges are:
 
 \begin{itemize}
 \item \textit{We need to show that $\mu$ is countably additive.} We will do this in Section 5.   Moreover, in that section, we will generalize our problem to set functions given by $\mu(a,b] = F(b)-F(a)$, where $F$ is an increasing right-continuous function from $\R$ to $\R$.
@@ -735,19 +742,8 @@ Thus, $\mu$ on $\F_\mu$ is complete, since any subset of measure 0 is contained 
  A \textit{distribution function} on $\R$ is a map $F : \R \to \R$ that is increasing [ $a<b$ implies $F(a) \leq F(b)$] and right continuous [ $\lim_{x \downarrow x_0} F(x) = F(x_0)$]. 
  \end{definition}
  
- Here we show that the formula $\mu(a,b] = F(b) - F(a)$ sets up a one-to-one correspondence between distribution functions and Lesbesgue-Stieltjes measures.    Figure \ref{fig:distribution_function_with_positive_mass_on_points_that_is_not_concentrated_on_a_countable_set} helps to illuminate how working with distribution functions allows us to cover absolutely continuous, discrete, and mixed random variables in a single paradigm. 
-   
- \begin{figure}[H]
- \centering
- \includegraphics[width=.5\textwidth]{images/distribution_function_with_positive_mass_on_points_that_is_not_concentrated_on_a_countable_set}
- \caption{A distribution function with positive mass on points that is not concentrated on a countable set}	
-\label{fig:distribution_function_with_positive_mass_on_points_that_is_not_concentrated_on_a_countable_set}
-\end{figure}
+In this Section, we show that the formula $\mu(a,b] = F(b) - F(a)$ sets up a one-to-one correspondence between distribution functions and Lesbesgue-Stieltjes measures.    
 
-
-
-
-   
  
  \subsection{$\S$ 1.4.2 Each Lesbesgue-Stietljes measure uniquely determines a distribution function (up to an additive constant)}
  First, we show that to every Lesbesgue-Stieltjes  measure, there is a unique distribution function (up to an additive constant).  This is the easy part.
@@ -896,6 +892,19 @@ which holds by Proposition \ref{prop:properties_of_LS_measures} part e) and the 
 
 \item The magnitude of the discontinuity corresponds with the measure of $\set{x}$. 
 \end{enumerate}
+
+ For example, the measure corresponding to the distribution function in Figure \ref{fig:distribution_function_with_positive_mass_on_points_that_is_not_concentrated_on_a_countable_set} puts positive probability mass on the points $\set{x_1}, \set{x_2}, \set{x_3}$ and zero probability mass on all other points. 
+
+ \begin{figure}[H]
+ \centering
+ \includegraphics[width=.5\textwidth]{images/distribution_function_with_positive_mass_on_points_that_is_not_concentrated_on_a_countable_set}
+ \caption{A distribution function with positive mass on points that is not concentrated on a countable set}	
+\label{fig:distribution_function_with_positive_mass_on_points_that_is_not_concentrated_on_a_countable_set}
+\end{figure}
+
+
+%Figure \ref{fig:distribution_function_with_positive_mass_on_points_that_is_not_concentrated_on_a_countable_set} helps to illuminate how working with distribution functions will allow us to cover absolutely continuous, discrete, and mixed random variables in a single paradigm. 
+   
 \label{rk:continuity_at_a_point_iffi_measure_zero_at_a_point}
 \end{remark}
 
@@ -971,7 +980,8 @@ For our purposes, we will focus on
 \begin{itemize}
 \item Pointing out that, and motivating why, the definition of a distribution function must change in $\R^n$.
 \item Showing that if $\mu$ is a \textit{finite} measure on the Borel sets of $\R^n$ and $F(x) = \mu(-\infty, x], x \in \R^n$, then $F$ is a distribution function on $\R^n$ and $\mu(a,b]$ can be provided in terms of it.     (The finite condition can be relaxed, but we omit this here.) %#= \Delta_{(a,b]} F$.
-\item Stating the converse -- that if $F$ is a distribution on $\R^n$, there there is a unique Lebesgue-Stieltjes measure associated to it, with $\mu(a,b]$ determined by it. 	
+\item Providing some examples of Lesbesgue-Stieltjes distribution functions in $\R^n$. 
+%\item Stating the converse -- that if $F$ is a distribution on $\R^n$, there there is a unique Lebesgue-Stieltjes measure associated to it, with $\mu(a,b]$ determined by it. 	
 \end{itemize}
 
  
@@ -1037,7 +1047,7 @@ Now consider Figure \ref{fig:distribution_functions_in_Rn}. We see that if $(a,b
 Now we generalize \eqref{eqn:measure_of_rsc_interval_in_R2} to a formula for measuring r.s.c. intervals in $n$ dimensions, rather than just $2$ dimensions.
 
 \begin{theorem}
-Let $\mu$ is a finite measure on $\B(\R^n)$.  Then 
+Let $\mu$ be a finite measure on $\B(\R^n)$. Define  $F : \R^n \to \R$ via $F(x) = \mu(-\infty, x] = \mu(\omega \in \R^n : \omega_1 \leq x_1, ..., \omega_n \leq x_n)$. Then 
 \begin{alphabate}
 \item We have 	
 	\begin{align*}
