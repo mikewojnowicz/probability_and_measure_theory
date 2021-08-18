@@ -792,35 +792,34 @@ Let $A_n$ be a sequence of sets in $\F_0(\overline{\R})$ such that $A_n \downarr
 
  Suppose one such interval is $(a,b]$.  By the right continuity of $F$, we can find intervals $(a',b]$ that approximate $(a,b]$ from the inside arbitrarily well, since by continuity from below
 \[ \mu(a',b] = F(b) - F(a') \to \mu(a,b] = F(b) - F(a) \text{ as } a' \downarrow a \] 
-Thus, we can find sets $B_n \in \F_0(\overline{\R})$ whose closures $\overline{B}_n \subset A_n$ and where $\mu(B_n)$ approximates $\mu(A_n)$ to any desired $\epsilon > 0$. 
-
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=.45\textwidth]{images/approximating_union_of_rsc_intervals}	
 \end{figure}
 
-For any fixed $\epsilon>0$, we can choose such a sequence $B_n$ such that $\mu(A_n) - \mu(B_n) < \epsilon 2^{-n} \; (*)$, and we find
+Thus, we can find sets $B_n \in \F_0(\overline{\R})$  where $\mu(B_n)$ approximates $\mu(A_n)$ to any desired $\epsilon > 0$ that satisfy $B_n \subset \overline{B}_n \subset A_n$.  By these inclusion properties and the decreasing nature of the sequence, we have:
 \begin{alphabate}
 \item $\cap_{n=1}^\infty \overline{B}_n = \emptyset$.	\quad  {[\footnotesize True because each $\overline{B}_n \subset A_n$, so $\cap_{n=1}^\infty \overline{B}_n \subset \cap_{n=1}^\infty A_n = \emptyset$.  ]} 
 \item $\cap_{k=1}^n \overline{B}_k = \emptyset$ for sufficiently large $n$.	\quad  {\footnotesize [We have $\overline{\R} \; \stackrel{ \text{item a)}}{=} \; (\overline{\R} - \cap_{n=1}^\infty \overline{B}_n) \; \stackrel{\text{DeMorgan } \eqref{eqn:demorgan_for_relative_complements}}{=} \; \cup_{n=1}^\infty (\overline{\R} - \overline{B}_n)$.   So $\set{\overline{\R} - \overline{B}_n}$ is an open cover of $\overline{\R}$. By the Heine-Borel theorem, there must be a finite subcover.  So for sufficiently large $n$, we have $\cup_{k=1}^n (\overline{\R} - \overline{B}_k) = \overline{\R}$.  Taking complements of both sides, and once again applying DeMorgan's law \eqref{eqn:demorgan_for_relative_complements} to the relative complement, we find $\cap_{k=1}^n \overline{B}_k = \emptyset$.  ]}
+\item $\cap_{k=1}^n B_k = \emptyset$ for sufficiently large $n$. {\footnotesize [This follow from item b) and the fact that each $B_k \subset \overline{B}_k$.]}
 \end{alphabate}
 
 So now we use a piece-and-difference decomposition (Theorem \ref{thm:basic_properties_of_finitely_additive_set_functions} (b) ):
 \begin{align*}
-A_n &= \bigg( \bigcap_{k=1}^n B_k \bigg) \; \bigcupdot \; \bigg(  A_n - \bigcap_{k=1}^n B_k \bigg) \\
-\implies \mu(A_n) &= \cancelto{0}{\mu(\cap_{k=1}^n B_k)} \; + \; \mu(A_n - \cap_{k=1}^n B_k) && \tinytext{countable additivity; item b) above}\\ 
-& \stackrel{1}{\leq} \mu( \cup_{k=1}^n (A_k - B_k))&& \tinytext{monotonicity} \\
+A_n &= \bigg( \bigcap_{k=1}^n B_k \bigg) \; \bigcupdot \; \bigg(  A_n - \bigcap_{k=1}^n B_k \bigg) && \tinytext{since $\cap_{k=1}^n B_k \subset B_n \subset A_n$} \\
+\implies \mu(A_n) &= \mu(\cap_{k=1}^n B_k) \; + \; \mu(A_n - \cap_{k=1}^n B_k) && \tinytext{countable additivity}\\
+ &= \cancelto{0}{\mu(\cap_{k=1}^n B_k)} \; + \; \mu(A_n - \cap_{k=1}^n B_k) && \tinytext{for sufficiently large $n$, by item c) above}\\ 
+& \leq  \mu( \cup_{k=1}^n (A_k - B_k))&& \tinytext{monotonicity, since $A_n - \cap_{k=1}^n B_k \stackrel{\text{DeMorgan}}{=} \cup_{k=1}^n
+(A_n - B_k) \subset \cup_{k=1}^n
+(A_k - B_k)$} \\
 & \leq \sum_{k=1}^n \mu( A_k - B_k) && \tinytext{finite subadditivity} \\
 & = \sum_{k=1}^n \mu( A_k) - \mu(B_k) && \tinytext{piece-and-difference decomposition; also uses finiteness} \\
-&\leq \epsilon \sum_{k=1}^n 2^{-k} \\
+&\leq \epsilon \sum_{k=1}^n 2^{-k} && \tinytext{Choose $B_k$ such that $\mu(A_k) - \mu(B_k) < \epsilon 2^{-k}$} \\
 & < \epsilon. 
 \end{align*}
-where the monotonicity property in (1) applies because $A_n - \cap_{k=1}^n B_k \stackrel{\text{DeMorgan}}{=} \cup_{k=1}^n
-(A_n - B_k) \subset \cup_{k=1}^n
-(A_k - B_k)$.
 
-In summary, we have seen that for any fixed $\epsilon >0$, we have $\mu(A_n) < \epsilon$ for sufficiently large $n$. Thus, $\mu(A_n) \to 0$, and so $\mu$ is continuous from below.  So by Theorem \ref{thm:finite_additivity_plus_continuity_gives_countable_additivity} (b), $\mu$ is countably additive.
+So for sufficiently large $n$, we have $\mu(A_n) < \epsilon$ for any fixed $\epsilon >0$. Thus, $\mu(A_n) \to 0$ for $A_n \downarrow \emptyset$, and so $\mu$ is continuous from above.  So by Theorem \ref{thm:finite_additivity_plus_continuity_gives_countable_additivity} (b), $\mu$ is countably additive.
 \end{proof}
 
 \begin{remark}
@@ -951,7 +950,7 @@ We can generate a large class of measures on $\B(\R)$ as follows.  Let $f$ be in
 which determines $F$ up to an additive constant.   Then $F$ is a distribution function (as it is both increasing and continuous), so it gives rise to a Lesbesgue-Stieltjes measure $\mu(a,b] = F(b) - F(a)$.  Lesbesgue measure (Example \ref{ex:lesbesgue_measure_as_example_of_lesbesgue_stieltjes}) is a special case where $f \equiv 1$.  Once again, Remark \ref{rk:LS_measures_with_continuous_distribution_function_agnostic_to_open_vs_closed_intervals} reveals that by continuity of $F$, we have $\mu(a,b]=\mu(a,b)=\mu[a,b)=\mu[a,b]$.  
 \end{example}
 
-\paragraph{A counterexample.} All Lesbesgue-Stieltjes measures are sigma-finite. (To see this, simply $R = \cup_{n \in \N} (-n,n)$, and observe that $\mu(-n,n)<\infty$.). Here we provide an example of a sigma-finite measure that is not Lesbesgue-Stieltjes.   First, let $\mu$ be concentrated on $S$ (i.e. $\mu(S^c)=0$), where we set $S= \set{1/n : n=1,2,...}$.    Take $\mu\set{1/n}=1/n$ for all $n$.  Since $\R = \cup_{n=1}^\infty {1/n} \cup S^c$, $\mu$ is sigma-finite.  However,
+\paragraph{A counterexample.} All Lesbesgue-Stieltjes measures are sigma-finite. (To see this, simply set $\R = \cup_{n \in \mathbb{N}} (-n,n)$, and observe that $\mu(-n,n)<\infty$.). Here we provide an example of a sigma-finite measure that is not Lesbesgue-Stieltjes.   First, let $\mu$ be concentrated on $S$ (i.e. $\mu(S^c)=0$), where we set $S= \set{1/n : n=1,2,...}$.    Take $\mu\set{1/n}=1/n$ for all $n$.  Since $\R = \cup_{n=1}^\infty {1/n} \cup S^c$, $\mu$ is sigma-finite.  However,
 \[  \mu[0,1] \stackrel{\text{countable additivity}}{=} \ds\sum_{n=1}^\infty \df{1}{n} = \infty\]
 and so $\mu$ is not a Lesbesgue-Stieltjes measure. 
  
