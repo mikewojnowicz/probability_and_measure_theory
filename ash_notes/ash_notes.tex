@@ -843,7 +843,7 @@ The proof of Theorem \ref{thm:extension_for_lesbesgue_stietljes_measure}
 essentially directly applies Carathe\'odory's Extension Theorem, since we know from Lemma \ref{lemma:ls_measures_are_countably_additive_on_the_field_of_disjoint_rsc_intervals} that $\mu$ is countably additive on $\F_0(\R)$, a field from which the Borel sets are generated.  The only real additional work is a tedious technical detail to identify a $\mu$-preserving correspondence between sets in $\F_0(\overline(\R))$ (over which we proved countable additivity) and sets in $\F_0(\R)$ (which is the field we actually want to extend).
 \end{remark}
 
-  \subsection{$\S$ 1.4.5 Properties of Lesbesgue-Stietljes measure }
+  \subsection{$\S$ 1.4.5 Properties of Lesbesgue-Stietljes measures}
  Before extension, we had $\mu(a,b] =F(b) - F(a)$ for $a < b$ where $F$ is a distribution function. The set function $\mu$ was defined only on $\F_0(\R)$, the field of disjoint unions of r.s.c interval.  But after extension, $\mu$ is defined on $\B(\R) = \sigma(\F_0)(\R))$, which allows us to measure other types of intervals as well (by expressing those intervals as countable unions or intersections of r.s.c intervals; recall \eqref{eqn:open_intervals_as_rsc_intervals_and_vice_versa}.)
  
  \begin{proposition}
@@ -948,6 +948,7 @@ The completion of Lesbesgue measure relative to $\B(\R)$ gives what is known as 
 
 Each Lesbesgue measurable set is the union of a Borel set and a subset of a Borel set with Lesbesgue measure zero.
 
+\begin{remark}
 Sometimes people use the term ``Lesbesgue measure" to refer to
 
 \begin{align*}
@@ -955,7 +956,141 @@ Sometimes people use the term ``Lesbesgue measure" to refer to
 \intertext{as well as}
 \mu : \; & \B(\R) \to \R^+
 \end{align*}
+\end{remark}
 
+\subsection{$\S$ 1.4.6 Lesbesgue-Stieltjes Measures in $\R^n$}
+
+The definition of Lesbesgue-Stieltjes measures on $\R^n$ parallels those on $\R$.
+
+\begin{definition}
+We define a \textit{right semi-closed interval} (or right semi-closed box) in $\R^n$ as
+\[ (a,b] :=	(a_1,b_1] \times ... \times (a_n, b_n]  = \set{x \in \R^n : a_1 \leq x_1 \leq b_1, ...., a_n \leq x_n \leq b_n }\]
+\end{definition}
+\begin{definition}
+The \textit{vertices} of a right semi-closed interval in $\R^n$ are given by
+\[ V(a,b] = \set{a_1,b_1} \times ... \times \set{a_n, b_n}\]
+\label{def:vertices_of_rsc_interval_in_Rn}
+\end{definition}
+
+\begin{definition}
+The \textit{Borel sets} of 	$\R^n$, denoted $\B(\R^n)$, are those sets which are members of the smallest sigma field containing all intervals $(a,b], a,b \in \R^n$. 
+\end{definition}
+
+\begin{definition}
+A \textit{Lesbesgue-Stieltjes measure} on $\R^n$ is a measure $\mu$ on $\B(\R^n)$ such that $\mu(I) < \infty$ for each bounded interval $I$. 	
+\end{definition}
+
+%We have established how to relate distribution functions and measures when the underlying space is $\R$.  When the underlying space is $\R^n$, the situation is different.
+
+Recall that in $\R$, we observed the following relation between distribution functions  and Lesbesgue-Stieltjes measures on right semi-closed intervals 
+\begin{align*}
+\mu(a,b] = F(b) - F(a), \quad a,b \in \R, a<b 
+\labelit \label{eqn:measure_as_distribution_function_difference_for_motivating_LS_in_Rn}
+\end{align*}
+
+We would like to to do the same for $\R^n$.  However, note that the equation
+\begin{align*}
+\mu(a,b] = F(b) - F(a), \quad a,b \in \R^n, a<b 	
+\labelit \label{eqn:measure_as_distribution_function_difference_for_motivating_LS_in_Rn}
+\end{align*}
+does \textit{not} hold! To see this, for now let us construct a distribution function $F : \R^n \to \R$ via 
+\[  F(a) = \mu(-\infty, a] = \mu(\omega \in \R^n : \omega_1 \leq x_1, ..., \omega_n \leq x_n)\]
+
+{\footnotesize We note that that this parallels the situation in $\R$, where  we have $\mu(-\infty, a]=F(a)$ if we identify a member from the equivalence classes of distribution functions by assuming $F(-\infty)=0$.}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.5\textwidth]{images/distribution_functions_in_Rn}	
+\caption{Using a distribution function in $\R^2$ to measure the box $I_1 \times I_2$.}
+\label{fig:distribution_functions_in_Rn}
+\end{figure}
+
+
+For example, in Figure \ref{fig:distribution_functions_in_Rn}, we see that if $(a,b] = I_1 \times I_2 = (a_1,b_1] \times (a_2, b_2]$, then 
+\begin{align*}
+\mu(a,b] = F(b_1, b_2) - F(a_1, b_2) - F(b_1, a_2) + F(a_1, a_2)
+\labelit \label{eqn:measure_of_rsc_interval_in_R2}
+\end{align*}
+(Note that we add back in the region that we had double subtracted.)
+
+If $\mu$ is a finite measure on $\B(\R^n)$, we can generalize \eqref{eqn:measure_of_rsc_interval_in_R2} for measuring r.s.c. intervals to $\R^n$.
+
+\begin{theorem}
+Let $\mu$ is a finite measure on $\B(\R^n)$.  Then 
+\begin{alphabate}
+\item We have 	
+	\begin{align*}
+	\mu(a,b] &= \Delta_{(a,b]} F  := \Delta_{b_1a_1} \cdots \Delta_{b_na_n} F(x_1, ..., x_n) 
+	\labelit \label{eqn:measure_of_rsc_interval_in_Rn_via_distribution_function}
+	\intertext{where}
+	\Delta_{b_ia_i} G(x_1,...,x_n) &:= G(x_1,....,x_{i-1}, b_i, x_{i+1}, ..., x_n) - G(x_1,....,x_{i-1}, a_i, x_{i+1}, ..., x_n)
+	\end{align*}
+\item We have
+\[\Delta_{(a,b)} F = \sum_{v \in V(a,b]} (-1)^{\# \text{ of a's in v}} \; F(v) \]
+where $V(a,b]$ are the vertices of $(a,b]$ (see Definition \ref{def:vertices_of_rsc_interval_in_Rn}). 
+\end{alphabate}
+\label{eqn:measure_of_rsc_interval_in_Rn_via_distribution_function}
+\end{theorem}
+
+\begin{proof}
+We prove part (a) and leave (b) to the reader.
+\begin{align*}
+\Delta_{b_na_n} &F(x_1, ..., x_n) = 	F(x_1,...,x_{n-1}, b_n) - F(x_1,...,x_{n-1}, a_n)\\
+&=\mu(\set{\omega_1 \leq x_1, \; ..., \; \omega_{n-1} \leq x_{n-1}, \; \omega_{n} \leq b_{n}}) - \mu(\set{\omega_1 \leq x_1, \; ..., \; \omega_{n-1} \leq x_{n-1}, \;\omega_{n} \leq a_{n}}) \\
+&=\mu(\set{\omega_1 \leq x_1, \; ..., \; \omega_{n-1} \leq x_{n-1}, \; a_n < \omega_{n} \leq b_{n}})
+\end{align*}
+where the last equality follows by the piece-and-difference decomposition of finite measures.
+
+Similarly, 
+\begin{align*}
+\Delta_{b_{n-1}a_{n-1}} &\Delta_{b_na_n} F(x_1, ..., x_n) \\
+&=\mu(\set{\omega_1 \leq x_1, \;..., \; \omega_{n-2} \leq x_{n-2}, \; a_{n-1} < \omega_{n-1} \leq b_{n-1}, \; a_n < \omega_{n} \leq b_{n}})
+\end{align*}
+Repeating this, we obtain
+\[\Delta_{b_1a_1} \cdots \Delta_{b_na_n} F(x_1, ..., x_n) =  \mu(\set{a_1 < \omega_1 \leq b_1, \; ... \; a_n < \omega_{n} \leq b_{n}}) = \mu(a,b]\]
+
+\end{proof}
+
+\begin{remark}
+Note from the proof of Theorem \ref{eqn:measure_of_rsc_interval_in_Rn_via_distribution_function} part (a) that the application of the $n$th difference operator restricts the set being measured to the bounds given in the $n$th dimension.  See Figure \ref{fig:applying_the_difference_operator_to_distribution_functions_in_R2}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.5\textwidth]{images/applying_the_difference_operator_to_distribution_functions_in_R2}	
+\caption{Repeated applications of the difference operator to a distribution function in $\R^2$.}
+\label{fig:applying_the_difference_operator_to_distribution_functions_in_R2}
+\end{figure}
+
+
+\end{remark}
+
+Due to Theorem \ref{eqn:measure_of_rsc_interval_in_Rn_via_distribution_function} part (a), we must alter our notion of \textit{increasing} when defining distribution functions on $\R^n$.  
+
+\begin{definition}
+ A \textit{distribution function} on $\R^n$ is a map $F : \R^n \to \R$ that is:
+ 
+ \begin{alphabate}
+ \item \textit{increasing}, in the sense that
+ \[ \Delta_{(a,b]} F \geq 0 \]
+ for all r.s.c. intervals $(a,b]$
+ \item \textit{right continuous}, that is
+ \[ \ds\lim_{y \downarrow x} F(y) = F(x) \]
+ where $y \downarrow x$ means $y_i \downarrow x_i$ for each $i=1,...,n$.
+ \end{alphabate}
+ \label{def:distribution_function_on_Rn}
+ \end{definition}
+ 
+ \begin{remark}
+ Note that Definition \ref{def:distribution_function_on_Rn} defines increasing in a different manner than what might be intuitive:
+ \[ F(y) \geq F(x) \; \text { if } \; y_i \geq x_i \quad \text{ for all } i=1,...,n\]
+ However, such a condition would be insufficient to describe a distribution function in $\R^n.$ For an example of a distribution function that is right continuous and increasing in this sense, but which assigns negative measure to intervals, see pp. 6-7 of \cite{durrett2010probability}.
+ \end{remark}
+
+ 
+%applying_the_difference_operator_to_distribution_functions_in_R2
+
+% TODO: Define the difference operator, give theorem 1.4.8 but for (b) use the Durrett statement, prove (a) like my notes.  Skip the proof of (b).   Perhaps give the Ash statement for (b) in a remark.  Make a picture and remark for (a) giving the intuition: the $n$th application of the difference operator restricts the set being measured to the bounds given in the $n$th dimension.   Then define distribution functions in R^n.  Finally give the extension statement for $R^n$. 
 
 \bibliography{references_ash_notes.bib}
 \bibliographystyle{unsrt}
