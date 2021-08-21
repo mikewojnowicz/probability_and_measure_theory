@@ -1186,12 +1186,124 @@ Let us summarize.\footnote{This passage is basically a paragraph from \cite{ash2
 
 % TODO: Define the difference operator, give theorem 1.4.8 but for (b) use the Durrett statement, prove (a) like my notes.  Skip the proof of (b).   Perhaps give the Ash statement for (b) in a remark.  Make a picture and remark for (a) giving the intuition: the $n$th application of the difference operator restricts the set being measured to the bounds given in the $n$th dimension.   Then define distribution functions in R^n.  Finally give the extension statement for $R^n$. 
 
+\subsection{$\S$ 1.4.11 Approximation theorem}
+
+The following result shows that under appropriate conditions, a Borel set can be approximated from below by a compact set, and from above by an open set. 
+
+\begin{theorem}
+If $\mu$ is a $\sigma$-finite measure on $\B(\R^n)$, then for each $B \in \B(\R^n)$,
+\begin{alphabate}
+\item $\mu(B) = \sup \set{\mu(K) : K \subset B, K \text{ compact}}$
+\item If $\mu$ is in fact a Lesbesgue-Stieltjes measure, then
+\[ \mu(B) = \inf \set{\mu(V) : V \supset B, V \text{ open}}\]
+\item There is an example of a $\sigma$-finite measure on $\B(\R^n)$ that is not a Lebesgue-Stieljes measure for which (b) fails.
+\end{alphabate}
+\label{thm:approximation_theorem_for_borel_sets}	
+\end{theorem}
+
+\begin{proof}
+We prove part (b) for finite measures.  For the case of infinite measures, and for a proof of parts (a) and (c), see the text.
+
+We have 
+\begin{align*}
+\mu(B) & \stackrel{1}{\leq}	\inf \set{\mu(V) : V \supset B, V \text{ open}} && \tinytext{by monotonicity and Definition \ref{def:supremum_and_infimum}} \\
+ & \stackrel{2}{\leq}	\inf \set{\mu(K^c) : K^c \supset B, K \text{ compact}} && \tinytext{by monotonicity and Proposition \ref{prop:sup_and_inf_for_subsets_are_tighter}} \\
+ &= \inf \set{\mu(\R^n) - \mu(K) : K \subset B^c, K \text{ compact}} && \tinytext{by piece-and-difference, $\mu$ finite} \\
+ & \stackrel{3}{=}	\mu(\R^n) - \sup \set{\mu(K) : K \subset B^c, K \text{ compact}} && \tinytext{by Proposition \ref{prop:sup_and_inf_for_minkowski_sum_and_diff}} \\
+  & =	\mu(\R^n) - \mu(B^c)  && \tinytext{by part (a)}\\
+&= \mu(B)
+\end{align*}
+For more details, Equation (1) holds since, by monotonicity, the LHS is a lower bound on the RHS, so the statement must be true by definition of infimum. Equation (2) holds since the LHS is a smaller set than the RHS (because not every open set is the complement of a compact set)\footnote{Recall that in $\R^n$, a compact set is both closed \textit{and} bounded.}, and the infimum can only increase on subsets by Proposition \ref{prop:sup_and_inf_for_subsets_are_tighter}. Equation (3) holds by writing $\mu(K^c) = \mu(\R^n) - \mu(K)$.  This has the form of a Minkowski set difference $A = \set{c} - B$, where $c$ is a singleton.  So we have $\inf A = \inf ( \set{c} - B) \stackrel{Prop. \ref{prop:sup_and_inf_for_minkowski_sum_and_diff}}{=} \inf \set{c} - \sup B = c - \sup B$.  
+ \end{proof}
+
+
+
 \bibliography{references_ash_notes.bib}
 \bibliographystyle{unsrt}
 
 \appendix
 
-\section{Appendix}
+\section{Supremum and Infimum}
+
+Following are some definitions and propositions that we use in the notes.\footnote{For a nice introductory overview, see \href{https://www.math.ucdavis.edu/~hunter/m125b/ch2.pdf}.}
+
+First, we define upper and lower bounds.
+\begin{definition}
+A set $A \subset \R$ of real numbers is bounded from above if there exists a real number $M \in \R$, called an \textit{upper bound} of $A$, such that $x \leq M$ for every $x \in A$.  Similarly, $A$  is bounded from below if there exists a real number $m \in \R$, called an \textit{lower bound} of $A$, such that $x \geq m$ for every $x \in A$.  A set is \textit{bounded} if it is bounded from above and below.
+\label{def:upper_and_lower_bound}	
+\end{definition}
+
+
+Now, we define infimum and supremum.
+\begin{definition}
+Suppose that $A \subset \R$ is a set of real numbers. If $M \in \R$ is an upper bound of $A$ such that $M \leq M'$ for every upper bound $M'$ of $A$, then $M$ is called the \textit{supremum} of $A$, denoted $M=\sup A$.   Similarly, if $m \in \R$ is an lower bound of $A$ such that $m \geq m'$ for every lower bound $m'$ of $A$, then $m$ is called the \textit{infimum} of $A$, denoted $m=\inf A$.\label{def:supremum_and_infimum}	
+\end{definition}
+
+We sometimes use an alternate characterization of infimum and supremum.
+
+\begin{proposition}
+
+If $A \subset \R$, then $M = \sup A$ if and only if (a) $M$ is an upper bound of $A$; (b) for every $M' < M$, there exists an $a \in A$ such that $a>M'$.  Similarly, $m = \inf A$ if and only if (a) $m$ is a lower bound of $A$; (b) for all $m'>m$, there exists an $a \in A$ such that $a<m'$.
+
+\begin{proof}
+We prove the alternate characterization for the supremum only, as the proof for infimum is similar.    We only need to show equivalence for the part (b)'s, as the part (a)'s are identical. 
+
+We first show that the definition implies part the proposition.  We proceed by way of contradiction.  Let $M = \sup A$, $M' <M$, and suppose there is no $a \in A : a > M'$. Then $M'$ is an upper bound of $A$ where $M' <M$, contradicting part (b) of the definition of supremum.   
+
+Now we show that the proposition implies the definition. Part (b) of the proposition implies that if $M' < M$, then $M'$ is not an upper bound. Thus part (b) of the definition is satisfied.
+\end{proof}
+\label{prop:supremum_and_infimum_alternate_characterization}
+\end{proposition}
+
+
+
+\begin{remark}
+The (b) statement in Proposition \ref{prop:supremum_and_infimum_alternate_characterization} roughly tell us that any other candidate for a smaller supremum fails, because it will not be an upper bound.  Similarly, any other candidate for a larger infimum fails, because it will not be a lower bound. 	
+\end{remark}
+
+\begin{remark}
+Another way to write Proposition \ref{prop:supremum_and_infimum_alternate_characterization} is as follows:	
+
+If $A \subset \R$, then $M = \sup A$ if and only if (a) $M$ is an upper bound of $A$; (b) for all $\epsilon >0$, there exists an $a \in A$ such that $a>M-\epsilon$.  Similarly, $m = \inf A$ if and only if (a) $m$ is a lower bound of $A$; (b) for all $\epsilon >0$, there exists an $a \in A$ such that $a<m+\epsilon$.
+\end{remark}
+
+
+
+
+
+The proposition below characterizes the behavior of the infimum and supremum under set containment
+
+\begin{proposition}
+Suppose that $A$ and $B$ are subsets of $\R$ such that $A \subset B$.  If $\sup A$ and $\sup B$ exist, then $\sup A \leq \sup B$.  If $\inf A$ and $\inf B$ exist, then $\inf A \geq \inf B$.
+\label{prop:sup_and_inf_for_subsets_are_tighter}
+\end{proposition}
+
+Now we characterize the behavior of infimum and supremum over set (Minskowski) sums and differences.
+
+\begin{definition}
+If $A, B \subset \R$ are non-empty, we define the \textit{Minkowski sum} of the two sets, denoted $A+B$, by 
+\[ A + B := \set{z : z = x + y \text{ for some } x \in A, y \in B } \]
+Similarly, we define the \textit{Minkowski difference} of two sets, denoted $A-B$, by
+\[ A - B := \set{z : z = x - y \text{ for some } x \in A, y \in B } \]
+\label{def:minkowski_sum_and_difference}	
+\end{definition}
+
+\begin{proposition}
+If $A, B \subset \R$ are non-empty, then 
+\begin{align*}
+\sup (A+B) = \sup A + \sup B, &\quad \inf (A+B) = \inf A + \inf B 	 \\
+\sup (A-B) = \sup A - \inf B, &\quad \inf (A-B) = \inf A - \sup B 	 \\
+\end{align*}
+
+\label{prop:sup_and_inf_for_minkowski_sum_and_diff}	
+\end{proposition}
+
+\begin{remark}
+Proposition \ref{prop:sup_and_inf_for_minkowski_sum_and_diff} can be informally described as saying that the infimum and supremum distribute over addition and subtraction, but negative signs ``flip" infima to suprema, and vice versa. 
+\end{remark}
+
+
+\section{Miscellaneous}
 \subsection{Right semi-closed intervals}
 \begin{definition}
 A \textbf{right semi-closed interval} is a set of the form $(a,b] = \set{x : a < x \leq b}, -\infty \leq a < b < \infty$.  By convention, we also count $(a,\infty)$ as right semi-closed for $-\infty \leq a < \infty$. 
