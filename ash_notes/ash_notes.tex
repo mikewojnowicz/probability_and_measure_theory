@@ -42,12 +42,23 @@ The primary reference here is \cite{ash2000probability}.   The book is wonderful
 
  Unless otherwise specified, all references to the ``text" refers to this textbook.  Likewise the symbol $\S$ refers to a Section of that textbook.
  
-\subsection{Motivation} \label{sec:motivation}
+\subsection{Motivation for topic} \label{sec:motivation_for_topic}
 
 Measure theory serves as a critical underpinning for some of the most interesting research in Bayesian statistics and probabilistic machine learning (see work from Stephen G. Walker, Michael Jordan, Tamara Broderick, David Dunson, and so on).   Thus, fluency with measure theory opens doors to a higher level of research consumption. 
   
 Measure theory is convenient in unifying various kinds of random variables.\footnote{For example, it allows one to work with discrete and absolutely continuous random variables in a unified way.  For example, the exponential family includes both types of random variables.}  Lesbesgue integrals have nice limit theorems, and can be seen as the completion of Reimann integrals (in the same way that the real numbers complete the rationals). 
 
+\subsection{Motivation for notes}
+
+It is hard to beat directly consulting a textbook (such as \cite{ash2000probability}) written by a seasoned mathematician who is an excellent pedagogue.
+
+However, we have created these notes nonetheless in an attempt to support lecture and/or discussion on that textbook.   With that goal in mind, we:
+\begin{itemize}
+\item Play a curation role, highlighting some of the main themes (and cores of proofs), offloading additional detail to the text. 
+\item Add sketches to support intuition.
+\item Provide additional detail in proofs.
+\item Incorporate supporting material, such as additional examples, from homework problems and outside sources.\footnote{This will happen increasingly often as the notes evolve.}
+\end{itemize}
 
 
 %We begin with a discussion of $\sigma$-fields, which are the domains of probability measures, and measures more generally.  As it turns out, measures cannot be defined on all subsets of many spaces that we would like to deal with. For instance, consider Proposition 1.2.6 of \cite{rosenthal2006first} which asserts the existence of non-measurable sets for the uniform distribution.  In particular, there is no definition of $P(A)$ that is defined for all subsets $A \subseteq [0,1]$ satisfying all three conditions below
@@ -146,7 +157,7 @@ The solution to this problem is to define measures on a restricted domain, $\sig
 
 
 
-%We begin with a discussion of $\sigma$-fields, which are typically the domains of probability measures, and measures more generally.\footnote{In the construction of Lesbesgue measure, Ash defines a probability measure on a field.  See 1.3.1 of \cite{ash2000probability}.}  As stated in the motivation (Section \ref{sec:motivation}), measures cannot be defined on all subsets of many spaces that we would like to deal with. 
+%We begin with a discussion of $\sigma$-fields, which are typically the domains of probability measures, and measures more generally.\footnote{In the construction of Lesbesgue measure, Ash defines a probability measure on a field.  See 1.3.1 of \cite{ash2000probability}.}  As stated in the motivation (Section \ref{sec:motivation_for_topic}), measures cannot be defined on all subsets of many spaces that we would like to deal with. 
 
 %\sfs\ are important because they are the domain of measures.  
 %Here are some definitions.
@@ -1186,7 +1197,7 @@ Let us summarize.\footnote{This passage is basically a paragraph from \cite{ash2
 
 % TODO: Define the difference operator, give theorem 1.4.8 but for (b) use the Durrett statement, prove (a) like my notes.  Skip the proof of (b).   Perhaps give the Ash statement for (b) in a remark.  Make a picture and remark for (a) giving the intuition: the $n$th application of the difference operator restricts the set being measured to the bounds given in the $n$th dimension.   Then define distribution functions in R^n.  Finally give the extension statement for $R^n$. 
 
-\subsection{$\S$ 1.4.11 Approximation theorem}
+\subsection{$\S$ 1.4.11 Approximation theorem for Borel sets}
 
 The following result shows that under appropriate conditions, a Borel set can be approximated from below by a compact set, and from above by an open set. 
 
