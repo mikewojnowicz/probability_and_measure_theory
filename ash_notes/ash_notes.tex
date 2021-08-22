@@ -274,8 +274,12 @@ Some example applications:
 
 \[ \explaintermbrace{take minimal sigma field first, then intersect}{\sigma_\Omega(\C) \cap A} = \explaintermbrace{intersect first, then take minimal sigma-field}{\sigma_A(\C \cap A)} \]
  \item  See my handwritten homework exercise for  $\S$ 1.2, Problem 6.
- \item See the proof of Caratheodory Extension Theorem (Theorem \ref{thm:caratheodory_extension}).	
+ %\item See the proof of Caratheodory Extension Theorem (Theorem \ref{thm:caratheodory_extension}).	
  \end{itemize}
+
+\begin{remark} 
+Later, we will cover the Monotone Class Theorem (see Theorem \ref{thm:monotone_class_theorem}), which provides an alternate mechanism for executing the Good Sets Strategy.  See Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy}.
+\end{remark}
 
 
 \subsection{$\S$ 1.2.3-1.2.4: Measures}
@@ -610,6 +614,23 @@ During the proof of Theorem \ref{thm:monotone_class_theorem}, some key observati
 \end{alphabate}
 \label{rk:monotone_classes_and_sigma_fields}
 \end{remark}
+
+\begin{remark}{\remarktitle{The utility of the Monotone Class Theorem}}
+The Monotone Class Theorem provides an alternate route towards executing on the Good Sets Strategy (Section \ref{sec:good_sets_strategy}.)  Suppose you want to show that all members of a $\sigma$-algebra   $\F$ have some property $P$.  Define ``good sets" as those that satisfy the property
+\[ \G := \{ G \in \F : G \text{ has property } P \} \]
+The strategy is then to simply
+\begin{enumerate}
+\item Show $\G$ is a monotone class.  
+\item Show $\G$ contains some class $\C$ such that $\F = \sigma(\C)$	
+\end{enumerate}	 
+\label{rk:monotone_class_theorem_for_executing_good_sets_strategy}
+\end{remark}
+
+
+\begin{remark}{\remarktitle{Using the Monotone Class Theorem to prove that the Borel sets have some property}} The Borel sets are rather abstract, and also contain many types of members (e.g., not only proper open intervals, but proper closed intervals, singletons, bizarre sets, etc.).  The MCT gives us a mechanism for showing that some property holds for \textit{all} Borel sets if we can just show that the property holds for some field generating the Borel sets (e.g., $\F_0 := \set{\text{disjoint unions of } (a,b], a,b \in \R^n }$) -- a much more tangible object to work with.  The strategy that is often used is a variant of the Good Sets strategy (see Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy}):  we consider the class of sets that have some desired property, and show that it is a monotone class and contains $\F_0$.  By the Monotone Class Theorem, these two facts are sufficient to prove that some property holds for all Borel sets.  For examples where this is used, see the proof of uniqueness in the Caratheodory Extension Theorem (Theorem \ref{thm:caratheodory_extension}), or see the Approximation Theorem for Borel sets (Theorem \ref{thm:approximation_theorem_for_borel_sets}).
+\label{rk:utility_of_montone_class_theorem}	
+\end{remark}
+
 
 \begin{theorem}{\textbf{(Carath\'eodory Extension Theorem)}} Let $\mu$ be a measure on the field $\F_0$ of subsets of $\Omega$, and assume that $\mu$ is $\sigma$-finite on $\F_0$, so that $\Omega$ can be decomposed as $\cup_{n=1}^\infty A_n$ where $A_n \in \F_0$ and $\mu(A_n) < \infty$ for all $n$.  Then $\mu$ has a unique extension to a measure on $\F := \sigma(\F_0)$, the minimal $\sigma$-field over $\F_0$. 
  \label{thm:caratheodory_extension}
@@ -1217,7 +1238,7 @@ If $\mu$ is a $\sigma$-finite measure on $\B(\R^n)$, then for each $B \in \B(\R^
 \begin{alphabate}
 \item We prove (a) for finite measures.   For the extension to $\sigma$-finite measures, see the text.  
 
-Let $\G$ be the class of subsets that have the desired result.\footnote{The reader may recognize that we are using the ``good sets" strategy.  See Section \ref{sec:good_sets_strategy}.} 
+We use the Monotone Class Theorem to show that all Borel sets have the desired property. Let $\G$ be the class of subsets that have the desired property.\footnote{The reader may recognize that we are using the ``good sets" strategy.  See Section \ref{sec:good_sets_strategy} and Remark \ref{rk:utility_of_montone_class_theorem}.} 
 	\begin{itemize}
 	\item \textit{First, observe that $\G$ contains all compact sets.}  If $K$ is a compact set, then $\mu(K)$ is an upper bound on $\set{\mu(K') : K' \subset K, K' \text{ compact}}$ by monotonicity {\footnotesize [$\mu(K) \geq \mu(K') \text{ for } K' \subset K,  K' \text{ compact}$].}  It is also the least upper bound since for each $\epsilon$, there is a compact $K' \subset K$ satisfying $\mu(K') > \mu(K) - \epsilon$. {\footnotesize [Just take $K'=K$].}  
 	\item \textit{Next, we show that $\G$ is a monotone class.}  So we need to show that (i) if $B_n \in \G$ and $B_n \downarrow B$ then $B \in \G$ and (ii) if $B_n \in \G$ and $B_n \uparrow B$ then $B \in \G$.  
