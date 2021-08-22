@@ -1217,12 +1217,12 @@ If $\mu$ is a $\sigma$-finite measure on $\B(\R^n)$, then for each $B \in \B(\R^
 \begin{alphabate}
 \item We prove (a) for finite measures.   For the extension to $\sigma$-finite measures, see the text.  
 
-Let $\C$ be the class of subsets that have the desired result.\footnote{The reader may recognize that we are using the ``good sets" strategy.  See Section \ref{sec:good_sets_strategy}.} 
+Let $\G$ be the class of subsets that have the desired result.\footnote{The reader may recognize that we are using the ``good sets" strategy.  See Section \ref{sec:good_sets_strategy}.} 
 	\begin{itemize}
-	\item \textit{First, observe that $\C$ contains all compact sets.}  If $K$ is a compact set, then $\mu(K)$ is an upper bound on $\set{\mu(K') : K' \subset K, K' \text{ compact}}$ by monotonicity {\footnotesize [$\mu(K) \geq \mu(K') \text{ for } K' \subset K,  K' \text{ compact}$].}  It is also the least upper bound since for each $\epsilon$, there is a compact $K' \subset K$ satisfying $\mu(K') > \mu(K) - \epsilon$. {\footnotesize [Just take $K'=K$].}  
-	\item \textit{Next, we show that $\C$ is a monotone class.}  So we need to show that (i) if $B_n \in \C$ and $B_n \downarrow B$ then $B \in \C$ and (ii) if $B_n \in \C$ and $B_n \uparrow B$ then $B \in \C$ and   We will prove (i) and leave (ii) for the reader.
+	\item \textit{First, observe that $\G$ contains all compact sets.}  If $K$ is a compact set, then $\mu(K)$ is an upper bound on $\set{\mu(K') : K' \subset K, K' \text{ compact}}$ by monotonicity {\footnotesize [$\mu(K) \geq \mu(K') \text{ for } K' \subset K,  K' \text{ compact}$].}  It is also the least upper bound since for each $\epsilon$, there is a compact $K' \subset K$ satisfying $\mu(K') > \mu(K) - \epsilon$. {\footnotesize [Just take $K'=K$].}  
+	\item \textit{Next, we show that $\G$ is a monotone class.}  So we need to show that (i) if $B_n \in \G$ and $B_n \downarrow B$ then $B \in \G$ and (ii) if $B_n \in \G$ and $B_n \uparrow B$ then $B \in \G$.  
 		\begin{itemize}
-		\item[(i)] Since each $B_n \in \C$, by definition of supremum (see Remark \ref{rk:usage_of_alternate_characterization_of_inf_and_sup}), we can find $K_n \subset B_n$, $K_n$ compact, such that 
+		\item[(i)] Since each $B_n \in \G$, by definition of supremum (see Remark \ref{rk:usage_of_alternate_characterization_of_inf_and_sup}), we can find $K_n \subset B_n$, $K_n$ compact, such that 
 		\[\mu(B_n) \leq \mu(K_n) + \epsilon 2^{-n}\]
 		Set $K=\cap_{n=1}^\infty K_n$.   Then
 		\begin{align*}
@@ -1234,13 +1234,13 @@ Let $\C$ be the class of subsets that have the desired result.\footnote{The read
 		\end{align*}
 		{\footnotesize [For more detail, Equation (1) applies because $B - \cap_{n=1}^\infty K_n \stackrel{\text{DeMorgan}}{=} \cup_{n=1}^\infty (B-K_n) \stackrel{B \subset B_n}{\subset} \cap_{n=1}^\infty (B_n - K_n)$.]} \\
 		
-		So for all sets $B$ formed by $B_n \downarrow B$ for $B_n \in \C$, we have that $\mu(B)$ satisfies the second property of the supremum (see Definition \ref{def:supremum_and_infimum}).  {\scriptsize [It satisfies the first property immediately since $K_n \subset B_n  \implies \cap_{n=1}^\infty K_n \subset \cap_{n=1}^\infty  B_n$, so by monotonicity $\mu(K) \leq \mu(B)$, and so $B$ is an upper bound.]} 
+		So for all sets $B$ formed by $B_n \downarrow B$ for $B_n \in \G$, we have that $\mu(B)$ satisfies the second property of the supremum (see Definition \ref{def:supremum_and_infimum}).  {\scriptsize [It satisfies the first property immediately since $K_n \subset B_n  \implies \cap_{n=1}^\infty K_n \subset \cap_{n=1}^\infty  B_n$, so by monotonicity $\mu(K) \leq \mu(B)$, and so $B$ is an upper bound.]} 
 		\item[(ii)]  Up to reader or see text for proof. 	
 		\end{itemize}
-	\item \textit{Now we show that $\C$ contains $\F_0 := \set{\text{disjoint unions of } (a,b], a,b \in \R^n}$}.  Consider that 
+	\item \textit{Now we show that $\G$ contains $\F_0 := \set{\text{disjoint unions of } (a,b], a,b \in \R^n}$}.  Consider that 
 	\[ (a,b] = \bigcup_{n=1}^\infty \explaintermbrace{compact}{ \big[a+\frac{1}{n}, b \big] } \]	
-	So $[a+1/n, b] \uparrow (a,b]$.  And since $(a,b]$ is the limit of an increasing sequence of compact sets, $(a,b] \in \C$ by the first two bullet points.  A similar argument holds for disjoint unions of sets which have the form $(a,b]$.  
-	\item \textit{Now we use the Monotone Class Theorem to finish the proof.t} By the previous bulletpoints, $\C$ contains $\F_0 := \set{\text{disjoint unions of } (a,b], a,b \in \R^n}$, and $\C$ is a monotone class.  So by the Monotone Class Theorem (Theorem \ref{thm:monotone_class_theorem}), we $\C$ contains $\sigma(\F_0) = \B(\R^n)$.\footnote{In other words, \textit{all} Borel sets are are ``good" - they have the property stated in part (a).}  
+	So $[a+1/n, b] \uparrow (a,b]$.  And since $(a,b]$ is the limit of an increasing sequence of compact sets, $(a,b] \in \G$ by the first two bullet points.  A similar argument holds for disjoint unions of sets which have the form $(a,b]$.  
+	\item \textit{Now we use the Monotone Class Theorem to finish the proof.} By the previous bulletpoints, $\G$ contains $\F_0 := \set{\text{disjoint unions of } (a,b], a,b \in \R^n}$, and $\G$ is a monotone class.  So by the Monotone Class Theorem (Theorem \ref{thm:monotone_class_theorem}), $\G$ contains $\sigma(\F_0) = \B(\R^n)$.\footnote{In other words, \textit{all} Borel sets are are ``good" - they have the property stated in part (a).}  
 	\end{itemize}
 
 
