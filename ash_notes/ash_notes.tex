@@ -239,7 +239,7 @@ But $\F_0$ is \underline{not} a \sf.  Note that if $A_n = (-\frac{1}{n},0]$, the
 \end{example}
 
 \begin{remark}
-A \sf\ can also be described as a field that is closed under limits of increasing sequences.  For if $A_n \in \F$ and $A_n \uparrow A$, then A is a countable union of sets in $\F$ by definition.  Conversely, if $A = \cup_{n=1}^\infty A_n$, then set $B_N := \cup_{n=1}^N A_n$ and $B_N \uparrow A$.	So if $\G$ is the collection of all limits of increasing sequences of sets in some field $\F_0$, we can also describe $\G$ as the collection of all countable unions of sets in $\F_0$. \label{rk:the_limits_of_increasing_and_decreasing_sequences_of_sets_in_a_field_are_also_the_countable_unions}
+ If $\F$ is a field, a countable union of sets in $\F$ can be expressed as the limit of an increasing sequence of sets in $\F$, and conversely. For if $A_n \in \F$ and $A_n \uparrow A$, then A is a countable union of sets in $\F$ by definition.  Conversely, if $A = \cup_{n=1}^\infty A_n$, then set $B_N := \cup_{n=1}^N A_n$ and $B_N \uparrow A$. This shows that a \sf\ can also be described as a field that is closed under limits of increasing sequences.  More generally, if $\G$ is the collection of all limits of increasing sequences of sets in some field $\F_0$, we can also describe $\G$ as the collection of all countable unions of sets in $\F_0$. \label{rk:the_limits_of_increasing_and_decreasing_sequences_of_sets_in_a_field_are_also_the_countable_unions}
 \end{remark}
 %Recalling Figure \ref{fig:increasing_and_decreasing_limits_of_sets}, limits of increasing sequences are very special kinds of limits.
 
@@ -1213,7 +1213,38 @@ If $\mu$ is a $\sigma$-finite measure on $\B(\R^n)$, then for each $B \in \B(\R^
 \end{theorem}
 
 \begin{proof}
-We prove part (b) for finite measures.  For the case of infinite measures, and for a proof of parts (a) and (c), see the text.
+\;
+\begin{alphabate}
+\item We prove (a) for finite measures.   For the extension to $\sigma$-finite measures, see the text.  
+
+Let $\C$ be the class of subsets that have the desired result.\footnote{The reader may recognize that we are using the ``good sets" strategy.  See Section \ref{sec:good_sets_strategy}.} 
+	\begin{itemize}
+	\item \textit{First, observe that $\C$ contains all compact sets.}  If $K$ is a compact set, then $\mu(K)$ is an upper bound on $\set{\mu(K') : K' \subset K, K' \text{ compact}}$ by monotonicity {\footnotesize [$\mu(K) \geq \mu(K') \text{ for } K' \subset K,  K' \text{ compact}$].}  It is also the least upper bound since for each $\epsilon$, there is a compact $K' \subset K$ satisfying $\mu(K') > \mu(K) - \epsilon$. {\footnotesize [Just take $K'=K$].}  
+	\item \textit{Next, we show that $\C$ is a monotone class.}  So we need to show that (i) if $B_n \in \C$ and $B_n \downarrow B$ then $B \in \C$ and (ii) if $B_n \in \C$ and $B_n \uparrow B$ then $B \in \C$ and   We will prove (i) and leave (ii) for the reader.
+		\begin{itemize}
+		\item[(i)] Since each $B_n \in \C$, by definition of supremum (see Remark \ref{rk:usage_of_alternate_characterization_of_inf_and_sup}), we can find $K_n \subset B_n$, $K_n$ compact, such that 
+		\[\mu(B_n) \leq \mu(K_n) + \epsilon 2^{-n}\]
+		Set $K=\cap_{n=1}^\infty K_n$.   Then
+		\begin{align*}
+		\mu(B) - \mu(K) &= \mu(B-K) && \tinytext{piece-and-difference, $\mu$ finite} \\
+		&\stackrel{1}{\leq} \mu(\cup_{n=1}^\infty (B_n-K_n)) && \tinytext{DeMorgan, monotonicity}\\
+		&\leq \sum_{n=1}^\infty \mu(B_n - K_n) && \tinytext{countable subadditivity} \\
+		&= 	\sum_{n=1}^\infty \mu(B_n) - \mu(K_n) && \tinytext{piece-and-difference, $\mu$ finite} \\
+		&= \epsilon 
+		\end{align*}
+		{\footnotesize [For more detail, Equation (1) applies because $B - \cap_{n=1}^\infty K_n \stackrel{\text{DeMorgan}}{=} \cup_{n=1}^\infty (B-K_n) \stackrel{B \subset B_n}{\subset} \cap_{n=1}^\infty (B_n - K_n)$.]} \\
+		
+		So for all sets $B$ formed by $B_n \downarrow B$ for $B_n \in \C$, we have that $\mu(B)$ satisfies the second property of the supremum (see Definition \ref{def:supremum_and_infimum}).  {\scriptsize [It satisfies the first property immediately since $K_n \subset B_n  \implies \cap_{n=1}^\infty K_n \subset \cap_{n=1}^\infty  B_n$, so by monotonicity $\mu(K) \leq \mu(B)$, and so $B$ is an upper bound.]} 
+		\item[(ii)]  Up to reader or see text for proof. 	
+		\end{itemize}
+	\item \textit{Now we show that $\C$ contains $\F_0 := \set{\text{disjoint unions of } (a,b], a,b \in \R^n}$}.  Consider that 
+	\[ (a,b] = \bigcup_{n=1}^\infty \explaintermbrace{compact}{ \big[a+\frac{1}{n}, b \big] } \]	
+	So $[a+1/n, b] \uparrow (a,b]$.  And since $(a,b]$ is the limit of an increasing sequence of compact sets, $(a,b] \in \C$ by the first two bullet points.  A similar argument holds for disjoint unions of sets which have the form $(a,b]$.  
+	\item \textit{Now we use the Monotone Class Theorem to finish the proof.t} By the previous bulletpoints, $\C$ contains $\F_0 := \set{\text{disjoint unions of } (a,b], a,b \in \R^n}$, and $\C$ is a monotone class.  So by the Monotone Class Theorem (Theorem \ref{thm:monotone_class_theorem}), we $\C$ contains $\sigma(\F_0) = \B(\R^n)$.\footnote{In other words, \textit{all} Borel sets are are ``good" - they have the property stated in part (a).}  
+	\end{itemize}
+
+
+\item We prove part (b) for finite measures.  For the extension to $\sigma$-finite measures, see the text.
 
 We have 
 \begin{align*}
@@ -1224,7 +1255,10 @@ We have
   & =	\mu(\R^n) - \mu(B^c)  && \tinytext{by part (a)}\\
 &= \mu(B)
 \end{align*}
-For more details, Equation (1) holds since, by monotonicity, the LHS is a lower bound on the RHS, so the statement must be true by definition of infimum. Equation (2) holds since the LHS is a smaller set than the RHS (because not every open set is the complement of a compact set)\footnote{Recall that in $\R^n$, a compact set is both closed \textit{and} bounded.}, and the infimum can only increase on subsets by Proposition \ref{prop:sup_and_inf_for_subsets_are_tighter}. Equation (3) holds by writing $\mu(K^c) = \mu(\R^n) - \mu(K)$.  This has the form of a Minkowski set difference $A = \set{c} - B$, where $c$ is a singleton.  So we have $\inf A = \inf ( \set{c} - B) \stackrel{Prop. \ref{prop:sup_and_inf_for_minkowski_sum_and_diff}}{=} \inf \set{c} - \sup B = c - \sup B$.  
+For more details, Equation (1) holds since, by monotonicity, the LHS is a lower bound on the RHS, so the statement must be true by definition of infimum. Equation (2) holds since the LHS is a smaller set than the RHS (because not every open set is the complement of a compact set)\footnote{Recall that in $\R^n$, a compact set is both closed \textit{and} bounded.}, and the infimum can only increase on subsets by Proposition \ref{prop:sup_and_inf_for_subsets_are_tighter}. Equation (3) holds by writing $\mu(K^c) = \mu(\R^n) - \mu(K)$.  This has the form of a Minkowski set difference $A = \set{c} - B$, where $c$ is a singleton.  So we have $\inf A = \inf ( \set{c} - B) \stackrel{Prop. \ref{prop:sup_and_inf_for_minkowski_sum_and_diff}}{=} \inf \set{c} - \sup B = c - \sup B$. 
+\item See the text.
+\end{alphabate}
+ 
  \end{proof}
 
 
@@ -1276,6 +1310,7 @@ The (b) statement in Proposition \ref{prop:supremum_and_infimum_alternate_charac
 Another way to write Proposition \ref{prop:supremum_and_infimum_alternate_characterization} is as follows:	
 
 If $A \subset \R$, then $M = \sup A$ if and only if (a) $M$ is an upper bound of $A$; (b) for all $\epsilon >0$, there exists an $a \in A$ such that $a>M-\epsilon$.  Similarly, $m = \inf A$ if and only if (a) $m$ is a lower bound of $A$; (b) for all $\epsilon >0$, there exists an $a \in A$ such that $a<m+\epsilon$.
+\label{rk:usage_of_alternate_characterization_of_inf_and_sup}
 \end{remark}
 
 
