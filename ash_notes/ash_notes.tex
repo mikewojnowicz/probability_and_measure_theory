@@ -119,7 +119,7 @@ One can verify that this definition is consistent with the definition of limits,
 As shown in Figure \ref{fig:increasing_and_decreasing_limits_of_sets}, limits of increasing and decreasing sequences are very special kinds of limits.
 
 
-\subsection{Representing unions as disjoint unions}
+\subsection{Representing unions as disjoint unions} \label{sec:representing_unions_as_disjoint_unions}
  
 \begin{remark}
 If $A_1,A_2,...$ are subsets of some set $\Omega$, then
@@ -629,7 +629,7 @@ The strategy is then to simply
 \end{remark}
 
 
-\begin{remark}{\remarktitle{Using the Monotone Class Theorem to prove that the Borel sets have some property}} The Borel sets are rather abstract, and also contain many types of members (e.g., proper open intervals, proper closed intervals, singletons, bizarre sets like the Cantor set, etc.).  The MCT gives us a mechanism for showing that some property holds for \textit{all} Borel sets if we can just show that the property holds for some field generating the Borel sets (e.g., $\F_0 := \set{\text{disjoint unions of } (a,b], a,b \in \R^n }$) -- a much more tangible object to work with.  The strategy that is often used is a variant of the Good Sets strategy (see Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy}):  we consider the class of sets that have some desired property, and show that it is a monotone class and contains $\F_0$.  By the Monotone Class Theorem, these two facts are sufficient to prove that some property holds for all Borel sets.  For examples where this is used, see the proof of uniqueness in the Caratheodory Extension Theorem (Theorem \ref{thm:caratheodory_extension}), or see the Approximation Theorem for Borel sets (Theorem \ref{thm:approximation_theorem_for_borel_sets}).
+\begin{remark}{\remarktitle{Using the Monotone Class Theorem to prove that the Borel sets have some property}} The Borel sets are rather abstract, and also contain many types of members (e.g., proper open intervals, proper closed intervals, singletons, bizarre sets like the Cantor set, etc.).  The MCT gives us a mechanism for showing that some property holds for \textit{all} Borel sets if we can just show that the property holds for some field generating the Borel sets (e.g., $\F_0 := \set{\text{disjoint unions of } (a,b], a,b \in \R^n }$) -- a much more tangible object to work with.  The strategy that is often used is a variant of the Good Sets strategy (see Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy}):  we consider the class of sets that have some desired property, and show that it is a monotone class and contains $\F_0$.  By the Monotone Class Theorem, these two facts are sufficient to prove that some property holds for all Borel sets.  For examples where this is used, seethe proof of uniqueness in the Caratheodory Extension Theorem (Theorem \ref{thm:caratheodory_extension}), the  Approximation Theorem for Borel sets (Theorem \ref{thm:approximation_theorem_for_borel_sets}), or the proof that Lebesgue measure is translation invariant (Proposition \ref{prop:lesbesgue_measure_is_translation_invariant}).
 \label{rk:utility_of_montone_class_theorem}	
 \end{remark}
 
@@ -1283,6 +1283,72 @@ For more details, Equation (1) holds since, by monotonicity, the LHS is a lower 
 \end{alphabate}
  
  \end{proof}
+
+\subsection{Translation Invariance of Lebesgue Measure}
+
+\begin{proposition}
+Lebesgue measure is translation invariant.  That is, if $B \in \overline{\B}(\R^n)$ and $c \in \R^n$, then $B+c \in  \overline{\B}(\R^n)$ and $\mu(B+c)=\mu(B)$, where $\mu$ is Lesbesgue measure.	
+\label{prop:lesbesgue_measure_is_translation_invariant}
+\end{proposition}
+
+\begin{proof}
+We prove the statement for $\B(\R^n)$ and leave the extension to $\overline{\B}(\R^n)$ to the reader. We shall use the Monotone Class Theorem as our vehicle for executing the Good Sets Strategy (see Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy}).  That is, we will let $\G$ be the class of ``good sets" that have the desired property. Then we must show: (a) that $\G$ is a monotone class and (b) that $\G$ contains $\F_0 = \set{\text{disjoint union of sets of the form } (a,b], a, b \in \R^n}$. We will use this strategy twice, to show: (1) that $B \in \B(\R^n)$ and $c \in \R^n$ implies $B+c \in  \B(\R^n)$  (2) that $\mu(B+c)=\mu(B)$ for all $B \in \B(\R^n)$.  
+
+\begin{enumerate}
+\item We want to show that $B \in \B(\R^n) \implies B+c \in \B(R^n)$.  Let $\G$ be the sets where the property holds.
+	\begin{alphabate}
+	\item Consider a sequence $B_n \uparrow B$ such that $B_n \in \G$.  That is, by hypothesis, we have $B_n \in \B(\R^n) \implies B_n+c \in \B(R^n)$.  Then 
+	\[  B+c = (\bigcup_{n=1}^\infty B_n) + c = \bigcup_{n=1}^\infty \explaintermbrace{\quad in $ \B(\R^n)$ \, by hypothesis}{(B_n + c)} \explaintermbrace{\quad by $\sigma$-field}{\in \B(\R^n)}\]
+	So $B \in \G$.
+	\item This property holds on $\F_0$; that is $\G \supset \F_0$.   Given $(a,b] \in \F_0, (a,b]+c = (a+c,b+c] \in \F_0$.  A similar statement holds for disjoint unions of r.s.c. intervals. 
+	\end{alphabate}
+\item We want to show that $\mu(B+c)=\mu(B)$ for all $B \in \B(\R^n)$.
+	\begin{alphabate}
+	\item Let $\G$ be the sets where the property holds. We show $\G$ is a monotone class. \\
+	 
+	 First, we handle increasing sequences. So we want to show $B_n \in \G, B_n \uparrow B \implies B \in G$.   Now by hypothesis, $\mu(B_n + c) = \mu(B_n)$.  So 
+	 \begin{align*}
+	 \mu(B+c) &=  \mu \big( \cup_{n=1}^\infty (B_n)+c \big)  && \tinytext{def. of $B$} \\
+	  &=  \mu \big( \cup_{n=1}^\infty (B_n+c) \big)  && \tinytext{def. of union and +; still an increasing sequence} \\
+	 &= \ds\lim_{n \to \infty} \mu(B_n+c)  && \tinytext{continuity from below} \\
+	 &= \ds\lim_{n \to \infty} \mu(B_n) && \tinytext{hypothesis} \\
+	 &= \mu(B) && \tinytext{continuity from below}
+	 \end{align*}
+ 
+ 	Now we handle decreasing sequences.  So we want to show $B_n \in \G, B_n \downarrow B \implies B \in G$.  We could use the same argument as above with continuity from above instead of continuity from below, but continuity from above only applies for sets with finite measure.  However, Lesbesgue measure is $\sigma$-finite, so we can handle this problem in the standard way.\footnote{In particular, we write $\Omega = \cupdot_{n=1}^\infty \Omega_n$ where $\mu (\Omega_n) < \infty$.\footnote{Recall that we can represent any union as a disjoint union; see Section \ref{sec:representing_unions_as_disjoint_unions}.}  Then we define a finite measure $\mu_n$ via $\mu_n(A) := \mu(A \cap \Omega_n)$.  We have 
+ 		\[ \mu(A) = \sum_{n=1}^\infty \mu_n(A), \quad (*)\]
+ 		since $\mu(A) = \mu(\cupdot A \cap \Omega_n) = \sum_n \mu(A \cap \Omega_n) = \sum_n \mu_n(A)$.
+ 		
+ 		Now, using the continuity from above argument for finite measures, we have 
+ 			\[ \mu_n(B+c) = \mu_n(B), \quad (+)\]
+ 			
+ 		And so
+ 		\[\mu(B+c) \stackrel{(*)}{=} \sum_n \mu_n (B+c)   \stackrel{(+)}{=}  \sum_n \mu_n(B) \stackrel{(*)}{=} \mu(B)  \]
+ 	}
+% 	 \begin{align*}
+%	 \mu(B+c) &\leq \mu(B) + \mu(c) && \tinytext{countable subadditivity} \\
+%	 &= \ds\lim_{n \to \infty} [\mu(B_n)] + \mu(c) && \tinytext{continuity from below} \\
+%	 &= \ds\lim_{n \to \infty} [\mu(B_n) + \mu(c)] && \tinytext{limit properties} \\
+%	 &= \ds\lim_{n \to \infty} [\mu(B_n)] && \tinytext{hypothesis} \\
+%	 &= \mu(B) && \tinytext{continuity from below}
+%	 \end{align*}
+% 
+% 	\red{I AM ON DRUGS, THIS DOESNT HOLD}
+	\item Now we show that $\G$ contains $\F_0$. The property certainly holds for r.s.c intervals; that is, $\mu(a+c,b+c] = \mu(a,b]$. \footnote{ For example, in $\R$, we have
+	\[ \mu\big( (a,b] + c \big) = \mu\big( (a+c,b+c]\big) =(b+c) - (a+c) = b-a = \mu(a,b]\] 
+	}  In $\R^n$, the distribution function is $F(x_1, ..., x_n) = x_1 \cdots x_n$, and so $\mu (a,b] = \Delta_{b_1 a_1} \cdots \Delta_{b_n a_n} [x_1 \cdots x_n]$. Now note that
+		\begin{align*}
+		\Delta_{b_i + c_i, a_i+c_i} [x_1 \cdots x_n] &= x_1 \cdots x_{i-1} \bigg( (b_i + c_i) - (a_i + c_i)  \bigg) x_{i+1} \cdots x_n \\
+		& = x_1 \cdots x_{i-1} \bigg( b_i - a_i  \bigg) x_{i+1} \cdots x_n \\
+		&= \Delta_{b_i a_i} [x_1 \cdots x_n]  
+		\end{align*}
+	So $\Delta_{b_i + c_i, a_i+c_i} = \Delta_{b_i, a_i}$ for each $i=1,..n$.  Thus,  
+	\[ \mu(a+c,b+c] = \Delta_{b_1+c_1, a_1 +c_1} \cdots \Delta_{b_n+c_n, a_n+c_n} [x_1 \cdots x_n] = \Delta_{b_1 a_1} \cdots \Delta_{b_n a_n} [x_1 \cdots x_n] = \mu(a,b] \] 
+	A similar proof holds for disjoint unions of r.s.c intervals.
+	\end{alphabate}
+\end{enumerate}
+
+\end{proof}
 
 
 
