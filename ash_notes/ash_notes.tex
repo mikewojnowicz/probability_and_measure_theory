@@ -628,10 +628,7 @@ The strategy is then to simply
 \label{rk:monotone_class_theorem_for_executing_good_sets_strategy}
 \end{remark}
 
-
-\begin{remark}{\remarktitle{Using the Monotone Class Theorem to prove that the Borel sets have some property}} The Borel sets are rather abstract, and also contain many types of members (e.g., proper open intervals, proper closed intervals, singletons, bizarre sets like the Cantor set, etc.).  The MCT gives us a mechanism for showing that some property holds for \textit{all} Borel sets if we can just show that the property holds for some field generating the Borel sets (e.g., $\F_0 := \set{\text{disjoint unions of } (a,b], a,b \in \R^n }$) -- a much more tangible object to work with.  The strategy that is often used is a variant of the Good Sets strategy (see Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy}):  we consider the class of sets that have some desired property, and show that it is a monotone class and contains $\F_0$.  By the Monotone Class Theorem, these two facts are sufficient to prove that some property holds for all Borel sets.  For examples where this is used, seethe proof of uniqueness in the Caratheodory Extension Theorem (Theorem \ref{thm:caratheodory_extension}), the  Approximation Theorem for Borel sets (Theorem \ref{thm:approximation_theorem_for_borel_sets}), or the proof that Lebesgue measure is translation invariant (Proposition \ref{prop:lesbesgue_measure_is_translation_invariant}).
-\label{rk:utility_of_montone_class_theorem}	
-\end{remark}
+For an example of where the strategy in Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy} is used, see the proof of uniqueness in the Caratheodory Extension Theorem (Theorem \ref{thm:caratheodory_extension}).  It is also used extensively to show that Borel sets have some property; see Section \ref{sec:properties_of_borel_sets}.
 
 
 \begin{theorem}{\textbf{(Carath\'eodory Extension Theorem)}} Let $\mu$ be a measure on the field $\F_0$ of subsets of $\Omega$, and assume that $\mu$ is $\sigma$-finite on $\F_0$, so that $\Omega$ can be decomposed as $\cup_{n=1}^\infty A_n$ where $A_n \in \F_0$ and $\mu(A_n) < \infty$ for all $n$.  Then $\mu$ has a unique extension to a measure on $\F := \sigma(\F_0)$, the minimal $\sigma$-field over $\F_0$. 
@@ -1220,12 +1217,39 @@ Let us summarize.\footnote{This passage is basically a paragraph from \cite{ash2
 
 % TODO: Define the difference operator, give theorem 1.4.8 but for (b) use the Durrett statement, prove (a) like my notes.  Skip the proof of (b).   Perhaps give the Ash statement for (b) in a remark.  Make a picture and remark for (a) giving the intuition: the $n$th application of the difference operator restricts the set being measured to the bounds given in the $n$th dimension.   Then define distribution functions in R^n.  Finally give the extension statement for $R^n$. 
 
-\subsection{$\S$ 1.4.11 Approximation theorem for Borel sets}
+\subsection{Properties of Borel sets under Lebesgue measure} \label{sec:properties_of_borel_sets}
 
-The following result shows that under appropriate conditions, a Borel set can be approximated from below by a compact set, and from above by an open set. 
+Below we show some properties of Borel sets that hold under Lesbesgue measure.  How can we accomplish this?  After all, the Borel sets are rather abstract, and also contain many types of members (e.g., proper open intervals, proper closed intervals, singletons, bizarre sets like the Cantor set, etc.).
+
+To prove that such properties hold, we can take a standard tact: use the Good Sets strategy, in conjunction with the Monotone Class Theorem,  to show that the Borel sets have some property (see Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy}).  Using this strategy, we can show that a property holds for \textit{all} Borel sets if we can just show that the property holds for some field generating the Borel sets (e.g., $\F_0 := \set{\text{disjoint unions of } (a,b], a,b \in \R^n }$) -- a much more tangible object to work with.
+
+
+\begin{remark}{\remarktitle{Using the Monotone Class Theorem to prove that the Borel sets have some property}}
+Suppose you want to show that all Borel sets $\B(\R^n)$ have some property $P$.  Define ``good sets" as those that satisfy the property
+\[ \G := \{ B \in \B(\R^n) : B \text{ has property } P \} \]
+The strategy is then to simply
+\begin{enumerate}
+\item Show $\G$ is a monotone class.  
+\item Show $\G$ contains $\F_0 := \set{\text{disjoint unions of } (a,b], a,b \in \R^n }$.
+\end{enumerate}	 
+\label{rk:monotone_class_theorem_for_executing_good_sets_strategy_with_borel_sets}
+\end{remark}
+
+Note that the strategy of Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy_with_borel_sets} is simply the strategy from Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy} in the special case where the $\sigma$-field of interest is the Borel sets (and where we take the field generating them to be $\F_0$).
+
+For examples where this strategy is used, see the  Approximation Theorem for Borel sets (Theorem \ref{thm:approximation_theorem_for_borel_sets}) or the proof that Lebesgue measure is translation invariant (Proposition \ref{prop:lesbesgue_measure_is_translation_invariant}). We begin with the Approximation Theorem for Borel sets.  This theorem shows that under appropriate conditions, a Borel set can be approximated from below by a compact set, and from above by an open set. 
+
+
+%\begin{remark}{\remarktitle{Using the Monotone Class Theorem to prove that the Borel sets have some property}} The Borel sets are rather abstract, and also contain many types of members (e.g., proper open intervals, proper closed intervals, singletons, bizarre sets like the Cantor set, etc.).  The MCT gives us a mechanism for showing that some property holds for \textit{all} Borel sets if we can just show that the property holds for some field generating the Borel sets (e.g., $\F_0 := \set{\text{disjoint unions of } (a,b], a,b \in \R^n }$) -- a much more tangible object to work with.  The strategy that is often used is a variant of the Good Sets strategy (see Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy}):  we consider the class of sets that have some desired property, and show that it is a monotone class and contains $\F_0$.  By the Monotone Class Theorem, these two facts are sufficient to prove that some property holds for all Borel sets.  For examples where this is used, see the  Approximation Theorem for Borel sets (Theorem \ref{thm:approximation_theorem_for_borel_sets}) or the proof that Lebesgue measure is translation invariant (Proposition \ref{prop:lesbesgue_measure_is_translation_invariant}).
+%\label{rk:utility_of_montone_class_theorem}	
+%\end{remark}
+
+%\subsubsection{$\S$ 1.4.11 Approximation theorem for Borel sets}
+
+
 
 \begin{theorem}
-If $\mu$ is a $\sigma$-finite measure on $\B(\R^n)$, then for each $B \in \B(\R^n)$,
+\textbf{(Approximation Theorem for Borel sets).} If $\mu$ is a $\sigma$-finite measure on $\B(\R^n)$, then for each $B \in \B(\R^n)$,
 \begin{alphabate}
 \item $\mu(B) = \sup \set{\mu(K) : K \subset B, K \text{ compact}}$
 \item If $\mu$ is in fact a Lesbesgue-Stieltjes measure, then
@@ -1284,10 +1308,10 @@ For more details, Equation (1) holds since, by monotonicity, the LHS is a lower 
  
  \end{proof}
 
-\subsection{Translation Invariance of Lebesgue Measure}
+%\subsubsection{Translation Invariance of Lebesgue Measure}
 
 \begin{proposition}
-Lebesgue measure is translation invariant.  That is, if $B \in \overline{\B}(\R^n)$ and $c \in \R^n$, then $B+c \in  \overline{\B}(\R^n)$ and $\mu(B+c)=\mu(B)$, where $\mu$ is Lesbesgue measure.	
+\textbf{(Translation Invariance of Lebesgue Measure).} Lebesgue measure is translation invariant.  That is, if $B \in \overline{\B}(\R^n)$ and $c \in \R^n$, then $B+c \in  \overline{\B}(\R^n)$ and $\mu(B+c)=\mu(B)$, where $\mu$ is Lesbesgue measure.	
 \label{prop:lesbesgue_measure_is_translation_invariant}
 \end{proposition}
 
