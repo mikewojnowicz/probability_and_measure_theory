@@ -1360,7 +1360,7 @@ We prove the statement for $\B(\R^n)$ and leave the extension to $\overline{\B}(
 % 	\red{I AM ON DRUGS, THIS DOESNT HOLD}
 	\item Now we show that $\G$ contains $\F_0$. The property certainly holds for r.s.c intervals; that is, $\mu(a+c,b+c] = \mu(a,b]$. \footnote{ For example, in $\R$, we have
 	\[ \mu\big( (a,b] + c \big) = \mu\big( (a+c,b+c]\big) =(b+c) - (a+c) = b-a = \mu(a,b]\] 
-	}  In $\R^n$, the distribution function is $F(x_1, ..., x_n) = x_1 \cdots x_n$, and so $\mu (a,b] = \Delta_{b_1 a_1} \cdots \Delta_{b_n a_n} [x_1 \cdots x_n]$. Now note that
+	}  For Lesbesgue measure on $\R^n$, the distribution function is $F(x_1, ..., x_n) = x_1 \cdots x_n$, and so $\mu (a,b] = \Delta_{b_1 a_1} \cdots \Delta_{b_n a_n} [x_1 \cdots x_n]$. Now note that
 		\begin{align*}
 		\Delta_{b_i + c_i, a_i+c_i} [x_1 \cdots x_n] &= x_1 \cdots x_{i-1} \bigg( (b_i + c_i) - (a_i + c_i)  \bigg) x_{i+1} \cdots x_n \\
 		& = x_1 \cdots x_{i-1} \bigg( b_i - a_i  \bigg) x_{i+1} \cdots x_n \\
@@ -1374,7 +1374,50 @@ We prove the statement for $\B(\R^n)$ and leave the extension to $\overline{\B}(
 
 \end{proof}
 
+\subsection{A set that is not Lesbesgue measurable\footnote{The presentation here is a variation on both Problem 6 in Section 1.4 of 
+\cite{ash2000probability} and Proposition 1.2.6 in \cite{rosenthal2006first}.}}
 
+\begin{proposition}
+Call $x,y \in \R$ equivalent iff $x-y \in \mathbb{Q}$.\footnote{So, for example, some equivalence classes are:
+\begin{itemize}
+\item $e \sim e + \frac{1}{10} \sim e - \frac{1}{10} \sim e+\frac{50}{3} + ...$
+\item  $\pi \sim \pi + \frac{1}{10} \sim \pi - \frac{1}{10} \sim \pi+\frac{50}{3} + ...$
+\item $1 \sim 1 + \frac{1}{10} \sim 1 - \frac{1}{10} \sim 1 +\frac{50}{3} + ...$
+\end{itemize}
+} Define $A \subset [0,1]$ as a set containing one member from each class. (This set exists by axiom of choice.) Then $A$ is not Lesbesgue measurable
+
+\label{prop:existence_of_set_that_is_not_lesbesgue_measurable}
+\end{proposition}
+
+\begin{proof}
+\begin{alphabate}
+\item First, we show that we can partition the reals as $\R = \bigcupdot_{q \in \mathbb{Q}} (q+A)$.  
+	\begin{itemize}
+		\item \textit{(disjointedness)} Suppose $x \in q+A$ and $x \in r+A$ for some $r,q \in \mathbb{Q}, r \neq q$.  Then $\exists\, a_1,a_2 \in A : q + a_1 = r + a_2 \implies a_1 - a_2 = r - q$.  Since $r \neq q, a_1 - a_2 \neq 0 \implies a_1 \neq a_2$.  But since $r-q \in \mathbb{Q}$, $a_1$ and $a_2$ are in the same equivalence class, which contradicts how $A$ was constructed.
+		\item \textit{(containment)} We show $\R \subset \bigcupdot_{q \in \mathbb{Q}} (q+A)$ (as the other direction is obvious).  If $x \in \R$ and $a_x$ is its representative in $A$, then $x-a_x = q \in \mathbb{Q}$, and so $x \in q + A$. 
+	\end{itemize}
+\item Now we argue
+\[ [0,1] = \R \cap [0,1] \stackrel{\text{part (a)}}{=} \bigg( \bigcupdot_{q \in \mathbb{Q}} (q+A)\bigg) \cap [0,1] = \bigcupdot_{q \in \mathbb{Q}} \bigg( (q+A) \cap [0,1] \bigg)  \]
+and so
+\begin{align*}
+ 1 = \mu[0,1] \stackrel{\text{countable additivity, above}}{=}  \ds\sum_{q \in \mathbb{Q}} \mu\bigg( (q + A) \cap [0,1] \bigg)  \stackrel{\text{translation invariance}}{=} \ds\sum_{q \in \mathbb{Q}}  \mu\bigg(  A \cap [0,1] \bigg)  
+ \labelit \label{eqn:contradiction_to_lesbesgue_measurability_for_all_subsets}	
+\end{align*}
+
+but this is a contradiction; the RHS of this equation is a countable sum of a constant, and so can only take on values $-\infty, 0,$ or $\infty$.
+\end{alphabate}
+
+	
+\end{proof}
+
+\begin{remark}
+The proof of Proposition \ref{prop:existence_of_set_that_is_not_lesbesgue_measurable} only used the following two properties of Lesbesgue measure:
+\begin{itemize}
+\item translation invariance
+\item finiteness on bounded intervals (note that the argument in part (b) would go through if we intersected the reals with any bounded interval $[a,b]$).
+\end{itemize}
+Therefore, our argument shows that there cannot be a translation invariant measure $\lambda$ (except $\lambda \equiv 0$) on the class of all subsets of $\R$ such that $\lambda(I) < \infty$ for all bounded intervals $I$.
+\end{remark}
 
 \bibliography{references_ash_notes.bib}
 \bibliographystyle{unsrt}
