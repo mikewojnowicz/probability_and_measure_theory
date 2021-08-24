@@ -145,7 +145,7 @@ This is because $A_{n-1} \subset A_{n}$, so $A_{n-1}^c \supset A_{n}^c$ by contr
 
 \subsection{$\S$ 1.2.1-1.2.2: Fields and \sfs}
 
-Probability measures, and measures more generally, cannot be defined on all subsets of many spaces that we would like to deal with.  For instance, non-measurable sets can be shown to exist even for Lesbesgue measure on the unit interval.  Proposition 1.2.6 of \cite{rosenthal2006first} shows that there is no definition of $P(A)$ that is defined for all subsets $A \subseteq [0,1]$ satisfying all three conditions below
+Probability measures, and measures more generally, cannot be defined on all subsets of many spaces that we would like to deal with.  For instance, non-measurable sets can be shown to exist even for Lesbesgue measure on the unit interval.  Proposition 1.2.6 of \cite{rosenthal2006first} shows that there is no definition of $P(A)$ that is defined for all subsets $A \subseteq [0,1]$ satisfying all three conditions below\footnote{In Proposition \ref{prop:existence_of_set_that_is_not_lesbesgue_measurable}, we make a similar observation, along with a proof: there cannot be a measure defined on all subsets of the reals that is both translation invariant and has a finite value on all bounded intervals.}
 \begin{enumerate}
 \item $P([a,b]) = b-a, \quad 0 \leq a \leq b \leq 1$.	
 \item $P(\bigcupdot_{n=1}^\infty A_n ) = \ds\sum_{n=1}^\infty A_n$ for $A_1, A_2, ...$ disjoint subsets of $[0,1]$.
@@ -1417,7 +1417,12 @@ The proof of Proposition \ref{prop:existence_of_set_that_is_not_lesbesgue_measur
 \item finiteness on bounded intervals (note that the argument in part (b) would go through if we intersected the reals with any bounded interval $[a,b]$).
 \end{itemize}
 Therefore, our argument shows that there cannot be a translation invariant measure $\lambda$ (except $\lambda \equiv 0$) on the class of all subsets of $\R$ such that $\lambda(I) < \infty$ for all bounded intervals $I$.
+\label{rk:implications_of_existence_of_set_that_is_not_lesbesgue_measurable}
 \end{remark}
+
+\begin{question}
+Our discussion in Remark \ref{rk:implications_of_existence_of_set_that_is_not_lesbesgue_measurable} parallels that of \cite{ash2000probability} pp. 35.  But haven't we actually proved a stronger result - namely that there cannot be a translation invariant measure $\lambda$ (except $\lambda \equiv 0$) on the class of all subsets of $\R$ such that $\lambda(I) < \infty$ for \textit{any} bounded interval $I$?
+\end{question}
 
 \bibliography{references_ash_notes.bib}
 \bibliographystyle{unsrt}
