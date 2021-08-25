@@ -1378,8 +1378,7 @@ We prove the statement for $\B(\R^n)$ and leave the extension to $\overline{\B}(
 
 \end{proof}
 
-\subsection{A set that is not Lesbesgue measurable\footnote{The presentation here is a variation on both Problem 6 in Section 1.4 of 
-\cite{ash2000probability} and Proposition 1.2.6 in \cite{rosenthal2006first}.}}
+\subsection{A set that is not Lesbesgue measurable}
 
 \begin{proposition}
 Call $x,y \in \R$ equivalent iff $x-y \in \mathbb{Q}$.\footnote{So, for example, some equivalence classes are:
@@ -1400,15 +1399,17 @@ Call $x,y \in \R$ equivalent iff $x-y \in \mathbb{Q}$.\footnote{So, for example,
 		\item \textit{(disjointedness)} Suppose $x \in q+A$ and $x \in r+A$ for some $r,q \in \mathbb{Q}, r \neq q$.  Then $\exists\, a_1,a_2 \in A : q + a_1 = r + a_2 \implies a_1 - a_2 = r - q$.   Now since $r \neq q$, we know that $a_1$ and $a_2$ are not the same.  But they are in the same equivalence class, since $r-q \in \mathbb{Q}$. This  contradicts how $A$ was constructed.
 		\item \textit{(containment)} We show $\R \subset \bigcupdot_{q \in \mathbb{Q}} (q+A)$ (as the other direction is obvious).  If $x \in \R$ and $a_x$ is its representative in $A$, then $x-a_x = q \in \mathbb{Q}$, and so $x \in q + A$. %x is in A translated by q.
 	\end{itemize}
-\item Now we argue
-\[ [0,1] = \R \cap [0,1] \stackrel{\text{part (a)}}{=} \bigg( \bigcupdot_{q \in \mathbb{Q}} (q+A)\bigg) \cap [0,1] = \bigcupdot_{q \in \mathbb{Q}} \bigg( (q+A) \cap [0,1] \bigg)  \]
-and so
-\begin{align*}
- 1 = \mu[0,1] \stackrel{\text{countable additivity, above}}{=}  \ds\sum_{q \in \mathbb{Q}} \mu\bigg( (q + A) \cap [0,1] \bigg)  \stackrel{\text{translation invariance}}{=} \ds\sum_{q \in \mathbb{Q}}  \mu\bigg(  A \cap [0,1] \bigg)  
- \labelit \label{eqn:contradiction_to_lesbesgue_measurability_for_all_subsets}	
-\end{align*}
+\item Now we note that since $A \subset [0,1]$, we have 
+\[ \bigcupdot_{q \in \mathbb{Q}, 0 \leq q \leq 1} (q + A) \subset [0,2] \]
+So 
+\[ 2 = [0,2] \stackreltext{subadditivity}{\geq} \mu\bigg(\bigcupdot_{q \in \mathbb{Q}, 0 \leq q \leq 1} q + A \bigg)  = \ds\sum_{q \in \mathbb{Q}, 0 \leq q \leq 1} \mu(q+A) \stackreltext{translation invariance}{=} \ds\sum_{q \in \mathbb{Q}, 0 \leq q \leq 1}  \mu(A) \]
+This implies $\mu(A) = 0$, since the RHS of this equation is a countable sum of a constant, and so can only take on values $0$ or $\infty$.
+	
+But then 
+\[ \infty = \mu(\R) \stackreltext{part (a)}= \mu \bigg(\bigcupdot_{q \in \mathbb{Q}} (q+A) \bigg)
+= \ds\sum_{q \in \mathbb{Q}} \mu(q+A) 
+ \stackreltext{translation invariance}{=}   \ds\sum_{q \in \mathbb{Q}} \mu(A) \stackreltext{see above}{=} 0. \;    \contradiction \]
 
-but this is a contradiction; the RHS of this equation is a countable sum of a constant, and so can only take on values $0$ or $\infty$.
 \end{alphabate}
 
 	
@@ -1418,15 +1419,16 @@ but this is a contradiction; the RHS of this equation is a countable sum of a co
 The proof of Proposition \ref{prop:existence_of_set_that_is_not_lesbesgue_measurable} only used the following two properties of Lesbesgue measure:
 \begin{itemize}
 \item translation invariance
-\item finiteness on bounded intervals (note that the argument in part (b) would go through if we intersected the reals with any bounded interval $[a,b]$).
+\item finiteness on bounded intervals %(note that the argument in part (b) would go through for any bounded interval $[a,b]$ by the choice of bounds on $A$ and on the rationals used in part (b)). % Commented this out because it's outdated and possibly no longer relevant
 \end{itemize}
 Therefore, our argument shows that there cannot be a translation invariant measure $\lambda$ (except $\lambda \equiv 0$) on the class of all subsets of $\R$ such that $\lambda(I) < \infty$ for all bounded intervals $I$.
 \label{rk:implications_of_existence_of_set_that_is_not_lesbesgue_measurable}
 \end{remark}
 
-\begin{question}
-Our discussion in Remark \ref{rk:implications_of_existence_of_set_that_is_not_lesbesgue_measurable} parallels that of \cite{ash2000probability} pp. 35.  But haven't we actually proved a stronger result - namely that there cannot be a translation invariant measure $\lambda$ (except $\lambda \equiv 0$) on the class of all subsets of $\R$ such that $\lambda(I) < \infty$ for \textit{any} bounded interval $I$?
-\end{question}
+% Commented the question out because it's outdated and possibly no longer relevant
+%\begin{question}
+%Our discussion in Remark \ref{rk:implications_of_existence_of_set_that_is_not_lesbesgue_measurable} parallels that of \cite{ash2000probability} pp. 35.  But haven't we actually proved a stronger result - namely that there cannot be a translation invariant measure $\lambda$ (except $\lambda \equiv 0$) on the class of all subsets of $\R$ such that $\lambda(I) < \infty$ for \textit{any} bounded interval $I$?
+%\end{question}
 
 \bibliography{references_ash_notes.bib}
 \bibliographystyle{unsrt}
