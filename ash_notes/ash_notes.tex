@@ -252,8 +252,8 @@ Ash says that there is a type of reasoning that occurs so often in problems invo
 \[ \G := \{ G \in \F : G \text{ has property } P \} \]
 The strategy is then to simply
 \begin{enumerate}
-\item Show $\G$ is a $\sigma$-algebra 
-\item Show $\G$ contains some class $\C$ such that $\F = \sigma(\C)$	
+\item Show $\G$ contains some class $\C$ such that $\F = \sigma(\C)$
+\item Show $\G$ is a $\sigma$-algebra 	
 \end{enumerate}
 
 
@@ -262,7 +262,7 @@ Then you're done!
 Why does this work?
 
 \begin{align*}
-& \quad \C \subset \G &&	\text{by 2}\\
+& \quad \C \subset \G &&	\text{by 1}\\
 &\implies \sigma(\C) \subset \sigma(\G) &&  \\
 &\implies \F \subset \G && \text{by 1,2} \\
 & \text{Yet $\G \subset \F$ by definition of $\G$.} && \\
@@ -622,10 +622,14 @@ The Monotone Class Theorem provides an alternate route towards executing on the 
 \[ \G := \{ G \in \F : G \text{ has property } P \} \]
 The strategy is then to simply
 \begin{enumerate}
+\item Show $\G$ contains some class $\C$ such that $\F = \sigma(\C)$
 \item Show $\G$ is a monotone class.  
-\item Show $\G$ contains some class $\C$ such that $\F = \sigma(\C)$	
 \end{enumerate}	 
 \label{rk:monotone_class_theorem_for_executing_good_sets_strategy}
+\end{remark}
+
+\begin{remark}
+The strategy in Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy} is very much like induction.  Step \#1 is the ``base" step and step \#2 is the ``induction" step.
 \end{remark}
 
 For an example of where the strategy in Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy} is used, see the proof of uniqueness in the Caratheodory Extension Theorem (Theorem \ref{thm:caratheodory_extension}).  It is also used extensively to show that Borel sets have some property; see Section \ref{sec:properties_of_borel_sets}.
@@ -1219,9 +1223,9 @@ Let us summarize.\footnote{This passage is basically a paragraph from \cite{ash2
 
 \subsection{Properties of Borel sets under Lebesgue measure} \label{sec:properties_of_borel_sets}
 
-Below we show some properties of Borel sets that hold under Lesbesgue measure.  How can we accomplish this?  After all, the Borel sets are rather abstract, and also contain many types of members (e.g., proper open intervals, proper closed intervals, singletons, bizarre sets like the Cantor set, etc.).
+Below we show some properties of Borel sets that hold under Lesbesgue measure.  How can we accomplish this?  After all, the Borel sets are rather abstractly defined, and although we have been generating them via disjoint unions of r.s.c intervals, they also contain many types of members (e.g., proper open intervals, proper closed intervals, and singletons; bizarre sets like the Cantor set; inverse images of Borel measurable sets under Borel measurable functions; etc.).
 
-To prove that such properties hold, we can take a standard tact: use the Good Sets strategy, in conjunction with the Monotone Class Theorem,  to show that the Borel sets have some property (see Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy}).  Using this strategy, we can show that a property holds for \textit{all} Borel sets if we can just show that the property holds for some field generating the Borel sets (e.g., $\F_0 := \set{\text{disjoint unions of } (a,b], a,b \in \R^n }$) -- a much more tangible object to work with.
+To prove that such properties hold, we can take a standard tact: use the the Monotone Class Theorem,  to show that the Borel sets have some property.  Using this approach, we can show that a property holds for \textit{all} Borel sets if we can just show that the property holds for some field generating the Borel sets (e.g., $\F_0 := \set{\text{disjoint unions of } (a,b], a,b \in \R^n }$) -- a much more tangible object to work with.
 
 
 \begin{remark}{\remarktitle{Using the Monotone Class Theorem to prove that the Borel sets have some property}}
@@ -1229,16 +1233,16 @@ Suppose you want to show that all Borel sets $\B(\R^n)$ have some property $P$. 
 \[ \G := \{ B \in \B(\R^n) : B \text{ has property } P \} \]
 The strategy is then to simply
 \begin{enumerate}
-\item Show $\G$ is a monotone class.  
 \item Show $\G$ contains $\F_0 := \set{\text{disjoint unions of } (a,b], a,b \in \R^n }$.
+\item Show $\G$ is a monotone class.  
 \end{enumerate}	 
 \label{rk:monotone_class_theorem_for_executing_good_sets_strategy_with_borel_sets}
 \end{remark}
 
-Note that the strategy of Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy_with_borel_sets} is simply the strategy from Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy} in the special case where the $\sigma$-field of interest is the Borel sets (and where we take the field generating them to be $\F_0$).
+
+This is a particular version of the Good Sets Strategy (see Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy}) in the special case where the $\sigma$-field of interest is the Borel sets (and where we take the field generating them to be $\F_0$).  As pointed out in Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy}, this strategy is very much like induction.  Step \#1 is the ``base" step and Step \#2 is the ``induction" step.
 
 For examples where this strategy is used, see the  Approximation Theorem for Borel sets (Theorem \ref{thm:approximation_theorem_for_borel_sets}) or the proof that Lebesgue measure is translation invariant (Proposition \ref{prop:lesbesgue_measure_is_translation_invariant}). We begin with the Approximation Theorem for Borel sets.  This theorem shows that under appropriate conditions, a Borel set can be approximated from below by a compact set, and from above by an open set. 
-
 
 %\begin{remark}{\remarktitle{Using the Monotone Class Theorem to prove that the Borel sets have some property}} The Borel sets are rather abstract, and also contain many types of members (e.g., proper open intervals, proper closed intervals, singletons, bizarre sets like the Cantor set, etc.).  The MCT gives us a mechanism for showing that some property holds for \textit{all} Borel sets if we can just show that the property holds for some field generating the Borel sets (e.g., $\F_0 := \set{\text{disjoint unions of } (a,b], a,b \in \R^n }$) -- a much more tangible object to work with.  The strategy that is often used is a variant of the Good Sets strategy (see Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy}):  we consider the class of sets that have some desired property, and show that it is a monotone class and contains $\F_0$.  By the Monotone Class Theorem, these two facts are sufficient to prove that some property holds for all Borel sets.  For examples where this is used, see the  Approximation Theorem for Borel sets (Theorem \ref{thm:approximation_theorem_for_borel_sets}) or the proof that Lebesgue measure is translation invariant (Proposition \ref{prop:lesbesgue_measure_is_translation_invariant}).
 %\label{rk:utility_of_montone_class_theorem}	
@@ -1380,11 +1384,11 @@ We prove the statement for $\B(\R^n)$ and leave the extension to $\overline{\B}(
 \begin{proposition}
 Call $x,y \in \R$ equivalent iff $x-y \in \mathbb{Q}$.\footnote{So, for example, some equivalence classes are:
 \begin{itemize}
-\item $e \sim e + \frac{1}{10} \sim e - \frac{1}{10} \sim e+\frac{50}{3} + ...$
-\item  $\pi \sim \pi + \frac{1}{10} \sim \pi - \frac{1}{10} \sim \pi+\frac{50}{3} + ...$
-\item $1 \sim 1 + \frac{1}{10} \sim 1 - \frac{1}{10} \sim 1 +\frac{50}{3} + ...$
+\item $e \sim e + \frac{1}{10} \sim e - \frac{1}{10} \sim e+\frac{50}{3} \sim ...$
+\item  $\pi \sim \pi + \frac{1}{10} \sim \pi - \frac{1}{10} \sim \pi+\frac{50}{3} \sim ...$
+\item $1 \sim 1 + \frac{1}{10} \sim 1 - \frac{1}{10} \sim 1 +\frac{50}{3} \sim ...$
 \end{itemize}
-} Define $A \subset [0,1]$ as a set containing one member from each class. (This set exists by axiom of choice.) Then $A$ is not Lesbesgue measurable
+} Define $A \subset [0,1]$ as a set containing one member from each class. (This set exists by axiom of choice.) Then $A$ is not Lesbesgue measurable.
 
 \label{prop:existence_of_set_that_is_not_lesbesgue_measurable}
 \end{proposition}
@@ -1393,8 +1397,8 @@ Call $x,y \in \R$ equivalent iff $x-y \in \mathbb{Q}$.\footnote{So, for example,
 \begin{alphabate}
 \item First, we show that we can partition the reals as $\R = \bigcupdot_{q \in \mathbb{Q}} (q+A)$.  
 	\begin{itemize}
-		\item \textit{(disjointedness)} Suppose $x \in q+A$ and $x \in r+A$ for some $r,q \in \mathbb{Q}, r \neq q$.  Then $\exists\, a_1,a_2 \in A : q + a_1 = r + a_2 \implies a_1 - a_2 = r - q$.  Since $r \neq q, a_1 - a_2 \neq 0 \implies a_1 \neq a_2$.  But since $r-q \in \mathbb{Q}$, $a_1$ and $a_2$ are in the same equivalence class, which contradicts how $A$ was constructed.
-		\item \textit{(containment)} We show $\R \subset \bigcupdot_{q \in \mathbb{Q}} (q+A)$ (as the other direction is obvious).  If $x \in \R$ and $a_x$ is its representative in $A$, then $x-a_x = q \in \mathbb{Q}$, and so $x \in q + A$. 
+		\item \textit{(disjointedness)} Suppose $x \in q+A$ and $x \in r+A$ for some $r,q \in \mathbb{Q}, r \neq q$.  Then $\exists\, a_1,a_2 \in A : q + a_1 = r + a_2 \implies a_1 - a_2 = r - q$.   Now since $r \neq q$, we know that $a_1$ and $a_2$ are not the same.  But they are in the same equivalence class, since $r-q \in \mathbb{Q}$. This  contradicts how $A$ was constructed.
+		\item \textit{(containment)} We show $\R \subset \bigcupdot_{q \in \mathbb{Q}} (q+A)$ (as the other direction is obvious).  If $x \in \R$ and $a_x$ is its representative in $A$, then $x-a_x = q \in \mathbb{Q}$, and so $x \in q + A$. %x is in A translated by q.
 	\end{itemize}
 \item Now we argue
 \[ [0,1] = \R \cap [0,1] \stackrel{\text{part (a)}}{=} \bigg( \bigcupdot_{q \in \mathbb{Q}} (q+A)\bigg) \cap [0,1] = \bigcupdot_{q \in \mathbb{Q}} \bigg( (q+A) \cap [0,1] \bigg)  \]
@@ -1404,7 +1408,7 @@ and so
  \labelit \label{eqn:contradiction_to_lesbesgue_measurability_for_all_subsets}	
 \end{align*}
 
-but this is a contradiction; the RHS of this equation is a countable sum of a constant, and so can only take on values $-\infty, 0,$ or $\infty$.
+but this is a contradiction; the RHS of this equation is a countable sum of a constant, and so can only take on values $0$ or $\infty$.
 \end{alphabate}
 
 	
