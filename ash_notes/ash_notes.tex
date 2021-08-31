@@ -19,12 +19,6 @@
 \newcommand{\fasf}{\tilde{\mu}_0}
 % Signed measure
 \newcommand{\signedmu}{\wt{\mu}}
-
-
-% ENUMERATE BUT WITH LETTERS
-\newenvironment{alphabate}
-    {\begin{enumerate}[label=\alph*)]}
-	{\end{enumerate} }
     
 \begin{document}
 
@@ -44,9 +38,18 @@ The primary reference here is \cite{ash2000probability}.   The book is wonderful
  
 \subsection{Motivation for topic} \label{sec:motivation_for_topic}
 
-Measure theory serves as a critical underpinning for some of the most interesting research in Bayesian statistics and probabilistic machine learning (see work from Stephen G. Walker, Michael Jordan, Tamara Broderick, David Dunson, and so on).   Thus, fluency with measure theory opens doors to a higher level of research consumption. 
-  
-Measure theory is convenient in unifying various kinds of random variables.\footnote{For example, it allows one to work with discrete and absolutely continuous random variables in a unified way.  For example, the exponential family includes both types of random variables.}  Lesbesgue integrals have nice limit theorems, and can be seen as the completion of Reimann integrals (in the same way that the real numbers complete the rationals). 
+What are some motivations for measure theory?
+
+\begin{itemize}
+\item Measure theory underpins some of the most interesting research in Bayesian statistics and probabilistic machine learning (see work from Stephen G. Walker, Michael Jordan, Tamara Broderick, David Dunson, and so on).   Thus, fluency with measure theory opens doors to a higher level of research consumption. 
+\item Measure theory underpins research on stochastic processes (as used in Bayesian nonparametrics) and stochastic differential equations (useful for continuous-time time series models, a current topic of active research interest in machine learning). 
+\item Measure theory is convenient in unifying various kinds of random variables.\footnote{For example, it allows one to work with discrete and absolutely continuous random variables in a unified way.  For example, the exponential family includes both types of random variables.}  
+\item Measure theory provides nice limit theorems, e.g. clarifying when one can interchange integrals and limits (such as derivatives). 
+\item Integrating against arbitrary measure provides the necessary abstraction to integrate over spaces more general than the reals. 
+\item Lesbesgue integrals can be seen as the completion of Reimann integrals (in the same way that the real numbers complete the rationals).
+\end{itemize}
+
+
 
 \subsection{Motivation for notes}
 
@@ -55,11 +58,11 @@ It is hard to beat directly consulting a textbook (such as \cite{ash2000probabil
 However, we have created these notes nonetheless in an attempt to support lecture and/or discussion on that textbook.   With that goal in mind, we:
 \begin{itemize}
 \item Curate the text.\footnote{We highlight some of the main themes (and cores of proofs), offloading additional detail to the text.} 
+\item Provide additional detail in proofs.
+\item Format the presentation to encourage easier absorption.\footnote{E.g., we exploit space to organize the presentation, whereas a textbook will often provide proofs in paragraph form}
 \item Add remarks to illustrate the utility of theorems and draw connections between them.
 \item Add sketches to support intuition.
-\item Provide additional detail in proofs.
 \item Incorporate supporting material, such as additional examples, from homework problems and outside sources.\footnote{This will happen increasingly often as the notes evolve.}
-\item Format the presentation to encourage easier absorption.\footnote{E.g., we exploit space to organize the presentation, whereas a textbook will often provide proofs in paragraph form}
 \end{itemize}
 
 
