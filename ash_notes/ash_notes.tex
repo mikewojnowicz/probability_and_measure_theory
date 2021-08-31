@@ -1433,9 +1433,46 @@ Therefore, our argument shows that there cannot be a translation invariant measu
 %Our discussion in Remark \ref{rk:implications_of_existence_of_set_that_is_not_lesbesgue_measurable} parallels that of \cite{ash2000probability} pp. 35.  But haven't we actually proved a stronger result - namely that there cannot be a translation invariant measure $\lambda$ (except $\lambda \equiv 0$) on the class of all subsets of $\R$ such that $\lambda(I) < \infty$ for \textit{any} bounded interval $I$?
 %\end{question}
 
+\section{$\S$ 1.5 Measurable functions and Integration}
+
+In this section, we will introduce the general theory of integration of a function with respect to a general measure, as introduced by Lebesgue.  We will sometimes refer to this as \textit{Lesbesgue integration}.  However, that term is sometimes used to refer to the special case of integration of a function defined on a sub-domain of the real line with respect to the Lebesgue measure.
+
+\subsection{Intuition\footnote{Here we borrow freely from some sections of Wikipedia.}}
+
+Folland summarizes the difference between the Riemann and Lebesgue approaches thus: ``to compute the Riemann integral of $f$, one partitions the domain [...] into subintervals", while in the Lebesgue integral, ``one is in effect partitioning the range of $f$ ." \cite{folland1999real}.
+
+
+To get some intuition about the different approaches to integration, let us imagine that we want to find a mountain's volume (above sea level).
+
+\begin{itemize}
+\item \textbf{The Riemann approach}: Divide the base of the mountain into a grid of 1 meter squares. Measure the altitude of the mountain at the center of each square. The volume on a single grid square is approximately 1 $m^2$ × (that square's altitude), so the total volume is 1 $m^2$ times the sum of the altitudes.
+\item \textbf{The Lebesgue approach}: Draw a contour map of the mountain, where adjacent contours are 1 meter of altitude apart. The volume of earth a single contour contains is approximately 1 m × (that contour's area), so the total volume is the sum of these areas times 1 m.
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=.5\textwidth]{images/contour_plot}
+\end{figure}
+\end{itemize}
+
+While the Riemann integral considers the area under a curve as made out of vertical rectangles, the Lebesgue definition considers horizontal slabs that are not necessarily just rectangles, and so it is more flexible. For this reason, the Lebesgue definition makes it possible to calculate integrals for a broader class of functions.\footnote{For example, as we will see the \textit{Dirichlet function}, which is 0 where its argument is irrational and 1 otherwise, has a Lebesgue integral, but does not have a Riemann integral.}
+
+
+
+Lebesgue summarized his approach to integration in a letter to Paul Montel:
+\begin{quotation}
+I have to pay a certain sum, which I have collected in my pocket.  I take the bills and coins out of my pocket and give them to the creditor in the order I find them until I have reached the total sum. This is the Riemann integral. But I can proceed differently. After I have taken all the money out of my pocket I order the bills and coins according to identical values and then I pay the several heaps one after the other to the creditor. This is my integral.
+\end{quotation}
+
+
+
+The insight is that one should be able to rearrange the values of a function freely, while preserving the value of the integral.  This process of rearrangement can convert a very pathological function into one that is ``nice" from the point of view of integration, and thus let such pathological functions be integrated.
+
+
+
 \bibliography{references_ash_notes.bib}
 \bibliographystyle{unsrt}
 
+\newpage 
 \appendix
 
 \section{Supremum and Infimum}
