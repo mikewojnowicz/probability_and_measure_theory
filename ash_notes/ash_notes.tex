@@ -1439,10 +1439,15 @@ In this section, we will introduce the general theory of integration of a functi
 
 \subsection{Intuition\footnote{Here we borrow freely from some sections of Wikipedia.}}
 
-Folland summarizes the difference between the Riemann and Lebesgue approaches thus: ``to compute the Riemann integral of $f$, one partitions the domain [...] into subintervals", while in the Lebesgue integral, ``one is in effect partitioning the range of $f$ ." \cite{folland1999real}.
+Folland summarizes the difference between the Riemann and Lebesgue approaches thus: ``to compute the Riemann integral of $f$, one partitions the domain [...] into subintervals", while in the Lebesgue integral, ``one is in effect partitioning the range of $f$ " \cite{folland1999real}.
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=.7\textwidth, angle=270]{images/lesbesgue_vs_reimann}
+\end{figure}
 
 
-To get some intuition about the different approaches to integration, let us imagine that we want to find a mountain's volume (above sea level).
+Similarly, suppose we want to find a mountain's volume (above sea level).
 
 \begin{itemize}
 \item \textbf{The Riemann approach}: Divide the base of the mountain into a grid of 1 meter squares. Measure the altitude of the mountain at the center of each square. The volume on a single grid square is approximately 1 $m^2$ × (that square's altitude), so the total volume is 1 $m^2$ times the sum of the altitudes.
@@ -1454,7 +1459,7 @@ To get some intuition about the different approaches to integration, let us imag
 \end{figure}
 \end{itemize}
 
-While the Riemann integral considers the area under a curve as made out of vertical rectangles, the Lebesgue definition considers horizontal slabs that are not necessarily just rectangles, and so it is more flexible. For this reason, the Lebesgue definition makes it possible to calculate integrals for a broader class of functions.\footnote{For example, as we will see the \textit{Dirichlet function}, which is 0 where its argument is irrational and 1 otherwise, has a Lebesgue integral, but does not have a Riemann integral.}
+While the Riemann integral considers the area under a curve as made out of vertical rectangles, the Lebesgue definition considers horizontal slabs that are not necessarily just rectangles, and so it is more flexible. For this reason, the Lebesgue definition makes it possible to calculate integrals for a broader class of functions. For example, as we will see, the \textit{Dirichlet function}, which is 0 where its argument is irrational and 1 otherwise, has a Lebesgue integral, but does not have a Riemann integral.
 
 
 
@@ -1468,6 +1473,53 @@ I have to pay a certain sum, which I have collected in my pocket.  I take the bi
 The insight is that one should be able to rearrange the values of a function freely, while preserving the value of the integral.  This process of rearrangement can convert a very pathological function into one that is ``nice" from the point of view of integration, and thus let such pathological functions be integrated.
 
 
+\subsection{$\S$ 1.5.1 Measurable functions}
+
+\begin{definition}
+If $h : \Omega_1 \to \Omega_2$, $h$ is \textit{measurable} relative to the $\sigma$-fields $\F_j$ of subsets of $\Omega_j$, $j=1,2$, iff $h^{-1}(A) \in F_1$ for all $A \in \F_2$.  We denote such a function as $h : (\Omega_1, \F_1) \to (\Omega_2, \F_2)$. 
+\label{def:measurable_function}
+\end{definition}
+
+In practice, to show that a function is measurable, it suffices to apply what we might call the ``computational definition of measurability."
+
+\begin{claim}
+For $h : \Omega_1 \to \Omega_2$ to be measurable relative to the $\sigma$-fields $\F_j$ of subsets of $\Omega_j$, $j=1,2$, it suffices to show that $h^{-1}(B) \in \F_1$ for all $B \in \C : \sigma(\C) = \F_2$. 
+\label{claim:computational_def_measurability}	
+\end{claim}
+
+\begin{proof}
+We apply the ``Good Sets" strategy (see Section \ref{sec:good_sets_strategy}).  The ``base" condition is satisfied by hypothesis.  For the ``induction step", we need to show that the good sets form a $\sigma$-field.
+
+Let us define the good sets as $\G := \set{B \in \F_2 : h^{-1}(B) \in \F_1}$.  We check the three conditions:
+\begin{itemize}
+\item $\Omega_2 \in \G$	? \greencheck.  True because $h^{-1}(\Omega_2) = \Omega_1 \in \F_1$ by  the fact that $\F_1$ is a $\sigma$-field.
+\item $B \in \G \implies B^c \in \G$? \greencheck.  We see that $h^{-1}(B^c) := \set{x \in \Omega_1 : h(x) \not\in B} = \set{x \in \Omega_1 : h(x) \in B}^c = h^{-1}(B)^c \in \F_1$ by assumption and the fact that $\F_1$ is a $\sigma$-field, and hence closed under complements.
+\item $B_1, B_2, ... \in \G \implies \cup_{i=1}^\infty B_i \in \G$? \greencheck.  We have $h^{-1}(\cup_{i=1}^\infty B_i) = \set{x \in \Omega_1 : h(x) \in \cup_{i=1}^\infty B_i} =  \set{x \in \Omega_1 : h(x) \in B_i \text{ for some } i} = \cup_{i=1}^\infty \set{x \in \Omega_1 : h(x) \in B_i} = \cup_{i=1}^\infty h^{-1}(B_i) \in \F_1$ by assumption and the fact that $\F_1$ is a $\sigma$-field, and hence closed under countable unions.   
+\end{itemize}
+
+\end{proof}
+
+
+\begin{definition}
+A \textit{Borel measurable function} is a function $h : (\Omega_1, \F_1) \to (\R^n, \B(\R^n))$ or  $h : (\Omega_1, \F_1) \to (\overline{\R}^n, \B(\overline{\R}^n))$. 
+\label{def:borel_measurable_function}
+\end{definition}
+
+%\begin{definition}
+%Given a measurable function $h : (\Omega_1, \F_1) \to (\Omega_2, \F_2)$, sets in $\F_1$ are called the \textit{measurable sets}. 
+%\label{def:measurable_sets}
+%\end{definition}
+
+\begin{remark}
+Thanks to Claim \ref{claim:computational_def_measurability}, to show that a function $h$ is Borel measurable, we simply need to show that $h^{-1}(B) \in \F_1$ for $B \in \C$ for any collection $\C$ that generates the Borel sets; for instance it suffices to show
+\begin{itemize}
+\item $\set{w: h(w) > c} \in \F_1$ for each $c \in \R$.
+\item $\set{w: h(w) \geq c} \in \F_1$ for each $c \in \R$.
+\item $\set{w: h(w) < c} \in \F_1$ for each $c \in \R$.
+\item $\set{w: h(w) \leq c} \in \F_1$ for each $c \in \R$.
+\end{itemize}
+
+\end{remark}
 
 \bibliography{references_ash_notes.bib}
 \bibliographystyle{unsrt}
