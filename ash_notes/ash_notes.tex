@@ -43,10 +43,11 @@ What are some motivations for measure theory?
 \begin{itemize}
 \item Measure theory underpins some of the most interesting research in Bayesian statistics and probabilistic machine learning (see work from Stephen G. Walker, Michael Jordan, Tamara Broderick, David Dunson, and so on).   Thus, fluency with measure theory opens doors to a higher level of research consumption. 
 \item Measure theory underpins research on stochastic processes (as used in Bayesian nonparametrics) and stochastic differential equations (useful for continuous-time time series models, a current topic of active research interest in machine learning). 
-\item Measure theory is convenient in unifying various kinds of random variables.\footnote{For example, it allows one to work with discrete and absolutely continuous random variables in a unified way.  For example, the exponential family includes both types of random variables.}  
-\item Measure theory provides nice limit theorems, e.g. clarifying when one can interchange integrals and limits (such as derivatives). 
-\item Integrating against arbitrary measure provides the necessary abstraction to integrate over spaces more general than the reals. 
+\item Measure theory is convenient in unifying various kinds of random variables.\footnote{For example, it allows one to work with discrete and absolutely continuous random variables in a unified way.  For example, the exponential family includes both types of random variables.}
+\item Lebesgue integration provide nice limit theorems, e.g. clarifying when one can interchange integrals and limits (such as derivatives).   
 \item Lesbesgue integrals can be seen as the completion of Reimann integrals (in the same way that the real numbers complete the rationals).
+\item Abstract Lebesgue integration allows one to integrate over spaces more general than the reals. 
+
 \end{itemize}
 
 
@@ -1448,9 +1449,9 @@ Therefore, our argument shows that there cannot be a translation invariant measu
 
 \section{$\S$ 1.5 Measurable functions and Integration}
 
-In this section, we will introduce the general theory of integration of a function with respect to a general measure, as introduced by Lebesgue.  We will sometimes refer to this as \textit{Lesbesgue integration}.  However, that term is sometimes used to refer to the special case of integration of a function defined on a sub-domain of the real line with respect to the Lebesgue measure.
+In this section, we will introduce the general theory of integration of a function with respect to a general measure, as introduced by Lebesgue.  We will sometimes refer to this as \textit{Lesbesgue integration}.  However, that term is sometimes used to refer to the special case of integration of a function defined on a sub-domain of the real line with respect to the Lebesgue measure. To be more precise, some authors (e.g. \cite{ash2000probability}) refer to the former as \textit{abstract Lesbesgue integration}.
 
-\subsection{Intuition\footnote{Here we borrow freely from some sections of Wikipedia.}}
+\subsection{Intuition\footnote{Here we borrow freely from some sections of Wikipedia.}} \label{sec:intuition_on_lesbesgue_integration}
 
 Folland summarizes the difference between the Riemann and Lebesgue approaches thus: ``to compute the Riemann integral of $f$, one partitions the domain [...] into subintervals", while in the Lebesgue integral, ``one is in effect partitioning the range of $f$ " \cite{folland1999real}.
 
@@ -1491,16 +1492,26 @@ The insight is that one should be able to rearrange the values of a function fre
 \subsubsection{Definitions}
 
 \begin{definition}
-If $h : \Omega_1 \to \Omega_2$, $h$ is \textit{measurable} relative to the $\sigma$-fields $\F_j$ of subsets of $\Omega_j$, $j=1,2$, iff $h^{-1}(A) \in F_1$ for all $A \in \F_2$.  We denote such a function as $h : (\Omega_1, \F_1) \to (\Omega_2, \F_2)$. 
+If $\F$ is a $\sigma$-field of subsets of $\Omega$, then $(\Omega, \F)$ is called a \textit{measurable space} and sets in $\F$ are called \textit{measurable sets}.
+\label{def:measurable_space_and_measurable_sets}	
+\end{definition}
+
+We can now define measurable functions as those which preserve measurability under inverse images.
+   
+\begin{definition}
+If $h : \Omega_1 \to \Omega_2$, $h$ is a \textit{measurable function} relative to the $\sigma$-fields $\F_j$ of subsets of $\Omega_j$, $j=1,2$, iff $h^{-1}(A) \in F_1$ for all $A \in \F_2$.  We sometimes denote measurable functions as an explicit mapping between measurable spaces: $h : (\Omega_1, \F_1) \to (\Omega_2, \F_2)$.
 \label{def:measurable_function}
 \end{definition}
 
+
+Borel measurable functions are a special case of particular interest.  
+ 
 \begin{definition}
 A \textit{Borel measurable function} is a measurable function $h : (\Omega_1, \F_1) \to (\R^n, \B(\R^n))$ or  $h : (\Omega_1, \F_1) \to (\overline{\R}^n, \B(\overline{\R}^n))$.  
 \label{def:borel_measurable_function}
 \end{definition}
 
-When applying Definition \ref{def:borel_measurable_function}, if $\Omega_1$ is a Borel subset of $\R^k$ or $\overline{\R}^k$, we assume $\F_1 = \B$.
+Note that the \textit{Borel} in Borel measurability refers to the measurable sets in the \textit{range}, not the domain.  However, when applying Definition \ref{def:borel_measurable_function}, if $\Omega_1$ is a Borel subset of $\R^k$ or $\overline{\R}^k$, we assume $\F_1 = \B$.
 
 \subsubsection{``Computational" definitions}
 In practice, to show that a function is measurable, it suffices to apply what we might call the ``computational definition of measurable functions."
@@ -1577,8 +1588,41 @@ Let $A$ be a subset of $\R$ that is not Borel (e.g., $A$ could be the non-Borel 
 However, $I_A$  \textit{is} measurable with respect to the trivial sigma-field; that is, if we take the mapping to be $I_A : (\R, \B(\R)) \to (\R, \F_2)$, where $F_2 := \set{\emptyset, \R}$.  See Example \ref{ex:any_function_is_measurable_with_respect_to_trivial_sigma_field}.
 \end{example}
 
-\begin{example}{\remarktitle{Continuous functions are Borel measurable}}. Let $h : \R^k \to \R^n$ be continuous.  Since $h$ is continuous, the inverse image of any open set is open.  Hence $h$ is Borel measurable by the computational definition of Borel measurability -- see Remark \ref{rk:computational_definition_of_Borel_measurability}.
+\begin{example}{\remarktitle{Continuous functions are Borel measurable}}. Let $h : \R^k \to \R^n$ be continuous.  Since $h$ is continuous, the inverse image of any open set is open. Hence $h$ is Borel measurable by the computational definition of Borel measurability -- see Remark \ref{rk:computational_definition_of_Borel_measurability}.
 \end{example}
+
+\subsubsection{Why define measurability this way?}
+
+Measurable functions do \textit{not} preserve measurability in \textit{both} directions. That is, if $h : (\Omega_1, \F_1) \to (\Omega_2, \F_2)$ is a measurable function, it is not necessarily true that $h(A) \in \F_2$ for all $A \in \F_1$.  For a counterexample, we take $\F_2 = \set{\emptyset, \Omega_2}$, recalling Example \ref{ex:any_function_is_measurable_with_respect_to_trivial_sigma_field}.   Then any $h$ is measurable.  But if $h(A)$ is a nonempty proper subset of $\Omega_2$, then it is not a measurable set, and so $h$ will not be measurable. 
+
+So why is measurability defined by preserving measurability over \textit{inverse} images, rather than in terms of direct images?  In measure theory, inverse images are much nicer objects than direct images.  This is because basic set operations are preserved by inverse images, but in general not by images.  
+
+In particular, for any function $f$
+\begin{alphabate}
+\item Inverse images and complements commute: $f^{-1}(B^c) = \big(f^{-1}(B)\big)^c$	
+
+\textit{Proof.} $ \big(f^{-1}(B)\big)^c := \set{x : x \not\in f^{-1}(B) } = \set{x : f(x) \not\in B } = \set{x: f(x) \in B^c} = \set{x: x \in f^{-1}(B^c)} := f^{-1}(B^c).$
+
+\item Inverse images and unions commute: $f^{-1}(\cup_i B_i) = \cup_i \big(f^{-1}(B_i)\big)$
+\item Inverse images and intersections commute: $f^{-1}(\cap_i B_i) = \cap_i \big(f^{-1}(B_i)\big)$	
+\end{alphabate}
+
+However, 
+\begin{itemize}
+\item[d)] Direct images and complements do not in general commute: $f(A^c) \neq \big(f(A)\big)^c$	
+
+\textit{Proof.} Let $f : \Omega \to \R$ be the constant function, i.e. $f(\omega) = c$ for some $c \in \R$ for all $\omega \in \Omega$.  Let $A$ be a non-empty proper subset of $\Omega$.  Then $h(A) = c$ and $h(A^c) = c$.  So $\R \setminus c = \big(h(A)\big)^c \neq  h(A^c) = c$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.4\textwidth]{images/direct_images_and_complements}	
+\end{figure}
+
+
+\item[e)] Direct images and intersections do not in general commute: $f(\cap_i A_i) \neq \cap_i \big(f(A_i)\big)$	
+\end{itemize}
+
+Recall in Section \ref{sec:intuition_on_lesbesgue_integration} that Lesbesgue and Reimann integration are distinguished in terms of whether they partition the range or domain of the function.  My speculation is that the nice interplay of basic set operations and inverse images (but not direct images) at least partially explains why Lesbesgue integration is more successful than Reimann integration (better limit theorems, better handling of non-Euclidean spaces, etc.).
 
 
 
