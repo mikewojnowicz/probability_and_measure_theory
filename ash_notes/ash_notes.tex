@@ -291,7 +291,7 @@ Later, we will cover the Monotone Class Theorem (see Theorem \ref{thm:monotone_c
 An important example of a $\sigma$-field is the Borel Sets $\B(\R)$, defined as the smallest \sf\ of subsets of $\R$ containing all intervals $(a,b] \subset \R$.  
 
 We may alternately characterize $\B(\R)$ as the smallest \sf\ containing
-\begin{itemize}
+\begin{alphabate}
 \item all intervals $(a,b], \; a,b \in \R$
 \item all intervals $(a,b), \; a,b \in \R$
 \item all intervals $[a,b), \; a,b \in \R$
@@ -302,7 +302,7 @@ We may alternately characterize $\B(\R)$ as the smallest \sf\ containing
 \item  all intervals $(-\infty,b], \; b \in \R$.
 \item all open sets of $\R$.\footnote{Recall that an open set is a countable union of open intervals.}
 \item all closed sets of $\R$.\footnote{Recall that a set is open iff its complement is closed.}
-\end{itemize}
+\end{alphabate}
 
 To illustrate these equivalences, let us equate the first two conditions. That is, let us show that a \sf\ contains all open intervals $(a,b)$ iff it contains all right semi-closed intervals $(a,b]$.  To see this, simply note
 \begin{subequations}
@@ -321,8 +321,9 @@ The text gives another description of the Borel sets $\B(\R)$ as the smallest \s
 The Borel sets are a large collection of sets.  For instance, Remark \ref{rk:cantor_set_is_a_borel_set} notes that the Cantor set is a Borel set. 
 
 \begin{remark}{\remarktitle{The Cantor set is a Borel set}}
-The Cantor set can quite easily be defined in terms of a countable intersections and unions of closed sets. In each step you "remove the middle third of each part". Explicitly,
+The Cantor set must be a Borel set because it is closed.  To see this more explicitly, note that in each step you "remove the middle third of each part".  
 \[K = \bigcap_{i=1}^\infty\bigcap_{j=1}^{3^{i-1}-1}\left[0,\frac{3j+1}{3^i}\right]\cup \left[\frac{3j+2}{3^i}, 1\right] \]
+which is a countable number of intersections and unions of closed intervals, and hence Borel by characterization (d) above. 
 \label{rk:cantor_set_is_a_borel_set}
 \end{remark}
 
@@ -1393,7 +1394,7 @@ We prove the statement for $\B(\R^n)$ and leave the extension to $\overline{\B}(
 
 \end{proof}
 
-\subsection{A set that is not Lesbesgue measurable}
+\subsection{A set that is not Lesbesgue measurable} \label{sec:set_that_is_not_lesbesgue_measurable}
 
 \begin{proposition}
 Call $x,y \in \R$ equivalent iff $x-y \in \mathbb{Q}$.\footnote{So, for example, some equivalence classes are:
@@ -1487,11 +1488,21 @@ The insight is that one should be able to rearrange the values of a function fre
 
 \subsection{$\S$ 1.5.1 Measurable functions}
 
+\subsubsection{Definitions}
+
 \begin{definition}
 If $h : \Omega_1 \to \Omega_2$, $h$ is \textit{measurable} relative to the $\sigma$-fields $\F_j$ of subsets of $\Omega_j$, $j=1,2$, iff $h^{-1}(A) \in F_1$ for all $A \in \F_2$.  We denote such a function as $h : (\Omega_1, \F_1) \to (\Omega_2, \F_2)$. 
 \label{def:measurable_function}
 \end{definition}
 
+\begin{definition}
+A \textit{Borel measurable function} is a measurable function $h : (\Omega_1, \F_1) \to (\R^n, \B(\R^n))$ or  $h : (\Omega_1, \F_1) \to (\overline{\R}^n, \B(\overline{\R}^n))$.  
+\label{def:borel_measurable_function}
+\end{definition}
+
+When applying Definition \ref{def:borel_measurable_function}, if $\Omega_1$ is a Borel subset of $\R^k$ or $\overline{\R}^k$, we assume $\F_1 = \B$.
+
+\subsubsection{``Computational" definitions}
 In practice, to show that a function is measurable, it suffices to apply what we might call the ``computational definition of measurable functions."
 
 \begin{claim}{\remarktitle{Computational definition of measurable functions}}
@@ -1512,34 +1523,64 @@ Let us define the good sets as $\G := \set{B \in \F_2 : h^{-1}(B) \in \F_1}$.  W
 \end{proof}
 
 
-\begin{definition}
-A \textit{Borel measurable function} is a function $h : (\Omega_1, \F_1) \to (\R^n, \B(\R^n))$ or  $h : (\Omega_1, \F_1) \to (\overline{\R}^n, \B(\overline{\R}^n))$. 
-\label{def:borel_measurable_function}
-\end{definition}
+
 
 %\begin{definition}
 %Given a measurable function $h : (\Omega_1, \F_1) \to (\Omega_2, \F_2)$, sets in $\F_1$ are called the \textit{measurable sets}. 
 %\label{def:measurable_sets}
 %\end{definition}
 
-\begin{remark}
-Thanks to Claim \ref{claim:computational_def_measurability}, to show that a function $h$ is Borel measurable, we simply need to show that $h^{-1}(B) \in \F_1$ for $B \in \C$ for any collection $\C$ that generates the Borel sets; for instance it suffices to show
+\begin{remark}{\remarktitle{The computational definition of Borel measurability.}}
+Thanks to Claim \ref{claim:computational_def_measurability}, to show that a function $h$ is Borel measurable, we simply need to show that $h^{-1}(B) \in \F_1$ for $B \in \C$ for any collection $\C$ that generates the Borel sets. For instance, when $h$ is real-valued, it suffices to show
 \begin{itemize}
 \item $\set{w: h(w) > c} \in \F_1$ for each $c \in \R$.
 \item $\set{w: h(w) \geq c} \in \F_1$ for each $c \in \R$.
 \item $\set{w: h(w) < c} \in \F_1$ for each $c \in \R$.
 \item $\set{w: h(w) \leq c} \in \F_1$ for each $c \in \R$.
 \item $\set{w: a \leq h(w) \leq b} \in \F_1$ for each $a,b \in \R$.
+\item $h^{-1}(U) \in \F_1$ for each open set $U \subset \R$.
+\item $h^{-1}(V) \in \F_1$ for each closed set $V \subset \R$.
 \item etc.
 \end{itemize}
 For a larger list, recall Section \ref{sec:borel_sets}. 
+\label{rk:computational_definition_of_Borel_measurability}.
 \end{remark}
 
-%\subsubsection{Examples}
-%
-%\begin{example}
-%Let $A$ be a Borel subset of $\R$ and let $I_A$ be the indicator of $A$; that is $I_A(\omega)=1$ for $\omega \in A$ and $0$ for $\omega \not\in A$. 	
-%\end{example}
+\subsubsection{Examples}
+
+\begin{example}{\remarktitle{Any function is measurable with respect to the trivial $\sigma$-field.}}
+Consider any function $h : (\Omega_1, \F_1) \to (\Omega_2, \F_2)$, where $\F_2$ is the trivial $\sigma$-field: $\F_2 = \set{\emptyset, \Omega_2}$.  Then $h$ is measurable since $h^{-1}(\emptyset) = \emptyset \in \F_1$ and  $h^{-1}(\Omega_2) = \Omega_1 \in \F_1$
+\label{ex:any_function_is_measurable_with_respect_to_trivial_sigma_field}	
+\end{example}
+
+\begin{example}{\remarktitle{Indicators of Borel sets are Borel measurable.}}
+Let $A$ be a Borel subset of $\R$,\footnote{Recall Section \ref{sec:borel_sets}.  For instance, we might take $A$ to be an open interval, or a disjoint union of open intervals, or the Cantor set.} and let $I_A : \R \to \R$ be the indicator of $A$; that is $I_A(\omega)=1$ for $\omega \in A$ and $0$ for $\omega \not\in A$. Then $I_A$ is Borel measurable, since for all $B \in \B(\R)$, we have
+\[ I_A^{-1}(B) = 
+\begin{cases}
+\Omega, & \text{ if } 0,1 \in B\\ 
+A, & \text{ if } 1 \in B, 0 \not\in B \\
+A^c, & \text{ if } 0 \in B, 1 \not\in B \\	
+\emptyset, & \text{ if } 0,1 \not\in B\\ 
+\end{cases}
+\]
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.5\textwidth]{images/indicator_of_borel_set}	
+\end{figure}
+
+\end{example}
+
+\begin{example}{\remarktitle{Indicators of non-Borel sets are not Borel measurable - but they may still be measurable.}}
+Let $A$ be a subset of $\R$ that is not Borel (e.g., $A$ could be the non-Borel set described in Section \ref{sec:set_that_is_not_lesbesgue_measurable}), and let $I_A : \R \to \R$ be the indicator of $A$.   Then $I_A$ is \textit{not} Borel measurable.  
+
+However, $I_A$  \textit{is} measurable with respect to the trivial sigma-field; that is, if we take the mapping to be $I_A : (\R, \B(\R)) \to (\R, \F_2)$, where $F_2 := \set{\emptyset, \R}$.  See Example \ref{ex:any_function_is_measurable_with_respect_to_trivial_sigma_field}.
+\end{example}
+
+\begin{example}{\remarktitle{Continuous functions are Borel measurable}}. Let $h : \R^k \to \R^n$ be continuous.  Since $h$ is continuous, the inverse image of any open set is open.  Hence $h$ is Borel measurable by the computational definition of Borel measurability -- see Remark \ref{rk:computational_definition_of_Borel_measurability}.
+\end{example}
+
+
 
 \bibliography{references_ash_notes.bib}
 \bibliographystyle{unsrt}
