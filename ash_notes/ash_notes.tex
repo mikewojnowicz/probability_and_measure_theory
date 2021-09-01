@@ -1451,7 +1451,7 @@ Therefore, our argument shows that there cannot be a translation invariant measu
 
 \section{$\S$ 1.5 Measurable functions and Integration}
 
-In this section, we will introduce the general theory of integration of a function with respect to a general measure, as introduced by Lebesgue.  We will sometimes refer to this as \textit{Lesbesgue integration}.  However, that term is sometimes used to refer to the special case of integration of a function defined on a sub-domain of the real line with respect to the Lebesgue measure. To be more precise, some authors (e.g. \cite{ash2000probability}) refer to the former as \textit{abstract Lesbesgue integration}.  We will differentiate between the general and special cases by referring to \textit{Lesbesgue integration} (which can be against arbitrary measure) and \textit{Lesbesgue integration against Lesbesgue measure}.
+In this section, we will introduce the general theory of integration of a function with respect to a general measure, as introduced by Lebesgue.  We will refer to this as \textit{integration} or \textit{Lesbesgue integration}. We use use \textit{(Lesbesgue) integration against Lesbesgue measure} to refer to the special case of integrating a function defined on a sub-domain of the real line with respect to the Lebesgue measure.   %  Some authors reserve the term \textit{Lesbesgue integration} for  the special case of integration of a function defined on a sub-domain of the real line with respect to the Lebesgue measure, and refer to integration against arbitrary measure as \textit{abstract Lesbesgue integration}.  We will differentiate between the general and special cases by referring to \textit{Lesbesgue integration} (which can be against arbitrary measure) and \textit{Lesbesgue integration against Lesbesgue measure}.
 
 \subsection{Intuition\footnote{Here we borrow freely from some sections of Wikipedia.}} \label{sec:intuition_on_lesbesgue_integration}
 
@@ -1463,7 +1463,7 @@ Folland summarizes the difference between the Riemann and Lebesgue approaches th
 \end{figure}
 
 
-Similarly, suppose we want to find a mountain's volume (above sea level).
+For another example, this time in two dimensions, suppose we want to find a mountain's volume (above sea level).
 
 \begin{itemize}
 \item \textbf{The Riemann approach}: Divide the base of the mountain into a grid of 1 meter squares. Measure the altitude of the mountain at the center of each square. The volume on a single grid square is approximately 1 $m^2$ × (that square's altitude), so the total volume is 1 $m^2$ times the sum of the altitudes.
@@ -1475,7 +1475,7 @@ Similarly, suppose we want to find a mountain's volume (above sea level).
 \end{figure}
 \end{itemize}
 
-While the Riemann integral considers the area under a curve as made out of vertical rectangles, the Lebesgue definition considers horizontal slabs that are not necessarily just rectangles, and so it is more flexible. For this reason, the Lebesgue definition makes it possible to calculate integrals for a broader class of functions. For example, as we will see, the \textit{Dirichlet function}, which is 0 where its argument is irrational and 1 otherwise, has a Lebesgue integral, but does not have a Riemann integral.
+While the Riemann integral considers the area under a curve as made out of vertical rectangles, the Lebesgue definition considers slabs that are not necessarily just rectangles, and so it is more flexible. For this reason, the Lebesgue definition makes it possible to calculate integrals for a broader class of functions. For example, as we will see, the \textit{Dirichlet function}, which is 0 where its argument is irrational and 1 otherwise, has a Lebesgue integral, but does not have a Riemann integral.
 
 
 
@@ -1529,8 +1529,8 @@ We apply the ``Good Sets" strategy (see Section \ref{sec:good_sets_strategy}).  
 Let us define the good sets as $\G := \set{B \in \F_2 : h^{-1}(B) \in \F_1}$.  We check the three conditions:
 \begin{itemize}
 \item $\Omega_2 \in \G$	? \greencheck.  True because $h^{-1}(\Omega_2) = \Omega_1 \in \F_1$ by  the fact that $\F_1$ is a $\sigma$-field.
-\item $B \in \G \implies B^c \in \G$? \greencheck.  We see that $h^{-1}(B^c) := \set{x \in \Omega_1 : h(x) \not\in B} = \set{x \in \Omega_1 : h(x) \in B}^c = h^{-1}(B)^c \in \F_1$ by assumption and the fact that $\F_1$ is a $\sigma$-field, and hence closed under complements.
-\item $B_1, B_2, ... \in \G \implies \cup_{i=1}^\infty B_i \in \G$? \greencheck.  We have $h^{-1}(\cup_{i=1}^\infty B_i) = \set{x \in \Omega_1 : h(x) \in \cup_{i=1}^\infty B_i} =  \set{x \in \Omega_1 : h(x) \in B_i \text{ for some } i} = \cup_{i=1}^\infty \set{x \in \Omega_1 : h(x) \in B_i} = \cup_{i=1}^\infty h^{-1}(B_i) \in \F_1$ by assumption and the fact that $\F_1$ is a $\sigma$-field, and hence closed under countable unions.   
+\item $B \in \G \implies B^c \in \G$? \greencheck.  Since complements and inverse images commute (see Section \ref{sec:why_define_measurability_this_way}), we have $h^{-1}(B^c) = h^{-1}(B)^c \in \F_1$ by assumption and the fact that $\F_1$ is a $\sigma$-field, and hence closed under complements.
+\item $B_1, B_2, ... \in \G \implies \cup_{i=1}^\infty B_i \in \G$? \greencheck.  Since unions and inverse images commute (see Section \ref{sec:why_define_measurability_this_way}), we have $h^{-1}(\cup_{i=1}^\infty B_i) = \cup_{i=1}^\infty h^{-1}(B_i) \in \F_1$ by assumption and the fact that $\F_1$ is a $\sigma$-field, and hence closed under countable unions.   
 \end{itemize}
 
 \end{proof}
@@ -1604,9 +1604,9 @@ However, $I_A$  \textit{is} measurable with respect to the trivial sigma-field; 
 \begin{example}{\remarktitle{Continuous functions are Borel measurable}}. Let $h : \R^k \to \R^n$ be continuous.  Since $h$ is continuous, the inverse image of any open set is open. Hence $h$ is Borel measurable by the computational definition of Borel measurability -- see Remark \ref{rk:computational_definition_of_Borel_measurability}.
 \end{example}
 
-\subsubsection{Why define measurability this way?}
+\subsubsection{Why define measurability this way?} \label{sec:why_define_measurability_this_way}
 
-Measurable functions do \textit{not} preserve measurability in \textit{both} directions. That is, if $h : (\Omega_1, \F_1) \to (\Omega_2, \F_2)$ is a measurable function, it is not necessarily true that $h(A) \in \F_2$ for all $A \in \F_1$.  For a counterexample, we take $\F_2 = \set{\emptyset, \Omega_2}$, recalling Example \ref{ex:any_function_is_measurable_with_respect_to_trivial_sigma_field}.   Then any $h$ is measurable.  But if $h(A)$ is a nonempty proper subset of $\Omega_2$, then it is not a measurable set, and so $h$ will not be measurable. 
+Measurable functions do \textit{not} preserve measurability in \textit{both} directions. That is, if $h : (\Omega_1, \F_1) \to (\Omega_2, \F_2)$ is a measurable function, it is not necessarily true that $h(A) \in \F_2$ for all $A \in \F_1$.  For a counterexample, we take $\F_2 = \set{\emptyset, \Omega_2}$, recalling Example \ref{ex:any_function_is_measurable_with_respect_to_trivial_sigma_field}.   Then any $h$ is measurable.  But if there is $A \in F_1$ such that $h(A)$ is a nonempty proper subset of $\Omega_2$, then it is not a measurable set ($h(A) \not\in \F_2$). 
 
 So why is measurability defined by preserving measurability over \textit{inverse} images, rather than in terms of direct images?  In measure theory, inverse images are much nicer objects than direct images.  This is because basic set operations are preserved by inverse images, but in general not by images.  
 
@@ -1678,7 +1678,7 @@ Note that the indicator function for a non-Borel set (see Example \ref{ex:indica
 \begin{definition}
 Let $h$ be simple, say $h = \sum_{i=1}^r y_i I_{A_i}$ where the $A_i$ are disjoint sets in $\F$.  Then
 \begin{align*}
-\ds\int_{\Omega} h \wrt{\mu} := \ds\sum_{i=1}^r y_i I_{A_i}.
+\ds\int_{\Omega} h \wrt{\mu} := \ds\sum_{i=1}^r y_i \; \mu(A_i).
 \labelit \label{eqn:integral_of_simple_function}	
 \end{align*}
  \label{def:integral_of_simple_function}
@@ -1708,14 +1708,21 @@ Now we turn to the integral of a simple function that is not a step function.
 \begin{example}{\remarktitle{Integrating the Dirichlet function}}
 Let $h$ be the Dirichlet function; that is $h = I_{\Q} : \R \to \R$ is the indicator of the rationals.  Let us integrate $h$ against Lesbesgue measure $\mu$. 
 \begin{align*}
-\ds\int_{\Omega} h \wrt{\mu} &= 1 \mu(\Q) && \tinytext{def. integral} \\
+\ds\int_{\Omega} h \wrt{\mu} &= 1 \; \mu(\Q) + 0 \; \mu(\R - \Q) && \tinytext{def. integral of simple function} \\
+ &= 1 \; \mu(\Q) && \tinytext{arithmetic of $\overline{\R}$: \; $0 \cdot x = 0$ for $x \in \overline{\R}$} \\
  	&= 1 \; \mu(\bigcupdot_{q \in \Q} \set{q}) && \tinytext{rewrite $\Q$} \\
 &= 1 \; \ds\sum_{q \in \Q} \mu(\set{q}) && \tinytext{countable additivity, $\Q$ is countable} \\
-& \stackrel{1}{=} 1 \ds\sum_{q \in \Q} 0 && \tinytext{Proposition \ref{prop:properties_of_LS_measures}s} \\
+& \stackrel{1}{=} 1 \ds\sum_{q \in \Q} 0 && \tinytext{Proposition \ref{prop:properties_of_LS_measures}} \\
 &= 0.  
 \end{align*}
 Note Equation 1 holds for any Lesbesgue-Stieljes measure with a continuous distribution function (see Remark \ref{rk:continuity_at_a_point_iffi_measure_zero_at_a_point}).  However, other measures may yield other results.
 \end{example}
+
+Note that the Dirichlet function does not have a Reimann integral. 
+
+\begin{exercise}
+Prove that the Dirichlet function does not have a Reimann integral.	
+\end{exercise}
 
 
 
