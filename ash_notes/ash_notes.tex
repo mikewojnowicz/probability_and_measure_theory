@@ -19,7 +19,9 @@
 \newcommand{\fasf}{\tilde{\mu}_0}
 % Signed measure
 \newcommand{\signedmu}{\wt{\mu}}
-    
+
+% RATIONALS
+\renewcommand{\Q}{\mathbb{Q}}
 \begin{document}
 
 
@@ -1449,7 +1451,7 @@ Therefore, our argument shows that there cannot be a translation invariant measu
 
 \section{$\S$ 1.5 Measurable functions and Integration}
 
-In this section, we will introduce the general theory of integration of a function with respect to a general measure, as introduced by Lebesgue.  We will sometimes refer to this as \textit{Lesbesgue integration}.  However, that term is sometimes used to refer to the special case of integration of a function defined on a sub-domain of the real line with respect to the Lebesgue measure. To be more precise, some authors (e.g. \cite{ash2000probability}) refer to the former as \textit{abstract Lesbesgue integration}.
+In this section, we will introduce the general theory of integration of a function with respect to a general measure, as introduced by Lebesgue.  We will sometimes refer to this as \textit{Lesbesgue integration}.  However, that term is sometimes used to refer to the special case of integration of a function defined on a sub-domain of the real line with respect to the Lebesgue measure. To be more precise, some authors (e.g. \cite{ash2000probability}) refer to the former as \textit{abstract Lesbesgue integration}.  We will differentiate between the general and special cases by referring to \textit{Lesbesgue integration} (which can be against arbitrary measure) and \textit{Lesbesgue integration against Lesbesgue measure}.
 
 \subsection{Intuition\footnote{Here we borrow freely from some sections of Wikipedia.}} \label{sec:intuition_on_lesbesgue_integration}
 
@@ -1554,10 +1556,20 @@ Thanks to Claim \ref{claim:computational_def_measurability}, to show that a func
 \item etc.
 \end{itemize}
 For a larger list, recall Section \ref{sec:borel_sets}. 
-\label{rk:computational_definition_of_Borel_measurability}.
+\label{rk:computational_definition_of_Borel_measurability}
 \end{remark}
 
 \subsubsection{Examples}
+
+\begin{example}{\remarktitle{Constant functions are Borel measurable}}
+Consider a constant function, i.e. $h: (\Omega_1, \F_1) \to (\Omega_2, \F_2)$ such that $h(\omega) =   c$ for all $\omega \in \Omega_1$.  Then $h$ is Borel measurable, since 
+\[ h^{-1}(B) = 
+\begin{cases}
+\Omega, & \text{ if } c \in B\\ 
+\emptyset, & \text{ if } c \not\in B\\ 
+\end{cases}
+\]
+\end{example}
 
 \begin{example}{\remarktitle{Any function is measurable with respect to the trivial $\sigma$-field.}}
 Consider any function $h : (\Omega_1, \F_1) \to (\Omega_2, \F_2)$, where $\F_2$ is the trivial $\sigma$-field: $\F_2 = \set{\emptyset, \Omega_2}$.  Then $h$ is measurable since $h^{-1}(\emptyset) = \emptyset \in \F_1$ and  $h^{-1}(\Omega_2) = \Omega_1 \in \F_1$
@@ -1586,6 +1598,7 @@ A^c, & \text{ if } 0 \in B, 1 \not\in B \\
 Let $A$ be a subset of $\R$ that is not Borel (e.g., $A$ could be the non-Borel set described in Section \ref{sec:set_that_is_not_lesbesgue_measurable}), and let $I_A : \R \to \R$ be the indicator of $A$.   Then $I_A$ is \textit{not} Borel measurable.  
 
 However, $I_A$  \textit{is} measurable with respect to the trivial sigma-field; that is, if we take the mapping to be $I_A : (\R, \B(\R)) \to (\R, \F_2)$, where $F_2 := \set{\emptyset, \R}$.  See Example \ref{ex:any_function_is_measurable_with_respect_to_trivial_sigma_field}.
+\label{ex:indicators_of_non_borel_sets_are_not_borel_measurable}
 \end{example}
 
 \begin{example}{\remarktitle{Continuous functions are Borel measurable}}. Let $h : \R^k \to \R^n$ be continuous.  Since $h$ is continuous, the inverse image of any open set is open. Hence $h$ is Borel measurable by the computational definition of Borel measurability -- see Remark \ref{rk:computational_definition_of_Borel_measurability}.
@@ -1615,14 +1628,97 @@ However,
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=.4\textwidth]{images/direct_images_and_complements}	
+\includegraphics[width=.25\textwidth]{images/direct_images_and_complements}	
 \end{figure}
 
 
 \item[e)] Direct images and intersections do not in general commute: $f(\cap_i A_i) \neq \cap_i \big(f(A_i)\big)$	
 \end{itemize}
 
-Recall in Section \ref{sec:intuition_on_lesbesgue_integration} that Lesbesgue and Reimann integration are distinguished in terms of whether they partition the range or domain of the function.  My speculation is that the nice interplay of basic set operations and inverse images (but not direct images) at least partially explains why Lesbesgue integration is more successful than Reimann integration (better limit theorems, better handling of non-Euclidean spaces, etc.).
+Recall in Section \ref{sec:intuition_on_lesbesgue_integration} that Lesbesgue and Reimann integration are distinguished in terms of whether they partition the range or domain of the function.  My speculation is that the nice interplay of basic set operations and inverse images (but not direct images) at least partially explains why Lesbesgue's approach has been more successful than Reimann's approach (in the sense of better limit theorems, better handling of non-Euclidean spaces, etc.).
+
+\subsection{$\S$ 1.5.2-1.5.3 Definition of the integral for Borel measurable functions}
+
+In this section, we define integral of a Borel measurable function $h : (\Omega, \F) \to (\overline{\R}, \B(\overline{\R}))$ against arbitrary measure $\mu$.  The integral can be written as:
+\[ \ds\int_{\Omega} h \wrt{\mu}, \quad \quad \ds\int_{\Omega} h(\omega) \wrt{\mu(\omega)}, \quad \text{ or } \quad \ds\int_{\Omega} h(\omega) \mu(d \, \omega) \]
+ 
+ We proceed in three steps: first, we consider where $h$ is simple, then we consider $h$ non-negative, then we consider $h$ arbitrary. 
+
+\subsubsection{Integrals of simple functions}
+
+First we define simple functions. 
+
+\begin{definition}
+Let $(\Omega, \F)$ be a measurable space, fixed throughout the discussion.  If $h : \Omega \to \overline{\R}$, $h$ is said to be \textit{simple} iff $h$ is measurable and takes on only finitely many distinct values.  That is, $h$ is simple iff it can be written $h = \sum_{i=1}^r y_i I_{A_i}$ where the $A_i$ are disjoint sets in $\F$ and $I_{A_i}$ is the indicator of $A_i$; the $y_i$ need not be distinct. 
+\label{def:simple_function}	
+\end{definition}
+
+\begin{remark}{\remarktitle{Simple functions generalize step functions}}
+A special case of simple functions are the step functions used in Reimann integration. 
+
+
+For $a,b \in \overline{\R}$ with $a<b$, $f : [a,b] \to \R$ is a \textit{step function} if there exists a partition $a = x_0 < x_1 < ... < x_n = b$ and constants $y_1, ..., y_n \in \R$ such that $f(x)=y_i$ for all $y \in (x_{i-1},x_i)$ and each $i=1,...,n$.  Then $f$ is equal to the following simple function:
+\[ y_i I_{(x_{i-1}, x_i)} + f(x_i) I_{\set{x_i}}\]
+
+Some observations:
+\begin{itemize}
+\item In this case, the sets $A_i$ take on a specific form, as open intervals or singletons.  In general, simple functions allow more general $A_i$. 
+\item Simple functions do not require that the domain is totally ordered.  
+\end{itemize}
+\label{rk:simple_functions_generalize_step_functions}
+\end{remark}
+
+\begin{remark}
+Note that the indicator function for a non-Borel set (see Example \ref{ex:indicators_of_non_borel_sets_are_not_borel_measurable}) is \textit{not} a simple function, even though it only takes on values 0 and 1. 
+%Note that the term \textit{simple} in simple function refers to properties of \textit{both} the domain and range. So for instance, the indicator function for a non-Borel set (see Example \ref{ex:indicators_of_non_borel_sets_are_not_borel_measurable}) is \textit{not} a simple function, even though it only takes on values 0 and 1.  
+\end{remark}
+
+\paragraph{Definition of the integral of simple functions}
+
+\begin{definition}
+Let $h$ be simple, say $h = \sum_{i=1}^r y_i I_{A_i}$ where the $A_i$ are disjoint sets in $\F$.  Then
+\begin{align*}
+\ds\int_{\Omega} h \wrt{\mu} := \ds\sum_{i=1}^r y_i I_{A_i}.
+\labelit \label{eqn:integral_of_simple_function}	
+\end{align*}
+ \label{def:integral_of_simple_function}
+\end{definition}
+
+The integral of a simple function can also be expressed as 
+\[\ds\int_{\Omega} h \wrt{\mu} := \ds\sum_{i=1}^r y_i \; \mu \bigg( h^{-1}(y_i) \bigg) \]
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=.5\textwidth]{images/integral_of_simple_function}	
+\caption{The Lesbesgue integral of a simple function. {\scriptsize (In this case, the simple function is also a step function.)}}
+\end{figure}
+
+\begin{example}{\remarktitle{Integrating a step function}}
+Let $h$ be a step function, as defined in Remark \ref{rk:simple_functions_generalize_step_functions}.   So  $a = x_0 < x_1 < ... < x_n = b$ is a partition of $\Omega := \text{dom}(h)$, and $h$ takes on values $y_i$ on $(x_{i-1},x_i)$ for $i=1,...,n$.  Then 
+\begin{align*}
+\ds\int_{\Omega} h \wrt{\mu} &= \ds\sum_{i=1}^n y_i \; \mu(x_{i-1},x_i) + \cancelto{0}{\ds\sum_{i=1}^n f(x_i) \mu\set{x_i}} \\
+& \stackreltext{(if $\mu$ is Lesbesgue measure)}{=} \; \ds\sum_{i=1}^n y_i \; (x_i - x_{i-1})
+\end{align*}
+
+So the Lesbesgue integral of the step function agrees with the Reimann integral when $\mu$ is Lesbesgue measure (although not for general measure).
+\end{example}
+
+Now we turn to the integral of a simple function that is not a step function.
+
+\begin{example}{\remarktitle{Integrating the Dirichlet function}}
+Let $h$ be the Dirichlet function; that is $h = I_{\Q} : \R \to \R$ is the indicator of the rationals.  Let us integrate $h$ against Lesbesgue measure $\mu$. 
+\begin{align*}
+\ds\int_{\Omega} h \wrt{\mu} &= 1 \mu(\Q) && \tinytext{def. integral} \\
+ 	&= 1 \; \mu(\bigcupdot_{q \in \Q} \set{q}) && \tinytext{rewrite $\Q$} \\
+&= 1 \; \ds\sum_{q \in \Q} \mu(\set{q}) && \tinytext{countable additivity, $\Q$ is countable} \\
+& \stackrel{1}{=} 1 \ds\sum_{q \in \Q} 0 && \tinytext{Proposition \ref{prop:properties_of_LS_measures}s} \\
+&= 0.  
+\end{align*}
+Note Equation 1 holds for any Lesbesgue-Stieljes measure with a continuous distribution function (see Remark \ref{rk:continuity_at_a_point_iffi_measure_zero_at_a_point}).  However, other measures may yield other results.
+\end{example}
+
+
+
 
 
 
