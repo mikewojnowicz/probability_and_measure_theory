@@ -286,6 +286,45 @@ Some example applications:
 Later, we will cover the Monotone Class Theorem (see Theorem \ref{thm:monotone_class_theorem}), which provides an alternate mechanism for executing the Good Sets Strategy.  See Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy}.
 \end{remark}
 
+\subsubsection{Borel Sets} \label{sec:borel_sets}
+
+An important example of a $\sigma$-field is the Borel Sets $\B(\R)$, defined as the smallest \sf\ of subsets of $\R$ containing all intervals $(a,b] \subset \R$.  
+
+We may alternately characterize $\B(\R)$ as the smallest \sf\ containing
+\begin{itemize}
+\item all intervals $(a,b], \; a,b \in \R$
+\item all intervals $(a,b), \; a,b \in \R$
+\item all intervals $[a,b), \; a,b \in \R$
+\item all intervals $[a,b], \; a,b \in \R$.
+\item all intervals $(a,\infty), \; a \in \R$.
+\item  all intervals $[a,\infty), \; a \in \R$.
+\item 	 all intervals $(-\infty,b), \; b \in \R$.
+\item  all intervals $(-\infty,b], \; b \in \R$.
+\item all open sets of $\R$.\footnote{Recall that an open set is a countable union of open intervals.}
+\item all closed sets of $\R$.\footnote{Recall that a set is open iff its complement is closed.}
+\end{itemize}
+
+To illustrate these equivalences, let us equate the first two conditions. That is, let us show that a \sf\ contains all open intervals $(a,b)$ iff it contains all right semi-closed intervals $(a,b]$.  To see this, simply note
+\begin{subequations}
+\begin{align}
+(a,b] &= \bigcap_{n=1}^\infty \bigg(a, b+\frac{1}{n}\bigg) \\
+	\intertext{and}
+(a,b) &= \bigcup_{n=1}^\infty \bigg(a, b-\frac{1}{n}\bigg] 
+\end{align}
+\label{eqn:open_intervals_as_rsc_intervals_and_vice_versa}
+\end{subequations}
+
+\begin{question}
+The text gives another description of the Borel sets $\B(\R)$ as the smallest \sf\ containing $\F_0$, the field of disjoint unions of right semi-closed intervals $(a,b]$.  Can we make the same statement about the field of finite disjoint unions of left semi-closed intervals?
+\end{question}
+
+The Borel sets are a large collection of sets.  For instance, Remark \ref{rk:cantor_set_is_a_borel_set} notes that the Cantor set is a Borel set. 
+
+\begin{remark}{\remarktitle{The Cantor set is a Borel set}}
+The Cantor set can quite easily be defined in terms of a countable intersections and unions of closed sets. In each step you "remove the middle third of each part". Explicitly,
+\[K = \bigcap_{i=1}^\infty\bigcap_{j=1}^{3^{i-1}-1}\left[0,\frac{3j+1}{3^i}\right]\cup \left[\frac{3j+2}{3^i}, 1\right] \]
+\label{rk:cantor_set_is_a_borel_set}
+\end{remark}
 
 \subsection{$\S$ 1.2.3-1.2.4: Measures}
 
@@ -326,37 +365,10 @@ Then $\mu$ is a measure on $\F$. We might call it the ``point weighting" measure
 \begin{example}{\remarktitle{Lesbesgue measure}}
 Define $\mu$ such that 
 \[ \mu(a,b] = b-a \quad \forall \, a,b \in \R : b>a \]
-As we will see in Section \ref{sec:extension_of_measures}, this requirement determines $\mu$ on a large collection of sets, the Borel Sets $\B(\R)$, defined as the smallest \sf\ of subsets of $\R$ containing all intervals $(a,b] \subset \R$.
-
-We may alternately characterize $\B(\R)$ as the smallest \sf\ containing
-\begin{itemize}
-\item all intervals $(a,b], \; a,b \in \R$
-\item all intervals $(a,b), \; a,b \in \R$
-\item all intervals $[a,b), \; a,b \in \R$
-\item all intervals $[a,b], \; a,b \in \R$.
-\item all intervals $(a,\infty), \; a \in \R$.
-\item  all intervals $[a,\infty), \; a \in \R$.
-\item 	 all intervals $(-\infty,b), \; b \in \R$.
-\item  all intervals $(-\infty,b], \; b \in \R$.
-\item all open sets of $\R$.\footnote{Recall that an open set is a countable union of open intervals.}
-\item all closed sets of $\R$.\footnote{Recall that a set is open iff its complement is closed.}
-\end{itemize}
-
-To illustrate these equivalences, let us equate the first two conditions. That is, let us show that a \sf\ contains all open intervals $(a,b)$ iff it contains all right semi-closed intervals $(a,b]$.  To see this, simply note
-\begin{subequations}
-\begin{align}
-(a,b] &= \bigcap_{n=1}^\infty \bigg(a, b+\frac{1}{n}\bigg) \\
-	\intertext{and}
-(a,b) &= \bigcup_{n=1}^\infty \bigg(a, b-\frac{1}{n}\bigg] 
-\end{align}
-\end{subequations}
-\label{eqn:open_intervals_as_rsc_intervals_and_vice_versa}
+As we will see in Section \ref{sec:extension_of_measures}, this requirement determines $\mu$ on a large collection of sets, the Borel Sets $\B(\R)$, which we defined in Section \ref{sec:borel_sets} as the smallest \sf\ of subsets of $\R$ containing all intervals $(a,b] \subset \R$. 
 \label{ex:lesbesgue_measure}
 \end{example}
 
-\begin{question}
-The text gives another description of the Borel sets $\B(\R)$ as the smallest \sf\ containing $\F_0$, the field of disjoint unions of right semi-closed intervals $(a,b]$.  Can we make the same statement about the field of finite disjoint unions of left semi-closed intervals?
-\end{question}
 
 \subsection{$\S$ 1.2.5-1.2.6: Properties of measures (and some more general set functions)}
 
@@ -1480,9 +1492,9 @@ If $h : \Omega_1 \to \Omega_2$, $h$ is \textit{measurable} relative to the $\sig
 \label{def:measurable_function}
 \end{definition}
 
-In practice, to show that a function is measurable, it suffices to apply what we might call the ``computational definition of measurability."
+In practice, to show that a function is measurable, it suffices to apply what we might call the ``computational definition of measurable functions."
 
-\begin{claim}
+\begin{claim}{\remarktitle{Computational definition of measurable functions}}
 For $h : \Omega_1 \to \Omega_2$ to be measurable relative to the $\sigma$-fields $\F_j$ of subsets of $\Omega_j$, $j=1,2$, it suffices to show that $h^{-1}(B) \in \F_1$ for all $B \in \C : \sigma(\C) = \F_2$. 
 \label{claim:computational_def_measurability}	
 \end{claim}
@@ -1517,9 +1529,17 @@ Thanks to Claim \ref{claim:computational_def_measurability}, to show that a func
 \item $\set{w: h(w) \geq c} \in \F_1$ for each $c \in \R$.
 \item $\set{w: h(w) < c} \in \F_1$ for each $c \in \R$.
 \item $\set{w: h(w) \leq c} \in \F_1$ for each $c \in \R$.
+\item $\set{w: a \leq h(w) \leq b} \in \F_1$ for each $a,b \in \R$.
+\item etc.
 \end{itemize}
-
+For a larger list, recall Section \ref{sec:borel_sets}. 
 \end{remark}
+
+%\subsubsection{Examples}
+%
+%\begin{example}
+%Let $A$ be a Borel subset of $\R$ and let $I_A$ be the indicator of $A$; that is $I_A(\omega)=1$ for $\omega \in A$ and $0$ for $\omega \not\in A$. 	
+%\end{example}
 
 \bibliography{references_ash_notes.bib}
 \bibliographystyle{unsrt}
