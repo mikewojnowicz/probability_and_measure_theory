@@ -1513,7 +1513,7 @@ A \textit{Borel measurable function} is a measurable function $h : (\Omega_1, \F
 \label{def:borel_measurable_function}
 \end{definition}
 
-Note that the \textit{Borel} in Borel measurability refers to the measurable sets in the \textit{range}, not the domain.  However, when applying Definition \ref{def:borel_measurable_function}, if $\Omega_1$ is a Borel subset of $\R^k$ or $\overline{\R}^k$, we assume $\F_1 = \B$.
+Note that the \textit{Borel} in Borel measurability refers to the measurable sets in the \textit{range}, not the domain.  A more precise term would be \textit{$(\F_1, \text{Borel})$-measurable}, since the condition to be a measurable function depends on both sigma-fields.  However, people do not say that.  Unless stated otherwise, we assume $\F_1 = \B$ whenever $\Omega_1$ is a Borel subset of $\R^k$ or $\overline{\R}^k$.
 
 \subsubsection{``Computational" definitions}
 In practice, to show that a function is measurable, it suffices to apply what we might call the ``computational definition of measurable functions."
@@ -1546,11 +1546,10 @@ Let us define the good sets as $\G := \set{B \in \F_2 : h^{-1}(B) \in \F_1}$.  W
 \begin{remark}{\remarktitle{The computational definition of Borel measurability.}}
 Thanks to Claim \ref{claim:computational_def_measurability}, to show that a function $h$ is Borel measurable, we simply need to show that $h^{-1}(B) \in \F_1$ for $B \in \C$ for any collection $\C$ that generates the Borel sets. For instance, when $h$ is real-valued, it suffices to show
 \begin{itemize}
-\item $\set{w: h(w) > c} \in \F_1$ for each $c \in \R$.
-\item $\set{w: h(w) \geq c} \in \F_1$ for each $c \in \R$.
-\item $\set{w: h(w) < c} \in \F_1$ for each $c \in \R$.
-\item $\set{w: h(w) \leq c} \in \F_1$ for each $c \in \R$.
-\item $\set{w: a \leq h(w) \leq b} \in \F_1$ for each $a,b \in \R$.
+\item $h^{-1}\big((a,\infty)\big) \in \F_1$ for each $a \in \R$.
+\item $h^{-1}\big([a,\infty)\big) \in \F_1$ for each $a \in \R$.
+\item $h^{-1}\big((a,b)\big) \in \F_1$ for each $a,b \in \R$.
+\item $h^{-1}\big([a,b]\big) \in \F_1$ for each $a,b \in \R$.
 \item $h^{-1}(U) \in \F_1$ for each open set $U \subset \R$.
 \item $h^{-1}(V) \in \F_1$ for each closed set $V \subset \R$.
 \item etc.
@@ -1703,7 +1702,7 @@ Let $h$ be a step function, as defined in Remark \ref{rk:simple_functions_genera
 So the Lesbesgue integral of the step function agrees with the Reimann integral when $\mu$ is Lesbesgue measure (although not for general measure).
 \end{example}
 
-Now we turn to the integral of a simple function that is not a step function.
+Now we integrate a simple function that is not a step function -- in fact, a simple function for which there is not a Reimann integral. 
 
 \begin{example}{\remarktitle{Integrating the Dirichlet function}}
 Let $h$ be the Dirichlet function; that is $h = I_{\Q} : \R \to \R$ is the indicator of the rationals.  Let us integrate $h$ against Lesbesgue measure $\mu$. 
@@ -1716,18 +1715,34 @@ Let $h$ be the Dirichlet function; that is $h = I_{\Q} : \R \to \R$ is the indic
 &= 0.  
 \end{align*}
 Note Equation 1 holds for any Lesbesgue-Stieljes measure with a continuous distribution function (see Remark \ref{rk:continuity_at_a_point_iffi_measure_zero_at_a_point}).  However, other measures may yield other results.
+\label{ex:integrating_the_dirichlet_function}
 \end{example}
 
-Note that the Dirichlet function does not have a Reimann integral. 
+Now we show that the Dirichlet function does not have a Reimann integral. Recall that the Reimann integral $\int_{a}^b f(x) \, dx$, when it exists,  is defined only for real-valued functions  $f$ whose domain is a compact space $[a,b] \subset \R$. For more information, see Section \ref{sec:some_info_relevant_to_reimann_integrals}.
 
-\begin{exercise}
-Prove that the Dirichlet function does not have a Reimann integral.	
-\end{exercise}
+\begin{remark}{\remarktitle{The Dirichlet function does not have a Reimann integral.}}	
+Let $f = I_{\Q} : [a,b] \to \R$ be the Dirichlet function on $[a,b] \subset \R$.  We consider an arbitrary \textit{partition} $P$ of $[a,b]$ into a collection of $n$ subintervals $[x_{k-1}, x_k]$ where $a=x_0 < x_1 < ... < x_n = b$.  Now by Proposition \ref{prop:reimann_integrable_iff_oscillation_goes_to_zero_as_partition_gets_finer}, a function on $[a,b]$ is Reimann integrable iff $\text{Osc}(f,P) \to 0$ as the maximum interval length of a partition $P$ goes to 0.  But for any partition $P$, any subinterval $[x_{k-1}, x_k]$ will contain at least one rational number and at least one irrational number, and so
+\begin{align*}
+S^+(f,P) &= \ds\sum_{k=1}^n 1 \cdot (x_k - x_{k-1}) = b-a \\	
+S^-(f,P) &= \ds\sum_{k=1}^n 0 \cdot (x_k - x_{k-1}) = 0\\
+\end{align*}
+Thus $\text{Osc}(f,P) = b-a$ for all partitions $P$. In particular $\text{Osc}(f,P) \not\to 0$ 	as the maximum interval length of a partition $P$ goes to 0.\footnote{To be more explicit, the condition of Proposition \ref{prop:reimann_integrable_iff_oscillation_goes_to_zero_as_partition_gets_finer} is that $\forall \epsilon > 0, \;\exists \delta >0  : \forall P  \text{ where the maximum interval length of } P < \delta, \; \text{Osc}(f,P) < \epsilon$. But since $\text{Osc}(f,P) = b-a$ for all partitions $P$, the condition is contradicted: $\exists \epsilon = \frac{b-a}{2} >0 : \forall P, \text{Osc}(f,P) > \epsilon.$}  Thus $f$ is not Reimann integrable. 
+\end{remark}
 
+% Commenting this out because we haven't defined almost everywhere yet.
 
-
-
-
+%\begin{remark}{\remarktitle{The Dirichlet function does not have a Reimann integral}} A function on $[a,b]$ is Riemann integrable if and only if it is bounded and continuous almost everywhere.  However, the Dirichlet function $f$ is continuous nowhere.  For every irrational number $x$, there is a sequence of rational numbers $\{r_n\}$ that converges to it. We have:
+%$$
+%\lim_{n\to\infty} f(r_n) = 1 \ne 0 = f(x)
+%$$
+%
+%Thus, $f$ isn't continuous at irrational numbers. Rational numbers can be handled similarly.
+%	
+%\label{rk:dirichlet_function_has_no_reimann_integral}
+%\end{remark}
+%\end{document}
+%
+%Example \ref{ex:integrating_the_dirichlet_function} shows how Lesbesgue integration can handle functions not handled by Reimann integration.  As noted in Remark \ref{rk:{rk:dirichlet_function_has_no_reimann_integral}, a function on $[a,b]$ is Riemann integrable if and only if it is bounded and continuous almost everywhere.  Lebesgue integration can handle functions that do not meet these criteria.
 
 \bibliography{references_ash_notes.bib}
 \bibliographystyle{unsrt}
@@ -1814,6 +1829,39 @@ If $A, B \subset \R$ are non-empty, then
 \begin{remark}
 Proposition \ref{prop:sup_and_inf_for_minkowski_sum_and_diff} can be informally described as saying that the infimum and supremum distribute over addition and subtraction, but negative signs ``flip" infima to suprema, and vice versa. 
 \end{remark}
+
+\section{Some information relevant to Reimann integrals} \label{sec:some_info_relevant_to_reimann_integrals}
+
+Let us present (using  \cite{strichartz2000way} for reference) some information relevant to Reimann integration for real-valued functions.  
+
+First off, recall that the Reimann integral $\int_{a}^b f(x) \, dx$, when it exists,  is defined only for real-valued functions  $f$ whose domain is a compact space $[a,b] \subset \R$.   
+
+Now consider the following definitions:
+
+\begin{itemize}
+\item A \textit{partition} $P$ of an interval $[a,b]$ is a collection of $n$ subintervals $[x_{k-1}, x_k]$ where $a=x_0 < x_1 < ... < x_n = b$. 
+\item The \textit{maximum interval length} of $P$ is defined by $ \max_{k=1,...,n} \big|[x_{k-1}, x_k]\big|$.
+\item Given a partition $P$, the \textit{upper sum} $S^+(f,P)$ and \textit{lower sum} $S^-(f,P)$ are defined by 
+\begin{align*}
+S^+(f,P) &:= \ds\sum_{k=1}^n M_k (x_k - x_{k-1}) \\
+&\quad \text{ where $M_k$ is the supremum of $f$ on $[x_{k-1}, x_k]$.} \\	
+S^-(f,P) &:= \ds\sum_{k=1}^n m_k (x_k - x_{k-1}) \\
+&\quad \text{ where $m_k$ is the infimum of $f$ on $[x_{k-1}, x_k]$.} \\
+\end{align*}
+\item The \textit{oscillation} $\text{Osc}(f,P)$ of a function $f$ over a partition $P$ is given by the difference of the upper and lower sums; i.e. $ \text{Osc}(f,P) := S^+(f,P) - S^-(f,P)$.
+\end{itemize}
+
+Finally, we present a proposition we use in the main text. 
+
+\begin{proposition}
+If $f$ is a bounded real-valued function on $[a,b]$, then $f$ is Reimann integrable iff $\text{Osc}(f,P) \to 0$ as the maximum interval length of $P$ goes to 0.
+\label{prop:reimann_integrable_iff_oscillation_goes_to_zero_as_partition_gets_finer}
+\end{proposition}
+
+\begin{proof}
+See Theorem 6.2.1 of \cite{strichartz2000way}.	
+\end{proof}
+
 
 
 \section{Miscellaneous}
