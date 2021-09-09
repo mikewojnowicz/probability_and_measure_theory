@@ -1728,16 +1728,23 @@ Note Equation 1 holds for any Lesbesgue-Stieljes measure with a continuous distr
 \label{ex:integrating_the_dirichlet_function}
 \end{example}
 
-Now we show that the Dirichlet function does not have a Reimann integral. Recall that the Reimann integral $\int_{a}^b f(x) \, dx$, when it exists,  is defined only for real-valued functions  $f$ whose domain is a compact space $[a,b] \subset \R$. For more information, see Section \ref{sec:some_info_relevant_to_reimann_integrals}.
+Now we show that the Dirichlet function does not have a Reimann integral. 
 
 \begin{remark}{\remarktitle{The Dirichlet function does not have a Reimann integral.}}	
-Let $f = I_{\Q} : [a,b] \to \R$ be the Dirichlet function on $[a,b] \subset \R$.  We consider an arbitrary \textit{partition} $P$ of $[a,b]$ into a collection of $n$ subintervals $[x_{k-1}, x_k]$ where $a=x_0 < x_1 < ... < x_n = b$.  Now by Proposition \ref{prop:reimann_integrable_iff_oscillation_goes_to_zero_as_partition_gets_finer}, a function on $[a,b]$ is Reimann integrable iff $\text{Osc}(f,P) \to 0$ as the maximum interval length of a partition $P$ goes to 0.  But for any partition $P$, any subinterval $[x_{k-1}, x_k]$ will contain at least one rational number and at least one irrational number, and so
+Let $h$ be the Dirichlet function; that is $h = I_{\Q} : \R \to \R$ is the indicator of the rationals.  Fix $[a,b] \subset \R$, and let $f=h |_{[a,b]}$; that is $f : [a,b] \to \R$ is the Dirichlet function restricted to $[a,b]$.  
+
+We consider an arbitrary \textit{partition} $P$ of $[a,b]$ into a collection of $n$ subintervals $[x_{k-1}, x_k]$ where $a=x_0 < x_1 < ... < x_n = b$.  Now by Proposition \ref{prop:reimann_integrable_iff_oscillation_goes_to_zero_as_partition_gets_finer}, a function on $[a,b]$ is Reimann integrable iff $\text{Osc}(f,P) \to 0$ as the maximum interval length of a partition $P$ goes to 0.\footnote{For a refresher on how these terms are defined, see Section \ref{sec:some_info_relevant_to_reimann_integrals}.}  But for any partition $P$, any subinterval $[x_{k-1}, x_k]$ will contain at least one rational number and at least one irrational number, and so
 \begin{align*}
 S^+(f,P) &= \ds\sum_{k=1}^n 1 \cdot (x_k - x_{k-1}) = b-a \\	
 S^-(f,P) &= \ds\sum_{k=1}^n 0 \cdot (x_k - x_{k-1}) = 0\\
 \end{align*}
 Thus $\text{Osc}(f,P) = b-a$ for all partitions $P$. In particular $\text{Osc}(f,P) \not\to 0$ 	as the maximum interval length of a partition $P$ goes to 0.\footnote{To be more explicit, the condition of Proposition \ref{prop:reimann_integrable_iff_oscillation_goes_to_zero_as_partition_gets_finer} is that $\forall \epsilon > 0, \;\exists \delta >0  : \forall P  \text{ where the maximum interval length of } P < \delta, \; \text{Osc}(f,P) < \epsilon$. But since $\text{Osc}(f,P) = b-a$ for all partitions $P$, the condition is contradicted: $\exists \epsilon = \frac{b-a}{2} >0 : \forall P, \text{Osc}(f,P) > \epsilon.$}  Thus $f$ is not Reimann integrable. 
+
+The Riemann integral of $h: \R \to \R$ would be an improper integral defined as the limiting value of the Reimann integrals $h|_{[a,b]}$ as $a \to -\infty, b \to \infty$.  But since the proper Reimann integrals for $h|_{[a,b]}$ don't exist, neither does the improper Reimann integral for $h$. 
+\label{rk:dirichlet_function_is_not_reimann_integrable}
 \end{remark}
+
+%Recall that a proper Reimann integral $\int_{a}^b f(x) \, dx$, when it exists,  is defined only for real-valued functions  $f$ whose domain is a compact space $[a,b] \subset \R$.  Recall also that an improper Reimann integral is  defined for functions $h: \R \to \R$ as the limiting value of proper Reimann integrals.  
 
 % Commenting this out because we haven't defined almost everywhere yet.
 
