@@ -1457,13 +1457,8 @@ In this section, we will introduce the general theory of integration of a functi
 
 Folland summarizes the difference between the Riemann and Lebesgue approaches thus: ``to compute the Riemann integral of $f$, one partitions the domain [...] into subintervals", while in the Lebesgue integral, ``one is in effect partitioning the range of $f$ " \cite{folland1999real}.
 
-\begin{figure}[H]
-\centering 
-\includegraphics[width=.7\textwidth, angle=270]{images/lesbesgue_vs_reimann}
-\end{figure}
 
-
-For another example, this time in two dimensions, suppose we want to find a mountain's volume (above sea level).
+For example, suppose we want to find a mountain's volume (above sea level).
 
 \begin{itemize}
 \item \textbf{The Riemann approach}: Divide the base of the mountain into a grid of 1 meter squares. Measure the altitude of the mountain at the center of each square. The volume on a single grid square is approximately 1 $m^2$ × (that square's altitude), so the total volume is 1 $m^2$ times the sum of the altitudes.
@@ -1475,9 +1470,20 @@ For another example, this time in two dimensions, suppose we want to find a moun
 \end{figure}
 \end{itemize}
 
-While the Riemann integral considers the area under a curve as made out of vertical rectangles, the Lebesgue definition considers slabs that are not necessarily just rectangles, and so it is more flexible. For this reason, the Lebesgue definition makes it possible to calculate integrals for a broader class of functions. For example, as we will see, the \textit{Dirichlet function}, which is 0 where its argument is irrational and 1 otherwise, has a Lebesgue integral, but does not have a Riemann integral.
+While the Riemann integral considers the area under a curve as made out of vertical rectangles, the Lebesgue definition considers slabs that are not necessarily just rectangles, and so it is more flexible. 
 
+Figure \ref{fig:lesbesgue_vs_reimann} compares how the Reimann and Lesbesgue approaches would approximate the area under the curve of a function $f : \R \to \R$. 
 
+\begin{figure}[H]
+\centering 
+\includegraphics[width=.7\textwidth, angle=270]{images/lesbesgue_vs_reimann}
+\caption{Illustrating the fundamental differences between Reimann and Lesbesgue integration}
+\label{fig:lesbesgue_vs_reimann}
+\end{figure}
+
+ In particular, notice:
+\begin{enumerate}
+\item Lesbesgue integration partitions the range of $f$, whereas Reimann integration partitions the domain of $f$. As a result, the Lesbegue approach provides \textit{adaptive grouping} when computing the area under the curve as the sum over $n$ contributions.  Whereas a function can vary a lot in Reimann subintervals of the form $A_i = (a_i,b_i)$, in the Lesbesgue approach, the function will have controlled amount of variation for each of the $n$ contributions.  While the approaches give equivalent answers for sufficiently nice functions (like continuous functions), the Lebesgue definition makes it possible to calculate integrals for a broader class of functions. For example, as we will see, the \textit{Dirichlet function}, which is 0 where its argument is irrational and 1 otherwise, has a Lebesgue integral, but does not have a Riemann integral.
 
 Lebesgue summarized his approach to integration in a letter to Paul Montel:
 \begin{quotation}
@@ -1487,6 +1493,10 @@ I have to pay a certain sum, which I have collected in my pocket.  I take the bi
 
 
 The insight is that one should be able to rearrange the values of a function freely, while preserving the value of the integral.  This process of rearrangement can convert a very pathological function into one that is ``nice" from the point of view of integration, and thus let such pathological functions be integrated.
+
+\item The Reimann approach implicitly assumes that sets in the domain have sizes that are given by Lesbesgue measure ($\mu(A) = |A|)$, whereas the Lesbesgue approach allows sets in the domain to have sizes given by any arbitrary measure $\mu$.
+\item The Reimann approach assumes that the domain is totally ordered.  In contrast, Lesbesgue integrals can be defined for functions on arbitrary spaces.
+\end{enumerate}
 
 
 \subsection{$\S$ 1.5.1 Measurable functions}
