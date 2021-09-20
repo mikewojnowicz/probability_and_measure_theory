@@ -1702,6 +1702,16 @@ The integral of a simple function can also be expressed as
 \caption{The Lesbesgue integral of a simple function. {\scriptsize (In this case, the simple function is also a step function.)}}
 \end{figure}
 
+\begin{remark}{\remarktitle{Integrating simple functions over arbitrary measurable subsets}}
+For any $A \in \F$, we define 
+\[ \ds\int_A h \wrt{\mu} := \ds\int_\Omega h \, I_A \wrt{\mu}  \]
+
+This definition is possible because whenever $h$ is a simple function, then so is $h I_A$ for any measurable set $A$.   Indeed, if we express $h = \sum_{i=1}^r y_i I_{B_i}$, then $h I_A = \sum_{i=1}^r y_i I_{A} I_{B_i} = \sum_{i=1}^r y_i I_{A \cap B_i}$, and each $A \cap B_i \in \F$.  
+\label{rk:integrating_simple_functions_over_arbitrary_measurable_subsets}
+ \end{remark}
+ 
+\paragraph{Comparison to Reimann integration}
+
 \begin{example}{\remarktitle{Integrating a step function}}
 Let $h$ be a step function, as defined in Remark \ref{rk:simple_functions_generalize_step_functions}.   So  $a = x_0 < x_1 < ... < x_n = b$ is a partition of $\Omega := \text{dom}(h)$, and $h$ takes on values $y_i$ on $(x_{i-1},x_i)$ for $i=1,...,n$.  Then 
 \begin{align*}
@@ -1761,6 +1771,64 @@ The Riemann integral of $h: \R \to \R$ would be an improper integral defined as 
 %
 %Example \ref{ex:integrating_the_dirichlet_function} shows how Lesbesgue integration can handle functions not handled by Reimann integration.  As noted in Remark \ref{rk:{rk:dirichlet_function_has_no_reimann_integral}, a function on $[a,b]$ is Riemann integrable if and only if it is bounded and continuous almost everywhere.  Lebesgue integration can handle functions that do not meet these criteria.
 
+\paragraphnewline{Properties of integrals of simple functions} 
+
+In this section, for now, we only provide properties that come up in our exposition.  For other useful properties, see Proposition 2.13 of \cite{folland1999real}.
+
+
+\begin{proposition} (Monotonicity of integrals of simple functions) Let $h_1 \leq h_2$ be simple functions. Then $\ds\int h_1 \wrt{\mu} \leq \ds\int h_2 \wrt{\mu}$.
+\label{prop:monotonicity_of_integrals_of_simple_functions}
+\end{proposition}
+
+\begin{proof}
+By definition of simple functions, we write \[h_1 = \ds\sum_{i=1}^r x_i I_{A_i} ,\quad \quad h_2 = \ds\sum_{j=1}^s y_j I_{B_j}  \]	
+But if we use a common (finer) partition of $\Omega$ into sets $\set{A_i \cap B_j}$, we can write
+\[h_1 = \ds\sum_{i=1}^r \ds\sum_{j=1}^s x_i I_{A_i \cap B_j} ,\quad \quad h_2 = \ds\sum_{i=1}^r \ds\sum_{j=1}^s y_j I_{A_i \cap B_j}  \]
+where by assumption, $x_i \leq y_j$ on each $A_i \cap B_j$.	
+	
+So 
+\begin{align*}
+\ds\int h_1 \wrt{\mu}  = \ds\sum_{i=1}^r \ds\sum_{j=1}^s x_i \, \mu(A_i \cap B_j)  \leq \ds\sum_{i=1}^r \ds\sum_{j=1}^s y_i \, \mu(A_i \cap B_j) = \ds\int h_2 \wrt{\mu}.
+\end{align*}
+
+\end{proof}
+
+\begin{proposition}
+Let $s$ be a non-negative simple function. Then 
+\[ A \mapsto \ds\int_A s \wrt{\mu} \]
+is a measure on $\F$. 
+\end{proposition}
+
+\begin{proof}
+We show  countable additivity.\footnote{Non-negativity is clear from the definition.  See Remark \ref{rk:integrating_simple_functions_over_arbitrary_measurable_subsets}.}  Let $A = \bigcupdot_{i=1}^\infty A_i$.  Then
+
+\begin{align*}
+\ds\int_A s \wrt{\mu} &= \ds\sum_{j=1}^n y_j \, \mu(B_j \cap A) && \tinytext{Remark \ref{rk:integrating_simple_functions_over_arbitrary_measurable_subsets}} \\
+&= \ds\sum_{j=1}^n \ds\sum_{i=1}^\infty y_i \, \mu(B_j \cap A_i) && \tinytext{countable additivity} \\
+&= \ds\sum_{i=1}^\infty  \ds\sum_{j=1}^n y_i \, \mu(B_j \cap A_i) && \tinytext{needs justification} \\
+&= \ds\sum_{i=1}^\infty \ds\int_{A_i} s \wrt{\mu}
+\end{align*}
+\end{proof}
+
+
+
+\subsubsection{Integrals of non-negative functions}
+
+\begin{definition}
+If $h$ is non-negative Borel measurable, we define 
+
+\[  \ds\int_{\Omega} h \wrt{\mu} = \sup \bigg\{ \ds\int_{\Omega} s \wrt{\mu} : s \quad \text{simple,} \quad 0 \leq s \leq h  \bigg\} \]
+\label{def:integral_of_non_negative_Borel_measurable_function}
+\end{definition}
+
+When $h$ is simple, this definition agrees with the definition of the integral for simple functions (Definition \ref{def:integral_of_simple_function}). This follows from Proposition \ref{prop:monotonicity_of_integrals_of_simple_functions} and the fact that the family of functions over which the supremum is taken includes $h$ itself.\footnote{Let us show in more detail that when $h$ is simple, the definition of the integral for non-negative Borel measurable functions (Definition \ref{def:integral_of_non_negative_Borel_measurable_function}) agrees with the definition of the integral for simple functions (Definition \ref{def:integral_of_simple_function}).  Let $h$ be simple and take $\int_{\Omega} h \wrt{\mu}$ to be given by Definition \ref{def:integral_of_simple_function}. Then by Proposition \ref{prop:monotonicity_of_integrals_of_simple_functions}, $\int_{\Omega} h \wrt{\mu}$ must be an upper bound for  $A$, which we define as the set of integrals on the RHS of  Definition \ref{def:integral_of_non_negative_Borel_measurable_function}.  Moreover, it is the least upper bound by Remark \ref{rk:when_upper_or_lower_bound_is_contained_in_the_set_itself}, since for every $M' < M:= \int_{\Omega} h \wrt{\mu}$ there is an $a \in A$ such that $a>M'$, namely $a=\int_{\Omega} h \wrt{\mu}$.} 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.4\textwidth]{images/simple_function_approximating_non_negative_function}	
+\caption{A simple function approximating a non-negative function in terms of its integral}
+\end{figure}
+
 \bibliography{references_ash_notes.bib}
 \bibliographystyle{unsrt}
 
@@ -1770,6 +1838,8 @@ The Riemann integral of $h: \R \to \R$ would be an improper integral defined as 
 \section{Supremum and Infimum}
 
 Following are some definitions and propositions that we use in the notes.\footnote{For a nice introductory overview, see \href{https://www.math.ucdavis.edu/~hunter/m125b/ch2.pdf}.}
+
+\subsection{Characterization}
 
 First, we define upper and lower bounds.
 \begin{definition}
@@ -1812,11 +1882,14 @@ If $A \subset \R$, then $M = \sup A$ if and only if (a) $M$ is an upper bound of
 \label{rk:usage_of_alternate_characterization_of_inf_and_sup}
 \end{remark}
 
+\begin{remark}{\remarktitle{When the upper or lower bound is contained in the set itself}}
+Note that if a set $A$ \textit{contains} an upper bound, then it is automatically a supremum.  That is, if $M$ is an upper bound of $A$ such that $M \in A$, then the \textit{least} upper bound property (the second condition in the characterizations above) automatically follows.  For instance, condition (b) in Proposition \ref{prop:supremum_and_infimum_alternate_characterization} is immediately satisfied by setting $a=M$.   When the supremum is contained in the set, it is called a \textit{maximum}.   A similar remark holds for infima: when the lower bound is contained in the set, it is automatically the infimum, and it is called the minimum.
+\label{rk:when_upper_or_lower_bound_is_contained_in_the_set_itself} 
+\end{remark}
 
+\subsection{Properties}
 
-
-
-The proposition below characterizes the behavior of the infimum and supremum under set containment
+The proposition below characterizes the behavior of the infimum and supremum under set containment.
 
 \begin{proposition}
 Suppose that $A$ and $B$ are subsets of $\R$ such that $A \subset B$.  If $\sup A$ and $\sup B$ exist, then $\sup A \leq \sup B$.  If $\inf A$ and $\inf B$ exist, then $\inf A \geq \inf B$.
