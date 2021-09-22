@@ -1655,7 +1655,7 @@ In this section, we define integral of a Borel measurable function $h : (\Omega,
 
 \subsubsection{Integrals of simple functions}
 
-First we define simple functions. 
+\paragraph{Definition of simple functions} 
 
 \begin{definition}
 Let $(\Omega, \F)$ be a measurable space, fixed throughout the discussion.  If $h : \Omega \to \overline{\R}$, $h$ is said to be \textit{simple} iff $h$ is measurable and takes on only finitely many distinct values.  That is, $h$ is simple iff it can be written $h = \sum_{i=1}^r y_i I_{A_i}$ where the $A_i$ are disjoint sets in $\F$ and $I_{A_i}$ is the indicator of $A_i$; the $y_i$ need not be distinct. 
@@ -1701,6 +1701,25 @@ The integral of a simple function can also be expressed as
 \includegraphics[width=.5\textwidth]{images/integral_of_simple_function}	
 \caption{The Lesbesgue integral of a simple function. {\scriptsize (In this case, the simple function is also a step function.)}}
 \end{figure}
+
+\begin{remark}{\remarktitle{When does the integral of a simple function exist}}
+The integral of a simple function exists whenever $\infty$ and  $-\infty$ do not both appear in the sum.  So in particular, the integral for $h$ does not exist when
+\begin{itemize}
+\item The finite values it takes on $\set{y_i}_{i=1}^r$ include 	$\infty$ and $-\infty$ on sets that are not of measure zero.
+\begin{figure}[H]
+\centering
+\includegraphics[width=.5\textwidth]{images/when_does_integral_of_simple_function_exist_part_1}
+\end{figure}
+
+\item It takes on values of opposite signs on two sets of infinite measure.
+\begin{figure}[H]
+\centering
+\includegraphics[width=.5\textwidth]{images/when_does_integral_of_simple_function_exist_part_2}
+\end{figure}
+\end{itemize}
+ 
+\label{rk:when_does_integral_of_simple_function_exist}
+\end{remark}
 
 \begin{remark}{\remarktitle{Integrating simple functions over arbitrary measurable subsets}}
 For any $A \in \F$, we define 
@@ -1812,7 +1831,7 @@ We show  countable additivity.\footnote{Non-negativity is clear from the definit
 
 
 
-\subsubsection{Integrals of non-negative functions}
+\subsubsection{Integrals of non-negative Borel measurable functions}
 
 \begin{definition}
 If $h$ is non-negative Borel measurable, we define 
@@ -1829,9 +1848,95 @@ When $h$ is simple, this definition agrees with the definition of the integral f
 \caption{A simple function approximating a non-negative function in terms of its integral}
 \end{figure}
 
+\begin{remark}{\remarktitle{When does the integral of a non-negative Borel measurable function exist?}}
+The integral of a non-negative Borel measurable function \textit{always} exists (although it may take on the value $+\infty$).  Note that neither case discussed in Remark \ref{rk:when_does_integral_of_simple_function_exist} apply, since the supremum can simply be taken over the set of simple functions that never take on negative values. 
+\label{rk:when_does_integral_of_non_negative_Borel_measurable_function_exist}
+\end{remark}
+
+The following proposition may provide additional confidence in Definition \ref{def:integral_of_non_negative_Borel_measurable_function}, since simple functions approximate non-negative Borel measurable functions.
+
+\begin{proposition}
+Let $h$ be a non-negative Borel measurable function.  Then there is a sequence $\set{s_n}$ of simple functions such that $0 \leq s_1 \leq s_2 \leq ... \leq h$, $s_n \to h$ pointwise, and $s_n \to h$ uniformly on any set on which $h$ is bounded.	
+\end{proposition}
+
+\begin{proof}
+Define 
+\[ s_n(\omega) = 
+\begin{cases}
+\df{k-1}{2^n}, & \text{ if } \quad \df{k-1}{2^n} \leq h(\omega) \leq \df{k}{2^n},\quad k=1,2,...,n2^n \\
+n, & \text{ if } \quad h(\omega) \geq n 
+\end{cases}
+\]	
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.7\textwidth]{images/approximate_nonnegative_with_simple}	
+\caption{An element of an increasing sequence of simple functions approximating an arbitrary non-negative Borel measurable function. The $n$th function in the sequence has a maximum value of $n$ and divides the range into bins of size $2^{-n}$.}
+\end{figure}
+
+
+Then 
+\begin{itemize}
+\item $s_n \leq s_{n+1}$ for all $n$
+\item $0 \leq h - s_n \leq 2^{-n}$ on the set where $h \leq 2^n$.
+\end{itemize}
+
+
+\end{proof}
+
+
+\subsubsection{Integrals of arbitrary Borel measurable functions}
+
+Let $h$ be an arbitrary Borel measurable function.   We will express an arbitrary Borel measurable function as as the difference of two non-negative Borel measurable functions.
+
+Define:
+\begin{align*}
+h^+ &:= \max (h,0) \\
+h^- &:= \max (-h,0) \\	
+\end{align*}
+Then 
+\begin{align*}
+h &= h^+ - h^- \\
+|h| &= h^+ + h^- \\	
+\end{align*}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.7\textwidth]{images/arbitrary_borel_measurable_functions_in_terms_of_nonnegative_borel_measurable_functions}
+\end{figure}
+
+Now both $h^+$ and $h^-$ are Borel measurable as well.  This holds because if $h_1, h_2$ are Borel measurable, then so are $\max(h_1,h_2)$ and $\min(h_1,h_2)$:
+
+\begin{align*}
+\bigg\{ \omega : \max \bigg( h_1(\omega), h_2(\omega) < c \bigg) \bigg\} &=	\set{\omega :  h_1(\omega) < c } \cap \set{\omega : h_2(\omega) < c } \\
+\bigg\{ \omega : \min \bigg( h_1(\omega), h_2(\omega) < c \bigg) \bigg\} &=	\set{\omega :  h_1(\omega) < c } \cup \set{\omega : h_2(\omega) < c }
+\end{align*}
+
+
+which is sufficient to show measurability by the ``computational definition of measurability" (see Remark \ref{rk:computational_definition_of_Borel_measurability}). 
+
+So we have expressed an arbitrary Borel measurable function as as the difference of two non-negative Borel measurable functions. Therefore, we can define its integral by 
+
+\[ \ds\int_\Omega h \wrt{\mu} = \ds\int_\Omega h^+ \wrt{\mu} - \ds\int_\Omega h^- \wrt{\mu} \]
+
+
+\begin{remark}{\remarktitle{When does the integral of an arbitary Borel measurable function exist?}}
+Recall from Remark \ref{rk:when_does_integral_of_non_negative_Borel_measurable_function_exist} that the integral of a non-negative Borel measurable function \textit{always} exists (although it may take on the value $+\infty$).  Thus, the integral of an arbitrary non-negative Borel function exists so long as it does not take the form $+\infty - \infty$. 
+\label{rk:when_does_integral_of_arbitary_Borel_measurable_function_exist}
+\end{remark}
+
+\begin{remark}{\remarktitle{Integrals on subsets}}
+For $A \in \F$, we define 
+\[ \ds\int_A h \wrt{\mu} = \ds\int_\Omega  h I_A \wrt{\mu} \]
+This definition works because whenever $h$ is measurable, then so is $h I_A$:
+\[\set{ \omega : h I_A (\omega) < c } =	\explaintermbrace{$\in \F$ since $h$ measurable}{\set{\omega :  h(\omega) < c }} \cap \explaintermbrace{$\in \F$ by assumption}{\set{\omega : \omega \in A }} \\  \]
+ 
+	
+\end{remark}
+
 \bibliography{references_ash_notes.bib}
 \bibliographystyle{unsrt}
-
+ 
 \newpage 
 \appendix
 
