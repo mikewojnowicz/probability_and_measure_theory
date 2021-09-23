@@ -1457,21 +1457,6 @@ In this section, we will introduce the general theory of integration of a functi
 
 Folland summarizes the difference between the Riemann and Lebesgue approaches thus: ``to compute the Riemann integral of $f$, one partitions the domain [...] into subintervals", while in the Lebesgue integral, ``one is in effect partitioning the range of $f$ " \cite{folland1999real}.
 
-
-For example, suppose we want to find a mountain's volume (above sea level).
-
-\begin{itemize}
-\item \textbf{The Riemann approach}: Divide the base of the mountain into a grid of 1 meter squares. Measure the altitude of the mountain at the center of each square. The volume on a single grid square is approximately 1 $m^2$ × (that square's altitude), so the total volume is 1 $m^2$ times the sum of the altitudes.
-\item \textbf{The Lebesgue approach}: Draw a contour map of the mountain, where adjacent contours are 1 meter of altitude apart. The volume of earth a single contour contains is approximately 1 m × (that contour's area), so the total volume is the sum of these areas times 1 m.
-
-\begin{figure}[H]
-\centering 
-\includegraphics[width=.5\textwidth]{images/contour_plot}
-\end{figure}
-\end{itemize}
-
-While the Riemann integral considers the area under a curve as made out of vertical rectangles, the Lebesgue definition considers slabs that are not necessarily just rectangles, and so it is more flexible. 
-
 Figure \ref{fig:lesbesgue_vs_reimann} compares how the Reimann and Lesbesgue approaches would approximate the area under the curve of a function $f : \R \to \R$. 
 
 \begin{figure}[H]
@@ -1497,6 +1482,22 @@ The insight is that one should be able to rearrange the values of a function fre
 \item The Reimann approach implicitly assumes that sets in the domain have sizes that are given by Lesbesgue measure ($\mu(A) = |A|)$, whereas the Lesbesgue approach allows sets in the domain to have sizes given by any arbitrary measure $\mu$.
 \item The Reimann approach assumes that the domain is totally ordered.  In contrast, Lesbesgue integrals can be defined for functions on arbitrary spaces.
 \end{enumerate}
+
+
+For another example with domain in $\R^2$, suppose we want to find a mountain's volume (above sea level).
+
+\begin{itemize}
+\item \textbf{The Riemann approach}: Divide the base of the mountain into a grid of 1 meter squares. Measure the altitude of the mountain at the center of each square. The volume on a single grid square is approximately 1 $m^2$ × (that square's altitude), so the total volume is 1 $m^2$ times the sum of the altitudes.
+\item \textbf{The Lebesgue approach}: Draw a contour map of the mountain, where adjacent contours are 1 meter of altitude apart. The volume of earth a single contour contains is approximately 1 m × (that contour's area), so the total volume is the sum of these areas times 1 m.
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=.5\textwidth]{images/contour_plot}
+\end{figure}
+\end{itemize}
+
+While the Riemann integral considers the area under a curve as made out of vertical rectangles, the Lebesgue definition considers slabs that are not necessarily just rectangles, and so it is more flexible. 
+
 
 
 \subsection{$\S$ 1.5.1 Measurable functions}
@@ -1645,6 +1646,31 @@ However,
 \end{itemize}
 
 Recall in Section \ref{sec:intuition_on_lesbesgue_integration} that Lesbesgue and Reimann integration are distinguished in terms of whether they partition the range or domain of the function.  My speculation is that the nice interplay of basic set operations and inverse images (but not direct images) at least partially explains why Lesbesgue's approach has been more successful than Reimann's approach (in the sense of better limit theorems, better handling of non-Euclidean spaces, etc.).
+
+\subsubsection{Properties}
+
+\begin{proposition}
+If $h_1, h_2 : (\Omega, \F) \to (\overline{\R}, \B(\overline{\R}))$ are Borel measurable, then so are $h_1 + h_2$ and $h_1 h_2$.  
+\label{prop:borel_measurability_closed_under_multiplication_and_addition}
+\end{proposition}
+
+\begin{proof}
+See \cite{folland1999real} Proposition 2.6.
+\end{proof}
+
+\begin{proposition}
+If $\set{h_n}$ is a sequence of $\overline{\R}$-valued Borel measurable functions on $(\Omega, \F)$, then the functions
+\begin{align*}
+\sup_n h_n(\omega), & \quad \quad \limsup_{n \to \infty} h_n(\omega) \\
+\inf_n h_n(\omega), & \quad \quad  \liminf_{n \to \infty} h_n(\omega) \\	
+\end{align*}
+are all measurable. Thus, if $h(\omega) = \lim_{n \to \infty} h_n(\omega)$ exists for all $\omega \in \Omega$, then $h$ is measurable.
+\label{prop:borel_measurability_closed_under_inf_sup_liminf_limsup}
+\end{proposition}
+
+\begin{proof}
+See \cite{folland1999real} Proposition 2.7.
+\end{proof}
 
 \subsection{$\S$ 1.5.2-1.5.3 Definition of the integral for Borel measurable functions}
 
@@ -1795,14 +1821,20 @@ The Riemann integral of $h: \R \to \R$ would be an improper integral defined as 
 In this section, for now, we only provide properties that come up in our exposition.  For other useful properties, see Proposition 2.13 of \cite{folland1999real}.
 
 
-\begin{proposition} (Monotonicity of integrals of simple functions) Let $h_1 \leq h_2$ be simple functions. Then $\ds\int h_1 \wrt{\mu} \leq \ds\int h_2 \wrt{\mu}$.
-\label{prop:monotonicity_of_integrals_of_simple_functions}
+\begin{proposition} 
+Let $g$ and $h$  be simple functions.  Then 
+\begin{alphabate}
+\item (monotonicity) If $g \leq h$ then $\ds\int g \wrt{\mu} \leq \ds\int h \wrt{\mu}$.
+\item If $c \geq 0$, then $\ds\int c g \wrt{\mu} = c \ds\int g \wrt{\mu}$.
+\item $\ds\int (g + h) \wrt{\mu} = \ds\int g \wrt{\mu} + \ds\int h \wrt{\mu}$ .
+\end{alphabate}
+\label{prop:properties_of_integrals_of_simple_functions}
 \end{proposition}
 
 \begin{proof}
-By definition of simple functions, we write \[h_1 = \ds\sum_{i=1}^r x_i I_{A_i} ,\quad \quad h_2 = \ds\sum_{j=1}^s y_j I_{B_j}  \]	
+We prove (a) and leave the rest to the reader. By definition of simple functions, we write \[g = \ds\sum_{i=1}^r x_i I_{A_i} ,\quad \quad h = \ds\sum_{j=1}^s y_j I_{B_j}  \]	
 But if we use a common (finer) partition of $\Omega$ into sets $\set{A_i \cap B_j}$, we can write
-\[h_1 = \ds\sum_{i=1}^r \ds\sum_{j=1}^s x_i I_{A_i \cap B_j} ,\quad \quad h_2 = \ds\sum_{i=1}^r \ds\sum_{j=1}^s y_j I_{A_i \cap B_j}  \]
+\[g = \ds\sum_{i=1}^r \ds\sum_{j=1}^s x_i I_{A_i \cap B_j} ,\quad \quad h = \ds\sum_{i=1}^r \ds\sum_{j=1}^s y_j I_{A_i \cap B_j}  \]
 where by assumption, $x_i \leq y_j$ on each $A_i \cap B_j$.	
 	
 So 
@@ -1815,7 +1847,8 @@ So
 \begin{proposition}
 Let $s$ be a non-negative simple function. Then 
 \[ A \mapsto \ds\int_A s \wrt{\mu} \]
-is a measure on $\F$. 
+is a measure on $\F$.
+\label{prop:the_integral_of_a_simple_function_over_a_set_is_one_way_to_measure_that_set} 
 \end{proposition}
 
 \begin{proof}
@@ -1829,18 +1862,39 @@ We show  countable additivity.\footnote{Non-negativity is clear from the definit
 \end{align*}
 \end{proof}
 
+\begin{remark}
+Proposition \ref{prop:the_integral_of_a_simple_function_over_a_set_is_one_way_to_measure_that_set} says that we can measure a set by integrating a simple function over it.  Given some initial measure for $A$, we can get a new measure by breaking $A$ into finitely many (measurable) pieces and giving different weights to the measures of the different pieces.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.5\textwidth]{images/integrals_of_simple_functions_induce_new_measures}
+\end{figure}
+\end{remark}
+
+\begin{remark}{\remarktitle{Continuity of measure applied to measures given by integrals of simple functions over sets}}
+Recall (Theorem \ref{thm:continuity_of_countably_additive_set_functions}) that measure satisfies continuity from below: if $A_n$ are measurable and $A_n \uparrow A$, then $\lim_{n \to \infty} \mu(A_n) = \mu(A)$.    Combining this with Proposition \ref{prop:the_integral_of_a_simple_function_over_a_set_is_one_way_to_measure_that_set}, we have that if $A_n$ are measurable and $A_n \uparrow A$,
+\[ \ds\lim_{n \to \infty} \ds\int_{A_n} s \wrt{\mu} =  \ds\int_A s \wrt{\mu} \]
+for any simple function $s$.  
+\label{rk:continuity_of_measure_applied_to_measures_given_by_integrals_of_simple_functions_over_sets}
+\end{remark}
+
 
 
 \subsubsection{Integrals of non-negative Borel measurable functions}
 
+\paragraph{Definition of integral of non-negative Borel measurable functions}
+
 \begin{definition}
 If $h$ is non-negative Borel measurable, we define 
 
-\[  \ds\int_{\Omega} h \wrt{\mu} = \sup \bigg\{ \ds\int_{\Omega} s \wrt{\mu} : s \quad \text{simple,} \quad 0 \leq s \leq h  \bigg\} \]
+\begin{align*}
+\ds\int_{\Omega} h \wrt{\mu} = \sup \bigg\{ \ds\int_{\Omega} s \wrt{\mu} : s \quad \text{simple,} \quad 0 \leq s \leq h  \bigg\} 
+\labelit \label{eqn:def_integral_of_non_negative_Borel_measurable_function}
+\end{align*}
 \label{def:integral_of_non_negative_Borel_measurable_function}
 \end{definition}
 
-When $h$ is simple, this definition agrees with the definition of the integral for simple functions (Definition \ref{def:integral_of_simple_function}). This follows from Proposition \ref{prop:monotonicity_of_integrals_of_simple_functions} and the fact that the family of functions over which the supremum is taken includes $h$ itself.\footnote{Let us show in more detail that when $h$ is simple, the definition of the integral for non-negative Borel measurable functions (Definition \ref{def:integral_of_non_negative_Borel_measurable_function}) agrees with the definition of the integral for simple functions (Definition \ref{def:integral_of_simple_function}).  Let $h$ be simple and take $\int_{\Omega} h \wrt{\mu}$ to be given by Definition \ref{def:integral_of_simple_function}. Then by Proposition \ref{prop:monotonicity_of_integrals_of_simple_functions}, $\int_{\Omega} h \wrt{\mu}$ must be an upper bound for  $A$, which we define as the set of integrals on the RHS of  Definition \ref{def:integral_of_non_negative_Borel_measurable_function}.  Moreover, it is the least upper bound by Remark \ref{rk:when_upper_or_lower_bound_is_contained_in_the_set_itself}, since for every $M' < M:= \int_{\Omega} h \wrt{\mu}$ there is an $a \in A$ such that $a>M'$, namely $a=\int_{\Omega} h \wrt{\mu}$.} 
+When $h$ is simple, this definition agrees with the definition of the integral for simple functions (Definition \ref{def:integral_of_simple_function}). This follows from Proposition \ref{prop:properties_of_integrals_of_simple_functions} (a) and the fact that the family of functions over which the supremum is taken includes $h$ itself.\footnote{Let us show in more detail that when $h$ is simple, the definition of the integral for non-negative Borel measurable functions (Definition \ref{def:integral_of_non_negative_Borel_measurable_function}) agrees with the definition of the integral for simple functions (Definition \ref{def:integral_of_simple_function}).  Let $h$ be simple and take $\int_{\Omega} h \wrt{\mu}$ to be given by Definition \ref{def:integral_of_simple_function}. Then by Proposition \ref{prop:properties_of_integrals_of_simple_functions} (a), $\int_{\Omega} h \wrt{\mu}$ must be an upper bound for  $A$, which we define as the set of integrals on the RHS of  Definition \ref{def:integral_of_non_negative_Borel_measurable_function}.  Moreover, it is the least upper bound by Remark \ref{rk:when_upper_or_lower_bound_is_contained_in_the_set_itself}, since for every $M' < M:= \int_{\Omega} h \wrt{\mu}$ there is an $a \in A$ such that $a>M'$, namely $a=\int_{\Omega} h \wrt{\mu}$.} 
 
 \begin{figure}[H]
 \centering
@@ -1849,14 +1903,52 @@ When $h$ is simple, this definition agrees with the definition of the integral f
 \end{figure}
 
 \begin{remark}{\remarktitle{When does the integral of a non-negative Borel measurable function exist?}}
-The integral of a non-negative Borel measurable function \textit{always} exists (although it may take on the value $+\infty$).  Note that neither case discussed in Remark \ref{rk:when_does_integral_of_simple_function_exist} apply, since the supremum can simply be taken over the set of simple functions that never take on negative values. 
+The integral of a non-negative Borel measurable function \textit{always} exists (although it may take on the value $+\infty$).  Note that neither case discussed in Remark \ref{rk:when_does_integral_of_simple_function_exist} apply, since the supremum is simply taken over the set of simple functions that never take on negative values. 
 \label{rk:when_does_integral_of_non_negative_Borel_measurable_function_exist}
 \end{remark}
+
+
+\paragraphnewline{Properties of integral of non-negative Borel measurable functions}
+
+We will use these basic properties below:
+\begin{proposition}
+Let $f,g$ be non-negative Borel measurable functions. Then
+\begin{alphabate}
+\item (monotonicity) $\ds\int f \leq \ds\int g \text{ whenever } f \leq g$
+\item (non-negative constant multiples) $\ds\int cf = c \ds\int f \text{ for all } c \geq 0.$	
+\end{alphabate}
+\label{prop:properties_of_integrals_of_non_negative_borel_measurable_functions}
+\end{proposition}
+
+\begin{proof}
+\begin{alphabate}
+\item 
+\begin{align*}
+f \leq g & \implies \set{s : s \text{ simple } , 0 \leq s \leq f} \subset \set{s:  s \text{ simple } , 0 \leq s \leq g} \\
+& \implies 	\set{ \ds\int s \wrt{\mu}  :   s \text{ simple } , 0 \leq s \leq f} \subset \set{ \ds\int s \wrt{\mu} :  s \text{ simple } , 0 \leq s \leq g} \\
+& \stackrel{Prop. \ref{prop:sup_and_inf_for_subsets_are_tighter}}{\implies} \sup \set{ \ds\int s \wrt{\mu}  :  s \text{ simple } , 0 \leq s \leq f} \leq  \sup \set{ \ds\int s \wrt{\mu} :   s \text{ simple } , 0 \leq s \leq g} \\
+& \implies \ds\int f \wrt{\mu} \leq \ds\int g \wrt{\mu} 
+\end{align*}
+\item 
+\begin{align*}
+\ds\int c f \wrt{\mu} &= \sup \set{\ds\int s' \wrt{\mu} : s' \text{ simple } , 0 \leq s' \leq cf} \\
+&=  \sup  \set{\ds\int cs \wrt{\mu}   : s\text{ simple } , 0 \leq s \leq f} && \tinytext{Let $s' = cs$} \\
+&= \sup  \set{c \ds\int s \wrt{\mu}   : s\text{ simple } , 0 \leq s \leq f} && \tinytext{Linearity of integral of simple functions} \\
+&= c \set{ \ds\int s \wrt{\mu}   : s\text{ simple } , 0 \leq s \leq f} && \tinytext{Prop. \ref{prop:supremum_and_infimum_under_constant_multiples_of_sets}}\\
+&= c \ds\int f \wrt{\mu} 
+\end{align*}
+
+\end{alphabate}
+
+\end{proof}
+
+\paragraphnewline{Computing the integral of non-negative Borel measurable functions}
 
 The following proposition may provide additional confidence in Definition \ref{def:integral_of_non_negative_Borel_measurable_function}, since simple functions approximate non-negative Borel measurable functions.
 
 \begin{proposition}
 Let $h$ be a non-negative Borel measurable function.  Then there is a sequence $\set{s_n}$ of simple functions such that $0 \leq s_1 \leq s_2 \leq ... \leq h$, $s_n \to h$ pointwise, and $s_n \to h$ uniformly on any set on which $h$ is bounded.	
+\label{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function}
 \end{proposition}
 
 \begin{proof}
@@ -1878,11 +1970,58 @@ n, & \text{ if } \quad h(\omega) \geq n
 Then 
 \begin{itemize}
 \item $s_n \leq s_{n+1}$ for all $n$
-\item $0 \leq h - s_n \leq 2^{-n}$ on the set where $h \leq 2^n$.
+\item $0 \leq h - s_n \leq 2^{-n}$ on the set where $h \leq n$.
 \end{itemize}
 
 
 \end{proof}
+
+Now we establish one of the fundamental convergence theorems. 
+
+\begin{theorem}{\textbf{The Monotone convergence theorem.}}
+If $\set{h_n}$ is a sequence of non-negative Borel measurable functions such that $h_n \leq h_{n+1}$ for all $n$ and $h =\lim_{n \to \infty} h_n (= \sup_n h_n)$, then 
+\begin{align*}
+\ds \int h \wrt{\mu} = \lim_{n \to \infty} \ds\int h_n \wrt{\mu}
+\labelit \label{eqn:monotone_convergence_theorem_conclusion}	
+\end{align*}
+\label{thm:monotone_convergence_theorem}
+\end{theorem}
+
+\begin{proof}
+
+We break the proof into three parts:
+\begin{itemize}
+\item We first show that both quantities in \eqref{eqn:monotone_convergence_theorem_conclusion} exist.  The RHS exists because $h$ is Borel measurable (by Proposition \ref{prop:borel_measurability_closed_under_inf_sup_liminf_limsup}) and non-negative (see Remark \ref{rk:when_does_integral_of_non_negative_Borel_measurable_function_exist}).  The LHS exists since each $\int h_n$ exists (see Remark \ref{rk:when_does_integral_of_non_negative_Borel_measurable_function_exist}) and is increasing (by monotonicity; see Prop. \ref{prop:properties_of_integrals_of_non_negative_borel_measurable_functions}), and therefore has a limit (possibly $\infty$). 
+
+\item Next, we show $\geq$ for \eqref{eqn:monotone_convergence_theorem_conclusion}; that is we show $\lim_{n \to \infty} \int h_n \leq \int h$.
+\[ h_n \leq h \stackreltext{monotonicity}{\implies} \ds\int h_n \leq \ds\int h \stackreltext{limits preserve inequalities}{\implies} \ds\lim_{n \to \infty} \ds\int h_n \leq \ds\int h \]
+
+\item Finally, we show $\leq$ for \eqref{eqn:monotone_convergence_theorem_conclusion}; that is we show $\lim_{n \to \infty} \int h_n \geq \int h$.   Let $\alpha \in (0,1)$ and $s$ be a simple function such that $0 \leq s \leq h$.  Now define 
+\[ A_n := \set{x : h_n(x) \geq \alpha s(x) }\].
+So
+\begin{align*}
+ \ds\int h_n  \stackreltext{monotonicity}{\geq} \ds\int_{A_n} h_n \stackreltext{def. $A_n$}{\geq} \ds\int_{A_n} \alpha s \stackreltext{linearity}{=} \alpha   \ds\int_{A_n} s 
+ \labelit \label{eqn:intermediate_eqn_from_proof_mct} 
+ \end{align*}
+But note that $A_n \uparrow \Omega$, so recognizing the right hand side as a measure on $A_n$ and applying  continuity from below (see Remark \ref{rk:continuity_of_measure_applied_to_measures_given_by_integrals_of_simple_functions_over_sets}), Equation \eqref{eqn:intermediate_eqn_from_proof_mct} becomes
+\[  \ds\int h_n  \geq \alpha \ds\int s \]
+Now since the equality holds for all $\alpha <1$, it holds for $\alpha =1$, and so we have
+\[  \ds\int h_n  \geq \ds\int s \]
+Since the LHS is an upper bound , it must be greater than the least upper bound, so 
+\[  \ds\int h_n  \geq \ds\int h \]
+\end{itemize}
+\end{proof}
+
+
+The monotone convergence theorem can actually be used to make it easier to compute values for integrals of non-negative Borel measurable functions!  Let us quote \cite{folland1999real} (except with changes of notation and references)
+
+\begin{quotation}
+ The definition of $\int h$  involves the supremum over a huge (usually uncountable) family of simple functions, so it may be difficult to evaluate $\int h$ directly from the definition (see Definition \ref{def:integral_of_non_negative_Borel_measurable_function}).  The monotone convergence theorem, however, assures us that to compute $\int h$, it is enough to compute $\lim \int s_n$, where $\set{s_n}$ is any sequence of simple functions that increase to $h$, and Proposition \ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function} guarantees that such sequences exist. 
+\end{quotation}
+
+
+
+%{rk:continuity_of_measure_applied_to_measures_given_by_integrals_of_simple_functions_over_sets}
 
 
 \subsubsection{Integrals of arbitrary Borel measurable functions}
@@ -1994,12 +2133,35 @@ Note that if a set $A$ \textit{contains} an upper bound, then it is automaticall
 
 \subsection{Properties}
 
-The proposition below characterizes the behavior of the infimum and supremum under set containment.
+The proposition below characterizes the behavior of the infimum and supremum under set containment. Namely, making a set smaller increases its supremum and decreases its infimum. 
 
 \begin{proposition}
 Suppose that $A$ and $B$ are subsets of $\R$ such that $A \subset B$.  If $\sup A$ and $\sup B$ exist, then $\sup A \leq \sup B$.  If $\inf A$ and $\inf B$ exist, then $\inf A \geq \inf B$.
 \label{prop:sup_and_inf_for_subsets_are_tighter}
 \end{proposition}
+
+Now we characterize the behavior of the infimum and supremum when we multiply a set by a constant.
+
+\begin{definition}
+If $A \subset \R$ and $c \in \R$, we define
+\[ cA := \set{x \in \R : x = ca \text{ for some } a \in A}\]	
+\end{definition}
+
+\begin{proposition}
+
+\begin{align*}
+\intertext{If $c \geq 0$ then} 
+\sup cA = c \sup A, &\quad \quad \inf cA = c \inf A\\
+\intertext{If $c < 0$ then} 
+\sup cA = c \inf A, &\quad \quad \inf cA = c \sup A\\
+\end{align*}
+\label{prop:supremum_and_infimum_under_constant_multiples_of_sets}
+\end{proposition}
+
+\begin{proof}
+If $c=0$, then the result holds because $cA = \set{0}$ and $\sup \set{0} = \inf \set{0} = 0$ by Remark \ref{rk:when_upper_or_lower_bound_is_contained_in_the_set_itself}.	If $c >0$, then $M \geq a$ if and only if $cM \geq ca$, so $M$ is an upper bound of $A$ if and only if $cM$ is an upper bound of $cA$, so $\sup cA = c \sup A$.   If $c<0$, then $M \geq a$ if and only if $cM \leq ca$, so $M$ is an upper bound of $A$ if and only if $cM$ is a lower bound of $cA$, so $\inf cA = c \sup A$.  The remaining results follow similarly. 
+\end{proof}
+
 
 Now we characterize the behavior of infimum and supremum over set (Minskowski) sums and differences.
 
@@ -2024,6 +2186,23 @@ If $A, B \subset \R$ are non-empty, then
 \begin{remark}
 Proposition \ref{prop:sup_and_inf_for_minkowski_sum_and_diff} can be informally described as saying that the infimum and supremum distribute over addition and subtraction, but negative signs ``flip" infima to suprema, and vice versa. 
 \end{remark}
+
+\subsection{Functions}
+
+The supremum and infimum of functions are the supremum and infimum of its range, and so results about sets translate immediately to results about functions.
+
+\begin{definition}
+If $f : A \to \R$ is a function, then 
+\[ \sup_A f := \sup \set{f(x) : x \in A}, \quad \quad \inf_A f := \inf \set{f(x) : x \in A} \]	
+\end{definition}
+
+One useful result is that the limit of an increasing sequence of functions is its supremum.
+
+\begin{proposition}
+If $f_n \leq f_{n+1}$ for all $n \in \mathbb{N}$, and $f_n \to f$, then $f = \sup_n f_n$.
+\label{prop:limit_of_an_increasing_sequence_of_functions_is_its_supremum}	
+\end{proposition}
+
 
 \section{Some information relevant to Reimann integrals} \label{sec:some_info_relevant_to_reimann_integrals}
 
