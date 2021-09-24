@@ -1480,7 +1480,7 @@ I have to pay a certain sum, which I have collected in my pocket.  I take the bi
 The insight is that one should be able to rearrange the values of a function freely, while preserving the value of the integral.  This process of rearrangement can convert a very pathological function into one that is ``nice" from the point of view of integration, and thus let such pathological functions be integrated.
 
 \item The Reimann approach implicitly assumes that sets in the domain have sizes that are given by Lesbesgue measure ($\mu(A) = |A|)$, whereas the Lesbesgue approach allows sets in the domain to have sizes given by any arbitrary measure $\mu$.
-\item The Reimann approach assumes that the domain is totally ordered.  In contrast, Lesbesgue integrals can be defined for functions on arbitrary spaces.
+% Commenting this out because I'm not sure if it's true. \item The Reimann approach assumes that the domain is totally ordered.  In contrast, Lesbesgue integrals can be defined for functions on arbitrary spaces.
 \end{enumerate}
 
 
@@ -1695,11 +1695,13 @@ A special case of simple functions are the step functions used in Reimann integr
 For $a,b \in \overline{\R}$ with $a<b$, $f : [a,b] \to \R$ is a \textit{step function} if there exists a partition $a = x_0 < x_1 < ... < x_n = b$ and constants $y_1, ..., y_n \in \R$ such that $f(x)=y_i$ for all $y \in (x_{i-1},x_i)$ and each $i=1,...,n$.  Then $f$ is equal to the following simple function:
 \[ y_i I_{(x_{i-1}, x_i)} + f(x_i) I_{\set{x_i}}\]
 
-Some observations:
-\begin{itemize}
-\item In this case, the sets $A_i$ take on a specific form, as open intervals or singletons.  In general, simple functions allow more general $A_i$. 
-\item Simple functions do not require that the domain is totally ordered.  
-\end{itemize}
+Note that in this case, the sets $A_i$ take on a specific form, as open intervals or one of finitely many singletons.  In general, simple functions allow more general $A_i$. 
+
+%Some observations:
+%\begin{itemize}
+%\item In this case, the sets $A_i$ take on a specific form, as open intervals or singletons.  In general, simple functions allow more general $A_i$. 
+%\item Simple functions do not require that the domain is totally ordered.  
+%\end{itemize}
 \label{rk:simple_functions_generalize_step_functions}
 \end{remark}
 
@@ -1760,8 +1762,8 @@ This definition is possible because whenever $h$ is a simple function, then so i
 \begin{example}{\remarktitle{Integrating a step function}}
 Let $h$ be a step function, as defined in Remark \ref{rk:simple_functions_generalize_step_functions}.   So  $a = x_0 < x_1 < ... < x_n = b$ is a partition of $\Omega := \text{dom}(h)$, and $h$ takes on values $y_i$ on $(x_{i-1},x_i)$ for $i=1,...,n$.  Then 
 \begin{align*}
-\ds\int_{\Omega} h \wrt{\mu} &= \ds\sum_{i=1}^n y_i \; \mu(x_{i-1},x_i) + \cancelto{0}{\ds\sum_{i=1}^n f(x_i) \mu\set{x_i}} \\
-& \stackreltext{(if $\mu$ is Lesbesgue measure)}{=} \; \ds\sum_{i=1}^n y_i \; (x_i - x_{i-1})
+\ds\int_{\Omega} h \wrt{\mu} &= \ds\sum_{i=1}^n y_i \; \mu(x_{i-1},x_i) + \ds\sum_{i=1}^n f(x_i) \mu\set{x_i} \\
+& \stackreltext{(if $\mu$ is Lesbesgue measure)}{=} \; \ds\sum_{i=1}^n y_i \; (x_i - x_{i-1}) + \cancelto{0}{\ds\sum_{i=1}^n f(x_i) \mu\set{x_i}}
 \end{align*}
 
 So the Lesbesgue integral of the step function agrees with the Reimann integral when $\mu$ is Lesbesgue measure (although not for general measure).
@@ -1884,7 +1886,7 @@ We show  countable additivity.\footnote{Non-negativity is clear from the definit
 \begin{align*}
 \ds\int_A s \wrt{\mu} &= \ds\sum_{j=1}^n y_j \, \mu(B_j \cap A) && \tinytext{Remark \ref{rk:integrating_simple_functions_over_arbitrary_measurable_subsets}} \\
 &= \ds\sum_{j=1}^n \ds\sum_{i=1}^\infty y_i \, \mu(B_j \cap A_i) && \tinytext{countable additivity} \\
-&= \ds\sum_{i=1}^\infty  \ds\sum_{j=1}^n y_i \, \mu(B_j \cap A_i) && \tinytext{needs justification} \\
+&= \ds\sum_{i=1}^\infty  \ds\sum_{j=1}^n y_i \, \mu(B_j \cap A_i) && \tinytext{sum of limit is limit of sum} \\
 &= \ds\sum_{i=1}^\infty \ds\int_{A_i} s \wrt{\mu}
 \end{align*}
 \end{proof}
@@ -2003,6 +2005,10 @@ Then
 
 \end{proof}
 
+\begin{question}
+When working with $\overline{\R}$, how does one check convergence of a function at a point $\omega$ such that $h(\omega)=\infty$?  Does the proof of Proposition \ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function} still work at such points?
+\end{question}
+
 Now we establish one of the fundamental convergence theorems. 
 
 \begin{theorem}{\textbf{The Monotone convergence theorem.}}
@@ -2018,24 +2024,26 @@ If $\set{h_n}$ is a sequence of non-negative Borel measurable functions such tha
 
 We break the proof into three parts:
 \begin{itemize}
-\item We first show that both quantities in \eqref{eqn:monotone_convergence_theorem_conclusion} exist.  The RHS exists because $h$ is Borel measurable (by Proposition \ref{prop:borel_measurability_closed_under_inf_sup_liminf_limsup}) and non-negative (see Remark \ref{rk:when_does_integral_of_non_negative_Borel_measurable_function_exist}).  The LHS exists since each $\int h_n$ exists (see Remark \ref{rk:when_does_integral_of_non_negative_Borel_measurable_function_exist}) and is increasing (by monotonicity; see Prop. \ref{prop:properties_of_integrals_of_non_negative_borel_measurable_functions}), and therefore has a limit (possibly $\infty$). 
+\item We first show that both quantities in \eqref{eqn:monotone_convergence_theorem_conclusion} exist. First, recall from Remark \ref{rk:when_does_integral_of_non_negative_Borel_measurable_function_exist} that the integral of a non-negative Borel measurable function always exists. So the LHS exists because $h$ is Borel measurable (by Proposition \ref{prop:borel_measurability_closed_under_inf_sup_liminf_limsup}) and non-negative.  The RHS exists since each $\int h_n$ exists and is increasing (by monotonicity; see Prop. \ref{prop:properties_of_integrals_of_non_negative_borel_measurable_functions}), and therefore has a limit (possibly $\infty$). 
 
 \item Next, we show $\geq$ for \eqref{eqn:monotone_convergence_theorem_conclusion}; that is we show $\lim_{n \to \infty} \int h_n \leq \int h$.
-\[ h_n \leq h \stackreltext{monotonicity}{\implies} \ds\int h_n \leq \ds\int h \stackreltext{limits preserve inequalities}{\implies} \ds\lim_{n \to \infty} \ds\int h_n \leq \ds\int h \]
+\[ h_n \leq h \stackreltext{monotonicity}{\implies} \ds\int h_n \leq \ds\int h \stackreltext{limits preserve (non-strict) inequalities}{\implies} \ds\lim_{n \to \infty} \ds\int h_n \leq \ds\int h \]
 
 \item Finally, we show $\leq$ for \eqref{eqn:monotone_convergence_theorem_conclusion}; that is we show $\lim_{n \to \infty} \int h_n \geq \int h$.   Let $\alpha \in (0,1)$ and $s$ be a simple function such that $0 \leq s \leq h$.  Now define 
-\[ A_n := \set{x : h_n(x) \geq \alpha s(x) }\].
+\[ A_n := \set{\omega : h_n(\omega) \geq \alpha s(\omega) }\]
+And note that $A_n \uparrow \Omega$.
+
 So
 \begin{align*}
- \ds\int h_n  \stackreltext{monotonicity}{\geq} \ds\int_{A_n} h_n \stackreltext{def. $A_n$}{\geq} \ds\int_{A_n} \alpha s \stackreltext{linearity}{=} \alpha   \ds\int_{A_n} s 
+ \ds\int h_n  \stackreltext{monotonicity}{\geq} \ds\int_{A_n} h_n \stackreltext{def. $A_n$, monotonicity}{\geq} \ds\int_{A_n} \alpha s \stackreltext{linearity}{=} \alpha   \ds\int_{A_n} s 
  \labelit \label{eqn:intermediate_eqn_from_proof_mct} 
  \end{align*}
-But note that $A_n \uparrow \Omega$, so recognizing the right hand side as a measure on $A_n$ and applying  continuity from below (see Remark \ref{rk:continuity_of_measure_applied_to_measures_given_by_integrals_of_simple_functions_over_sets}), Equation \eqref{eqn:intermediate_eqn_from_proof_mct} becomes
-\[  \ds\int h_n  \geq \alpha \ds\int s \]
+   Now we recognize the right hand side as a measure on $A_n$, and since $A_n \uparrow \Omega$, we can apply continuity from below (see Remark \ref{rk:continuity_of_measure_applied_to_measures_given_by_integrals_of_simple_functions_over_sets}), so taking the limit as $n \to \infty$, Equation \eqref{eqn:intermediate_eqn_from_proof_mct} becomes
+\[  \ds\lim_{n \to \infty} \ds\int h_n  \geq \alpha \ds\int s \]
 Now since the equality holds for all $\alpha <1$, it holds for $\alpha =1$, and so we have
-\[  \ds\int h_n  \geq \ds\int s \]
-Since the LHS is an upper bound , it must be greater than the least upper bound, so 
-\[  \ds\int h_n  \geq \ds\int h \]
+\[   \ds\lim_{n \to \infty}  \ds\int h_n  \geq \ds\int s \]
+Since the LHS is an upper bound on the set in the RHS, it must be greater than the least upper bound, so 
+\[   \ds\lim_{n \to \infty}  \ds\int h_n  \geq \ds\int h \]
 \end{itemize}
 \end{proof}
 
@@ -2070,7 +2078,7 @@ By Proposition \ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_
 
 
 \begin{exercise}
-Proposition \ref{prop:additivity_of_integral_for_non_negative_Borel_measurable_functions} actually extends to linearity with countably infinite sums.  This can be proven fairly easily with induction and yet another application of the monotone convergence theorem. Do it. 
+Proposition \ref{prop:additivity_of_integral_for_non_negative_Borel_measurable_functions} actually extends to linearity with countably infinite sums.  This can be proven fairly easily with induction and yet another application of the monotone convergence theorem. Do it. (See \cite{folland1999real}.)  
 \end{exercise}
 
 
@@ -2102,8 +2110,8 @@ h &= h^+ - h^- \\
 Now both $h^+$ and $h^-$ are Borel measurable as well.  This holds because if $h_1, h_2$ are Borel measurable, then so are $\max(h_1,h_2)$ and $\min(h_1,h_2)$:
 
 \begin{align*}
-\bigg\{ \omega : \max \bigg( h_1(\omega), h_2(\omega) < c \bigg) \bigg\} &=	\set{\omega :  h_1(\omega) < c } \cap \set{\omega : h_2(\omega) < c } \\
-\bigg\{ \omega : \min \bigg( h_1(\omega), h_2(\omega) < c \bigg) \bigg\} &=	\set{\omega :  h_1(\omega) < c } \cup \set{\omega : h_2(\omega) < c }
+\bigg\{ \omega : \max \bigg( h_1(\omega), h_2(\omega) \bigg) < c  \bigg\} &=	\set{\omega :  h_1(\omega) < c } \cap \set{\omega : h_2(\omega) < c } \\
+\bigg\{ \omega : \min \bigg( h_1(\omega), h_2(\omega) \bigg)  < c \bigg\} &=	\set{\omega :  h_1(\omega) < c } \cup \set{\omega : h_2(\omega) < c }
 \end{align*}
 
 
@@ -2269,7 +2277,6 @@ Now consider the following definitions:
 
 \begin{itemize}
 \item A \textit{partition} $P$ of an interval $[a,b]$ is a collection of $n$ subintervals $[x_{k-1}, x_k]$ where $a=x_0 < x_1 < ... < x_n = b$. 
-\item The \textit{maximum interval length} of $P$ is defined by $ \max_{k=1,...,n} \big|[x_{k-1}, x_k]\big|$.
 \item Given a partition $P$, the \textit{upper sum} $S^+(f,P)$ and \textit{lower sum} $S^-(f,P)$ are defined by 
 \begin{align*}
 S^+(f,P) &:= \ds\sum_{k=1}^n M_k (x_k - x_{k-1}) \\
@@ -2278,6 +2285,7 @@ S^-(f,P) &:= \ds\sum_{k=1}^n m_k (x_k - x_{k-1}) \\
 &\quad \text{ where $m_k$ is the infimum of $f$ on $[x_{k-1}, x_k]$.} \\
 \end{align*}
 \item The \textit{oscillation} $\text{Osc}(f,P)$ of a function $f$ over a partition $P$ is given by the difference of the upper and lower sums; i.e. $ \text{Osc}(f,P) := S^+(f,P) - S^-(f,P)$.
+\item The \textit{maximum interval length} of $P$ is defined by $ \max_{k=1,...,n} \big|[x_{k-1}, x_k]\big|$.
 \end{itemize}
 
 Finally, we present a proposition we use in the main text. 
