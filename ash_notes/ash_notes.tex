@@ -1672,7 +1672,7 @@ are all measurable. Thus, if $h(\omega) = \lim_{n \to \infty} h_n(\omega)$ exist
 See \cite{folland1999real} Proposition 2.7.
 \end{proof}
 
-\subsection{$\S$ 1.5.2-1.5.3 Definition of the integral for Borel measurable functions}
+\subsection{$\S$ 1.5.2-1.5.3 Integrating  Borel measurable functions}
 
 In this section, we define integral of a Borel measurable function $h : (\Omega, \F) \to (\overline{\R}, \B(\overline{\R}))$ against arbitrary measure $\mu$.  The integral can be written as:
 \[ \ds\int_{\Omega} h \wrt{\mu}, \quad \quad \ds\int_{\Omega} h(\omega) \wrt{\mu(\omega)}, \quad \text{ or } \quad \ds\int_{\Omega} h(\omega) \mu(d \, \omega) \]
@@ -1825,22 +1825,49 @@ In this section, for now, we only provide properties that come up in our exposit
 Let $g$ and $h$  be simple functions.  Then 
 \begin{alphabate}
 \item (monotonicity) If $g \leq h$ then $\ds\int g \wrt{\mu} \leq \ds\int h \wrt{\mu}$.
-\item If $c \geq 0$, then $\ds\int c g \wrt{\mu} = c \ds\int g \wrt{\mu}$.
-\item $\ds\int (g + h) \wrt{\mu} = \ds\int g \wrt{\mu} + \ds\int h \wrt{\mu}$ .
+\item (addivity) $\ds\int (g + h) \wrt{\mu} = \ds\int g \wrt{\mu} + \ds\int h \wrt{\mu}$ .
+\item (scalar multiple property) $\ds\int c \, g \wrt{\mu} = c \ds\int g \wrt{\mu}$.
 \end{alphabate}
 \label{prop:properties_of_integrals_of_simple_functions}
 \end{proposition}
 
 \begin{proof}
-We prove (a) and leave the rest to the reader. By definition of simple functions, we write \[g = \ds\sum_{i=1}^r x_i I_{A_i} ,\quad \quad h = \ds\sum_{j=1}^s y_j I_{B_j}  \]	
+
+
+\begin{alphabate}
+\item By definition of simple functions, we write \[g = \ds\sum_{i=1}^r x_i I_{A_i} ,\quad \quad h = \ds\sum_{j=1}^s y_j I_{B_j}  \]	
 But if we use a common (finer) partition of $\Omega$ into sets $\set{A_i \cap B_j}$, we can write
-\[g = \ds\sum_{i=1}^r \ds\sum_{j=1}^s x_i I_{A_i \cap B_j} ,\quad \quad h = \ds\sum_{i=1}^r \ds\sum_{j=1}^s y_j I_{A_i \cap B_j}  \]
+\begin{align*}
+g = \ds\sum_{i=1}^r \ds\sum_{j=1}^s x_i I_{A_i \cap B_j} ,\quad \quad h = \ds\sum_{i=1}^r \ds\sum_{j=1}^s y_j I_{A_i \cap B_j}  
+\labelit \label{eqn:two_simple_functions_with_common_partition}
+\end{align*}
+
 where by assumption, $x_i \leq y_j$ on each $A_i \cap B_j$.	
 	
 So 
 \begin{align*}
-\ds\int h_1 \wrt{\mu}  = \ds\sum_{i=1}^r \ds\sum_{j=1}^s x_i \, \mu(A_i \cap B_j)  \leq \ds\sum_{i=1}^r \ds\sum_{j=1}^s y_i \, \mu(A_i \cap B_j) = \ds\int h_2 \wrt{\mu}.
+\ds\int g \wrt{\mu}  = \ds\sum_{i=1}^r \ds\sum_{j=1}^s x_i \, \mu(A_i \cap B_j)  \leq \ds\sum_{i=1}^r \ds\sum_{j=1}^s y_i \, \mu(A_i \cap B_j) = \ds\int h \wrt{\mu}.
 \end{align*}
+
+\item We sum the two forms in \eqref{eqn:two_simple_functions_with_common_partition} and apply the definition of integral of simple functions to obtain
+\begin{align*}
+\ds\int (g+h) \wrt{\mu} = \ds\sum_{i=1}^r \ds\sum_{j=1}^s (x_i + y_j) \, \mu(A_i \cap B_j)
+\labelit \label{eqn:intermediate_result_addivity_of_simple_functions}
+\end{align*}
+
+But since we have 
+\[A_i =\bigcupdot_j (A_i \cap B_j), \quad  B_j =\bigcupdot_i (A_i \cap B_j)\]
+Then by finite additivity
+\[\mu(A_i) =\sum_{j=1}^s \mu(A_i \cap B_j), \quad  \mu(B_j) =\sum_{i=1}^r \mu(A_i \cap B_j)\]
+And so
+\begin{align*}
+\ds\int g \wrt{\mu} &= \ds\sum_{i=1}^r x_i \mu(A_i) = \ds\sum_{i=1}^r x_i \bigg(\sum_{j=1}^s \mu(A_i \cap B_j)\bigg) \\	
+\ds\int h \wrt{\mu} &= \ds\sum_{j=1}^s y_i \mu(B_i) = \ds\sum_{j=1}^s y_i \bigg(\sum_{i=1}^r \mu(A_i \cap B_j)\bigg) \\	
+\end{align*}
+and summing these together yields \eqref{eqn:intermediate_result_addivity_of_simple_functions}.
+\item This follows immediately from the distributive property.
+\[ c \ds\int g \wrt{\mu} = c \ds\sum_{i=1}^r x_i \mu(A_i) =  \ds\sum_{i=1}^r c \, x_i \mu(A_i) = \ds\int cg \wrt{\mu} \]
+\end{alphabate}
 
 \end{proof}
 
@@ -1908,7 +1935,7 @@ The integral of a non-negative Borel measurable function \textit{always} exists 
 \end{remark}
 
 
-\paragraphnewline{Properties of integral of non-negative Borel measurable functions}
+\paragraphnewline{Properties of integral of non-negative Borel measurable functions (Part I)}
 
 We will use these basic properties below:
 \begin{proposition}
@@ -2013,11 +2040,39 @@ Since the LHS is an upper bound , it must be greater than the least upper bound,
 \end{proof}
 
 
-The monotone convergence theorem can actually be used to make it easier to compute values for integrals of non-negative Borel measurable functions!  Let us quote \cite{folland1999real} (except with changes of notation and references)
+The monotone convergence theorem can actually be used to make it easier to do computations with integrals of non-negative Borel measurable functions!  Let us quote \cite{folland1999real} (except with changes of notation and references)
 
 \begin{quotation}
  The definition of $\int h$  involves the supremum over a huge (usually uncountable) family of simple functions, so it may be difficult to evaluate $\int h$ directly from the definition (see Definition \ref{def:integral_of_non_negative_Borel_measurable_function}).  The monotone convergence theorem, however, assures us that to compute $\int h$, it is enough to compute $\lim \int s_n$, where $\set{s_n}$ is any sequence of simple functions that increase to $h$, and Proposition \ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function} guarantees that such sequences exist. 
 \end{quotation}
+
+
+\paragraphnewline{Properties of integral of non-negative Borel measurable functions (Part II)}
+
+With the monotone convergence theorem in hand, we can now provide some additional properties of the integrals of non-negative Borel measurable functions.
+
+\begin{proposition}
+Let $f, g$ be non-negative Borel measurable functions. Then
+\[ \ds\int f + \ds\int g = \ds\int f+g \]
+\label{prop:additivity_of_integral_for_non_negative_Borel_measurable_functions}	
+\end{proposition}
+
+\begin{proof}
+By Proposition \ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function}, there are sequences of simple functions $\set{s_n}, \set{t_n}$ such that $s_n \uparrow f$ and $t_n \uparrow g$.   Thus, by limit properties, $(s_n + t_n) \uparrow (f+g)$.  So we have
+\begin{align*}
+	\ds\int f + \ds\int g &=\ds\lim_{n \to \infty} \ds\int s_n + \ds\lim_{n \to \infty} \ds\int t_n && \tinytext{Monotone convergence theorem} \\
+	&= \ds\lim_{n \to \infty} ( \ds\int s_n +  \ds\int t_n ) \\
+	&=  \ds\lim_{n \to \infty} \ds\int (s_n + t_n)  && \tinytext{Linearity of integral for simple functions}\\
+	&= \ds\int (f+g)  && \tinytext{Monotone convergence theorem}
+ \end{align*}
+\end{proof}
+
+
+
+\begin{exercise}
+Proposition \ref{prop:additivity_of_integral_for_non_negative_Borel_measurable_functions} actually extends to linearity with countably infinite sums.  This can be proven fairly easily with induction and yet another application of the monotone convergence theorem. Do it. 
+\end{exercise}
+
 
 
 
