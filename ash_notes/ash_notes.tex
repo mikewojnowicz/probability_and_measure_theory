@@ -1579,6 +1579,7 @@ Consider a constant function, i.e. $h: (\Omega_1, \F_1) \to (\Omega_2, \F_2)$ su
 \emptyset, & \text{ if } c \not\in B\\ 
 \end{cases}
 \]
+\label{ex:constant_functions_are_borel_measurable}
 \end{example}
 
 \begin{example}{\remarktitle{Any function is measurable with respect to the trivial $\sigma$-field.}}
@@ -1966,7 +1967,7 @@ f \leq g & \implies \set{s : s \text{ simple } , 0 \leq s \leq f} \subset \set{s
 &= c \set{ \ds\int s \wrt{\mu}   : s\text{ simple } , 0 \leq s \leq f} && \tinytext{Prop. \ref{prop:supremum_and_infimum_under_constant_multiples_of_sets}}\\
 &= c \ds\int f \wrt{\mu} 
 \end{align*}
-
+% By Proposition \ref{prop:borel_measurability_closed_under_multiplication_and_addition} and Example \ref{ex:constant_functions_are_borel_measurable},  $cf$ is a measurable function. Now 
 \end{alphabate}
 
 \end{proof}
@@ -2117,9 +2118,17 @@ Now both $h^+$ and $h^-$ are Borel measurable as well.  This holds because if $h
 
 which is sufficient to show measurability by the ``computational definition of measurability" (see Remark \ref{rk:computational_definition_of_Borel_measurability}). 
 
-So we have expressed an arbitrary Borel measurable function as as the difference of two non-negative Borel measurable functions. Therefore, we can define its integral by 
+So we have expressed an arbitrary Borel measurable function as as the difference of two non-negative Borel measurable functions. Therefore, we can define its integral as follows.  
 
-\[ \ds\int_\Omega h \wrt{\mu} = \ds\int_\Omega h^+ \wrt{\mu} - \ds\int_\Omega h^- \wrt{\mu} \]
+\begin{definition}{\remarktitle{Integral of an arbitrary Borel measurable function}}
+\begin{align} 
+ \ds\int_\Omega h \wrt{\mu} = \ds\int_\Omega h^+ \wrt{\mu} - \ds\int_\Omega h^- \wrt{\mu} 
+\label{eqn:definition_of_integral_of_arbitrary_borel_measurable_function}
+\end{align}
+\label{def:integral_of_arbitrary_borel_measurable_function}
+\end{definition}
+
+
 
 
 \begin{remark}{\remarktitle{When does the integral of an arbitary Borel measurable function exist?}}
@@ -2135,6 +2144,54 @@ This definition works because whenever $h$ is measurable, then so is $h I_A$:
  
 	
 \end{remark}
+
+\paragraphnewline{Properties of the integral of arbitrary Borel measurable functions}
+
+\begin{proposition}
+Let $f,g$ arbitrary Borel measurable functions. Then
+\begin{alphabate}
+\item (scalar multiple) $\ds\int cf = c \ds\int f \text{ for all } c \in \R.$	
+\end{alphabate}
+\label{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions}
+\end{proposition}
+
+\begin{proof}
+Since $cf$ is a Borel measurable function\footnote{The function $cf$ is a Borel measurable fucntion by Proposition \ref{prop:borel_measurability_closed_under_multiplication_and_addition} and Example \ref{ex:constant_functions_are_borel_measurable}.  Alternatively, we could verify this directly.  If $c \geq 0$, then $\set{\omega : c f(\omega) \leq k} = \set{\omega : f(\omega) \leq k/c} \in \F$ by the Borel measurability of $f$.  Similarly if  $c < 0$, then $\set{\omega : c f(\omega) \leq k} = \set{\omega : f(\omega) \geq k/c} \in \F$ by the Borel measurability of $f$.}, we apply Definition \ref{def:integral_of_arbitrary_borel_measurable_function}.
+
+We have 
+\begin{subequations}
+\begin{align}
+\text{if $c \geq 0$}, && (cf)^+ &= cf^+  & (cf)^- &= cf^-   \label{eqn:decomposing_scalar_multiple_of_borel_measurable_function_into_two_nonnegative_functions_when_scalar_multiple_is_nonnegative} \\
+\text{if $c < 0$}, && (cf)^+ &= -cf^-  & (cf)^- &= -cf^+. \label{eqn:decomposing_scalar_multiple_of_borel_measurable_function_into_two_nonnegative_functions_when_scalar_multiple_is_negative} 
+\end{align}
+\end{subequations}
+
+\begin{figure}
+\centering
+\includegraphics[width=.5\textwidth, angle=90]{images/decomposing_scalar_multiple_of_borel_measurable_function_into_two_nonnegative_functions_when_scalar_multiple_is_negative}	
+\end{figure}
+
+
+Now we will use the fact that if $f$ is non-negative Borel measurable and $c \geq 0$, then we already know the identity holds (see Prop. \ref{prop:properties_of_integrals_of_non_negative_borel_measurable_functions} (b)).
+
+
+So if $c\geq 0$
+\begin{align*}
+\ds\int cf \wrt{\mu} &= \ds\int (cf)^+ \wrt{\mu} - \ds\int (cf)^- \wrt{\mu} && \tinytext{Def. \ref{def:integral_of_arbitrary_borel_measurable_function}} \\
+&= \ds\int cf^+ \wrt{\mu} - \ds\int cf^- \wrt{\mu} && \tinytext{\eqref{eqn:decomposing_scalar_multiple_of_borel_measurable_function_into_two_nonnegative_functions_when_scalar_multiple_is_nonnegative}} \\ 
+&= c \ds\int f^+ \wrt{\mu} - c \ds\int f^- \wrt{\mu} && \tinytext{ Prop. \ref{prop:properties_of_integrals_of_non_negative_borel_measurable_functions} (b)} \\
+& = c \ds\int f \wrt{\mu} && \tinytext{Def. \ref{def:integral_of_arbitrary_borel_measurable_function}} 
+\end{align*}
+
+Likewise if $c < 0$
+\begin{align*}
+\ds\int cf \wrt{\mu} &= \ds\int (cf)^+ \wrt{\mu} - \ds\int (cf)^- \wrt{\mu} && \tinytext{Def. \ref{def:integral_of_arbitrary_borel_measurable_function}} \\
+&= \ds\int -cf^- \wrt{\mu} - \ds\int -cf^+ \wrt{\mu} && \tinytext{\eqref{eqn:decomposing_scalar_multiple_of_borel_measurable_function_into_two_nonnegative_functions_when_scalar_multiple_is_negative}} \\ 
+&= -c \ds\int f^- \wrt{\mu} + c \ds\int f^+ \wrt{\mu} && \tinytext{ Prop. \ref{prop:properties_of_integrals_of_non_negative_borel_measurable_functions} (b)} \\
+& = c \ds\int f \wrt{\mu} && \tinytext{Def. \ref{def:integral_of_arbitrary_borel_measurable_function}} \\
+\end{align*}	
+\end{proof}
+
 
 \bibliography{references_ash_notes.bib}
 \bibliographystyle{unsrt}
