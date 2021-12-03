@@ -2150,7 +2150,7 @@ This definition works because whenever $h$ is measurable, then so is $h I_A$:
 \begin{proposition}
 Let $f,g$ arbitrary Borel measurable functions. Then
 \begin{alphabate}
-\item (scalar multiple) $\ds\int cf = c \ds\int f \text{ for all } c \in \R.$	
+\item (scalar multiple) $\ds\int cf = c \ds\int f \text{ for all } c \in \R.$ \quad {\tiny (More explicitly, if $\int f$ exists and $c \in \R$, then $\int cf$ exists and $\int cf = c \int f $.)}	
 \end{alphabate}
 \label{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions}
 \end{proposition}
@@ -2179,7 +2179,7 @@ So if $c\geq 0$
 \begin{align*}
 \ds\int cf \wrt{\mu} &= \ds\int (cf)^+ \wrt{\mu} - \ds\int (cf)^- \wrt{\mu} && \tinytext{Def. \ref{def:integral_of_arbitrary_borel_measurable_function}} \\
 &= \ds\int cf^+ \wrt{\mu} - \ds\int cf^- \wrt{\mu} && \tinytext{\eqref{eqn:decomposing_scalar_multiple_of_borel_measurable_function_into_two_nonnegative_functions_when_scalar_multiple_is_nonnegative}} \\ 
-&= c \ds\int f^+ \wrt{\mu} - c \ds\int f^- \wrt{\mu} && \tinytext{ Prop. \ref{prop:properties_of_integrals_of_non_negative_borel_measurable_functions} (b)} \\
+& \stackrel{*}{=} c \ds\int f^+ \wrt{\mu} - c \ds\int f^- \wrt{\mu} && \tinytext{ Prop. \ref{prop:properties_of_integrals_of_non_negative_borel_measurable_functions} (b)} \\ %\labelit \label{eqn:expanding_integral_of_nonnegative_scalar_times_function} \\
 & = c \ds\int f \wrt{\mu} && \tinytext{Def. \ref{def:integral_of_arbitrary_borel_measurable_function}} 
 \end{align*}
 
@@ -2187,9 +2187,14 @@ Likewise if $c < 0$
 \begin{align*}
 \ds\int cf \wrt{\mu} &= \ds\int (cf)^+ \wrt{\mu} - \ds\int (cf)^- \wrt{\mu} && \tinytext{Def. \ref{def:integral_of_arbitrary_borel_measurable_function}} \\
 &= \ds\int -cf^- \wrt{\mu} - \ds\int -cf^+ \wrt{\mu} && \tinytext{\eqref{eqn:decomposing_scalar_multiple_of_borel_measurable_function_into_two_nonnegative_functions_when_scalar_multiple_is_negative}} \\ 
-&= -c \ds\int f^- \wrt{\mu} + c \ds\int f^+ \wrt{\mu} && \tinytext{ Prop. \ref{prop:properties_of_integrals_of_non_negative_borel_measurable_functions} (b)} \\
+& \stackrel{**}{=} -c \ds\int f^- \wrt{\mu} + c \ds\int f^+ \wrt{\mu} && \tinytext{ Prop. \ref{prop:properties_of_integrals_of_non_negative_borel_measurable_functions} (b)}  \\ %\labelit \label{eqn:expanding_integral_of_positive_scalar_times_function} \\
 & = c \ds\int f \wrt{\mu} && \tinytext{Def. \ref{def:integral_of_arbitrary_borel_measurable_function}} \\
 \end{align*}	
+
+Equations (*) and (**) reveal that $\int cf \wrt{\mu}$ exists whenever $\int f \wrt{\mu}$ exists.
+
+%Equations \eqref{eqn:expanding_integral_of_nonnegative_scalar_times_function} and \eqref{eqn:expanding_integral_of_positive_scalar_times_function} reveal that $\int cf \wrt{\mu}$ exists whenever $\int f \wrt{\mu}$ exists.
+
 \end{proof}
 
 
