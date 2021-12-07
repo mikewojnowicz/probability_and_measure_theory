@@ -2148,15 +2148,17 @@ This definition works because whenever $h$ is measurable, then so is $h I_A$:
 \paragraphnewline{Properties of the integral of arbitrary Borel measurable functions}
 
 \begin{proposition}
-Let $f,g$ arbitrary Borel measurable functions. Then
+Let $f,g,h$ arbitrary Borel measurable functions. Then
 \begin{alphabate}
-\item (scalar multiple) $\ds\int cf = c \ds\int f \text{ for all } c \in \R.$ \quad {\tiny (More explicitly, if $\int f$ exists and $c \in \R$, then $\int cf$ exists and $\int cf = c \int f $.)}	
+\item (scalar multiple) $\ds\int cf \wrt{\mu} = c \ds\int f \wrt{\mu} \text{ for all } c \in \R.$ \quad {\tiny (More explicitly, if $\int f \wrt{\mu}$ exists and $c \in \R$, then $\int cf$ exists and $\int cf \wrt{\mu} = c \int f \wrt{\mu} $.)}
+\item (monotonicity). If $g \geq h$ and both integrals exist, then $\ds\int g \wrt{\mu} \geq  \ds\int h \wrt{\mu}$. Moreover, if  $g \geq h$,  $\ds\int h \wrt{\mu}$ exists and $\ds\int h \wrt{\mu} > -\infty$, then $\ds\int g \wrt{\mu}$ exists.  And if  $g \geq h$, $\ds\int g \wrt{\mu}$ exists and $\ds\int g \wrt{\mu} < \infty$, then $\ds\int h \wrt{\mu}$ exists.\footnote{We might consider this as a ``dominance criterion for existence."}
 \end{alphabate}
 \label{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions}
 \end{proposition}
 
 \begin{proof}
-Since $cf$ is a Borel measurable function\footnote{The function $cf$ is a Borel measurable fucntion by Proposition \ref{prop:borel_measurability_closed_under_multiplication_and_addition} and Example \ref{ex:constant_functions_are_borel_measurable}.  Alternatively, we could verify this directly.  If $c \geq 0$, then $\set{\omega : c f(\omega) \leq k} = \set{\omega : f(\omega) \leq k/c} \in \F$ by the Borel measurability of $f$.  Similarly if  $c < 0$, then $\set{\omega : c f(\omega) \leq k} = \set{\omega : f(\omega) \geq k/c} \in \F$ by the Borel measurability of $f$.}, we apply Definition \ref{def:integral_of_arbitrary_borel_measurable_function}.
+\begin{alphabate}
+\item Since $cf$ is a Borel measurable function\footnote{The function $cf$ is a Borel measurable fucntion by Proposition \ref{prop:borel_measurability_closed_under_multiplication_and_addition} and Example \ref{ex:constant_functions_are_borel_measurable}.  Alternatively, we could verify this directly.  If $c \geq 0$, then $\set{\omega : c f(\omega) \leq k} = \set{\omega : f(\omega) \leq k/c} \in \F$ by the Borel measurability of $f$.  Similarly if  $c < 0$, then $\set{\omega : c f(\omega) \leq k} = \set{\omega : f(\omega) \geq k/c} \in \F$ by the Borel measurability of $f$.}, we apply Definition \ref{def:integral_of_arbitrary_borel_measurable_function}.
 
 We have 
 \begin{subequations}
@@ -2193,7 +2195,37 @@ Likewise if $c < 0$
 
 Equations (*) and (**) reveal that $\int cf \wrt{\mu}$ exists whenever $\int f \wrt{\mu}$ exists.
 
-%Equations \eqref{eqn:expanding_integral_of_nonnegative_scalar_times_function} and \eqref{eqn:expanding_integral_of_positive_scalar_times_function} reveal that $\int cf \wrt{\mu}$ exists whenever $\int f \wrt{\mu}$ exists.
+\item First we show that $g \geq h \implies \ds\int g \wrt{\mu} \geq \ds\int h \wrt{\mu}$ when both integrals exist.\footnote{Even if $\ds\int g \wrt{\mu}$ exists and $g \geq h$, we can still have $\ds\int h \wrt{\mu}$ not exist, because of \eqref{eqn:monotonicity_for_positive_and_negative_parts_separately}.  For example, we can have 
+\begin{align}
+\ds\int g^+ \wrt{\mu} &= \ds\int h^+ \wrt{\mu} = \infty  \\
+\ds\int g^- \wrt{\mu} & < \ds\int h^- \wrt{\mu} = \infty 	
+\end{align}
+and so $\ds\int h \wrt{\mu}$ DNE.}  We decompose each function into its positive and negative parts
+\[ g = g^+ - g^-, \quad h = h^+ - h^-. \]
+By hypothesis,
+\[ g^+ \geq h^+, \quad g^- \leq h^-. \]
+So by monotonicity for non-negative functions (Prop. \ref{prop:properties_of_integrals_of_non_negative_borel_measurable_functions} (a)), we have 
+\begin{align} \ds\int g^+ \wrt{\mu} \geq \ds\int h^+ \wrt{\mu}, \quad \ds\int g^- \wrt{\mu}  \leq \ds\int h^- \wrt{\mu}. 
+\label{eqn:monotonicity_for_positive_and_negative_parts_separately}
+\end{align}
+
+So
+\begin{align*}
+\ds\int g \wrt{\mu} &= 	\ds\int g^+ \wrt{\mu} - \ds\int g^- \wrt{\mu} && \tinytext{(def. integral)} \\
+&\geq \ds\int h^+ \wrt{\mu} - \ds\int h^- \wrt{\mu} &&  \tinytext{\eqref{eqn:monotonicity_for_positive_and_negative_parts_separately}} \\
+&=\ds\int g \wrt{\mu} && \tinytext{(def. integral)}
+\end{align*}
+
+Now we consider the ``dominance criterion for existence".  We prove the second sentence of (b), as the third is proved similarly. 
+
+If $\ds\int h \wrt{\mu}$ exists and $\ds\int h \wrt{\mu} > -\infty$, then by definition of the integral, $\ds\int h^- \wrt{\mu} < \infty$.  Since $g \geq h$, then $g^- \leq h^-$, so 
+\[ \ds\int g^- \wrt{\mu} \leq \ds\int h^- \wrt{\mu} < \infty \]
+Thus, $\ds\int g \wrt{\mu}$ exists.\footnote{Recall that for $\ds\int f \wrt{\mu}$ to exist, at least one of  $\ds\int f^- \wrt{\mu}$, $\ds\int f^+ \wrt{\mu}$ must be finite.}
+
+
+
+\end{alphabate}
+
 
 \end{proof}
 
