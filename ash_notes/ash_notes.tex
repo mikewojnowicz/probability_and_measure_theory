@@ -11,8 +11,8 @@
 % ADD TO STANDARD PREAMBLE
 %%%
 % CIRCLED NUMBERS 
-\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
-            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+\newcommand*\tinycircled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {\tiny #1};}}
            
 %%% 
 % SPECIFIC TO THIS DOCUMENT
@@ -2306,11 +2306,80 @@ What does each say?
 \section{$\S$ 1.6 Basic Integation Theorems}
 
 \begin{theorem}
-Let $h$ be a Borel measurable function such that $\int_\Omega h \wrt{\mu}$ exists.  Define $\lambda(B) = \int_B h \wrt{\mu}$, $B \in \F$.  The $\lambda$ is countably additive on $\F$; thus if $h \geq 0$, $\lambda$ is a measure.	
+Let $h$ be a Borel measurable function such that $\int_\Omega h \wrt{\mu}$ exists.  Define $\lambda(B) = \int_B h \wrt{\mu}$, $B \in \F$.  Then $\lambda$ is countably additive on $\F$; thus if $h \geq 0$, $\lambda$ is a measure.	
 \end{theorem}
 
 \begin{proof}
-	
+Recall that Prop. \ref{prop:the_integral_of_a_simple_function_over_a_set_is_one_way_to_measure_that_set}  proved this for non-negative simple functions.
+
+
+So let $h$ be a arbitrary non-negative Borel function.   We want to show that if $\lambda(B) = \int_B h \wrt{\mu}$,  $B = \bigcupdot_{n=1}^\infty B_n$, then $\lambda(B) = \ds\sum_{n=1}^\infty \lambda(B_n)$.
+
+\begin{itemize}
+\item \framebox{$\leq$} Let $s$ be simple, $0 \leq s \leq h$.   Then 
+\begin{align*}
+\ds\int_B s \wrt{\mu} &= \ds\sum_{n=1}^\infty \ds\int_{B_n} s \wrt{\mu} && \tinytext{Prop. \ref{prop:the_integral_of_a_simple_function_over_a_set_is_one_way_to_measure_that_set}} \\
+&\leq \ds\sum_{n=1}^\infty \ds\int_{B_n} h \wrt{\mu}  && \tinytext{monotonicity} \\ 
+&:= \ds\sum_{n=1}^\infty \lambda(B_n) 	
+\end{align*}
+Since the RHS is an upper bound, the supremum (over s) cannot exceed it.  Thus, applying Prop. \ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} \ref{item:delayed_truncation_of_simple_functions}, we have 
+\begin{align*}
+\ds\int_B h \wrt{\mu} & \leq \ds\sum_{n=1}^\infty \lambda(B_n)  \\ 
+\implies \lambda(B) &\leq \ds\sum_{n=1}^\infty \lambda(B_n) && \tinytext{def. $\lambda$}
+\end{align*}
+
+\item \framebox{$\geq$}	By monotonicity, 
+\begin{align*}
+B \supset B_n \implies \indicate{B} \geq \indicate{B_n} \implies \lambda(B) \geq \lambda(B_n) && \tinycircled{1}
+\end{align*} 
+If $\lambda(B_n) =\infty$ for one $n$, we are done. {\tiny (Why? Since $h \geq 0$, by monotonicity, $\int_A h \wrt{\mu} \geq 0$ for any $A \in \F$.  So each $\lambda(B_n) \geq 0$.  So if one $\lambda(B_n) = \infty$, then $\sum_{n=1}^\infty \lambda(B_n) = \infty$, and \tinycircled{1} and $\lambda(B) \geq \ds\sum_{n=1}^\infty \lambda(B_n)$ are saying the same thing, that $\lambda(B) = \infty$.)}
+ 
+ So let each $\lambda(B_n) < \infty$.  
+ 
+ Fix $N$.  Consider $\bigcupdot_{n=1}^N B_n$.  By Prop. \ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} \ref{item:delayed_truncation_of_simple_functions} and properties of the supremum {\tiny (if we subtract $\epsilon$ from it, there $\exists$ a member of the set exceeding that)}, for all $\epsilon>0$, we have simple functions $s_n : 0 \leq s_n \leq h$ for each $n$ so that 
+ 
+\begin{align*}
+\ds\int_{B_n} s_n \wrt{\mu} \geq \ds\int_{B_n} h_n \wrt{\mu} - \frac{\epsilon}{N} \quad \text{ for all } n  && \tinycircled{2} 
+\end{align*}
+Let $s^*$ be the pointwise maximum of $\set{s_n}_{n=1}^N$, which is still a simple function.  Then  $s^* \indicate{B_n} \geq s_n \indicate{B_n}$ for each $n$, so 
+   
+\begin{align*}
+\ds\int_{B_n} s^* \wrt{\mu} \geq \ds\int_{B_n} s_n \quad \text{ for all } n && \tinycircled{3}
+\end{align*}
+
+So \tinycircled{2} and \tinycircled{3} gives that 
+ 
+\begin{align*}
+\ds\int_{B_n} s^* \wrt{\mu} \geq \ds\int_{B_n} h \wrt{\mu} - \frac{\epsilon}{N} \quad \text{ for all } n  && \tinycircled{4} 
+\end{align*}
+
+Thus, for any $N$, $\epsilon>0$, we have  
+\begin{align*}
+\lambda(B) &\geq \lambda(\bigcupdot_{n=1}^N B_n) && \tinytext{By monotonicity; see \tinycircled{1} as we don't know it's a measure yet!} \\
+&:= \ds\int_{\bigcupdot_{n=1}^N B_n} h \wrt{\mu} \\
+& \geq \ds\int_{\bigcupdot_{n=1}^N B_n} s^* \wrt{\mu} && \tinytext{monotonicity} \\
+&= \ds\sum_{n=1}^N \ds\int_{B_n} s^* \wrt{\mu} && \tinytext{Prop. \ref{prop:the_integral_of_a_simple_function_over_a_set_is_one_way_to_measure_that_set} } \\
+&= \ds\sum_{n=1}^N \ds\int_{B_n} h_n \wrt{\mu} - \epsilon && \tinytext{see \tinycircled{4}} \\
+&:= \ds\sum_{n=1}^N  \lambda(B_n) -\epsilon \\
+\implies \lambda(B) &\geq \ds\sum_{n=1}^\infty \lambda(B_n) && \tinytext{justified below}
+\end{align*}
+
+The last line above is justified in this footnote.\footnote{\textbf{Claim.} Let $\set{a_n}_{n=1}^\infty : 0 \leq a_n < \infty$.  Then $M \stackrel{*}{\geq} \ds\sum_{n=1}^N a_n - \epsilon \; \text{ for any } N, \epsilon>0 \implies M \geq \ds\sum_{n=1}^\infty a_n.$ \textbf{Proof}. If $\ds\sum_{n=1}^\infty a_n = \infty$ then the claim obviously holds.  If $\ds\sum_{n=1}^\infty a_n < \infty$ then for all $\epsilon >0$, the tail of the series is less than $\epsilon$ for some $N^*$.  So write $\sum_{n=1}^{N^*} a_n < \ds\sum_{n=1}^\infty a_n - \epsilon$, and equation (*) becomes $M \geq \ds\sum_{n=1}^\infty a_n - 2\epsilon = \ds\sum_{n=1}^\infty a_n -\tilde{\epsilon}$ for all $\tilde{\epsilon} > 0$.  Take the limit as $\tilde{\epsilon} \to 0$, and the non-strict inequality is preserved in the limit.}
+
+So now assume $h$ is an arbitrary Borel-measurable function.  Since we have assumed $\ds\int h \wrt{\mu}$ exists, we have $\ds\int h^+ \wrt{\mu}, \ds\int h^- \wrt{\mu} < \infty$.  So by what we have shown for non-negative functions, there exists measures $\lambda^+, \lambda^-$ corresponding to each of these integrals.  So if $B = \bigcupdot_{n=1}^\infty B_n$, 
+\begin{align*}
+\ds\int_B h \wrt{\mu} &= \ds\int_B h^+ \wrt{\mu} - \ds\int_B h^- \wrt{\mu} && \tinytext{def. integral} \\
+\implies \lambda(B) &= \lambda^+(B) - \lambda^-(B) && \tinytext{by def. of $\lambda$, $\lambda^+$, $\lambda^-$ } \\
+\implies \lambda(B) &= \ds\sum_{n=1}^\infty \lambda^+(B_n) - \ds\sum_{n=1}^\infty \lambda^-(B_n) && \tinytext{by result with non-negative functions } \\
+\end{align*}
+ and this expression is \textit{NOT} of the form $\infty - \infty$, since the first line isn't, by the existence of $\int_\Omega h \wrt{\mu}$ {\tiny (and the fact that, by monotonicity, $\int_\Omega h \wrt{\mu} < \infty \implies \int_B h \wrt{\mu} < \infty  $) }.
+
+\end{itemize}
+
+
+
+%
+
 \end{proof}
 
  
