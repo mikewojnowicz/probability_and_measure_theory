@@ -1,9 +1,19 @@
 \documentclass{article} % For LaTeX2e
 
-%STANDARD PREAMBLE
+%%% 
+% STANDARD PREAMBLE
+%%%
 %https://tex.stackexchange.com/questions/68821/is-it-possible-to-create-a-latex-preamble-header
 \usepackage{/Users/mikewojnowicz/Repos/latex_preamble/preamble}
 
+
+%%% 
+% ADD TO STANDARD PREAMBLE
+%%%
+% CIRCLED NUMBERS 
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+           
 %%% 
 % SPECIFIC TO THIS DOCUMENT
 %%%
@@ -61,11 +71,11 @@ It is hard to beat directly consulting a textbook (such as \cite{ash2000probabil
 However, we have created these notes nonetheless in an attempt to support lecture and/or discussion on that textbook.   With that goal in mind, we:
 \begin{itemize}
 \item Curate the text.\footnote{We highlight some of the main themes (and cores of proofs), offloading additional detail to the text.} 
-\item Provide additional detail in proofs.
+\item Provide additional detail in proofs.  Sometimes alternate paths have been given that seemed ``nicer" to me. 
 \item Format the presentation to encourage easier absorption.\footnote{E.g., we exploit space to organize the presentation, whereas a textbook will often provide proofs in paragraph form}
-\item Add remarks to illustrate the utility of theorems and draw connections between them.
+\item Add remarks for color (illustrating the need for propositions, the utility of theorems, or connections between things).
 \item Add sketches to support intuition.
-\item Incorporate supporting material, such as additional examples, from homework problems and outside sources.\footnote{This will happen increasingly often as the notes evolve.}
+\item Incorporate supporting material from worked homework problems and outside sources.\footnote{This will happen increasingly often as the notes evolve.}
 \end{itemize}
 
 
@@ -2150,8 +2160,16 @@ This definition works because whenever $h$ is measurable, then so is $h I_A$:
 \begin{proposition}
 Let $f,g,h$ arbitrary Borel measurable functions. Then
 \begin{alphabate}
-\item (scalar multiple) $\ds\int cf \wrt{\mu} = c \ds\int f \wrt{\mu} \text{ for all } c \in \R.$ \quad {\tiny (More explicitly, if $\int f \wrt{\mu}$ exists and $c \in \R$, then $\int cf$ exists and $\int cf \wrt{\mu} = c \int f \wrt{\mu} $.)}
-\item (monotonicity). If $g \geq h$ and both integrals exist, then $\ds\int g \wrt{\mu} \geq  \ds\int h \wrt{\mu}$. Moreover, if  $g \geq h$,  $\ds\int h \wrt{\mu}$ exists and $\ds\int h \wrt{\mu} > -\infty$, then $\ds\int g \wrt{\mu}$ exists.  And if  $g \geq h$, $\ds\int g \wrt{\mu}$ exists and $\ds\int g \wrt{\mu} < \infty$, then $\ds\int h \wrt{\mu}$ exists.\footnote{We might consider this as a ``dominance criterion for existence."}
+\item (scalar multiple) If $\int f \wrt{\mu}$ exists and $c \in \R$, then $\int cf$ exists and $\int cf \wrt{\mu} = c \int f \wrt{\mu} $. %$\ds\int cf \wrt{\mu} = c \ds\int f \wrt{\mu} \text{ for all } c \in \R.$ \quad {\tiny (More explicitly, if $\int f \wrt{\mu}$ exists and $c \in \R$, then $\int cf$ exists and $\int cf \wrt{\mu} = c \int f \wrt{\mu} $.)}
+\item \label{item:monotonicity} (monotonicity)  If $g \geq h$ and both integrals exist, then $\ds\int g \wrt{\mu} \geq  \ds\int h \wrt{\mu}$. Moreover, if  $g \geq h$,  $\ds\int h \wrt{\mu}$ exists and $\ds\int h \wrt{\mu} > -\infty$, then $\ds\int g \wrt{\mu}$ exists.  And if  $g \geq h$, $\ds\int g \wrt{\mu}$ exists and $\ds\int g \wrt{\mu} < \infty$, then $\ds\int h \wrt{\mu}$ exists.\footnote{We might consider this as a ``dominance criterion for existence."  For more on why the monotonicity statement is concerned with existence, see Remark \ref{rk:why_does_existence_matter_for_monotonicity}.} 
+\item \label{item:delayed_truncation_of_simple_functions} (delayed truncation of simple functions) If $h \geq 0$ and $B \in \F$, then\footnote{For why this needs to be proven, see Remark \ref{rk:why_delayed_truncation_of_simple_functions_is_something_that_needs_to_be_proven}.} 
+\[ \ds\int_B h \wrt{\mu} = \sup \biggset{ \ds\int_B s \wrt{\mu} : \; 0 \leq s \leq h, \; s \text{ simple }} \]
+\item (existence of integral transfers to subsets) 
+\begin{align}
+\ds\int_{\Omega} h \wrt{\mu} \text{ exists } &\implies 	\ds\int_{A} h \wrt{\mu} \text{ exists} \quad \forall A \in \F \\
+\ds\int_{\Omega} h \wrt{\mu} \text{ finite } &\implies 	\ds\int_{A} h \wrt{\mu} \text{ finite} \quad \forall A \in \F
+\end{align}
+
 \end{alphabate}
 \label{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions}
 \end{proposition}
@@ -2168,7 +2186,7 @@ We have
 \end{align}
 \end{subequations}
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=.5\textwidth, angle=90]{images/decomposing_scalar_multiple_of_borel_measurable_function_into_two_nonnegative_functions_when_scalar_multiple_is_negative}	
 \end{figure}
@@ -2195,12 +2213,7 @@ Likewise if $c < 0$
 
 Equations (*) and (**) reveal that $\int cf \wrt{\mu}$ exists whenever $\int f \wrt{\mu}$ exists.
 
-\item First we show that $g \geq h \implies \ds\int g \wrt{\mu} \geq \ds\int h \wrt{\mu}$ when both integrals exist.\footnote{Even if $\ds\int g \wrt{\mu}$ exists and $g \geq h$, we can still have $\ds\int h \wrt{\mu}$ not exist, because of \eqref{eqn:monotonicity_for_positive_and_negative_parts_separately}.  For example, we can have 
-\begin{align}
-\ds\int g^+ \wrt{\mu} &= \ds\int h^+ \wrt{\mu} = \infty  \\
-\ds\int g^- \wrt{\mu} & < \ds\int h^- \wrt{\mu} = \infty 	
-\end{align}
-and so $\ds\int h \wrt{\mu}$ DNE.}  We decompose each function into its positive and negative parts
+\item First we show that $g \geq h \implies \ds\int g \wrt{\mu} \geq \ds\int h \wrt{\mu}$ when both integrals exist.  We decompose each function into its positive and negative parts
 \[ g = g^+ - g^-, \quad h = h^+ - h^-. \]
 By hypothesis,
 \[ g^+ \geq h^+, \quad g^- \leq h^-. \]
@@ -2211,9 +2224,9 @@ So by monotonicity for non-negative functions (Prop. \ref{prop:properties_of_int
 
 So
 \begin{align*}
-\ds\int g \wrt{\mu} &= 	\ds\int g^+ \wrt{\mu} - \ds\int g^- \wrt{\mu} && \tinytext{(def. integral)} \\
+\ds\int g \wrt{\mu} &= 	\ds\int g^+ \wrt{\mu} - \ds\int g^- \wrt{\mu} && \tinytext{(def. integral; existence assumed)} \\
 &\geq \ds\int h^+ \wrt{\mu} - \ds\int h^- \wrt{\mu} &&  \tinytext{\eqref{eqn:monotonicity_for_positive_and_negative_parts_separately}} \\
-&=\ds\int g \wrt{\mu} && \tinytext{(def. integral)}
+&=\ds\int g \wrt{\mu} && \tinytext{(def. integral;  existence assumed)}
 \end{align*}
 
 Now we consider the ``dominance criterion for existence".  We prove the second sentence of (b), as the third is proved similarly. 
@@ -2221,13 +2234,87 @@ Now we consider the ``dominance criterion for existence".  We prove the second s
 If $\ds\int h \wrt{\mu}$ exists and $\ds\int h \wrt{\mu} > -\infty$, then by definition of the integral, $\ds\int h^- \wrt{\mu} < \infty$.  Since $g \geq h$, then $g^- \leq h^-$, so 
 \[ \ds\int g^- \wrt{\mu} \leq \ds\int h^- \wrt{\mu} < \infty \]
 Thus, $\ds\int g \wrt{\mu}$ exists.\footnote{Recall that for $\ds\int f \wrt{\mu}$ to exist, at least one of  $\ds\int f^- \wrt{\mu}$, $\ds\int f^+ \wrt{\mu}$ must be finite.}
+\item  We want to prove that if $h \geq 0$ and $B \in \F$, then
+\[ \ds\int_B h \wrt{\mu} = \sup \biggset{ \ds\int_B s \wrt{\mu} : \; 0 \leq s \leq h, \; s \text{ simple }}. \] 
+We prove \framebox{$\geq$}, \framebox{$\leq$}  separately, using the strategy of Remark \ref{rk:one_way_to_show_two_supremums_are_equal}.
 
+\begin{itemize}
+\item \framebox{$\geq$}.  For $0 \leq s \leq h$, $s$ simple,
+\begin{align*}  
+\ds\int_B h \wrt{\mu} \geq \ds\int_B s \wrt{\mu}  && \tinytext{monotonicity}
+\end{align*}
+Since the LHS is an upper bound on the set of the integrals on the RHS, \framebox{$\geq$} holds. 
 
+\item \framebox{$\leq$} 
+\begin{align*}
+\set{t: t \text{ simple}, 0 \leq t \leq h \indicate{B}}  & \subseteq \set{s \indicate{B} : s \text{ simple }, 0 \leq s \leq h }  \\
+\implies \explaintermbrace{:=$\ds\int_B h \wrt{\mu}$}{\sup \biggset{\ds\int t  \wrt{\mu} : \; t \text{ simple}, \; 0 \leq t \leq h \indicate{B} }} & \leq \sup \biggset{\ds\int s \indicate{B} \wrt{\mu} : \; s \text{ simple}, \; 0 \leq s \leq h } 
+\end{align*}
+
+\end{itemize}
+
+\item 
+\[ (h \indicate{A})^+ = h^+\indicate{A} \, \leq h^+, \quad  (h \indicate{A})^- = h^- \indicate{A}  \, \leq h^- \]
+So by monotonicity,
+\begin{align*}
+\explaintermbrace{A1}{\ds\int (h \indicate{A})^+ \wrt{\mu}} \leq \explaintermbrace{B1}{\ds\int h^+ \wrt{\mu}} \\
+\explaintermbrace{A2}{\ds\int (h \indicate{A})^- \wrt{\mu}} \leq \explaintermbrace{B1}{\ds\int h^- \wrt{\mu}} \\
+\end{align*}
+So $B_i < \infty \implies A_i < \infty$.
+
+By assuming the conditional holds for at least one $i \in \set{1,2}$, we prove transfer of existence. By assuming the conditional holds for both $i$, we prove transfer of finiteness. 
 
 \end{alphabate}
-
-
 \end{proof}
+
+
+\begin{remark}{\remarktitle{Why the monotonicity property is concerned with existence}}
+Why is Proposition \ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} \ref{item:monotonicity} concerned with monotonicity? Answer: even if $\ds\int g \wrt{\mu}$ exists and $g \geq h$, we can still have $\ds\int h \wrt{\mu}$ not exist, because of \eqref{eqn:monotonicity_for_positive_and_negative_parts_separately}.  For example, we can have 
+\begin{align}
+\ds\int g^+ \wrt{\mu} &= \ds\int h^+ \wrt{\mu} = \infty  \\
+\ds\int g^- \wrt{\mu} & < \ds\int h^- \wrt{\mu} = \infty 	
+\end{align}
+and so $\ds\int h \wrt{\mu}$ DNE.
+\label{rk:why_does_existence_matter_for_monotonicity}
+\end{remark}
+
+\begin{remark}{\remarktitle{Why delayed truncation of simple functions is something that needs to be proven}}
+Proposition \ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} \ref{item:delayed_truncation_of_simple_functions} needs to be proven because it is \textit{not} what is given by the definition of the integral for an arbitrary Borel measurable function (after observing that $h \indicate{B}$ is still measurable).   Note that
+\begin{subequations}
+\begin{align}	
+\ds\int_\Omega h \wrt{\mu} &= \sup \biggset{ \ds\int s \wrt{\mu} : \; 0 \leq s \leq h \indicate{B}, \; s \text{ simple} } && \tinytext{def. integral} \label{eqn:integral_over_subset_according_to_definition} \\
+\ds\int_\Omega h \wrt{\mu} &= \sup \biggset{ \ds\int s \indicate{B} \wrt{\mu} : \; 0 \leq s \leq h, \; s \text{ simple}  }&& \tinytext{Prop. \ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions}  \ref{item:delayed_truncation_of_simple_functions}. } \label{eqn:integral_over_subset_according_to_delayed_truncation_property}
+\end{align}
+\end{subequations}
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=.3\linewidth, angle=90]{images/function_and_truncated_function}	
+\end{figure}
+
+What does each say?
+\begin{itemize}
+\item \eqref{eqn:integral_over_subset_according_to_definition} : truncate first, then ``simplify"
+\item \eqref{eqn:integral_over_subset_according_to_delayed_truncation_property} ``simplify" first, then truncate
+\end{itemize}
+
+
+\label{rk:why_delayed_truncation_of_simple_functions_is_something_that_needs_to_be_proven}.
+\end{remark}
+ 
+ 
+\section{$\S$ 1.6 Basic Integation Theorems}
+
+\begin{theorem}
+Let $h$ be a Borel measurable function such that $\int_\Omega h \wrt{\mu}$ exists.  Define $\lambda(B) = \int_B h \wrt{\mu}$, $B \in \F$.  The $\lambda$ is countably additive on $\F$; thus if $h \geq 0$, $\lambda$ is a measure.	
+\end{theorem}
+
+\begin{proof}
+	
+\end{proof}
+
+ 
+
 
 
 \bibliography{references_ash_notes.bib}
@@ -2286,6 +2373,16 @@ If $A \subset \R$, then $M = \sup A$ if and only if (a) $M$ is an upper bound of
 \begin{remark}{\remarktitle{When the upper or lower bound is contained in the set itself}}
 Note that if a set $A$ \textit{contains} an upper bound, then it is automatically a supremum.  That is, if $M$ is an upper bound of $A$ such that $M \in A$, then the \textit{least} upper bound property (the second condition in the characterizations above) automatically follows.  For instance, condition (b) in Proposition \ref{prop:supremum_and_infimum_alternate_characterization} is immediately satisfied by setting $a=M$.   When the supremum is contained in the set, it is called a \textit{maximum}.   A similar remark holds for infima: when the lower bound is contained in the set, it is automatically the infimum, and it is called the minimum.
 \label{rk:when_upper_or_lower_bound_is_contained_in_the_set_itself} 
+\end{remark}
+
+
+\begin{remark}
+One way to show that $\sup A = \sup B$ is using breaking the equality into \framebox{$\leq$}, \framebox{$\geq$}.  We can then show
+\begin{itemize}
+\item \framebox{$\leq$} if RHS is an upper bound on the LHS
+\item if RHS is a supremum over a subset of the LHS (i.e. if $B \subset A$	
+\end{itemize}
+\label{rk:one_way_to_show_two_supremums_are_equal}
 \end{remark}
 
 \subsection{Properties}
