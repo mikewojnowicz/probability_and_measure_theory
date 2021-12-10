@@ -4,15 +4,7 @@
 % STANDARD PREAMBLE
 %%%
 %https://tex.stackexchange.com/questions/68821/is-it-possible-to-create-a-latex-preamble-header
-\usepackage{/Users/mikewojnowicz/Repos/latex_preamble/preamble}
-
-
-%%% 
-% ADD TO STANDARD PREAMBLE
-%%%
-% CIRCLED NUMBERS 
-\newcommand*\tinycircled[1]{\tikz[baseline=(char.base)]{
-            \node[shape=circle,draw,inner sep=2pt] (char) {\tiny #1};}}
+\usepackage{/Users/mwojno01/Repos/latex_preamble/preamble}
            
 %%% 
 % SPECIFIC TO THIS DOCUMENT
@@ -2405,10 +2397,30 @@ In particular, if $f$ and $g$ are integrable, so is $f+g$.
 See \cite{ash2000probability}, Theorem 1.6.3.	
 \end{proof}
 
+
+
+\begin{remark}
+The proof of Theorem \ref{thm:additivity} is straightforward when integrability is assumed.  Suppose $f$ and $g$ are integrable. Let $h=f+g$.  Then 
+\[ h^+ - h^- = f^+ - f^- + g^+ - g^- \]
+Rearranging, we have 
+\[ h^+ + f^- + g^- = f^+ + g^+ + h^- \]
+Applying additivity for non-negative functions (see Prop. \ref{prop:additivity_of_integral_for_non_negative_Borel_measurable_functions}) twice, we get 
+\[ \int h^+ + \int f^- + \int g^- =  \int f^+ + \int g^+ + \int h^- \]
+Rearranging (possible by integrability), we get 
+\begin{align*} 
+\int h^+ -  \int h^- &=  \int f^+ - \int f^- + \int g^+ - \int g^- \\
+\stackexplain{def. integral, def. h}{\implies} \int f+g &= \int f + \int g 
+\end{align*}
+
+
+	
+\end{remark}
+
 \begin{remark}
 The conditions of the additivity theorem imply the conditions of the scalar multiple property (Prop \ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} (a)).  Thus, linearity holds whenever additivity holds.
 \label{rk:linearity_holds_if_additivity_holds}	
 \end{remark}
+
 
 \begin{corollary}{\remarktitle{Additivity corollaries}}
 \begin{alphabate}
@@ -2418,6 +2430,7 @@ Thus, any series of non-negative Borel measurable functions may be integrated te
 \item If $h$ is Borel measurable, $h$ is integrable iff $|h|$ is integrable.
 \item If $g$ and $h$ are Borel measurable with $|g| \leq h$, $h$ integrable, then $g$ is integrable.	
 \end{alphabate}
+\label{cor:additivity_corollaries}
 \end{corollary}
 
 \begin{proof}
@@ -2522,6 +2535,39 @@ Thanks to Theorem \ref{thm:almost_everywhere}, in any integration theorem, we ma
 \item If $\set{h_n}$ is a sequence of non-negative Borel measurable functions such that $h_n \to h$ a.e., then $\int_\Omega h_n \dmu \to \int_\Omega h \dmu$. {\tiny (This is the Monotone Convergence Theorem but with the condition weakened to a.e.  In more detail: we can simply define $h^*_n$ such that it equals $h_n$ almost everywhere and $h$ on the set of measure 0.  Then $h^*_n \to h$.  So by MCT,  $\int_\Omega h^*_n \dmu \to \int_\Omega h \dmu$.  But by Theorem \ref{thm:almost_everywhere} b), $\int_\Omega h^*_n \dmu  = \int_\Omega h_n \dmu$ for all $n$, and so the conclusion holds.)  }
 \end{itemize}
 \end{remark}
+
+\begin{theorem}
+Let $h$ be Borel measurable
+\begin{alphabate}
+\item If $h$ is integrable, then $h$ is finite a.e. 
+\item If $h \geq 0$ and $\int_\Omega h \dmu =0$ then $h=0$ a.e.
+\end{alphabate}
+\end{theorem}
+
+\begin{proof}
+\begin{alphabate}
+\item By contraposition.  If h is not finite a.e., then $\exists B \in \F : \mu(B) >0$ and $|h \indicate{B}| = \infty$.  Then 
+\[ \ds\int_\Omega |h| \dmu \stackexplain{monotonicity}{\geq} \ds\int_B |h| \dmu \stackexplain{simple function} = \infty \, \mu(B) = \infty. \]
+So $|h|$ is not integrable. So by Corollary \ref{cor:additivity_corollaries} b), $h$ is not integrable. 
+\item Let $B_n := \set{\omega : h(\omega) \geq \frac{1}{n}}$.  Then  $ B_n \uparrow B := \set{\omega : h(\omega) > 0}.\footnote{Recall that $\cup_{n=1}^\infty [\frac{1}{n}, \infty) = (0, \infty)$.} \quad \tinycircled{1}$
+
+Now
+\begin{align*} 
+ 0 \stackexplain{first hypothesis}{\leq} h \indicate{B_n} \stackexplain{$B_n \subset B$ }{\leq} h \indicate{B} \stackexplain{def. $B$}{=} h \\
+\implies \dint_{B_n} h \dmu \stackexplain{monotonicity}{\leq} \dint_\Omega h \dmu \stackexplain{second hypothesis}{=} 0 \\
+\stackexplain{first hypothesis, monotonicity}{\implies} \dint_{B_n} h \dmu =0 && \tinycircled{2}
+\end{align*}
+Now \tinycircled{1} and monotonicity again give
+\begin{align*}
+\dint_{B_n} h \dmu \stackexplain{def. $B_n$, monotonicity}{\geq} \dint \frac{1}{n} \indicate{B_n} \dmu \stackexplain{simple function}{=} \frac{1}{n} \mu(B_n) && \tinycircled{3} 	
+\end{align*}
+Now \tinycircled{2} and \tinycircled{3} together give $\mu(B_n) =0 \; \forall n$.  So by continuity of measure
+\[ \mu(B) = \ds\lim_{n \to \infty} \mu(B_n) =0 \]
+
+\end{alphabate}
+	
+\end{proof}
+
 
 
 
