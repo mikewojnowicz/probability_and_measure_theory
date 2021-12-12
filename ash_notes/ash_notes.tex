@@ -2096,6 +2096,95 @@ Proposition \ref{prop:additivity_of_integral_for_non_negative_Borel_measurable_f
 %{rk:continuity_of_measure_applied_to_measures_given_by_integrals_of_simple_functions_over_sets}
 
 
+\paragraphnewline{Fatou's Lemma}
+
+
+\begin{theorem}{\remarktitle{Fatou's Lemma}}
+Let $\set{f_n}$ be non-negative measurable for each positive integer $n$.  Then 
+\begin{align} 
+\ds\int_\Omega \bigg( \liminf_{n \to \infty} f_n \bigg) \dmu \leq \liminf_{n \to \infty} \dint_\Omega f_n \dmu
+\label{eqn:fatous_lemma}
+\end{align}
+
+\end{theorem}
+
+\begin{proof}
+By definition of the limit inferior,
+\[ \explaintermbrace{$:=g$}{\liminf_{n \to \infty} f_n} = \lim_{n \to \infty}  \explaintermbrace{$:=g_n$}{\inf_{m \geq n} f_n} \]	
+And $g_n \uparrow g$ {\tiny (due to taking the infimum over successively smaller sets; see Prop. \ref{prop:sup_and_inf_for_subsets_are_tighter})}. \\
+
+Hence, by Monotone Convergence Theorem
+\begin{align*} 
+  \explaintermbrace{$=\liminf_{n \to \infty} \dint g_n \dmu$}{\dlim_{n \to \infty} \dint g_n \dmu} \stackexplain{(MCT)}{=} \dint \dlim_{n \to \infty} g_n \dmu  && \tinycircled{1} 
+\end{align*}
+So
+\[ \liminf_{n \to \infty} \dint f_n \dmu \stackexplain{(monotonicity, $f_n \geq g_n$)}{\geq}  \liminf_{n \to \infty} \dint g_n \dmu \stackexplain{\tinycircled{1}}{=} \dint \lim_{n \to \infty} g_n \dmu \stackexplain{(def. $g_n$)}{=} \dint \liminf_{n \to \infty} f_n \dmu \]
+\end{proof}
+
+\begin{remark}{\remarktitle{Expanded view of Fatou's Lemma}}
+We can interpret Fatou's lemma as \textit{integrals of asymptotics give more extreme values than asymptotics of integrals}.
+
+To see this, first note that a parallel argument gives 
+
+\begin{align} 
+\ds\int_\Omega \bigg( \limsup_{n \to \infty} f_n \bigg) \dmu \geq \limsup_{n \to \infty} \dint_\Omega f_n \dmu
+\label{eqn:fatous_lemma_with_sups}
+\end{align}
+
+So, overall, we have
+
+\begin{align} 
+\ds\int_\Omega \bigg( \liminf_{n \to \infty} f_n \bigg) \dmu  \stackexplain{\eqref{eqn:fatous_lemma}}{\leq} \liminf_{n \to \infty} \dint_\Omega f_n \dmu \stackexplain{\eqref{eqn:liminf_upper_bounded_by_limsup_for_functions}}{\leq} \limsup_{n \to \infty} \dint_\Omega f_n \dmu \stackexplain{\eqref{eqn:fatous_lemma_with_sups}}{\leq} \ds\int_\Omega \bigg( \limsup_{n \to \infty} f_n \bigg) \dmu  
+\label{eqn:fatous_lemma_big_picture_view}
+\end{align}
+
+\end{remark}
+
+\begin{example}{\remarktitle{Strict inequalities can occur in Fatou's lemma}}
+We show that that strict inequalities can occur in the expanded view of Fatou's lemma, \eqref{eqn:fatous_lemma_big_picture_view}.  
+
+Consider a measure space $(\Omega, \F, \mu)$ and set $B \in \F$ such that $0 < \mu(B^c) < \mu(B) < \mu(\Omega)$. 
+Define a sequence of functions $\set{f_n}$ such that
+\[ f_n = 
+\begin{cases}
+\indicate{B}, & \text{n odd} \\ 
+\indicate{B^c}, & \text{n even} \\ 	
+ \end{cases}
+ \]	
+ 
+ \begin{figure}[H]
+ \centering 
+ \includegraphics[width=.4\textwidth, angle=90]{images/fatous_lemma_example}	
+ \end{figure}
+
+ \begin{table}[htp!]
+ \begin{tabular}{rl|l}
+ & \textbf{Integrate first} & \textbf{Asymptotics first} \\
+ \hline 
+\textbf{Observation} & $\dint f_n  \dmu = 
+\begin{cases}
+\mu(B), & \text{n odd} \\ 
+\mu(B^c), & \text{n even} \\ 	
+ \end{cases}$	 &  $\liminf_{n \to \infty} f_n =0$ \\
+ & & $\limsup_{n \to \infty} f_n =1$\\
+ & & \\
+ %\hline 
+\textbf{Implication} & $\liminf_{n \to \infty} \dint f_n \dmu = \mu(B^c)$ & $\dint \liminf_{n \to \infty} f_n \dmu = 0$ \\
+& $\limsup_{n \to \infty} \dint f_n \dmu = \mu(B)$ & $\dint \limsup_{n \to \infty} f_n \dmu = \mu(\Omega)$ \\
+ \end{tabular}
+ \end{table}
+
+And so we see that strict inequalities occur in the expanded view of Fatou's lemma, \eqref{eqn:fatous_lemma_big_picture_view}. 
+
+\begin{align*}
+\explaintermbrace{0}{\ds\int_\Omega \bigg( \liminf_{n \to \infty} f_n \bigg) \dmu}  < \explaintermbrace{$\mu(B^c)$}{\liminf_{n \to \infty} \dint_\Omega f_n \dmu} < \explaintermbrace{$\mu(B)$}{\limsup_{n \to \infty} \dint_\Omega f_n \dmu} <  \explaintermbrace{$\mu(\Omega)$}{\ds\int_\Omega \bigg( \limsup_{n \to \infty} f_n \bigg) \dmu}  
+%\labelit \label{eqn:fatous_lemma_big_picture_view_applied_to_example_with_strict_inequalities}
+\end{align*}
+The example captures the fact that \textit{integrals of asymptotics give more extreme values than asymptotics of integrals}.
+
+\end{example}
+
+
 \subsubsection{Integrals of arbitrary Borel measurable functions}
 
 Let $h$ be an arbitrary Borel measurable function.   We will express an arbitrary Borel measurable function as as the difference of two non-negative Borel measurable functions.
@@ -2310,7 +2399,7 @@ What does each say?
  
 \section{$\S$ 1.6 Basic Integration Theorems}
 
-Here we prove some basic integration theorems, and further properties of integration that can be derived thereof.  Note that we have already provided the Monotone Convergence Theorem in the previous section. 
+Here we prove some basic integration theorems, and further properties of integration that can be derived thereof.  Note that we have already provided the Monotone Convergence Theorem and Fatou's lemma in the previous section (since we give statements that apply to non-negative functions). 
 
 \begin{theorem}{\remarktitle{Integrals as measures}}
 Let $h$ be a Borel measurable function such that $\int_\Omega h \wrt{\mu}$ exists.  Define $\lambda(B) = \int_B h \wrt{\mu}$, $B \in \F$.  Then $\lambda$ is countably additive on $\F$; thus if $h \geq 0$, $\lambda$ is a measure.	
@@ -2634,7 +2723,7 @@ Note that if a set $A$ \textit{contains} an upper bound, then it is automaticall
 One way to show that $\sup A = \sup B$ is using breaking the equality into \framebox{$\leq$}, \framebox{$\geq$}.  We can then show
 \begin{itemize}
 \item \framebox{$\leq$} if RHS is an upper bound on the LHS
-\item if RHS is a supremum over a subset of the LHS (i.e. if $B \subset A$	
+\item \framebox{$\geq$} if RHS is a supremum over a subset of the LHS (i.e. if $B \subset A)$	
 \end{itemize}
 \label{rk:one_way_to_show_two_supremums_are_equal}
 \end{remark}
@@ -2695,6 +2784,42 @@ If $A, B \subset \R$ are non-empty, then
 Proposition \ref{prop:sup_and_inf_for_minkowski_sum_and_diff} can be informally described as saying that the infimum and supremum distribute over addition and subtraction, but negative signs ``flip" infima to suprema, and vice versa. 
 \end{remark}
 
+
+\subsection{Limit inferior and limit superior of real valued sequences}
+
+\begin{definition}
+If $a_n$ is a sequence of real numbers, then  we define its limit inferior and limit superior as 
+\[ \liminf_{n \to \infty} a_n := \lim_{n \to \infty} \inf_{m \geq n} a_m, \quad \quad \limsup_{n \to \infty} a_n := \lim_{n \to \infty} \sup_{m \geq n} a_m \]	
+\end{definition}
+
+\begin{remark}
+The definitions can be presented in quantified form.  For example, \cite{apostol1974mathematical} defines the limit superior as follows. Suppose there is a real number $S$ satisfying the following two conditions
+\begin{enumerate}
+\item \begin{align*}
+ \forall \epsilon > 0, \exists N \in \mathbb{N}: \forall n \geq N,\\
+ x_n < S + \epsilon 	
+ \end{align*}
+
+\item \begin{align*}
+ \forall \epsilon > 0, N \in \mathbb{N}, \exists n \geq N : \\
+ x_n > S - \epsilon 	
+ \end{align*}
+\end{enumerate}
+then $S$ is the limit superior of $\set{x_n}$.  We can think of (1) as stating that $S$ is an asymptotic upper bound;  ultimately \textit{all} terms of the sequence lie to the left of $S + \epsilon$.  We can think of the additional condition (2) as then guaranteeing that $S$ is an asymptotic least upper bound; \textit{infinitely many} terms lie to the right of $U - \epsilon$ (so $U - \epsilon$ cannot be an upper bound for any $n$). 
+\end{remark}
+
+Unlike the limit, the limit inferior and limit superior always exist, although they may be $\pm \infty$. 
+
+\begin{proposition}
+\[ \liminf_{n \to \infty} a_n  \leq \limsup_{n \to \infty} a_n  \]
+\label{prop:liminf_upper_bounded_by_limsup}
+\end{proposition}
+
+\begin{proof}
+\[\liminf_{n \to \infty} a_n  \stackexplain{def}{=} \lim_{n \to \infty} \inf_{m \geq n} a_m \; \stackexplain{*}{\leq} \;  \lim_{n \to \infty} \sup_{m \geq n} a_m \stackexplain{def}{=}  \limsup_{n \to \infty} a_n. \]
+{\tiny (Note: * holds because limits preserve non-strict inequalities.)}	
+\end{proof}
+
 \subsection{Functions}
 
 The supremum and infimum of functions are the supremum and infimum of its range, and so results about sets translate immediately to results about functions.
@@ -2710,6 +2835,23 @@ One useful result is that the limit of an increasing sequence of functions is it
 If $f_n \leq f_{n+1}$ for all $n \in \mathbb{N}$, and $f_n \to f$, then $f = \sup_n f_n$.
 \label{prop:limit_of_an_increasing_sequence_of_functions_is_its_supremum}	
 \end{proposition}
+
+
+
+\subsubsection{Limit inferior and limit superior of functions}
+
+\begin{definition}
+If $\set{f_n}$ is a sequence of functions, then  we define its limit inferior and limit superior as 
+\[ \liminf_{n \to \infty} f := \lim_{n \to \infty} \inf_{m \geq n} f_m, \quad \quad \limsup_{n \to \infty} f := \lim_{n \to \infty} \sup_{m \geq n} f_m \]	
+\end{definition}
+
+
+Applying Proposition \ref{prop:liminf_upper_bounded_by_limsup} to a function pointwise, we have 
+\begin{align}
+\liminf_{n \to \infty} f  \leq \limsup_{n \to \infty} f  
+\label{eqn:liminf_upper_bounded_by_limsup_for_functions}
+\end{align}
+
 
 
 \section{Some information relevant to Reimann integrals} \label{sec:some_info_relevant_to_reimann_integrals}
