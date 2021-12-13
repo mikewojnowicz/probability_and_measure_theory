@@ -2403,6 +2403,7 @@ Here we prove some basic integration theorems, and further properties of integra
 
 \begin{theorem}{\remarktitle{Integrals as measures}}
 Let $h$ be a Borel measurable function such that $\int_\Omega h \wrt{\mu}$ exists.  Define $\lambda(B) = \int_B h \wrt{\mu}$, $B \in \F$.  Then $\lambda$ is countably additive on $\F$; thus if $h \geq 0$, $\lambda$ is a measure.	
+\label{thm:integrals_as_measures}
 \end{theorem}
 
 \begin{proof}
@@ -2460,7 +2461,7 @@ Thus, for any $N$, $\epsilon>0$, we have
 \implies \lambda(B) &\geq \ds\sum_{n=1}^\infty \lambda(B_n) && \tinytext{justified below}
 \end{align*}
 
-The last line above is justified in this footnote.\footnote{\textbf{Claim.} Let $\set{a_n}_{n=1}^\infty : 0 \leq a_n < \infty$.  Then $M \stackrel{*}{\geq} \ds\sum_{n=1}^N a_n - \epsilon \; \text{ for any } N, \epsilon>0 \implies M \geq \ds\sum_{n=1}^\infty a_n.$ \textbf{Proof}. If $\ds\sum_{n=1}^\infty a_n = \infty$ then the claim obviously holds.  If $\ds\sum_{n=1}^\infty a_n < \infty$ then for all $\epsilon >0$, the tail of the series is less than $\epsilon$ for some $N^*$.  So write $\sum_{n=1}^{N^*} a_n < \ds\sum_{n=1}^\infty a_n - \epsilon$, and equation (*) becomes $M \geq \ds\sum_{n=1}^\infty a_n - 2\epsilon = \ds\sum_{n=1}^\infty a_n -\tilde{\epsilon}$ for all $\tilde{\epsilon} > 0$.  Take the limit as $\tilde{\epsilon} \to 0$, and the non-strict inequality is preserved in the limit.}
+{\tiny What justifies the last line above?  \textbf{Claim.} Let $\set{a_n}_{n=1}^\infty : 0 \leq a_n < \infty$.  Then $M \stackrel{*}{\geq} \ds\sum_{n=1}^N a_n - \epsilon \; \text{ for any } N, \epsilon>0 \implies M \geq \ds\sum_{n=1}^\infty a_n.$ \textbf{Proof}. If $\ds\sum_{n=1}^\infty a_n = \infty$ then the claim obviously holds.  If $\ds\sum_{n=1}^\infty a_n < \infty$ then for all $\epsilon >0$, the tail of the series is less than $\epsilon$ for some $N^*$.  So write $\sum_{n=1}^{N^*} a_n < \ds\sum_{n=1}^\infty a_n - \epsilon$, and equation (*) becomes $M \geq \ds\sum_{n=1}^\infty a_n - 2\epsilon = \ds\sum_{n=1}^\infty a_n -\tilde{\epsilon}$ for all $\tilde{\epsilon} > 0$.  Take the limit as $\tilde{\epsilon} \to 0$, and the non-strict inequality is preserved in the limit.}
 
 So now assume $h$ is an arbitrary Borel-measurable function.  Since we have assumed $\ds\int h \wrt{\mu}$ exists, we have $\ds\int h^+ \wrt{\mu}, \ds\int h^- \wrt{\mu} < \infty$.  So by what we have shown for non-negative functions, there exists measures $\lambda^+, \lambda^-$ corresponding to each of these integrals.  So if $B = \bigcupdot_{n=1}^\infty B_n$, 
 \begin{align*}
@@ -2473,6 +2474,35 @@ So now assume $h$ is an arbitrary Borel-measurable function.  Since we have assu
 \end{itemize}
 
 \end{proof}
+
+\begin{remark}{\remarktitle{Change of measure}} Rudin \cite{walter1987real} points out an important implication of Theorem \ref{thm:integrals_as_measures}: if $h \geq 0$, and so $\lambda$ (as defined as in the theorem statement) is a measure, then
+\begin{align*}
+\dint_\Omega g \wrt{\lambda} = \dint_\Omega g h \dmu
+\labelit \label{eqn:change_of_measure}
+\end{align*}
+for every measurable $g$ on $\Omega$ such that $g \geq 0$. 
+
+The change of measure statement \eqref{eqn:change_of_measure} is sometimes written in the form
+\begin{align*}
+d\lambda = h \; d\mu 
+\labelit \label{eqn:change_of_measure_as_change_in_differentials}
+\end{align*}
+
+Rudin assigns no independent meaning to the symbols 
+$d\lambda$ and $d\mu$; \eqref{eqn:change_of_measure_as_change_in_differentials} simply means that \eqref{eqn:change_of_measure} holds for every measurable non-negative $g$. 
+
+The Radon-Nikodym theorem (to be covered later in the document) provides an important converse:  instead of obtaining new measure $\lambda$ given original measure $\mu$ and function $h$, we will be given two measures $\lambda$ and $\mu$, and will obtain the \textit{Radon-Nikdoym derivative} $h$.
+
+{\tiny Let us prove \eqref{eqn:change_of_measure} from Theorem \ref{thm:integrals_as_measures}.
+
+\begin{itemize}
+	\item First let $g$ be a simple function, which we write as $s= \sum_{i=1}^r x_i \indicate{E_i}$.   Then 
+\[ \int s \wrt{\lambda} \stackexplain{simple f'n}{=} \sum_{i=1}^r x_i \lambda(E_i) \stackexplain{hypothesis}{=}  \sum_{i=1}^r x_i \int_{E_i} h \dmu \stackexplain{linearity}{=} \int \sum_{i=1}^r x_i \indicate{E_i} h \dmu \stackexplain{def. $s$}{=} \int sh \dmu    \]
+\item Now let $g$ be a non-negative measurable function. By Prop \ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function}, there exists a sequence of simple functions $\set{s_n}$ such that $s_n \uparrow g$.  Since  $s_n \uparrow g$, then also $s_n f \uparrow fg$.  So applying Monotone Convergence Theorem to both, we obtain $\int s_n d\lambda \uparrow \int g d\lambda$ and  $\int s_n f d\mu \uparrow \int fg d\mu$.  But since $\int s_n d\lambda  =\int s_n f d\mu$ for all $n$ by the previous bullet point, the sequences must have the same limit (by uniqueness of limits), so $\int g d\lambda = \int gh d\mu$.
+\end{itemize}
+} 
+\end{remark}
+
 
  
 \begin{theorem}{\remarktitle{Additivity theorem}}
@@ -2543,7 +2573,7 @@ which is also true iff BOTH of $\biggset{\dint h^+ \dmu , \dint h^- \dmu } < \in
 \end{proof}
 
 
-\begin{definition}{\remarktitle{almost everywhere}}
+\begin{definition}{\remarktitle{Almost everywhere}}
 A condition is said to hold \textit{almost everywhere} with respect to the measure $\mu$ (written a.e $[\mu]$ or simply a.e. if $\mu$ is understood) if there exists a set $B \in \F$ of $\mu$-measure 0 such that the condition holds outside $B$.
 \label{def:almost_everywhere}
 \end{definition}
