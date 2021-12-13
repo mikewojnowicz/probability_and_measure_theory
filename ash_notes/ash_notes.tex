@@ -2084,12 +2084,46 @@ By Proposition \ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_
  \end{align*}
 \end{proof}
 
+Below we show that Proposition \ref{prop:additivity_of_integral_for_non_negative_Borel_measurable_functions} actually extends to linearity with countably infinite sums. 
 
 
-\begin{exercise}
-Proposition \ref{prop:additivity_of_integral_for_non_negative_Borel_measurable_functions} actually extends to linearity with countably infinite sums.  This can be proven fairly easily with induction and yet another application of the monotone convergence theorem. Do it. (See \cite{folland1999real}.)  
-\end{exercise}
+\begin{corollary}{\remarktitle{Linearity with countably infinite sums of non-negative measurable functions}}
+If $\set{f_n}$ is a sequence of non-negative measurable functions,  and 
+\[ f(\omega) = \ds\sum_{n=1}^\infty f_n(\omega), \quad \quad \text{ for all } \omega \in \Omega  \]
+Then 
+\begin{align*}
+ \dint_\Omega f \dmu = \ds\sum_{n=1}^\infty \ds\int_\Omega f_n \dmu 
+\labelit \label{eqn:consequence_of_linearity_with_countably_infinite_sums_of_non_negative_measurable_functions}	
+\end{align*}
+Thus, any series of non-negative Borel measurable functions may be integrated term by term.
 
+% Below is Ash's formulation of the statement.  I've replaced it with Rudin's, as I trust Rudin more :)
+% 
+%If $h_1, h_2, ...$ are non-negative Borel measurable, 
+%\[ \ds\int_\Omega \bigg(  \ds\sum_{n=1}^\infty h_n \bigg) \dmu  = \ds\sum_{n=1}^\infty \ds\int_\Omega h_n \dmu\]
+\label{cor:linearity_with_countable_infinite_sums_of_non_negative_functions}
+\end{corollary}
+
+\begin{proof}
+By induction, the linearity of Proposition \ref{prop:additivity_of_integral_for_non_negative_Borel_measurable_functions} extends to a finite collection $\set{f_n}_{n=1}^N$. Now $\ds\sum_{n=1}^N f_n \uparrow \ds\sum_{n=1}^\infty f_n$, so we apply Monotone Convergence Theorem (MCT)
+\[ \explaintermbrace{ $\stackexplain{(additivity)}{=} \dsum_{n=1}^\infty \dint f_n \dmu$}{\dlim_{N \to \infty} \dint \dsum_{n=1}^N f_n \dmu} \stackexplain{(MCT)}{=} \dint \dsum_{n=1}^\infty f_n \dmu \]
+\end{proof}
+
+\begin{remark}
+If we let $\mu$ be the counting measure on a countable set, the statement of  Corollary \ref{cor:linearity_with_countable_infinite_sums_of_non_negative_functions} becomes a statement about double series of non-negative real numbers (which can be proved by more elementary means) \cite{rudin1987real}:
+
+That is, if $a_{ij} \geq 0$ for $i$ and $j = 1, 2, 3, ...$, then 
+\[ \ds\sum_{i=1}^\infty \ds\sum_{j=1}^\infty  a_{ij} = \ds\sum_{j=1}^\infty \ds\sum_{i=1}^\infty  a_{ij} \]
+
+{\tiny More explicitly, on $\Omega =\set{1,2,3,...}$, we define sequence $\set{f_i}$ such that $f_i(j) = a_{ij}$.  Then we define $f = \sum_{i=1}^\infty f_i$, so $f(j) = \sum_{i=1}^\infty f_i(j) = \sum_{i=1}^\infty a_{ij}$.
+
+Then, since $\mu$ is the counting measure, the LHS of  \eqref{eqn:consequence_of_linearity_with_countably_infinite_sums_of_non_negative_measurable_functions} becomes 
+\[  \dint_\Omega f(j) \dmu(j) = \dsum_{j=1}^\infty f(j) = \ds\sum_{j=1}^\infty \ds\sum_{i=1}^\infty a_{ij}\]	
+and the RHS of \eqref{eqn:consequence_of_linearity_with_countably_infinite_sums_of_non_negative_measurable_functions} is 
+\[ \ds\sum_{i=1}^\infty \ds\int_\Omega f_i \dmu = \ds\sum_{i=1}^\infty \ds\sum_{j=1}^\infty a_{ij}. \]
+}
+
+\end{remark}
 
 
 
@@ -2475,7 +2509,7 @@ So now assume $f$ is an arbitrary Borel-measurable function.  Since we have assu
 
 \end{proof}
 
-\begin{remark}{\remarktitle{Change of measure}} Rudin \cite{walter1987real} points out an important implication of Theorem \ref{thm:integrals_as_measures}: if $f \geq 0$, and so $\lambda$ (as defined as in the theorem statement) is a measure, then
+\begin{remark}{\remarktitle{Change of measure}} Rudin \cite{rudin1987real} points out an important implication of Theorem \ref{thm:integrals_as_measures}: if $f \geq 0$, and so $\lambda$ (as defined as in the theorem statement) is a measure, then
 \begin{align*}
 \dint_\Omega g \wrt{\lambda} = \dint_\Omega g f \dmu
 \labelit \label{eqn:change_of_measure}
@@ -2543,9 +2577,6 @@ The conditions of the additivity theorem imply the conditions of the scalar mult
 
 \begin{corollary}{\remarktitle{Additivity corollaries}}
 \begin{alphabate}
-\item If $h_1, h_2, ...$ are non-negative Borel measurable, 
-\[ \ds\int_\Omega \bigg(  \ds\sum_{n=1}^\infty h_n \bigg) \dmu  = \ds\sum_{n=1}^\infty \ds\int_\Omega h_n \dmu\]
-Thus, any series of non-negative Borel measurable functions may be integrated term by term.
 \item If $h$ is Borel measurable, $h$ is integrable iff $|h|$ is integrable.
 \item If $g$ and $h$ are Borel measurable with $|g| \leq h$, $h$ integrable, then $g$ is integrable.	
 \end{alphabate}
@@ -2554,8 +2585,6 @@ Thus, any series of non-negative Borel measurable functions may be integrated te
 
 \begin{proof}
 \begin{alphabate}
-\item $\ds\sum_{n=1}^N h_n \uparrow \ds\sum_{n=1}^\infty h_n$, so we apply Monotone Convergence Theorem (MCT)
-\[ \explaintermbrace{ $\stackexplain{(additivity)}{=} \dsum_{n=1}^\infty \dint h_n \dmu$}{\dlim_{N \to \infty} \dint \dsum_{n=1}^N h_n \dmu} \stackexplain{(MCT)}{=} \dint \dsum_{n=1}^\infty h_n \dmu \]
 \item  If $h$ is integrable, then by assumption we have 
 \[ \bigg| \dint h \dmu \bigg| \stackexplain{def. \, integral}{=} \bigg| \dint h^+ \dmu - \dint h^- \dmu \bigg| < \infty \]
 which is true iff BOTH of $\biggset{\dint h^+ \dmu , \dint h^- \dmu } < \infty$
