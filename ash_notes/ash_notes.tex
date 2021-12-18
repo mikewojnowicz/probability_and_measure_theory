@@ -2445,7 +2445,7 @@ What does each say?
 
 Here we prove some basic integration theorems, and further properties of integration that can be derived thereof.  Note that we have already provided the Monotone Convergence Theorem and Fatou's lemma in the previous section (since we give statements that apply to non-negative functions). 
 
-\begin{theorem}{\remarktitle{Integrals as measures}}
+\begin{theorem}{\textbf{Integrals as measures.}}
 Let $f$ be a Borel measurable function such that $\int_\Omega f \wrt{\mu}$ exists.  Define $\lambda(B) = \int_B f \wrt{\mu}$, $B \in \F$.  Then $\lambda$ is countably additive on $\F$; thus if $f \geq 0$, $\lambda$ is a measure.	
 \label{thm:integrals_as_measures}
 \end{theorem}
@@ -2549,7 +2549,7 @@ The Radon-Nikodym theorem (to be covered later in the document) provides an impo
 
 
  
-\begin{theorem}{\remarktitle{Additivity theorem}}
+\begin{theorem}{\textbf{Additivity theorem.}}
 Let $f$ and $g$ be Borel measurable, and assume that $f+g$ is well-defined.  If $\dint_\Omega f \dmu$ and $\dint_\Omega g \dmu$ exist and $\dint_\Omega f \dmu$ + $\dint_\Omega g \dmu$ is well-defined (not of the form $+ \infty - \infty$ or $- \infty +\infty$), then 
 \[ \dint_\Omega f +g \dmu = \dint_\Omega f \dmu + \dint_\Omega f \dmu \]
 In particular, if $f$ and $g$ are integrable, so is $f+g$.
@@ -2619,7 +2619,7 @@ A condition is said to hold \textit{almost everywhere} with respect to the measu
 
 From the point of view of integration theory, functions that differ only on a set of measure zero may be identified, as is established by the following result.
 
-\begin{theorem}{\remarktitle{Almost everywhere}}
+\begin{theorem}{\textbf{Almost everywhere}.}
 Let $f,g,h$ be Borel measurable functions.
 \begin{alphabate}
 \item If $f=0$ a.e. $[\mu]$, then $\dint_\Omega f \dmu =0$.
@@ -2725,6 +2725,42 @@ Now \tinycircled{2} and \tinycircled{3} together give $\mu(B_n) =0 \; \forall n$
 \end{alphabate}
 	
 \end{proof}
+
+The monotone convergence theorem as stated earlier only applies to non-negative functions and only to increasing sequences. We relax those assumptions below.
+
+\begin{theorem}{\textbf{Extended Monotone Convergence Theorem.}}
+Let $f_1, f_2, ..., f, g$ be Borel measurable
+\begin{alphabate}
+\item If $f_n \uparrow f$ and $f_n \geq g$ for all $n$, where $\int_\Omega g \dmu > -\infty$, then 
+\[ \ds\int_\Omega f_n \dmu \uparrow \ds\int_\Omega f \dmu  \]
+\item If $f_n \downarrow f$ and $f_n \leq g$ for all $n$, where $\int_\Omega g \dmu < \infty$, then 
+\[ \ds\int_\Omega f_n \dmu \downarrow \ds\int_\Omega f \dmu  \]	
+\end{alphabate}
+	
+\end{theorem}
+
+\begin{proof}
+\begin{alphabate}
+\item If $\int g \dmu = \infty$, then by monotonicity {\tiny (and the fact that the limit of an increasing sequence equals its supremum)}, $\int f \dmu \geq \int f_n \dmu \geq \int g \dmu$, and the conclusion holds.  So assume $\int g \dmu < \infty$.  Along with the hypothesis, we have that $\int g \dmu$ is finite.
+
+%Now we have $f_n - g \geq 0$ and $f_n -g \uparrow f-g$, so by Monotone Convergence Theorem, 
+Now
+\begin{align*}
+& f_n - g \geq 0 \quad \text{ and } \quad f_n -g \uparrow f-g && \tinytext{Hypothesis (and Prop \ref{prop:limit_of_monotone_sequences})} \\
+\implies & \ds\int (f_n - g) \dmu \uparrow \ds\int (f-g) \dmu && \tinytext{Monotone Convergence Theorem}\\
+\stackrel{\tinycircled{1}}{\implies} & \ds\int f_n \dmu - \ds\int g \dmu \uparrow \ds\int f \dmu - \ds\int g \dmu && \tinytext{Linearity}\\
+\implies & \dint f_n \dmu \uparrow \dint f \dmu && \tinytext{Since $\int g$ is tfinite} 
+\end{align*}	
+To check that linearity holds in \tinycircled{1}, note that $\int f \dmu$ and $\int f_n \dmu$ exist by monotonicity (Prop \ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} a), and the sum cannot be of form $\infty - \infty$ or $-\infty + \infty$ since $\int g \dmu$ is finite.
+\item We have
+\begin{align*}
+& -f_n \geq -g \quad \text{ and } \quad -f_n \uparrow -g && \tinytext{Hypothesis} \\
+\implies & - \int f_n \dmu \uparrow - \int f \dmu && \tinytext{Part (a) (and constant multiple property; Prop \ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} a) } \\
+\implies & \int f_n \dmu \downarrow  \int f \dmu
+\end{align*} 
+\end{alphabate}
+\end{proof}
+
 
 
 
