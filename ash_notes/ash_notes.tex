@@ -2023,7 +2023,7 @@ Now we establish one of the fundamental convergence theorems.
 \begin{theorem}{\textbf{The Monotone convergence theorem.}}
 If $\set{h_n}$ is a sequence of non-negative Borel measurable functions such that $h_n \leq h_{n+1}$ for all $n$ and $h =\lim_{n \to \infty} h_n (= \sup_n h_n)$, then 
 \begin{align*}
-\ds \int h \wrt{\mu} = \lim_{n \to \infty} \ds\int h_n \wrt{\mu}
+\ds \int h_n \wrt{\mu} \uparrow \ds\int h \wrt{\mu}
 \labelit \label{eqn:monotone_convergence_theorem_conclusion}	
 \end{align*}
 \label{thm:monotone_convergence_theorem}
@@ -2031,14 +2031,19 @@ If $\set{h_n}$ is a sequence of non-negative Borel measurable functions such tha
 
 \begin{proof}
 
-We break the proof into three parts:
-\begin{itemize}
-\item We first show that both quantities in \eqref{eqn:monotone_convergence_theorem_conclusion} exist. First, recall from Remark \ref{rk:when_does_integral_of_non_negative_Borel_measurable_function_exist} that the integral of a non-negative Borel measurable function always exists. So the LHS exists because $h$ is Borel measurable (by Proposition \ref{prop:borel_measurability_closed_under_inf_sup_liminf_limsup}) and non-negative.  The RHS exists since each $\int h_n$ exists and is increasing (by monotonicity; see Prop. \ref{prop:properties_of_integrals_of_non_negative_borel_measurable_functions}), and therefore has a limit (possibly $\infty$). 
+We break the proof into four parts.  Consider
+\begin{align*}
+\ds \int h \wrt{\mu} = \lim_{n \to \infty} \ds\int h_n \wrt{\mu}
+\labelit \label{eqn:monotone_convergence_theorem_pre_conclusion}	
+\end{align*}
 
-\item Next, we show $\geq$ for \eqref{eqn:monotone_convergence_theorem_conclusion}; that is we show $\lim_{n \to \infty} \int h_n \leq \int h$.
+\begin{itemize}
+\item We first show that both quantities in \eqref{eqn:monotone_convergence_theorem_pre_conclusion} exist. First, recall from Remark \ref{rk:when_does_integral_of_non_negative_Borel_measurable_function_exist} that the integral of a non-negative Borel measurable function always exists. So the LHS exists because $h$ is Borel measurable (by Proposition \ref{prop:borel_measurability_closed_under_inf_sup_liminf_limsup}) and non-negative.  The RHS exists since each $\int h_n$ exists and is increasing (by monotonicity; see Prop. \ref{prop:properties_of_integrals_of_non_negative_borel_measurable_functions}), and therefore has a limit (possibly $\infty$). 
+
+\item Next, we show $\geq$ for \eqref{eqn:monotone_convergence_theorem_pre_conclusion}; that is we show $\lim_{n \to \infty} \int h_n \leq \int h$.
 \[ h_n \leq h \stackreltext{monotonicity}{\implies} \ds\int h_n \leq \ds\int h \stackreltext{limits preserve (non-strict) inequalities}{\implies} \ds\lim_{n \to \infty} \ds\int h_n \leq \ds\int h \]
 
-\item Finally, we show $\leq$ for \eqref{eqn:monotone_convergence_theorem_conclusion}; that is we show $\lim_{n \to \infty} \int h_n \geq \int h$.   Let $\alpha \in (0,1)$ and $s$ be a simple function such that $0 \leq s \leq h$.  Now define 
+\item Now, we show $\leq$ for \eqref{eqn:monotone_convergence_theorem_pre_conclusion}; that is we show $\lim_{n \to \infty} \int h_n \geq \int h$.   Let $\alpha \in (0,1)$ and $s$ be a simple function such that $0 \leq s \leq h$.  Now define 
 \[ A_n := \set{\omega : h_n(\omega) \geq \alpha s(\omega) }\]
 And note that $A_n \uparrow \Omega$.
 
@@ -2053,8 +2058,13 @@ Now since the equality holds for all $\alpha <1$, it holds for $\alpha =1$, and 
 \[   \ds\lim_{n \to \infty}  \ds\int h_n  \geq \ds\int s \]
 Since the LHS is an upper bound on the set in the RHS, it must be greater than the least upper bound, so 
 \[   \ds\lim_{n \to \infty}  \ds\int h_n  \geq \ds\int h \]
+\item Now we know that \eqref{eqn:monotone_convergence_theorem_pre_conclusion} holds.  It just remains to show that \eqref{eqn:monotone_convergence_theorem_pre_conclusion} $\implies$ \eqref{eqn:monotone_convergence_theorem_conclusion}.  By monotonicity, $\int h_{n+1} \wrt{\mu}  \geq \int h_{n} \wrt{\mu}$ for all $n$, and since the limit of an increasing sequence is its supremum (Prop. \ref{prop:limit_of_monotone_sequences}), $\int h \wrt{\mu}  \geq \int h_{n} \wrt{\mu}$ for all $n$.
 \end{itemize}
 \end{proof}
+
+
+
+
 
 
 The monotone convergence theorem can actually be used to make it easier to do computations with integrals of non-negative Borel measurable functions!  Let us quote \cite{folland1999real} (except with changes of notation and references)
@@ -2444,7 +2454,7 @@ Let $f$ be a Borel measurable function such that $\int_\Omega f \wrt{\mu}$ exist
 Recall that Prop. \ref{prop:the_integral_of_a_simple_function_over_a_set_is_one_way_to_measure_that_set}  proved this for non-negative simple functions.
 
 
-So let $f$ be a arbitrary non-negative Borel function.   We want to show that if $\lambda(B) = \int_B f \wrt{\mu}$,  $B = \bigcupdot_{n=1}^\infty B_n$, then $\lambda(B) = \ds\sum_{n=1}^\infty \lambda(B_n)$.
+So let $f$ be any non-negative Borel measurable function.   We want to show that if $\lambda(B) = \int_B f \wrt{\mu}$,  $B = \bigcupdot_{n=1}^\infty B_n$, then $\lambda(B) = \ds\sum_{n=1}^\infty \lambda(B_n)$.
 
 \begin{itemize}
 \item \framebox{$\leq$} Let $s$ be simple, $0 \leq s \leq f$.   Then 
@@ -2459,9 +2469,9 @@ Since the RHS is an upper bound, the supremum (over s) cannot exceed it.  Thus, 
 \implies \lambda(B) &\leq \ds\sum_{n=1}^\infty \lambda(B_n) && \tinytext{def. $\lambda$}
 \end{align*}
 
-\item \framebox{$\geq$}	By monotonicity, 
+\item \framebox{$\geq$}	By monotonicity of the integral, 
 \begin{align*}
-B \supset B_n \implies \indicate{B} \geq \indicate{B_n} \implies \lambda(B) \geq \lambda(B_n) && \tinycircled{1}
+B \supset B_n \implies \indicate{B} \geq \indicate{B_n} \implies  f\indicate{B}   \geq f\indicate{B_n} \implies \lambda(B) \geq \lambda(B_n) && \tinycircled{1}
 \end{align*} 
 If $\lambda(B_n) =\infty$ for one $n$, we are done. {\tiny (Why? Since $f \geq 0$, by monotonicity, $\int_A f \wrt{\mu} \geq 0$ for any $A \in \F$.  So each $\lambda(B_n) \geq 0$.  So if one $\lambda(B_n) = \infty$, then $\sum_{n=1}^\infty \lambda(B_n) = \infty$, and \tinycircled{1} and $\lambda(B) \geq \ds\sum_{n=1}^\infty \lambda(B_n)$ are saying the same thing, that $\lambda(B) = \infty$.)}
  
@@ -2470,9 +2480,9 @@ If $\lambda(B_n) =\infty$ for one $n$, we are done. {\tiny (Why? Since $f \geq 0
  Fix $N$.  Consider $\bigcupdot_{n=1}^N B_n$.  By Prop. \ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} \ref{item:delayed_truncation_of_simple_functions} and properties of the supremum {\tiny (if we subtract $\epsilon$ from it, there $\exists$ a member of the set exceeding that)}, for all $\epsilon>0$, we have simple functions $s_n : 0 \leq s_n \leq f$ for each $n$ so that 
  
 \begin{align*}
-\ds\int_{B_n} s_n \wrt{\mu} \geq \ds\int_{B_n} f_n \wrt{\mu} - \frac{\epsilon}{N} \quad \text{ for all } n  && \tinycircled{2} 
+\ds\int_{B_n} s_n \wrt{\mu} \geq \ds\int_{B_n} f \wrt{\mu} - \frac{\epsilon}{N} \quad \text{ for all } n  && \tinycircled{2} 
 \end{align*}
-Let $s^*$ be the pointwise maximum of $\set{s_n}_{n=1}^N$, which is still a simple function.  Then  $s^* \indicate{B_n} \geq s_n \indicate{B_n}$ for each $n$, so 
+Let $s^*$ be the pointwise maximum of $\set{s_n}_{n=1}^N$.  This is still a simple function, and $s^* \indicate{B_n} \geq s_n \indicate{B_n}$ for each $n$, so 
    
 \begin{align*}
 \ds\int_{B_n} s^* \wrt{\mu} \geq \ds\int_{B_n} s_n \quad \text{ for all } n && \tinycircled{3}
@@ -2486,11 +2496,11 @@ So \tinycircled{2} and \tinycircled{3} gives that
 
 Thus, for any $N$, $\epsilon>0$, we have  
 \begin{align*}
-\lambda(B) &\geq \lambda(\bigcupdot_{n=1}^N B_n) && \tinytext{By monotonicity; see \tinycircled{1} as we don't know it's a measure yet!} \\
+\lambda(B) &\geq \lambda(\bigcupdot_{n=1}^N B_n) && \tinytext{By monotonicity; need argument like \tinycircled{1}; we don't know it's a measure yet!} \\
 &:= \ds\int_{\bigcupdot_{n=1}^N B_n} f \wrt{\mu} \\
 & \geq \ds\int_{\bigcupdot_{n=1}^N B_n} s^* \wrt{\mu} && \tinytext{monotonicity} \\
-&= \ds\sum_{n=1}^N \ds\int_{B_n} s^* \wrt{\mu} && \tinytext{Prop. \ref{prop:the_integral_of_a_simple_function_over_a_set_is_one_way_to_measure_that_set} } \\
-&= \ds\sum_{n=1}^N \ds\int_{B_n} f_n \wrt{\mu} - \epsilon && \tinytext{see \tinycircled{4}} \\
+&= \ds\sum_{n=1}^N \ds\int_{B_n} s^* \wrt{\mu} && \tinytext{what's we're trying to prove holds for simple functions (Prop. \ref{prop:the_integral_of_a_simple_function_over_a_set_is_one_way_to_measure_that_set}) } \\
+&\geq \ds\sum_{n=1}^N \ds\int_{B_n} f_n \wrt{\mu} - \epsilon && \tinytext{see \tinycircled{4}} \\
 &:= \ds\sum_{n=1}^N  \lambda(B_n) -\epsilon \\
 \implies \lambda(B) &\geq \ds\sum_{n=1}^\infty \lambda(B_n) && \tinytext{justified below}
 \end{align*}
@@ -2645,7 +2655,7 @@ where we can apply linearity (see Remark \ref{rk:linearity_holds_if_additivity_h
 So again by \tinycircled{1}, we can add to  sides of \tinycircled{3} to get
 \[ \dint h^+ = \dint g^+ < \infty \]
 so $\int h \dmu$ exists.
-\item[ii)] Let $A:=\set{\omega : h(\omega = g(\omega)}$.  By hypothesis, $\mu(A^c)=0$. Now we decompose each function by partitioning their domains
+\item[ii)] Let $A:=\set{\omega : h(\omega) = g(\omega)}$.  By hypothesis, $\mu(A^c)=0$. Now we decompose each function by partitioning their domains
 \begin{align*}
 h&=h\indicate{A} + h\indicate{A^c}  \stackexplain{def. $A$}{=} g \indicate{A} + h \indicate{A^c} \labelit \label{eqn:decompose_h_by_domain}\\
 g&= g\indicate{A} + g\indicate{A^c}  \labelit \label{eqn:decompose_g_by_domain}\\	
@@ -2842,6 +2852,11 @@ If $A, B \subset \R$ are non-empty, then
 \begin{remark}
 Proposition \ref{prop:sup_and_inf_for_minkowski_sum_and_diff} can be informally described as saying that the infimum and supremum distribute over addition and subtraction, but negative signs ``flip" infima to suprema, and vice versa. 
 \end{remark}
+
+\begin{proposition}
+Let $\set{x_n}$ be a sequence of real numbers.  If $\set{x_n}$ is increasing, then its supremum is the limit. 	If $\set{x_n}$ is decreasing, then its infimum is the limit.
+\label{prop:limit_of_monotone_sequences}
+\end{proposition}
 
 
 \subsection{Limit inferior and limit superior of real valued sequences}
