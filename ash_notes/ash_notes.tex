@@ -64,15 +64,13 @@ What are some motivations for measure theory?
 
 \subsection{Motivation for notes}
 
-It is hard to beat directly consulting a textbook (such as \cite{ash2000probability}) written by a seasoned mathematician who is an excellent pedagogue.
-
-However, we have created these notes nonetheless in an attempt to support lecture and/or discussion on that textbook.   With that goal in mind, we:
+It is hard to beat directly consulting a textbook (such as \cite{ash2000probability}) written by a seasoned mathematician who is an excellent pedagogue. However, we have created these notes nonetheless in an attempt to \textit{support lecture and/or discussion}.   With that goal in mind, we:
 \begin{itemize}
+\item Format the presentation to encourage easier absorption.\footnote{E.g., we exploit space to organize the presentation, whereas a textbook will often provide proofs in paragraph form}
+\item Add sketches to support intuition.
 \item Curate the text.\footnote{We highlight some of the main themes (and cores of proofs), offloading additional detail to the text.} 
 \item Provide additional detail in proofs.  Sometimes alternate paths have been given that seemed ``nicer" to me. 
-\item Format the presentation to encourage easier absorption.\footnote{E.g., we exploit space to organize the presentation, whereas a textbook will often provide proofs in paragraph form}
 \item Add remarks for color (illustrating the need for propositions, the utility of theorems, or connections between things).
-\item Add sketches to support intuition.
 \item Incorporate supporting material from worked homework problems and outside sources.\footnote{This will happen increasingly often as the notes evolve.}
 \end{itemize}
 
@@ -1656,7 +1654,7 @@ However,
 
 Recall in Section \ref{sec:intuition_on_Lebesgue_integration} that Lebesgue and Reimann integration are distinguished in terms of whether they partition the range or domain of the function.  My speculation is that the nice interplay of basic set operations and inverse images (but not direct images) at least partially explains why Lebesgue's approach has been more successful than Reimann's approach (in the sense of better limit theorems, better handling of non-Euclidean spaces, etc.).
 
-\subsubsection{Properties}
+\subsubsection{Closure properties} \label{sec:closure_properties_of_measurable_functions}
 
 \begin{proposition}
 If $h_1, h_2 : (\Omega, \F) \to (\overline{\R}, \B(\overline{\R}))$ are Borel measurable, then so are $h_1 + h_2$ and $h_1 h_2$.  
@@ -2791,8 +2789,68 @@ Both sides of the expanded Fatou's lemma apply, and so we have \eqref{eqn:fatous
 \explaintermbrace{\tinycircled{1}}{\ds\int_\Omega \bigg( \liminf_{n \to \infty} f_n \bigg) \dmu}  \leq \explaintermbrace{\tinycircled{2}}{\liminf_{n \to \infty} \dint_\Omega f_n \dmu} \leq  \explaintermbrace{\tinycircled{3}}{\limsup_{n \to \infty} \dint_\Omega f_n \dmu} \leq \explaintermbrace{\tinycircled{4}}{\ds\int_\Omega \bigg( \limsup_{n \to \infty} f_n \bigg) \dmu}   
 \end{align*}
 But since $f_n \to f$ a.e, $\liminf_{n \to \infty} f_n = \limsup_{n \to \infty} f_n = \lim_{n \to \infty} f_n$ a.e., and so by the a.e. theorem (Thm. \ref{thm:almost_everywhere}), they have the same integrals: $\int_\Omega \liminf_{n \to \infty} f_n \dmu = \int_\Omega \limsup_{n \to \infty} f_n \dmu = \int_\Omega \lim_{n \to \infty} f_n \dmu $.   In other words, \tinycircled{1}=\tinycircled{4}, and so by sandwiching \tinycircled{2}=\tinycircled{3}.  Since the limit inferior and limit superior of the integrals are equal, the limit of the integrals exists as well, and all together we have
-\[ \ds\lim_{n \to \infty} \dint_\Omega f_n \dmu = \dint_\Omega \ds\lim_{n \to \infty} f_n \dmu\].
+\[ \ds\lim_{n \to \infty} \dint_\Omega f_n \dmu = \dint_\Omega \ds\lim_{n \to \infty} f_n \dmu.\]
 \end{proof}
+
+\paragraphnewline{Continuity and differentiability of functions defined with an integral}
+
+We now consider \textit{dependence on a parameter}.  Specifically, we consider integrals where the integrand depends on a real parameter.\footnote{Here, a ``parameter" refers to a variable in the domain of the function that is not integrated over.}  The following theorem describes continuity and the computation of derivative for such functions. 
+
+\begin{theorem}{\textbf{Continuity and differentiability of functions defined with an integral.}}
+Let 
+%$f : \mathcal{X} \times [a,b] \to \R$, where $(-\infty < a < b < \infty)$.  
+\begin{align*}
+& f : \mathcal{X} \times [a,b] \to \R, && \text{ where } (-\infty < a < b < \infty) \\
+& f(\cdot, t) : \mathcal{X} \to \R \text{ be integrable} && \forall t \in [a,b] \\
+&F(t) := \ds\int_{\mathcal{X}} f(x,t) \dmu(x)  
+\end{align*}
+\begin{alphabate}
+\item Suppose
+\[ |f(x,t)| \leq g(x) \quad \quad \forall x,t \]
+for some integrable $g$.   If $f(x,\cdot)$ is continuous for each $x$, then $F$ is continuous.
+\item Suppose $\partial f / \partial t$ exists and 
+\[ \bigg|\df{\partial f}{\partial t}(x,t)\bigg| \leq g(x) \quad \quad \forall x,t \]
+for some integrable $g$.  Then $F$ is differentiable and 
+\[ F'(t) = \ds\int_{\mathcal{X}} \df{\partial f}{\partial t}(x,t) \dmu(x) \]
+\end{alphabate}
+\label{thm:continuity_and_differentiability_of_functions_defined_with_an_integral}
+\end{theorem}
+	
+\begin{proof}
+\begin{alphabate}
+\item We need to show that
+\[ \ds\lim_{t \to t_0} f(x,t) = f(x,t_0) \implies  \ds\lim_{t \to t_0} F(t) = F(t_0)  \]	
+So 
+\begin{align*}
+\ds\lim_{t \to t_0} F(t) &=   \ds\lim_{t \to t_0} \ds\int_{\mathcal{X}} f(x,t) \dmu(x) && \tinytext{definition of $F$}\\
+&= \ds\int_{\mathcal{X}}  \ds\lim_{t \to t_0}  f(x,t) \dmu(x) && \tinytext{Dominated Convergence Thm}\\
+&= \ds\int_{\mathcal{X}}  f(x,t_0) \dmu(x) && \tinytext{hypothesis}\\
+&= F(t_0) && \tinytext{definition of $F$}
+\end{align*}
+\item First we note that $\frac{\partial f}{\partial t}$ is measurable.  This is true by the closure properties of measurable functions (Sec. \ref{sec:closure_properties_of_measurable_functions}), since
+\[ \df{\partial f}{\partial t}(x,t_0) = \ds\lim_{n \to \infty} \explaintermbrace{$:=h_n(x)$}{\df{f(x, t_n) - f(x,t_0)}{t_n - t_0}} \]
+for any sequence $\set{t_n}$ converging to $t_0$.
+
+Next we note that $h_n(x)$ is bounded uniformly in $n$.  For all $n$, there is an $s_n$ between $t_0$ and $t_n$ such that
+\[  |h_n| \stackexplain{(def)}{=} \bigg|\df{f(x, t_n) - f(x,t_0)}{t_n - t_0} \bigg| \stackexplain{(MVT)}{=} \bigg| \df{\partial f}{\partial t}(x,s_n) \bigg| \stackexplain{(hypothesis)}{\leq} g(x)\]
+where MVT stands for the Mean Value Theorem.
+
+Thus, we can apply the Dominated Convergence Theorem to $h_n$, i.e. $\lim_{n \to \infty} \int h_n(x) \dmu(x) = \int \lim_{n \to \infty} h_n(x) \dmu(x)$.  Using this, we obtain
+\begin{align*}
+F'(t_0) &= \ds\lim_{n \to \infty} \df{F(t_n) - F(t_0)}{t_n-t_0} && \tinytext{def. derivative} \\
+&= \ds\lim_{n \to \infty }	\df{ \int f(x,t_n) \dmu(x)  - \int f(x,t_0) \dmu(x)}{t_n-t_0} && \tinytext{def. $F$} \\
+&= \ds\lim_{n \to \infty }	\ds\int \df{ f(x,t_n)  -  f(x,t_0) }{t_n-t_0} \dmu(x) && \tinytext{linearity, applies since $f$ integrable} \\
+&= \ds\int \df{\partial}{\partial t} f(x,t) \dmu(x) && \tinytext{Dominated Convergence Theorem, def. derivative}
+\end{align*}
+
+\end{alphabate}
+	
+\end{proof}
+
+\begin{remark}{\remarktitle{Extensions to real-valued parameters with unbounded support}}
+Theorem \ref{thm:continuity_and_differentiability_of_functions_defined_with_an_integral}  may seem overly restrictive, since the real-valued parameter has bounded support.  However, as noted by \cite{folland1999real} pp. 56, continuity and differentiability are \textit{local} in nature.  Thus, if the hypotheses of (a) or (b) hold for all $[a,b] \subset I$ of an open interval $I$ (which is perhaps $\R$ itself), perhaps with the dominating function $g$ depending on $a$ and $b$, one obtains the continuity of the integrated function $F$ on all of $I$! 	
+\end{remark}
+
 
 
 
