@@ -55,7 +55,7 @@ What are some motivations for measure theory?
 \item Measure theory underpins research on stochastic processes (as used in Bayesian nonparametrics) and stochastic differential equations (useful for continuous-time time series models, a current topic of active research interest in machine learning). 
 \item Measure theory is convenient in unifying various kinds of random variables.\footnote{For example, it allows one to work with discrete and absolutely continuous random variables in a unified way.  For example, the exponential family includes both types of random variables.}
 \item Lebesgue integration provide nice limit theorems, e.g. clarifying when one can interchange integrals and limits (such as derivatives).   
-\item Lebesgue integrals can be seen as the completion of Reimann integrals (in the same way that the real numbers complete the rationals).
+\item Lebesgue integrals can be seen as the completion of Riemann integrals (in the same way that the real numbers complete the rationals).
 \item Abstract Lebesgue integration allows one to integrate over spaces more general than the reals. 
 
 \end{itemize}
@@ -1006,7 +1006,7 @@ Under the identity distribution function ($F(x)=x$), we have $\mu(a,b]=F(b)-F(a)
 \end{example}
 
 \begin{example}{\remarktitle{Generating Lebesgue-Stieltjes measures via integration}}
-We can generate a large class of measures on $\B(\R)$ as follows.  Let $f$ be integrable (Reimann for now) on any finite interval, and define
+We can generate a large class of measures on $\B(\R)$ as follows.  Let $f$ be integrable (Riemann for now) on any finite interval, and define
 \[ F(b) - F(a) = \ds\int_{a}^b f(t) \, dt\]
 which determines $F$ up to an additive constant.   Then $F$ is a distribution function (as it is both increasing and continuous), so it gives rise to a Lebesgue-Stieltjes measure $\mu(a,b] = F(b) - F(a)$.  Lebesgue measure (Example \ref{ex:Lebesgue_measure_as_example_of_Lebesgue_stieltjes}) is a special case where $f \equiv 1$.  Once again, Remark \ref{rk:LS_measures_with_continuous_distribution_function_agnostic_to_open_vs_closed_intervals} reveals that by continuity of $F$, we have $\mu(a,b]=\mu(a,b)=\mu[a,b)=\mu[a,b]$.  
 \end{example}
@@ -1219,7 +1219,7 @@ This $\mu$ is \textit{Lebesgue measure} on $\B(\R^n)$.  Note that
 and more generally, the Lebesgue measure of any rectangular box is its volume (which can be seen by using a slight tweak to the arguments of parts (b)-(d) of the proof of Proposition \ref{prop:properties_of_LS_measures}). 
 \item Let $f$ be any non-negative function from $\R^n$ to $\R$ such that 
 \[ \ds\int_{-\infty}^\infty \cdots  \ds\int_{-\infty}^\infty f(x_1,...,x_n) \; dx_1 \cdots dx_n < \infty \]
-(For now, we assume the integration is in the Reimann sense.)
+(For now, we assume the integration is in the Riemann sense.)
 
 Define 
 \[ F(x) = \ds\int_{(-\infty,x]} f(t) dt \]
@@ -1463,18 +1463,18 @@ In this section, we will introduce the general theory of integration of a functi
 
 Folland summarizes the difference between the Riemann and Lebesgue approaches thus: ``to compute the Riemann integral of $f$, one partitions the domain [...] into subintervals", while in the Lebesgue integral, ``one is in effect partitioning the range of $f$ " \cite{folland1999real}.
 
-Figure \ref{fig:Lebesgue_vs_reimann} compares how the Reimann and Lebesgue approaches would approximate the area under the curve of a function $f : \R \to \R$. 
+Figure \ref{fig:Lebesgue_vs_Riemann} compares how the Riemann and Lebesgue approaches would approximate the area under the curve of a function $f : \R \to \R$. 
 
 \begin{figure}[H]
 \centering 
-\includegraphics[width=.7\textwidth, angle=270]{images/Lebesgue_vs_Reimann}
-\caption{Illustrating the fundamental differences between Reimann and Lebesgue integration}
-\label{fig:Lebesgue_vs_reimann}
+\includegraphics[width=.7\textwidth, angle=270]{images/Lebesgue_vs_Riemann}
+\caption{Illustrating the fundamental differences between Riemann and Lebesgue integration}
+\label{fig:Lebesgue_vs_Riemann}
 \end{figure}
 
  In particular, notice:
 \begin{enumerate}
-\item Lebesgue integration partitions the range of $f$, whereas Reimann integration partitions the domain of $f$. As a result, the Lesbegue approach provides \textit{adaptive grouping} when computing the area under the curve as the sum over $n$ contributions.  Whereas a function can vary a lot in Reimann subintervals of the form $A_i = (a_i,b_i)$, in the Lebesgue approach, the function will have controlled amount of variation for each of the $n$ contributions.  While the approaches give equivalent answers for sufficiently nice functions (like continuous functions), the Lebesgue definition makes it possible to calculate integrals for a broader class of functions. For example, as we will see, the \textit{Dirichlet function}, which is 0 where its argument is irrational and 1 otherwise, has a Lebesgue integral, but does not have a Riemann integral.
+\item Lebesgue integration partitions the range of $f$, whereas Riemann integration partitions the domain of $f$. As a result, the Lesbegue approach provides \textit{adaptive grouping} when computing the area under the curve as the sum over $n$ contributions.  Whereas a function can vary a lot in Riemann subintervals of the form $A_i = (a_i,b_i)$, in the Lebesgue approach, the function will have controlled amount of variation for each of the $n$ contributions.  While the approaches give equivalent answers for sufficiently nice functions (like continuous functions), the Lebesgue definition makes it possible to calculate integrals for a broader class of functions. For example, as we will see, the \textit{Dirichlet function}, which is 0 where its argument is irrational and 1 otherwise, has a Lebesgue integral, but does not have a Riemann integral.
 
 Lebesgue summarized his approach to integration in a letter to Paul Montel:
 \begin{quotation}
@@ -1485,8 +1485,8 @@ I have to pay a certain sum, which I have collected in my pocket.  I take the bi
 
 The insight is that one should be able to rearrange the values of a function freely, while preserving the value of the integral.  This process of rearrangement can convert a very pathological function into one that is ``nice" from the point of view of integration, and thus let such pathological functions be integrated.
 
-\item The Reimann approach implicitly assumes that sets in the domain have sizes that are given by Lebesgue measure ($\mu(A) = |A|)$, whereas the Lebesgue approach allows sets in the domain to have sizes given by any arbitrary measure $\mu$.
-% Commenting this out because I'm not sure if it's true. \item The Reimann approach assumes that the domain is totally ordered.  In contrast, Lebesgue integrals can be defined for functions on arbitrary spaces.
+\item The Riemann approach implicitly assumes that sets in the domain have sizes that are given by Lebesgue measure ($\mu(A) = |A|)$, whereas the Lebesgue approach allows sets in the domain to have sizes given by any arbitrary measure $\mu$.
+% Commenting this out because I'm not sure if it's true. \item The Riemann approach assumes that the domain is totally ordered.  In contrast, Lebesgue integrals can be defined for functions on arbitrary spaces.
 \end{enumerate}
 
 
@@ -1652,7 +1652,7 @@ However,
 \item[e)] Direct images and intersections do not in general commute: $f(\cap_i A_i) \neq \cap_i \big(f(A_i)\big)$	
 \end{itemize}
 
-Recall in Section \ref{sec:intuition_on_Lebesgue_integration} that Lebesgue and Reimann integration are distinguished in terms of whether they partition the range or domain of the function.  My speculation is that the nice interplay of basic set operations and inverse images (but not direct images) at least partially explains why Lebesgue's approach has been more successful than Reimann's approach (in the sense of better limit theorems, better handling of non-Euclidean spaces, etc.).
+Recall in Section \ref{sec:intuition_on_Lebesgue_integration} that Lebesgue and Riemann integration are distinguished in terms of whether they partition the range or domain of the function.  My speculation is that the nice interplay of basic set operations and inverse images (but not direct images) at least partially explains why Lebesgue's approach has been more successful than Riemann's approach (in the sense of better limit theorems, better handling of non-Euclidean spaces, etc.).
 
 \subsubsection{Closure properties} \label{sec:closure_properties_of_measurable_functions}
 
@@ -1696,7 +1696,7 @@ Let $(\Omega, \F)$ be a measurable space, fixed throughout the discussion.  If $
 \end{definition}
 
 \begin{remark}{\remarktitle{Simple functions generalize step functions}}
-A special case of simple functions are the step functions used in Reimann integration. 
+A special case of simple functions are the step functions used in Riemann integration. 
 
 
 For $a,b \in \overline{\R}$ with $a<b$, $f : [a,b] \to \R$ is a \textit{step function} if there exists a partition $a = x_0 < x_1 < ... < x_n = b$ and constants $y_1, ..., y_n \in \R$ such that $f(x)=y_i$ for all $y \in (x_{i-1},x_i)$ and each $i=1,...,n$.  Then $f$ is equal to the following simple function:
@@ -1764,7 +1764,7 @@ This definition is possible because whenever $h$ is a simple function, then so i
 \label{rk:integrating_simple_functions_over_arbitrary_measurable_subsets}
  \end{remark}
  
-\paragraph{Comparison to Reimann integration}
+\paragraph{Comparison to Riemann integration}
 
 \begin{example}{\remarktitle{Integrating a step function}}
 Let $h$ be a step function, as defined in Remark \ref{rk:simple_functions_generalize_step_functions}.   So  $a = x_0 < x_1 < ... < x_n = b$ is a partition of $\Omega := \text{dom}(h)$, and $h$ takes on values $y_i$ on $(x_{i-1},x_i)$ for $i=1,...,n$.  Then 
@@ -1773,10 +1773,10 @@ Let $h$ be a step function, as defined in Remark \ref{rk:simple_functions_genera
 & \stackreltext{(if $\mu$ is Lebesgue measure)}{=} \; \ds\sum_{i=1}^n y_i \; (x_i - x_{i-1}) + \cancelto{0}{\ds\sum_{i=1}^n f(x_i) \mu\set{x_i}}
 \end{align*}
 
-So the Lebesgue integral of the step function agrees with the Reimann integral when $\mu$ is Lebesgue measure (although not for general measure).
+So the Lebesgue integral of the step function agrees with the Riemann integral when $\mu$ is Lebesgue measure (although not for general measure).
 \end{example}
 
-Now we integrate a simple function that is not a step function -- in fact, a simple function for which there is not a Reimann integral. 
+Now we integrate a simple function that is not a step function -- in fact, a simple function for which there is not a Riemann integral. 
 
 \begin{example}{\remarktitle{Integrating the Dirichlet function}}
 Let $h$ be the Dirichlet function; that is $h = I_{\Q} : \R \to \R$ is the indicator of the rationals.  Let us integrate $h$ against Lebesgue measure $\mu$. 
@@ -1792,38 +1792,38 @@ Note Equation 1 holds for any Lebesgue-Stieljes measure with a continuous distri
 \label{ex:integrating_the_dirichlet_function}
 \end{example}
 
-Now we show that the Dirichlet function does not have a Reimann integral. 
+Now we show that the Dirichlet function does not have a Riemann integral. 
 
-\begin{remark}{\remarktitle{The Dirichlet function does not have a Reimann integral.}}	
+\begin{remark}{\remarktitle{The Dirichlet function does not have a Riemann integral.}}	
 Let $h$ be the Dirichlet function; that is $h = I_{\Q} : \R \to \R$ is the indicator of the rationals.  Fix $[a,b] \subset \R$, and let $f=h |_{[a,b]}$; that is $f : [a,b] \to \R$ is the Dirichlet function restricted to $[a,b]$.  
 
-We consider an arbitrary \textit{partition} $P$ of $[a,b]$ into a collection of $n$ subintervals $[x_{k-1}, x_k]$ where $a=x_0 < x_1 < ... < x_n = b$.  Now by Proposition \ref{prop:reimann_integrable_iff_oscillation_goes_to_zero_as_partition_gets_finer}, a function on $[a,b]$ is Reimann integrable iff $\text{Osc}(f,P) \to 0$ as the maximum interval length of a partition $P$ goes to 0.\footnote{For a refresher on how these terms are defined, see Section \ref{sec:some_info_relevant_to_reimann_integrals}.}  But for any partition $P$, any subinterval $[x_{k-1}, x_k]$ will contain at least one rational number and at least one irrational number, and so
+We consider an arbitrary \textit{partition} $P$ of $[a,b]$ into a collection of $n$ subintervals $[x_{k-1}, x_k]$ where $a=x_0 < x_1 < ... < x_n = b$.  Now by Proposition \ref{prop:Riemann_integrable_iff_oscillation_goes_to_zero_as_partition_gets_finer}, a function on $[a,b]$ is Riemann integrable iff $\text{Osc}(f,P) \to 0$ as the maximum interval length of a partition $P$ goes to 0.\footnote{For a refresher on how these terms are defined, see Section \ref{sec:some_info_relevant_to_Riemann_integrals}.}  But for any partition $P$, any subinterval $[x_{k-1}, x_k]$ will contain at least one rational number and at least one irrational number, and so
 \begin{align*}
 S^+(f,P) &= \ds\sum_{k=1}^n 1 \cdot (x_k - x_{k-1}) = b-a \\	
 S^-(f,P) &= \ds\sum_{k=1}^n 0 \cdot (x_k - x_{k-1}) = 0\\
 \end{align*}
-Thus $\text{Osc}(f,P) = b-a$ for all partitions $P$. In particular $\text{Osc}(f,P) \not\to 0$ 	as the maximum interval length of a partition $P$ goes to 0.\footnote{To be more explicit, the condition of Proposition \ref{prop:reimann_integrable_iff_oscillation_goes_to_zero_as_partition_gets_finer} is that $\forall \epsilon > 0, \;\exists \delta >0  : \forall P  \text{ where the maximum interval length of } P < \delta, \; \text{Osc}(f,P) < \epsilon$. But since $\text{Osc}(f,P) = b-a$ for all partitions $P$, the condition is contradicted: $\exists \epsilon = \frac{b-a}{2} >0 : \forall P, \text{Osc}(f,P) > \epsilon.$}  Thus $f$ is not Reimann integrable. 
+Thus $\text{Osc}(f,P) = b-a$ for all partitions $P$. In particular $\text{Osc}(f,P) \not\to 0$ 	as the maximum interval length of a partition $P$ goes to 0.\footnote{To be more explicit, the condition of Proposition \ref{prop:Riemann_integrable_iff_oscillation_goes_to_zero_as_partition_gets_finer} is that $\forall \epsilon > 0, \;\exists \delta >0  : \forall P  \text{ where the maximum interval length of } P < \delta, \; \text{Osc}(f,P) < \epsilon$. But since $\text{Osc}(f,P) = b-a$ for all partitions $P$, the condition is contradicted: $\exists \epsilon = \frac{b-a}{2} >0 : \forall P, \text{Osc}(f,P) > \epsilon.$}  Thus $f$ is not Riemann integrable. 
 
-The Riemann integral of $h: \R \to \R$ would be an improper integral defined as the limiting value of the Reimann integrals $h|_{[a,b]}$ as $a \to -\infty, b \to \infty$.  But since the proper Reimann integrals for $h|_{[a,b]}$ don't exist, neither does the improper Reimann integral for $h$. 
-\label{rk:dirichlet_function_is_not_reimann_integrable}
+The Riemann integral of $h: \R \to \R$ would be an improper integral defined as the limiting value of the Riemann integrals $h|_{[a,b]}$ as $a \to -\infty, b \to \infty$.  But since the proper Riemann integrals for $h|_{[a,b]}$ don't exist, neither does the improper Riemann integral for $h$. 
+\label{rk:dirichlet_function_is_not_Riemann_integrable}
 \end{remark}
 
-%Recall that a proper Reimann integral $\int_{a}^b f(x) \, dx$, when it exists,  is defined only for real-valued functions  $f$ whose domain is a compact space $[a,b] \subset \R$.  Recall also that an improper Reimann integral is  defined for functions $h: \R \to \R$ as the limiting value of proper Reimann integrals.  
+%Recall that a proper Riemann integral $\int_{a}^b f(x) \, dx$, when it exists,  is defined only for real-valued functions  $f$ whose domain is a compact space $[a,b] \subset \R$.  Recall also that an improper Riemann integral is  defined for functions $h: \R \to \R$ as the limiting value of proper Riemann integrals.  
 
 % Commenting this out because we haven't defined almost everywhere yet.
 
-%\begin{remark}{\remarktitle{The Dirichlet function does not have a Reimann integral}} A function on $[a,b]$ is Riemann integrable if and only if it is bounded and continuous almost everywhere.  However, the Dirichlet function $f$ is continuous nowhere.  For every irrational number $x$, there is a sequence of rational numbers $\{r_n\}$ that converges to it. We have:
+%\begin{remark}{\remarktitle{The Dirichlet function does not have a Riemann integral}} A function on $[a,b]$ is Riemann integrable if and only if it is bounded and continuous almost everywhere.  However, the Dirichlet function $f$ is continuous nowhere.  For every irrational number $x$, there is a sequence of rational numbers $\{r_n\}$ that converges to it. We have:
 %$$
 %\lim_{n\to\infty} f(r_n) = 1 \ne 0 = f(x)
 %$$
 %
 %Thus, $f$ isn't continuous at irrational numbers. Rational numbers can be handled similarly.
 %	
-%\label{rk:dirichlet_function_has_no_reimann_integral}
+%\label{rk:dirichlet_function_has_no_Riemann_integral}
 %\end{remark}
 %\end{document}
 %
-%Example \ref{ex:integrating_the_dirichlet_function} shows how Lebesgue integration can handle functions not handled by Reimann integration.  As noted in Remark \ref{rk:{rk:dirichlet_function_has_no_reimann_integral}, a function on $[a,b]$ is Riemann integrable if and only if it is bounded and continuous almost everywhere.  Lebesgue integration can handle functions that do not meet these criteria.
+%Example \ref{ex:integrating_the_dirichlet_function} shows how Lebesgue integration can handle functions not handled by Riemann integration.  As noted in Remark \ref{rk:{rk:dirichlet_function_has_no_Riemann_integral}, a function on $[a,b]$ is Riemann integrable if and only if it is bounded and continuous almost everywhere.  Lebesgue integration can handle functions that do not meet these criteria.
 
 \paragraphnewline{Properties of integrals of simple functions} 
 
@@ -2657,7 +2657,7 @@ Now
 & f_n - g \geq 0 \quad \text{ and } \quad f_n -g \uparrow f-g && \tinytext{Hypothesis (and Prop \ref{prop:limit_of_monotone_sequences})} \\
 \implies & \ds\int (f_n - g) \dmu \uparrow \ds\int (f-g) \dmu && \tinytext{Monotone Convergence Theorem}\\
 \stackrel{\tinycircled{1}}{\implies} & \ds\int f_n \dmu - \ds\int g \dmu \uparrow \ds\int f \dmu - \ds\int g \dmu && \tinytext{Linearity}\\
-\implies & \dint f_n \dmu \uparrow \dint f \dmu && \tinytext{Since $\int g$ is tfinite} 
+\implies & \dint f_n \dmu \uparrow \dint f \dmu && \tinytext{Since $\int g$ is finite} 
 \end{align*}	
 To check that linearity holds in \tinycircled{1}, note that $\int f \dmu$ and $\int f_n \dmu$ exist by monotonicity (Prop \ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} a), and the sum cannot be of form $\infty - \infty$ or $-\infty + \infty$ since $\int g \dmu$ is finite.
 \item We have
@@ -2781,9 +2781,9 @@ The example captures the fact that \textit{integrals of asymptotics give more ex
 \end{theorem}
 
 \begin{proof}
-We have $|f_n| \leq g$ a.e. {\tiny (In detail, $|f_n| \leq g$ can be unpacked into $f_n \leq g$ and $f_n \geq -g$.  Since limits preserve non-strict inequalities, we have ($f \leq g$ and $f \geq -g$) a.e.   So repacking the absolute value operator, the conclusion follows.)}, hence $f$ is integrable by Cor. \ref{cor:additivity_corollaries} (b).   
+We have $|f| \leq g$ a.e. {\tiny (In detail, $|f_n| \leq g$ can be unpacked into $f_n \leq g$ and $f_n \geq -g$.  Since limits preserve non-strict inequalities, we have ($f \leq g$ and $f \geq -g$) a.e.   So repacking the absolute value operator, the conclusion follows.)}, hence $f$ is integrable by Cor. \ref{cor:additivity_corollaries} (b).   
 
-Both sides of the expanded Fatou's lemma apply, and so we have \eqref{eqn:fatous_lemma_big_picture_view}:
+By hypothesis, both sides of the expanded Fatou's lemma apply, and so we have \eqref{eqn:fatous_lemma_big_picture_view}:
 
 \begin{align*} 
 \explaintermbrace{\tinycircled{1}}{\ds\int_\Omega \bigg( \liminf_{n \to \infty} f_n \bigg) \dmu}  \leq \explaintermbrace{\tinycircled{2}}{\liminf_{n \to \infty} \dint_\Omega f_n \dmu} \leq  \explaintermbrace{\tinycircled{3}}{\limsup_{n \to \infty} \dint_\Omega f_n \dmu} \leq \explaintermbrace{\tinycircled{4}}{\ds\int_\Omega \bigg( \limsup_{n \to \infty} f_n \bigg) \dmu}   
@@ -2848,12 +2848,15 @@ F'(t_0) &= \ds\lim_{n \to \infty} \df{F(t_n) - F(t_0)}{t_n-t_0} && \tinytext{def
 \end{proof}
 
 \begin{remark}{\remarktitle{Extensions to real-valued parameters with unbounded support}}
-Theorem \ref{thm:continuity_and_differentiability_of_functions_defined_with_an_integral}  may seem overly restrictive, since the real-valued parameter has bounded support.  However, as noted by \cite{folland1999real} pp. 56, continuity and differentiability are \textit{local} in nature.  Thus, if the hypotheses of (a) or (b) hold for all $[a,b] \subset I$ of an open interval $I$ (which is perhaps $\R$ itself), perhaps with the dominating function $g$ depending on $a$ and $b$, one obtains the continuity of the integrated function $F$ on all of $I$! 	
+Theorem \ref{thm:continuity_and_differentiability_of_functions_defined_with_an_integral}  may seem overly restrictive, since the real-valued parameter has bounded support.  However, as noted by \cite{folland1999real} pp. 56, continuity and differentiability are \textit{local} in nature.  Thus, if the hypotheses of (a) or (b) hold for all $[a,b] \subset I$ of an open interval $I$ (which is perhaps $\R$ itself), perhaps with the dominating function $g$ depending on $a$ and $b$, one obtains the continuity and differentiability of the integrated function $F$ on all of $I$! 	
 \end{remark}
 
 
+\section{Comparison of Lebesgue and Riemann integrals}
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
 \bibliographystyle{unsrt}
  
@@ -3053,16 +3056,16 @@ Applying Proposition \ref{prop:liminf_upper_bounded_by_limsup} to a function poi
 
 
 
-\section{Some information relevant to Reimann integrals} \label{sec:some_info_relevant_to_reimann_integrals}
+\section{Some information relevant to Riemann integrals} \label{sec:some_info_relevant_to_Riemann_integrals}
 
-Let us present (using  \cite{strichartz2000way} for reference) some information relevant to Reimann integration for real-valued functions.  
+Let us present (using  \cite{strichartz2000way} for reference) some information relevant to Riemann integration for real-valued functions.  
 
-First off, recall that the Reimann integral $\int_{a}^b f(x) \, dx$, when it exists,  is defined only for real-valued functions  $f$ whose domain is a compact space $[a,b] \subset \R$.   
+First off, recall that the Riemann integral $\int_{a}^b f(x) \, dx$, when it exists,  is defined only for real-valued functions  $f$ whose domain is a compact space $[a,b] \subset \R$.   
 
 Now consider the following definitions:
 
 \begin{itemize}
-\item A \textit{partition} $P$ of an interval $[a,b]$ is a collection of $n$ subintervals $[x_{k-1}, x_k]$ where $a=x_0 < x_1 < ... < x_n = b$. 
+\item A \textit{partition} $P$ of a compact interval $[a,b]$ is a collection of $n$ subintervals $[x_{k-1}, x_k]$ where $a=x_0 < x_1 < ... < x_n = b$. 
 \item Given a partition $P$, the \textit{upper sum} $S^+(f,P)$ and \textit{lower sum} $S^-(f,P)$ are defined by 
 \begin{align*}
 S^+(f,P) &:= \ds\sum_{k=1}^n M_k (x_k - x_{k-1}) \\
@@ -3077,8 +3080,8 @@ S^-(f,P) &:= \ds\sum_{k=1}^n m_k (x_k - x_{k-1}) \\
 Finally, we present a proposition we use in the main text. 
 
 \begin{proposition}
-If $f$ is a bounded real-valued function on $[a,b]$, then $f$ is Reimann integrable iff $\text{Osc}(f,P) \to 0$ as the maximum interval length of $P$ goes to 0.
-\label{prop:reimann_integrable_iff_oscillation_goes_to_zero_as_partition_gets_finer}
+If $f$ is a bounded real-valued function on $[a,b]$, then $f$ is Riemann integrable iff $\text{Osc}(f,P) \to 0$ as the maximum interval length of $P$ goes to 0.
+\label{prop:Riemann_integrable_iff_oscillation_goes_to_zero_as_partition_gets_finer}
 \end{proposition}
 
 \begin{proof}
