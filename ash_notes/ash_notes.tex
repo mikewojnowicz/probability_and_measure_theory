@@ -66,7 +66,7 @@ What are some motivations for measure theory?
 
 It is hard to beat directly consulting a textbook (such as \cite{ash2000probability}) written by a seasoned mathematician who is an excellent pedagogue. However, we have created these notes nonetheless in an attempt to \textit{support lecture and/or discussion}.   With that goal in mind, we:
 \begin{itemize}
-\item Format the presentation to encourage easier absorption.\footnote{E.g., we exploit space to organize the presentation, whereas a textbook will often provide proofs in paragraph form}
+\item Format the presentation to encourage easier absorption.\footnote{E.g., we exploit space to organize the presentation, whereas a textbook will often provide proofs in paragraph form. We sometimes refactor presentations into more modular subsections.}
 \item Add sketches to support intuition.
 \item Curate the text.\footnote{We highlight some of the main themes (and cores of proofs), offloading additional detail to the text.} 
 \item Provide additional detail in proofs.  Sometimes alternate paths have been given that seemed ``nicer" to me. 
@@ -723,7 +723,7 @@ This interesting example (from \cite{ash2000probability} pp. 20) provides a coun
 \end{figure}
 \end{example}
 
-\subsection{Completion of measure spaces}
+\subsection{Completion of measure spaces} \label{sec:completion_of_measure_spaces}
 
 \begin{definition}
 A measure $\mu$ on a $\sigma$-field $\F$ is said to be \textit{complete} iff whenever $A \in F$ and $\mu(A) =0$, we have $B \in F$ for all $B \subset A$.
@@ -791,6 +791,12 @@ Thus, $\mu$ on $\F_\mu$ is complete, since any subset of measure 0 is contained 
 \end{enumerate}
 \label{rk:completion_of_measure_space_is_well_defined} 
 \end{remark}
+
+
+\begin{example}
+Let us provide a simple example of where completing a measure space generates new measurable sets. Consider a measure space given by $(\Omega, \F, \mu)$ where $\Omega=\R$, $\F = \set{\emptyset, A, A^c, \Omega}$ where we take $A=[0,1]$ for concreteness, and where $\mu$ is defined by $\mu(A^c)=1$ and $\mu(A)=0$.  The measure space is not complete, since no proper subset of $A$  is contained in $\F$. (For example, $[0,\half] \not\in \F$.)  If we complete the measure space, we obtain $(\Omega, \F_\mu, \mu)$ where $\F_\mu = \set{\emptyset, A, A^c, \Omega, \text{ any subset of } [0,1]}$.
+\end{example}
+
 
 
  \section{$\S$ 1.4: Lebesgue-Stieltjes Measures and Distribution Functions} \label{sec:ls_measures_and_distribution_functions}
@@ -1015,10 +1021,10 @@ which determines $F$ up to an additive constant.   Then $F$ is a distribution fu
 \[  \mu[0,1] \stackrel{\text{countable additivity}}{=} \ds\sum_{n=1}^\infty \df{1}{n} = \infty\]
 and so $\mu$ is not a Lebesgue-Stieltjes measure. 
  
-\subsection{Lebesgue measurable sets}
+\subsection{Lebesgue measurable sets} \label{sec:Lebesgue measurable sets}
 
 \begin{definition}
-The completion of Lebesgue measure relative to $\B(\R)$ gives what is known as the \textit{Lebesgue measurable sets}, denoted $\overline{\B}(\R)$.   
+The completion of Lebesgue measure relative to $\B(\R)$ gives what is known as the \textit{Lebesgue measurable sets}, denoted $\overline{\B}(\R)$.\footnote{See Section \ref{sec:completion_of_measure_spaces} for the definition of the completion of a measure space.}   
 \end{definition}
 
 Each Lebesgue measurable set is the union of a Borel set and a subset of a Borel set with Lebesgue measure zero.
@@ -2852,7 +2858,99 @@ Theorem \ref{thm:continuity_and_differentiability_of_functions_defined_with_an_i
 \end{remark}
 
 
-\section{Comparison of Lebesgue and Riemann integrals}
+\section{$\S$ 1.7 Comparison of Lebesgue and Riemann integrals}
+
+In this section, we show that integration with respect to Lebesgue measure is more general than Riemann integration, and we give a precise criterion for Riemann integration.
+
+\paragraph{Review of Riemann integration.} Let $[a,b]$ be a bounded closed subset of the reals, and $f$ be a bounded real valued function on $[a,b]$. We assume $f$ is fixed throughout the discussion (i.e., we suppress dependence on $f$ in the notation).  Let $P: a=x_0 < x_1 < ... < x_n =b$ be a partition of $[a,b]$.  We construct the upper and lower sums as follows.  Let 
+\begin{align*}
+M_i &:= \sup \set{f(y) : x_{i-1} < y \leq x_i}, && i=1,...,n \\	
+m_i &:= \inf \set{f(y) : x_{i-1} < y \leq x_i}, && i=1,...,n 
+\end{align*}
+And define step functions $\alpha$ and $\beta$, called the \textit{upper} and \textit{lower} functions for $f$ via 
+\begin{align*}
+\alpha(x) &= M_i && \text{ if } x_{i-1} < x \leq x_{i}   && i=1,...,n \\	
+\beta(x) &= m_i && \text{ if } x_{i-1} < x \leq x_{i}  && i=1,...,n 	
+\end{align*}
+[$\alpha(a)$ and $\beta(a)$ may be chosen arbitrarily].   The upper and lower sums are defined as
+\begin{subequations}
+\begin{align}
+U(P) &= \ds\sum_{i=1}^n M_i (x_i - x_{i-1}) \\	
+L(P) &= \ds\sum_{i=1}^n m_i (x_i - x_{i-1}) 
+\end{align}
+\label{eqn:upper_and_lower_sums}	
+\end{subequations}
+
+
+Now let $P_1, P_2, ...$ be a sequence of partitions such that $P_{k+1}$ is a refinement of $P_k$ for each $K$, and such that $|P_k|$ (the length of the largest subinterval of $P_k$) approaches 0 as $k \to \infty$.  
+
+If 
+\begin{align}
+ \lim_{k \to \infty} L(P_k) =  \lim_{k \to \infty} U(P_k) = r,
+ \label{eqn:criterion_for_riemann_integrability}	
+\end{align}
+ independent of the particular sequence of partitions, then $f$ is said to be \textit{Riemann integrable} on $[a,b]$, and $r$ is the value of the \textit{Riemann integral}.\redfootnote{TODO: integrate this with my review of the Riemann integral in the appendix.} 
+
+\paragraph{The criterion for Riemann integrability criterion in terms of Lebesgue integration.}
+
+Now consider the measure space $(\Omega, \F, \mu) = ([a,b], \overline{\B}([a,b]), \text{Lebesgue measure})$, where $\overline{\B}([a,b])$ are the Lebesgue measurable sets (see Section \ref{sec:Lebesgue measurable sets}).  Let $P_k$ be a sequence of partitions described earlier, with $\alpha_k$ and $\beta_k$ the corresponding upper and lower functions.  Now since $\alpha_k$ and $\beta_k$ are simple functions, we can express the upper and lower sums \eqref{eqn:upper_and_lower_sums} as integrals with respect to Lebesgue measure $\mu$:
+\begin{align*}
+U(P_k) &= \ds\int_{[a,b]} \alpha_k \dmu \\
+L(P_k) &= \ds\int_{[a,b]} \beta_k \dmu \\		
+\end{align*}
+Now we can bound the upper and lower functions by an integrable function. {\tiny (In detail, since we assumed $f$ is bounded,  we can write $|f| \leq M$, and therefore $|\alpha_k|,|\beta_k| \leq M$.  Moreover $M$ is integrable, since $\int_{[a,b]} M \dmu = M(b-a) < \infty$.)} Moreover, {\tiny (by Proposition \ref{prop:sup_and_inf_for_subsets_are_tighter})}, we have 
+\[ \alpha_1 \geq \alpha_2 \geq ... \geq f \geq ... \geq \beta_2 \geq \beta_1 \]
+so $\alpha_k$ and $\beta_k$ approach limit functions $\alpha$ and $\beta$.   Thus, we can apply Lebesgue dominated convergence theorem to obtain
+\begin{align*}
+\ds\lim_{k \to \infty} U(P_k) &= \ds\lim_{k \to \infty} \ds\int_{[a,b]} \alpha_k \dmu \stackexplain{(LDCT)}{=}  \ds\int_{[a,b]} \alpha \dmu  \\
+\ds\lim_{k \to \infty} L(P_k) &= \ds\lim_{k \to \infty} \ds\int_{[a,b]} \beta_k \dmu \stackexplain{(LDCT)}{=}  \ds\int_{[a,b]} \beta \dmu   \\	
+\end{align*}
+Thus, we can write the criterion for Riemann integrability \eqref{eqn:criterion_for_riemann_integrability} in terms of the Lebesgue integral.  In particular, $f$ is Riemann integrable over $[a,b]$ with value $r$ iff 
+\[ \ds\int_{[a,b]} \alpha \dmu = \ds\int_{[a,b]} \beta \dmu  = r\]
+independent of the sequence of partitions $\set{P_k}$.
+
+
+\paragraph{Continuity at a point as equality of the upper and lower functions.}  Here we provide a key observation which will help us to relate the Riemann integral and the Lebesgue integral. 
+
+\begin{lemma}
+If $x$ is not an endpoint of any subintervals of $P_k$, then 
+\[ f \text{ is continuous at } x \quad \text{iff} \quad \alpha(x) = f(x) = \beta(x)\]	
+\end{lemma}
+
+\begin{proof}
+\begin{itemize}
+\item $\boxed{\implies}$.  $f$ is continuous at $x$ means that $\forall \epsilon>0, \exists \delta >0 :$
+\begin{align*}
+|y-x| < \delta \implies & |f(y) - f(x) | < \epsilon && \\
+\implies &f(y) \leq f(x) + \epsilon  && \forall y \in B_x(\delta) \\ 
+\implies &\sup_{y \in B_x(\delta)} f(y) \leq f(x) + \epsilon && \tinycircled{1}. 
+\end{align*}
+where $B_x(\delta)$ refers to a ball centered at $x$ with radius $\delta$.
+
+Now let $I_k(x)$ be the subinterval in the $k$th partition to which $x$ belongs.  Since $|P_k| \to 0$, $|I_k(x)| \to 0$, and so
+\[ \forall \delta>0, \exists K : \forall k \geq K, \quad  |y-x| < \delta \quad \forall y \in I_k(x) \quad \quad  \tinycircled{2} \]
+Combining \tinycircled{1} and \tinycircled{2}, we obtain
+\[ \forall \delta>0, \exists K : \forall k \geq K, \quad  \sup_{y \in I_k(x)} f(y) \leq f(x) + \epsilon \quad \quad  \tinycircled{3}\]
+And certainly, since $x \in I_k(x)$, 
+\[ \sup_{y \in I_k(x)} f(y) \geq f(x). \quad \quad  \tinycircled{4}\]
+So combining \tinycircled{3} and \tinycircled{4}, and recalling that $\alpha_k(x) :=  \sup_{y \in I_k(x)} f(y)$, we have 
+\[ \forall \delta>0, \exists K : \forall k \geq K, \quad  | \alpha_k(x) - f(x) | \leq  \epsilon\]
+which is the definition of the limit.   That is,
+\[ \ds\lim_{k \to \infty} \alpha_k(x) = f(x)\]
+A similar argument holds for $\beta_k$.
+\item $\boxed{\impliedby}$.  By hypothesis, 
+\begin{align*}
+\forall \epsilon>0, \exists K : \forall k \geq K, \\
+ & | \sup_{y \in I_k(x)} f(y) - f(x) | \leq  \epsilon & \text{ and } && | \inf_{y \in I_k(x)} f(y) - f(x) | \leq  \epsilon  && \\	
+ \stackrel{1}{\implies} & f(y) - f(x) < \epsilon & \text{ and } && f(y) - f(x) > -\epsilon && \forall y \in I_k(x) \\
+\end{align*}
+where (1) holds since the supremum is an upper bound and the infimum is a lower bound.  So 
+\[ \forall \epsilon>0, \exists K : \forall k \geq K, \quad |f(y) - f(x) | < \epsilon \quad  \forall y \in I_k(x) \]
+and taking $\delta$ to be the radius of $I_k(x)$, the definition of the continuity of $f$ at $x$ holds. 
+\end{itemize}
+\end{proof}
+
+\red{TODO: Finish section}
 
 
 
@@ -3058,23 +3156,23 @@ Applying Proposition \ref{prop:liminf_upper_bounded_by_limsup} to a function poi
 
 \section{Some information relevant to Riemann integrals} \label{sec:some_info_relevant_to_Riemann_integrals}
 
-Let us present (using  \cite{strichartz2000way} for reference) some information relevant to Riemann integration for real-valued functions.  
+Let us present (using  \cite{strichartz2000way} for reference, along with pp. 56 of \cite{folland1999real} and pp.55 of \cite{ash2000probability}) some information relevant to Riemann integration for real-valued functions.  
 
 First off, recall that the Riemann integral $\int_{a}^b f(x) \, dx$, when it exists,  is defined only for real-valued functions  $f$ whose domain is a compact space $[a,b] \subset \R$.   
 
 Now consider the following definitions:
 
 \begin{itemize}
-\item A \textit{partition} $P$ of a compact interval $[a,b]$ is a collection of $n$ subintervals $[x_{k-1}, x_k]$ where $a=x_0 < x_1 < ... < x_n = b$. 
-\item Given a partition $P$, the \textit{upper sum} $S^+(f,P)$ and \textit{lower sum} $S^-(f,P)$ are defined by 
+\item A \textit{partition} of a compact interval $[a,b]$ is a finite sequence $P=\set{x_i}_{i=0}^n$ such that $a=x_0 < x_1 < ... < x_n = b$. 
+\item Given a partition $P$, the \textit{upper sum} $S^+(f,P)$ and \textit{lower sum} $S^-(f,P)$ are defined by\footnote{References \cite{strichartz2000way} and \cite{folland1999real} define the supremum and infimum over closed sets $[x_{i-1}, x_i]$, whereas \cite{ash2000probability} defines them over $(x_{i-1},x_i]$.  It presumably doesn't matter.}
 \begin{align*}
-S^+(f,P) &:= \ds\sum_{k=1}^n M_k (x_k - x_{k-1}) \\
-&\quad \text{ where $M_k$ is the supremum of $f$ on $[x_{k-1}, x_k]$.} \\	
-S^-(f,P) &:= \ds\sum_{k=1}^n m_k (x_k - x_{k-1}) \\
-&\quad \text{ where $m_k$ is the infimum of $f$ on $[x_{k-1}, x_k]$.} \\
+S^+(f,P) &:= \ds\sum_{i=1}^n M_k (x_i - x_{i-1}) \\
+&\quad \text{ where $M_i$ is the supremum of $f$ on $(x_{i-1}, x_i]$.} \\	
+S^-(f,P) &:= \ds\sum_{i=1}^n m_k (x_i - x_{i-1}) \\
+&\quad \text{ where $m_i$ is the infimum of $f$ on $(x_{i-1}, x_i]$.} \\
 \end{align*}
 \item The \textit{oscillation} $\text{Osc}(f,P)$ of a function $f$ over a partition $P$ is given by the difference of the upper and lower sums; i.e. $ \text{Osc}(f,P) := S^+(f,P) - S^-(f,P)$.
-\item The \textit{maximum interval length} of $P$ is defined by $ \max_{k=1,...,n} \big|[x_{k-1}, x_k]\big|$.
+\item The \textit{maximum interval length} of $P$ is defined by $ \max_{i=1,...,n} \big|[x_{i-1}, x_i]\big|$.
 \end{itemize}
 
 Finally, we present a proposition we use in the main text. 
