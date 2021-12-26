@@ -797,6 +797,22 @@ Thus, $\mu$ on $\F_\mu$ is complete, since any subset of measure 0 is contained 
 Let us provide a simple example of where completing a measure space generates new measurable sets. Consider a measure space given by $(\Omega, \F, \mu)$ where $\Omega=\R$, $\F = \set{\emptyset, A, A^c, \Omega}$ where we take $A=[0,1]$ for concreteness, and where $\mu$ is defined by $\mu(A^c)=1$ and $\mu(A)=0$.  The measure space is not complete, since no proper subset of $A$  is contained in $\F$. (For example, $[0,\half] \not\in \F$.)  If we complete the measure space, we obtain $(\Omega, \F_\mu, \mu)$ where $\F_\mu = \set{\emptyset, A, A^c, \Omega, \text{ any subset of } [0,1]}$.
 \end{example}
 
+\begin{problem}
+Let $(\Omega, \F, \mu)$ be a complete measure space.  If $f: (\Omega, \F) \to (\Omega', \F')$ and $g: \Omega \to \Omega'$, $g=f$ except on a subset of a set $A \in \F$ with $\mu(A)=0$, show that $g$ is measurable (relative to $\F$ and $\F'$)
+\label{prob:in_a_complete_metric_space_you_are_a_measurable_function_if_you_are_equal_to_some_other_measurable_function_ae}
+\end{problem}
+
+\begin{proof}[Solution.]
+For all $A \in \F'$, 
+{\footnotesize 
+\begin{align*}
+g^{-1}(A) &= \biggset{x: x \in g^{-1}(A) \text{ and } x \in f^{-1}(A)} && \bigcup \biggset{x: x \in g^{-1}(A) \text{ and } x \not\in f^{-1}(A)}	 \\
+&= \explaintermbrace{$\in \F$ since $f$ measurable}{\set{x \in f^{-1}(A)}}\setminus \explaintermbrace{$\in \F$ by completeness, as a subset of a set of measure 0 }{\biggset{x : x \in f^{-1}(A) \text{ and } x \not\in g^{-1}(A)}} && \bigcup \explaintermbrace{$\in \F$ by completeness, as a subset of a set of measure 0 }{\biggset{x: x \in g^{-1}(A) \text{ and } x \not\in f^{-1}(A)}}
+\end{align*}
+ }
+So by closure properties of $\sigma$-fields, $g^{-1}(A) \in \F$. 
+\end{proof}
+
 
 
  \section{$\S$ 1.4: Lebesgue-Stieltjes Measures and Distribution Functions} \label{sec:ls_measures_and_distribution_functions}
@@ -2931,7 +2947,7 @@ Now let $I_k(x)$ be the subinterval in the $k$th partition to which $x$ belongs.
 \[ \forall \delta>0, \exists K : \forall k \geq K, \quad  |y-x| < \delta \quad \forall y \in I_k(x) \quad \quad  \tinycircled{2} \]
 Combining \tinycircled{1} and \tinycircled{2}, we obtain
 \[ \forall \delta>0, \exists K : \forall k \geq K, \quad  \sup_{y \in I_k(x)} f(y) \leq f(x) + \epsilon \quad \quad  \tinycircled{3}\]
-And certainly, since $x \in I_k(x)$, 
+And of course, since the supremum is an upper bound and $x \in I_k(x)$, 
 \[ \sup_{y \in I_k(x)} f(y) \geq f(x). \quad \quad  \tinycircled{4}\]
 So combining \tinycircled{3} and \tinycircled{4}, and recalling that $\alpha_k(x) :=  \sup_{y \in I_k(x)} f(y)$, we have 
 \[ \forall \delta>0, \exists K : \forall k \geq K, \quad  | \alpha_k(x) - f(x) | \leq  \epsilon\]
