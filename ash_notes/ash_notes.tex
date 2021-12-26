@@ -2492,8 +2492,10 @@ See \cite{ash2000probability}, Theorem 1.6.3.
 
 
 
-\begin{remark}
-The proof of Theorem \ref{thm:additivity} is straightforward when integrability is assumed.  Suppose $f$ and $g$ are integrable. Let $h=f+g$.  Then 
+\begin{remark}{\remarktitle{Additivity holds automatically for integrable functions.}}
+If $f$ and $g$ are integrable, the conditions of Theorem \ref{thm:additivity} are always met.    
+
+Moreover, in this situation, the proof of Theorem \ref{thm:additivity} is straightforward. Suppose $f$ and $g$ are integrable. Let $h=f+g$.  Then 
 \[ h^+ - h^- = f^+ - f^- + g^+ - g^- \]
 Rearranging, we have 
 \[ h^+ + f^- + g^- = f^+ + g^+ + h^- \]
@@ -2504,9 +2506,7 @@ Rearranging (possible by integrability), we get
 \int h^+ -  \int h^- &=  \int f^+ - \int f^- + \int g^+ - \int g^- \\
 \stackexplain{def. integral, def. h}{\implies} \int f+g &= \int f + \int g 
 \end{align*}
-
-
-	
+\label{rk:additivity_holds_automatically_for_integrable_functions}	
 \end{remark}
 
 \begin{remark}
@@ -2630,6 +2630,7 @@ Let $h$ be Borel measurable
 \item If $h$ is integrable, then $h$ is finite a.e. 
 \item If $h \geq 0$ and $\int_\Omega h \dmu =0$ then $h=0$ a.e.
 \end{alphabate}
+\label{thm:properties_of_functions_derived_from_properties_of_integrals}
 \end{theorem}
 
 \begin{proof}
@@ -2922,7 +2923,10 @@ so $\alpha_k$ and $\beta_k$ approach limit functions $\alpha$ and $\beta$.   Thu
 \ds\lim_{k \to \infty} L(P_k) &= \ds\lim_{k \to \infty} \ds\int_{[a,b]} \beta_k \dmu \stackexplain{(LDCT)}{=}  \ds\int_{[a,b]} \beta \dmu   \\	
 \end{align*}
 Thus, we can write the criterion for Riemann integrability \eqref{eqn:criterion_for_riemann_integrability} in terms of the Lebesgue integral.  In particular, $f$ is Riemann integrable over $[a,b]$ with value $r$ iff 
-\[ \ds\int_{[a,b]} \alpha \dmu = \ds\int_{[a,b]} \beta \dmu  = r\]
+\begin{align}
+\ds\int_{[a,b]} \alpha \dmu = \ds\int_{[a,b]} \beta \dmu  = r
+\label{eqn:criterion_for_riemann_integrability_in_terms_of_lebesgue_integral}
+\end{align}
 independent of the sequence of partitions $\set{P_k}$.
 
 
@@ -2931,6 +2935,7 @@ independent of the sequence of partitions $\set{P_k}$.
 \begin{lemma}
 If $x$ is not an endpoint of any subintervals of $P_k$, then 
 \[ f \text{ is continuous at } x \quad \text{iff} \quad \alpha(x) = f(x) = \beta(x)\]	
+\label{lemma:continuity_at_a_point_as_equality_of_upper_and_lower_functions}
 \end{lemma}
 
 \begin{proof}
@@ -2966,8 +2971,37 @@ and taking $\delta$ to be the radius of $I_k(x)$, the definition of the continui
 \end{itemize}
 \end{proof}
 
-\red{TODO: Finish section}
+\paragraph{The theorem.}
 
+\begin{theorem}
+Let $f$ be a bounded real-valued function on $[a,b]$.	
+\begin{alphabate}
+\item The function $f$ is Riemann integrable on $[a,b]$ iff $f$ is continuous almost everywhere on $[a,b]$ (with respect to Lebesgue measure).
+\item If $f$ is Riemann integrable on $[a,b]$, then $f$ is integrable with respect to Lebesgue measure on $[a,b]$, and the two integrals are equal.	
+\end{alphabate}
+\end{theorem}
+
+\begin{proof}
+\begin{alphabate}
+\begin{itemize}
+\item $\boxed{\implies}$.  By \eqref{eqn:criterion_for_riemann_integrability_in_terms_of_lebesgue_integral}, if $f$ is Riemann integrable, then 
+\[ \ds\int_{[a,b]} \alpha \dmu = \ds\int_{[a,b]} \beta \dmu = r\]
+By linearity {\tiny (which holds immediately since $\alpha$, $\beta$ are integrable by the above equation; see Remark \ref{rk:additivity_holds_automatically_for_integrable_functions})}, 
+\[  \ds\int_{[a,b]} (\alpha-\beta) \dmu =0  \]
+Since $\beta \leq f \leq \alpha$ {\tiny (since each $\beta_k$ and $\alpha_k$ are lower and upper bounds by construction, and limits preserve non-strict inequalities)}, we have $\alpha-\beta \geq 0$, so by Theorem \ref{thm:properties_of_functions_derived_from_properties_of_integrals} (b), $\alpha-\beta =0$ a.e.  So {\tiny (by sandwiching)} $\alpha=\beta=f$ a.e.   So by Lemma \ref{lemma:continuity_at_a_point_as_equality_of_upper_and_lower_functions}, $f$ is continuous a.e.\footnote{Implicit in this last statement, I think, is that the endpoints are are set of measure 0, even in the limit.  If $E_k$ denotes the set of endpoints of the subintervals of $P_k$, and $E_{ik}$ denotes the $i$th such endpoint for $i=1,...,N_k$, then $\mu(\lim_{k \to \infty} E_k) \stackrel{1}{=} \lim_{k \to \infty} \mu(E_k) = \lim_k \mu(\cup_{i=1}^{N_k} E_{ik}) \stackrel{2}{=} 0$, where (1) holds by continuity of measure (from below; recall each successive partition is a refinement of the previous) and (2) holds since by additivity of measure, since each $E_{ik}$ is a singleton and the Lebesgue measure of any singleton is 0.
+}
+\item $\boxed{\impliedby}$.  By hypothesis and Lemma  \ref{lemma:continuity_at_a_point_as_equality_of_upper_and_lower_functions}, $\alpha = f = \beta$ a.e.   As a result, $f$ is measurable.   {\tiny ($\alpha, \beta$ are limits of simple functions, and hence measurable by closure properties of simple functions.  Thus, $f$ differs from a measurable function only on a subset of a set of measure 0.   Since the Lebesgue measurable sets $\overline{\B}([a,b])$ are complete, $f$ must be measurable by Problem \ref{prob:in_a_complete_metric_space_you_are_a_measurable_function_if_you_are_equal_to_some_other_measurable_function_ae}.)}\footnote{After this line \cite{ash2000probability} also adds that $f$ is integrable. {\tiny (Since $f$ is bounded, say $|f| \leq L$, we have $\int_{[a,b]} f \dmu \leq \int_{[a,b]} L \dmu = L (b-a) < \infty $.) } But on my reading, we can just use the a.e. theorem directly after arguing that $f$ is measurable.} Since $\alpha=f=\beta$ a.e., by Theorem \ref{thm:almost_everywhere} (b),  we have
+\[ \ds\int_{[a,b]} \alpha \dmu =  \ds\int_{[a,b]} f \dmu  = \ds\int_{[a,b]} \beta \dmu  \]
+Thus $f$ is Riemann integrable by \eqref{eqn:criterion_for_riemann_integrability_in_terms_of_lebesgue_integral}.\footnote{Presumably the ``independent of the sequence of partitions" condition of \eqref{eqn:criterion_for_riemann_integrability_in_terms_of_lebesgue_integral} is met here, since the argument -- in particular, Lemma  \ref{lemma:continuity_at_a_point_as_equality_of_upper_and_lower_functions} -- does not seem to depend on the sequence of partitions.}
+\end{itemize}
+	
+\end{alphabate}
+	
+\end{proof}
+
+\red{TODO: Add proof of part (b)}
+
+%{prob:in_a_complete_metric_space_you_are_a_measurable_function_if_you_are_equal_to_some_other_measurable_function_ae}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
