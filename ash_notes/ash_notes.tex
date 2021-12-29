@@ -810,7 +810,14 @@ g^{-1}(A) &= \biggset{x: x \in g^{-1}(A) \text{ and } x \in f^{-1}(A)} && \bigcu
 &= \explaintermbrace{$\in \F$ since $f$ measurable}{\set{x \in f^{-1}(A)}}\setminus \explaintermbrace{$\in \F$ by completeness, as a subset of a set of measure 0 }{\biggset{x : x \in f^{-1}(A) \text{ and } x \not\in g^{-1}(A)}} && \bigcup \explaintermbrace{$\in \F$ by completeness, as a subset of a set of measure 0 }{\biggset{x: x \in g^{-1}(A) \text{ and } x \not\in f^{-1}(A)}}
 \end{align*}
  }
+ 
 So by closure properties of $\sigma$-fields, $g^{-1}(A) \in \F$. 
+
+ \begin{figure}[H]
+ \centering
+ \includegraphics[width=.4\textwidth, angle=90]{images/measurability_of_functions_in_complete_measure_spaces_from_ae_equality}
+ \end{figure}
+
 \end{proof}
 
 
@@ -1819,7 +1826,7 @@ Now we show that the Dirichlet function does not have a Riemann integral.
 \begin{remark}{\remarktitle{The Dirichlet function does not have a Riemann integral.}}	
 Let $h$ be the Dirichlet function; that is $h = I_{\Q} : \R \to \R$ is the indicator of the rationals.  Fix $[a,b] \subset \R$, and let $f=h |_{[a,b]}$; that is $f : [a,b] \to \R$ is the Dirichlet function restricted to $[a,b]$.  
 
-We consider an arbitrary \textit{partition} $P$ of $[a,b]$ into a collection of $n$ subintervals $[x_{k-1}, x_k]$ where $a=x_0 < x_1 < ... < x_n = b$.  Now by Proposition \ref{prop:Riemann_integrable_iff_oscillation_goes_to_zero_as_partition_gets_finer}, a function on $[a,b]$ is Riemann integrable iff $\text{Osc}(f,P) \to 0$ as the maximum interval length of a partition $P$ goes to 0.\footnote{For a refresher on how these terms are defined, see Section \ref{sec:some_info_relevant_to_Riemann_integrals}.}  But for any partition $P$, any subinterval $[x_{k-1}, x_k]$ will contain at least one rational number and at least one irrational number, and so
+We consider an arbitrary \textit{partition} $P$ of $[a,b]$ into a collection of $n$ subintervals via a finite sequence $P=\set{x_i}_{i=0}^n$ such that $a=x_0 < x_1 < ... < x_n = b$.  Now by Proposition \ref{prop:Riemann_integrable_iff_oscillation_goes_to_zero_as_partition_gets_finer}, a function on $[a,b]$ is Riemann integrable iff $\text{Osc}(f,P) \to 0$ as the maximum interval length of a partition $P$ goes to 0.\footnote{For a refresher on how these terms are defined, see Section \ref{sec:some_info_relevant_to_Riemann_integrals}.}  But for any partition $P$, any subinterval $(x_{k-1}, x_k)$ will contain at least one rational number and at least one irrational number, and so
 \begin{align*}
 S^+(f,P) &= \ds\sum_{k=1}^n 1 \cdot (x_k - x_{k-1}) = b-a \\	
 S^-(f,P) &= \ds\sum_{k=1}^n 0 \cdot (x_k - x_{k-1}) = 0\\
@@ -2083,16 +2090,17 @@ Since the LHS is an upper bound on the set in the RHS, it must be greater than t
 \end{proof}
 
 
-
-
-
-
+\begin{remark}{\remarktitle{The monotone convergence theorem aids in computation.}}
 The monotone convergence theorem can actually be used to make it easier to do computations with integrals of non-negative Borel measurable functions!  Let us quote \cite{folland1999real} (except with changes of notation and references)
 
 \begin{quotation}
  The definition of $\int h$  involves the supremum over a huge (usually uncountable) family of simple functions, so it may be difficult to evaluate $\int h$ directly from the definition (see Definition \ref{def:integral_of_non_negative_Borel_measurable_function}).  The monotone convergence theorem, however, assures us that to compute $\int h$, it is enough to compute $\lim \int s_n$, where $\set{s_n}$ is any sequence of simple functions that increase to $h$, and Proposition \ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function} guarantees that such sequences exist. 
 \end{quotation}
+\end{remark}
 
+\begin{remark}{\remarktitle{Monotone convergence theorem fails for the Riemann integral.}}
+Using an enumeration of the rational numbers between 0 and 1, we define the function $f_n$ (for all nonnegative integer $n$) as the indicator function of the set of the first $n$ terms of this sequence of rational numbers. The increasing sequence of functions $f_n$ (which are nonnegative, Riemann-integrable with a vanishing integral) pointwise converges to the Dirichlet function which is not Riemann-integrable (see Remark \ref{rk:dirichlet_function_is_not_Riemann_integrable}).
+\end{remark}
 
 \paragraphnewline{Properties of integral of non-negative Borel measurable functions (Part II)}
 
@@ -2815,6 +2823,10 @@ But since $f_n \to f$ a.e, $\liminf_{n \to \infty} f_n = \limsup_{n \to \infty} 
 \[ \ds\lim_{n \to \infty} \dint_\Omega f_n \dmu = \dint_\Omega \ds\lim_{n \to \infty} f_n \dmu.\]
 \end{proof}
 
+\begin{remark}{\remarktitle{Example where limits and integrals cannot be exchanged.}} Let $f_n = \frac{1}{n} \indicate{[0,n]}$.  Then $\int_{\R} f_n = 1$ for all $n$, and so $\lim_{n \to \infty} \int_{\R} f_n =1$.  But the pointwise limit $f := \lim_{n \to \infty} f_n = 0 $ and so $\int_{\R} f = \int_{\R}  0 = 0$.  %Note that the conditions of the Dominated Convergence Theorem cannot be met; there cannot be an integrable $g$ such that $|f_n| \leq g$, since $\sup_n f_n = f$ (see Remark \ref{rk:when_upper_or_lower_bound_is_contained_in_the_set_itself}) and $f$ is not integrable.  
+\end{remark}
+
+
 \paragraphnewline{Continuity and differentiability of functions defined with an integral}
 
 We now consider \textit{dependence on a parameter}.  Specifically, we consider integrals where the integrand depends on a real parameter.\footnote{Here, a ``parameter" refers to a variable in the domain of the function that is not integrated over.}  The following theorem describes continuity and the computation of derivative for such functions. 
@@ -2968,6 +2980,11 @@ A similar argument holds for $\beta_k$.
 where (1) holds since the supremum is an upper bound and the infimum is a lower bound.  So 
 \[ \forall \epsilon>0, \exists K : \forall k \geq K, \quad |f(y) - f(x) | < \epsilon \quad  \forall y \in I_k(x) \]
 and taking $\delta$ to be the radius of $I_k(x)$, the definition of the continuity of $f$ at $x$ holds. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=.4\textwidth, angle=90]{images/continuity_from_equality_of_limits_of_upper_and_lower_functions}	
+\end{figure}
+
 \end{itemize}
 \end{proof}
 
@@ -2983,6 +3000,7 @@ Let $f$ be a bounded real-valued function on $[a,b]$.
 
 \begin{proof}
 \begin{alphabate}
+\item
 \begin{itemize}
 \item $\boxed{\implies}$.  By \eqref{eqn:criterion_for_riemann_integrability_in_terms_of_lebesgue_integral}, if $f$ is Riemann integrable, then 
 \[ \ds\int_{[a,b]} \alpha \dmu = \ds\int_{[a,b]} \beta \dmu = r\]
@@ -2991,17 +3009,17 @@ By linearity {\tiny (which holds immediately since $\alpha$, $\beta$ are integra
 Since $\beta \leq f \leq \alpha$ {\tiny (since each $\beta_k$ and $\alpha_k$ are lower and upper bounds by construction, and limits preserve non-strict inequalities)}, we have $\alpha-\beta \geq 0$, so by Theorem \ref{thm:properties_of_functions_derived_from_properties_of_integrals} (b), $\alpha-\beta =0$ a.e.  So {\tiny (by sandwiching)} $\alpha=\beta=f$ a.e.   So by Lemma \ref{lemma:continuity_at_a_point_as_equality_of_upper_and_lower_functions}, $f$ is continuous a.e.\footnote{Implicit in this last statement, I think, is that the endpoints are are set of measure 0, even in the limit.  If $E_k$ denotes the set of endpoints of the subintervals of $P_k$, and $E_{ik}$ denotes the $i$th such endpoint for $i=1,...,N_k$, then $\mu(\lim_{k \to \infty} E_k) \stackrel{1}{=} \lim_{k \to \infty} \mu(E_k) = \lim_k \mu(\cup_{i=1}^{N_k} E_{ik}) \stackrel{2}{=} 0$, where (1) holds by continuity of measure (from below; recall each successive partition is a refinement of the previous) and (2) holds since by additivity of measure, since each $E_{ik}$ is a singleton and the Lebesgue measure of any singleton is 0.
 }
 \item $\boxed{\impliedby}$.  By hypothesis and Lemma  \ref{lemma:continuity_at_a_point_as_equality_of_upper_and_lower_functions}, $\alpha = f = \beta$ a.e.   As a result, $f$ is measurable.   {\tiny ($\alpha, \beta$ are limits of simple functions, and hence measurable by closure properties of simple functions.  Thus, $f$ differs from a measurable function only on a subset of a set of measure 0.   Since the Lebesgue measurable sets $\overline{\B}([a,b])$ are complete, $f$ must be measurable by Problem \ref{prob:in_a_complete_metric_space_you_are_a_measurable_function_if_you_are_equal_to_some_other_measurable_function_ae}.)}\footnote{After this line \cite{ash2000probability} also adds that $f$ is integrable. {\tiny (Since $f$ is bounded, say $|f| \leq L$, we have $\int_{[a,b]} f \dmu \leq \int_{[a,b]} L \dmu = L (b-a) < \infty $.) } But on my reading, we can just use the a.e. theorem directly after arguing that $f$ is measurable.} Since $\alpha=f=\beta$ a.e., by Theorem \ref{thm:almost_everywhere} (b),  we have
-\[ \ds\int_{[a,b]} \alpha \dmu =  \ds\int_{[a,b]} f \dmu  = \ds\int_{[a,b]} \beta \dmu  \]
+\begin{align}
+\ds\int_{[a,b]} \alpha \dmu =  \ds\int_{[a,b]} f \dmu  = \ds\int_{[a,b]} \beta \dmu  
+\label{eqn:lebesgue_integral_of_riemann_integral_fucntion_equals_the_lebesgue_integral_of_the_limits_of_the_upper_and_lower_functions}
+\end{align}
+
 Thus $f$ is Riemann integrable by \eqref{eqn:criterion_for_riemann_integrability_in_terms_of_lebesgue_integral}.\footnote{Presumably the ``independent of the sequence of partitions" condition of \eqref{eqn:criterion_for_riemann_integrability_in_terms_of_lebesgue_integral} is met here, since the argument -- in particular, Lemma  \ref{lemma:continuity_at_a_point_as_equality_of_upper_and_lower_functions} -- does not seem to depend on the sequence of partitions.}
 \end{itemize}
-	
+\item If $f$ is Riemann integrable, then $f$ is continuous a.e. by part (a).   So \eqref{eqn:lebesgue_integral_of_riemann_integral_fucntion_equals_the_lebesgue_integral_of_the_limits_of_the_upper_and_lower_functions} holds.  Then, by \eqref{eqn:criterion_for_riemann_integrability_in_terms_of_lebesgue_integral}, $\int_{[a,b]} f \dmu = r$, the value of the Riemann integral. 
 \end{alphabate}
-	
 \end{proof}
 
-\red{TODO: Add proof of part (b)}
-
-%{prob:in_a_complete_metric_space_you_are_a_measurable_function_if_you_are_equal_to_some_other_measurable_function_ae}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3013,7 +3031,7 @@ Thus $f$ is Riemann integrable by \eqref{eqn:criterion_for_riemann_integrability
 
 \section{Supremum and Infimum}
 
-Following are some definitions and propositions that we use in the notes.\footnote{For a nice introductory overview, see \href{https://www.math.ucdavis.edu/~hunter/m125b/ch2.pdf}.}
+Following are some definitions and propositions that we use in the notes.\footnote{For a nice introductory overview, see \url{https://www.math.ucdavis.edu/~hunter/m125b/ch2.pdf}.}
 
 \subsection{Characterization}
 
@@ -3056,6 +3074,10 @@ Another way to write Proposition \ref{prop:supremum_and_infimum_alternate_charac
 
 If $A \subset \R$, then $M = \sup A$ if and only if (a) $M$ is an upper bound of $A$; (b) for all $\epsilon >0$, there exists an $a \in A$ such that $a>M-\epsilon$.  Similarly, $m = \inf A$ if and only if (a) $m$ is a lower bound of $A$; (b) for all $\epsilon >0$, there exists an $a \in A$ such that $a<m+\epsilon$.
 \label{rk:usage_of_alternate_characterization_of_inf_and_sup}
+\end{remark}
+
+\begin{remark}{\remarktitle{Existence of sequences converging to the infimum and supremum}}
+By Remark \ref{rk:usage_of_alternate_characterization_of_inf_and_sup}, if $A \subset \R$, we can always find a non-decreasing sequence $\set{x_n} \subset A$ such that $\lim_{n \to \infty} x_n = \sup A$, and likewise for the infimum.  
 \end{remark}
 
 \begin{remark}{\remarktitle{When the upper or lower bound is contained in the set itself}}
@@ -3216,9 +3238,9 @@ Now consider the following definitions:
 \item A \textit{partition} of a compact interval $[a,b]$ is a finite sequence $P=\set{x_i}_{i=0}^n$ such that $a=x_0 < x_1 < ... < x_n = b$. 
 \item Given a partition $P$, the \textit{upper sum} $S^+(f,P)$ and \textit{lower sum} $S^-(f,P)$ are defined by\footnote{References \cite{strichartz2000way} and \cite{folland1999real} define the supremum and infimum over closed sets $[x_{i-1}, x_i]$, whereas \cite{ash2000probability} defines them over $(x_{i-1},x_i]$.  It presumably doesn't matter.}
 \begin{align*}
-S^+(f,P) &:= \ds\sum_{i=1}^n M_k (x_i - x_{i-1}) \\
+S^+(f,P) &:= \ds\sum_{i=1}^n M_i (x_i - x_{i-1}) \\
 &\quad \text{ where $M_i$ is the supremum of $f$ on $(x_{i-1}, x_i]$.} \\	
-S^-(f,P) &:= \ds\sum_{i=1}^n m_k (x_i - x_{i-1}) \\
+S^-(f,P) &:= \ds\sum_{i=1}^n m_i (x_i - x_{i-1}) \\
 &\quad \text{ where $m_i$ is the infimum of $f$ on $(x_{i-1}, x_i]$.} \\
 \end{align*}
 \item The \textit{oscillation} $\text{Osc}(f,P)$ of a function $f$ over a partition $P$ is given by the difference of the upper and lower sums; i.e. $ \text{Osc}(f,P) := S^+(f,P) - S^-(f,P)$.
