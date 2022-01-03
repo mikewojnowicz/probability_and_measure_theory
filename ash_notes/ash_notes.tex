@@ -46,6 +46,8 @@ The primary reference here is \cite{ash2000probability}.   The book is wonderful
 
  Unless otherwise specified, all references to the ``text" refers to this textbook.  Likewise the symbol $\S$ refers to a Section of that textbook.
  
+ Other useful references are \cite{folland1999real} and \cite{rudin1987real}. 
+ 
 \subsection{Motivation for topic} \label{sec:motivation_for_topic}
 
 What are some motivations for measure theory?
@@ -88,6 +90,7 @@ The \textbf{upper limit} of a sequence of sets is given by
 \[ \lim\sup A_n := \bigcap_{n=1}^\infty \bigcup_{k \geq n} A_k \]
 Alternatively,
 \[ x \in \lim\sup A_n \text{ iff } x \in A_n \text{ for infinitely many } n \]
+\label{def:upper_limit}
 \end{definition}
 
 \begin{definition}
@@ -2383,9 +2386,9 @@ What does each say?
 
 Here we prove some basic integration theorems, and further properties of integration that can be derived thereof.  %Note that we have already provided the Monotone Convergence Theorem and Fatou's lemma in the previous section (since we give statements that apply to non-negative functions). 
 
-\begin{theorem}{\textbf{Integrals as measures.}}
+\begin{theorem}{\textbf{Integrals are countably additive set functions.}}
 Let $f$ be a Borel measurable function such that $\int_\Omega f \wrt{\mu}$ exists.  Define $\lambda(B) = \int_B f \wrt{\mu}$, $B \in \F$.  Then $\lambda$ is countably additive on $\F$; thus if $f \geq 0$, $\lambda$ is a measure.	
-\label{thm:integrals_as_measures}
+\label{thm:integrals_are_countably_additive_set_functions}
 \end{theorem}
 
 \begin{proof}
@@ -2457,7 +2460,18 @@ So now assume $f$ is an arbitrary Borel-measurable function.  Since we have assu
 
 \end{proof}
 
-\begin{remark}{\remarktitle{Change of measure}} Rudin \cite{rudin1987real} points out an important implication of Theorem \ref{thm:integrals_as_measures}: if $f \geq 0$, and so $\lambda$ (as defined as in the theorem statement) is a measure, then
+\begin{corollary}{\textbf{Integrals as measures.}}
+Let $f \geq 0$ be a Borel measurable function such that $\int_\Omega f \wrt{\mu}$ exists.  Define $\lambda(B) = \int_B f \wrt{\mu}$, $B \in \F$.  Then $\lambda$ is a measure.	
+\label{cor:integrals_as_measures}
+\end{corollary}
+
+\begin{proof}
+We apply Definition \ref{def:measure} to show that $\lambda$ is a measure.   $\lambda$ is countably additive by Theorem \ref{thm:integrals_are_countably_additive_set_functions}.  
+The non-negativity of $\lambda$ is immediate from Definition \ref{def:integral_of_non_negative_Borel_measurable_function}. 
+\end{proof}
+
+
+\begin{remark}{\remarktitle{Change of measure}} \cite{rudin1987real} pp. 24 points out an important implication of Corollary \ref{cor:integrals_as_measures}: if $f \geq 0$, and so $\lambda$ (as defined as in the theorem statement) is a measure, then
 \begin{align*}
 \dint_\Omega g \wrt{\lambda} = \dint_\Omega g f \dmu
 \labelit \label{eqn:change_of_measure}
@@ -2475,7 +2489,7 @@ $d\lambda$ and $d\mu$; \eqref{eqn:change_of_measure_as_change_in_differentials} 
 
 The Radon-Nikodym theorem (to be covered later in the document) provides an important converse:  instead of obtaining new measure $\lambda$ given original measure $\mu$ and function $f$, we will be given two measures $\lambda$ and $\mu$, and will obtain the \textit{Radon-Nikdoym derivative} $f$.
 
-{\tiny Let us prove \eqref{eqn:change_of_measure} from Theorem \ref{thm:integrals_as_measures}.
+{\tiny Let us prove \eqref{eqn:change_of_measure} from Theorem \ref{thm:integrals_are_countably_additive_set_functions}.
 
 \begin{itemize}
 	\item First let $g$ be a simple function, which we write as $s= \sum_{i=1}^r x_i \indicate{E_i}$.   Then 
@@ -3020,11 +3034,142 @@ Thus $f$ is Riemann integrable by \eqref{eqn:criterion_for_riemann_integrability
 \end{alphabate}
 \end{proof}
 
+\section{\S 2.1 Signed measures}
+
+\subsection{Overview of signed measures}
+This section plays the same role as Section 2.1 of \cite{ash2000probability}, although the primary reference here is Section 3.1 of \cite{folland1999real}
+
+
+\begin{definition} Let $(\Omega,\F)$ be a measurable space.\footnote{Recall Definition \ref{def:measurable_space_and_measurable_sets}.}A \textbf{signed measure} on $(\Omega,\F)$ is a function $\nu : \F \to [-\infty, \infty]$ such that
+\begin{itemize}
+\item $\nu(\emptyset) = 0$;
+\item $\nu$ assumes at most one of the values $\pm \infty$;
+\item (\textit{countable additivity}) If $\set{A_j}$ is a sequence of disjoint sets in $\F$, then $\nu(\cup_{j=1}^\infty A_j) = \sum_{j=1}^\infty \nu(A_j)$.
+\end{itemize}
+\label{def:signed_measure}
+\end{definition}
+
+\begin{remark}
+Every measure is a signed measure. 
+\end{remark}
+
+More generally, two mechanisms for forming signed measures come to mind:
+\begin{enumerate}
+\item $\nu = \mu_1 - \mu_2$, where $\mu_1$ and $\mu_2$ are measures on $\F$, and at least one measure is finite.
+\item The set function defined by $\nu(A) = \int_A h \dmu$, where $h : \Omega \to [-\infty, \infty]$ is a measurable function such that at least one of $\int h^+ \dmu$ and $\int h^- \dmu$ is finite  {\tiny (and where $\mu$ is a measure on $\F$)}.
+\end{enumerate}
+
+\begin{remark}
+\cite{folland1999real} points out that these are the \textit{only} two examples; every signed measure can be represented in either of these two forms.
+\end{remark}
+
+\begin{remark}
+Signed measures are continuous by Theorem \ref{thm:continuity_of_countably_additive_set_functions} (continuity of countably additive set functions).
+\end{remark}
+
+\subsection{Hanh and Jordan Decompositions}
+
+\begin{definition}
+Given a signed measure $\nu$ on a measurable space $(\Omega, \F)$, a set $A \in \F$ is called
+\begin{itemize}
+\item \textbf{positive} if $\nu(B) \geq 0$ for all $B \subset A$.
+\item \textbf{negative} if $\nu(B) \leq 0$ for all $B \subset A$.
+\item \textbf{null}	if $\nu(B) = 0$ for all $B \subset A$.
+\end{itemize}
+\label{def:positive_negative_and_null_sets}
+\end{definition}
+
+\begin{remark}
+To motivate Definition \ref{def:positive_negative_and_null_sets} (c), consider that unlike measures, \textit{signed} measures do not have the monotonicity property. Thus, the condition $\nu(A)=0$ in isolation provides no information about the value of $\nu$ on subsets. 
+\end{remark}
+
+\begin{theorem}{\textbf{The Hanh Decomposition Theorem}}
+If $\nu$ is a signed measure on $(\Omega, \F)$, there exist a positive set $P$ and a negative set $N$ such that $\Omega = P \cupdot N$.  Moreover, if $P',N'$ is another such pair, then $P \triangle P' (= N \triangle N')$ is null for $\nu$.
+\label{thm:hanh_decomposition}
+\end{theorem}
+
+\begin{proof}
+See \cite{folland1999real} pp. 86.	
+\end{proof}
+
+
+\begin{definition}
+Let $\nu, \lambda$ be signed measures on a measurable space $(\Omega, \F)$.   Then $\nu$ and $\lambda$ are said to be \textbf{mutually singular}, written $\nu \perp \lambda$ if there exist $A,B \in \F$ such that $\Omega = A \cupdot B$ where $\mu$ is null for $A$ and $\lambda$ is null for $B$.
+\label{def:mutually_singular}  
+\end{definition}
+
+So two signed measures are mutually singular if there is a partition of the universe into two cells such that each cell is null for a different signed measure.
+
+\begin{example}
+The normal distributions truncated to the positive reals ($\N_+$) and negative reals ($\N_-$) provide an example of mutually singular measures.  Note that in Definition \ref{def:mutually_singular}, we can take either $A=\R_0^+$ and $B=\R^-$ or 
+$A=\R^+$ and $B=\R_0^-$, illustrating the non-uniqueness of the Hanh Decomposition.
+\end{example}
+
+Now we show that any signed measure can be expressed as the difference of two (latent) measures, which are moreover mutually singular. 
+
+\begin{theorem}{\textbf{The Jordan decomposition theorem.}}
+If $\nu$ is a signed measure, there exist unique measures $\nu^+$ and $\nu^-$ such that $\nu = \nu^+ - \nu^-$ and $\nu^+ \perp \nu^-$.
+\end{theorem}
+
+\begin{proof}
+\begin{itemize}
+\item \textit{Existence}.  Let $\Omega = P \cupdot N$ be a Hanh decomposition for $\nu$. {\tiny (So $\nu(A) \geq 0$ for all $A \subset P$ and  $\nu(B) \leq 0$ for all $B \subset N$)}. 
+
+Define set functions $\nu^+$ and $\nu^-$ by:
+\begin{align*}
+\nu^+(E) &:= \nu(E \cap P) \\
+\nu^-(E) &:= -\nu(E \cap N)
+\end{align*}
+which are both measures {\tiny (as they are non-negative and countably additive)}.  
+
+Then:
+	\begin{itemize}
+	\item $\nu = \nu^+ - \nu^-$.  
+	
+	{\tiny This holds because E = $(E \cap P) \cupdot (E \cap N)$, so by countable additivity, $\nu(E) = \nu(E \cap P) + \nu(E \cap N) := \nu^+(E) - \nu^-(E)$. 
+	}
+	\item $\nu^+ \perp \nu^-$.
+	
+	{\tiny This holds because \begin{align*}
+ 		\nu^+(N) &= \nu(N \cap P) = \nu(\emptyset) =  0 \\
+ 		\nu^-(P) &= -\nu(P \cap N) = \nu(\emptyset) = 0,
+ 		\end{align*}
+so $\Omega = P \cupdot N$ is the partition required for mutual singularity. (By monotonicity of measure, the equalities hold for subsets as well).}
+	\end{itemize}
+
+\item \textit{Uniqueness}.  TBD, or see \cite{folland1999real} pp. 87.	
+\end{itemize}
+	
+\end{proof}
+
+
+\section{\S 2.2 Radon-Nikodym Theorem}
+
+\red{This section is under construction}
+
+\begin{lemma}{\textbf{Borel Cantelli Lemma}}
+If $A_1, A_2, ... \in \F$ and $\sum_{n=1}^\infty \mu(A_n) < \infty$, then $\mu(\limsup_{n \to \infty} A_n) = 0$.
+\end{lemma}
+
+\begin{proof}
+Recall from Definition \ref{def:upper_limit} that
+\[ \explaintermbrace{$:=B$}{\limsup_{n \to \infty} A_n} = \bigcap_{k=1}^\infty \explaintermbrace{$:=B_k$}{\bigcup_{n=k}^\infty A_n} = \set{x : x \in A_n \text{ i.o. }}  \]	
+where we have also introduced some notation for convenience.
+
+Now $B_{k+1} \subset B_k$ and $\cap_{k=1}^\infty B_k =B$, so $B_k \downarrow B$.  Since also $\mu(B_1) < \infty$ (by hypothesis and monotonicity), then we can apply continuity from above to get
+\begin{align*}
+\mu(B) &= \ds\lim_{k \to \infty} \mu(B_k) \\
+&= 	\ds\lim_{k \to \infty} \mu \bigg( \bigcup_{n=k}^\infty A_n \bigg) && \tinytext{def. $B_k$} \\
+&\leq \ds\lim_{k \to \infty} \ds\sum_{n=k}^\infty \mu (A_n) && \tinytext{subadditivity} \\
+&=0 && \tinytext{convergent series have vanishing tails}
+\end{align*}
+  
+\end{proof}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
-\bibliographystyle{unsrt}
+\bibliographystyle{apalike}
  
 \newpage 
 \appendix
