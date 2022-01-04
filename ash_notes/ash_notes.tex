@@ -3080,7 +3080,7 @@ Given a signed measure $\nu$ on a measurable space $(\Omega, \F)$, a set $A \in 
 \end{definition}
 
 \begin{remark}
-To motivate Definition \ref{def:positive_negative_and_null_sets} (c), consider that unlike measures, \textit{signed} measures do not have the monotonicity property. Thus, the condition $\nu(A)=0$ in isolation provides no information about the value of $\nu$ on subsets. 
+To motivate Definition \ref{def:positive_negative_and_null_sets}, consider that unlike measures, \textit{signed} measures do not have the monotonicity property. So, for example, the condition $\nu(A)=0$ in isolation provides no information about the value of $\nu$ on subsets. 
 \end{remark}
 
 \begin{theorem}{\textbf{The Hanh Decomposition Theorem}}
@@ -3094,7 +3094,7 @@ See \cite{folland1999real} pp. 86.
 
 
 \begin{definition}
-Let $\nu, \lambda$ be signed measures on a measurable space $(\Omega, \F)$.   Then $\nu$ and $\lambda$ are said to be \textbf{mutually singular}, written $\nu \perp \lambda$ if there exist $A,B \in \F$ such that $\Omega = A \cupdot B$ where $\mu$ is null for $A$ and $\lambda$ is null for $B$.
+Let $\nu, \lambda$ be signed measures on a measurable space $(\Omega, \F)$.   Then $\nu$ and $\lambda$ are said to be \textbf{mutually singular}, written $\nu \perp \lambda$, if there exist $A,B \in \F$ such that $\Omega = A \cupdot B$ where $\mu$ is null for $A$ and $\lambda$ is null for $B$.
 \label{def:mutually_singular}  
 \end{definition}
 
@@ -3141,6 +3141,83 @@ so $\Omega = P \cupdot N$ is the partition required for mutual singularity. (By 
 \end{itemize}
 	
 \end{proof}
+
+
+\subsection{Total Variation}
+
+\begin{definition}
+The \textbf{total variation} of a signed measure $\nu$, denoted $|\nu|$, is the measure given by 
+\[ |\nu| := \nu^+ + \nu^- \]
+\label{def:total_variation}	
+\end{definition}
+
+\begin{remark}
+Definition \ref{def:total_variation} is well-defined because the sum of two measures is a measure:
+\begin{itemize}
+\item Non-negativity \checkmark 
+\item Countable additivity \checkmark 
+
+{\tiny Countable additivity holds because\footnote{TODO: Argue instead by appealing to a more general theorem.} 
+\begin{align*}
+|\nu|\bp{\bigcup_{i=1}^\infty A_i} &= \nu^+ \bp{\bigcup_{i=1}^\infty A_i}   + \nu^- \bp{\bigcup_{i=1}^\infty A_i}  \\
+&= \ds\sum_{i=1}^\infty  \nu^+ (A_i) + \ds\sum_{i=1}^\infty  \nu^- (A_i) && \text{$\nu^+, \nu^-$ are measures} \\
+&= \ds\sum_{i=1}^\infty \nu^+ (A_i) + \nu^-(A_i) && \text{Limits and sums commute; see \cite{strichartz2000way} Theorem 2.3.2 and apply it to partial sums} \\
+&= \ds\sum_{i=1}^\infty |\nu|(A_i) && \text{def. of $|\nu|$}
+\end{align*}
+
+}	
+\end{itemize}
+	
+\end{remark}
+
+\begin{remark}{\remarktitle{An illustrative example of Hanh-Jordan Decomposition.}}
+The picture below illustrates the structure of a signed measure $\nu$, as provided by a Jordan decomposition. Some Hanh decompositions are shown at the bottom of the figure.  The union of green intervals is a positive set $P$, and the union of orange intervals is a negative set $N$.  There are a number of possible pairs $(P,N), (P',N'), (P'', N'')$; however, these choices are ``not that different" from each other in the sense that for any two decompositions $(P,N), (P',N')$, the set $P \triangle P'$ (i.e. the set of points in exactly one version of green coloring), which equals $N \triangle N'$ (i.e. the set of points in exactly one version of orange coloring), is null for $\nu$. [In other words, the set of ``disagreement" is such that all subsets have signed measure 0.  As we will see in Problem \ref{prob:null_sets_are_those_with_zero_total_variation}, we can think about the set of disagreement as having a total variation $|\nu|$ of 0, so both $\nu^+$ and $\nu^-$ give zero measure to the sets of disagreement.] 
+\begin{figure}[H]
+\centering 
+\includegraphics[width=.6\textwidth, angle=90]{images/hanh_jordan_decomp}
+\end{figure}
+
+\end{remark}
+
+\begin{problem}{\remarktitle{Null sets are those with zero total variation.}}
+Given a signed measure $\nu$ on a measure space $(\Omega,\F)$ and a set $E \in \F$, show that
+\[ \text{$E$ is null for $\nu$}  \quad \text{iff} \quad |\nu|(E) = 0 \]	
+\label{prob:null_sets_are_those_with_zero_total_variation}
+\end{problem}
+
+\begin{proof}[Solution.]
+First recall the definitions
+\begin{itemize}
+\item 	$E$ is null for $\nu$: $\nu(F)=0 \quad  \forall F \subset E$.
+\item  $|\nu|(E) = 0 $: $\nu^+(E) + \nu^-(E) = 0$.
+\end{itemize}
+Now the proof
+\begin{itemize}
+\item $\boxed{\implies}$.  Let $\Omega = P \cupdot N$ be a Hanh decomposition for $\nu$. 
+Then 
+\begin{align*}
+\nu^+(E) &= \nu(E \cap P) = 0 \\
+\nu^-(E) &= -\nu(E \cap N) = 0 
+\end{align*}
+where the first equalities are the Jordan decomposition, and the second equalities follow since $E$ is null for $\nu$ {\tiny (and $E \cap P, E \cap N \subset E$)}.
+
+So 
+\[  |\nu|(E) = \nu^+(E) + \nu^-(E) = 0. \]
+\item $\boxed{\impliedby}$.	
+\begin{align*}
+|\nu|(E) = 0 & \iff  \nu^+(E) + \nu^-(E) =0 && \tinytext{def. $|\nu|$} \\
+&\implies \nu^+(E) = 0, \nu^-(E) = 0 && \tinytext{non-negativity of measure} \\
+&\implies \nu^+(F) = 0, \nu^-(F) = 0  \quad \forall F \subset E && \tinytext{monotonicity of measure}	\\
+& \implies  \nu^+(F) + \nu^-(F) =0 \quad \forall F \subset E && \\
+&\implies \nu(F) = 0 \quad \forall F \subset E && 
+\end{align*}
+
+\end{itemize}
+
+\end{proof}
+
+
+
 
 
 \section{\S 2.2 Radon-Nikodym Theorem}
