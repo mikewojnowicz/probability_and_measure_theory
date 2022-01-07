@@ -3256,6 +3256,8 @@ This section plays the same role as Section 2.2 of \cite{ash2000probability}, al
 
 \subsection{Absolute continuity}
 
+In this section, we define absolute continuity and give some useful properties.
+
 \begin{definition}
 Let $\nu$ be a signed measure and $\mu$ a measure on a measurable space $(\Omega, \F)$.  We say that $\nu$ is \textbf{absolutely continuous} with respect to $\mu$, and write
 \[ \nu \ll \mu \]
@@ -3264,10 +3266,12 @@ if
 \label{def:absolute_continuity}	
 \end{definition}
 
+
 \begin{problem}{\remarktitle{\cite{folland1999real} Problem 3.2.8a}}
 Let $\nu$ be a signed measure and $\mu$ a measure on a measurable space $(\Omega, \F)$.  Then 
 \[ \nu \ll \mu \quad \text{iff} \quad |\nu| \ll \mu \]
 In other words, a signed measure is absolutely continuous iff its total variation is absolutely continuous.
+\label{prob:signed_measure_is_absolutely_continuous_iff_its_total_variation_is_absolutely_continuous}
 \end{problem}
 
 \begin{proof}[Solution]
@@ -3291,13 +3295,60 @@ And now we proceed:
 \mu(A) = 0  &\stackexplain{monotonicity}{\implies} & A \text{ is $\mu$-null } \\
 && \quad \text{ i.e. } \mu(B)=0 \quad \forall \, B \subset A \\
 & \stackexplain{hypothesis}{\implies} &  \nu(B) = 0 \quad \forall \, B \subset A \\
-& \stackexplain{property of total variation (Problem \ref{prob:null_sets_are_those_with_zero_total_variation}) }{\implies}& |\nu|(A) = 0  
+& \stackexplain{null sets have zero total variation (Problem \ref{prob:null_sets_are_those_with_zero_total_variation}) }{\implies}& |\nu|(A) = 0  
 \end{array}
 \] 
 
 %\end{array}
 
 \end{itemize}
+
+\end{proof}
+
+\begin{remark}{\remarktitle{Absolute continuity is the antithesis of mutual singularity.}}
+
+This statement (from \cite{folland1999real}) captures the fact that 
+%
+\[ \begin{array}{rl}
+\text{ if } & \nu \text{ is a signed measure } \\
+   & \mu \text{ is a measure } \\
+   & \nu \ll \mu \\
+   & \nu \perp \mu \\
+\text{ then } & \nu \equiv 0
+\end{array}
+\]
+%
+
+	
+\label{rk:absolute_continuity_is_the_antithesis_of_mutual_singularity}
+\end{remark}
+
+\begin{proof}
+First recall
+\[ \nu \ll \mu \stackexplain{Problem \ref{prob:signed_measure_is_absolutely_continuous_iff_its_total_variation_is_absolutely_continuous}}{\iff} |\nu| \ll \mu \]
+Now by mutual singularity
+\[
+\begin{array}{rlclcl}
+\exists A,B \in \F: & \Omega = A \cupdot B && \\
+& \nu \text{ is null for } A & \stackexplain{Problem \ref{prob:null_sets_are_those_with_zero_total_variation}}{\iff}& |\nu|(A) = 0\\ 
+& \mu \text{ is null for } B & \stackexplain{special case}{\implies}& \mu(B) = 0 & \stackexplain{$|\nu| \ll \mu$}{\implies} & |\nu|(B) = 0\\ 
+\end{array}
+\]
+
+So 
+\begin{align*}
+|\nu|(\Omega) & \stackexplain{countable additivity}{=} |\nu|(A) + |\nu|(B)  \stackexplain{see above}{=}  0 	 \\
+& \stackexplain{monotonicity, since $|\nu|$ is a measure}{\implies} |\nu| \equiv 0 \\
+& \stackexplain{*}{\implies} \nu \equiv 0.
+\end{align*}
+{\tiny Implication (*) holds since 
+\begin{align*}
+|\nu| \equiv 0 & \stackexplain{def}{\iff} \nu^+ - \nu^- \equiv 0 \\
+& \stackexplain{non-negativity}{\implies} \nu^+  \equiv 0, \nu^- \equiv 0 \\
+& \implies \nu^+ - \nu^- \equiv 0 \\
+& \stackexplain{def.}{\iff} \nu \equiv 0.	
+\end{align*}
+}
 
 \end{proof}
 
