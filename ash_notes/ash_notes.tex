@@ -593,7 +593,7 @@ If $A_1, A_2, ... \in \F$ and $\sum_{n=1}^\infty \mu(A_n) < \infty$, then $\mu(\
 \label{lemma:borel_cantelli}
 \end{lemma}
 
-\begin{proof}
+\begin{proof}\footnote{\cite{ash2000probability} has a proof that does not require continuity of measure, although I currently personally enjoy its role here.}
 Recall from Definition \ref{def:upper_limit} that
 \[ \explaintermbrace{$:=B$}{\limsup_{n \to \infty} A_n} = \bigcap_{k=1}^\infty \explaintermbrace{$:=B_k$}{\bigcup_{n=k}^\infty A_n} = \set{x : x \in A_n \text{ i.o. }}  \]	
 where we have also introduced some notation for convenience.
@@ -612,6 +612,7 @@ Now $B_{k+1} \subset B_k$ and $\cap_{k=1}^\infty B_k =B$, so $B_k \downarrow B$.
 An attempt at a verbal description of the proof of Lemma \ref{lemma:borel_cantelli} follows:  Convergent series of real numbers have arbitrarily small tails. When the series is constructed of measures $(\sum_{n=1}^\infty \mu(A_n))$, this implies that the measure of the tail $(\cup_{n=k}^\infty A_n)$ is arbitrarily small (by subadditivity).  Now $\limsup_{n \to \infty} A_n$ is the set of points in $\set{A_n}$ i.o., so such points must be in \textit{all} tails $(\cap_{k=1}^\infty \cup_{n=k}^\infty A_n)$, and by continuity of measure (from above), the measure of such a set is the limit of the measure of the tail, i.e. 0.
 \end{remark}
 
+	
 
 
 %By , we have
@@ -3063,8 +3064,10 @@ Thus $f$ is Riemann integrable by \eqref{eqn:criterion_for_riemann_integrability
 
 \section{\S 2.1 Signed measures}
 
+This section plays the same role as Section 2.1 of \cite{ash2000probability}, although the primary reference here is Section 3.1 of \cite{folland1999real}.
+
 \subsection{Overview of signed measures}
-This section plays the same role as Section 2.1 of \cite{ash2000probability}, although the primary reference here is Section 3.1 of \cite{folland1999real}
+
 
 
 \begin{definition} Let $(\Omega,\F)$ be a measurable space.\footnote{Recall Definition \ref{def:measurable_space_and_measurable_sets}.}A \textbf{signed measure} on $(\Omega,\F)$ is a function $\nu : \F \to [-\infty, \infty]$ such that
@@ -3247,8 +3250,56 @@ So
 
 
 
-\section{\S 2.2 Radon-Nikodym Theorem}
+\section{\S 2.2 Lebesgue-Radon-Nikodym Theorem}
 
+This section plays the same role as Section 2.2 of \cite{ash2000probability}, although the primary reference here is Section 3.2 of \cite{folland1999real}.
+
+\subsection{Absolute continuity}
+
+\begin{definition}
+Let $\nu$ be a signed measure and $\mu$ a measure on a measurable space $(\Omega, \F)$.  We say that $\nu$ is \textbf{absolutely continuous} with respect to $\mu$, and write
+\[ \nu \ll \mu \]
+if 
+\[ \mu(A) = 0 \implies \nu(A) = 0 \quad \forall A \in \F. \]
+\label{def:absolute_continuity}	
+\end{definition}
+
+\begin{problem}{\remarktitle{\cite{folland1999real} Problem 3.2.8a}}
+Let $\nu$ be a signed measure and $\mu$ a measure on a measurable space $(\Omega, \F)$.  Then 
+\[ \nu \ll \mu \quad \text{iff} \quad |\nu| \ll \mu \]
+In other words, a signed measure is absolutely continuous iff its total variation is absolutely continuous.
+\end{problem}
+
+\begin{proof}[Solution]
+Using the Jordan decomposition and the definitions (of absolute continuity and total variation), we write the following for reference:
+\begin{align*}
+\nu \ll \mu &\; \text{ means}  \\
+&\mu(A) = 0 \implies \nu(A) = 0 \\
+& \quad \text{ i.e. } \nu^+(A) - \nu^-(A) = 0 \\
+|\nu| \ll \mu &\; \text{ means}  \\
+&\mu(A) = 0 \implies |\nu|(A) = 0 \\
+& \quad \text{ i.e. } \nu^+(A) + \nu^-(A) = 0 \\
+\end{align*}
+for all $A \in \F$.
+
+And now we proceed:
+\begin{itemize}
+\item $\boxed{\impliedby}$. The hypothesis plus non-negativity implies
+\[ \nu^+(A), \; \nu^-(A) =0 \]
+\item $\boxed{\implies}$. 
+\[ \begin{array}{rcl}
+\mu(A) = 0  &\stackexplain{monotonicity}{\implies} & A \text{ is $\mu$-null } \\
+&& \quad \text{ i.e. } \mu(B)=0 \quad \forall \, B \subset A \\
+& \stackexplain{hypothesis}{\implies} &  \nu(B) = 0 \quad \forall \, B \subset A \\
+& \stackexplain{property of total variation (Problem \ref{prob:null_sets_are_those_with_zero_total_variation}) }{\implies}& |\nu|(A) = 0  
+\end{array}
+\] 
+
+%\end{array}
+
+\end{itemize}
+
+\end{proof}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
