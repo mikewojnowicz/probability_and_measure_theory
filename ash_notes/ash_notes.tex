@@ -3267,14 +3267,13 @@ if
 \end{definition}
 
 
-\begin{problem}{\remarktitle{\cite{folland1999real} Problem 3.2.8a}}
+\begin{remark}{\remarktitle{A signed measure is absolutely continuous iff its total variation is absolutely continuous.}}\footnote{This is \cite{folland1999real} Problem 3.2.8a}
 Let $\nu$ be a signed measure and $\mu$ a measure on a measurable space $(\Omega, \F)$.  Then 
 \[ \nu \ll \mu \quad \text{iff} \quad |\nu| \ll \mu \]
-In other words, a signed measure is absolutely continuous iff its total variation is absolutely continuous.
-\label{prob:signed_measure_is_absolutely_continuous_iff_its_total_variation_is_absolutely_continuous}
-\end{problem}
+\label{rk:signed_measure_is_absolutely_continuous_iff_its_total_variation_is_absolutely_continuous}
+\end{remark}
 
-\begin{proof}[Solution]
+\begin{proof}
 Using the Jordan decomposition and the definitions (of absolute continuity and total variation), we write the following for reference:
 \begin{align*}
 \nu \ll \mu &\; \text{ means}  \\
@@ -3325,7 +3324,7 @@ This statement (from \cite{folland1999real}) captures the fact that
 
 \begin{proof}
 First recall
-\[ \nu \ll \mu \stackexplain{Problem \ref{prob:signed_measure_is_absolutely_continuous_iff_its_total_variation_is_absolutely_continuous}}{\iff} |\nu| \ll \mu \]
+\[ \nu \ll \mu \stackexplain{Problem \ref{rk:signed_measure_is_absolutely_continuous_iff_its_total_variation_is_absolutely_continuous}}{\iff} |\nu| \ll \mu \]
 Now by mutual singularity
 \[
 \begin{array}{rlclcl}
@@ -3351,6 +3350,25 @@ So
 }
 
 \end{proof}
+
+\begin{remark}{\remarktitle{Indefinite integrals are absolutely continuous.}}
+
+Let $\lambda$ be an ``indefinite integral" with respect to $\mu$.\footnote{This interpretation of ``indefinite integral" is used in \cite{ash2000probability}.}
+\[ \text{ i.e. } \; \lambda(A) = \ds\int_A h \dmu, \quad \quad \forall A \in \F \]
+
+Then $\lambda \ll \mu$
+\[ \text{ i.e. } \; \mu(A) = 0 \implies \lambda(A) = 0  \quad \quad \forall A \in \F \]
+\label{rk:indefinite_integrals_are_absolutely_continuous}
+\end{remark}
+
+\begin{proof}\footnote{My first attempt at a proof worked through the definition for Lebesgue integral, working up from simple functions to non-negative to arbitrary functions.  However, the proof we provide here, which uses the strategy in Section 2.2 of \cite{ash2000probability}, is much nicer.  Note that my original strategy of proving via the definition just basically recapitulates the proof of Theorem \ref{thm:almost_everywhere} (a), so we might as well rely on the Theorem to do that dirty work.}
+If $\mu(A) =0$, $h \indicate{A} = 0$ a.e.  So by Theorem \ref{thm:almost_everywhere} (a), 
+\[ \ds\int_A h \dmu = 0 \]
+\end{proof}
+
+The Radon-Nikodym theorem in an assertion in the opposite direction of Remark \ref{rk:indefinite_integrals_are_absolutely_continuous}:  if $\lambda \ll \mu$ (and $\mu$ is $\sigma$-finite on $\F$), then $\lambda$ is an indefinite integral with respect  to $\mu$. 
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
