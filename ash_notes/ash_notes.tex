@@ -167,6 +167,7 @@ Probability measures, and measures more generally, cannot be defined on all subs
 \item $P(A \bigoplus r) = P(A), \quad 0 \leq r \leq 1$, where $A \bigoplus r$ denotes the \textit{r-shift} of $A$, i.e. 
 \[ A \bigoplus r := \set{a+r : a \in A, a+r \leq 1} \cup \set{a+r-1 : a \in A, a +r >1}\]
 \end{enumerate}
+In Sec.~\ref{sec:set_that_is_not_Lebesgue_measurable}, we provide more information about a set that is not Lebesgue measurable.
 
 The solution to this problem is to define measures on a restricted domain, $\sigma$-fields.
 
@@ -3086,12 +3087,40 @@ Every measure is a signed measure.
 More generally, two mechanisms for forming signed measures come to mind:
 \begin{enumerate}
 \item $\nu = \mu_1 - \mu_2$, where $\mu_1$ and $\mu_2$ are measures on $\F$, and at least one measure is finite.
-\item The set function defined by $\nu(A) = \int_A h \dmu$, where $h : \Omega \to [-\infty, \infty]$ is a measurable function such that at least one of $\int h^+ \dmu$ and $\int h^- \dmu$ is finite  {\tiny (and where $\mu$ is a measure on $\F$)}.
+\item The set function defined by $\nu(A) = \int_A h \dmu$, where $h : \Omega \to [-\infty, \infty]$ is a measurable function such that at least one of $\int h^+ \dmu$ and $\int h^- \dmu$ is finite.  {\tiny (The function is defined $\forall A \in \F$ on measure space $(\Omega, \F, \mu)$.)}.
 \end{enumerate}
 
 \begin{remark}
 \cite{folland1999real} points out that these are the \textit{only} two examples; every signed measure can be represented in either of these two forms.
 \end{remark}
+
+
+\begin{example}
+
+We can define a signed measure on all subsets of the reals by the number of blue ticks minus the number of red ticks.\footnote{Note that even though \textit{Lebesgue measure} could not be defined on \textit{all} subsets of the reals, clearly other signed measures can be.   Recall from Remark \label{rk:implications_of_existence_of_set_that_is_not_Lebesgue_measurable} that the problem was translation invariance:  we showed that there cannot be a translation invariant measure that assigns a finite value to all intervals.  The (signed) measure in this example, however, is clearly not translation invariant.}
+  
+\begin{figure}[H]
+\centering 
+\includegraphics[width=.1\linewidth, angle=90]{images/signed_measure_example_with_ticks}
+\end{figure}
+\label{ex:a_signed_measure_with_ticks}
+\end{example}
+
+
+\begin{example}
+We can define a signed measure on the reals by 
+\[ \nu(A) := \ds\int_A |x| \dmu(x) \]
+where $\mu$ is the Lebesgue measure.    To illustrate, compare the behavior of these set functions on two different sets:
+
+\begin{tabular}{rcc}
+& \multicolumn{2}{c}{Set} \\
+Output & $[-5,-4]$ & $[-5,5]$\\	
+$\mu$ & 1 & 10\\
+$\nu$ & -1 & 0\\
+\end{tabular}
+ 	
+\end{example}
+
 
 \begin{remark}
 Signed measures are continuous by Theorem \ref{thm:continuity_of_countably_additive_set_functions} (continuity of countably additive set functions).
@@ -3110,7 +3139,7 @@ Given a signed measure $\nu$ on a measurable space $(\Omega, \F)$, a set $A \in 
 \end{definition}
 
 \begin{remark}
-To motivate Definition \ref{def:positive_negative_and_null_sets}, consider that unlike measures, \textit{signed} measures do not have the monotonicity property. So, for example, the condition $\nu(A)=0$ in isolation provides no information about the value of $\nu$ on subsets. 
+To motivate Definition \ref{def:positive_negative_and_null_sets}, consider that unlike measures, \textit{signed} measures do not have the monotonicity property. So, for example, the condition $\nu(A)=0$ in isolation provides no information about the value of $\nu$ on subsets. For an illustration, recall  Example~\ref{ex:a_signed_measure_with_ticks}.
 \end{remark}
 
 \begin{theorem}{\textbf{The Hanh Decomposition Theorem}}
@@ -3122,17 +3151,26 @@ If $\nu$ is a signed measure on $(\Omega, \F)$, there exist a positive set $P$ a
 See \cite{folland1999real} pp. 86.	
 \end{proof}
 
+\begin{example}
+Let us consider two possible Hanh decompositions $(P,N), (P',N')$ for the signed measure of Example~\ref{ex:a_signed_measure_with_ticks}. The union of green intervals is a positive set $P$, and the union of orange intervals is a negative set $N$.  While there are a number of possible Hanh decompositions, these choices are ``not that different" from each other in the sense that for any two decompositions $(P,N), (P',N')$, the set $P \triangle P'$ (i.e. the set of points in exactly one version of green coloring), which equals $N \triangle N'$ (i.e. the set of points in exactly one version of orange coloring), is null for $\nu$. [In other words, the set of ``disagreement" is such that all subsets have signed measure 0.]  
+\begin{figure}[H]
+\centering 
+\includegraphics[width=.2\linewidth, angle=90]{images/hanh_decomposition_for_the_signed_measure_example_with_ticks}
+\end{figure}
+\label{ex:hanh_decomposition_for_the_signed_measure_example_with_ticks}
+\end{example}
+
 
 \begin{definition}
-Let $\nu, \lambda$ be signed measures on a measurable space $(\Omega, \F)$.   Then $\nu$ and $\lambda$ are said to be \textbf{mutually singular}, written $\nu \perp \lambda$, if there exist $A,B \in \F$ such that $\Omega = A \cupdot B$ where $\mu$ is null for $A$ and $\lambda$ is null for $B$.
+Let $\nu, \lambda$ be signed measures on a measurable space $(\Omega, \F)$.   Then $\nu$ and $\lambda$ are said to be \textbf{mutually singular}, written $\nu \perp \lambda$, if there exist $A,B \in \F$ such that $\Omega = A \cupdot B$ where $\nu$ is null for $A$ and $\lambda$ is null for $B$.
 \label{def:mutually_singular}  
 \end{definition}
 
 So two signed measures are mutually singular if there is a partition of the universe into two cells such that each cell is null for a different signed measure.
 
 \begin{example}
-The normal distributions truncated to the positive reals ($\N_+$) and negative reals ($\N_-$) provide an example of mutually singular measures.  Note that in Definition \ref{def:mutually_singular}, we can take either $A=\R_0^+$ and $B=\R^-$ or 
-$A=\R^+$ and $B=\R_0^-$, illustrating the non-uniqueness of the Hanh Decomposition.
+The normal distributions truncated to the positive reals ($\N_+$) and negative reals ($\N_-$) provide an example of mutually singular measures.  Note that in Definition \ref{def:mutually_singular}, we can take either $(A,B)=(\R_0^+,\R^-)$  or $(A'
+,B')=(\R^+,\R_0^-)$, illustrating the non-uniqueness of the Hanh Decomposition.
 \end{example}
 
 Now we show that any signed measure can be expressed as the difference of two (latent) measures, which are moreover mutually singular. 
@@ -3201,7 +3239,7 @@ Definition \ref{def:total_variation} is well-defined because the sum of two meas
 \end{remark}
 
 \begin{remark}{\remarktitle{An illustrative example of Hanh-Jordan Decomposition.}}
-The picture below illustrates the structure of a signed measure $\nu$, as provided by a Jordan decomposition. Some Hanh decompositions are shown at the bottom of the figure.  The union of green intervals is a positive set $P$, and the union of orange intervals is a negative set $N$.  There are a number of possible pairs $(P,N), (P',N'), (P'', N'')$; however, these choices are ``not that different" from each other in the sense that for any two decompositions $(P,N), (P',N')$, the set $P \triangle P'$ (i.e. the set of points in exactly one version of green coloring), which equals $N \triangle N'$ (i.e. the set of points in exactly one version of orange coloring), is null for $\nu$. [In other words, the set of ``disagreement" is such that all subsets have signed measure 0.  As we will see in Problem \ref{prob:null_sets_are_those_with_zero_total_variation}, we can think about the set of disagreement as having a total variation $|\nu|$ of 0, so both $\nu^+$ and $\nu^-$ give zero measure to the sets of disagreement.] 
+The picture below illustrates the structure of a signed measure $\nu$, as provided by a Jordan decomposition. As we will see in Problem \ref{prob:null_sets_are_those_with_zero_total_variation}, we can think about the ``set of disagreement" ( $P \triangle P' (= N \triangle N')$ ) between any two Hanh Decompositions ($(P,N), (P',N')$) as having a total variation $|\nu|$ of 0, so both $\nu^+$ and $\nu^-$ give zero measure to the sets of disagreement.
 \begin{figure}[H]
 \centering 
 \includegraphics[width=.6\textwidth, angle=90]{images/hanh_jordan_decomp}
@@ -3265,6 +3303,27 @@ if
 \[ \mu(A) = 0 \implies \nu(A) = 0 \quad \forall A \in \F. \]
 \label{def:absolute_continuity}	
 \end{definition}
+
+\begin{remark}{\remarktitle{Indefinite integrals are absolutely continuous.}}
+
+Let $\lambda$ be an ``indefinite integral" with respect to $\mu$.\footnote{This interpretation of ``indefinite integral" is used in \cite{ash2000probability}.}
+\[ \text{ i.e. } \; \lambda(A) = \ds\int_A h \dmu, \quad \quad \forall A \in \F \]
+
+Then $\lambda \ll \mu$
+\[ \text{ i.e. } \; \mu(A) = 0 \implies \lambda(A) = 0  \quad \quad \forall A \in \F \]
+\label{rk:indefinite_integrals_are_absolutely_continuous}
+\end{remark}
+
+\begin{proof}\footnote{My first attempt at a proof worked through the definition for Lebesgue integral, working up from simple functions to non-negative to arbitrary functions.  However, the proof we provide here, which uses the strategy in Section 2.2 of \cite{ash2000probability}, is much nicer.  Note that my original strategy of proving via the definition just basically recapitulates the proof of Theorem \ref{thm:almost_everywhere} (a), so we might as well rely on the Theorem to do that dirty work.}
+If $\mu(A) =0$, $h \indicate{A} = 0$ a.e.  So by Theorem \ref{thm:almost_everywhere} (a), 
+\[ \ds\int_A h \dmu = 0 \]
+\end{proof}
+
+The Radon-Nikodym theorem in an assertion in the opposite direction of Remark \ref{rk:indefinite_integrals_are_absolutely_continuous}:  if $\lambda \ll \mu$ (and $\mu$ is $\sigma$-finite on $\F$), then $\lambda$ is an indefinite integral with respect  to $\mu$. 
+
+
+
+
 
 
 \begin{remark}{\remarktitle{A signed measure is absolutely continuous iff its total variation is absolutely continuous.}}\footnote{This is \cite{folland1999real} Problem 3.2.8a}
@@ -3351,24 +3410,52 @@ So
 
 \end{proof}
 
-\begin{remark}{\remarktitle{Indefinite integrals are absolutely continuous.}}
+We now provide some motivation for the name ``absolute continuity".
 
-Let $\lambda$ be an ``indefinite integral" with respect to $\mu$.\footnote{This interpretation of ``indefinite integral" is used in \cite{ash2000probability}.}
-\[ \text{ i.e. } \; \lambda(A) = \ds\int_A h \dmu, \quad \quad \forall A \in \F \]
+\begin{theorem}
+Let $\nu$ be a finite signed measure and $\mu$ a positive measure on $(\Omega, \F)$.  Then 
 
-Then $\lambda \ll \mu$
-\[ \text{ i.e. } \; \mu(A) = 0 \implies \lambda(A) = 0  \quad \quad \forall A \in \F \]
-\label{rk:indefinite_integrals_are_absolutely_continuous}
-\end{remark}
 
-\begin{proof}\footnote{My first attempt at a proof worked through the definition for Lebesgue integral, working up from simple functions to non-negative to arbitrary functions.  However, the proof we provide here, which uses the strategy in Section 2.2 of \cite{ash2000probability}, is much nicer.  Note that my original strategy of proving via the definition just basically recapitulates the proof of Theorem \ref{thm:almost_everywhere} (a), so we might as well rely on the Theorem to do that dirty work.}
-If $\mu(A) =0$, $h \indicate{A} = 0$ a.e.  So by Theorem \ref{thm:almost_everywhere} (a), 
-\[ \ds\int_A h \dmu = 0 \]
+\[
+\begin{array}{lcr}	
+\nu \ll \mu  & \text{iff} &  \forall \epsilon > 0, \; \exists \delta > 0 : \forall A \in \F, \\
+(\text{i.e. } \mu(A) = 0 \implies \nu(A) = 0) & & \mu(A) < \delta \implies |\nu(A)| < \epsilon \\
+\tinycircled{A} & & \tinycircled{B} 
+\end{array}
+\]	
+\end{theorem}
+
+\begin{proof}
+\begin{itemize}
+\item $\boxed{\impliedby}$. 
+\[  \mu(A) = 0 \implies \mu(A) < \delta \quad \forall \delta \stackexplain{hypothesis}{\implies} |\nu(A)| < \epsilon \quad \forall \epsilon \implies \nu(A) = 0\]
+\item $\boxed{\implies}$.   We proceed by contraposition. Since not \tinycircled{B},
+\[
+\begin{array}{lcrr}
+\exists \epsilon > 0 : & \forall n \in \mathbb{N}, &  \exists A_n \in \F : & \\
+\mu(A_n) \leq 2^{-n} & \text{ but } & |\nu|(A_n) \stackexplain{*}{\geq} |\nu(A_n) | \geq \epsilon 
+& \quad \tinycircled{+} \end{array}
+\]
+where in Equation (*), we move work with $|\nu|$ since it is a measure.
+
+{\tiny The inequality holds since  
+\begin{align*}
+|\nu(A)| &	\leq |\nu|(A) \\
+|\nu^+(A) - \nu^-(A)| &\leq |\nu^+(A) + \nu^-(A)| \\
+| x -y | &\leq |x + y|
+\end{align*}
+where we have applied the Jordan decomposition and properties of real numbers.
+}
+
+To show \tinycircled{A}, recall from Remark \ref{rk:signed_measure_is_absolutely_continuous_iff_its_total_variation_is_absolutely_continuous} that $\nu \ll \mu$ iff $|\nu| \ll \mu$, so
+\[  \text{N.T.S.} \quad  \exists B \in \F : \; \mu(B) = 0 \quad \text{but} \quad |\nu|(B) \neq 0 \]
+Let $B_k = \cup_{n=k}^\infty A_n, \; B = \cap_{k=1}^\infty B_k$.  So 
+\[  B = \limsup A_n = \set{x : x \in A_n \text{ i.o. }}\]
+Then by the Borel-Cantelli Lemma (Lemma \ref{lemma:borel_cantelli}), $\mu(B)=0$.  But 
+\[ |\nu|(B) \stackexplain{cty from above}{=} \ds\lim_{k \to \infty} |\nu| (B_k) \stackexplain{monotonicity, \tinycircled{+}}{\geq} \ds\lim_{k \to \infty} \epsilon = \epsilon.  \]
+where continuity from above holds because $B_k$ are decreasing, and $|\nu|(B_1)$ is finite because $\nu$ finite $\implies |\nu|$ finite.\redfootnote{Check on this last implication.}
+\end{itemize}	
 \end{proof}
-
-The Radon-Nikodym theorem in an assertion in the opposite direction of Remark \ref{rk:indefinite_integrals_are_absolutely_continuous}:  if $\lambda \ll \mu$ (and $\mu$ is $\sigma$-finite on $\F$), then $\lambda$ is an indefinite integral with respect  to $\mu$. 
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
