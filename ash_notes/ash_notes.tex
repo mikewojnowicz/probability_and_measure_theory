@@ -2500,7 +2500,12 @@ The non-negativity of $\lambda$ is immediate from Definition \ref{def:integral_o
 \end{proof}
 
 
-\begin{remark}{\remarktitle{Change of measure}} \cite{rudin1987real} pp. 24 points out an important implication of Corollary \ref{cor:integrals_as_measures}: if $f \geq 0$, and so $\lambda$ (as defined as in the theorem statement) is a measure, then
+
+\begin{remark}{\textbf{Integrals as signed measures.}}
+As will become clear in Section~\ref{sec:signed_measures}, another name for Thm. \ref{thm:integrals_are_countably_additive_set_functions} is \textit{integrals as signed measures}.	
+\end{remark}
+
+\begin{remark}{\textbf{Change of measure.}} \cite[pp.~24]{rudin1987real} points out an important implication of Corollary \ref{cor:integrals_as_measures}: if $f \geq 0$, and so $\lambda$ (as defined as in the theorem statement) is a measure, then
 \begin{align*}
 \dint_\Omega g \wrt{\lambda} = \dint_\Omega g f \dmu
 \labelit \label{eqn:change_of_measure}
@@ -3063,7 +3068,7 @@ Thus $f$ is Riemann integrable by \eqref{eqn:criterion_for_riemann_integrability
 \end{alphabate}
 \end{proof}
 
-\section{\S 2.1 Signed measures}
+\section{\S 2.1 Signed measures} \label{sec:signed_measures}
 
 This section plays the same role as Section 2.1 of \cite{ash2000probability}, although the primary reference here is Section 3.1 of \cite{folland1999real}.
 
@@ -3306,7 +3311,7 @@ if
 
 \begin{remark}{\remarktitle{Indefinite integrals are absolutely continuous.}}
 
-Let $\lambda$ be an ``indefinite integral" with respect to $\mu$.\footnote{This interpretation of ``indefinite integral" is used in \cite{ash2000probability}.}
+Let $\lambda$ be an ``indefinite integral" with respect to $\mu$.\footnote{This interpretation of ``indefinite integral" is used in \cite[pp.~61]{ash2000probability}.}
 \[ \text{ i.e. } \; \lambda(A) = \ds\int_A h \dmu, \quad \quad \forall A \in \F \]
 
 Then $\lambda \ll \mu$
@@ -3423,6 +3428,7 @@ Let $\nu$ be a finite signed measure and $\mu$ a positive measure on $(\Omega, \
 \tinycircled{A} & & \tinycircled{B} 
 \end{array}
 \]	
+\label{thm:justifying_the_name_absolutely_continuous}
 \end{theorem}
 
 \begin{proof}
@@ -3453,9 +3459,30 @@ Let $B_k = \cup_{n=k}^\infty A_n, \; B = \cap_{k=1}^\infty B_k$.  So
 \[  B = \limsup A_n = \set{x : x \in A_n \text{ i.o. }}\]
 Then by the Borel-Cantelli Lemma (Lemma \ref{lemma:borel_cantelli}), $\mu(B)=0$.  But 
 \[ |\nu|(B) \stackexplain{cty from above}{=} \ds\lim_{k \to \infty} |\nu| (B_k) \stackexplain{monotonicity, \tinycircled{+}}{\geq} \ds\lim_{k \to \infty} \epsilon = \epsilon.  \]
-where continuity from above holds because $B_k$ are decreasing, and $|\nu|(B_1)$ is finite because $\nu$ finite $\implies |\nu|$ finite.\redfootnote{Check on this last implication.}
+where continuity from above holds because $B_k$ are decreasing, and $|\nu|(B_1)$ is finite because $\nu$ finite $\implies |\nu|$ finite.
+
+{\tiny In fact $\nu$ finite $\iff |\nu|$ finite. This  can be seen by appealing to the  Jordan decomposition of $\nu$ and the definition of $|\nu|$.  For any $E \in \F$, 
+\begin{align*}
+\nu(E) &= \nu^+(E) - \nu^-(E) \not\in \set{\infty, -\infty}\\
+\iff &\\
+|\nu|(E) &= \nu^+(E) + \nu^-(E) \not\in \set{\infty, -\infty}.
+\end{align*}
+%
+Both statements say that the two numbers $\nu^+(E), \nu^-(E)$ are both finite.}
 \end{itemize}	
 \end{proof}
+
+As a corollary, we have that an integral of any (integrable) function over a set can be made arbitrarily small if the measure of the set is sufficiently small.
+
+\begin{corollary}
+Let $f$ be an integrable function with respect to $\mu$. Then $\forall \epsilon > 0, \; \exists \delta > 0$ such that 
+\[  \mu(A) < \delta \implies \bigg| \int_A f \wrt{\mu} \bigg| < \epsilon \]	
+\end{corollary}
+
+\begin{proof}
+By Theorem \ref{thm:integrals_are_countably_additive_set_functions}, the set function $\nu : \F \to \overline{\R}$ defined by $\nu(A) = \int_A f \wrt{\mu}$ is a signed measure.    Moreover, $\nu \ll \mu$, since indefinite integrals are absolutely continuous (see Remark \ref{rk:indefinite_integrals_are_absolutely_continuous}).  Thus, the implication follows from the name-justifying characterization of absolute continuity (see Theorem \ref{thm:justifying_the_name_absolutely_continuous}). 
+\end{proof}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
