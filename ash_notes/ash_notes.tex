@@ -2247,14 +2247,17 @@ Recall from Remark \ref{rk:when_does_integral_of_non_negative_Borel_measurable_f
 \label{rk:when_does_integral_of_arbitary_Borel_measurable_function_exist}
 \end{remark}
 
-\begin{remark}{\remarktitle{Integrable}}
+\begin{definition}{\remarktitle{Integrable and extended integrable functions.}}
 We say that a function $h$ is $\mu$-integrable (or just integrable if $\mu$ is understood) if $
 \ds\int_\Omega h \wrt{\mu}$ is finite, that is, iff $
 \ds\int_\Omega h^+ \wrt{\mu}$ and $
 \ds\int_\Omega h^- \wrt{\mu}$ are both finite.   %We can express this condition as 
 %\[ \bigg| \dint h \dmu \bigg| \stackrel{def. integral}{=} \bigg| \dint h^+ \dmu - \dint h^- \dmu \bigg| < \infty \]
-\label{rk:integrable}
-\end{remark}
+Following \cite[pp.~86]{folland1999real}, we say that a function $h$ is extended $\mu$-integrable iff at least one of $
+\ds\int_\Omega h^+ \wrt{\mu}$ and $
+\ds\int_\Omega h^- \wrt{\mu}$ are finite (which means that the integral $\ds\int_\Omega h \wrt{\mu}$ exists).
+\label{def:integrable_and_extended_integrable_functions}
+\end{definition}
 
 \begin{remark}{\remarktitle{Integrals on subsets}}
 For $A \in \F$, we define 
@@ -3509,10 +3512,121 @@ By Theorem \ref{thm:integrals_are_countably_additive_set_functions}, the set fun
 
 \subsection{The theorem}
 
-\begin{theorem}
-	
+\begin{lemma}
+Let $\nu, \mu$ be a finite  measures on $(\Omega, \F)$.  Then either $\nu \perp \mu$ or there exist $\epsilon > 0$ and $A \in \F$ such that $\mu(A) > 0$ and $\nu \geq \epsilon \mu$ on $A$.
+\label{lemma:lemma_for_lebesgue_radon_nikodym}
+\end{lemma}
+
+\begin{proof}
+See \cite[pp.~89]{folland1999real}.
+\end{proof}
+
+
+\begin{theorem}{\textbf{The Lebesgue-Radon-Nikodym Theorem.}} Let $\nu$ be a $\sigma$-finite signed measure and $\mu$ a $\sigma$-finite (positive) measure on $(\Omega, \F)$.  There exist unique $\sigma$-finite signed measures $\lambda, \rho$ on $(\Omega, \F)$ such that
+\[ \nu = \lambda + \rho, \quad \text{ where } \quad \lambda \perp \mu \quad \text{ and } \quad \rho \ll \mu\]
+Moreover, there is an extended $\mu$-integrable function $f : \Omega \to \R$ such that $d\rho = f \, d\mu$, and any two such functions are equal $\mu$-a.e.
 \end{theorem}
 
+
+\begin{proof}
+We prove the theorem in the special case that $\nu$ and $\mu$ are finite (positive) measures.  For a full proof, see \cite[pp.~90]{folland1999real}.
+	
+Let 
+\[ \mathcal{S} := \biggset{ f : \Omega \to [0,\infty] : \ds\int_E f \, d\mu \leq \nu(E) \quad \forall E \in \F}\]
+$\mathcal{S}$ is nonempty since $0 \in \mathcal{S}$.  Now if $f,g \in \mathcal{S}$, then $h:=\max(f,g) \in \mathcal{S}$, because if $A:=\set{x: f(x) > g(x)}$, then for any $E \in \F$, we have
+\begin{align*}
+\ds\int_E h \dmu = \ds\int_\Omega \indicate{E} h \dmu &= \ds\int_\Omega \bigg( \indicate{E \cap A} + \indicate{E \cap A^c}  \bigg) h \dmu  \\
+&= \ds\int_{E \cap A} h \dmu +  \ds\int_{E \cap A^c} h \dmu \\
+&= \ds\int_{E \cap A} f \dmu +  \ds\int_{E \cap A^c} g \dmu \\
+& \stackexplain{(since $f,g \in \mathcal{S}$)}{\leq} \nu(E \cap A) + \nu(E \cap A^c) \\
+& \stackexplain{countable additivity}{=} \nu(E). 
+\end{align*}
+
+Now let $a:=\sup \set{\int_\Omega f \dmu : f \in \mathcal{S}}$, and note that $a \stackexplain{sup is LUB}{\leq} \nu(\Omega) \stackexplain{assumption}{<} \infty$.  By a property of the supremum (see Remark~\ref{rk:existence_of_sequences_converging_to_infimum_and_supremum}), we can find a sequence $\set{f_n} \in \mathcal{S}$ such that $\int_\Omega f_n \dmu \to a$.  Now if we let $g_n := \max (f_1,\hdots, f_n)$, then $g_n \in \mathcal{S}$ by applying induction, since we have shown that $\mathcal{S}$ is closed under the maximum operator. It follows that $\int_\Omega g_n \dmu \to a$.
+
+{\tiny 
+Let us show that $\ds\lim_{n \to \infty} \int_\Omega g_n \dmu = a$.
+
+\begin{itemize}
+\item $\boxed{\geq}$.
+\begin{align*}
+\int_\Omega g_n \dmu &\geq \int_\Omega f_n \dmu && \text{by monotonicity of integral} \\
+\implies \ds\lim_{n \to \infty} \int_\Omega g_n \dmu &\geq \ds\lim_{n \to \infty}  \int_\Omega f_n \dmu  = a && \text{limits preserve non-strict inequalities}
+\end{align*}
+
+\item 	$\boxed{\leq}$. Since $g_n \in \mathcal{S}$,
+\begin{align*}
+\int_\Omega g_n \dmu &\leq a && \text{supremum is upper bound} \\
+\implies \ds\lim_{n \to \infty} \int_\Omega g_n \dmu &\leq a && \text{limits preserve non-strict inequalities}
+\end{align*}
+\end{itemize}
+}
+
+Since $g_n$ is an increasing sequence, there exists a function $f : \Omega \to [0,\infty]$ such that $g_n \uparrow f$ (see Prop.~\ref{prop:limit_of_an_increasing_sequence_of_functions_exists_and_is_the_supremum_if_we_allow_functions_to_map_to_the_extended_reals}),\redfootnote{TODO: Show specifically that $f = \sup_n f_n$. The proposition gives us that $g = \sup_n g_n = \sup_n \max_{m \leq n} f_n$.} and by monotone convergence theorem
+\[ \ds\int_\Omega f \dmu = \ds\lim_{n \to \infty} \ds\int_\Omega g_n \dmu = a < \infty  \]
+So $f < \infty$ a.e. (by Theorem~\ref{thm:properties_of_functions_derived_from_properties_of_integrals} a), and so we may take $f$ to be real-valued everywhere. 
+
+Now define $\rho$ by $\rho(A) = \int_A f \dmu$, and define $\lambda := \nu-\rho$.  {\tiny (In differential notation, we can express both conditions simultaneously via $d\lambda = d\nu - f d\mu$.) }  Then the existence conditions of the theorem hold:
+\begin{itemize}
+\item $\nu = \lambda + \rho$? \greencheck  {\tiny Addition.} 
+\item $\rho \ll \mu$? \greencheck  {\tiny This holds because indefinite integrals are absolutely continuous (see Remark \ref{rk:indefinite_integrals_are_absolutely_continuous}).}
+\item $\lambda \perp \mu$? \greencheck  {\tiny First note $\lambda \geq 0$ since $f \in \mathcal{S}$.  So we proceed via Lemma~\ref{lemma:lemma_for_lebesgue_radon_nikodym}.  BWOC, suppose not $\lambda \perp \mu$. Then there is $\epsilon >0, A \in \F : \mu(A) >0$ and $\lambda \geq \epsilon \mu$ on $A$.   Now
+\begin{align*}
+\lambda & \geq \indicate{A} \epsilon \mu && \tinytext{by hypothesis, and $\lambda \geq 0$} \\
+\implies d\nu - f \, \dmu & \geq \epsilon \indicate{A} \dmu && \tinytext{by def. $\lambda$, differential notation} \\ 
+\implies d\nu & \geq (f+\epsilon \indicate{A}) \dmu && \tinytext{addition} \\
+\implies (f+\epsilon \indicate{A}) & \in \mathcal{S} && \tinytext{by def. $\mathcal{S}$}
+\end{align*}
+
+But by linearity {\tiny (which applies immediately since $(f+\epsilon \indicate{A})$ is integrable)}, we have
+\[ \ds\int_\Omega (f+\epsilon \indicate{A}) \dmu = a + \epsilon \mu(A) > a,\]
+which contradicts the definition of the supremum.
+}
+\end{itemize}
+
+Now we show uniqueness.
+\[ \begin{array}{rl}
+\text{We have} & d\nu = d\lambda + f d\mu \\
+\text{Suppose also} & d\nu = d\lambda' + f' d\mu
+\end{array}
+\]
+Then\footnote{Include \cite{folland1999real} Prop. 2.23 in these notes. It is strange that \cite{ash2000probability} omits this. It can probably be obtained fairly immediately from Theorem~\ref{thm:properties_of_functions_derived_from_properties_of_integrals}.}
+\[ \begin{array}{lrlr}
+ & d\lambda - d\lambda' &=  (f-f') d\mu &\\
+\text{But} & \lambda - \lambda' & \perp \mu & \tinytext{Justified below} \\
+\text{And} & \lambda - \lambda' & \ll \mu & \tinytext{Since $d(\lambda - \lambda') = (f-f')\dmu$ ; indefinite integrals are absolutely continuous (Remark \ref{rk:indefinite_integrals_are_absolutely_continuous})} \\
+\text{So} & \lambda-\lambda' &=0 & \tinytext{$\ll$ and $\perp$ are antitheses; see Remark~\ref{rk:absolute_continuity_is_the_antithesis_of_mutual_singularity}}\\
+\text{So} & \lambda&=\lambda' &\\
+\text{So} & f&=f' \quad [\mu]-a.e. &  \tinytext{See \cite{folland1999real} Prop. 2.23}
+\end{array}
+\]
+
+{\tiny 
+Let us show that if $\lambda_1 \perp \mu$ and $\lambda_2 \perp \mu$, then $\lambda_1  - \lambda_2 \perp \mu$.
+
+\[ 
+\begin{array}{rcl}
+\lambda_1 \perp \mu & \text{means} & \exists E_1, F_1 : E_1 \cupdot F_1 = \Omega \\
+& & E_1 \text{ null for } \lambda_1 \\
+& & F_1 \text{ null for } \mu  \\
+\lambda_2 \perp \mu & \text{means} & \exists E_2, F_2 : E_2 \cupdot F_2 = \Omega \\
+& & E_2 \text{ null for } \lambda_2 \\
+& & F_2 \text{ null for } \mu  \\
+\end{array}
+\]
+Now let $\lambda = \lambda_1 - \lambda_2$.
+\[ 
+\begin{array}{rl}
+\text{Let} & E = E_1 \cap E_2 \\
+& \text{Then $E$ null for $\lambda_1$ and $\lambda_2$, so $E$ null for $\lambda = \lambda_1 - \lambda_2$} \\
+\text{Let} & F := E^c = (E_1 \cap E_2)^c = E_1^c \cup E_2^c = F_1 \cup F_2 \\
+& \text{So $F$ null for $\mu$}.
+\end{array}
+\]
+}
+
+  
+\end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
@@ -3570,6 +3684,7 @@ If $A \subset \R$, then $M = \sup A$ if and only if (a) $M$ is an upper bound of
 
 \begin{remark}{\remarktitle{Existence of sequences converging to the infimum and supremum}}
 By Remark \ref{rk:usage_of_alternate_characterization_of_inf_and_sup}, if $A \subset \R$, we can always find a non-decreasing sequence $\set{x_n} \subset A$ such that $\lim_{n \to \infty} x_n = \sup A$, and likewise for the infimum.  
+\label{rk:existence_of_sequences_converging_to_infimum_and_supremum}
 \end{remark}
 
 \begin{remark}{\remarktitle{When the upper or lower bound is contained in the set itself}}
@@ -3696,8 +3811,14 @@ If $f : A \to \R$ is a function, then
 One useful result is that the limit of an increasing sequence of functions is its supremum.
 
 \begin{proposition}
-If $f_n \leq f_{n+1}$ for all $n \in \mathbb{N}$, and $f_n \to f$, then $f = \sup_n f_n$.
+Let $f_n : A \to \R$ be functions for all $n \in \mathbb{N}$. If $f_n \leq f_{n+1}$ for all $n$, and $f_n \to f$, then $f = \sup_n f_n$.
 \label{prop:limit_of_an_increasing_sequence_of_functions_is_its_supremum}	
+\end{proposition}
+
+If we allow for extended real-valued functions, we can make a stronger proposition.
+\begin{proposition}
+Let $f_n : A \to \R$ be functions for all $n \in \mathbb{N}$. If $f_n \leq f_{n+1}$ for all $n$, then there exists $f: A \to \overline{\R}$ such that  $f_n \to f$ pointwise. In particular, $f=\sup_n f_n$.
+\label{prop:limit_of_an_increasing_sequence_of_functions_exists_and_is_the_supremum_if_we_allow_functions_to_map_to_the_extended_reals}	
 \end{proposition}
 
 
