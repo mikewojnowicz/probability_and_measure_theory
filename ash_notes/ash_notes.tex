@@ -599,7 +599,7 @@ Recall from Definition \ref{def:upper_limit} that
 \[ \explaintermbrace{$:=B$}{\limsup_{n \to \infty} A_n} = \bigcap_{k=1}^\infty \explaintermbrace{$:=B_k$}{\bigcup_{n=k}^\infty A_n} = \set{x : x \in A_n \text{ i.o. }}  \]	
 where we have also introduced some notation for convenience.
 
-Now $B_{k+1} \subset B_k$ and $\cap_{k=1}^\infty B_k =B$, so $B_k \downarrow B$.  Since also $\mu(B_1) < \infty$ (by hypothesis and monotonicity), then we can apply continuity from above to get
+Now $B_{k+1} \subset B_k$ and $\cap_{k=1}^\infty B_k =B$, so $B_k \downarrow B$.  Since also $\mu(B_1) < \infty$ (by hypothesis and monotonicity), then we can apply continuity from above (Theorem~\ref{thm:continuity_of_countably_additive_set_functions}) to get
 \begin{align*}
 \mu(B) &= \ds\lim_{k \to \infty} \mu(B_k) \\
 &= 	\ds\lim_{k \to \infty} \mu \bigg( \bigcup_{n=k}^\infty A_n \bigg) && \tinytext{def. $B_k$} \\
@@ -3242,6 +3242,10 @@ so $\Omega = P \cupdot N$ is the partition required for mutual singularity. (By 
 	
 \end{proof}
 
+\begin{remark}
+Don't let the notation confuse you.   Both $\nu^+$ and $\nu^-$ are (positive) measures.  The superscripts are meant to designate that $\nu^+$ is the minuend and  $\nu^-$  is the subtrahend in $\nu = \nu^+ - \nu^-$.	
+\end{remark}
+
 
 \subsection{Total Variation}
 
@@ -3336,13 +3340,25 @@ if
 \label{def:absolute_continuity}	
 \end{definition}
 
+\begin{example}
+
+Below we give examples.  For these examples, let $(\Omega, \F) = (\R, \B(\R))$.
+
+\begin{enumerate}
+\item Let $\mu$ be a univariate Gaussian and $\nu$ be a Gaussian that is truncated (e.g. to the set of positive reals).  Then $\nu \ll \mu$ but $\mu \not\ll \nu$.
+\item Let $\mu$ be Lebesgue measure and $\nu$ give the number of integers in a set.  Then $\nu \not\ll \mu$ and $\mu \not\ll \nu$.
+\item Let $\mu$ be Lebesgue measure and $\nu$ be twice Lebesgue measure.  Then $\nu \ll \mu$ and $\mu \ll \nu$.
+\end{enumerate}
+\end{example}
+
+
 \begin{remark}{\remarktitle{Indefinite integrals are absolutely continuous.}}
 
-Let $\lambda$ be an ``indefinite integral" with respect to $\mu$.\footnote{This interpretation of ``indefinite integral" is used in \cite[pp.~61]{ash2000probability}.}
-\[ \text{ i.e. } \; \lambda(A) = \ds\int_A h \dmu, \quad \quad \forall A \in \F \]
+Let $\nu$ be an ``indefinite integral" with respect to $\mu$.\footnote{This interpretation of ``indefinite integral" is used in \cite[pp.~61]{ash2000probability}.}
+\[ \text{ i.e. } \; \nu(A) = \ds\int_A h \dmu, \quad \quad \forall A \in \F \]
 
-Then $\lambda \ll \mu$
-\[ \text{ i.e. } \; \mu(A) = 0 \implies \lambda(A) = 0  \quad \quad \forall A \in \F \]
+Then $\nu \ll \mu$
+\[ \text{ i.e. } \; \mu(A) = 0 \implies \nu(A) = 0  \quad \quad \forall A \in \F \]
 \label{rk:indefinite_integrals_are_absolutely_continuous}
 \end{remark}
 
@@ -3351,11 +3367,9 @@ If $\mu(A) =0$, $h \indicate{A} = 0$ a.e.  So by Theorem \ref{thm:almost_everywh
 \[ \ds\int_A h \dmu = 0 \]
 \end{proof}
 
-The Radon-Nikodym theorem in an assertion in the opposite direction of Remark \ref{rk:indefinite_integrals_are_absolutely_continuous}:  if $\lambda \ll \mu$ (and $\mu$ is $\sigma$-finite on $\F$), then $\lambda$ is an indefinite integral with respect  to $\mu$. 
-
-
-
-
+\begin{remark}{\remarktitle{Radon-Nikodym as a converse.}}
+The Radon-Nikodym theorem is an assertion in the opposite direction of Remark \ref{rk:indefinite_integrals_are_absolutely_continuous}:  if $\nu \ll \mu$ (and $\mu$ is $\sigma$-finite on $\F$), then $\nu$ is an indefinite integral with respect  to $\mu$. 
+\end{remark}
 
 
 \begin{remark}{\remarktitle{A signed measure is absolutely continuous iff its total variation is absolutely continuous.}}\footnote{This is \cite{folland1999real} Problem 3.2.8a}
@@ -3415,7 +3429,7 @@ This statement (from \cite{folland1999real}) captures the fact that
 
 \begin{proof}
 First recall
-\[ \nu \ll \mu \stackexplain{Problem \ref{rk:signed_measure_is_absolutely_continuous_iff_its_total_variation_is_absolutely_continuous}}{\iff} |\nu| \ll \mu \]
+\[ \nu \ll \mu \stackexplain{Remark~\ref{rk:signed_measure_is_absolutely_continuous_iff_its_total_variation_is_absolutely_continuous}}{\iff} |\nu| \ll \mu \]
 Now by mutual singularity
 \[
 \begin{array}{rlclcl}
@@ -3433,10 +3447,10 @@ So
 \end{align*}
 {\tiny Implication (*) holds since 
 \begin{align*}
-|\nu| \equiv 0 & \stackexplain{def}{\iff} \nu^+ - \nu^- \equiv 0 \\
+|\nu| \equiv 0 & \stackexplain{def}{\iff} \nu^+ + \nu^- \equiv 0 \\
 & \stackexplain{non-negativity}{\implies} \nu^+  \equiv 0, \nu^- \equiv 0 \\
 & \implies \nu^+ - \nu^- \equiv 0 \\
-& \stackexplain{def.}{\iff} \nu \equiv 0.	
+& \stackexplain{def.}{\iff} \nu \equiv 0.
 \end{align*}
 }
 
@@ -3444,7 +3458,7 @@ So
 
 We now provide some motivation for the name ``absolute continuity".
 
-\begin{theorem}
+\begin{theorem}{\textnormal{(Name-justifying characterization of absolute continuity.)}}
 Let $\nu$ be a finite signed measure and $\mu$ a positive measure on $(\Omega, \F)$.  Then 
 
 
@@ -3507,7 +3521,7 @@ Let $f$ be an integrable function with respect to $\mu$. Then $\forall \epsilon 
 \end{corollary}
 
 \begin{proof}
-By Theorem \ref{thm:integrals_are_countably_additive_set_functions}, the set function $\nu : \F \to \overline{\R}$ defined by $\nu(A) = \int_A f \wrt{\mu}$ is a signed measure.    Moreover, $\nu \ll \mu$, since indefinite integrals are absolutely continuous (see Remark \ref{rk:indefinite_integrals_are_absolutely_continuous}).  Thus, the implication follows from the name-justifying characterization of absolute continuity (see Theorem \ref{thm:justifying_the_name_absolutely_continuous}). 
+By Theorem \ref{thm:integrals_are_countably_additive_set_functions}, the set function $\nu : \F \to \overline{\R}$ defined by $\nu(A) = \int_A f \wrt{\mu}$ is a signed measure.    Moreover, $\nu \ll \mu$, since indefinite integrals are absolutely continuous (see Remark \ref{rk:indefinite_integrals_are_absolutely_continuous}).  Thus, the implication follows from the name-justifying characterization of absolute continuity (Theorem \ref{thm:justifying_the_name_absolutely_continuous}). 
 \end{proof}
 
 \subsection{The theorem}
