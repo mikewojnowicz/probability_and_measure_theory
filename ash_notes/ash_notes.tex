@@ -2517,19 +2517,66 @@ The non-negativity of $\lambda$ is immediate from Definition \ref{def:integral_o
 
 \begin{remark}{\textbf{Indefinite integrals are signed measures.}}
 As will become clear in Section~\ref{sec:signed_measures}, Theorem \ref{thm:integrals_are_countably_additive_set_functions} more generally tells us that \textit{indefinite integrals are signed measures}.	 If we remove the constraint that $f \geq 0$, then $\lambda$ is a countably additive set function, but it may be negative. 
+
+The Radon-Nikodym theorem (to be covered later in the document) provides an important converse:  instead of obtaining a signed measure $\lambda$ from a measure $\mu$ and function $f$, we will be given signed measure $\lambda$ and measure $\mu$, and will obtain the \textit{Radon-Nikodym derivative} $f$.
 \end{remark}
 
 
-\begin{remark}{\textbf{Change of measure, change of signed measure, and differential notation.}}
+% NOTE: I was previously trying to make this remark about change of signed measure as well, but (1) I ran into some existence questions that don't exist when integrating non-negative functions, (2) I felt awkward about it since signed measures don't appear until a later section, (3) At one point I wanted to use the extended MCT, which hasn't been introduced yet, (4) I wasn't 100% sure that I was stating things correctly and minimally, since I was trying to state more than what was stated by Rudin.  So with all this in mind, for now at least, I will just reduce this to a statement about change in measure 
+%\begin{remark}{\textbf{Change of measure, change of signed measure, and differential notation.}}
+%
+%By Theorem~\ref{thm:integrals_are_countably_additive_set_functions}, the indefinite integral 
+%%
+%\begin{align*}
+%\lambda(A)  =  \ds\int_A f \dmu
+%\labelit \label{eqn:indefinite_integral_again}
+%\end{align*}
+% can be interpreted as a change in signed measure; specifically, as a change from measure $\mu$ to signed measure $\lambda$. In the special case where $f \geq 0$, then $\lambda$ is a measure, and so the formula provides a mechanism for change of measure. 
+%
+%To express this relationship, we sometimes use the following notation \cite[pp.~89]{folland1999real}:
+%%
+%\begin{align} 
+%d\lambda = f \; d\mu 
+%\label{eqn:indefinite_integral_in_differential_form}	
+%\end{align}
+%%
+%And sometimes, by a slight abuse of language, we refer to ``the signed measure $f \, d\mu$".
+%
+%The notation may make more sense if we interpret it as does \cite[pp.~24]{rudin1987real} :
+%\begin{align*}
+%\dint_A g \wrt{\lambda} = \dint_A g f \dmu
+%\labelit \label{eqn:change_of_signed_measure}
+%\end{align*}
+%for every measurable function $g$ and every measurable set $A$.
+%
+%
+%As pointed out by \cite[pp.~24]{rudin1987real}, we assign no independent meaning to the symbols 
+%$d\lambda$ and $d\mu$; \eqref{eqn:indefinite_integral_in_differential_form} simply means that \eqref{eqn:indefinite_integral_again} (and therefore \eqref{eqn:change_of_signed_measure}) holds for every measurable $f$. 
+%
+%The Radon-Nikodym theorem (to be covered later in the document) provides an important converse:  instead of obtaining a signed measure $\lambda$ from a measure $\mu$ and function $f$, we will be given signed measure $\lambda$ and measure $\mu$, and will obtain the \textit{Radon-Nikodym derivative} $f$.
+%
+%{\tiny Let us prove \eqref{eqn:change_of_signed_measure} from Theorem \ref{thm:integrals_are_countably_additive_set_functions} in the special case where $f,g \geq 0$.
+%
+%\begin{itemize}
+%	\item First let $g$ be a simple function, which we write as $s= \sum_{i=1}^r x_i \indicate{E_i}$.   Then 
+%\[ \int s \wrt{\lambda} \stackexplain{simple f'n}{=} \sum_{i=1}^r x_i \lambda(E_i) \stackexplain{hypothesis}{=}  \sum_{i=1}^r x_i \int_{E_i} f \dmu \stackexplain{linearity}{=} \int \sum_{i=1}^r x_i \indicate{E_i} f \dmu \stackexplain{def. $s$}{=} \int sf \dmu    \]
+%\item Now let $g$ be a non-negative measurable function. By Prop \ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function}, there exists a sequence of simple functions $\set{s_n}$ such that $s_n \uparrow g$.  Since  $s_n \uparrow g$, then also $s_n f \uparrow fg$.  So applying Monotone Convergence Theorem to both, we obtain $\int s_n d\lambda \uparrow \int g d\lambda$ and  $\int s_n f d\mu \uparrow \int fg d\mu$.  But since $\int s_n d\lambda  =\int s_n f d\mu$ for all $n$ by the previous bullet point, the sequences must have the same limit (by uniqueness of limits), so $\int g d\lambda = \int gf d\mu$.
+%\end{itemize}
+%} 
+%\label{rk:change_of_measure_and_change_of_signed_measure}
+%\end{remark}
 
-By Theorem~\ref{thm:integrals_are_countably_additive_set_functions}, the indefinite integral 
+
+\begin{remark}{\textbf{Change of measure and differential notation.}}
+
+ By Cor.~\ref{cor:integrals_as_measures},  given Borel measurable $f \geq 0$, the indefinite integral 
 %
 \begin{align*}
 \lambda(A)  =  \ds\int_A f \dmu
 \labelit \label{eqn:indefinite_integral_again}
 \end{align*}
- can be interpreted as a change in signed measure; specifically, as a change from measure $\mu$ to signed measure $\lambda$. In the special case where $f \geq 0$, then $\lambda$ is a measure, and so the formula provides a mechanism for change of measure. 
-
+ can be interpreted as a change in measure specifically, as a change from measure $\mu$ to measure $\lambda$. 
+ 
 To express this relationship, we sometimes use the following notation \cite[pp.~89]{folland1999real}:
 %
 \begin{align} 
@@ -2537,20 +2584,18 @@ d\lambda = f \; d\mu
 \label{eqn:indefinite_integral_in_differential_form}	
 \end{align}
 %
-And sometimes, by a slight abuse of language, we refer to ``the signed measure $f \, d\mu$".
+And sometimes, by a slight abuse of language, we refer to ``the measure $f \, d\mu$".
 
 The notation may make more sense if we interpret it as does \cite[pp.~24]{rudin1987real} :
 \begin{align*}
-\dint_\Omega g \wrt{\lambda} = \dint_\Omega g f \dmu
+\dint_A g \wrt{\lambda} = \dint_A g f \dmu
 \labelit \label{eqn:change_of_signed_measure}
 \end{align*}
-for every measurable $g$ on $\Omega$.
+for every measurable function $g \geq 0$ and every measurable set $A$.
 
 
 As pointed out by \cite[pp.~24]{rudin1987real}, we assign no independent meaning to the symbols 
-$d\lambda$ and $d\mu$; \eqref{eqn:indefinite_integral_in_differential_form} simply means that \eqref{eqn:indefinite_integral_again} (and therefore \eqref{eqn:change_of_signed_measure}) holds for every measurable $f$. 
-
-The Radon-Nikodym theorem (to be covered later in the document) provides an important converse:  instead of obtaining a signed measure $\lambda$ from a measure $\mu$ and function $f$, we will be given signed measure $\lambda$ and measure $\mu$, and will obtain the \textit{Radon-Nikodym derivative} $f$.
+$d\lambda$ and $d\mu$; \eqref{eqn:indefinite_integral_in_differential_form} simply means that \eqref{eqn:indefinite_integral_again} (and therefore \eqref{eqn:change_of_signed_measure}) holds for every measurable $f \geq 0$. 
 
 {\tiny Let us prove \eqref{eqn:change_of_signed_measure} from Theorem \ref{thm:integrals_are_countably_additive_set_functions} in the special case where $f,g \geq 0$.
 
@@ -2562,6 +2607,8 @@ The Radon-Nikodym theorem (to be covered later in the document) provides an impo
 } 
 \label{rk:change_of_measure_and_change_of_signed_measure}
 \end{remark}
+
+
 
 
 
