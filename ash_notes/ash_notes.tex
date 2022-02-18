@@ -2418,7 +2418,18 @@ What does each say?
 
 Here we prove some basic integration theorems, and further properties of integration that can be derived thereof.  %Note that we have already provided the Monotone Convergence Theorem and Fatou's lemma in the previous section (since we give statements that apply to non-negative functions). 
 
-\begin{theorem}{\textbf{Integrals are countably additive set functions.}}
+\begin{definition}
+We say that $\lambda$ is an \textit{indefinite integral}\footnote{This interpretation of ``indefinite integral" is used in \cite[pp.~61]{ash2000probability}}  with respect to $\mu$ if for any $A \in \F$ we have
+%
+\begin{align*}
+\lambda(A)  =  \ds\int_A f \dmu
+\labelit \label{eqn:indefinite_integral}
+\end{align*}
+where $f$ is a Borel measurable function and where $\int_\Omega f \dmu$ exists.
+\label{def:indefinite_integrals}	
+\end{definition}
+
+\begin{theorem}{\textbf{Indefinite integrals are countably additive set functions.}}
 Let $f$ be a Borel measurable function such that $\int_\Omega f \wrt{\mu}$ exists.  Define $\lambda(B) = \int_B f \wrt{\mu}$, $B \in \F$.  Then $\lambda$ is countably additive on $\F$; thus if $f \geq 0$, $\lambda$ is a measure.	
 \label{thm:integrals_are_countably_additive_set_functions}
 \end{theorem}
@@ -2492,7 +2503,7 @@ So now assume $f$ is an arbitrary Borel-measurable function.  Since we have assu
 
 \end{proof}
 
-\begin{corollary}{\textbf{Integrals as measures.}}
+\begin{corollary}{\textbf{Indefinite integrals as measures.}}
 Let $f \geq 0$ be a Borel measurable function such that $\int_\Omega f \wrt{\mu}$ exists.  Define $\lambda(B) = \int_B f \wrt{\mu}$, $B \in \F$.  Then $\lambda$ is a measure.	
 \label{cor:integrals_as_measures}
 \end{corollary}
@@ -2504,40 +2515,20 @@ The non-negativity of $\lambda$ is immediate from Definition \ref{def:integral_o
 
 
 
-\begin{remark}{\textbf{Integrals as signed measures.}}
-As will become clear in Section~\ref{sec:signed_measures}, another name for Thm. \ref{thm:integrals_are_countably_additive_set_functions} is \textit{integrals as signed measures}.	 Basically, if $f$ is Borel measurable but not necessarily $f \geq 0$, then $\lambda$ is a countably additive set function, but it may be negative. 
-\end{remark}
-
-\begin{remark}{\textbf{Change of measure and change of signed measure.}} \cite[pp.~24]{rudin1987real} points out an important implication of Corollary \ref{cor:integrals_as_measures}: for every measurable $g$ on $\Omega$ such that $g \geq 0$, we have 
-%
-\begin{align*}
-\dint_\Omega g \wrt{\lambda} = \dint_\Omega g f \dmu
-\labelit \label{eqn:change_of_signed_measure}
-\end{align*}
-
-This can be interpreted as a change in signed measure; specifically, as a change from measure $\mu$ to signed measure $\lambda$. In the special case where $f \geq 0$, then $\lambda$ (as defined as in the theorem statement) is a measure, and so the formula provides a mechanism for change of measure. 
-
-
-The Radon-Nikodym theorem (to be covered later in the document) provides an important converse:  instead of obtaining a signed measure $\lambda$ from a measure $\mu$ and function $f$, we will be given signed measure $\lambda$ and measure $\mu$, and will obtain the \textit{Radon-Nikodym derivative} $f$.
-
-{\tiny Let us prove \eqref{eqn:change_of_signed_measure} from Theorem \ref{thm:integrals_are_countably_additive_set_functions}.
-
-\begin{itemize}
-	\item First let $g$ be a simple function, which we write as $s= \sum_{i=1}^r x_i \indicate{E_i}$.   Then 
-\[ \int s \wrt{\lambda} \stackexplain{simple f'n}{=} \sum_{i=1}^r x_i \lambda(E_i) \stackexplain{hypothesis}{=}  \sum_{i=1}^r x_i \int_{E_i} f \dmu \stackexplain{linearity}{=} \int \sum_{i=1}^r x_i \indicate{E_i} f \dmu \stackexplain{def. $s$}{=} \int sf \dmu    \]
-\item Now let $g$ be a non-negative measurable function. By Prop \ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function}, there exists a sequence of simple functions $\set{s_n}$ such that $s_n \uparrow g$.  Since  $s_n \uparrow g$, then also $s_n f \uparrow fg$.  So applying Monotone Convergence Theorem to both, we obtain $\int s_n d\lambda \uparrow \int g d\lambda$ and  $\int s_n f d\mu \uparrow \int fg d\mu$.  But since $\int s_n d\lambda  =\int s_n f d\mu$ for all $n$ by the previous bullet point, the sequences must have the same limit (by uniqueness of limits), so $\int g d\lambda = \int gf d\mu$.
-\end{itemize}
-} 
+\begin{remark}{\textbf{Indefinite integrals are signed measures.}}
+As will become clear in Section~\ref{sec:signed_measures}, Theorem \ref{thm:integrals_are_countably_additive_set_functions} more generally tells us that \textit{indefinite integrals are signed measures}.	 If we remove the constraint that $f \geq 0$, then $\lambda$ is a countably additive set function, but it may be negative. 
 \end{remark}
 
 
-\begin{notation}
-Let $\lambda$ be an ``indefinite integral" \footnote{This interpretation of ``indefinite integral" is used in \cite[pp.~61]{ash2000probability}}  with respect to $\mu$, i.e. let   $\lambda$ be a countably additive set function formed from Borel measurable $f$ as in Theorem~\ref{thm:integrals_are_countably_additive_set_functions}:
+\begin{remark}{\textbf{Change of measure, change of signed measure, and differential notation.}}
+
+By Theorem~\ref{thm:integrals_are_countably_additive_set_functions}, the indefinite integral 
 %
 \begin{align*}
 \lambda(A)  =  \ds\int_A f \dmu
-\labelit \label{eqn:indefinite_integral}
+\labelit \label{eqn:indefinite_integral_again}
 \end{align*}
+ can be interpreted as a change in signed measure; specifically, as a change from measure $\mu$ to signed measure $\lambda$. In the special case where $f \geq 0$, then $\lambda$ is a measure, and so the formula provides a mechanism for change of measure. 
 
 To express this relationship, we sometimes use the following notation \cite[pp.~89]{folland1999real}:
 %
@@ -2548,18 +2539,31 @@ d\lambda = f \; d\mu
 %
 And sometimes, by a slight abuse of language, we refer to ``the signed measure $f \, d\mu$".
 
-The notation may make more sense if we interpret it as does \cite[pp.~24]{rudin1987real}, in light of the change of signed measure:
+The notation may make more sense if we interpret it as does \cite[pp.~24]{rudin1987real} :
 \begin{align*}
 \dint_\Omega g \wrt{\lambda} = \dint_\Omega g f \dmu
 \labelit \label{eqn:change_of_signed_measure}
 \end{align*}
-for every measurable $g$ on $\Omega$ such that $g \geq 0$. 
+for every measurable $g$ on $\Omega$.
 
 
 As pointed out by \cite[pp.~24]{rudin1987real}, we assign no independent meaning to the symbols 
-$d\lambda$ and $d\mu$; \eqref{eqn:indefinite_integral_in_differential_form} simply means that \eqref{eqn:indefinite_integral} (and therefore \eqref{eqn:change_of_signed_measure}) holds for every measurable $f$. 
+$d\lambda$ and $d\mu$; \eqref{eqn:indefinite_integral_in_differential_form} simply means that \eqref{eqn:indefinite_integral_again} (and therefore \eqref{eqn:change_of_signed_measure}) holds for every measurable $f$. 
 
-\end{notation}
+The Radon-Nikodym theorem (to be covered later in the document) provides an important converse:  instead of obtaining a signed measure $\lambda$ from a measure $\mu$ and function $f$, we will be given signed measure $\lambda$ and measure $\mu$, and will obtain the \textit{Radon-Nikodym derivative} $f$.
+
+{\tiny Let us prove \eqref{eqn:change_of_signed_measure} from Theorem \ref{thm:integrals_are_countably_additive_set_functions} in the special case where $f,g \geq 0$.
+
+\begin{itemize}
+	\item First let $g$ be a simple function, which we write as $s= \sum_{i=1}^r x_i \indicate{E_i}$.   Then 
+\[ \int s \wrt{\lambda} \stackexplain{simple f'n}{=} \sum_{i=1}^r x_i \lambda(E_i) \stackexplain{hypothesis}{=}  \sum_{i=1}^r x_i \int_{E_i} f \dmu \stackexplain{linearity}{=} \int \sum_{i=1}^r x_i \indicate{E_i} f \dmu \stackexplain{def. $s$}{=} \int sf \dmu    \]
+\item Now let $g$ be a non-negative measurable function. By Prop \ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function}, there exists a sequence of simple functions $\set{s_n}$ such that $s_n \uparrow g$.  Since  $s_n \uparrow g$, then also $s_n f \uparrow fg$.  So applying Monotone Convergence Theorem to both, we obtain $\int s_n d\lambda \uparrow \int g d\lambda$ and  $\int s_n f d\mu \uparrow \int fg d\mu$.  But since $\int s_n d\lambda  =\int s_n f d\mu$ for all $n$ by the previous bullet point, the sequences must have the same limit (by uniqueness of limits), so $\int g d\lambda = \int gf d\mu$.
+\end{itemize}
+} 
+\label{rk:change_of_measure_and_change_of_signed_measure}
+\end{remark}
+
+
 
  
 \begin{theorem}{\textbf{Additivity theorem.}}
