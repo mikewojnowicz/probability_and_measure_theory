@@ -3718,6 +3718,51 @@ Now let $\lambda = \lambda_1 - \lambda_2$.
   
 \end{proof}
 
+
+\section{Implications}
+
+
+\red{TODO: Mention RN as a special case}
+
+\begin{proposition}
+Suppose that $\nu$ is a $\sigma$-finite signed measure and $\mu, \lambda$ are $\sigma$-finite measures on $(\Omega, \F)$ such that $\nu \ll \mu$ and $\mu \ll \lambda$.
+Then 
+\begin{alphabate}
+\item If $g$ is integrable, then $g(d\nu/d\mu)$ is integrable, and 
+\[ \int g \wrt{\nu} = \int g \frac{d\nu}{d\mu} \wrt{\mu} \]
+\item We have $\nu \ll \lambda$, and 
+\[ \df{d\nu}{d\lambda} = \df{d\nu}{d\mu}  \df{d\mu}{d\lambda} \quad \lambda-\text{a.e.} \]	
+\end{alphabate}
+\end{proposition}
+
+\begin{proof}
+\begin{alphabate}
+\item See \cite[pp.91]{folland1999real}.  The proof is similar to that of Prop.~\ref{prop:change_of_differential}.
+\item For all $A \in \F$, we have
+\begin{align*}
+\nu(A) &= \ds\int_A d\nu && \tinytext{Def. $\int$ simple functions, since $\int_A d\nu := \int \indicate{A} d\nu$}\\
+&= \int_A \frac{d\nu}{d\mu} \dmu && \tinytext{$\nu \ll \mu$, Radon-Nikodym} \\
+&= \int_A \frac{d\nu}{d\mu} \frac{d\mu}{d\lambda} \wrt{\lambda} && \tinytext{$\mu \ll \lambda$ and part (a) (replacing $\nu, \mu$ by $\mu, \lambda$) where $g=\frac{d\nu}{d\mu} \indicate{A}$.} \labelit \label{eqn:RN_chain_rule_RHS} 
+\end{align*} 
+
+On the other hand, we have $\nu \ll \lambda$. ($\ll$ can be seen to be transitive immediately from the definition).  Thus, by Radon-Nikodym, 
+\begin{align}
+\nu(A) = \ds\int_A \df{d\nu}{d\lambda} \wrt{\lambda}
+\label{eqn:RN_chain_rule_LHS}	
+\end{align}
+
+Since \eqref{eqn:RN_chain_rule_RHS}  and \eqref{eqn:RN_chain_rule_LHS} both hold for all $A \in \F$, then by \cite{folland1999real} Prop. 2.23, 
+\[ \df{d\nu}{d\lambda} = \df{d\nu}{d\mu}  \df{d\mu}{d\lambda} \quad \lambda-\text{a.e.} \]	
+
+ 
+\end{alphabate}
+	
+\end{proof}
+
+
+%{prop:change_of_differential} 
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
 \bibliographystyle{apalike}
