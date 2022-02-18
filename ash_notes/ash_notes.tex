@@ -2505,7 +2505,7 @@ So now assume $f$ is an arbitrary Borel-measurable function.  Since we have assu
 
 \begin{corollary}{\textbf{Indefinite integrals as measures.}}
 Let $f \geq 0$ be a Borel measurable function such that $\int_\Omega f \wrt{\mu}$ exists.  Define $\lambda(B) = \int_B f \wrt{\mu}$, $B \in \F$.  Then $\lambda$ is a measure.	
-\label{cor:integrals_as_measures}
+\label{cor:indefinite_integrals_as_measures}
 \end{corollary}
 
 \begin{proof}
@@ -2545,17 +2545,17 @@ The Radon-Nikodym theorem (to be covered later in the document) provides an impo
 %The notation may make more sense if we interpret it as does \cite[pp.~24]{rudin1987real} :
 %\begin{align*}
 %\dint_A g \wrt{\lambda} = \dint_A g f \dmu
-%\labelit \label{eqn:change_of_signed_measure}
+%\labelit \label{eqn:change_of_differential}
 %\end{align*}
 %for every measurable function $g$ and every measurable set $A$.
 %
 %
 %As pointed out by \cite[pp.~24]{rudin1987real}, we assign no independent meaning to the symbols 
-%$d\lambda$ and $d\mu$; \eqref{eqn:indefinite_integral_in_differential_form} simply means that \eqref{eqn:indefinite_integral_again} (and therefore \eqref{eqn:change_of_signed_measure}) holds for every measurable $f$. 
+%$d\lambda$ and $d\mu$; \eqref{eqn:indefinite_integral_in_differential_form} simply means that \eqref{eqn:indefinite_integral_again} (and therefore \eqref{eqn:change_of_differential}) holds for every measurable $f$. 
 %
 %The Radon-Nikodym theorem (to be covered later in the document) provides an important converse:  instead of obtaining a signed measure $\lambda$ from a measure $\mu$ and function $f$, we will be given signed measure $\lambda$ and measure $\mu$, and will obtain the \textit{Radon-Nikodym derivative} $f$.
 %
-%{\tiny Let us prove \eqref{eqn:change_of_signed_measure} from Theorem \ref{thm:integrals_are_countably_additive_set_functions} in the special case where $f,g \geq 0$.
+%{\tiny Let us prove \eqref{eqn:change_of_differential} from Theorem \ref{thm:integrals_are_countably_additive_set_functions} in the special case where $f,g \geq 0$.
 %
 %\begin{itemize}
 %	\item First let $g$ be a simple function, which we write as $s= \sum_{i=1}^r x_i \indicate{E_i}$.   Then 
@@ -2563,13 +2563,13 @@ The Radon-Nikodym theorem (to be covered later in the document) provides an impo
 %\item Now let $g$ be a non-negative measurable function. By Prop \ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function}, there exists a sequence of simple functions $\set{s_n}$ such that $s_n \uparrow g$.  Since  $s_n \uparrow g$, then also $s_n f \uparrow fg$.  So applying Monotone Convergence Theorem to both, we obtain $\int s_n d\lambda \uparrow \int g d\lambda$ and  $\int s_n f d\mu \uparrow \int fg d\mu$.  But since $\int s_n d\lambda  =\int s_n f d\mu$ for all $n$ by the previous bullet point, the sequences must have the same limit (by uniqueness of limits), so $\int g d\lambda = \int gf d\mu$.
 %\end{itemize}
 %} 
-%\label{rk:change_of_measure_and_change_of_signed_measure}
+%\label{rk:change_of_measure_and_differential_notation}
 %\end{remark}
 
 
 \begin{remark}{\textbf{Change of measure and differential notation.}}
 
- By Cor.~\ref{cor:integrals_as_measures},  given Borel measurable $f \geq 0$, the indefinite integral 
+ By Cor.~\ref{cor:indefinite_integrals_as_measures},  given Borel measurable $f \geq 0$, the indefinite integral 
 %
 \begin{align*}
 \lambda(A)  =  \ds\int_A f \dmu
@@ -2586,26 +2586,18 @@ d\lambda = f \; d\mu
 %
 And sometimes, by a slight abuse of language, we refer to ``the measure $f \, d\mu$".
 
-The notation may make more sense if we interpret it as does \cite[pp.~24]{rudin1987real} :
+The notation may make more sense if we interpret it, as does \cite[pp.~24]{rudin1987real}:
 \begin{align*}
-\dint_A g \wrt{\lambda} = \dint_A g f \dmu
-\labelit \label{eqn:change_of_signed_measure}
+\dint_\Omega g \wrt{\lambda} = \dint_\Omega g f \dmu
+\labelit \label{eqn:change_of_differential}
 \end{align*}
-for every measurable function $g \geq 0$ and every measurable set $A$.
+for every measurable function $g$ on $\Omega$.\footnote{Note that if also $g \geq 0$, this constructs yet another measure by $\xi(A) = \int_A g \wrt{\lambda}$ for all $A \in \F$.} (See  Proposition~\ref{prop:change_of_differential} for a proof.) 
 
 
 As pointed out by \cite[pp.~24]{rudin1987real}, we assign no independent meaning to the symbols 
-$d\lambda$ and $d\mu$; \eqref{eqn:indefinite_integral_in_differential_form} simply means that \eqref{eqn:indefinite_integral_again} (and therefore \eqref{eqn:change_of_signed_measure}) holds for every measurable $f \geq 0$. 
+$d\lambda$ and $d\mu$; \eqref{eqn:indefinite_integral_in_differential_form} simply means that \eqref{eqn:indefinite_integral_again} (and therefore \eqref{eqn:change_of_differential}) holds for every measurable $f \geq 0$. 
 
-{\tiny Let us prove \eqref{eqn:change_of_signed_measure} from Theorem \ref{thm:integrals_are_countably_additive_set_functions} in the special case where $f,g \geq 0$.
-
-\begin{itemize}
-	\item First let $g$ be a simple function, which we write as $s= \sum_{i=1}^r x_i \indicate{E_i}$.   Then 
-\[ \int s \wrt{\lambda} \stackexplain{simple f'n}{=} \sum_{i=1}^r x_i \lambda(E_i) \stackexplain{hypothesis}{=}  \sum_{i=1}^r x_i \int_{E_i} f \dmu \stackexplain{linearity}{=} \int \sum_{i=1}^r x_i \indicate{E_i} f \dmu \stackexplain{def. $s$}{=} \int sf \dmu    \]
-\item Now let $g$ be a non-negative measurable function. By Prop \ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function}, there exists a sequence of simple functions $\set{s_n}$ such that $s_n \uparrow g$.  Since  $s_n \uparrow g$, then also $s_n f \uparrow fg$.  So applying Monotone Convergence Theorem to both, we obtain $\int s_n d\lambda \uparrow \int g d\lambda$ and  $\int s_n f d\mu \uparrow \int fg d\mu$.  But since $\int s_n d\lambda  =\int s_n f d\mu$ for all $n$ by the previous bullet point, the sequences must have the same limit (by uniqueness of limits), so $\int g d\lambda = \int gf d\mu$.
-\end{itemize}
-} 
-\label{rk:change_of_measure_and_change_of_signed_measure}
+\label{rk:change_of_measure_and_differential_notation}
 \end{remark}
 
 
@@ -2647,6 +2639,39 @@ Rearranging (possible by integrability), we get
 The conditions of the additivity theorem imply the conditions of the scalar multiple property (Prop \ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} (a)).  Thus, linearity holds whenever additivity holds.
 \label{rk:linearity_holds_if_additivity_holds}	
 \end{remark}
+
+\begin{proposition}{\remarktitle{Change of differential.}}\footnote{This is Exercise 4 from \cite[pp.~71]{ash2000probability}.}  Let $(\Omega, \F, \mu)$ be a measure space, and $f \geq 0$ a non-negative Borel measurable function on $\Omega$.  Recalling Cor.~\ref{cor:indefinite_integrals_as_measures}, define a measure $\lambda$ on $\F$ by 
+\begin{align*}
+\lambda(A)  =  \ds\int_A f \dmu
+%\labelit \label{eqn:indefinite_integral_yet_again}
+\end{align*}
+Then for any Borel measurable function $g$ on $\Omega$, we have 
+\begin{align*}
+\dint_\Omega g \wrt{\lambda} = \dint_\Omega g f \dmu
+%\labelit \label{eqn:change_of_differential_in_proposition}
+\end{align*}
+in the sense that if one of the integrals exists, so does the other, and the two integrals are equal.
+% NOTE: I am calling this change of differential instead of change of measure so that the name accommodates arbitrary g and not just non-negative g. 
+\label{prop:change_of_differential} 
+\end{proposition}
+
+\begin{proof}
+We proceed through the steps in constructing the integral.
+
+\begin{alphabate}
+	\item \textit{Simple functions.} First let $g$ be a simple function, which we write as $s= \sum_{i=1}^r x_i \indicate{E_i}$.   Then 
+\[ \int s \wrt{\lambda} \stackexplain{$\int$ for simple f'n}{=} \sum_{i=1}^r x_i \lambda(E_i) \stackexplain{hypothesis}{=}  \sum_{i=1}^r x_i \int_{E_i} f \dmu \stackexplain{linearity}{=} \int \sum_{i=1}^r x_i \indicate{E_i} f \dmu \stackexplain{def. $s$}{=} \int sf \dmu    \]
+\item \textit{Non-negative Borel measurable functions.} Now let $g$ be a non-negative Borel measurable function. By Prop \ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function}, there exists a sequence of simple functions $\set{s_n}$ such that $s_n \uparrow g$.  Since  $s_n \uparrow g$, then also $s_n f \uparrow fg$.  So applying Monotone Convergence Theorem to both, we obtain $\int s_n d\lambda \uparrow \int g d\lambda$ and  $\int s_n f d\mu \uparrow \int fg d\mu$.  But since $\int s_n d\lambda  =\int s_n f d\mu$ for all $n$ by the previous bullet point, the sequences must have the same limit (by uniqueness of limits), so $\int g d\lambda = \int gf d\mu$.
+\item \textit{Arbitrary Borel measurable functions.} Now let $g$ be an arbitrary Borel measurable function.
+\begin{align*}
+ \int g \wrt{\lambda} &\stackexplain{$\int$ for general f'n}{=} \int g^+ \wrt{\lambda} - \int g^- \wrt{\lambda}  \stackexplain{part (b)}{=}  \int g^+ f \wrt{\mu} - \int g^- f \wrt{\mu} \\
+  &\stackexplain{Additivity Thm}{=} \int (g^+ - g^-) f \dmu \stackexplain{def. $g^+, g^-$}{=} \int g f \dmu  	
+ \end{align*}
+ which holds if $ \int g \wrt{\lambda}$ exists.  In that case, $\int g^+ \wrt{\lambda} - \int g^- \wrt{\lambda}$ is well-defined, and so the Additivity Theorem (Thm.~\ref{thm:additivity}) can be applied. 
+\end{alphabate}
+
+
+\end{proof}
 
 
 \begin{corollary}{\remarktitle{Additivity corollaries}}
