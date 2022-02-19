@@ -2601,8 +2601,19 @@ $d\lambda$ and $d\mu$; \eqref{eqn:indefinite_integral_in_differential_form} simp
 \end{remark}
 
 
-
-
+\begin{example-for-statisticians}{\remarktitle{Jeffreys prior for observation noise in linear regression}}
+An example for statisticians: Jeffreys prior for observation noise in linear regression  (see e.g. \cite{carvalho2010horseshoe} or \cite{makalic2015simple}) is sometimes written as
+\begin{align}
+ \sigma^2 &\sim \sigma^{-2} \wrt{\sigma^2} \label{eqn:prior_on_observation_noise_for_linear_regression_model_with_horseshoe_prior_jeffreys_special_case}
+\end{align}
+%
+What does this mean?  First off, the $\sim$ notation means that the random variable $\sigma^2$ has the probability distribution $P$ described by
+\[  dP = \sigma^{-2} \wrt{\mu(\sigma^2)} \]
+where $\mu$ is Lebesgue measure. This is differential notation of the form \eqref{eqn:indefinite_integral_in_differential_form}.  Unpacking back to 	\eqref{eqn:indefinite_integral_again}, this is saying that
+%\[  P(A) = \ds\int_A \sigma^{-2} \dmu  = \ds\int_A \sigma^{-2} \wrt{\sigma^2} \]	
+\[  P(A) = \ds\int_A \sigma^{-2} \dmu  = \ds\int_A \sigma^{-2} \wrt{\sigma^2} \]
+for all measurable sets $A$.
+\end{example-for-statisticians}
 
  
 \begin{theorem}{\textbf{Additivity theorem.}}
@@ -3615,6 +3626,7 @@ See \cite[pp.~89]{folland1999real}.
 \begin{theorem}{\textbf{The Lebesgue-Radon-Nikodym Theorem.}} Let $\nu$ be a $\sigma$-finite signed measure and $\mu$ a $\sigma$-finite (positive) measure on $(\Omega, \F)$.  There exist unique $\sigma$-finite signed measures $\lambda, \rho$ on $(\Omega, \F)$ such that
 \[ \nu = \lambda + \rho, \quad \text{ where } \quad \lambda \perp \mu \quad \text{ and } \quad \rho \ll \mu\]
 Moreover, there is an extended $\mu$-integrable function $f : \Omega \to \R$ such that $d\rho = f \, d\mu$, and any two such functions are equal $\mu$-a.e.
+\label{thm:lebesgue_radon_nikodym}
 \end{theorem}
 
 
@@ -3719,12 +3731,38 @@ Now let $\lambda = \lambda_1 - \lambda_2$.
 \end{proof}
 
 
-\section{Implications}
+\subsection{Focus on Radon-Nikodym}
 
 
-\red{TODO: Mention RN as a special case}
+\begin{corollary}{\textbf{Radon-Nikodym Theorem.}}
+Let $\nu$ be a $\sigma$-finite signed measure and $\mu$ a $\sigma$-finite (positive) measure on $(\Omega, \F)$.  Let $\nu \ll \mu$. Then $d \nu = f d\mu$ for some (extended $\mu$-integrable) function $f: \Omega \to \R$. In other words,
+\begin{align}
+ \nu(A) = \ds\int_A f \wrt{\mu} \quad \text{ for all } \quad A \in \F 
+ \label{eqn:radon_nikodym}	
+\end{align}
+\label{cor:radon_nikodym}
+\end{corollary}
 
-\begin{proposition}
+\begin{terminology}
+We refer to $f$ in \eqref{eqn:radon_nikodym} as the \textbf{Radon-Nikodym derivative} or \textbf{density} of $\nu$ with respect to $\mu$.   We denote it by $d\nu/d\mu$.  (Strictly speaking, $d\nu/d\mu$ should be construed as a class of functions equal to $f$ $\mu$-a.e.). When $\mu$ is the Lebesgue measure, then $f$ is often simply called the density of $\nu$.
+\end{terminology}
+
+Below we note that in the special case where $\nu$ is a measure, the Radon-Nikodym derivative must be non-negative almost everywhere. (Hence, it can be taken to be non-negative everywhere.)
+ 
+\begin{corollary}
+Let the hypotheses of the Radon-Nikodym Theorem (Cor.~\ref{cor:radon_nikodym}) hold.  If $\nu \geq 0$, then $f \geq 0$ a.e. $[\mu]$. 
+\end{corollary}
+
+\begin{proof}
+Let $A := \set{x : f(x) < 0}$.  Now 
+\[ 0 \stackexplain{measure}{\leq} \nu(A) = \int_A f \dmu \stackexplain{monotonicity}{\leq} 0 \]
+So $\int_A f \dmu =0$.  Negating this and applying the scalar multiple property, we have that a non-negative function integrates to zero :  $\int - f \indicate{A} \dmu =0$.  Thus, by Theorem~\ref{thm:properties_of_functions_derived_from_properties_of_integrals} b), the integrand $- f \indicate{A} =0$ a.e. $[\mu]$, and so negating again, $f \indicate{A} =0$ a.e. $[\mu]$.  But by construction, $f < 0$ on $A$, so $\mu(A)=0$.
+\end{proof}
+
+
+Below we show that the Radon-Nikodym derivative satisfies a chain rule. 
+
+\begin{proposition}{\remarktitle{A chain rule for Radon-Nikodym derivatives.}}
 Suppose that $\nu$ is a $\sigma$-finite signed measure and $\mu, \lambda$ are $\sigma$-finite measures on $(\Omega, \F)$ such that $\nu \ll \mu$ and $\mu \ll \lambda$.
 Then 
 \begin{alphabate}
@@ -3737,7 +3775,7 @@ Then
 
 \begin{proof}
 \begin{alphabate}
-\item See \cite[pp.91]{folland1999real}.  The proof is similar to that of Prop.~\ref{prop:change_of_differential}.
+\item See \cite[pp.91]{folland1999real}.  The proof is similar to that of Prop.~\ref{prop:change_of_differential}, except that now we do not assume that $f:=\frac{d\nu}{d\mu} \geq 0$.
 \item For all $A \in \F$, we have
 \begin{align*}
 \nu(A) &= \ds\int_A d\nu && \tinytext{Def. $\int$ simple functions, since $\int_A d\nu := \int \indicate{A} d\nu$}\\
@@ -3751,7 +3789,7 @@ On the other hand, we have $\nu \ll \lambda$. ($\ll$ can be seen to be transitiv
 \label{eqn:RN_chain_rule_LHS}	
 \end{align}
 
-Since \eqref{eqn:RN_chain_rule_RHS}  and \eqref{eqn:RN_chain_rule_LHS} both hold for all $A \in \F$, then by \cite{folland1999real} Prop. 2.23, 
+Since \eqref{eqn:RN_chain_rule_RHS}  and \eqref{eqn:RN_chain_rule_LHS} both hold for all $A \in \F$, then by \cite{folland1999real} Prop. 2.23 \red{(TODO: But how do we know from this that $\frac{d\nu}{d\mu} \indicate{A}$ is integrable!?)}, 
 \[ \df{d\nu}{d\lambda} = \df{d\nu}{d\mu}  \df{d\mu}{d\lambda} \quad \lambda-\text{a.e.} \]	
 
  
