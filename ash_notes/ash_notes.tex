@@ -2266,16 +2266,17 @@ This definition works because whenever $h$ is measurable, then so is $h I_A$:
 \[\set{ \omega : h I_A (\omega) < c } =	\explaintermbrace{$\in \F$ since $h$ measurable}{\set{\omega :  h(\omega) < c }} \cap \explaintermbrace{$\in \F$ by assumption}{\set{\omega : \omega \in A }} \\  \]
 \end{remark}
 
-\paragraphnewline{Properties of the integral of arbitrary Borel measurable functions}
+\subsubsection{Properties of the integral of arbitrary Borel measurable functions} \label{sec:properties_of_integral_of_arbitrary_Borel_measurable_functions}
 
 \begin{proposition}
 Let $f,g,h$ arbitrary Borel measurable functions. Then
 \begin{alphabate}
-\item \label{item:scalar_multiple}  (scalar multiple) If $\int f \wrt{\mu}$ exists and $c \in \R$, then $\int cf$ exists and $\int cf \wrt{\mu} = c \int f \wrt{\mu} $. %$\ds\int cf \wrt{\mu} = c \ds\int f \wrt{\mu} \text{ for all } c \in \R.$ \quad {\tiny (More explicitly, if $\int f \wrt{\mu}$ exists and $c \in \R$, then $\int cf$ exists and $\int cf \wrt{\mu} = c \int f \wrt{\mu} $.)}
-\item \label{item:monotonicity} (monotonicity)  If $g \geq h$ and both integrals exist, then $\ds\int g \wrt{\mu} \geq  \ds\int h \wrt{\mu}$. Moreover, if  $g \geq h$,  $\ds\int h \wrt{\mu}$ exists and $\ds\int h \wrt{\mu} > -\infty$, then $\ds\int g \wrt{\mu}$ exists.  And if  $g \geq h$, $\ds\int g \wrt{\mu}$ exists and $\ds\int g \wrt{\mu} < \infty$, then $\ds\int h \wrt{\mu}$ exists.\footnote{We might consider this as a ``dominance criterion for existence."  For more on why the monotonicity statement is concerned with existence, see Remark \ref{rk:why_does_existence_matter_for_monotonicity}.} 
-\item \label{item:delayed_truncation_of_simple_functions} (delayed truncation of simple functions) If $h \geq 0$ and $B \in \F$, then\footnote{For why this needs to be proven, see Remark \ref{rk:why_delayed_truncation_of_simple_functions_is_something_that_needs_to_be_proven}.} 
+\item \label{item:scalar_multiple}  (Scalar multiple.) If $\int f \wrt{\mu}$ exists and $c \in \R$, then $\int cf$ exists and $\int cf \wrt{\mu} = c \int f \wrt{\mu} $. %$\ds\int cf \wrt{\mu} = c \ds\int f \wrt{\mu} \text{ for all } c \in \R.$ \quad {\tiny (More explicitly, if $\int f \wrt{\mu}$ exists and $c \in \R$, then $\int cf$ exists and $\int cf \wrt{\mu} = c \int f \wrt{\mu} $.)}
+\item \label{item:monotonicity} (Monotonicity.)  If $g \geq h$ and both integrals exist, then $\ds\int g \wrt{\mu} \geq  \ds\int h \wrt{\mu}$. Moreover, if  $g \geq h$,  $\ds\int h \wrt{\mu}$ exists and $\ds\int h \wrt{\mu} > -\infty$, then $\ds\int g \wrt{\mu}$ exists.  And if  $g \geq h$, $\ds\int g \wrt{\mu}$ exists and $\ds\int g \wrt{\mu} < \infty$, then $\ds\int h \wrt{\mu}$ exists.\footnote{We might consider this as a ``dominance criterion for existence."  For more on why the monotonicity statement is concerned with existence, see Remark \ref{rk:why_does_existence_matter_for_monotonicity}.} 
+\item \label{item:triangle_inequality_for_integrals}(Triangle inequality for integrals.) If $\int_\Omega h \dmu$ exists, then $|\int_\Omega h \dmu| \leq \int_\Omega |h| \dmu$.
+\item \label{item:delayed_truncation_of_simple_functions} (Delayed truncation of simple functions.) If $h \geq 0$ and $B \in \F$, then\footnote{For why this needs to be proven, see Remark \ref{rk:why_delayed_truncation_of_simple_functions_is_something_that_needs_to_be_proven}.} 
 \[ \ds\int_B h \wrt{\mu} = \sup \biggset{ \ds\int_B s \wrt{\mu} : \; 0 \leq s \leq h, \; s \text{ simple }} \]
-\item \label{item:existence_transfers_to_subsets}(existence of integral transfers to subsets) 
+\item \label{item:existence_transfers_to_subsets}(Existence of integral transfers to subsets.) 
 \begin{align}
 \ds\int_{\Omega} h \wrt{\mu} \text{ exists } &\implies 	\ds\int_{A} h \wrt{\mu} \text{ exists} \quad \forall A \in \F \\
 \ds\int_{\Omega} h \wrt{\mu} \text{ finite } &\implies 	\ds\int_{A} h \wrt{\mu} \text{ finite} \quad \forall A \in \F
@@ -2345,6 +2346,9 @@ Now we consider the ``dominance criterion for existence".  We prove the second s
 If $\ds\int h \wrt{\mu}$ exists and $\ds\int h \wrt{\mu} > -\infty$, then by definition of the integral, $\ds\int h^- \wrt{\mu} < \infty$.  Since $g \geq h$, then $g^- \leq h^-$, so 
 \[ \ds\int g^- \wrt{\mu} \leq \ds\int h^- \wrt{\mu} < \infty \]
 Thus, $\ds\int g \wrt{\mu}$ exists.\footnote{Recall that for $\ds\int f \wrt{\mu}$ to exist, at least one of  $\ds\int f^- \wrt{\mu}$, $\ds\int f^+ \wrt{\mu}$ must be finite.}
+\item We have $-|h| \leq h \leq |h|$.  So by monotonicity and the scalar multiple property, $- \int_\Omega |h| \dmu \leq \int_\Omega h \dmu \leq \int_\Omega |h| \dmu$.  By multiplying the left-hand inequality by -1 and keeping the right-hand inequality as is, we see  
+\[ - \int_\Omega h \dmu \leq \int_\Omega |h| \dmu  \quad \text { and } \quad \int_\Omega h \dmu \leq \int_\Omega |h| \dmu  \] 
+which taken together says $|\int_\Omega h \dmu| \leq \int_\Omega |h| \dmu$.
 \item  We want to prove that if $h \geq 0$ and $B \in \F$, then
 \[ \ds\int_B h \wrt{\mu} = \sup \biggset{ \ds\int_B s \wrt{\mu} : \; 0 \leq s \leq h, \; s \text{ simple }}. \] 
 We prove \framebox{$\geq$}, \framebox{$\leq$}  separately, using the strategy of Remark \ref{rk:one_way_to_show_two_supremums_are_equal}.
@@ -2379,7 +2383,9 @@ By assuming the conditional holds for at least one $i \in \set{1,2}$, we prove t
 \end{proof}
 
 
-\begin{remark}{\remarktitle{Why the monotonicity property is concerned with existence}}
+
+
+\begin{remark}{\remarktitle{Why the monotonicity property is concerned with existence.}}
 Why is Proposition \ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} \ref{item:monotonicity} concerned with monotonicity? Answer: even if $\ds\int g \wrt{\mu}$ exists and $g \geq h$, we can still have $\ds\int h \wrt{\mu}$ not exist, because of \eqref{eqn:monotonicity_for_positive_and_negative_parts_separately}.  For example, we can have 
 \begin{align}
 \ds\int g^+ \wrt{\mu} &= \ds\int h^+ \wrt{\mu} = \infty  \\
@@ -2389,7 +2395,7 @@ and so $\ds\int h \wrt{\mu}$ DNE.
 \label{rk:why_does_existence_matter_for_monotonicity}
 \end{remark}
 
-\begin{remark}{\remarktitle{Why delayed truncation of simple functions is something that needs to be proven}}
+\begin{remark}{\remarktitle{Why delayed truncation of simple functions is something that needs to be proven.}}
 Proposition \ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} \ref{item:delayed_truncation_of_simple_functions} needs to be proven because it is \textit{not} what is given by the definition of the integral for an arbitrary Borel measurable function (after observing that $h \indicate{B}$ is still measurable).   Note that
 \begin{subequations}
 \begin{align}	
@@ -2413,10 +2419,21 @@ What does each say?
 \label{rk:why_delayed_truncation_of_simple_functions_is_something_that_needs_to_be_proven}.
 \end{remark}
  
+\begin{example}{\remarktitle{A simple example of triangle inequality for integrals.}}
+Let $h(x) = \sin(x)$, $A=[0,2\pi]$, and $\mu$ be Lebesgue measure. Then 
+\begin{figure}[H]
+\centering 
+\includegraphics[width=.2\linewidth, angle=270]{images/triangle_inequality_for_integrals}	
+\end{figure}
+The basic idea is that integrating over a function $h$ that can take on both positive and negative values can lead to cancelations, which explains the result.	
+\end{example}
+
  
 \section{$\S$ 1.6 Basic Integration Theorems}
 
 Here we prove some basic integration theorems, and further properties of integration that can be derived thereof.  %Note that we have already provided the Monotone Convergence Theorem and Fatou's lemma in the previous section (since we give statements that apply to non-negative functions). 
+
+\subsection{Indefinite integrals as countably additive set functions}
 
 \begin{definition}
 We say that $\lambda$ is an \textit{indefinite integral}\footnote{This interpretation of ``indefinite integral" is used in \cite[pp.~61]{ash2000probability}}  with respect to $\mu$ if for any $A \in \F$ we have
@@ -2615,6 +2632,7 @@ where $\mu$ is Lebesgue measure. This is differential notation of the form \eqre
 for all measurable sets $A$.
 \end{example-for-statisticians}
 
+\subsection{Additivity theorem}
  
 \begin{theorem}{\textbf{Additivity theorem.}}
 Let $f$ and $g$ be Borel measurable, and assume that $f+g$ is well-defined.  If $\dint_\Omega f \dmu$ and $\dint_\Omega g \dmu$ exist and $\dint_\Omega f \dmu$ + $\dint_\Omega g \dmu$ is well-defined (not of the form $+ \infty - \infty$ or $- \infty +\infty$), then 
@@ -2646,7 +2664,17 @@ Rearranging (possible by integrability), we get
 \label{rk:additivity_holds_automatically_for_integrable_functions}	
 \end{remark}
 
-\begin{remark}
+\begin{non-example}
+Let us demonstrate where the Additivity Theorem fails to apply.  Let $f \equiv 1, g \equiv -1$ and $\mu$ be Lebesgue measure.  Then $\int f \dmu = \infty$ and $\int  g \dmu = -\infty$.  But
+\[\begin{array}{rcccl}
+\int (f+g) &\dmu  \neq &  \int f \dmu & + & \int g \dmu   \\
+	0 && \infty && -\infty 
+\end{array} \]
+Because $\infty - \infty$ is undefined. {\tiny (To reinforce the undefinedness of  $\infty - \infty$, note that the LHS could be $0$, $\infty$ or $-\infty$ by setting $f \equiv a, g \equiv -b$, by choosing $a<b, b>a$, or $a=b$.) }
+\end{non-example}
+
+
+\begin{remark}{\remarktitle{From additivity to linearity}}
 The conditions of the additivity theorem imply the conditions of the scalar multiple property (Prop \ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} (a)).  Thus, linearity holds whenever additivity holds.
 \label{rk:linearity_holds_if_additivity_holds}	
 \end{remark}
@@ -2711,9 +2739,10 @@ which is also true iff BOTH of $\biggset{\dint h^+ \dmu , \dint h^- \dmu } < \in
 \end{alphabate}
 \end{proof}
 
+\subsection{Almost everywhere theorems}
 
-\begin{definition}{\textbf{Almost everywhere}}
-A condition is said to hold \textit{almost everywhere} with respect to the measure $\mu$ (written a.e $[\mu]$ or simply a.e. if $\mu$ is understood) if there exists a set $B \in \F$ of $\mu$-measure 0 such that the condition holds outside $B$.
+\begin{definition}
+A condition is said to hold \textbf{almost everywhere} with respect to the measure $\mu$ (written a.e $[\mu]$ or simply a.e. if $\mu$ is understood) if there exists a set $B \in \F$ of $\mu$-measure 0 such that the condition holds outside $B$.
 \label{def:almost_everywhere}
 \end{definition}
 
@@ -2795,10 +2824,10 @@ Thanks to Theorem \ref{thm:almost_everywhere}, in any integration theorem, we ma
 \end{remark}
 
 \begin{theorem}
-Let $h$ be Borel measurable
+Let $h$ be Borel measurable.
 \begin{alphabate}
 \item If $h$ is integrable, then $h$ is finite a.e. 
-\item If $h \geq 0$ and $\int_\Omega h \dmu =0$ then $h=0$ a.e.
+\item \label{item:integral_of_nonnegative_function_equals_zero_implies_the_function_equals_zero_almost_everywhere} If $h \geq 0$ and $\int_\Omega h \dmu =0$ then $h=0$ a.e.
 \end{alphabate}
 \label{thm:properties_of_functions_derived_from_properties_of_integrals}
 \end{theorem}
@@ -2826,6 +2855,68 @@ Now \tinycircled{2} and \tinycircled{3} together give $\mu(B_n) =0 \; \forall n$
 \end{alphabate}
 	
 \end{proof}
+
+By monotonicity (Prop.~\ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions}), $g \leq h$ implies $\int_\Omega g \dmu \leq \int_\Omega h \dmu$, and in fact, $\int_A g \dmu \leq \int_A h \dmu$ for all $A \in \F$ {\tiny (This holds by monotonicity again, since $g \leq h \implies g \indicate{A} \leq h \indicate{A}$.)} There is a converse to this result.  
+
+\begin{theorem}{\textbf{Monotonicity Converse.}}
+If $\mu$ is $\sigma$-finite on $\F$, $g$ and $h$ are Borel measurable, $\int_\Omega g \dmu$ and $\int_\Omega h \dmu$ exist, and $\int_A g \dmu \leq \int_A h \dmu$ for all $A \in \F$, then $g \leq h$ a.e. $[\mu]$.
+\label{thm:monotonicity_converse}
+\end{theorem}
+
+\begin{proof}
+We prove the theorem assuming that at least one of $\set{ \int_\Omega g \dmu,  \int_\Omega h \dmu}$ is finite (so that we can apply the Additivity Theorem).  Note that in this special case, we need not assume that 	$\mu$ is $\sigma$-finite on $\F$.  For a full proof, see \cite{ash2000probability} Theorem 1.6.11.
+
+Let $A:=\set{x : g(x) < h(x)}$. {\tiny (Note that $A$ is the set where the desired conclusion fails.)}  Then 
+\[\ds\int_A g \dmu \stackexplain{monotonicity on $A$}{\leq} \ds\int_A h \dmu \stackexplain{hypothesis}{\leq} \ds\int_A g \dmu \]
+So by sandwiching, 
+\[ \ds\int_A g \dmu  = \ds\int_A h \dmu. \] 
+Now 
+\[ 0 \stackexplain{subtraction}{=} \ds\int_A h \dmu  - \ds\int_A g \dmu \stackexplain{linearity} =  \ds\int_A (h-g) \dmu\] 
+where linearity applies under the assumptions of the theorem. {\tiny (It wouldn't apply if $\ds\int_A g \dmu = \infty, \ds\int_A h \dmu = -\infty$, or vice versa, which would violate the conditions of the additivity theorem.)}
+
+So 
+\[\begin{array}{rcl}
+0 = 	\ds\int \explaintermbrace{non-negative by def $A$}{(h-g) \, \indicate{A}} \dmu &\stackexplain{Theorem~\ref{thm:properties_of_functions_derived_from_properties_of_integrals}~\ref{item:integral_of_nonnegative_function_equals_zero_implies_the_function_equals_zero_almost_everywhere}}{\implies}  &  (h-g)\indicate{A} = 0 \; \text{a.e.} \\
+& \implies & (h-g) = 0 \quad \text{ a.e. on } A \\
+& \implies & h=g \quad \text{a.e. on } A
+\end{array} \]
+
+This gives an a.e. contradiction to the definition of $A$.  So $\mu(A)=0$. 
+\end{proof}
+
+
+
+
+\begin{remark}
+Deriving an ``a.e. contradiction" to a set to show it has measure 0 seems like a fun proof technique.  I haven't seen this before. 
+\end{remark}
+
+\begin{remark}
+This remark could be made in many places, but note from the proof of the monotonicity converse how convenient it is to work with Lebesgue integrals rather than than Reimann integrals for proving integral properties.  We can define some set $A$ in the domain to have any desired property, and then proceed to work with it. 
+\end{remark}
+
+
+\begin{corollary}
+If $\mu$ is $\sigma$-finite on $\F$, $g$ and $h$ are Borel measurable, $\int_\Omega g \dmu$ and $\int_\Omega h \dmu$ exist, and $\int_A g \dmu = \int_A h \dmu$ for all $A \in \F$, then $g = h$ a.e. $[\mu]$.
+\label{cor:equal_integrals_for_all_measurable_sets_implies_the_functions_are_equal_ae}
+\end{corollary}
+
+\begin{proof}
+ Since $\int_A g \dmu = \int_A h \dmu$ for all $A \in \F$, we have  
+\begin{align*}
+\int_A g \dmu \leq \int_A h \dmu 	& \stackexplain{Thm.~\ref{thm:monotonicity_converse}}{\implies} g \leq h \; \text{a.e.} \\
+\text{ and} \int_A h \dmu \leq \int_A g \dmu 	& \stackexplain{Thm.~\ref{thm:monotonicity_converse}}{\implies} h \leq g \; \text{a.e.}
+\end{align*}
+Hence $g=h$ a.e.
+\end{proof}
+
+\begin{remark}
+Cor.~\ref{cor:equal_integrals_for_all_measurable_sets_implies_the_functions_are_equal_ae} gives a statent in Prop 2.2.3 b) of \cite{folland1999real}, but that statement assumes that both $g$ and $h$ are both integrable, whereas here we only need to assume that the integrals exist.  	
+\end{remark}
+
+
+\subsection{Extended monotone convergence theorem}
+
 
 The monotone convergence theorem as stated earlier only applies to non-negative functions and only to increasing sequences. We relax those assumptions below.
 
@@ -2865,8 +2956,7 @@ To check that linearity holds in \tinycircled{1}, note that $\int f \dmu$ and $\
 
 
 
-\paragraphnewline{Fatou's Lemma}
-
+\subsection{Fatou's Lemma}
 
 \begin{theorem}{\textbf{Extended Fatou's Lemma}\footnote{We refer to Theorem \ref{thm:extended_fatous_lemma} as \textit{extended} Fatou's lemma in parallel with the extended monotone convergence theorem (Theorem \ref{thm:extended_monotone_convergence_theorem}).  Some presentations, e.g. \cite{folland1999real}, present a (non-extended) version of Fatou's lemma that only gives part (a) and which only applies to non-negative measurable functions.  We prefer the extended formulation due to its greater generality and supporting of intuition from the ``big picture view".  Note that in the case of non-negative functions, the hypotheses reduce to simply $f_n \uparrow f$, as there is automatically a measurable $g$ satisfying the remaining conditions, namely $g \equiv 0$. }}
 Let $f_1, f_2, ..., g$ be Borel measurable for each positive integer $n$. 
@@ -2967,7 +3057,7 @@ The example captures the fact that \textit{integrals of asymptotics give more ex
 
 \end{example}
 
-\paragraphnewline{Dominated Convergence Theorem}
+\subsection{Dominated Convergence Theorem}
 
 \begin{theorem}{\textbf{Dominated Convergence Theorem.}}. If $f_1,f_2,...,f,g$ are Borel measurable, $|f_n| \leq g$ for all $n$, where $g$ is $\mu$-integrable, and $f_n \to f$ a.e. $[\mu]$, then $f$ is $\mu$-integrable, and $\int_\Omega f_n \dmu \to \int_\Omega f \dmu$.
 \label{thm:dominated_convergence}
@@ -2989,7 +3079,7 @@ But since $f_n \to f$ a.e, $\liminf_{n \to \infty} f_n = \limsup_{n \to \infty} 
 \end{remark}
 
 
-\paragraphnewline{Continuity and differentiability of functions defined with an integral}
+\subsection{Continuity and differentiability of functions defined with an integral}
 
 We now consider \textit{dependence on a parameter}.  Specifically, we consider integrals where the integrand depends on a real parameter.\footnote{Here, a ``parameter" refers to a variable in the domain of the function that is not integrated over.}  The following theorem describes continuity and the computation of derivative for such functions. 
 
@@ -3044,7 +3134,7 @@ F'(t_0) &= \ds\lim_{n \to \infty} \df{F(t_n) - F(t_0)}{t_n-t_0} && \tinytext{def
 	
 \end{proof}
 
-\begin{remark}{\remarktitle{Extensions to real-valued parameters with unbounded support}}
+\begin{remark}{\remarktitle{Extensions to real-valued parameters with unbounded support.}}
 Theorem \ref{thm:continuity_and_differentiability_of_functions_defined_with_an_integral}  may seem overly restrictive, since the real-valued parameter has bounded support.  However, as noted by \cite{folland1999real} pp. 56, continuity and differentiability are \textit{local} in nature.  Thus, if the hypotheses of (a) or (b) hold for all $[a,b] \subset I$ of an open interval $I$ (which is perhaps $\R$ itself), perhaps with the dominating function $g$ depending on $a$ and $b$, one obtains the continuity and differentiability of the integrated function $F$ on all of $I$! 	
 \end{remark}
 
@@ -3436,6 +3526,7 @@ Below we give examples.  For these examples, let $(\Omega, \F) = (\R, \B(\R))$.
 \item Let $\mu$ be Lebesgue measure and $\nu$ give the number of integers in a set.  Then $\nu \not\ll \mu$ and $\mu \not\ll \nu$.
 \item Let $\mu$ be Lebesgue measure and $\nu$ be twice Lebesgue measure.  Then $\nu \ll \mu$ and $\mu \ll \nu$.
 \end{enumerate}
+\label{ex:examples_with_absolute_continuity}
 \end{example}
 
 
@@ -3692,14 +3783,14 @@ Now we show uniqueness.
 \text{Suppose also} & d\nu = d\lambda' + f' d\mu
 \end{array}
 \]
-Then\footnote{Include \cite{folland1999real} Prop. 2.23 in these notes. It is strange that \cite{ash2000probability} omits this. It can probably be obtained fairly immediately from Theorem~\ref{thm:properties_of_functions_derived_from_properties_of_integrals}.}
+Then
 \[ \begin{array}{lrlr}
  & d\lambda - d\lambda' &=  (f-f') d\mu &\\
 \text{But} & \lambda - \lambda' & \perp \mu & \tinytext{Justified below} \\
 \text{And} & \lambda - \lambda' & \ll \mu & \tinytext{Since $d(\lambda - \lambda') = (f-f')\dmu$ ; indefinite integrals are absolutely continuous (Remark \ref{rk:indefinite_integrals_are_absolutely_continuous})} \\
 \text{So} & \lambda-\lambda' &=0 & \tinytext{$\ll$ and $\perp$ are antitheses; see Remark~\ref{rk:absolute_continuity_is_the_antithesis_of_mutual_singularity}}\\
 \text{So} & \lambda&=\lambda' &\\
-\text{So} & f&=f' \quad [\mu]-a.e. &  \tinytext{See \cite{folland1999real} Prop. 2.23}
+\text{So} & f&=f' \quad [\mu]-a.e. &  \tinytext{Cor.~\ref{cor:equal_integrals_for_all_measurable_sets_implies_the_functions_are_equal_ae}}
 \end{array}
 \]
 
@@ -3743,6 +3834,11 @@ Let $\nu$ be a $\sigma$-finite signed measure and $\mu$ a $\sigma$-finite (posit
 \label{cor:radon_nikodym}
 \end{corollary}
 
+\begin{proof}
+In the Lebesgue-Radon-Nikodym theorem, set $\rho=\nu$ and $\lambda=0$.	
+\end{proof}
+
+
 \begin{terminology}
 We refer to $f$ in \eqref{eqn:radon_nikodym} as the \textbf{Radon-Nikodym derivative} or \textbf{density} of $\nu$ with respect to $\mu$.   We denote it by $d\nu/d\mu$.  (Strictly speaking, $d\nu/d\mu$ should be construed as a class of functions equal to $f$ $\mu$-a.e.). When $\mu$ is the Lebesgue measure, then $f$ is often simply called the density of $\nu$.
 \end{terminology}
@@ -3760,7 +3856,7 @@ So $\int_A f \dmu =0$.  Negating this and applying the scalar multiple property,
 \end{proof}
 
 
-Below we show that the Radon-Nikodym derivative satisfies a chain rule. 
+As pointed out by \cite[pp.91]{folland1999real}, the formulas suggested by the differential notation $d\nu/d\mu$ generally apply. For example, $d(\nu_1 + \nu_2)d\mu = d\nu_1/d\mu + d\nu_2/d\mu$.  Additionally, the Radon-Nikodym derivative satisfies a chain rule. 
 
 \begin{proposition}{\remarktitle{A chain rule for Radon-Nikodym derivatives.}}
 Suppose that $\nu$ is a $\sigma$-finite signed measure and $\mu, \lambda$ are $\sigma$-finite measures on $(\Omega, \F)$ such that $\nu \ll \mu$ and $\mu \ll \lambda$.
@@ -3769,7 +3865,11 @@ Then
 \item If $g$ is integrable, then $g(d\nu/d\mu)$ is integrable, and 
 \[ \int g \wrt{\nu} = \int g \frac{d\nu}{d\mu} \wrt{\mu} \]
 \item We have $\nu \ll \lambda$, and 
-\[ \df{d\nu}{d\lambda} = \df{d\nu}{d\mu}  \df{d\mu}{d\lambda} \quad \lambda-\text{a.e.} \]	
+\begin{align}
+ \df{d\nu}{d\lambda} = \df{d\nu}{d\mu}  \df{d\mu}{d\lambda} \quad \lambda-\text{a.e.} 
+ \label{eqn:chain_rule}
+\end{align}
+
 \end{alphabate}
 \end{proposition}
 
@@ -3789,13 +3889,27 @@ On the other hand, we have $\nu \ll \lambda$. ($\ll$ can be seen to be transitiv
 \label{eqn:RN_chain_rule_LHS}	
 \end{align}
 
-Since \eqref{eqn:RN_chain_rule_RHS}  and \eqref{eqn:RN_chain_rule_LHS} both hold for all $A \in \F$, then by \cite{folland1999real} Prop. 2.23 \red{(TODO: But how do we know from this that $\frac{d\nu}{d\mu} \indicate{A}$ is integrable!?)}, 
+Since \eqref{eqn:RN_chain_rule_RHS}  and \eqref{eqn:RN_chain_rule_LHS} both hold for all $A \in \F$, then by Cor.~\ref{cor:equal_integrals_for_all_measurable_sets_implies_the_functions_are_equal_ae} , 
 \[ \df{d\nu}{d\lambda} = \df{d\nu}{d\mu}  \df{d\mu}{d\lambda} \quad \lambda-\text{a.e.} \]	
 
- 
 \end{alphabate}
 	
 \end{proof}
+
+\begin{question}
+\cite[pp.~91]{folland1999real}'s proof uses his Prop. 2.23 rather than our Cor.~\ref{cor:equal_integrals_for_all_measurable_sets_implies_the_functions_are_equal_ae}.   But his Prop requires integrals to be finite, rather than to simply exist.  How does  Folland know that $\frac{d\nu}{d\mu} \indicate{A}$ is integrable, given that the Lebesgue-Radon-Nikdoym theorem only states that $\frac{d\nu}{d\mu}$ is an \textit{extended} integrable function? 	
+\end{question}
+
+
+Although we can \textit{generally} treat the differentials as fractions, care must be taken, as shown in the Remark below. 
+
+\begin{remark}{\remarktitle{Problems with treating differentials as fractions.}}
+Let $a,b,c,d,e,f \in \R \setminus \set{0}$. Then by cross-multiplying, we of course have
+\[ \df{a}{b} = \df{c}{d} \df{e}{f} \iff \df{b}{a} = \df{d}{c} \df{f}{e} \]
+However, note that for Radon-Nikodym derivatives, we have 
+\[ \df{d\nu}{d\lambda} = \df{d\nu}{d\mu}  \df{d\mu}{d\lambda}   \red{\notiff} \df{d\mu}{d\nu} = \df{d\mu}{d\lambda}  \df{d\lambda}{d\nu} \]
+The first trouble is that for the expression on the left side of $\red{\notiff}$ to exist, the chain rule \eqref{eqn:chain_rule} requires that $\nu \ll \mu, \mu \ll \lambda$.  But absolute continuity is not a symmetric relation (recall Example~\ref{ex:examples_with_absolute_continuity}), and if the dominance relations do not hold in the other direction, then the Radon-Nikodym derivatives on the right hand side of $\red{\notiff}$ may not exist.   A second trouble is that the left side does not apply everywhere, but $\lambda$-a.e.; one might be tempted to flip the fractions on each side of the equality without taking care of the constraints on where the equality applies.
+\end{remark}
 
 
 %{prop:change_of_differential} 
