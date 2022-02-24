@@ -2426,6 +2426,7 @@ Let $h(x) = \sin(x)$, $A=[0,2\pi]$, and $\mu$ be Lebesgue measure. Then
 \includegraphics[width=.2\linewidth, angle=270]{images/triangle_inequality_for_integrals}	
 \end{figure}
 The basic idea is that integrating over a function $h$ that can take on both positive and negative values can lead to cancelations, which explains the result.	
+\label{ex:simple_example_of_triangle_inequality}
 \end{example}
 
  
@@ -2856,7 +2857,7 @@ Now \tinycircled{2} and \tinycircled{3} together give $\mu(B_n) =0 \; \forall n$
 	
 \end{proof}
 
-By monotonicity (Prop.~\ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions}), $g \leq h$ implies $\int_\Omega g \dmu \leq \int_\Omega h \dmu$, and in fact, $\int_A g \dmu \leq \int_A h \dmu$ for all $A \in \F$ {\tiny (This holds by monotonicity again, since $g \leq h \implies g \indicate{A} \leq h \indicate{A}$.)} There is a converse to this result.  
+We can now construct a converse to monotonicity. 
 
 \begin{theorem}{\textbf{Monotonicity Converse.}}
 If $\mu$ is $\sigma$-finite on $\F$, $g$ and $h$ are Borel measurable, $\int_\Omega g \dmu$ and $\int_\Omega h \dmu$ exist, and $\int_A g \dmu \leq \int_A h \dmu$ for all $A \in \F$, then $g \leq h$ a.e. $[\mu]$.
@@ -2884,11 +2885,12 @@ So
 This gives an a.e. contradiction to the definition of $A$.  So $\mu(A)=0$. 
 \end{proof}
 
-
-
+\begin{remark}{\remarktitle{On the assumptions of the monotonicity converse.}}
+ By monotonicity (Prop.~\ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions}), $g \leq h$ implies $\int_\Omega g \dmu \leq \int_\Omega h \dmu$, and in fact, $\int_A g \dmu \leq \int_A h \dmu$ for all $A \in \F$ {\tiny (This holds by monotonicity again, since $g \leq h \implies g \indicate{A} \leq h \indicate{A}$.)}  Now note that $\int_\Omega g \dmu \leq \int_\Omega h \dmu  \red{\notimplies} \int_A g \dmu \leq \int_A h \dmu$ for all $A \in \F$. (To see this, consider that $g,h$ are not necessarily non-negative.  So for a counter-example, just take $g=\sin$ and $h=0$ when integrating with respect to Lebesgue measure.  See also Example \ref{ex:simple_example_of_triangle_inequality}.)  So we obtain the converse by imposing the condition that the integral inequality holds over all measurable sets. 	
+\end{remark}
 
 \begin{remark}
-Deriving an ``a.e. contradiction" to a set to show it has measure 0 seems like a fun proof technique.  I haven't seen this before. 
+In the proof of the monotonicity converse, we derived an ``a.e. contradiction" to a set to show it has measure 0 seems like a fun proof technique.  I haven't seen this before. 
 \end{remark}
 
 \begin{remark}
@@ -3498,6 +3500,22 @@ So
 \end{proof}
 
 
+\subsection{Integrating against signed measure}
+
+ We can define integration against a signed measure $\nu$ in terms of integrals against measure by using the Jordan decomposition $\nu = \nu^+ - \nu^-$.  
+
+\begin{definition}{\textbf{Integration against signed measure}}
+Let $\nu$ be a signed measure and let $f$ be a Borel measurable function.  Then we define
+\begin{align}
+\int f \, d\nu :=  \int f \, d\nu^+ - \int f \, d\nu^-
+\label{eqn:integration_against_signed_measure}
+\end{align}
+
+\label{def:integration_against_signed_measure}
+\end{definition}
+
+The integral is finite if both $\int f d\nu^+$ and $\int f d\nu^+$ are finite. 
+
 
 
 
@@ -3856,15 +3874,15 @@ So $\int_A f \dmu =0$.  Negating this and applying the scalar multiple property,
 \end{proof}
 
 
-As pointed out by \cite[pp.91]{folland1999real}, the formulas suggested by the differential notation $d\nu/d\mu$ generally apply. For example, $d(\nu_1 + \nu_2)d\mu = d\nu_1/d\mu + d\nu_2/d\mu$.  Additionally, the Radon-Nikodym derivative satisfies a chain rule. 
+%As pointed out by \cite[pp.91]{folland1999real}, the formulas suggested by the differential notation $d\nu/d\mu$ generally apply. For example, $d(\nu_1 + \nu_2)d\mu = d\nu_1/d\mu + d\nu_2/d\mu$.  Additionally, the Radon-Nikodym derivative satisfies a chain rule. 
 
-\begin{proposition}{\remarktitle{A chain rule for Radon-Nikodym derivatives.}}
-Suppose that $\nu$ is a $\sigma$-finite signed measure and $\mu, \lambda$ are $\sigma$-finite measures on $(\Omega, \F)$ such that $\nu \ll \mu$ and $\mu \ll \lambda$.
-Then 
+\begin{proposition}{\remarktitle{Calculus with Radon-Nikodym Derivatives.}}\footnote{The terminology is borrowed from \url{https://pages.stat.wisc.edu/~doksum/STAT709/n709-5.pdf}.}
 \begin{alphabate}
-\item If $g$ is integrable, then $g(d\nu/d\mu)$ is integrable, and 
+\item \textnormal{(Additivity.)} Let $\nu = \nu_1 + \nu_2$ be a $\sigma$-finite signed measure on $(\Omega,\F)$.  If $\nu_1, \nu_2 \ll \mu$, then $\nu_1 + \nu_2 \ll \mu$, and 
+\[ \frac{d(\nu_1+\nu_2)}{d\mu} = \frac{d\nu_1}{d\mu} + \frac{d\nu_2}{d\mu} \quad \mu-\text{a.e.} \] 
+\item \textnormal{(Change of variables.)} Suppose that $\nu$ is a $\sigma$-finite signed measure and $\mu$ is a  $\sigma$-finite measure on $(\Omega, \F)$ such that $\nu \ll \mu$. If $g$ is integrable, then $g(d\nu/d\mu)$ is integrable, and 
 \[ \int g \wrt{\nu} = \int g \frac{d\nu}{d\mu} \wrt{\mu} \]
-\item We have $\nu \ll \lambda$, and 
+\item \textnormal{(Chain rule.)} Suppose that $\nu$ is a $\sigma$-finite signed measure and $\mu, \lambda$ are $\sigma$-finite measures on $(\Omega, \F)$ such that $\nu \ll \mu$ and $\mu \ll \lambda$. We have $\nu \ll \lambda$, and 
 \begin{align}
  \df{d\nu}{d\lambda} = \df{d\nu}{d\mu}  \df{d\mu}{d\lambda} \quad \lambda-\text{a.e.} 
  \label{eqn:chain_rule}
@@ -3875,7 +3893,26 @@ Then
 
 \begin{proof}
 \begin{alphabate}
-\item See \cite[pp.91]{folland1999real}.  The proof is similar to that of Prop.~\ref{prop:change_of_differential}, except that now we do not assume that $f:=\frac{d\nu}{d\mu} \geq 0$.
+\item For all $A \in \F$,
+%
+\begin{align*}
+\nu(A) &= \nu_1(A) + \nu_2(A)  \\
+&= \int_A f_1 \dmu + \int_A f_2 \dmu &\tinytext{Radon-Nikodym derivatives} \\
+& \stackrel{*}{=} \int_A (f_1 + f_2) \dmu & \tinytext{linearity applies (see below)}  
+\end{align*}
+%
+So $f_1+f_2$ must be a Radon-Nikodym derivative of $\nu$ w.r.t to $\mu$.   Linearity applies in (*) because if not, then $\nu$ would fail to map some $A \in \F$ to a number, which would violate the definition of signed measure.  
+
+\item See \cite[pp.91]{folland1999real}.  The proof is similar to that of Prop.~\ref{prop:change_of_differential}, except that now we do not assume that $f:=\frac{d\nu}{d\mu} \geq 0$. 
+
+Let us show that if the identity holds in the $\nu \geq 0$ case, it must hold for general $\nu$.  We have 
+\begin{align*}
+\int g \, d\nu &= \int g \, d\nu^+ - \int g \, d\nu^- &&\tinytext{Def. integrals of signed measure \eqref{def:integration_against_signed_measure}} \\
+& \stackrel{1}{=} \int g f^+ d\mu - \int g f^- d\mu && \tinytext{by hypothesis, where $f^+, f^-$ are RN derivatives of $\nu^+, \nu^-$}\\
+& \stackrel{2}{=}  \int g (f^+ - f^-) d\mu && \tinytext{linearity applies (see below)}
+\end{align*}
+so $f^+ - f^-$ is a Radon-Nikodym derivative of $\nu$ w.r.t $\mu$.  The Radon-Nikodym derivatives in (1) are possible since $\nu \ll \mu$ implies $\nu^+, \nu^- \ll \mu$.  {\tiny (See Remark ~\ref{rk:signed_measure_is_absolutely_continuous_iff_its_total_variation_is_absolutely_continuous}. In particular, since $\nu^+$ and $\nu^-$ are both measures and therefore non-negative, $|\nu|(A) = \nu^+(A) + \nu^-(A) =0$ implies that $\nu^+(A), \nu^-(A) =0$.)}  Linearity applies in (2) since $\int g d\nu $ exists by hypothesis, so the expansion in the second line cannot take the form of $\infty - \infty$ or $-\infty + \infty$.\redfootnote{TODO: This argument is essentially the additivity argument all over again. Can I just refer to that directly?} 
+
 \item For all $A \in \F$, we have
 \begin{align*}
 \nu(A) &= \ds\int_A d\nu && \tinytext{Def. $\int$ simple functions, since $\int_A d\nu := \int \indicate{A} d\nu$}\\
@@ -3896,9 +3933,9 @@ Since \eqref{eqn:RN_chain_rule_RHS}  and \eqref{eqn:RN_chain_rule_LHS} both hold
 	
 \end{proof}
 
-\begin{question}
-\cite[pp.~91]{folland1999real}'s proof uses his Prop. 2.23 rather than our Cor.~\ref{cor:equal_integrals_for_all_measurable_sets_implies_the_functions_are_equal_ae}.   But his Prop requires integrals to be finite, rather than to simply exist.  How does  Folland know that $\frac{d\nu}{d\mu} \indicate{A}$ is integrable, given that the Lebesgue-Radon-Nikdoym theorem only states that $\frac{d\nu}{d\mu}$ is an \textit{extended} integrable function? 	
-\end{question}
+%\begin{question}
+%\cite[pp.~91]{folland1999real}'s proof uses his Prop. 2.23 rather than our Cor.~\ref{cor:equal_integrals_for_all_measurable_sets_implies_the_functions_are_equal_ae}.   But his Prop requires integrals to be finite, rather than to simply exist.  How does  Folland know that $\frac{d\nu}{d\mu} \indicate{A}$ is integrable, given that the Lebesgue-Radon-Nikdoym theorem only states that $\frac{d\nu}{d\mu}$ is an \textit{extended} integrable function? 	
+%\end{question}
 
 
 Although we can \textit{generally} treat the differentials as fractions, care must be taken, as shown in the Remark below. 
