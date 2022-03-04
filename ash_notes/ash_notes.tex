@@ -2266,6 +2266,60 @@ This definition works because whenever $h$ is measurable, then so is $h I_A$:
 \[\set{ \omega : h I_A (\omega) < c } =	\explaintermbrace{$\in \F$ since $h$ measurable}{\set{\omega :  h(\omega) < c }} \cap \explaintermbrace{$\in \F$ by assumption}{\set{\omega : \omega \in A }} \\  \]
 \end{remark}
 
+\begin{example}{\remarktitle{Sums as integrals}}
+\cite[pp.89 and Problem 1a (real part only) pp.94]{ash2000probability}.  
+Let $\Omega = \set{1,2,3, ...}$, $\F=2^\Omega$ (i.e. all subsets of $\Omega$), and $\mu$ be the counting measure. A real-valued function $f$ on $\Omega$ can be written as a sequence of real numbers; we write $f=\set{a_n}, n=1,2, \hdots$.  We will show that an integral on this space is really a sum:
+%
+\begin{align}
+\int_\Omega f \dmu = \ds\sum_{n=1}^\infty a_n	
+\label{eqn:sums_as_integrals}
+\end{align}
+%
+where the series is interpreted as $\sum_{n=1}^\infty a_n^+ - \sum_{n=1}^\infty a_n^-$ if this is not of the form $\infty - \infty$ (if it is, the integral does not exist).\footnote{Recall that $a_n^+ := \max(a_n,0)$ and $a_n^0 := \max(-a_n,0)$.}
+
+To justify \eqref{eqn:sums_as_integrals}, let us first assume that $a_n \geq 0$ for each $n$.  We define a sequence of non-negative functions $\set{f_k}$ by $f_k : n \mapsto f(n) \indicate{n \leq k}$, i.e. $f_k = (a_1, a_2, \hdots, a_k, 0, 0, \hdots)$.   
+
+We know how to integrate each $f_k$, since we by the definition of integrals of simple functions, we have
+%
+\begin{align}
+ \int f_k \dmu = \ds\sum_{i=1}^k a_i 
+\label{eqn:intermediate_quantity_in_proof_of_integrals_as_sums}
+\end{align}
+%
+Since $f_k \uparrow f$, we apply Monotone Convergence Theorem to obtain
+\begin{align}
+\ds\int f \dmu \stackexplain{def $f$}{=} \ds\int \lim_{k \to \infty} f_k \dmu \stackexplain{MCT}{=}    \ds\lim_{k \to \infty} \ds\int  f_k \dmu \stackexplain{\eqref{eqn:intermediate_quantity_in_proof_of_integrals_as_sums}}{=} \ds\lim_{k \to \infty}  \ds\sum_{i=1}^k a_i = \ds\sum_{i=1}^\infty a_i 
+\label{eqn:second_intermediate_quantity_in_proof_of_integrals_as_sums}
+\end{align}
+%
+Relaxing the non-negativity assumption to allow $a_n \in \R$, we then have
+%
+\begin{align*}
+\int f \dmu &= \int f^+ \dmu - \int f^- \dmu && \tinytext{Def. integral of arbitrary measurable functions}\\
+&= \ds\sum_{i=1}^\infty a_i^+  - \ds\sum_{i=1}^\infty a_i^- && \tinytext{Result with non-negative functions, \eqref{eqn:second_intermediate_quantity_in_proof_of_integrals_as_sums}}
+\end{align*}
+%
+which exists whenever this does not take the form $\infty - \infty$. 
+
+\label{ex:integrals_as_sums}
+\end{example}
+
+
+
+\begin{remark}{\remarktitle{Conditionally convergent sums are not integrals.}}
+When summation is considered from the point of Lebesgue integration theory, series that converge conditionally but not absolutely are ignored.\footnote{The alternating harmonic series $\sum_{n=1}^\infty \frac{(-1)^{n-1}}{n}$ is an example of a series that converges conditionally but not absolutely. It is (potentially) easier for series with both negative and positive terms to converge, because terms with different signs may partially cancel or compensate.  See \url{https://www.sfu.ca/math-coursenotes/Math\%20158\%20Course\%20Notes/sec\_AbsoluteConvergence.html}.} 
+
+To see this, note that the expression $\int f \dmu = \sum_{n=1}^\infty a_n^+ - \sum_{n=1}^\infty a_n^-$ from \eqref{eqn:sums_as_integrals} yields four cases
+
+\begin{enumerate}
+\item 	$\sum_{n=1}^\infty a_n^+ = \infty,  \sum_{n=1}^\infty a_n^- < \infty$.  The series diverges to $\infty$ and the integrals is $\infty$.
+\item  $\sum_{n=1}^\infty a_n^+ < \infty,  \sum_{n=1}^\infty a_n^- = \infty$. The series diverges to $-\infty$ and the integrals is $-\infty$.
+\item $\sum_{n=1}^\infty a_n^+ < \infty,  \sum_{n=1}^\infty a_n^- < \infty$. The series is absolutely convergent and the integral equals the sum of the series.
+\item  $\sum_{n=1}^\infty a_n^+ = \infty,  \sum_{n=1}^\infty a_n^- = \infty$. The series is not absolutely convergent; it may or may not converge conditionally.  Whether it does or not, the integral does not exist.
+\end{enumerate}
+\end{remark}
+
+
 \subsubsection{Properties of the integral of arbitrary Borel measurable functions} \label{sec:properties_of_integral_of_arbitrary_Borel_measurable_functions}
 
 \begin{proposition}
@@ -3963,7 +4017,7 @@ provided $\Re f$ and $\Im f$ are \textit{both} finite.   In this case, we say th
 
 Many standard properties of the integral carry over to the complex case.   (For a complete list, see \cite[pp.~84]{ash2000probability}.)  In almost all cases, the result is an immediate consequence of the fact that integrating a complex function is equivalent to integrating the real and complex parts separately. 
 
-The only theorems that require additional comment are the triangle inequality (Prop~\ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} c), dominated convergence theorem \red{TODO: give link}, and transfer of integrability (Cor~\ref{cor:additivity_corollaries} (a)).  See \cite[pp.~84]{ash2000probability} for the first two. We show the latter here.   
+The only theorems that require additional comment are the triangle inequality (Prop~\ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} c), dominated convergence theorem, the  Radon-Nikodym theorem, and transfer of integrability (Cor~\ref{cor:additivity_corollaries} (a)).  For the first two, see \cite[pp.~84]{ash2000probability}. For the third, see \cite[Problem 10, pp.~95]{ash2000probability}. We show the fourth here.   
 
 \begin{proposition}
 Let $f$ be a complex-valued Borel measurable function on $(\Omega, \F)$.  Then $f$ is integrable iff $|f|$ is integrable. 	
@@ -3990,7 +4044,7 @@ We will apply the strategy of bounding the complex modulus by real moduli \eqref
 where (1) is the triangle inequality for integrals of real-valued functions (Prop~\ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} c).  
 
 \item $\boxed{\implies}$.  We have 
-\[ \int_\Omega |f| \dmu \stackexplain{by B}{\leq} \int_\Omega |\Im f|  +  |\Re f| \dmu \stackexplain{linearity}{=}  \int_\Omega |\Im f| \dmu + \int_\Omega |\Re f| \dmu  \stackrel{hypothesis}{<} \infty \]
+\[ \int_\Omega |f| \dmu \stackexplain{by B}{\leq} \int_\Omega |\Im f|  +  |\Re f| \dmu \stackexplain{linearity}{=}  \int_\Omega |\Im f| \dmu + \int_\Omega |\Re f| \dmu  \stackexplain{hypothesis}{<} \infty \]
 where in applying both linearity and the hypothesis, we utilize from (Cor~\ref{cor:additivity_corollaries} (a)) that the proposition is true for real-valued functions ($|\int f \dmu | < \infty$ iff $\int |f| \dmu < \infty $).
 \end{itemize}
 
