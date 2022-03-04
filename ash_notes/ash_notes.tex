@@ -2266,7 +2266,7 @@ This definition works because whenever $h$ is measurable, then so is $h I_A$:
 \[\set{ \omega : h I_A (\omega) < c } =	\explaintermbrace{$\in \F$ since $h$ measurable}{\set{\omega :  h(\omega) < c }} \cap \explaintermbrace{$\in \F$ by assumption}{\set{\omega : \omega \in A }} \\  \]
 \end{remark}
 
-\begin{example}{\remarktitle{Sums as integrals}}
+\begin{example}{\remarktitle{Sums as integrals against counting measure.}}
 \cite[pp.89 and Problem 1a (real part only) pp.94]{ash2000probability}.  
 Let $\Omega = \set{1,2,3, ...}$, $\F=2^\Omega$ (i.e. all subsets of $\Omega$), and $\mu$ be the counting measure. A real-valued function $f$ on $\Omega$ can be written as a sequence of real numbers; we write $f=\set{a_n}, n=1,2, \hdots$.  We will show that an integral on this space is really a sum:
 %
@@ -4057,7 +4057,47 @@ where in applying both linearity and the hypothesis, we utilize from (Cor~\ref{c
 
 Note that monotonicity does not transfer over, because the complex numbers cannot be ordered \cite[Sec~1.8]{stewart2018complex}. 
 
+\subsection{$L^p$ spaces as normed vector spaces}
 
+
+\begin{definition}{(\textbf{$L^p$ space}.)} If $p>0$, we define the space $L^p = L^p(\Omega, \F, \mu)$ as the collection of complex-valued Borel measurable functions $f$ such that $\int_\Omega |f| \dmu < \infty$.
+\end{definition}
+
+
+We note that $L^p$ is a \textit{vector space} (see Sec.~\ref{sec:vector_space}) for $1 \leq p < \infty$. We check:
+\begin{itemize}
+\item \textit{Closure under scalar multiplication?}  \greencheck.  This is given by the scalar multiple property of integrals (Prop.~\ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} a)  {\tiny (which extends immediately to the complex case by definition of the integral of a complex-valued function)}. 
+\item \textit{Closure under addition?} \greencheck.  Given by Minkowski's inequality below.  	
+\end{itemize}
+
+
+Moreover, by defining
+\begin{align}
+||f||_p := \bigg( \ds\int_\Omega |f|^p \dmu \bigg)^{1/p}, \quad f \in L^p.	
+\end{align}
+we see that the vector space $L^p (1 \leq p < \infty) $  has a \textit{semi-norm} (Def.~\ref{def:norm_and_semi_norm}). We check:
+\begin{itemize}
+\item \textit{Non-negativity?}  \greencheck. Immediate from the definition.
+\item \textit{Scalar multiple property?}  \greencheck. Immediate from the scalar multiple property of integrals (Prop.~\ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} a) ). 
+\item \textit{Triangle inequality?} \greencheck.  Given by Minkowski's inequality.
+\end{itemize}
+The semi-norm immediately induces a \textit{psuedo-distance} (Def.~\ref{def:metric_and_psuedometric}) by $d(f,g) := ||f-g||_p$.
+
+If we define equivalence classes $f \sim g$ iff $f=g$ a.e. $[\mu]$, then $||\cdot||_p$ becomes a \textit{norm} (Def.~\ref{def:norm_and_semi_norm}) and $d$ becomes a \textit{distance} (Def.~\ref{def:metric_and_psuedometric}).   
+
+\begin{theorem}{\textbf{Minkowski's inequality}}
+If $f,g \in L^p (1 \leq p < \infty)$, then $f+g \in L^p$ and $|| f+g ||_p \leq ||f||_p + ||g||_p$.
+\end{theorem}
+
+\begin{proof}	
+See \cite[pp.86]{ash2000probability}.
+\end{proof}
+
+
+
+
+
+%{fig:def_vector_space}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
 \bibliographystyle{apalike}
@@ -4358,9 +4398,52 @@ DeMorgan's Law also holds for relative complements.  That is, given a sequence o
 X - \bigcap_{n=1}^\infty A_n = \bigcup_{n=1}^\infty (X - A_n)
 \labelit \label{eqn:demorgan_for_relative_complements}	
 \end{align*}
-
-	
 \end{remark}
+
+\subsection{Vector space} \label{sec:vector_space}
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=.8\textwidth]{images/def_vector_space}
+\caption{Definition of a vector space.  From \url{http://www.math.toronto.edu/gscott/WhatVS.pdf}.}
+\label{fig:def_vector_space}
+\end{figure}
+
+In this document, the field $\mathbb{F}$ is always either the real numbers or the complex numbers.  
+
+\subsection{Norm and semi-norm} \label{sec:norm_and_semi_norm}
+
+
+\begin{definition} \cite[pp.87]{ash2000probability}. 
+A \textbf{norm} on a vector space $V$ (over the real or complex field) is a real-valued function $|| \cdot||$ on $V$ such that for any $f,g \in V$,
+\begin{enumerate}
+\item $||f|| =0 \implies f=0$.
+\item \textit{(non-negativity)} $||f|| \geq 0$
+\item \textit{(scalar multiple)} $||af|| = |a| \, ||f||$for each scalar $a$.
+\item \textit{(triangle inequality)} $||f+g|| \leq ||f|| + ||g||$.
+\end{enumerate}
+A \textbf{semi-norm} is a real-valued function that satisfies only conditions 2 through 4.
+\label{def:norm_and_semi_norm}
+\end{definition}
+
+\subsection{Metric and psuedo-metric} \label{sec:metric_and_psuedometric}
+
+A metric provides a notion of distance between elements of a vector space. 
+
+
+\begin{definition} \cite[pp.87]{ash2000probability}. 
+A \textbf{metric} on a vector space $V$ (over the real or complex field) is a real-valued function $d$ on pairs of elements $f,g  \in V$ such that  
+\begin{enumerate}
+\item $d(f,g) =0 \iff f=g$.
+\item \textit{(non-negativity)} $d(f,g) \geq 0$. 
+\item \textit{(symmetry)} $d(f,g)=d(g,f)$.
+\item \textit{(triangle inequality)} $d(f,h) \leq d(f,g)+ d(g,h)$.
+\end{enumerate}
+A \textbf{psuedometric} is a real-valued function that satisfies conditions 2 through 4 but only the $\impliedby$ direction of condition 1.
+\label{def:metric_and_psuedometric}
+\end{definition}
+
+A norm immediately induces a metric (and a semi-norm immediately induces a psuedo-metric) via the relation $d(f,g) := ||f-g||$.
 
 
 \end{document}
