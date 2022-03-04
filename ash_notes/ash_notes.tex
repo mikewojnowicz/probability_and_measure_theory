@@ -3948,8 +3948,60 @@ However, note that for Radon-Nikodym derivatives, we have
 The first trouble is that for the expression on the left side of $\red{\notiff}$ to exist, the chain rule \eqref{eqn:chain_rule} requires that $\nu \ll \mu, \mu \ll \lambda$.  But absolute continuity is not a symmetric relation (recall Example~\ref{ex:examples_with_absolute_continuity}), and if the dominance relations do not hold in the other direction, then the Radon-Nikodym derivatives on the right hand side of $\red{\notiff}$ may not exist.   A second trouble is that the left side does not apply everywhere, but $\lambda$-a.e.; one might be tempted to flip the fractions on each side of the equality without taking care of the constraints on where the equality applies.
 \end{remark}
 
+\section{$\S 2.4$ $L^p$ spaces}
 
-%{prop:change_of_differential} 
+\subsection{Integrating complex-valued functions}
+
+We follow \cite[pp.~83]{ash2000probability}. Let $(\Omega, \F)$ be a measurable space, and let $f$ be a complex-valued function on $\Omega$, so that $f = \Re f + i \, \Im f$. We say that $f$ is a \textit{complex-valued Borel measurable function} on $(\Omega, \F)$ if both $\Re f$ and $\Im f$ are real-valued Borel measurable functions.  If $\mu$ is a measure on $\F$, we define
+\begin{align}
+\int_\Omega f \dmu = \int_\Omega \Re f \dmu + i \int_\Omega \Im f \dmu 
+\label{eqn:def_of_integral_of_complex_functions}	
+\end{align}
+provided $\Re f$ and $\Im f$ are \textit{both} finite.   In this case, we say that $f$ is $\mu$-integrable.  Thus, in working with complex-valued functions, we do not consider any cases in which integrals exist but are finite. 
+
+\subsection{What properties are preserved?}
+
+Many standard properties of the integral carry over to the complex case.   (For a complete list, see \cite[pp.~84]{ash2000probability}.)  In almost all cases, the result is an immediate consequence of the fact that integrating a complex function is equivalent to integrating the real and complex parts separately. 
+
+The only theorems that require additional comment are the triangle inequality (Prop~\ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} c), dominated convergence theorem \red{TODO: give link}, and transfer of integrability (Cor~\ref{cor:additivity_corollaries} (a)).  See \cite[pp.~84]{ash2000probability} for the first two. We show the latter here.   
+
+\begin{proposition}
+Let $f$ be a complex-valued Borel measurable function on $(\Omega, \F)$.  Then $f$ is integrable iff $|f|$ is integrable. 	
+\end{proposition}
+
+\begin{proof}
+First, a note.  By definition, $|f|$ being integrable means that $|\int |f| \dmu| < \infty$. But the integral of a non-negative function can only be non-negative (by monotonicity of the integral of real valued functions), so this is equivalent to $\int |f| \dmu < \infty$.
+
+We will apply the strategy of bounding the complex modulus by real moduli \eqref{eqn:bounding_the_complex_modulus_by_real_moduli_appendix}, which in the case of functions can be written as 
+\begin{align}
+|\Re f|, |\Im f| \; \stackrel{A}{\leq} |f| \; \stackrel{B}{\leq} |\Re f|+|\Im f|
+\label{eqn:bounding_the_complex_modulus_by_real_moduli_for_functions} 
+\end{align}
+
+
+\begin{itemize}
+\item $\boxed{\impliedby}$.  To show that $f$ is integrable, we need to show that $| \int_\Omega \Re f \dmu |, | \int_\Omega \Im f \dmu |  < \infty$.
+\[
+\begin{array}{rrrr}
+\bigg| \int_\Omega \Re f \dmu \bigg| & \stackexplain{1}{\leq} \int_\Omega |\Re f| \dmu & \stackexplain{by A}{\leq} \int_\Omega |f| \dmu &\stackexplain{hypoth}{<} \infty  \\
+\bigg| \int_\Omega \Im f \dmu \bigg| & \stackexplain{1}{\leq} \int_\Omega |\Im f| \dmu & \stackexplain{by A}{\leq} \int_\Omega |f| \dmu &\stackexplain{hypoth}{<} \infty  \\
+\end{array}	
+\]
+where (1) is the triangle inequality for integrals of real-valued functions (Prop~\ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} c).  
+
+\item $\boxed{\implies}$.  We have 
+\[ \int_\Omega |f| \dmu \stackexplain{by B}{\leq} \int_\Omega |\Im f|  +  |\Re f| \dmu \stackexplain{linearity}{=}  \int_\Omega |\Im f| \dmu + \int_\Omega |\Re f| \dmu  \stackrel{hypothesis}{<} \infty \]
+where in applying both linearity and the hypothesis, we utilize from (Cor~\ref{cor:additivity_corollaries} (a)) that the proposition is true for real-valued functions ($|\int f \dmu | < \infty$ iff $\int |f| \dmu < \infty $).
+\end{itemize}
+
+\end{proof}
+
+
+%
+
+%{eqn:bounding_the_complex_modulus_by_real_moduli} 
+
+Note that monotonicity does not transfer over, because the complex numbers cannot be ordered \cite[Sec~1.8]{stewart2018complex}. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -4194,6 +4246,45 @@ If $f$ is a bounded real-valued function on $[a,b]$, then $f$ is Riemann integra
 \begin{proof}
 See Theorem 6.2.1 of \cite{strichartz2000way}.	
 \end{proof}
+
+\section{Complex Analysis}
+
+In the following, let $z \in \Com$. So $z = x+iy$ for $x,y \in \R$.  
+
+\subsection{The the complex modulus} 
+
+The \textit{modulus}, or absolute value, of $x \in \R$ is given by 
+\[ |x| = 
+\begin{cases}
+x, & \text{if} \quad  x\geq 0 \\
+-x, & \text{if} \quad x<0 \\ 	
+\end{cases}
+ \]
+
+We can define the modulus of $z \in \Com$ by $|z| = + \sqrt{x^2 + y^2}$.   We interpret $|z|$ as the Euclidean distance from the origin to $z$. 
+
+\subsection{Bounding the complex modulus by real moduli} 
+
+ Let $z=x+iy, 	(x, y \in \R)$.   We can bound the complex modulus by moduli of real numbers as follows:
+%
+\begin{align}
+|x|, |y| \leq |z|=|x+iy| \leq |x|+|y|
+\label{eqn:bounding_the_complex_modulus_by_real_moduli_appendix} 
+\end{align}
+where the latter inequality is the triangle inequality. 
+
+The bounds \eqref{eqn:bounding_the_complex_modulus_by_real_moduli}  are very useful.  For instance, from them, we can quickly deduce that the problem of finding limits of sequences of complex numbers can be reduced directly to the real case.
+
+\begin{lemma}
+\cite[Lemma~3.2]{stewart2018complex} Let $(z_n)$ be a sequence of complex numbers, with $z_n = x_n + i y_n, (x_n, y_n \in \R)$.  Let $z=x+iy, 	(x, y \in \R)$.  Then 
+\[ \ds\lim_{n \to \infty} z_n = z\]
+if and only if 
+\[ \ds\lim_{n \to \infty} x_n = x \quad \text{and} \quad \ds\lim_{n \to \infty} y_n = y\]
+\end{lemma}
+
+
+
+
 
 
 
