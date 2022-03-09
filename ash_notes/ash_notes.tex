@@ -32,6 +32,14 @@
 \renewcommand{\Q}{\mathbb{Q}}
 \begin{document}
 
+% EPSILON TILDE
+\newcommand{\epsilontilde}{\widetilde{\epsilon}}
+
+% MODES OF CONVERGENCE
+\newcommand{\convergenceAE}{\stackrel{a.e.}{\to}}
+\newcommand{\convergenceAU}{\stackrel{AU}{\to}}
+\newcommand{\convergenceInMu}{\stackrel{\mu}{\to}}
+\newcommand{\convergenceInLp}{\stackrel{L^p}{\to}}
 
 \title{Notes on Probability and Measure Theory} 
 \maketitle
@@ -2069,13 +2077,21 @@ Then
 \item $s_n \leq s_{n+1}$ for all $n$
 \item $0 \leq h - s_n \leq 2^{-n}$ on the set where $h \leq n$.
 \end{itemize}
-
-
 \end{proof}
 
 \begin{question}
 When working with $\overline{\R}$, how does one check convergence of a function at a point $\omega$ such that $h(\omega)=\infty$?  Does the proof of Proposition \ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function} still work at such points?
 \end{question}
+
+\begin{corollary}{\remarktitle{A Borel measurable function is the limit of a sequence of simple functions which it dominates.}}
+An arbitrary Borel measurable function $f$ is the limit of a sequence of finite-valued simple functions $s_n$, with $|s_n|<|f|$ for all $n$.
+\label{cor:measurable_function_is_limit_of_simple_functions_which_it_dominates}
+\end{corollary}
+
+\begin{proof}
+Straightforward. See \cite[Theorem 1.5.5b]{ash2000probability}.	
+\end{proof}
+
 
 Now we establish one of the fundamental convergence theorems. 
 
@@ -2275,7 +2291,7 @@ Let $\Omega = \set{1,2,3, ...}$, $\F=2^\Omega$ (i.e. all subsets of $\Omega$), a
 \label{eqn:sums_as_integrals}
 \end{align}
 %
-where the series is interpreted as $\sum_{n=1}^\infty a_n^+ - \sum_{n=1}^\infty a_n^-$ if this is not of the form $\infty - \infty$ (if it is, the integral does not exist).\footnote{Recall that $a_n^+ := \max(a_n,0)$ and $a_n^0 := \max(-a_n,0)$.}
+where the series is interpreted as $\sum_{n=1}^\infty a_n^+ - \sum_{n=1}^\infty a_n^-$ if this is not of the form $\infty - \infty$ (if it is, the integral does not exist).\footnote{Recall that $a_n^+ := \max(a_n,0)$ and $a_n^- := \max(-a_n,0)$.}
 
 To justify \eqref{eqn:sums_as_integrals}, let us first assume that $a_n \geq 0$ for each $n$.  We define a sequence of non-negative functions $\set{f_k}$ by $f_k : n \mapsto f(n) \indicate{n \leq k}$, i.e. $f_k = (a_1, a_2, \hdots, a_k, 0, 0, \hdots)$.   
 
@@ -2691,7 +2707,7 @@ for all measurable sets $A$.
  
 \begin{theorem}{\textbf{Additivity theorem.}}
 Let $f$ and $g$ be Borel measurable, and assume that $f+g$ is well-defined.  If $\dint_\Omega f \dmu$ and $\dint_\Omega g \dmu$ exist and $\dint_\Omega f \dmu$ + $\dint_\Omega g \dmu$ is well-defined (not of the form $+ \infty - \infty$ or $- \infty +\infty$), then 
-\[ \dint_\Omega f +g \dmu = \dint_\Omega f \dmu + \dint_\Omega f \dmu \]
+\[ \dint_\Omega f +g \dmu = \dint_\Omega f \dmu + \dint_\Omega g \dmu \]
 In particular, if $f$ and $g$ are integrable, so is $f+g$.
 \label{thm:additivity}
 \end{theorem}
@@ -4002,7 +4018,7 @@ However, note that for Radon-Nikodym derivatives, we have
 The first trouble is that for the expression on the left side of $\red{\notiff}$ to exist, the chain rule \eqref{eqn:chain_rule} requires that $\nu \ll \mu, \mu \ll \lambda$.  But absolute continuity is not a symmetric relation (recall Example~\ref{ex:examples_with_absolute_continuity}), and if the dominance relations do not hold in the other direction, then the Radon-Nikodym derivatives on the right hand side of $\red{\notiff}$ may not exist.   A second trouble is that the left side does not apply everywhere, but $\lambda$-a.e.; one might be tempted to flip the fractions on each side of the equality without taking care of the constraints on where the equality applies.
 \end{remark}
 
-\section{$\S 2.4$ $L^p$ spaces}
+\section{$\S$ 2.4 $L^p$ spaces}
 
 \subsection{Integrating complex-valued functions}
 
@@ -4060,7 +4076,7 @@ Note that monotonicity does not transfer over, because the complex numbers canno
 \subsection{$L^p$ spaces as normed vector spaces}
 
 
-\begin{definition}{(\textbf{$L^p$ space}.)} If $p>0$, we define the space $L^p = L^p(\Omega, \F, \mu)$ as the collection of complex-valued Borel measurable functions $f$ such that $\int_\Omega |f| \dmu < \infty$.
+\begin{definition}{(\textbf{$L^p$ space}.)} If $p>0$, we define the space $L^p = L^p(\Omega, \F, \mu)$ as the collection of complex-valued Borel measurable functions $f$ such that $\int_\Omega |f|^p \dmu < \infty$.
 \end{definition}
 
 
@@ -4093,7 +4109,210 @@ If $f,g \in L^p (1 \leq p < \infty)$, then $f+g \in L^p$ and $|| f+g ||_p \leq |
 See \cite[pp.86]{ash2000probability}.
 \end{proof}
 
+\subsection{Approximation Theorems}
 
+Functions in $L^p$ can be approximated nicely.  We point out two basic approximation theorems.
+
+\begin{itemize}
+\item Finite valued simple functions are dense in $L^p$ (see Theorem ~\ref{thm:finite_valued_simple_functions_are_dense_in_Lp}). Here  $L^p = L^p((\Omega, \F, \mu))$, where $(\Omega, \F, \mu)$ is any measure space.
+
+\item Continuous functions are dense in $L^p(\R^n, \B(\R^n), \mu)$, where $\mu$ is a Lebesgue-Stieltjes measure.  (See \cite[Thm~2.4.14]{ash2000probability}.)
+\end{itemize}
+
+
+\section{$\S$ 2.5 Convergence of sequences of measurable functions}
+
+\subsection{Definitions}
+
+\begin{definition}{\textbf{(Modes of convergence.)}}
+A sequence of complex-valued Borel functions $f_1, f_2, \hdots$ on $(\Omega, \F, \mu)$ is said to
+\begin{enumerate}
+\item \textbf{Converge almost everywhere}, written $f_n \to f \, \text{a.e.}$, if
+\begin{align*} 
+& \exists A \in \F : \\
+& \mu(A) =0 \quad \text{and} \quad f_n \to f \quad \text{on} \; A^c 	
+\end{align*}
+
+In fully quantified form, we have 
+\begin{align*}
+ &\exists \, A \in \F : \mu(A) =0  \quad \text{and} \quad \forall \, \omega \in A^c, \epsilon >0, \, \exists \, N : \forall \, n \geq N \\
+ & |f_n(\omega) - f(\omega)| < \epsilon 	
+\end{align*}
+\item \textbf{Converge almost uniformly}, written $f_n \stackrel{AU}{\to} f$ if 
+\begin{align*} 
+& \forall \epsilon >0, \; \exists A \in \F : \\
+& \mu(A) < \epsilon \quad \text{and} \quad f_n \to f \quad \text{uniformly on} \; A^c 	
+\end{align*} 
+In fully quantified form\footnote{Recall that $f_n \to f$ uniformly means 
+\begin{align*}
+&\forall \epsilon <0, \exists N : \forall n \geq N, \omega \in \Omega \\
+& |f_n(\omega) - f(\omega) | < \epsilon 	
+\end{align*}
+}, we have 
+\begin{align*}
+&\forall \, \epsilontilde <0, \exists \, A \in \F : \mu(A) < \epsilontilde \quad \text{and} \quad \forall \, \epsilon >0, \, \exists \, N : \forall \, n \geq N, \omega \in A^c \\
+& |f_n(\omega) - f(\omega) | < \epsilon 
+\labelit \label{eqn:def_of_convergence_almost_uniformly_in_quantified_form}	
+\end{align*}
+
+\item \textbf{Converge in measure}, written $f_n \stackrel{\mu}{\to} f$, if	
+\[\forall \, \epsilon >0, \quad \quad \mu \set{\omega : |f_n(\omega) - f(\omega)| \geq \epsilon} \to 0 \quad \text{as} \quad n \to \infty \]
+We can write this in fully quantified form as
+\begin{align*}
+\forall \, \epsilontilde>0, \epsilon>0, \exists \, N : \forall \, n \geq N: \\
+\mu \set{\omega : |f_n(\omega) - f(\omega)| \geq \epsilontilde} < \epsilon
+\end{align*}
+\item \textbf{Converge in $L^p$}, written $f_n \stackrel{L^p}{\to} f$, if	
+\[ \bigg( \ds\int |f_n - f|^p \dmu \bigg)^{\cancel{\frac{1}{p}}} \to 0 \quad \text{as} \quad n \to \infty \]
+In quantified form:
+\begin{align*}
+\forall \, \epsilon >0, \exists \, N : \forall \, n \geq N: \\
+ \bigg( \ds\int |f_n - f|^p \dmu \bigg)^{\cancel{\frac{1}{p}}} < \epsilon 	
+\end{align*}
+Note that we have canceled out the $1/p$ exponent since convergence holds with it iff it holds without it. 
+
+
+\end{enumerate}
+\end{definition}
+
+\begin{question}
+Why is there an asymmetry in the definitions of convergence a.e. and convergence almost uniformly?	
+\end{question}
+
+
+\subsection{Relations between modes of convergence}
+
+\subsubsection{Convergence in measure vs. convergence in $L^p$}
+To relate $\convergenceInMu$ and $\convergenceInLp$, we can will utilize Chebyshev's Inequality. 
+
+\begin{theorem}{\textbf{(Chebyshev's Inequality.)}}
+Let $f : \Omega \to [0,\infty]$ be a Borel measurable function on $(\Omega, \F, \mu)$. 
+
+If $0 < p < \infty$ and $0 < \epsilon < \infty$, then 
+\[ \mu \set{\omega :  f(\omega) \geq \epsilon} \leq \frac{1}{\epsilon^p} \dint f^p \dmu \] 
+\label{thm:chebyshevs_inequality}
+\end{theorem}
+
+\begin{proof}
+Using monotonicity, we can obtain a lower bound the integral by the integral of a simple function. 
+
+\begin{align*}
+\dint_\Omega f^p \dmu \stackexplain{monotonicity}{\geq} \dint_{\set{\omega : f(\omega) > \epsilon}} f^p \dmu  \stackexplain{monotonicity}{\geq} 	\dint_{\set{\omega : f(\omega) > \epsilon}} \epsilon^p \dmu \stackexplain{int. simple func.}{=} \epsilon^p \mu\set{\omega : f(\omega) > \epsilon}
+\end{align*}
+\end{proof}
+
+% TODO: Save the application of Chebyshev's Inequality to probability (as given by Ash) until we get to the actual probability section!
+%\begin{remark}
+%In the probability section, we will see that Chebyshev is often applied to $X$ being a rando	
+%\end{remark}
+
+
+\begin{remark}
+The proof of Chebyshev's theorem highlights yet again the niceities of Lebesgue integration - we can integrate over any set we want (so long as the set is measurable), and those sets can be defined in terms of conditions in the range.  	
+\end{remark}
+ 
+
+Now we can show that convergence in $L^p$ is stronger than convergence in measure
+
+\begin{theorem}
+If $f_1, f_2, \hdots \in L^p \, (0 < p < \infty)$, then $f_n \convergenceInLp f \implies f_n \convergenceInMu f$. 	
+\end{theorem}
+
+\begin{proof}
+We have
+%
+\begin{align*}
+& \forall \, \epsilon < 0, \exists N : \forall \, n \geq N, \\
+& \mu \set{\omega : |f_n (\omega) - f(\omega) \geq \epsilontilde}  \stackexplain{(1)}{\leq} \frac{1}{\epsilontilde^p} \dint |f_n -f|^p \dmu \stackexplain{(2)}{<} \epsilon 	
+\end{align*}
+%
+where (1) is obtained by applying Chebyshev's Inequality to the non-negative function $|f_n -f|$, and (2) is obtained by the hypothesis of $L^p$ convergence. {\tiny (More precisely,  $L^p$ convergence can make $\dint |f_n -f|^p \dmu  < \epsilon_1$ for any desired $\epsilon_1 >0$ for sufficiently large $n$.  So we decompose we write $\epsilon = \frac{1}{\epsilontilde^p} \epsilon_1$.  Since $\epsilontilde^p$ is fixed, we can choose $\epsilon_1$ to get any desired $\epsilon.$)} 
+\end{proof}
+
+
+\subsubsection{Almost uniform convergence and convergence in measure} 
+
+Now we show that almost uniform convergence is stronger than convergence in measure.
+\begin{theorem}
+\[ f_n \convergenceAU f \implies f_n \convergenceInMu f \]	
+\end{theorem}
+
+\begin{proof}
+We take the definition of $\convergenceAU$ in quantified form \eqref{eqn:def_of_convergence_almost_uniformly_in_quantified_form} 
+\begin{align*}
+&\forall \, \epsilontilde >0, \exists \, A \in \F : \mu(A) < \epsilontilde \quad \text{and} \quad \forall \, \epsilon >0, \, \exists \, N : \forall \, n \geq N, \omega \in A^c \\
+& |f_n(\omega) - f(\omega) | < \epsilon 
+\end{align*}
+and remove the explicit reference to the set $A$. In particular, for sufficiently large $n$, we have
+\begin{align*} 
+& \set{\omega : |f_n(\omega) - f(\omega) | \geq \epsilon  } \subset A \\
+&\implies \mu\set{\omega : |f_n(\omega) - f(\omega) | \geq \epsilon  } \stackexplain{monotonicity of measure}{\leq} \mu(A) \stackexplain{hypoth}{<} \epsilontilde 
+\end{align*}
+So the original quantified statement becomes
+\begin{align*}
+&\forall \, \epsilontilde >0,  \epsilon >0, \exists \, N : \forall \, n \geq N \\
+& \mu\set{\omega : |f_n(\omega) - f(\omega) | \geq \epsilon  } < \epsilontilde 
+\end{align*}
+which is the definition of convergence in measure. 
+\end{proof}
+
+\subsubsection{Convergence a.e. and convergence in $L^p$}
+
+First we show that in general
+\[ f_n \convergenceAE f \notimplies f_n \convergenceInLp f \]
+
+Let $\Omega = [0, \infty)$ and $\mu$ be Lebesgue measure. Let $f_n = n \, \indicate{(0, \frac{1}{n}]}$.  Then $f_n \to 0$ a.e.  But 
+\[ || f_n -0 ||_p^p = \dint_\Omega \bigg( n \, \indicate{(0, \frac{1}{n}]} \bigg)^p \dmu = n^p \mu((0,1/n]) = n^p (\frac{1}{n}) = n^{p-1} \not\to 0 \quad \text{as} \quad n \to \infty\]
+
+However, if the sequence has a \textit{dominating function} (whose $p$th power is integrable), then the implication holds.
+
+\begin{theorem}
+\cite[Cor.~1.6.10]{ash2000probability}.  Let $f_1, f_2, \hdots, f, g$ be Borel measurable, and $|f_n| \leq g$ for all $n$, where $|g|^p$ is $\mu$-integrable $(p>0, \textnormal{fixed})$.  Then $f \in L^p$ and 
+ \[ f_n \convergenceAE f \implies f_n \convergenceInLp f \]
+\label{thm:ae_convergence_plus_dominating_function_implies_Lp_convergence}
+\end{theorem}
+
+\begin{proof}
+First note that
+\[ |f_n| \leq g \stackrel{1}{\implies} \lim_{n \to \infty } |f_n| \leq g \stackrel{2}{\implies} |f| \leq g\]
+where (1) holds because limits preserve non-strict inequalities and (2) holds because limits and absolute values commute. 
+
+From this, by raising both sides of the implication to the $p$-th power, we immediately obtain
+\[ |f_n|^p \leq |g|^p, \quad |f|^p \leq |g|^p \]	
+
+At this point, we know that $|f|^p$ is integrable (i.e. $f \in L^p$). 
+
+Now we will apply the Dominated Convergence Theorem to show $L^p$ convergence.  First, we obtain a dominating function
+\[ |f_n -f|^p \stackexplain{tr. inequal.}{\leq} (|f_n| + |f|)^p \stackexplain{from above}{\leq} (2 |g|)^p \stackexplain{hypoth.}{<} \infty\]
+
+Then we have
+%
+\[ \dlim_{n \to \infty} \dint |f_n - f|^p \dmu \stackexplain{LDCT}{=} \dint \dlim_{n \to \infty}  |f_n - f|^p \dmu \stackexplain{1}{=}   0 \]
+where (1) holds by the hypothesis of a.e. convergence (so $|f_n - f|^p =0$ a.e.) followed by the a.e. theorems (see Theorem \ref{thm:almost_everywhere} (a)). 
+\end{proof}
+
+
+We can use Theorem~\ref{thm:ae_convergence_plus_dominating_function_implies_Lp_convergence} to prove that finite-valued simple functions are dense in $L^p$.
+
+\begin{theorem}\textnormal{(Finite valued simple functions are dense in $L^p$.)}
+Let $f \in L^p, \; (0 < p < \infty)$. If $\epsilon >0$, there is a simple function $s \in L^p$ such that $||f-s||_p < \epsilon$; $s$ can be chosen to be finite-valued and to satisfy $|s| \leq |f|$.
+\label{thm:finite_valued_simple_functions_are_dense_in_Lp}	
+\end{theorem}
+
+\begin{proof}
+First note that Cor \ref{cor:measurable_function_is_limit_of_simple_functions_which_it_dominates} states that any measurable function  is the limit of a sequence of simple functions which it dominates.   In particular, we have
+\[s_n \to f \quad \text{everywhere}, \quad\quad |s_n| < f \]
+where $s_n$ is a sequence of finite-valued simple functions.
+
+Since we have identified a.e. convergence and a dominating function with the correct integrability condition {\tiny (note that $|f|^p$ is $\mu$-integrable, since $f \in L^p$ by hypothesis.)}, we can apply Theorem~\ref{thm:ae_convergence_plus_dominating_function_implies_Lp_convergence} to obtain  $s_n \convergenceInLp f$.   
+
+The conclusion immediately follows. {\tiny (For any $\epsilon>0$, we can choose an $n$ so that $||f-s_n||_p < \epsilon$.)}
+ 
+
+\end{proof}
+
+
+%
 
 
 
