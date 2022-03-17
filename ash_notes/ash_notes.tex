@@ -4140,8 +4140,8 @@ In fully quantified form, we have
 \end{align*}
 \item \textbf{Converge almost uniformly}, written $f_n \stackrel{AU}{\to} f$ if 
 \begin{align*} 
-& \forall \epsilon >0, \; \exists A \in \F : \\
-& \mu(A) < \epsilon \quad \text{and} \quad f_n \to f \quad \text{uniformly on} \; A^c 	
+& \forall \epsilon >0, \; \exists A_\epsilon \in \F : \\
+& \mu(A_\epsilon) < \epsilon \quad \text{and} \quad f_n \to f \quad \text{uniformly on} \; A_\epsilon^c 	
 \end{align*} 
 In fully quantified form\footnote{Recall that $f_n \to f$ uniformly means 
 \begin{align*}
@@ -4150,10 +4150,11 @@ In fully quantified form\footnote{Recall that $f_n \to f$ uniformly means
 \end{align*}
 }, we have 
 \begin{align*}
-&\forall \, \epsilontilde <0, \exists \, A \in \F : \mu(A) < \epsilontilde \quad \text{and} \quad \forall \, \epsilon >0, \, \exists \, N : \forall \, n \geq N, \omega \in A^c \\
-& |f_n(\omega) - f(\omega) | < \epsilon 
+&\forall \, \epsilon <0, \exists \, A_\epsilon \in \F : \mu(A_\epsilon) < \epsilon \quad \text{and} \quad \forall \, \epsilontilde >0, \, \exists \, N : \forall \, n \geq N, \omega \in A_\epsilon^c \\
+& |f_n(\omega) - f(\omega) | < \epsilontilde 
 \labelit \label{eqn:def_of_convergence_almost_uniformly_in_quantified_form}	
 \end{align*}
+ 
 
 \item \textbf{Converge in measure}, written $f_n \stackrel{\mu}{\to} f$, if	
 \[\forall \, \epsilon >0, \quad \quad \mu \set{\omega : |f_n(\omega) - f(\omega)| \geq \epsilon} \to 0 \quad \text{as} \quad n \to \infty \]
@@ -4175,15 +4176,89 @@ Note that we have canceled out the $1/p$ exponent since convergence holds with i
 \end{enumerate}
 \end{definition}
 
-\begin{question}
-Why is there an asymmetry in the definitions of convergence a.e. and convergence almost uniformly?	
-\end{question}
+\begin{remark}{\remarktitle{On the asymmetry in the definitions of convergence a.e. and convergence almost uniformly.}}
+It is regrettable \cite[pp.72]{bartle2014elements} that the modifier ``almost" has different meanings in \textit{almost everywhere} convergence and \textit{almost uniform} convergence.  For AU convergence, what is required is uniform convergence outside a set of \textit{arbitrarily large measure}, rather than uniform convergence outside a set of \textit{zero measure}.  The latter is a stronger condition (see \cite[Exercise 7J]{bartle2014elements}), which presumably Egoroff's Theorem (which motivated the construction of the AU definition) cannot attain.
+\end{remark}
 
 
-\subsection{Relations between modes of convergence}
+\subsection{Relations between modes of convergence: Overview} \label{sec:overview_of_relations_between_modes_of_convergence}
 
-\subsubsection{Convergence in measure vs. convergence in $L^p$}
-To relate $\convergenceInMu$ and $\convergenceInLp$, we can will utilize Chebyshev's Inequality. 
+In the Figures below, we summarize the relationship between modes of convergence using a charts from \cite[pp.75]{bartle2014elements}. In each chart, a solid line means that convergence in the mode at the tail of the arrow implies convergence in the mode at the head.  
+
+\begin{figure}[H]
+\centering	
+\begin{tikzpicture}[node distance=2cm]
+% Reference: https://www.overleaf.com/learn/latex/LaTeX_Graphics_using_TikZ%3A_A_Tutorial_for_Beginners_(Part_3)%E2%80%94Creating_Flowcharts
+\tikzstyle{roundrect} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=.5cm,text centered, draw=black, fill=red!30]
+\node (AE)[roundrect] {AE};
+\node (Lp) [roundrect, below of=AE]{$L^p$};
+\node (AU)[roundrect, right of=AE]{AU};
+\node (mu)[roundrect, below of=AU]{$\mu$};
+\draw [->] (AU) -- (AE);
+\draw [->](AU) -- (mu);
+\draw [->] (Lp) -- (mu);
+\end{tikzpicture}
+\caption{ \textit{Relationship between modes of convergence in a general measure space.} }
+\label{fig:modes_of_convergence_general_measure_space}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering	
+\begin{tikzpicture}[node distance=2cm]
+% Reference: https://www.overleaf.com/learn/latex/LaTeX_Graphics_using_TikZ%3A_A_Tutorial_for_Beginners_(Part_3)%E2%80%94Creating_Flowcharts
+\tikzstyle{roundrect} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=.5cm,text centered, draw=black, fill=red!30]
+\node (AE)[roundrect] {AE};
+\node (Lp) [roundrect, below of=AE]{$L^p$};
+\node (AU)[roundrect, right of=AE]{AU};
+\node (mu)[roundrect, below of=AU]{$\mu$};
+\draw [->] (AU) -- (AE);
+\draw [->](AU) -- (mu);
+\draw [->] (Lp) -- (mu);
+\draw [->] (AE) -- (AU);
+\draw [->] (AE) -- (mu);
+\end{tikzpicture}
+\caption{ \textit{Relationship between modes of convergence in a finite measure space.}}
+\label{fig:modes_of_convergence_finite_measure_space}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering	
+\begin{tikzpicture}[node distance=2cm]
+% Reference: https://www.overleaf.com/learn/latex/LaTeX_Graphics_using_TikZ%3A_A_Tutorial_for_Beginners_(Part_3)%E2%80%94Creating_Flowcharts
+\tikzstyle{roundrect} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=.5cm,text centered, draw=black, fill=red!30]
+\node (AE)[roundrect] {AE};
+\node (Lp) [roundrect, below of=AE]{$L^p$};
+\node (AU)[roundrect, right of=AE]{AU};
+\node (mu)[roundrect, below of=AU]{$\mu$};
+\draw [->] (AU) -- (AE);
+\draw [->](AU) -- (mu);
+\draw [->] (Lp) -- (mu);
+\draw [->] (AE) -- (AU);
+\draw [->] (AE) -- (mu);
+\draw [->] (AE) -- (Lp);
+\draw [->] (mu) -- (Lp);
+\draw [->] (AU) -- (Lp);
+\end{tikzpicture}
+\caption{ \textit{Relationship between modes of convergence under a dominating function.} Here we assume the sequence $(f_n)$ is dominated by a function $g$ in $L^p$.  The measure space is general (not necessarily finite.)}
+\label{fig:modes_of_convergence_under_dominating_function}
+\end{figure}
+
+We note:
+
+\begin{itemize}
+\item In a finite measure space, or when a dominating function exists, a.e. convergence becomes stronger than it is in general measure spaces. The additional two edges in moving from measure general spaces ( Fig.~\ref{fig:modes_of_convergence_general_measure_space}) to finite measure spaces  (Fig.~\ref{fig:modes_of_convergence_finite_measure_space}) are obtained from Egoroff's Theorem.   
+\item When a dominating function exists, the same relations exist as in a finite measure space, along with three new ones.  In particular, the three other modes of convergence becomes stronger relative to $L^p$ convergence.  We note that in this context, \textit{a.e. convergence implies all three other modes of convergence}!
+\end{itemize}
+
+
+\subsection{Convergence on general measure spaces: Implications}
+
+The implications in the section are powerful because they \textit{always} hold. In some special case, if one can prove that the antecedent holds, then the consequent automatically follows as well.
+
+\subsubsection{Convergence in $L^p$ implies convergence in measure}
+To relate $\convergenceInLp$ and $\convergenceInMu$, we can will utilize Chebyshev's Inequality. 
 
 \begin{theorem}{\textbf{(Chebyshev's Inequality.)}}
 Let $f : \Omega \to [0,\infty]$ be a Borel measurable function on $(\Omega, \F, \mu)$. 
@@ -4235,6 +4310,7 @@ where (1) is obtained by applying Chebyshev's Inequality to the non-negative fun
 Now we show that almost uniform convergence is stronger than convergence in measure.
 \begin{theorem}
 \[ f_n \convergenceAU f \implies f_n \convergenceInMu f \]	
+\label{thm:convergence_AU_implies_convergence_in_measure}
 \end{theorem}
 
 \begin{proof}
@@ -4256,6 +4332,44 @@ So the original quantified statement becomes
 which is the definition of convergence in measure. 
 \end{proof}
 
+\subsection{Convergence on finite measure spaces: Implications}
+
+As noted in Sec.~\ref{sec:overview_of_relations_between_modes_of_convergence}, finite measure spaces have two implications that doesn't exist for general measure spaces:  $f_n \convergenceAE f \implies f_n \convergenceAU f, \convergenceInMu f$.  We obtain the former implication via Egoroff's Theorem, and then the latter follows immediately from Thm.~\ref{thm:convergence_AU_implies_convergence_in_measure}.
+
+\begin{theorem}\textbf{(Egoroff's Theorem.)} If $\mu$ is finite and $f_1, f_2, \hdots$ and $f$ are measurable complex-valued functions, then $f_n \convergenceAE f \implies f_n \convergenceAU f$.
+\label{thm:egoroffs_theorem}
+\end{theorem}
+
+\begin{proof}
+Without loss of generality, we assume $f_n \to f$ everywhere. {\tiny (If the implication holds for everywhere convergence, it must hold for a.e. convergence.  Suppose that $N$ is a set such that $\mu(N)=0$ and $f_n \to f$ outside $N$, and suppose that $A_\epsilon$ are the sets we have obtained for AU convergence from the weaker condition.  Then we simply form the sets $N \cup A_\epsilon$ in the definition of AU convergence, and we will automatically have $\mu(N \cup A_\epsilon) \stackexplain{subadditivity}{<} \mu(N) + \mu(A_\epsilon) < \epsilon)$ and uniform convergence will hold outside of $N \cup A_\epsilon$.)}
+
+For $k,n \in \mathbb{N}$, define
+\[E_n(k) := \explaintermbrace{Set of points whose outputs are at least $\frac{1}{k}$ away from the target somewhere in the tail starting at $n$}{\bigcup_{m=n}^\infty \bigg\{ x : |f_m(x) - f(x) | > \frac{1}{k} \bigg\}} \] 
+Let us fix $k$, consider this a sequence of sets in $n$, and check the conditions for continuity from above:
+\begin{itemize}
+\item $E_n(k)$ decreases as $n$ increases? \greencheck. 
+	\begin{itemize}
+	\item Note: $\bigcap_{n=1}^\infty E_n(k) = \emptyset$ by hypothesis that $f_n \to f$ everywhere. 	
+	\end{itemize}
+\item $\mu(E_1(k)) < \infty$? \greencheck.  By hypothesis, $\mu$ is finite. 
+\end{itemize}
+Thus, by continuity from above, 
+\[  \mu\big(E_n(k)\big) \to 0 \quad \text{as} \quad n \to \infty\]
+As a result, given $\epsilon>0$ and $k \in \mathbb{N}$, we can choose $n_k$ so large that 
+\[  \mu\big(E_n(k)\big) < \epsilon 2^{-k}\]
+Now let $E := \cup_{k=1}^\infty E_{n_k}(k)$.  By subadditivity, we have
+\[ \ \mu(E) \stackexplain{subadditivity}{\leq} \ds\sum_{k=1}^\infty \mu\big(E_n(k)\big) \stackexplain{see above}{<} \ds\sum_{k=1}^\infty \epsilon 2^{-k} \stackexplain{geometric series}{=} \epsilon  \]
+Now we show that $f_n \to f$ uniformly on $E^c$.  Applying DeMorgan's law
+\[E^c \stackexplain{def. E, DeMorgan}{=}  \bigcap_{k=1}^\infty E_{n_k}(k)^c  \stackexplain{def. $E_{n}$, DeMorgan}{=}\explaintermbrace{...for all $k$}{\bigcap_{k=1}^\infty \explaintermbrace{points within a $\frac{1}{k}$ distance of target in tail starting at $n_k$}{\bigcap_{m=n_k}^\infty \bigg\{ x: |f_m(x) - f(x)| < \frac{1}{k} \bigg\}}}  \]
+Thus, $E^c$ describes precisely the points of uniform convergence. 
+\end{proof}
+
+\begin{remark}
+The proof above utilizes a set theoretic definition of uniform convergence. See Remark~\ref{rk:set_theoretic_definition_of_uniform_convergence}.	
+\end{remark}
+
+\subsection{Convergence under a dominating function: Implications}
+
 \subsubsection{Convergence a.e. and convergence in $L^p$}
 
 First we show that in general
@@ -4264,7 +4378,7 @@ First we show that in general
 Let $\Omega = [0, \infty)$ and $\mu$ be Lebesgue measure. Let $f_n = n \, \indicate{(0, \frac{1}{n}]}$.  Then $f_n \to 0$ a.e.  But 
 \[ || f_n -0 ||_p^p = \dint_\Omega \bigg( n \, \indicate{(0, \frac{1}{n}]} \bigg)^p \dmu = n^p \mu((0,1/n]) = n^p (\frac{1}{n}) = n^{p-1} \not\to 0 \quad \text{as} \quad n \to \infty\]
 
-However, if the sequence has a \textit{dominating function} (whose $p$th power is integrable), then the implication holds.
+However, if the sequence has a \textit{dominating function} (in $L^p$, i.e. its $p$th power is integrable), then the implication holds.
 
 \begin{theorem}
 \cite[Cor.~1.6.10]{ash2000probability}.  Let $f_1, f_2, \hdots, f, g$ be Borel measurable, and $|f_n| \leq g$ for all $n$, where $|g|^p$ is $\mu$-integrable $(p>0, \textnormal{fixed})$.  Then $f \in L^p$ and 
@@ -4311,8 +4425,6 @@ The conclusion immediately follows. {\tiny (For any $\epsilon>0$, we can choose 
 
 \end{proof}
 
-
-%
 
 
 
@@ -4664,5 +4776,24 @@ A \textbf{psuedometric} is a real-valued function that satisfies conditions 2 th
 
 A norm immediately induces a metric (and a semi-norm immediately induces a psuedo-metric) via the relation $d(f,g) := ||f-g||$.
 
+
+\subsection{Set theoretic definition of uniform convergence}
+
+\begin{remark}{\remarktitle{Set theoretic definition of uniform convergence}}.
+Recall that $f_n \to f$ uniformly on $A$ means 
+\begin{align*}
+&\forall \epsilon <0, \; \exists N_\epsilon : \;\forall n \geq N_\epsilon, x \in A\\
+& |f_n(x) - f(x) | < \epsilon 
+\end{align*}
+By the density of the rationals, an equivalent condition is
+\begin{align*}
+&\forall k \in \mathbb{N},  \; \exists N_k \in \mathbb{N} :  \; \forall n  \geq N_k, x \in A\\
+& |f_n(x) - f(x) | < \epsilon 
+\end{align*}
+Thus, set of points where $f_n \to f$ uniformly is given by 
+\[ U:= \explaintermbrace{...for all $k$}{\bigcap_{k=1}^\infty \explaintermbrace{points within a $\frac{1}{k}$ distance of target in tail starting at $N_k$}{\bigcap_{n=N_k}^\infty \bigg\{ x: |f_n(x) - f(x)| < \frac{1}{k} \bigg\}}}  \]
+And if $f_n \to f$ uniformly on $A$ then $A=U$.
+\label{rk:set_theoretic_definition_of_uniform_convergence}
+\end{remark}
 
 \end{document}
