@@ -350,7 +350,7 @@ Later, we will cover the Monotone Class Theorem (see Theorem \ref{thm:monotone_c
 
 \subsubsection{Borel Sets} \label{sec:borel_sets}
 
-An important example of a $\sigma$-field is the Borel Sets $\B(\R)$, defined as the smallest \sf\ of subsets of $\R$ containing all intervals $(a,b] \subset \R$.  
+An important example of a $\sigma$-field is the Borel Sets $\B(\R)$, defined as the smallest \sf\ of subsets of $\R$ containing all right semi-closed intervals $(a,b] \subset \R$.  
 
 We may alternately characterize $\B(\R)$ as the smallest \sf\ containing
 \begin{alphabate}
@@ -367,7 +367,7 @@ We may alternately characterize $\B(\R)$ as the smallest \sf\ containing
 \end{alphabate}
 
 \ifActive 
-\textbf{Workshop Exercise.}: Justify that (a) and (b) are equivalent. 
+\textbf{Workshop Exercise}: Justify that (a) and (b) are equivalent. 
 \else 
 To illustrate these equivalences, let us equate the first two conditions. That is, let us show that a \sf\ contains all open intervals $(a,b)$ iff it contains all right semi-closed intervals $(a,b]$.  To see this, simply note
 \begin{subequations}
@@ -585,12 +585,18 @@ Let $\signedmu$ be a countably additive set function on the \sf\ $\F$. Then
 We prove continuity from below, and leave continuity from above as an exercise to the reader (or see text). 
  
 First let us assume that all $\signedmu(A_n)$ are finite (*). Then 
+\ifActive 
+ \textbf{Workshop Exercise}: Give the proof under this assumption. 
+\vspace{2in}
+
+\else 
 \begin{align*}
 A &= A_1 \cupdot (A_2 - A_1) \cupdot (A_3 - A_2) \cupdot ... && 	\text{ by } \eqref{eqn:union_as_disjoint_union_for_increasing_sequences} \\
 \implies \signedmu(A) &= \signedmu(A_1) + \signedmu(A_2 - A_1) + \signedmu(A_3 - A_2) + ... && \text{(countable additivity)}\\ 
 &= \signedmu(A_1) + \signedmu(A_2) - \signedmu(A_1) + \signedmu(A_3) - \signedmu(A_2) + ... && \text{(Theorem \ref{thm:basic_properties_of_finitely_additive_set_functions} \ref{itm:piece-and-difference}, (*) }\\
 &= \ds\lim_{n \to \infty} \signedmu(A_n) && \text{(telescoping difference)}
 \end{align*}
+
 Now suppose $\signedmu(A_n) = \infty$ for some $n$.   So write 
 \begin{align*}
 A &= A_n \cupdot A- A_n && \text{(increasing sequence)}\\ 
@@ -601,6 +607,7 @@ A &= A_n \cupdot A- A_n && \text{(increasing sequence)}\\
 So $\signedmu(A)=\infty$.\footnote{Note that we cannot have $\signedmu(A - A_n)=-\infty$, because that would violate additivity.} Replace $A$ by $A_k$ for any $k \geq n$ to also find $\signedmu(A_k)=\infty$ for all $k \geq n$ and the result follows.
 
 Finally suppose $\signedmu(A_n) = -\infty$ for some $n$. Then the result follows in the same way as for $\signedmu(A_n) = \infty$. 
+\fi 
 
 \end{proof}
 
@@ -939,7 +946,7 @@ In this Section, we show that the formula $\mu(a,b] = F(b) - F(a)$ sets up a one
 \begin{proof}
 We must show that $F$ is increasing and right continuous.
 
- \ifActive 
+\ifActive 
 \textbf{Workshop Exercise}: Finish the proof.
 \else 
 \begin{enumerate}
