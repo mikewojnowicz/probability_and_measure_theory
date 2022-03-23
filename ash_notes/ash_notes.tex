@@ -5,7 +5,32 @@
 %%%
 %https://tex.stackexchange.com/questions/68821/is-it-possible-to-create-a-latex-preamble-header
 \usepackage{/Users/mwojno01/Repos/latex_preamble/preamble}
-           
+
+%%% 
+% ACTIVE VS PASSIVE AUDIENCES
+%%%
+
+% CREATE DIFFERENT VERSIONS DEPENDING ON THE AUDIENCE
+% Reference: https://ramblingacademic.com/2016/10/31/multiple-latex-document-versions/
+% Audience choices here: {active, passive}
+% The "active" audience is used when teaching and I want to give little exercises. The "passive" version is for study group where we just want to talk through things.
+
+% Define the switch here using "newif" and start its name with "if"
+% Here, NAME_OF_SWITCH == "OneCol"
+\newif\ifActive
+
+% By default, a switch is "false". Use \NAME_OF_SWITCHtrue to set to true
+% Uncomment the line below to set the switch to "true"
+\Activetrue
+
+
+% Usage
+%\ifActive 
+%% stuff
+%\else
+%% stuff
+%\fi % end if
+     
 %%% 
 % SPECIFIC TO THIS DOCUMENT
 %%%
@@ -115,7 +140,7 @@ Alternatively,
 \[ x \in \lim\inf A_n \text{ iff } x \in A_n \text{ eventually ( for all but finitely many $n$ ) } \]
 \end{definition}
 
-\begin{figure}
+\begin{figure}[H]
 \centering 
 \includegraphics[width=.5\textwidth]{images/limsup_and_liminf}	
 \caption{A sequence of sets with empty lower limit and non-empty upper limit.}
@@ -136,7 +161,7 @@ If $A_1 \subset A_2 \subset ...$ and $\cup_{n=1}^\infty A_n = A$, we say that th
 \end{definition}
 
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering 
 \includegraphics[width=.5\textwidth, angle=90]{images/increasing_and_decreasing_sequences}
 \caption{An increasing and decreasing sequence of sets, followed by a sequence of sets which is neither, but which has a limit.}
@@ -209,7 +234,7 @@ that is, if $\Omega \in \F$ and $\F$ is closed under complementation and countab
 
 \begin{remark}
 It follows that $\sigma$-fields are closed under countable intersections, since
-\[ \cap_{i=1}^\infty A_i \stackrel{\text{DeMorgan's Law}}{=} \cup_{i=1}^\infty A_i^c \]	
+\[ \cap_{i=1}^\infty A_i \stackrel{\text{DeMorgan's Law}}{=} (\cup_{i=1}^\infty A_i^c)^c \]	
 \end{remark}
 
 \begin{example}
@@ -264,12 +289,19 @@ that is, if $\Omega \in \F$ and $\F$ is closed under complementation and \textit
 
 Let $\Omega=\R$ and $\F_0 = \set{\text{finite disjoint unions of right semi-closed intervals } (a,b], a \neq b}$.  Then $\F_0$ is a field, as can be easily verified.\footnote{By convention, we also count $(a, \infty)$ as right semi-closed for $-\infty\leq a < \infty$, which is necessary for the \sf\ to be closed under complements.}   
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=.6\textwidth]{images/rsc_intervals}	
 \end{figure}
 
-But $\F_0$ is \underline{not} a \sf.  Note that if $A_n = (-\frac{1}{n},0]$, then $\bigcap_{n=1}^\infty A_n = \set{0}  \not\in \F_0$.
+But $\F_0$ is \underline{not} a \sf.  
+
+\ifActive 
+\textbf{Workshop Exercise}: Prove this.
+\else 
+Note that if $A_n = (-\frac{1}{n},0]$, then $\bigcap_{n=1}^\infty A_n = \set{0}  \not\in \F_0$.
+\fi 
+
 \label{ex:field_of_finite_disjoint_unions_of_rsc_intervals}
 \end{example}
 
@@ -334,6 +366,9 @@ We may alternately characterize $\B(\R)$ as the smallest \sf\ containing
 \item all closed sets of $\R$.\footnote{Recall that a set is open iff its complement is closed.}
 \end{alphabate}
 
+\ifActive 
+\textbf{Workshop Exercise.}: Justify that (a) and (b) are equivalent. 
+\else 
 To illustrate these equivalences, let us equate the first two conditions. That is, let us show that a \sf\ contains all open intervals $(a,b)$ iff it contains all right semi-closed intervals $(a,b]$.  To see this, simply note
 \begin{subequations}
 \begin{align}
@@ -343,6 +378,14 @@ To illustrate these equivalences, let us equate the first two conditions. That i
 \end{align}
 \label{eqn:open_intervals_as_rsc_intervals_and_vice_versa}
 \end{subequations}
+{\tiny For example, the first equation in \eqref{eqn:open_intervals_as_rsc_intervals_and_vice_versa} can be verified by the argument 
+\[x \in  \bigcap_{n=1}^\infty \bigg(a, b+\frac{1}{n}\bigg) \iff x \in (a,b-\frac{1}{n}) \; \forall n \iff x>a \; \text{and} \; x < b -\frac{1}{n} \; \forall n \iff x >a \; \text{and} \; x \leq b \iff x \in (a,b] \]
+.}
+
+\fi 
+
+
+
 
 \begin{question}
 The text gives another description of the Borel sets $\B(\R)$ as the smallest \sf\ containing $\F_0$, the field of disjoint unions of right semi-closed intervals $(a,b]$.  Can we make the same statement about the field of finite disjoint unions of left semi-closed intervals?
@@ -386,8 +429,8 @@ Let $\Omega = \set{x_1,x_2,...}$ be a finite or countably infinite set.  Let $p_
 \[\mu(A) = \ds\sum_{x_i \in A} p_i \quad \text{ for all } A \in \F\]
 Then $\mu$ is a measure on $\F$. We might call it the ``point weighting" measure. 
 \begin{itemize}
-\item If $p_i \equiv 1 \; \forall \, i$, then $\mu$ is called the \textbf{counting measure}.
-\item If $\sum_i p_i =1$, then $\mu$ is a probability measure.	
+\item If $p_i \equiv 1 \; \forall \, i$, then $\mu$ is called the \textbf{counting measure}. (It gives the number of points in $A \subset \Omega$.)
+\item If $\sum_i p_i =1$, then $\mu$ is a discrete probability measure.	
 \end{itemize}
 	
 \end{example}
@@ -485,6 +528,9 @@ Measure-like set functions have useful properties. Using the notation in Table \
 \begin{proof}
  We prove Theorem \ref{thm:basic_properties_of_finitely_additive_set_functions} (b).  The rest is an exercise for the reader (or see the text).
  
+ \ifActive 
+\textbf{Workshop Exercise}: Prove part (b).
+\else 
  First, we break things into disjoint pieces
  {\footnotesize 
 \begin{align*}
@@ -497,6 +543,7 @@ A \cup B &= \bigg(A \cap B \bigg) \, \bigcupdot \, \bigg(A \cap B^c \bigg) \bigc
 Summing (1) and (2), we obtain
 \[\fasf(A) + \fasf(B) = 2 \fasf(A \cap B) + \fasf(A \cap B^c) + \fasf(A^c \cap B). \]
 We use (3) to simplify the RHS, and the result follows.
+\fi 
 \end{proof}
 
 \begin{remark}
@@ -646,7 +693,7 @@ An attempt at a verbal description of the proof of Lemma \ref{lemma:borel_cantel
 In Example \ref{ex:Lebesgue_measure}, we discussed the concept of length of a subset of $\R$; in particular, we mentioned extending the set function given on intervals by $\mu(a,b] = b-a$ to a larger class of subsets of $\R$.  
 
 
- As remarked in Example \ref{ex:field_of_finite_disjoint_unions_of_rsc_intervals}, if we define $\F_0 = \set{\text{finite disjoint unions of right semi-closed intervals } (a,b], a < b}$, then $\F_0$ is a field, as can be easily verified.  And $\mu$ can easily be seen to be a finitely additive set function on $\F_0$.   
+ As remarked in Example \ref{ex:field_of_finite_disjoint_unions_of_rsc_intervals}, if we define $\F_0 = \set{\text{finite disjoint unions of right semi-closed intervals } (a,b], a < b}$, then $\F_0$ is a field, as can be easily verified.  And $\mu$ can easily be extended to be a finitely additive set function on $\F_0$.   
 
 \begin{figure}[H]
 \centering
@@ -656,7 +703,7 @@ In Example \ref{ex:Lebesgue_measure}, we discussed the concept of length of a su
 However, $\F_0$ is not a $\sigma$-field.   So how can we extend this function to a measure on a larger class of subsets?  For instance, we would at least like to be able to measure intervals such as $(a,b), [a,b)$ or $[a,b]$ and points $\set{x}$.   The challenges are:
 
 \begin{itemize}
-\item \textit{We need to show that $\mu$ is countably additive.} We will do this in Section 5.   Moreover, in that section, we will generalize our problem to set functions given by $\mu(a,b] = F(b)-F(a)$, where $F$ is an increasing right-continuous function from $\R$ to $\R$.
+\item \textit{We need to show that $\mu$ is countably additive.} We will do this in Section ?.   Moreover, in that section, we will generalize our problem to set functions given by $\mu(a,b] = F(b)-F(a)$, where $F$ is an increasing right-continuous function from $\R$ to $\R$.
 \item \textit{We need to extend $\mu$ to $\sigma(\F_0)$, the minimal $\sigma$-field containing $\F_0$.} In other words, we need to extend $\mu$ to the Borel sets.  We will handle the problem in this section more generally.  In this section, we will deal with the problem of extending a measure on $\F_0$ to a measure on $\sigma(\F_0)$. We do so using Carath\'eodory's Theorem  (Theorem \ref{thm:caratheodory_extension}).  Along the way, we will use Theorem \ref{thm:extension_of_finite_measure} and Theorem \ref{thm:monotone_class_theorem} to prove Theorem \ref{thm:caratheodory_extension}. 
 % We refer to a countably additive set function $\mu$ on a field $\F_0$ as a \textit{pre-measure}
 \end{itemize}
@@ -707,7 +754,7 @@ The strategy in Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_st
 For an example of where the strategy in Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy} is used, see the proof of uniqueness in the Caratheodory Extension Theorem (Theorem \ref{thm:caratheodory_extension}).  It is also used extensively to show that Borel sets have some property; see Section \ref{sec:properties_of_borel_sets}.
 
 
-\begin{theorem}{\textbf{(Carath\'eodory Extension Theorem)}} Let $\mu$ be a measure on the field $\F_0$ of subsets of $\Omega$, and assume that $\mu$ is $\sigma$-finite on $\F_0$, so that $\Omega$ can be decomposed as $\cup_{n=1}^\infty A_n$ where $A_n \in \F_0$ and $\mu(A_n) < \infty$ for all $n$.  Then $\mu$ has a unique extension to a measure on $\F := \sigma(\F_0)$, the minimal $\sigma$-field over $\F_0$. 
+\begin{theorem}{\textbf{(Carath\'eodory Extension Theorem)}} Let $\mu$ be a measure on a field $\F_0$ of subsets of $\Omega$, and assume that $\mu$ is $\sigma$-finite on $\F_0$, so that $\Omega$ can be decomposed as $\cup_{n=1}^\infty A_n$ where $A_n \in \F_0$ and $\mu(A_n) < \infty$ for all $n$.  Then $\mu$ has a unique extension to a measure on $\F := \sigma(\F_0)$, the minimal $\sigma$-field over $\F_0$. 
  \label{thm:caratheodory_extension}
 \end{theorem}
 
@@ -879,8 +926,8 @@ So by closure properties of $\sigma$-fields, $g^{-1}(A) \in \F$.
  A \textit{distribution function} on $\R$ is a map $F : \R \to \R$ that is increasing [ $a<b$ implies $F(a) \leq F(b)$] and right continuous [ $\lim_{x \downarrow x_0} F(x) = F(x_0)$]. 
  \end{definition}
  
-In this Section, we show that the formula $\mu(a,b] = F(b) - F(a)$ sets up a one-to-one correspondence between distribution functions and Lebesgue-Stieltjes measures.    
 
+In this Section, we show that the formula $\mu(a,b] = F(b) - F(a)$ sets up a one-to-one correspondence between distribution functions and Lebesgue-Stieltjes measures.  {\tiny (For reference, Fig.~\ref{fig:distribution_function_with_positive_mass_on_points_that_is_not_concentrated_on_a_countable_set} shows a distribution function.)}
  
  \subsection{$\S$ 1.4.2 Each Lebesgue-Stietljes measure uniquely determines a distribution function (up to an additive constant)}
  First, the easy part: we show that to every Lebesgue-Stieltjes  measure, there is a unique distribution function (up to an additive constant). 
@@ -892,6 +939,9 @@ In this Section, we show that the formula $\mu(a,b] = F(b) - F(a)$ sets up a one
 \begin{proof}
 We must show that $F$ is increasing and right continuous.
 
+ \ifActive 
+\textbf{Workshop Exercise}: Finish the proof.
+\else 
 \begin{enumerate}
 \item We have $F(b) - F(a) = \mu(a,b] \geq 0$, since $\mu$ is non-negative. So $F$ is increasing.  
 \item By the continuity (from above) of measure (which can be applied since since Lebesgue-Stietljes measures are finite on any interval), 
@@ -901,6 +951,7 @@ Thus, rearranging,
 \[ \ds\lim_{b' \downarrow b} F(b') = \mu(a,b] + F(a) = \bigg(F(b)-F(a)\bigg) + F(a) = F(b)\]
 So $F$ is right continuous.  
 \end{enumerate}
+\fi 
 \end{proof}
 
 
@@ -1001,6 +1052,10 @@ essentially directly applies Carathe\'odory's Extension Theorem, since we know f
 \begin{proof}
 We prove some of these statements and leave the rest to the reader.  
 
+ \ifActive 
+\textbf{Workshop Exercise}: Prove part (b)
+\else 
+
 For (b), note that $(a,b) = \cup_{n=1}^\infty (a, b-\frac{1}{n}]$.  So let $A_n = (a, b-\frac{1}{n}]$. Then  by continuity from below,
 \[\mu(a,b) = \ds\lim_{n \to \infty}  \mu(A_n) = \ds\lim_{n \to \infty} \big[F(b-\frac{1}{n}) - F(a) \big] = F(b^-) - F (a) \]
 
@@ -1014,10 +1069,11 @@ For (i), we can write $[x,\infty) = \cup_{n=1}^\infty [x, x+n)$.  So by continui
 
 For (j), we can write $\R = \cup_{n=1}^\infty [-n, n]$.  So by continuity from below, 
 \[\mu(\R) = \ds\lim_{n \to \infty}  \mu[-n,n] \stackrel{(c)}{=} \ds\lim_{n \to \infty} \big[ F(n) - F(-n) \big] = F(\infty) - F(-\infty) \]
+\fi 
 \end{proof}
 
 
-\begin{remark}{\remarktitle{Continuity at a point iffi measure zero at a point}}
+\begin{remark}{\remarktitle{Distribution is continuous at a point iffi the point has zero measure}}
 \;
 \begin{enumerate}
 \item Note that
@@ -1416,7 +1472,7 @@ For more details, Equation (1) holds since, by monotonicity, the LHS is a lower 
 %\subsubsection{Translation Invariance of Lebesgue Measure}
 
 \begin{proposition}
-\textbf{(Translation Invariance of Lebesgue Measure).} Lebesgue measure is translation invariant.  That is, if $B \in \overline{\B}(\R^n)$ and $c \in \R^n$, then $B+c \in  \overline{\B}(\R^n)$ and $\mu(B+c)=\mu(B)$, where $\mu$ is Lebesgue measure.	
+\textbf{(Translation Invariance of Lebesgue Measure.)} Lebesgue measure is translation invariant.  That is, if $B \in \overline{\B}(\R^n)$ and $c \in \R^n$, then $B+c \in  \overline{\B}(\R^n)$ and $\mu(B+c)=\mu(B)$, where $\mu$ is Lebesgue measure.	
 \label{prop:Lebesgue_measure_is_translation_invariant}
 \end{proposition}
 
@@ -4213,7 +4269,7 @@ We can write this in fully quantified form as
 \forall \, \epsilontilde>0, \epsilon>0, \exists \, N : \forall \, n \geq N: \\
 \mu \set{\omega : |f_n(\omega) - f(\omega)| \geq \epsilontilde} < \epsilon
 \end{align*}
-\item \textbf{Converge in $L^p$}, written $f_n \stackrel{L^p}{\to} f$, if	
+\item \textbf{Converge in $L^p$} (here assumed $0 < p < \infty$), written $f_n \stackrel{L^p}{\to} f$, if	
 \[ \bigg( \ds\int |f_n - f|^p \dmu \bigg)^{\cancel{\frac{1}{p}}} \to 0 \quad \text{as} \quad n \to \infty \]
 In quantified form:
 \begin{align*}
@@ -4233,7 +4289,7 @@ It is regrettable \cite[pp.72]{bartle2014elements} that the modifier ``almost" h
 
 \subsection{Relations between modes of convergence: Overview} \label{sec:overview_of_relations_between_modes_of_convergence}
 
-In the Figures below, we summarize the relationship between modes of convergence using a charts from \cite[pp.75]{bartle2014elements}. In each chart, a solid line means that convergence in the mode at the tail of the arrow implies convergence in the mode at the head.  
+In the Figures below, we summarize the relationship between modes of convergence.  The Figures borrow from the charts of \cite[pp.75]{bartle2014elements}. In each chart, a solid line means that convergence in the mode at the tail of the arrow implies convergence in the mode at the head.  
 
 \begin{figure}[H]
 \centering	
@@ -4349,7 +4405,7 @@ We have
 %
 \begin{align*}
 & \forall \, \epsilon < 0, \exists N : \forall \, n \geq N, \\
-& \mu \set{\omega : |f_n (\omega) - f(\omega) \geq \epsilontilde}  \stackexplain{(1)}{\leq} \frac{1}{\epsilontilde^p} \dint |f_n -f|^p \dmu \stackexplain{(2)}{<} \epsilon 	
+& \mu \set{\omega : |f_n (\omega) - f(\omega)| \geq \epsilontilde}  \stackexplain{(1)}{\leq} \frac{1}{\epsilontilde^p} \dint |f_n -f|^p \dmu \stackexplain{(2)}{<} \epsilon 	
 \end{align*}
 %
 where (1) is obtained by applying Chebyshev's Inequality to the non-negative function $|f_n -f|$, and (2) is obtained by the hypothesis of $L^p$ convergence. {\tiny (More precisely,  $L^p$ convergence can make $\dint |f_n -f|^p \dmu  < \epsilon_1$ for any desired $\epsilon_1 >0$ for sufficiently large $n$.  So we decompose we write $\epsilon = \frac{1}{\epsilontilde^p} \epsilon_1$.  Since $\epsilontilde^p$ is fixed, we can choose $\epsilon_1$ to get any desired $\epsilon.$)} 
@@ -4376,7 +4432,7 @@ We have
 &\forall \, \epsilontilde >0, \exists \, A \in \F : \mu(A) < \epsilontilde \quad \text{and} \quad \forall \, \epsilon >0, \, \exists \, N : \forall \, n \geq N, \omega \in A^c \\
 & |f_n(\omega) - f(\omega) | < \epsilon 
 \end{align*}
-and remove the explicit reference to the set $A$. In particular, for sufficiently large $n$, we have
+and remove the explicit reference to the set $A$. In particular, for fixed $\epsilontilde, \epsilon>0$ and sufficiently large $n$, we have
 \begin{align*} 
 & \set{\omega : |f_n(\omega) - f(\omega) | \geq \epsilon  } \subset A \\
 &\implies \mu\set{\omega : |f_n(\omega) - f(\omega) | \geq \epsilon  } \stackexplain{monotonicity of measure}{\leq} \mu(A) \stackexplain{hypoth}{<} \epsilontilde 
@@ -4392,7 +4448,7 @@ which is the definition of convergence in measure.
 
 \subsection{Convergence on finite measure spaces: Implications}
 
-As noted in Sec.~\ref{sec:overview_of_relations_between_modes_of_convergence}, finite measure spaces have two implications that doesn't exist for general measure spaces:  $f_n \convergenceAE f \implies f_n \convergenceAU f, \convergenceInMu f$.  We obtain the former implication via Egoroff's Theorem, and then the latter follows immediately from Thm.~\ref{thm:convergence_AU_implies_convergence_in_measure_and_convergence_AE}.
+As noted in Sec.~\ref{sec:overview_of_relations_between_modes_of_convergence}, finite measure spaces have two implications that doesn't exist for general measure spaces:  $f_n \convergenceAE f \implies f_n \convergenceAU f, f_n \convergenceInMu f$.  We obtain the former implication via Egoroff's Theorem, and then the latter follows immediately from Thm.~\ref{thm:convergence_AU_implies_convergence_in_measure_and_convergence_AE}.
 
 \begin{theorem}\textbf{(Egoroff's Theorem.)} If $\mu$ is finite and $f_1, f_2, \hdots$ and $f$ are measurable complex-valued functions, then $f_n \convergenceAE f \implies f_n \convergenceAU f$.
 \label{thm:egoroffs_theorem}
@@ -4414,7 +4470,7 @@ Let us fix $k$, consider this a sequence of sets in $n$, and check the condition
 Thus, by continuity from above, 
 \[  \mu\big(E_n(k)\big) \to 0 \quad \text{as} \quad n \to \infty\]
 As a result, given $\epsilon>0$ and $k \in \mathbb{N}$, we can choose $n_k$ so large that 
-\[  \mu\big(E_n(k)\big) < \epsilon 2^{-k}\]
+\[  \mu\big(E_{n_k}(k)\big) < \epsilon 2^{-k}\]
 Now let $E := \cup_{k=1}^\infty E_{n_k}(k)$.  By subadditivity, we have
 \[ \ \mu(E) \stackexplain{subadditivity}{\leq} \ds\sum_{k=1}^\infty \mu\big(E_n(k)\big) \stackexplain{see above}{<} \ds\sum_{k=1}^\infty \epsilon 2^{-k} \stackexplain{geometric series}{=} \epsilon  \]
 Now we show that $f_n \to f$ uniformly on $E^c$.  Applying DeMorgan's law
@@ -4492,7 +4548,7 @@ The conclusion immediately follows. {\tiny (For any $\epsilon>0$, we can choose 
 
 \subsection{Counterexamples}
 
-The counterexamples speak to the \textit{non}-existence of links in some directions for the Figures in Sec.~\ref{sec:overview_of_relations_between_modes_of_convergence}. 
+The counterexamples below will prove the \textit{non}-existence of all 9 missing edges from the 12 possible edges in Figure~\ref{fig:modes_of_convergence_general_measure_space}.
 
 \subsubsection{Counterexample 1: No other modes imply $L^p$ convergence in a finite (and therefore in a general) measure space}
 
@@ -4541,15 +4597,16 @@ However, for $0 < p < \infty$,
 \begin{align}
 ||f_n||_p^p &= \int_0^1 \bigg|e^n \indicate{[0,\frac{1}{n}]} \bigg|^p \wrt{\mu} \nonumber \\
 &= 	\int_0^1 e^{np}  \nonumber \indicate{[0,\frac{1}{n}]} \wrt{\mu} \nonumber  \\
-&=  e^{np} \mu \big[0,\frac{1}{n}\big] \nonumber  \\
+&= e^{np} \mu \big[0,\frac{1}{n}\big] && \tinytext{int. simple func.} \nonumber  \\
 &= e^{np} \frac{1}{n} \to \infty \nonumber %\label{eqn:modes_of_convergence_counterexample_one_height_grows_faster_than_width_shrinks}
 \end{align}
 And so $f_n \notConvergenceInLp 0$ for $p \in (0, \infty)$.
 
+\begin{remark}{\remarktitle{Convergence in $L^\infty$.}}
 Likewise, for $p=\infty$
 \[ ||f_n||_\infty = e^n \to \infty \]
  so $f_n \notConvergenceInLp 0$ for $p=\infty$. 
-
+\end{remark}
 
 \subsubsection{Counterexample 2: Another counterexample showing that no other modes imply $L^p$ convergence in a general measure space}
 
@@ -4584,13 +4641,61 @@ Let $\Omega=\R$, $\mu$ be Lebesgue measure, and $\F$ be the Borel sets.  Define
 
 
 
-\begin{remark}
+\begin{remark}{\remarktitle{Convergence in $L^\infty$.}}
 Although $(f_n)$ does not converge in $L^p$ for $(0<p<\infty)$, it does converge in $L^\infty$. This is because uniform convergence a.e. implies convergence in $L^\infty$ ; see Remark~\ref{rk:L_infty_convergence_is_equivalent_to_uniform_cconvergence_ae}.
 \end{remark}
 
+\subsubsection{Counterexample 3: no other mode of convergence implies AU convergence in a general measure space}
 
 
-\subsubsection{Counterexample 4: Convergence in $L^p$ (and therefore measure) does not imply convergence  AE or AU}
+Here we provide a counterexample showing that no other mode of convergence implies AU convergence in a general measure space.
+
+
+\begin{figure}[H]
+\centering	
+\begin{tikzpicture}[node distance=2cm]
+% Reference: https://www.overleaf.com/learn/latex/LaTeX_Graphics_using_TikZ%3A_A_Tutorial_for_Beginners_(Part_3)%E2%80%94Creating_Flowcharts
+\tikzstyle{roundrect} = [rectangle, rounded corners, minimum width=1.5cm, minimum height=.5cm,text centered, draw=black, fill=red!30]
+\node (AE)[roundrect] {AE};
+\node (Lp) [roundrect, below of=AE]{$L^p$};
+\node (AU)[roundrect, right of=AE]{AU};
+\node (mu)[roundrect, below of=AU]{$\mu$};
+\draw [->] (Lp) -- (AU) node[pos=0.5,red,sloped] {\huge$/$} ;
+\draw [->] (mu) -- (AU) node[pos=0.5,red,sloped] {\huge$/$} ;
+\draw [->] (AE) -- (AU) node[pos=0.5,red,sloped] {\huge$/$} ;
+\end{tikzpicture}
+\caption{ \textit{Three more non-existing relationships between modes of convergence in a general measure space.}  The non-existence of these links is justified by the counterexample in this section.}
+\label{fig:non_existing_relationships_between_modes_of_convergence_in_a_general_measure_space_nothing_implies_AU}
+\end{figure}
+
+Let $\Omega=[0,\infty)$, $\mu$ be Lebesgue measure, and $\F$ be the Borel sets.  Define
+\[f_n(x) =
+\begin{cases}
+1 & \text{if} \quad n \leq x \leq n+ \frac{1}{n} \\
+0 & \text{otherwise}	
+\end{cases}
+ \]
+ 
+\begin{figure}[H]
+\centering
+\includegraphics[width=.25\textwidth, angle=270]{images/modes_of_convergence_counter_example_3}	
+\caption{}
+\label{fig:modes_of_convergence_counter_example_3}	
+\end{figure}
+
+We first show that convergence holds AE, in $\mu$, and in $L^p$.
+\begin{itemize}
+\item $f_n \convergenceAE 0$? \greencheck  Clearly $f_n \to 0$ pointwise.	
+\item $f_n \convergenceInLp 0$? \greencheck  
+\[ ||f_n||_p^p = \int \bigg| \indicate{[n, n + \frac{1}{n}} \bigg|^{\cancel{p}} \wrt{\mu} = \mu\big[n , n+\frac{1}{n}\big] = \frac{1}{n} \to 0 \quad \text{as} \quad n \to \infty\]
+\item $f_n \convergenceInMu 0$? \greencheck This is implied by convergence in $L^p$ (Thm.~\ref{thm:convergence_in_Lp_implies_convergence_in_measure}).  Alternatively, we could check directly. For all $\epsilon >0$,
+\[ \mu \big\{ x : |f_n(x)| \geq \epsilon \big\} = \frac{1}{n} \to 0 \quad \text{as} \quad n \to \infty \]  
+\end{itemize}
+
+But $(f_n)$ does not converge AU (see \cite[pp.99]{ash2000probability}.
+ 
+
+\subsubsection{Counterexample 4: Convergence in $L^p$ or in $\mu$ does not imply convergence  AE or AU}
 
 
 Here we provide a counterexample showing that convergence in $L^p$ (and therefore measure) does not imply convergence AE (and therefore AU).
@@ -4610,7 +4715,7 @@ Here we provide a counterexample showing that convergence in $L^p$ (and therefor
 \draw [->] (mu) -- (AU) node[pos=0.5,red,sloped] {\huge$/$} ;
 \draw [->] (mu) -- (AE) node[pos=0.5,red,sloped] {\huge$/$} ;
 \end{tikzpicture}
-\caption{ \textit{Four more non-existing relationships between modes of convergence in a finite (and therefore general) measure space.}  The non-existence of these links is justified by the counterexample in this section.}
+\caption{ \textit{Four more non-existing relationships between modes of convergence in a finite (and therefore general) measure space.}  The non-existence of these links is justified by the counterexample in this section. (Note that the absence of link from $L^p$ to $AU$ was already justified in Fig.~\ref{fig:non_existing_relationships_between_modes_of_convergence_in_a_general_measure_space_nothing_implies_AU}.)}
 \label{fig:non_existing_relationships_between_modes_of_convergence_Lp_and_measure_do_not_imply_AE_or_AU}
 \end{figure}
 
@@ -5014,7 +5119,7 @@ Recall that $f_n \to f$ uniformly on set $A$ means
 By the density of the rationals, an equivalent condition to uniform convergence (Def.~\ref{def:uniform_convergence}) is
 \begin{align*}
 &\forall k \in \mathbb{N},  \; \exists N_k \in \mathbb{N} :  \; \forall n  \geq N_k, x \in A\\
-& |f_n(x) - f(x) | < \epsilon 
+& |f_n(x) - f(x) | < \frac{1}{k}
 \end{align*}
 Thus, set of points where $f_n \to f$ uniformly is given by 
 \[ U:= \explaintermbrace{...for all $k$}{\bigcap_{k=1}^\infty \explaintermbrace{points within a $\frac{1}{k}$ distance of target in tail starting at $N_k$}{\bigcap_{n=N_k}^\infty \bigg\{ x: |f_n(x) - f(x)| < \frac{1}{k} \bigg\}}}  \]
