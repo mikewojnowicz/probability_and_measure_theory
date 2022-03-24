@@ -21,15 +21,15 @@
 
 % By default, a switch is "false". Use \NAME_OF_SWITCHtrue to set to true
 % Uncomment the line below to set the switch to "true"
-\Activetrue
+%\Activetrue
 
 
-% Usage
+% USAGE:
 %\ifActive 
 %% stuff
 %\else
 %% stuff
-%\fi % end if
+%\fi
      
 %%% 
 % SPECIFIC TO THIS DOCUMENT
@@ -185,6 +185,18 @@ If $A_1 \subset A_2 \subset ...$ and $\cup_{n=1}^\infty A_n = A$, we say that th
 
 One can verify that this definition is consistent with the definition of limits, i.e.
 \[  \text{If } A_n \uparrow A \text{ or } A_n \downarrow A \text{ then } \lim\inf A_n = \lim\sup A_n = A.\]
+
+{\tiny For instance, let $A_n \uparrow A$.  So $A_1 \subset A_2  \subset \hdots$ and $A =\bigcup_{n=1}^\infty A_n$. 
+
+Then
+\begin{align*} 
+\lim\inf A_n &= \bigcup_{n=1}^\infty \bigcap_{k \geq n}^\infty A_k  \stackexplain{containment}{=} \bigcup_{n=1}^\infty  A_n  \stackexplain{def.}{=} A 
+\intertext{and}
+\lim\sup A_n &= \bigcap_{n=1}^\infty \bigcup_{k \geq n}^\infty A_k  \stackexplain{containment}{=} \bigcap_{n=1}^\infty \bigcup_{k =1}^\infty A_k  \stackexplain{constant}{=} \bigcup_{k =1}^\infty A_k \stackexplain{def.}{=} A 
+\end{align*}
+So if $A_n \uparrow A$, then $\lim\inf A_n= \lim\sup A_n = A$, i.e. the sequence of sets has a limit, and we write   $A= \lim_{n} A_n$.
+}
+
 
 As shown in Figure \ref{fig:increasing_and_decreasing_limits_of_sets}, limits of increasing and decreasing sequences are very special kinds of limits.
 
@@ -955,7 +967,7 @@ In this Section, we show that the formula $\mu(a,b] = F(b) - F(a)$ sets up a one
  First, the easy part: we show that to every Lebesgue-Stieltjes  measure, there is a unique distribution function (up to an additive constant). 
  
  \begin{theorem}
- Let $\mu$ be a Lebesgue-Stietljes measure on $\R$.  Let $\F : \R \to \R$ be defined (up to additive constant) by $F(b)-F(a) = \mu(a,b]$ for $a<b$. Then $F$ is a distribution function.
+ Let $\mu$ be a Lebesgue-Stietljes measure on $\R$.  Let $F : \R \to \R$ be defined (up to additive constant) by $F(b)-F(a) = \mu(a,b]$ for $a<b$. Then $F$ is a distribution function.
  \end{theorem}
 
 \begin{proof}
