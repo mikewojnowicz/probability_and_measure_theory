@@ -82,7 +82,7 @@
 \section{Overview}
 
 \subsection{References}
-The primary reference here is \cite{ash2000probability}.   The book is wonderful for statistical machine learning – it is rigorous,  but also accessible (prerequisites are undergrad-level real analysis and mathematical probability).  Most importantly, it is structured to build towards the kinds of applications in probability that we care about.   (A point of contrast would be a book like that of Stein and Shakarchi, which tends to dwell heavily on things that are of higher interest to pure mathematicians –- long existence proofs, Cantor sets and fractals, etc.) 
+The primary reference here is \cite{ash2000probability}.   The book is wonderful for statistical machine learning – it is rigorous,  but also accessible (prerequisites are undergrad-level real analysis and mathematical probability).  Most importantly, it is structured to build towards the kinds of applications in probability that we care about.   (A point of contrast would be a book like that of Stein and Shakarchi, which tends to dwell heavily on things that are of higher interest to pure mathematicians – Cantor sets and fractals, etc.) 
 
  Unless otherwise specified, all references to the ``text" refers to this textbook.  Likewise the symbol $\S$ refers to a Section of that textbook.
  
@@ -112,8 +112,8 @@ It is hard to beat directly consulting a textbook (such as \cite{ash2000probabil
 \item Add sketches to support intuition.
 \item Curate the text.\footnote{We highlight some of the main themes (and cores of proofs), offloading additional detail to the text.} 
 \item Provide additional detail in proofs.  Sometimes alternate paths have been given that seemed ``nicer" to me. 
-\item Add remarks for color (illustrating the need for propositions, the utility of theorems, or connections between things).
-\item Incorporate supporting material from worked homework problems and outside sources.\footnote{This will happen increasingly often as the notes evolve.}
+\item Add remarks (illustrating the need for propositions, the utility of theorems, or connections between things).
+\item Incorporate supporting material from outside sources or worked homework problems.
 \end{itemize}
 
 
@@ -142,17 +142,32 @@ Alternatively,
 
 \begin{figure}[H]
 \centering 
-\includegraphics[width=.5\textwidth]{images/limsup_and_liminf}	
+\includegraphics[angle=90, width=.6\textwidth]{images/limsup_and_liminf_of_sets}
+\end{figure}
+
+\begin{example}{\remarktitle{A sequence of sets with empty lower limit and non-empty upper limit.}}
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=.5\textwidth]{images/limsup_and_liminf_of_sets_example}
 \caption{A sequence of sets with empty lower limit and non-empty upper limit.}
 \end{figure}
 
-\begin{discussion}
-Discuss why the two characterizations of upper limit and lower limit are equivalent.	
-\end{discussion}
+\end{example}
+
+%\begin{discussion}
+%Discuss why the two characterizations of upper limit and lower limit are equivalent.	
+%\end{discussion}
 
 \begin{definition}
 If $\lim\inf A_n = \lim\sup A_n = A$, then A is called the \textbf{limit} of the sequence $A_1, A_2, ...$. 
 \end{definition}
+
+\begin{figure}[H]
+\centering 
+\includegraphics[angle=90, width=.5\textwidth]{images/sequence_of_sets_with_limit}
+\caption{A sequence of sets with a limit.}
+\end{figure}
 
 Now we present a particular kind of limit that will be useful when we discuss continuity of measure. 
 
@@ -163,8 +178,8 @@ If $A_1 \subset A_2 \subset ...$ and $\cup_{n=1}^\infty A_n = A$, we say that th
 
 \begin{figure}[H]
 \centering 
-\includegraphics[width=.5\textwidth, angle=90]{images/increasing_and_decreasing_sequences}
-\caption{An increasing and decreasing sequence of sets, followed by a sequence of sets which is neither, but which has a limit.}
+\includegraphics[width=.4\textwidth, angle=90]{images/increasing_and_decreasing_sequence_of_sets}
+\caption{An increasing and decreasing sequence of sets.}
 \label{fig:increasing_and_decreasing_limits_of_sets}
 \end{figure}
 
@@ -203,7 +218,7 @@ This is because $A_{n-1} \subset A_{n}$, so $A_{n-1}^c \supset A_{n}^c$ by contr
 Probability measures, and measures more generally, cannot be defined on all subsets of many spaces that we would like to deal with.  For instance, non-measurable sets can be shown to exist even for Lebesgue measure on the unit interval.  Proposition 1.2.6 of \cite{rosenthal2006first} shows that there is no definition of $P(A)$ that is defined for all subsets $A \subseteq [0,1]$ satisfying all three conditions below\footnote{In Proposition \ref{prop:existence_of_set_that_is_not_Lebesgue_measurable}, we make a similar observation, along with a proof: there cannot be a measure defined on all subsets of the reals that is both translation invariant and has a finite value on all bounded intervals.}
 \begin{enumerate}
 \item $P([a,b]) = b-a, \quad 0 \leq a \leq b \leq 1$.	
-\item $P(\bigcupdot_{n=1}^\infty A_n ) = \ds\sum_{n=1}^\infty A_n$ for $A_1, A_2, ...$ disjoint subsets of $[0,1]$.
+\item $P(\bigcupdot_{n=1}^\infty A_n ) = \ds\sum_{n=1}^\infty P(A_n)$ for $A_1, A_2, ...$ disjoint subsets of $[0,1]$.
 \item $P(A \bigoplus r) = P(A), \quad 0 \leq r \leq 1$, where $A \bigoplus r$ denotes the \textit{r-shift} of $A$, i.e. 
 \[ A \bigoplus r := \set{a+r : a \in A, a+r \leq 1} \cup \set{a+r-1 : a \in A, a +r >1}\]
 \end{enumerate}
@@ -1190,9 +1205,16 @@ For our purposes, we will focus on
 The definition of Lebesgue-Stieltjes measures on $\R^n$ parallels those on $\R$.
 
 \begin{definition}
-We define a \textit{right semi-closed interval} (or right semi-closed box) in $\R^n$ as
+We define a \textit{right semi-closed interval} (or right semi-closed rectangle or right semi-closed box) in $\R^n$ as
 \[ (a,b] :=	(a_1,b_1] \times ... \times (a_n, b_n]  = \set{x \in \R^n : a_1 < x_1 \leq b_1, ...., a_n < x_n \leq b_n }\]
 \end{definition}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[angle=90, width=.3\textwidth]{images/rsc_rectangle_in_R2}	
+\end{figure}
+
 \begin{definition}
 The \textit{vertices} of a right semi-closed interval in $\R^n$ are given by
 \[ V(a,b] = \set{a_1,b_1} \times ... \times \set{a_n, b_n}\]
@@ -1716,15 +1738,25 @@ For a larger list, recall Section \ref{sec:borel_sets}.
 
 \subsubsection{Examples}
 
-\begin{example}{\remarktitle{Constant functions are Borel measurable}}
-Consider a constant function, i.e. $h: (\Omega_1, \F_1) \to (\Omega_2, \F_2)$ such that $h(\omega) =   c$ for all $\omega \in \Omega_1$.  Then $h$ is Borel measurable, since 
-\[ h^{-1}(B) = 
-\begin{cases}
-\Omega, & \text{ if } c \in B\\ 
-\emptyset, & \text{ if } c \not\in B\\ 
-\end{cases}
-\]
-\label{ex:constant_functions_are_borel_measurable}
+\begin{example}{\remarktitle{Constant functions are measurable.}}
+Consider a constant function, i.e. $h: (\Omega_1, \F_1) \to (\Omega_2, \F_2)$ such that $h(\omega) =   c$ for all $\omega \in \Omega_1$.  
+\ifActive 
+	\textbf{Workshop Exercise:} Show that $h$ is measurable. 
+\else 
+	Then $h$ is measurable, since 
+	\[ h^{-1}(B) = 
+	\begin{cases}
+	\Omega_1, & \text{ if } c \in B\\ 
+	\emptyset, & \text{ if } c \not\in B\\ 
+	\end{cases}
+	\]
+	
+	\begin{figure}[H]
+	\centering
+	\includegraphics[angle=90, width=.5\textwidth]{images/constant_functions_are_measurable}
+	\end{figure}
+\fi 
+\label{ex:constant_functions_are_measurable}
 \end{example}
 
 \begin{example}{\remarktitle{Any function is measurable with respect to the trivial $\sigma$-field.}}
@@ -1733,10 +1765,10 @@ Consider any function $h : (\Omega_1, \F_1) \to (\Omega_2, \F_2)$, where $\F_2$ 
 \end{example}
 
 \begin{example}{\remarktitle{Indicators of Borel sets are Borel measurable.}}
-Let $A$ be a Borel subset of $\R$,\footnote{Recall Section \ref{sec:borel_sets}.  For instance, we might take $A$ to be an open interval, or a disjoint union of open intervals, or the Cantor set.} and let $I_A : \R \to \R$ be the indicator of $A$; that is $I_A(\omega)=1$ for $\omega \in A$ and $0$ for $\omega \not\in A$. Then $I_A$ is Borel measurable, since for all $B \in \B(\R)$, we have
+Let $A$ be a Borel subset of $\R$,\footnote{Recall Section \ref{sec:borel_sets}.  For instance, we might take $A$ to be an open interval, or a disjoint union of open intervals, or the Cantor set.} and let $I_A : \R \to \R$ be the indicator of $A$; that is $I_A(x)=1$ for $x \in A$ and $0$ for $x \not\in A$. Then $I_A$ is Borel measurable, since for all $B \in \B(\R)$, we have
 \[ I_A^{-1}(B) = 
 \begin{cases}
-\Omega, & \text{ if } 0,1 \in B\\ 
+\R, & \text{ if } 0,1 \in B\\ 
 A, & \text{ if } 1 \in B, 0 \not\in B \\
 A^c, & \text{ if } 0 \in B, 1 \not\in B \\	
 \emptyset, & \text{ if } 0,1 \not\in B\\ 
@@ -1745,7 +1777,7 @@ A^c, & \text{ if } 0 \in B, 1 \not\in B \\
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=.5\textwidth]{images/indicator_of_borel_set}	
+\includegraphics[width=.4\textwidth]{images/indicator_of_borel_set}	
 \end{figure}
 
 \end{example}
@@ -1772,6 +1804,12 @@ In particular, for any function $f$
 
 \textit{Proof.} $ \big(f^{-1}(B)\big)^c := \set{x : x \not\in f^{-1}(B) } = \set{x : f(x) \not\in B } = \set{x: f(x) \in B^c} = \set{x: x \in f^{-1}(B^c)} := f^{-1}(B^c).$
 
+\begin{figure}[H]
+\centering
+\includegraphics[angle=90, width=.25\textwidth]{images/inverse_images_and_complements_commute}	
+\end{figure}
+
+
 \item Inverse images and unions commute: $f^{-1}(\cup_i B_i) = \cup_i \big(f^{-1}(B_i)\big)$
 \item Inverse images and intersections commute: $f^{-1}(\cap_i B_i) = \cap_i \big(f^{-1}(B_i)\big)$	
 \end{alphabate}
@@ -1780,13 +1818,16 @@ However,
 \begin{itemize}
 \item[d)] Direct images and complements do not in general commute: $f(A^c) \neq \big(f(A)\big)^c$	
 
-\textit{Proof.} Let $f : \Omega \to \R$ be the constant function, i.e. $f(\omega) = c$ for some $c \in \R$ for all $\omega \in \Omega$.  Let $A$ be a non-empty proper subset of $\Omega$.  Then $h(A) = c$ and $h(A^c) = c$.  So $\R \setminus c = \big(h(A)\big)^c \neq  h(A^c) = c$.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=.25\textwidth]{images/direct_images_and_complements}	
-\end{figure}
-
+\ifActive 
+	\textbf{Workshop Exercise:} Prove this.
+\else 
+	\textit{Proof.} Let $f : \Omega \to \R$ be the constant function, i.e. $f(\omega) = c$ for some $c \in \R$ for all $\omega \in \Omega$.  Let $A$ be a non-empty proper subset of $\Omega$.  Then $f(A) = c$ and $f(A^c) = c$.  So $\R \setminus c = \big(f(A)\big)^c \neq  f(A^c) = c$.
+	
+	\begin{figure}[H]
+	\centering
+	\includegraphics[width=.25\textwidth]{images/direct_images_and_complements}	
+	\end{figure}
+\fi 
 
 \item[e)] Direct images and intersections do not in general commute: $f(\cap_i A_i) \neq \cap_i \big(f(A_i)\big)$	
 \end{itemize}
@@ -1919,15 +1960,20 @@ Now we integrate a simple function that is not a step function -- in fact, a sim
 
 \begin{example}{\remarktitle{Integrating the Dirichlet function}}
 Let $h$ be the Dirichlet function; that is $h = I_{\Q} : \R \to \R$ is the indicator of the rationals.  Let us integrate $h$ against Lebesgue measure $\mu$. 
-\begin{align*}
-\ds\int_{\Omega} h \wrt{\mu} &= 1 \; \mu(\Q) + 0 \; \mu(\R - \Q) && \tinytext{def. integral of simple function} \\
- &= 1 \; \mu(\Q) && \tinytext{arithmetic of $\overline{\R}$: \; $0 \cdot x = 0$ for $x \in \overline{\R}$} \\
- 	&= 1 \; \mu(\bigcupdot_{q \in \Q} \set{q}) && \tinytext{rewrite $\Q$} \\
-&= 1 \; \ds\sum_{q \in \Q} \mu(\set{q}) && \tinytext{countable additivity, $\Q$ is countable} \\
-& \stackrel{1}{=} 1 \ds\sum_{q \in \Q} 0 && \tinytext{Proposition \ref{prop:properties_of_LS_measures}} \\
-&= 0.  
-\end{align*}
-Note Equation 1 holds for any Lebesgue-Stieljes measure with a continuous distribution function (see Remark \ref{rk:continuity_at_a_point_iffi_measure_zero_at_a_point}).  However, other measures may yield other results.
+%
+\ifActive 
+	\textbf{Workshop Exercise:} Derive the integral. 
+\else 
+	\begin{align*}
+	\ds\int_{\Omega} h \wrt{\mu} &= 1 \; \mu(\Q) + 0 \; \mu(\R - \Q) && \tinytext{def. integral of simple function} \\
+	 &= 1 \; \mu(\Q) && \tinytext{arithmetic of $\overline{\R}$: \; $0 \cdot x = 0$ for $x \in \overline{\R}$} \\
+	 	&= 1 \; \mu(\bigcupdot_{q \in \Q} \set{q}) && \tinytext{rewrite $\Q$} \\
+	&= 1 \; \ds\sum_{q \in \Q} \mu(\set{q}) && \tinytext{countable additivity, $\Q$ is countable} \\
+	& \stackrel{1}{=} 1 \ds\sum_{q \in \Q} 0 && \tinytext{Proposition \ref{prop:properties_of_LS_measures}} \\
+	&= 0.  
+	\end{align*}
+	Note Equation 1 holds for any Lebesgue-Stieljes measure with a continuous distribution function (see Remark \ref{rk:continuity_at_a_point_iffi_measure_zero_at_a_point}).  However, other measures may yield other results.
+\fi 
 \label{ex:integrating_the_dirichlet_function}
 \end{example}
 
@@ -1973,7 +2019,7 @@ In this section, for now, we only provide properties that come up in our exposit
 Let $g$ and $h$  be simple functions.  Then 
 \begin{alphabate}
 \item (monotonicity) If $g \leq h$ then $\ds\int g \wrt{\mu} \leq \ds\int h \wrt{\mu}$.
-\item (addivity) $\ds\int (g + h) \wrt{\mu} = \ds\int g \wrt{\mu} + \ds\int h \wrt{\mu}$ .
+\item (additivity) $\ds\int (g + h) \wrt{\mu} = \ds\int g \wrt{\mu} + \ds\int h \wrt{\mu}$ .
 \item (scalar multiple property) $\ds\int c \, g \wrt{\mu} = c \ds\int g \wrt{\mu}$.
 \end{alphabate}
 \label{prop:properties_of_integrals_of_simple_functions}
@@ -1983,20 +2029,24 @@ Let $g$ and $h$  be simple functions.  Then
 
 
 \begin{alphabate}
-\item By definition of simple functions, we write \[g = \ds\sum_{i=1}^r x_i I_{A_i} ,\quad \quad h = \ds\sum_{j=1}^s y_j I_{B_j}  \]	
-But if we use a common (finer) partition of $\Omega$ into sets $\set{A_i \cap B_j}$, we can write
-\begin{align*}
-g = \ds\sum_{i=1}^r \ds\sum_{j=1}^s x_i I_{A_i \cap B_j} ,\quad \quad h = \ds\sum_{i=1}^r \ds\sum_{j=1}^s y_j I_{A_i \cap B_j}  
-\labelit \label{eqn:two_simple_functions_with_common_partition}
-\end{align*}
-
-where by assumption, $x_i \leq y_j$ on each $A_i \cap B_j$.	
+\item 
+\ifActive 
+	\textbf{Workshop exercise:} Prove that the monotonicity property holds for integrals of simple functions.
+\else 
+	By definition of simple functions, we write \[g = \ds\sum_{i=1}^r x_i I_{A_i} ,\quad \quad h = \ds\sum_{j=1}^s y_j I_{B_j}  \]	
+	But if we use a common (finer) partition of $\Omega$ into sets $\set{A_i \cap B_j}$, we can write
+	\begin{align*}
+	g = \ds\sum_{i=1}^r \ds\sum_{j=1}^s x_i I_{A_i \cap B_j} ,\quad \quad h = \ds\sum_{i=1}^r \ds\sum_{j=1}^s y_j I_{A_i \cap B_j}  
+	\labelit \label{eqn:two_simple_functions_with_common_partition}
+	\end{align*}
 	
-So 
-\begin{align*}
-\ds\int g \wrt{\mu}  = \ds\sum_{i=1}^r \ds\sum_{j=1}^s x_i \, \mu(A_i \cap B_j)  \leq \ds\sum_{i=1}^r \ds\sum_{j=1}^s y_i \, \mu(A_i \cap B_j) = \ds\int h \wrt{\mu}.
-\end{align*}
-
+	where by assumption, $x_i \leq y_j$ on each $A_i \cap B_j$.	
+		
+	So 
+	\begin{align*}
+	\ds\int g \wrt{\mu}  = \ds\sum_{i=1}^r \ds\sum_{j=1}^s x_i \, \mu(A_i \cap B_j)  \leq \ds\sum_{i=1}^r \ds\sum_{j=1}^s y_i \, \mu(A_i \cap B_j) = \ds\int h \wrt{\mu}.
+	\end{align*}
+\fi 
 \item We sum the two forms in \eqref{eqn:two_simple_functions_with_common_partition} and apply the definition of integral of simple functions to obtain
 \begin{align*}
 \ds\int (g+h) \wrt{\mu} = \ds\sum_{i=1}^r \ds\sum_{j=1}^s (x_i + y_j) \, \mu(A_i \cap B_j)
@@ -2112,7 +2162,7 @@ f \leq g & \implies \set{s : s \text{ simple } , 0 \leq s \leq f} \subset \set{s
 &= c \set{ \ds\int s \wrt{\mu}   : s\text{ simple } , 0 \leq s \leq f} && \tinytext{Prop. \ref{prop:supremum_and_infimum_under_constant_multiples_of_sets}}\\
 &= c \ds\int f \wrt{\mu} 
 \end{align*}
-% By Proposition \ref{prop:borel_measurability_closed_under_multiplication_and_addition} and Example \ref{ex:constant_functions_are_borel_measurable},  $cf$ is a measurable function. Now 
+% By Proposition \ref{prop:borel_measurability_closed_under_multiplication_and_addition} and Example \ref{ex:constant_functions_are_measurable},  $cf$ is a measurable function. Now 
 \end{alphabate}
 
 \end{proof}
@@ -2428,7 +2478,7 @@ Let $f,g,h$ arbitrary Borel measurable functions. Then
 
 \begin{proof}
 \begin{alphabate}
-\item Since $cf$ is a Borel measurable function\footnote{The function $cf$ is a Borel measurable fucntion by Proposition \ref{prop:borel_measurability_closed_under_multiplication_and_addition} and Example \ref{ex:constant_functions_are_borel_measurable}.  Alternatively, we could verify this directly.  If $c \geq 0$, then $\set{\omega : c f(\omega) \leq k} = \set{\omega : f(\omega) \leq k/c} \in \F$ by the Borel measurability of $f$.  Similarly if  $c < 0$, then $\set{\omega : c f(\omega) \leq k} = \set{\omega : f(\omega) \geq k/c} \in \F$ by the Borel measurability of $f$.}, we apply Definition \ref{def:integral_of_arbitrary_borel_measurable_function}.
+\item Since $cf$ is a Borel measurable function\footnote{The function $cf$ is a Borel measurable fucntion by Proposition \ref{prop:borel_measurability_closed_under_multiplication_and_addition} and Example \ref{ex:constant_functions_are_measurable}.  Alternatively, we could verify this directly.  If $c \geq 0$, then $\set{\omega : c f(\omega) \leq k} = \set{\omega : f(\omega) \leq k/c} \in \F$ by the Borel measurability of $f$.  Similarly if  $c < 0$, then $\set{\omega : c f(\omega) \leq k} = \set{\omega : f(\omega) \geq k/c} \in \F$ by the Borel measurability of $f$.}, we apply Definition \ref{def:integral_of_arbitrary_borel_measurable_function}.
 
 We have 
 \begin{subequations}
