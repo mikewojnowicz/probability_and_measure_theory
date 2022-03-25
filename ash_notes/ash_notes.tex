@@ -1950,9 +1950,9 @@ The integral of a simple function exists whenever $\infty$ and  $-\infty$ do not
 
 \begin{remark}{\remarktitle{Integrating simple functions over arbitrary measurable subsets}}
 For any $A \in \F$, we define 
-\[ \ds\int_A h \wrt{\mu} := \ds\int_\Omega h \, I_A \wrt{\mu}  \]
+\[ \ds\int_A h \wrt{\mu} := \ds\int_\Omega h \, \indicate{A} \wrt{\mu}  \]
 
-This definition is possible because whenever $h$ is a simple function, then so is $h I_A$ for any measurable set $A$.   Indeed, if we express $h = \sum_{i=1}^r y_i I_{B_i}$, then $h I_A = \sum_{i=1}^r y_i I_{A} I_{B_i} = \sum_{i=1}^r y_i I_{A \cap B_i}$, and each $A \cap B_i \in \F$.  
+This definition is possible because whenever $h$ is a simple function, then so is $h \indicate{A}$ for any measurable set $A$.   Indeed, if we express $h = \sum_{i=1}^r y_i \indicate{{B_i}}$, then $h \indicate{A} = \sum_{i=1}^r y_i \indicate{A} \indicate{B_i} = \sum_{i=1}^r y_i \indicate{A \cap B_i}$, and each $A \cap B_i \in \F$.  
 \label{rk:integrating_simple_functions_over_arbitrary_measurable_subsets}
  \end{remark}
  
@@ -2279,7 +2279,7 @@ The monotone convergence theorem can actually be used to make it easier to do co
 \end{remark}
 
 \begin{remark}{\remarktitle{Monotone convergence theorem fails for the Riemann integral.}}
-Using an enumeration of the rational numbers between 0 and 1, we define the function $f_n$ (for all nonnegative integer $n$) as the indicator function of the set of the first $n$ terms of this sequence of rational numbers. The increasing sequence of functions $f_n$ (which are nonnegative, Riemann-integrable with a vanishing integral) pointwise converges to the Dirichlet function which is not Riemann-integrable (see Remark \ref{rk:dirichlet_function_is_not_Riemann_integrable}).
+Using an enumeration of the rational numbers between 0 and 1, we define the function $f_n$ (for all nonnegative integer $n$) as the indicator function of the set of the first $n$ terms of this sequence of rational numbers. The increasing sequence of functions $f_n$ (which are nonnegative, Riemann-integrable with a vanishing integral\redfootnote{TODO: Justify that each $f_n$ is Reimann integrable.}) pointwise converges to the Dirichlet function which is not Riemann-integrable (see Remark \ref{rk:dirichlet_function_is_not_Riemann_integrable}).
 \end{remark}
 
 \paragraphnewline{Properties of integral of non-negative Borel measurable functions (Part II)}
@@ -2296,7 +2296,7 @@ Let $f, g$ be non-negative Borel measurable functions. Then
 By Proposition \ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function}, there are sequences of simple functions $\set{s_n}, \set{t_n}$ such that $s_n \uparrow f$ and $t_n \uparrow g$.   Thus, by limit properties, $(s_n + t_n) \uparrow (f+g)$.  So we have
 \begin{align*}
 	\ds\int f + \ds\int g &=\ds\lim_{n \to \infty} \ds\int s_n + \ds\lim_{n \to \infty} \ds\int t_n && \tinytext{Monotone convergence theorem} \\
-	&= \ds\lim_{n \to \infty} ( \ds\int s_n +  \ds\int t_n ) \\
+	&= \ds\lim_{n \to \infty} ( \ds\int s_n +  \ds\int t_n ) && \tinytext{Sum of limits is limit of sum} \\
 	&=  \ds\lim_{n \to \infty} \ds\int (s_n + t_n)  && \tinytext{Linearity of integral for simple functions}\\
 	&= \ds\int (f+g)  && \tinytext{Monotone convergence theorem}
  \end{align*}
@@ -2409,9 +2409,9 @@ Following \cite[pp.~86]{folland1999real}, we say that a function $h$ is extended
 
 \begin{remark}{\remarktitle{Integrals on subsets}}
 For $A \in \F$, we define 
-\[ \ds\int_A h \wrt{\mu} = \ds\int_\Omega  h I_A \wrt{\mu} \]
-This definition works because whenever $h$ is measurable, then so is $h I_A$:
-\[\set{ \omega : h I_A (\omega) < c } =	\explaintermbrace{$\in \F$ since $h$ measurable}{\set{\omega :  h(\omega) < c }} \cap \explaintermbrace{$\in \F$ by assumption}{\set{\omega : \omega \in A }} \\  \]
+\[ \ds\int_A h \wrt{\mu} = \ds\int_\Omega  h \indicate{A} \wrt{\mu} \]
+This definition works because whenever $h$ is measurable, then so is $h \indicate{A}$:
+\[\set{ \omega : h \indicate{A} (\omega) < c } =	\explaintermbrace{$\in \F$ since $h$ measurable}{\set{\omega :  h(\omega) < c }} \cap \explaintermbrace{$\in \F$ by assumption}{\set{\omega : \omega \in A }} \\  \]
 \end{remark}
 
 \begin{example}{\remarktitle{Sums as integrals against counting measure.}}
@@ -3263,6 +3263,43 @@ The example captures the fact that \textit{integrals of asymptotics give more ex
 
 \subsection{Dominated Convergence Theorem}
 
+The dominated convergence theorem justifies exchanging integrals and limits.  We begin with a motivating example where the exchange is not warranted.
+
+\begin{example}{\remarktitle{Example where limits and integrals cannot be exchanged.}} Let $f_n = \frac{1}{n} \indicate{[0,n]}$.  Then $\int_{\R} f_n = 1$ for all $n$, and so $\lim_{n \to \infty} \int_{\R} f_n =1$.  But the pointwise limit $f := \lim_{n \to \infty} f_n = 0 $ and so $\int_{\R} f = \int_{\R}  0 = 0$.  %Note that the conditions of the Dominated Convergence Theorem cannot be met; there cannot be an integrable $g$ such that $|f_n| \leq g$, since $\sup_n f_n = f$ (see Remark \ref{rk:when_upper_or_lower_bound_is_contained_in_the_set_itself}) and $f$ is not integrable.  
+
+% Reference: https://tex.stackexchange.com/questions/169638/simple-characteristic-function-or-step-function-in-pgfplots
+%https://ctan.math.washington.edu/tex-archive/graphics/pstricks/contrib/pst-plot/doc/pst-plot-doc.pdf
+\begin{figure}[H]
+\centering 
+ \begin{pspicture}(-3.5,-1)(6,2)
+ \psaxes[dx=1,Dx=1]{<->}(0,0)(-1,-1)(4,2)[$x$,-90][$y$,0]
+\rput(-0.5,0.5){\small 1/2}
+\rput(-0.5,0.3){\small 1/3}
+  
+%f_1
+%\psplot[linecolor=blue,arrows=<-o]{-3}{0}{0}
+\psplot[linecolor=blue,arrows=*-o]{0}{1}{1}
+%\psplot[linecolor=blue,arrows=*->]{1}{5}{0}
+\uput[0](.5,1.25){\blue{$f_1$}}
+%f_2
+%\psplot[linecolor=red,arrows=<-o]{-3}{0}{0}
+\psplot[linecolor=red,arrows=*-o]{0}{2}{.5}
+\uput[0](1,.7){\red{$f_2$}}
+%\psplot[linecolor=red,arrows=*->]{2}{5}{0}
+%f_3
+\psplot[linecolor=green,arrows=<-o]{-1}{0}{0}
+\psplot[linecolor=green,arrows=*-o]{0}{3}{.33}
+\uput[0](2.25,.5){\green{$f_3$}}
+\psplot[linecolor=green,arrows=*->]{3}{4}{0}
+\end{pspicture}
+\end{figure}
+\label{ex:a_sequence_where_limits_and_integrals_cannot_be_exchanged}
+\end{example}
+
+The dominated convergence theorem says that if all functions in a sequence are dominated by an integrable function ($|f_n| \leq g$), then the pathology of Example~\ref{ex:a_sequence_where_limits_and_integrals_cannot_be_exchanged} cannot happen, and limits and integrals can be safely exchanged. 
+
+
+
 \begin{theorem}{\textbf{Dominated Convergence Theorem.}}. If $f_1,f_2,...,f,g$ are Borel measurable, $|f_n| \leq g$ for all $n$, where $g$ is $\mu$-integrable, and $f_n \to f$ a.e. $[\mu]$, then $f$ is $\mu$-integrable, and $\int_\Omega f_n \dmu \to \int_\Omega f \dmu$.
 \label{thm:dominated_convergence}
 \end{theorem}
@@ -3279,8 +3316,9 @@ But since $f_n \to f$ a.e, $\liminf_{n \to \infty} f_n = \limsup_{n \to \infty} 
 \[ \ds\lim_{n \to \infty} \dint_\Omega f_n \dmu = \dint_\Omega \ds\lim_{n \to \infty} f_n \dmu.\]
 \end{proof}
 
-\begin{remark}{\remarktitle{Example where limits and integrals cannot be exchanged.}} Let $f_n = \frac{1}{n} \indicate{[0,n]}$.  Then $\int_{\R} f_n = 1$ for all $n$, and so $\lim_{n \to \infty} \int_{\R} f_n =1$.  But the pointwise limit $f := \lim_{n \to \infty} f_n = 0 $ and so $\int_{\R} f = \int_{\R}  0 = 0$.  %Note that the conditions of the Dominated Convergence Theorem cannot be met; there cannot be an integrable $g$ such that $|f_n| \leq g$, since $\sup_n f_n = f$ (see Remark \ref{rk:when_upper_or_lower_bound_is_contained_in_the_set_itself}) and $f$ is not integrable.  
-\end{remark}
+
+
+
 
 
 \subsection{Continuity and differentiability of functions defined with an integral}
