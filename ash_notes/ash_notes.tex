@@ -2160,12 +2160,16 @@ Let $f,g$ be non-negative Borel measurable functions. Then
 \begin{proof}
 \begin{alphabate}
 \item 
-\begin{align*}
-f \leq g & \implies \set{s : s \text{ simple } , 0 \leq s \leq f} \subset \set{s:  s \text{ simple } , 0 \leq s \leq g} \\
-& \implies 	\set{ \ds\int s \wrt{\mu}  :   s \text{ simple } , 0 \leq s \leq f} \subset \set{ \ds\int s \wrt{\mu} :  s \text{ simple } , 0 \leq s \leq g} \\
-& \stackrel{Prop. \ref{prop:sup_and_inf_for_subsets_are_tighter}}{\implies} \sup \set{ \ds\int s \wrt{\mu}  :  s \text{ simple } , 0 \leq s \leq f} \leq  \sup \set{ \ds\int s \wrt{\mu} :   s \text{ simple } , 0 \leq s \leq g} \\
-& \implies \ds\int f \wrt{\mu} \leq \ds\int g \wrt{\mu} 
-\end{align*}
+\ifActive
+\textbf{Workshop exercise: Prove monotonicity.}
+\else 
+	\begin{align*}
+	f \leq g & \implies \set{s : s \text{ simple } , 0 \leq s \leq f} \subset \set{s:  s \text{ simple } , 0 \leq s \leq g} \\
+	& \implies	\set{ \ds\int s \wrt{\mu}  :   s \text{ simple } , 0 \leq s \leq f} \subset \set{ \ds\int s \wrt{\mu} :  s \text{ simple } , 0 \leq s \leq g} && \tinytext{monotonicity for simple fns} \\
+	& \implies \sup \set{ \ds\int s \wrt{\mu}  :  s \text{ simple } , 0 \leq s \leq f} \leq  \sup \set{ \ds\int s \wrt{\mu} :   s \text{ simple } , 0 \leq s \leq g} && \tinytext{Prop. \ref{prop:sup_and_inf_for_subsets_are_tighter}} \\
+	& \implies \ds\int f \wrt{\mu} \leq \ds\int g \wrt{\mu} && \tinytext{def. integral for non-negative fns}
+	\end{align*}
+\fi 
 \item 
 \begin{align*}
 \ds\int c f \wrt{\mu} &= \sup \set{\ds\int s' \wrt{\mu} : s' \text{ simple } , 0 \leq s' \leq cf} \\
@@ -2416,39 +2420,43 @@ This definition works because whenever $h$ is measurable, then so is $h \indicat
 
 \begin{example}{\remarktitle{Sums as integrals against counting measure.}}
 \cite[pp.89 and Problem 1a (real part only) pp.94]{ash2000probability}.  
-Let $\Omega = \set{1,2,3, ...}$, $\F=2^\Omega$ (i.e. all subsets of $\Omega$), and $\mu$ be the counting measure. A real-valued function $f$ on $\Omega$ can be written as a sequence of real numbers; we write $f=\set{a_n}, n=1,2, \hdots$.  We will show that an integral on this space is really a sum:
-%
-\begin{align}
-\int_\Omega f \dmu = \ds\sum_{n=1}^\infty a_n	
-\label{eqn:sums_as_integrals}
-\end{align}
-%
-where the series is interpreted as $\sum_{n=1}^\infty a_n^+ - \sum_{n=1}^\infty a_n^-$ if this is not of the form $\infty - \infty$ (if it is, the integral does not exist).\footnote{Recall that $a_n^+ := \max(a_n,0)$ and $a_n^- := \max(-a_n,0)$.}
-
-To justify \eqref{eqn:sums_as_integrals}, let us first assume that $a_n \geq 0$ for each $n$.  We define a sequence of non-negative functions $\set{f_k}$ by $f_k : n \mapsto f(n) \indicate{n \leq k}$, i.e. $f_k = (a_1, a_2, \hdots, a_k, 0, 0, \hdots)$.   
-
-We know how to integrate each $f_k$, since we by the definition of integrals of simple functions, we have
-%
-\begin{align}
- \int f_k \dmu = \ds\sum_{i=1}^k a_i 
-\label{eqn:intermediate_quantity_in_proof_of_integrals_as_sums}
-\end{align}
-%
-Since $f_k \uparrow f$, we apply Monotone Convergence Theorem to obtain
-\begin{align}
-\ds\int f \dmu \stackexplain{def $f$}{=} \ds\int \lim_{k \to \infty} f_k \dmu \stackexplain{MCT}{=}    \ds\lim_{k \to \infty} \ds\int  f_k \dmu \stackexplain{\eqref{eqn:intermediate_quantity_in_proof_of_integrals_as_sums}}{=} \ds\lim_{k \to \infty}  \ds\sum_{i=1}^k a_i = \ds\sum_{i=1}^\infty a_i 
-\label{eqn:second_intermediate_quantity_in_proof_of_integrals_as_sums}
-\end{align}
-%
-Relaxing the non-negativity assumption to allow $a_n \in \R$, we then have
-%
-\begin{align*}
-\int f \dmu &= \int f^+ \dmu - \int f^- \dmu && \tinytext{Def. integral of arbitrary measurable functions}\\
-&= \ds\sum_{i=1}^\infty a_i^+  - \ds\sum_{i=1}^\infty a_i^- && \tinytext{Result with non-negative functions, \eqref{eqn:second_intermediate_quantity_in_proof_of_integrals_as_sums}}
-\end{align*}
-%
-which exists whenever this does not take the form $\infty - \infty$. 
-
+Let $\Omega = \set{1,2,3, ...}$, $\F=2^\Omega$ (i.e. all subsets of $\Omega$), and $\mu$ be the counting measure. 
+\ifActive
+\textbf{Workshop Exercise}: Show that in this setting, the integral is sum.
+\else 
+	A real-valued function $f$ on $\Omega$ can be written as a sequence of real numbers; we write $f=\set{a_n}, n=1,2, \hdots$.  We will show that an integral on this space is really a sum:
+	%
+	\begin{align}
+	\int_\Omega f \dmu = \ds\sum_{n=1}^\infty a_n	
+	\label{eqn:sums_as_integrals}
+	\end{align}
+	%
+	where the series is interpreted as $\sum_{n=1}^\infty a_n^+ - \sum_{n=1}^\infty a_n^-$ if this is not of the form $\infty - \infty$ (if it is, the integral does not exist).\footnote{Recall that $a_n^+ := \max(a_n,0)$ and $a_n^- := \max(-a_n,0)$.}
+	
+	To justify \eqref{eqn:sums_as_integrals}, let us first assume that $a_n \geq 0$ for each $n$.  We define a sequence of non-negative functions $\set{f_k}$ by $f_k : n \mapsto f(n) \indicate{n \leq k}$, i.e. $f_k = (a_1, a_2, \hdots, a_k, 0, 0, \hdots)$.   
+	
+	We know how to integrate each $f_k$, since by the definition of integrals of simple functions, we have
+	%
+	\begin{align}
+	 \int f_k \dmu = \ds\sum_{i=1}^k a_i 
+	\label{eqn:intermediate_quantity_in_proof_of_integrals_as_sums}
+	\end{align}
+	%
+	Since $f_k \uparrow f$, we apply Monotone Convergence Theorem to obtain
+	\begin{align}
+	\ds\int f \dmu \stackexplain{def $f$}{=} \ds\int \lim_{k \to \infty} f_k \dmu \stackexplain{MCT}{=}    \ds\lim_{k \to \infty} \ds\int  f_k \dmu \stackexplain{\eqref{eqn:intermediate_quantity_in_proof_of_integrals_as_sums}}{=} \ds\lim_{k \to \infty}  \ds\sum_{i=1}^k a_i = \ds\sum_{i=1}^\infty a_i 
+	\label{eqn:second_intermediate_quantity_in_proof_of_integrals_as_sums}
+	\end{align}
+	%
+	Relaxing the non-negativity assumption to allow $a_n \in \R$, we then have
+	%
+	\begin{align*}
+	\int f \dmu &= \int f^+ \dmu - \int f^- \dmu && \tinytext{Def. integral of arbitrary measurable functions}\\
+	&= \ds\sum_{i=1}^\infty a_i^+  - \ds\sum_{i=1}^\infty a_i^- && \tinytext{Result with non-negative functions, \eqref{eqn:second_intermediate_quantity_in_proof_of_integrals_as_sums}}
+	\end{align*}
+	%
+	which exists whenever this does not take the form $\infty - \infty$. 
+\fi 
 \label{ex:integrals_as_sums}
 \end{example}
 
@@ -2961,60 +2969,64 @@ Let $f,g,h$ be Borel measurable functions.
 \end{theorem}
 
 \begin{proof}
-\begin{alphabate}
-\item  
-
-	\begin{enumerate}
-	\item[i)] \underline{$f$ simple}.	 If $f$ is simple, we can write $f=\sum_{i=1}^n x_i \indicate{A_i}$.  By hypothesis, $\forall$ i, $x_i=0$ or $\mu(A_i)=0$.  Thus, $\int f \dmu = \sum_{i=1}^n x_i \indicate{A_i} =0.$
-	\item[ii)] \underline{$f$ non-negative}. Since $f=0$ a.e. $[\mu]$, then $\forall$ $s \in \set{s \text{ simple } : 0 \leq s \leq f}, s=0$ a.e. $[\mu]$.  So by item i), $\int s \dmu =0 \, \forall s$.  So by definition of the integral for non-negative functions
-	\[ \int f \dmu = \sup \set{ \int s \dmu : s \text{ simple }, 0 \leq s \leq f}  = \sup \set{0} = 0\]
-	\item[iii)]\underline{$f$ arbitrary}. $f=0$ a.e. $[\mu] \implies f^+=0, f^-=0$ a.e. $[\mu]$.  So by item ii), $\int f^+ \dmu =0, \int f^- \dmu =0.$. So by definition of the integral $ \int f \dmu = \int f^+ \dmu - \int f^- \dmu =0$.
-	\end{enumerate}
-\item We prove i) $\int h \dmu$ exists and then that ii) $\int h \dmu = \int g \dmu$
-
-	\begin{enumerate}
-	\item[i)] $\int g \dmu$ exists means that $\int g^+ \dmu, \int g^- \dmu$ are not BOTH $\infty$.  WLOG, suppose that $\int g^+ \dmu < \infty 	 \quad \tinycircled{1}$.  
+\ifActive 
+	\textbf{Workshop exercise: Prove part(a) for when $f$ is simple.  If you have time, try proving it for when $f$ is non-negative.}
+\else  
 	
-	Now $h=g$ a.e. $\implies h^+=g^+, h^-=g^-$ a.e. $\implies h^+ - g^+ = 0 \text{ a.e. } \quad \tinycircled{2}$.   So
-\begin{align*}
-0 \stackexplain{by part (a) and \tinycircled{2}}{=} \ds\int (h^+ - g^+) \dmu \stackexplain{linearity}{=} 	\ds\int h^+ \dmu  - \ds\int g^+ \dmu && \tinycircled{3}
-\end{align*}
-where we can apply linearity (see Remark \ref{rk:linearity_holds_if_additivity_holds}) because
-	\begin{itemize}
-	\item Integrals of non-negative functions always exist, and multiplication by a scalar doesn't change existence (see Prop. \ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} \ref{item:scalar_multiple}).
-	\item The difference can't be of the form $\infty - \infty$ by \tinycircled{1}.
-	\end{itemize}
-So again by \tinycircled{1}, we can add to  sides of \tinycircled{3} to get
-\[ \dint h^+ = \dint g^+ < \infty \]
-so $\int h \dmu$ exists.
-\item[ii)] Let $A:=\set{\omega : h(\omega) = g(\omega)}$.  By hypothesis, $\mu(A^c)=0$. Now we decompose each function by partitioning their domains
-\begin{align*}
-h&=h\indicate{A} + h\indicate{A^c}  \stackexplain{def. $A$}{=} g \indicate{A} + h \indicate{A^c} \labelit \label{eqn:decompose_h_by_domain}\\
-g&= g\indicate{A} + g\indicate{A^c}  \labelit \label{eqn:decompose_g_by_domain}\\	
-\end{align*}
- Now since $g \indicate{A^c}, h \indicate{A^c}$ equal 0 except on a set of measure 0, by part (a),
-\begin{align*}
-\int_{A^c} g \dmu =0, \quad  \int_{A^c} h \dmu =0
-\labelit\label{eqn:integrals_on_set_of_measure_zero}	
-\end{align*}
-And so we can apply additivity to \eqref{eqn:decompose_h_by_domain} and \eqref{eqn:decompose_g_by_domain}, since:
-	\begin{itemize}
-	\item $\int g \dmu, \int h \dmu$ exist, so since existence transfers to subsets (see Prop. \ref{prop:properties_of_LS_measures}\ref{item:existence_transfers_to_subsets}), $\int_A g \dmu, \int_{A^c} g \dmu, \int_A h \dmu, \int_{A^c} h \dmu $ exist.  
-	\item By \eqref{eqn:integrals_on_set_of_measure_zero},
+	\begin{alphabate}
+	\item  
+	
+		\begin{enumerate}
+		\item[i)] \underline{$f$ simple}.	 If $f$ is simple, we can write $f=\sum_{i=1}^n x_i \indicate{A_i}$.  By hypothesis, $\forall$ i, $x_i=0$ or $\mu(A_i)=0$.  Thus, $\int f \dmu = \sum_{i=1}^n x_i \indicate{A_i} =0.$
+		\item[ii)] \underline{$f$ non-negative}. Since $f=0$ a.e. $[\mu]$, then $\forall$ $s \in \set{s \text{ simple } : 0 \leq s \leq f}, s=0$ a.e. $[\mu]$.  So by item i), $\int s \dmu =0 \, \forall s$.  So by definition of the integral for non-negative functions
+		\[ \int f \dmu = \sup \bigg\{ \int s \dmu : s \text{ simple}, 0 \leq s \leq f \bigg\}  = \sup \set{0} = 0\]
+		\item[iii)]\underline{$f$ arbitrary}. $f=0$ a.e. $[\mu] \implies f^+=0, f^-=0$ a.e. $[\mu]$.  So by item ii), $\int f^+ \dmu =0, \int f^- \dmu =0.$. So by definition of the integral $ \int f \dmu = \int f^+ \dmu - \int f^- \dmu =0$.
+		\end{enumerate}
+	\item We prove i) $\int h \dmu$ exists and then that ii) $\int h \dmu = \int g \dmu$
+	
+		\begin{enumerate}
+		\item[i)] $\int g \dmu$ exists means that $\int g^+ \dmu, \int g^- \dmu$ are not BOTH $\infty$.  WLOG, suppose that $\int g^+ \dmu < \infty 	 \quad \tinycircled{1}$.  
+		
+		Now $h=g$ a.e. $\implies h^+=g^+, h^-=g^-$ a.e. $\implies h^+ - g^+ = 0 \text{ a.e. } \quad \tinycircled{2}$.   So
 	\begin{align*}
-	\int_A g \dmu + \int_{A^c} g \dmu & \neq \infty - \infty \\
-	\int_A h \dmu + \int_{A^c} h \dmu  & \neq \infty - \infty \\	
+	0 \stackexplain{by part (a) and \tinycircled{2}}{=} \ds\int (h^+ - g^+) \dmu \stackexplain{linearity}{=} 	\ds\int h^+ \dmu  - \ds\int g^+ \dmu && \tinycircled{3}
 	\end{align*}
-	\end{itemize}
-	So applying linearity to \eqref{eqn:decompose_h_by_domain} and \eqref{eqn:decompose_g_by_domain}, we get 
+	where we can apply linearity (see Remark \ref{rk:linearity_holds_if_additivity_holds}) because
+		\begin{itemize}
+		\item Integrals of non-negative functions always exist, and multiplication by a scalar doesn't change existence (see Prop. \ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} \ref{item:scalar_multiple}).
+		\item The difference can't be of the form $\infty - \infty$ by \tinycircled{1}.
+		\end{itemize}
+	So again by \tinycircled{1}, we can add to  sides of \tinycircled{3} to get
+	\[ \dint h^+ = \dint g^+ < \infty \]
+	so $\int h \dmu$ exists.
+	\item[ii)] Let $A:=\set{\omega : h(\omega) = g(\omega)}$.  By hypothesis, $\mu(A^c)=0$. Now we decompose each function by partitioning their domains
 	\begin{align*}
-	\int h \dmu &= 	\int_A g \dmu + 	\cancelto{0}{\int_{A^c} h \dmu} && \tinytext{cancelation by \eqref{eqn:integrals_on_set_of_measure_zero}.} \\
-	\int g \dmu &= 	\int_A g \dmu + 		\cancelto{0}{\int_{A^c} g \dmu} && \tinytext{cancelation by \eqref{eqn:integrals_on_set_of_measure_zero}.} \\
+	h&=h\indicate{A} + h\indicate{A^c}  \stackexplain{def. $A$}{=} g \indicate{A} + h \indicate{A^c} \labelit \label{eqn:decompose_h_by_domain}\\
+	g&= g\indicate{A} + g\indicate{A^c}  \labelit \label{eqn:decompose_g_by_domain}\\	
 	\end{align*}
-	And so $\int h \dmu = \int g \dmu$
-	\end{enumerate}
-\end{alphabate}
-
+	 Now since $g \indicate{A^c}, h \indicate{A^c}$ equal 0 except on a set of measure 0, by part (a),
+	\begin{align*}
+	\int_{A^c} g \dmu =0, \quad  \int_{A^c} h \dmu =0
+	\labelit\label{eqn:integrals_on_set_of_measure_zero}	
+	\end{align*}
+	And so we can apply additivity to \eqref{eqn:decompose_h_by_domain} and \eqref{eqn:decompose_g_by_domain}, since:
+		\begin{itemize}
+		\item $\int g \dmu, \int h \dmu$ exist, so since existence transfers to subsets (see Prop. \ref{prop:properties_of_LS_measures}\ref{item:existence_transfers_to_subsets}), $\int_A g \dmu, \int_{A^c} g \dmu, \int_A h \dmu, \int_{A^c} h \dmu $ exist.  
+		\item By \eqref{eqn:integrals_on_set_of_measure_zero},
+		\begin{align*}
+		\int_A g \dmu + \int_{A^c} g \dmu & \neq \infty - \infty \\
+		\int_A h \dmu + \int_{A^c} h \dmu  & \neq \infty - \infty \\	
+		\end{align*}
+		\end{itemize}
+		So applying linearity to \eqref{eqn:decompose_h_by_domain} and \eqref{eqn:decompose_g_by_domain}, we get 
+		\begin{align*}
+		\int h \dmu &= 	\int_A g \dmu + 	\cancelto{0}{\int_{A^c} h \dmu} && \tinytext{cancelation by \eqref{eqn:integrals_on_set_of_measure_zero}.} \\
+		\int g \dmu &= 	\int_A g \dmu + 		\cancelto{0}{\int_{A^c} g \dmu} && \tinytext{cancelation by \eqref{eqn:integrals_on_set_of_measure_zero}.} \\
+		\end{align*}
+		And so $\int h \dmu = \int g \dmu$
+		\end{enumerate}
+	\end{alphabate}
+\fi 
 \end{proof}
 
 \begin{remark}
@@ -3271,27 +3283,31 @@ The dominated convergence theorem justifies exchanging integrals and limits.  We
 %https://ctan.math.washington.edu/tex-archive/graphics/pstricks/contrib/pst-plot/doc/pst-plot-doc.pdf
 \begin{figure}[H]
 \centering 
- \begin{pspicture}(-3.5,-1)(6,2)
- \psaxes[dx=1,Dx=1]{<->}(0,0)(-1,-1)(4,2)[$x$,-90][$y$,0]
-\rput(-0.5,0.5){\small 1/2}
-\rput(-0.5,0.3){\small 1/3}
-  
-%f_1
-%\psplot[linecolor=blue,arrows=<-o]{-3}{0}{0}
-\psplot[linecolor=blue,arrows=*-o]{0}{1}{1}
-%\psplot[linecolor=blue,arrows=*->]{1}{5}{0}
-\uput[0](.5,1.25){\blue{$f_1$}}
-%f_2
-%\psplot[linecolor=red,arrows=<-o]{-3}{0}{0}
-\psplot[linecolor=red,arrows=*-o]{0}{2}{.5}
-\uput[0](1,.7){\red{$f_2$}}
-%\psplot[linecolor=red,arrows=*->]{2}{5}{0}
-%f_3
-\psplot[linecolor=green,arrows=<-o]{-1}{0}{0}
-\psplot[linecolor=green,arrows=*-o]{0}{3}{.33}
-\uput[0](2.25,.5){\green{$f_3$}}
-\psplot[linecolor=green,arrows=*->]{3}{4}{0}
-\end{pspicture}
+\includegraphics[width=.5\textwidth]{images/sequence_of_functions_where_limit_and_integral_cannot_be_exchanged}
+\caption{The first 3 functions in a sequence $f_n$ where limit and integral (against Lebesgue measure) cannot be exchanged.}
+% 
+% Source code for making picture 
+% \begin{pspicture}(-3.5,-1)(6,2)
+% \psaxes[dx=1,Dx=1]{<->}(0,0)(-1,-1)(4,2)[$x$,-90][$y$,0]
+%\rput(-0.5,0.5){\small 1/2}
+%\rput(-0.5,0.3){\small 1/3}
+%  
+%%f_1
+%%\psplot[linecolor=blue,arrows=<-o]{-3}{0}{0}
+%\psplot[linecolor=blue,arrows=*-o]{0}{1}{1}
+%%\psplot[linecolor=blue,arrows=*->]{1}{5}{0}
+%\uput[0](.5,1.25){\blue{$f_1$}}
+%%f_2
+%%\psplot[linecolor=red,arrows=<-o]{-3}{0}{0}
+%\psplot[linecolor=red,arrows=*-o]{0}{2}{.5}
+%\uput[0](1,.7){\red{$f_2$}}
+%%\psplot[linecolor=red,arrows=*->]{2}{5}{0}
+%%f_3
+%\psplot[linecolor=green,arrows=<-o]{-1}{0}{0}
+%\psplot[linecolor=green,arrows=*-o]{0}{3}{.33}
+%\uput[0](2.25,.5){\green{$f_3$}}
+%\psplot[linecolor=green,arrows=*->]{3}{4}{0}
+%\end{pspicture}
 \end{figure}
 \label{ex:a_sequence_where_limits_and_integrals_cannot_be_exchanged}
 \end{example}
@@ -3779,11 +3795,15 @@ if
 
 Below we give examples.  For these examples, let $(\Omega, \F) = (\R, \B(\R))$.
 
-\begin{enumerate}
-\item Let $\mu$ be a univariate Gaussian and $\nu$ be a Gaussian that is truncated (e.g. to the set of positive reals).  Then $\nu \ll \mu$ but $\mu \not\ll \nu$.
-\item Let $\mu$ be Lebesgue measure and $\nu$ give the number of integers in a set.  Then $\nu \not\ll \mu$ and $\mu \not\ll \nu$.
-\item Let $\mu$ be Lebesgue measure and $\nu$ be twice Lebesgue measure.  Then $\nu \ll \mu$ and $\mu \ll \nu$.
-\end{enumerate}
+\ifActive
+\textbf{Workshop Discussion:} Can you think of any examples?
+\else 
+	\begin{enumerate}
+	\item Let $\mu$ be a univariate Gaussian and $\nu$ be a Gaussian that is truncated (e.g. to the set of positive reals).  Then $\nu \ll \mu$ but $\mu \not\ll \nu$.
+	\item Let $\mu$ be Lebesgue measure and $\nu$ give the number of integers in a set.  Then $\nu \not\ll \mu$ and $\mu \not\ll \nu$.
+	\item Let $\mu$ be Lebesgue measure and $\nu$ be twice Lebesgue measure.  Then $\nu \ll \mu$ and $\mu \ll \nu$.
+	\end{enumerate}
+\fi 
 \label{ex:examples_with_absolute_continuity}
 \end{example}
 
@@ -3799,8 +3819,13 @@ Then $\nu \ll \mu$
 \end{remark}
 
 \begin{proof}\footnote{My first attempt at a proof worked through the definition for Lebesgue integral, working up from simple functions to non-negative to arbitrary functions.  However, the proof we provide here, which uses the strategy in Section 2.2 of \cite{ash2000probability}, is much nicer.  Note that my original strategy of proving via the definition just basically recapitulates the proof of Theorem \ref{thm:almost_everywhere} (a), so we might as well rely on the Theorem to do that dirty work.}
-If $\mu(A) =0$, $h \indicate{A} = 0$ a.e.  So by Theorem \ref{thm:almost_everywhere} (a), 
-\[ \ds\int_A h \dmu = 0 \]
+
+\ifActive
+\textbf{Workshop Exercise: Prove this.}
+\else 
+	If $\mu(A) =0$, $h \indicate{A} = 0$ a.e.  So by Theorem \ref{thm:almost_everywhere} (a), 
+	\[ \ds\int_A h \dmu = 0 \]
+\fi 
 \end{proof}
 
 \begin{remark}{\remarktitle{Radon-Nikodym as a converse.}}
