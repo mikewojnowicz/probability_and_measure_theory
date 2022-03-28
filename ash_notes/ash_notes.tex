@@ -1949,10 +1949,10 @@ The integral of a simple function exists whenever $\infty$ and  $-\infty$ do not
 \end{remark}
 
 \begin{remark}{\remarktitle{Integrating simple functions over arbitrary measurable subsets}}
-For any $A \in \F$, we define 
-\[ \ds\int_A h \wrt{\mu} := \ds\int_\Omega h \, \indicate{A} \wrt{\mu}  \]
+For any $A \in \F$ and simple function $s$, we define 
+\[ \ds\int_A s \wrt{\mu} := \ds\int_\Omega s \, \indicate{A} \wrt{\mu}  \]
 
-This definition is possible because whenever $h$ is a simple function, then so is $h \indicate{A}$ for any measurable set $A$.   Indeed, if we express $h = \sum_{i=1}^r y_i \indicate{{B_i}}$, then $h \indicate{A} = \sum_{i=1}^r y_i \indicate{A} \indicate{B_i} = \sum_{i=1}^r y_i \indicate{A \cap B_i}$, and each $A \cap B_i \in \F$.  
+This definition is possible because whenever $s$ is a simple function, then so is $s \indicate{A}$ for any measurable set $A$.   Indeed, if we express $s = \sum_{i=1}^r y_i \indicate{{B_i}}$, then $s \indicate{A} = \sum_{i=1}^r y_i \indicate{A} \indicate{B_i} = \sum_{i=1}^r y_i \indicate{A \cap B_i}$, and each $A \cap B_i \in \F$.  
 \label{rk:integrating_simple_functions_over_arbitrary_measurable_subsets}
  \end{remark}
  
@@ -2089,13 +2089,13 @@ is a measure on $\F$.
 \end{proposition}
 
 \begin{proof}
-We show  countable additivity.\footnote{Non-negativity is clear from the definition.  See Remark \ref{rk:integrating_simple_functions_over_arbitrary_measurable_subsets}.}  Let $A = \bigcupdot_{i=1}^\infty A_i$.  Then
+Weshow  countable additivity.\footnote{Non-negativity is clear from the definition.  See Remark \ref{rk:integrating_simple_functions_over_arbitrary_measurable_subsets}.}  So let $A = \bigcupdot_{i=1}^\infty A_i$.   Writing the simple function as $s = \sum_{j=1}^r y_j \indicate{B_j}$, we obtain
 
 \begin{align*}
-\ds\int_A s \wrt{\mu} &= \ds\sum_{j=1}^n y_j \, \mu(B_j \cap A) && \tinytext{Remark \ref{rk:integrating_simple_functions_over_arbitrary_measurable_subsets}} \\
-&= \ds\sum_{j=1}^n \ds\sum_{i=1}^\infty y_i \, \mu(B_j \cap A_i) && \tinytext{countable additivity} \\
-&= \ds\sum_{i=1}^\infty  \ds\sum_{j=1}^n y_i \, \mu(B_j \cap A_i) && \tinytext{sum of limit is limit of sum} \\
-&= \ds\sum_{i=1}^\infty \ds\int_{A_i} s \wrt{\mu}
+\ds\int_A s \wrt{\mu} &= \ds\sum_{j=1}^r y_j \, \mu(B_j \cap A) && \tinytext{Integrals of simple functions over subsets (see Remark \ref{rk:integrating_simple_functions_over_arbitrary_measurable_subsets})} \\
+&= \ds\sum_{j=1}^r \ds\sum_{i=1}^\infty y_i \, \mu(B_j \cap A_i) && \tinytext{countable additivity -- note $\bigg(B_j \cap \bigcupdot_{i=1}^\infty A_i \bigg) = \bigcupdot_{i=1}^\infty (B_j \cap A_i)$} \\
+&= \ds\sum_{i=1}^\infty  \ds\sum_{j=1}^r y_i \, \mu(B_j \cap A_i) && \tinytext{sum of limit is limit of sum} \\
+&= \ds\sum_{i=1}^\infty \ds\int_{A_i} s \wrt{\mu} &&  \tinytext{Remark \ref{rk:integrating_simple_functions_over_arbitrary_measurable_subsets}} 
 \end{align*}
 \end{proof}
 
