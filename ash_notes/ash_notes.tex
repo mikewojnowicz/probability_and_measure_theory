@@ -4957,8 +4957,8 @@ The \textbf{product $\sigma$-field} $\M \otimes \N$ is the $\sigma$-field on $X 
 \end{definition}
 
 \begin{definition}{\textbf{Sections.}}
-Suppose that $E \subset X \times Y$.  For any $x \in X$ and $y \in Y$, we define the \textit{x-section} $E_x \subset Y$ and \textit{y-section} $E_y \subset X$ by:
-\[ E_x := \set{y \in Y : (x,y) \in E}, \quad E_y := \set{x \in X : (x,y) \in E} \]
+Suppose that $E \subset X \times Y$.  For any $x \in X$ and $y \in Y$, we define the \textit{x-section} $E_x \subset Y$ and \textit{y-section} $E^y \subset X$ by:
+\[ E_x := \set{y \in Y : (x,y) \in E}, \quad E^y := \set{x \in X : (x,y) \in E} \]
 \end{definition}
 
 \begin{figure}[H]
@@ -4975,7 +4975,7 @@ Given a rectangle $A \times B \subset X \times Y$, the sections are given by
 B,& x \in A \\
 \emptyset, & x \not\in A	
 \end{cases} \quad \quad \quad 
-(A \times B)_y = 
+(A \times B)^y = 
 \begin{cases}
 A,& y \in B \\
 \emptyset, & y \not\in B 	
@@ -4987,13 +4987,13 @@ A,& y \in B \\
 \end{example}
 
 
-\begin{proposition}{\remarktitle{All sections of a measurable set are measurable.}} If $(X,\M)$ and $(Y,\N)$ are measurable spaces, and $E \in \M \otimes \N$, then $E_x \in \M$ for every $x \in X$ and $E_y \in \N$ for every $y \in Y$. 
+\begin{proposition}{\remarktitle{All sections of a measurable set are measurable.}} If $(X,\M)$ and $(Y,\N)$ are measurable spaces, and $E \in \M \otimes \N$, then $E_x \in \M$ for every $x \in X$ and $E^y \in \N$ for every $y \in Y$. 
 \label{prop:sections_of_a_measurable_set_are_measurable}
 \end{proposition}
 
 \begin{proof}
 We apply the ``Good sets strategy" (Sec.~\ref{sec:good_sets_strategy}).   Let
-\[  \G := \{ E \subset X \times Y : E_x \in \N \text{ for all} \; x \in X \quad \text{and} \quad E_y \in \M \text{ for all} \; y \in Y \}. \]
+\[  \G := \{ E \subset X \times Y : E_x \in \N \text{ for all} \; x \in X \quad \text{and} \quad E^y \in \M \text{ for all} \; y \in Y \}. \]
 We have
 \begin{itemize}
 \item $\G$ contains all measurable rectangles, since the sections of $A \times B$ are given by \eqref{eqn:sections_of_rectangles}.
@@ -5084,7 +5084,7 @@ I'm not sure that $\lambda$ in Thm~\ref{thm:extended_product_measure_theorem} sh
 
 \begin{corollary}\textbf{(Classical product measure theorem.)}
 Let $(X, \M, \mu)$ and $(Y, \N, \nu)$ be $\sigma$-finite measure spaces.  Then the set function given by 
-\[ \lambda(E) := \int \nu(E_x) \mu(dx) = \int \mu(E_y) \nu(dy) \]
+\[ \lambda(E) := \int \nu(E_x) \mu(dx) = \int \mu(E^y) \nu(dy) \]
 is the unique measure on $\M \otimes \N$ such that 
 \[ \lambda(A \times B) = \mu(A) \nu(B) \]
 for all $A \in \M, B \in \N$.  Moreover, $\lambda$ is $\sigma$-finite on $\M \otimes \N$, and is a probability measure if $\mu$ and $\nu$ are.  The measure $\lambda$ is called the product of $\mu$ and $\nu$, and is written $\lambda = \mu \times \nu$.
@@ -5094,6 +5094,11 @@ for all $A \in \M, B \in \N$.  Moreover, $\lambda$ is $\sigma$-finite on $\M \ot
 \begin{proof}
 In Theorem~\ref{thm:extended_product_measure_theorem}, take $\nu(x, \cdot) = \nu$ for all $x \in X$.  The second formula for $\lambda$ is obtained by interchanging $\mu$ and $\nu$.	
 \end{proof}
+
+\subsection{Fubini-Tonelli theorem}
+
+In this section, we follow \cite{folland1999real} in restricting our consideration to classical product measures (as defined in Cor.~\ref{cor:classical_product_measure_theorem}).  For more general statements that work with extended product measures (as defined in Theorem.~\ref{thm:extended_product_measure_theorem}, see \cite[pp.105]{ash2000probability}. 
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
