@@ -2228,7 +2228,7 @@ Let $f,g$ be non-negative Borel measurable functions. Then
 
 The following proposition may provide additional confidence in Definition \ref{def:integral_of_non_negative_Borel_measurable_function}, since simple functions approximate non-negative Borel measurable functions.
 
-\begin{proposition}
+\begin{proposition}\textbf{(Any non-negative Borel measurable function is the pointwise limit of a sequence of simple functions.)}
 Let $h$ be a non-negative Borel measurable function.  Then there is a sequence $\set{s_n}$ of simple functions such that $0 \leq s_1 \leq s_2 \leq ... \leq h$, $s_n \to h$ pointwise, and $s_n \to h$ uniformly on any set on which $h$ is bounded.	
 \label{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function}
 \end{proposition}
@@ -2331,10 +2331,10 @@ Using an enumeration of the rational numbers between 0 and 1, we define the func
 
 With the monotone convergence theorem in hand, we can now provide some additional properties of the integrals of non-negative Borel measurable functions.
 
-\begin{proposition}
+\begin{proposition}{\textbf{Additivity of integration with non-negative Borel measurable functions.}}
 Let $f, g$ be non-negative Borel measurable functions. Then
 \[ \ds\int f + \ds\int g = \ds\int f+g \]
-\label{prop:additivity_of_integral_for_non_negative_Borel_measurable_functions}	
+\label{prop:additivity_of_integral_for_non_negative_Borel_measurable_functions}
 \end{proposition}
 
 \begin{proof}
@@ -2348,7 +2348,6 @@ By Proposition \ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_
 \end{proof}
 
 Below we show that Proposition \ref{prop:additivity_of_integral_for_non_negative_Borel_measurable_functions} actually extends to linearity with countably infinite sums. 
-
 
 \begin{corollary}{\remarktitle{Linearity with countably infinite sums of non-negative measurable functions}}
 If $\set{f_n}$ is a sequence of non-negative measurable functions,  and 
@@ -2388,6 +2387,10 @@ and the RHS of \eqref{eqn:consequence_of_linearity_with_countably_infinite_sums_
 
 \end{remark}
 
+
+\begin{remark}{\remarktitle{Linearity of integration with non-negative Borel measurable functions.}} The scalar multiple property is given by Prop.~\ref{prop:properties_of_integrals_of_non_negative_borel_measurable_functions}, and the additivity is given by Prop.~\ref{prop:additivity_of_integral_for_non_negative_Borel_measurable_functions}.
+\label{rk:integrals_are_linear_over_non_negative_Borel_measurable_function}
+\end{remark}
 
 
 %{rk:continuity_of_measure_applied_to_measures_given_by_integrals_of_simple_functions_over_sets}
@@ -4956,7 +4959,7 @@ The \textbf{product $\sigma$-field} $\M \otimes \N$ is the $\sigma$-field on $X 
 \[ \M \otimes \N := \sigma(\{ A \times B : A \in \M, \, B \in \N \})\]
 \end{definition}
 
-\begin{definition}{\textbf{Sections.}}
+\begin{definition}{\textbf{Sections of sets.}}
 Suppose that $E \subset X \times Y$.  For any $x \in X$ and $y \in Y$, we define the \textit{x-section} $E_x \subset Y$ and \textit{y-section} $E^y \subset X$ by:
 \[ E_x := \set{y \in Y : (x,y) \in E}, \quad E^y := \set{x \in X : (x,y) \in E} \]
 \end{definition}
@@ -5095,9 +5098,75 @@ for all $A \in \M, B \in \N$.  Moreover, $\lambda$ is $\sigma$-finite on $\M \ot
 In Theorem~\ref{thm:extended_product_measure_theorem}, take $\nu(x, \cdot) = \nu$ for all $x \in X$.  The second formula for $\lambda$ is obtained by interchanging $\mu$ and $\nu$.	
 \end{proof}
 
-\subsection{Fubini-Tonelli theorem}
+\subsection{Classical Fubini-Tonelli theorem}
 
-In this section, we follow \cite{folland1999real} in restricting our consideration to classical product measures (as defined in Cor.~\ref{cor:classical_product_measure_theorem}).  For more general statements that work with extended product measures (as defined in Theorem.~\ref{thm:extended_product_measure_theorem}, see \cite[pp.105]{ash2000probability}. 
+In this section, we follow \cite{folland1999real} in restricting our consideration to classical product measures (as defined in Cor.~\ref{cor:classical_product_measure_theorem}).  For more general statements that work with extended product measures (as defined in Theorem.~\ref{thm:extended_product_measure_theorem}), see \cite[pp.105]{ash2000probability}. 
+
+\begin{definition}\textbf{(Sections of functions)} If $f$ is a function on $X \times Y$, we define the \textbf{x-section} $f_x$ and \textbf{y-section} $f^y$ by
+\[ f_x(y) = f^y(x) = f(x,y)\] 	
+\end{definition}
+
+So the section is obtained by fixing one variable and letting the other vary. 
+
+\begin{example}
+\[ (\indicate{E})_x =  \indicate{{E_x}} \quad \text{and} \quad (\indicate{E})_y =  \indicate{{E_y}}  \]
+
+{\tiny We prove the left hand side only (as the right side follows immediately by interchanging variables). By definition of sections of functions, we have
+\[\bigg(\indicate{E}\bigg)_x = \bigg(\indicate{ \set{(x,y) : (x,y) \in E}}\bigg)_x \stackexplain{def. sections of functions}{=} \indicate{\set{y: (x,y) \in E}}\] 
+By definition of sections of sets, we have
+\[ \indicate{{E_x}} = \indicate{\set{y: (x,y) \in E}} \]
+since by definition, $E_x := \set{y \in Y : (x,y) \in E}$. 
+}
+\end{example}
+
+\begin{theorem}\textbf{Classical Fubini-Tonelli Theorem.}   Suppose that $(X,\M,\mu)$ and $(Y, \N, \nu)$ are $\sigma$-finite measure spaces.  
+\begin{alphabate}
+\item (Tonelli.) If $f$ is a non-negative measurable function on $X \times Y$ then
+\[ g(x) = \int f_x \wrt{\nu}, \quad \quad h(y) = \int f^y \wrt{\mu} \]
+are non-negative measurable functions on $X$ and $Y$, respectively, and 
+\begin{align}
+\int f \wrt{(\mu \times \nu)} = \int \int f(x,y) \wrt{\nu(y)}   \wrt{\mu(x)}  = \int \int f(x,y) \wrt{\mu(x)}  \wrt{\nu(y)}   
+\label{eqn:classical_fubini_tonelli_equation}
+\end{align}
+\item (Fubini.) If $f \in L^1(\mu \times \nu)$ then 
+	\begin{enumerate}
+		\item $f_x \in L^1(\nu)$ for a.e. $x \in X$, \quad $f^y \in L^1(\mu)$ for a.e. $y \in Y$
+		\item $g(x) = \int f_x \wrt{\nu} \in L^1(\mu),  \quad h(y) = \int f^y \wrt{\mu} \in L^1(\nu)$
+		\item \eqref{eqn:classical_fubini_tonelli_equation} holds.
+	\end{enumerate}
+\end{alphabate}	
+\end{theorem}
+
+\begin{proof}
+Our proof of Fubini-Tonelli mimics the construction of the integral.   
+
+We begin with Tonelli's, which covers the first three steps.
+\begin{enumerate}
+\item \textit{Step 1: $f$ is an indicator function}.   Here, Tonelli's theorem reduces to the classical product measure theorem {\tiny  [$\lambda(E) := \int \nu(E_x) \mu(dx) = \int \mu(E^y) \nu(dy) $; see Cor.~\ref{cor:classical_product_measure_theorem}.  Note that when integrating $f(x,y)$ against one variable, the function becomes a section.  So when integrating $f(x,y)$ against a measure on $y$, it becomes $f_x(y)$.]}  
+\item \textit{Step 2: $f$ is a non-negative simple function.}  Here, Tonelli's theorem follows from step 1 and linearity. {\tiny (Recall linearity always applies for non-negative simple functions; see Remark~\ref{rk:integrals_are_linear_over_non_negative_Borel_measurable_function}.)}  
+\item \textit{Step 3: $f$ is a general non-negative measurable function}.  We can find a sequence of simple functions $\set{f_n} \uparrow f$ by Prop.~\ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function}.   We now show two things:
+	\begin{itemize}
+	\item The inner integrands $g, h$ are measurable. To see this, define corresponding sequences $\set{g_n}, \set{h_n}$ via 
+	\[ g_n(x) = \int (f_n)x \wrt{\nu}, \quad \quad h_n(y) = \int (f_n)^y \wrt{\mu} \]
+	Since $f_n \uparrow f$, by Monotone Convergence Theorem, $g_n \uparrow g, h_n \uparrow h$. Thus, $g, h$ are measurable. 
+	\item Tonelli's theorem holds.  To see this, we apply Monotone Convergence Theorem again {\tiny (this time on $g_n \uparrow g, h_n \uparrow h$)}, and we obtain 
+	\begin{align*}
+	\int g \dmu & \stackexplain{MCT
+	}{=} \lim_n \int g_n \dmu  \\
+	&\stackexplain{def $g_n$
+	}{=}\lim_n \int \bigg( \int (f_n)_x \wrt{\nu} \bigg) \dmu \\
+	& \stackexplain{def sec. of functions}{=} \lim_n \int \bigg( \int f_n(x,y) \wrt{\nu(y)} \bigg) \dmu(x) \\
+	& \stackexplain{Step 2}{=} \lim_n \int f_n \wrt{(\mu \times \nu)} \\
+	& \stackexplain{MCT}{=} \int f \wrt{(\mu \times \nu)}
+	\end{align*}
+	which is the first equality of \eqref{eqn:classical_fubini_tonelli_equation}.  The second equality is obtained by applying the same logic to $h$. 
+	\end{itemize}
+
+\end{enumerate}
+\end{proof}
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
