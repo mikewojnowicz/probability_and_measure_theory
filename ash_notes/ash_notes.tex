@@ -881,9 +881,10 @@ So
 \cite[Thm.~1.14]{folland1999real} gives a useful version of Theorem \ref{thm:caratheodory_extension},  which provides an explicit construction of the measure extended from a pre-measure. {\tiny (The constructiveness will be useful e.g. for product measures (see Sec.~\ref{sec:product_measure}; in particular see the product measure of the unit square diagonal under lebesgue and counting measure factors Ex.~\ref{ex:lebesgue_counting_measure_on_the_unit_square_diagonal}.)}
 
 Folland's construction is as follows:  Let $\F_0 \subset \mathcal{P}(\Omega)$ be a field, $\mu_0$ be a premeasure on $\F_0$, and $\F = \sigma(\F_0)$.   Then there exists a measure $\mu$ on $\F$ such that $\mu |_{\F_0} = \mu_0$, namely
+for all $A \in \F$,
 %
 \begin{align}
-\mu(A) = \inf \bigg\{ \ds\sum_{j=1}^\infty \mu_0(A) : A_j \in \F_0, \bigcup_{j=1}^\infty A_j \supset A  \bigg\} \quad \quad \quad \forall A \in \F
+\mu(A) = \inf \bigg\{ \ds\sum_{j=1}^\infty \mu_0(A) : A_j \in \F_0, \bigcup_{j=1}^\infty A_j \supset A  \bigg\} 
 \label{eqn:explicit_construction_of_measure_extended_from_premeasure}	
 \end{align}
 %
@@ -5088,7 +5089,7 @@ Note that this collection now includes sets that aren't rectangles
 
 \subsubsection{Construction of the product measure}
 
-Let $C \in F_0$ be a disjoint union of rectangles $A_1 \times B_1, A_2 \times B_2, \hdots A_n \times B_n$.  {\tiny  (By Remark Rk.~\ref{rk:the_collection_of_finite_disjoint__unions_of_rectangles_is_a_field},  $F_0$ is a field. ) }
+Let $C \in F_0$ be a finite disjoint union of rectangles $A_1 \times B_1, A_2 \times B_2, \hdots A_n \times B_n$.  {\tiny  (By Remark Rk.~\ref{rk:the_collection_of_finite_disjoint__unions_of_rectangles_is_a_field},  $F_0$ is a field. ) }
 
 Define the set function 
 \[ \pi_0 (C) := \ds\sum_{i=1}^n \mu(A_i) \nu(B_i) \]
@@ -5239,12 +5240,12 @@ Our proof of Fubini-Tonelli mimics the construction of the integral.
 
 We begin with Tonelli's, which covers the first three steps.
 \begin{enumerate}
-\item \textit{Step 1: $f$ is an indicator function}.   Here, Tonelli's theorem reduces to the classical product measure theorem {\tiny  [$\lambda(E) := \int \nu(E_x) \mu(dx) = \int \mu(E^y) \nu(dy) $; see Cor.~\ref{cor:classical_product_measure_theorem}.  Note that when integrating $f(x,y)$ against one variable, the function becomes a section.  So when integrating $f(x,y)$ against a measure on $y$, it becomes $f_x(y)$.]}  
+\item \textit{Step 1: $f$ is an indicator function}.   Here, Tonelli's theorem reduces to the classical product measure theorem {\tiny  [If $f=\indicate{E}$, then \eqref{eqn:classical_fubini_tonelli_equation} becomes $\pi(E) := \int \nu(E_x) \mu(dx) = \int \mu(E^y) \nu(dy) $, which holds by   Cor.~\ref{cor:classical_product_measure_theorem}.]}   % Note that when integrating $f(x,y)$ against one variable, the function becomes a section.  So when integrating $f(x,y)$ against a measure on $y$, it becomes $f_x(y)$.]}  
 \item \textit{Step 2: $f$ is a non-negative simple function.}  Here, Tonelli's theorem follows from step 1 and linearity. {\tiny (Recall linearity always applies for non-negative simple functions; see Remark~\ref{rk:integrals_are_linear_over_non_negative_Borel_measurable_function}.)}  
 \item \textit{Step 3: $f$ is a general non-negative measurable function}.  We can find a sequence of simple functions $\set{f_n} \uparrow f$ by Prop.~\ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function}.   We now show two things:
 	\begin{itemize}
 	\item The inner integrands $g, h$ are measurable. To see this, define corresponding sequences $\set{g_n}, \set{h_n}$ via 
-	\[ g_n(x) = \int (f_n)x \wrt{\nu}, \quad \quad h_n(y) = \int (f_n)^y \wrt{\mu} \]
+	\[ g_n(x) = \int (f_n)_x \wrt{\nu}, \quad \quad h_n(y) = \int (f_n)^y \wrt{\mu} \]
 	Since $f_n \uparrow f$, by Monotone Convergence Theorem, $g_n \uparrow g, h_n \uparrow h$. Thus, $g, h$ are measurable. 
 	\item Tonelli's theorem holds.  To see this, we apply Monotone Convergence Theorem again {\tiny (this time on $g_n \uparrow g, h_n \uparrow h$)}, and we obtain 
 	\begin{align*}
@@ -5259,7 +5260,23 @@ We begin with Tonelli's, which covers the first three steps.
 	which is the first equality of \eqref{eqn:classical_fubini_tonelli_equation}.  The second equality is obtained by applying the same logic to $h$. 
 	\end{itemize}
 \end{enumerate}
-\red{TODO: Finish proof of Fubini part of Fubini-Tonelli}
+Now we do Fubini's part of the theorem.  We start by verifying the conditions (i),(ii), and then show that \eqref{eqn:classical_fubini_tonelli_equation} holds (which parallels ``Step 4" in the construction of the integral).
+
+\begin{itemize}
+\item[i)] 
+\begin{align*} 
+f \in L^1(\mu \times \nu) &\iff \int f \wrt{(\mu \times \nu)} < \infty  && \tinytext{by definition} \\
+& \iff \int |f| \wrt{(\mu \times \nu)} < \infty \\
+& \iff \int \int |f| \wrt{\mu} \wrt{\nu} = \int \int |f| \wrt{\nu} \wrt{\mu} < \infty && \tinytext{Tonelli} \\
+& \iff \int \int f \wrt{\mu} \wrt{\nu} = \int \int f \wrt{\nu} \wrt{\mu} < \infty \\
+& \implies \explaintermbrace{$:=h(y)$}{\int f^y \wrt{\mu(x)}} < \infty \; \text{ a.e. } y , \quad \explaintermbrace{$:=g(x)$}{\int f_x \wrt{\nu(y)}} < \infty  \text{ a.e. } x && \tinytext{Finite integrals have finite integrands a.e.; Thm.~\ref{thm:properties_of_functions_derived_from_properties_of_integrals}} \\
+& \iff f^y \in L^1(\mu) \text{ for a.e. } y \in Y, \quad f_x \in L^1(\nu) \text{ for a.e.  } x \in X && \tinytext{by definition}
+\end{align*}
+\item[ii)] \red{TODO}	
+\item \textit{Step 4:} \red{TODO} 
+\end{itemize}
+
+%{thm:properties_of_functions_derived_from_properties_of_integrals}
 \end{proof}
 
 When integrating a function $f$ which is not necessarily non-negative, verifying that Fubini's theorem applies requires integrating against product measure.  Integrating against product measure can be difficult -- product measure is defined in terms of an infimum.  Remark~\ref{rk:using_fubini_and_tonelli_theorems_in_tandem_to_avoid_integrating_against_product_measure_when_verifying_interchange_of_order_of_integration} shows us a way out of this quandry. 
@@ -5274,11 +5291,11 @@ The Fubini and Tonelli theorems are frequently used in tandem.  Typically one wi
 
 \subsection{Examples}
 
-The example below shows that the classical Fubini-Tonelli Theorem (Thm.~\ref{thm:classical_fubini_tonelli}) can fail when at least one factor in the product measure is not $\sigma$-finite.  In fact, in the example below, the three kinds of integrals yield \textit{three} distinct values!\footnote{I like this example because it illustrates how integrating against product measure is conceptually \textit{distinct} from iterated integrals, rather than defined in terms of them (as sometimes seems to be the case in calculus).}
+The example below shows that the classical Fubini-Tonelli Theorem (Thm.~\ref{thm:classical_fubini_tonelli}) can fail when at least one factor in the product measure is not $\sigma$-finite.  In fact, in the example below, the three kinds of integrals yield \textit{three} distinct values!\footnote{I like this example because it illustrates how integrating against product measure is conceptually \textit{distinct} from iterated integrals, rather than defined in terms of them (as sometimes seems to be the case in calculus).}. % MTW: I've commented this out because the example doesn't show that the relation fails to hold for sigma-finite spaces.  {\tiny (Moreover, an iterated integral can be finite even when the integral against product measure is infinite.  So when verifying the conditions for exchanging the order of integration, it's not sufficient to just show that one iterated integral is finite.  We actually need to integrate against product measure, or use the strategy of Remark~\ref{rk:using_fubini_and_tonelli_theorems_in_tandem_to_avoid_integrating_against_product_measure_when_verifying_interchange_of_order_of_integration}).} 
   
 \begin{example}{\remarktitle{Lebesgue-counting measure of the diagonal of the unit square.}}
 \cite[Exercise 2.46, pp.68]{folland1999real} Let $X=Y=[0,1], \M =\N = \B_{[0,1]}, \mu = \text{Lebesgue measure}$ and $\nu = \text{counting measure}$.  If $D:=\set{(x,x) : x \in [0,1]}$ is the diagonal in $X \times Y$, then 
-\[\int \int \indicate{D} \wrt{\mu} \wrt{\nu}\neq \int \int \indicate{D} \wrt{\nu} \wrt{\mu} \neq \int \int \indicate{D} \wrt{(\mu \times \nu)} \]
+\[\int \int \indicate{D} \wrt{\mu} \wrt{\nu}\neq \int \int \indicate{D} \wrt{\nu} \wrt{\mu} \neq \int \indicate{D} \wrt{(\mu \times \nu)} \]
 
 \begin{figure}[H]
 \centering 
@@ -5293,7 +5310,7 @@ The example below shows that the classical Fubini-Tonelli Theorem (Thm.~\ref{thm
 \item First we show $\int \int \indicate{D} \wrt{\mu} \wrt{\nu} = 0$.
 %
 \begin{align*}
-\int \int \indicate{D} \wrt{\mu} \wrt{\nu} & = \int \int \indicate{ \set{(x,y) \, : \, y \in [0,1], x=y}} \wrt{\mu(x)} \wrt{\nu(y)} \\
+\int \int \indicate{D} \wrt{\mu} \wrt{\nu} 
 & = \int_{[0,1]} \int_{\set{x: x=y}} 1 \wrt{\mu(x)} \wrt{\nu(y)} \\
 & = \int_{[0,1]} \mu(\set{x: x=y}) \wrt{\nu(y)} \\
 &= \int_{[0,1]} 0 \wrt{\nu(y)} = 0
@@ -5301,21 +5318,21 @@ The example below shows that the classical Fubini-Tonelli Theorem (Thm.~\ref{thm
 \item Next, we show $\int \int \indicate{D} \wrt{\nu} \wrt{\mu}  = 1$.
 %
 \begin{align*}
-\int \int \indicate{D}  \wrt{\nu} \wrt{\mu} & = \int \int \indicate{ \set{(x,y) \, : \, x \in [0,1], y=x}} \wrt{\nu(y)} \wrt{\mu(x)}  \\
+\int \int \indicate{D}  \wrt{\nu} \wrt{\mu} 
 & = \int_{[0,1]} \int_{\set{y: y=x}} 1  \wrt{\nu(y)} \wrt{\mu(x)} \\
 & = \int_{[0,1]} \nu(\set{y: y=x}) \wrt{\mu(x)} \\
 &= \int_{[0,1]} 1 \wrt{\mu(x)} = \mu([0,1]) = 1
 \end{align*}
 
-\item Now we show $\int \int \indicate{D} \wrt{(\mu \times \nu)} = \infty$. By the definition of integrals of simple functions, we have $\int \int \indicate{D} \wrt{(\mu \times \nu)} = \mu \times \nu(D)$.  So applying the (computational) definition of product measure \eqref{eqn:computational_def_of_product_measure}, we want to show 
+\item Now we show $\int \indicate{D} \wrt{(\mu \times \nu)} = \infty$. By the definition of integrals of simple functions, we have $\int \indicate{D} \wrt{(\mu \times \nu)} = \mu \times \nu(D)$.  So applying the (computational) definition of product measure \eqref{eqn:computational_def_of_product_measure}, we want to show 
 \begin{align}
-\mu \times \nu(D): = \inf \bigg\{ \ds\sum_{n=1}^\infty \mu(A_n) \nu(B_n) : \cup_{n=1}^\infty (A_n \times B_n) \supseteq D, \; A_n \in \B(\R), B_n \subseteq [0,1] \bigg\} = \infty 
+\mu \times \nu(D): = \inf \bigg\{ \ds\sum_{n=1}^\infty \mu(A_n) \nu(B_n) : \cup_{n=1}^\infty (A_n \times B_n) \supseteq D, \; A_n, B_n \in \B(\R)\bigg\} = \infty 
 \label{eqn:lesbegue_counting_product_measure_of_diagonal_of_unit_square_is_infinity}
 \end{align}
 
 
 To do this, we first observe that
-\[\cup_{n=1}^\infty (A_n \times B_n) \supseteq D \implies \cup_{n=1}^\infty A_n \cap B_n \supseteq [0,1] \quad \quad \quad \tinycircled{1}. \]
+\[\cup_{n=1}^\infty (A_n \times B_n) \supseteq D \implies \cup_{n=1}^\infty (A_n \cap B_n) \supseteq [0,1] \quad \quad \quad \tinycircled{1}. \]
 %
 {\tiny $\tinycircled{1}$ holds because
 \[\cup_{n=1}^\infty (A_n \times B_n) = \set{(x,y) : x \in A_n \text{ and } y \in B_n \text{ for some } n } \] 
@@ -5329,7 +5346,7 @@ Next we observe that
 {\tiny $\tinycircled{2}$ holds because
 
 \begin{align*}
-\tinytext{$\tinycircled{1}$} \implies & \mu([0,1]) \stackexplain{monotonicity}{\leq} \mu(\cup_{n=1}^\infty A_n \cap B_n) \stackexplain{subadditivity}{\leq} \ds\sum_{n=1}^\infty \mu(A_n \cap B_n) 	&& \\
+\tinytext{$\tinycircled{1}$} \implies & 1 = \mu([0,1]) \stackexplain{monotonicity}{\leq} \mu(\cup_{n=1}^\infty A_n \cap B_n) \stackexplain{subadditivity}{\leq} \ds\sum_{n=1}^\infty \mu(A_n \cap B_n) 	&& \\
 \implies & \exists N : \mu(A_N \cap B_N) \geq \epsilon > 0 && \tinytext{True by contraposition} \\
 \implies & \exists N : \mu(A_N), \mu(B_N) \geq \epsilon > 0  && \tinytext{by monotonicity, since $A_N \cap B_N \subseteq A_N, B_N$}
 \end{align*}
