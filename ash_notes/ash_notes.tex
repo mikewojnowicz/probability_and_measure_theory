@@ -53,9 +53,14 @@
 % Signed measure
 \newcommand{\signedmu}{\wt{\mu}}
 
+% CARATHEODORY
+\newcommand{\Caratheodory}{Carath\'eodory}
+
+
+
 % RATIONALS
 \renewcommand{\Q}{\mathbb{Q}}
-\begin{document}
+
 
 % EPSILON TILDE
 \newcommand{\epsilontilde}{\widetilde{\epsilon}}
@@ -72,6 +77,8 @@
 \newcommand{\notConvergenceInMu}{\stackrel{\mu}{\not\to}}
 \newcommand{\notConvergenceInLp}{\stackrel{L^p}{\not\to}}
 \newcommand{\notConvergenceInLinfty}{\stackrel{L^\infty}{\not\to}}
+
+\begin{document}
 
 \title{Notes on Probability and Measure Theory} 
 \maketitle
@@ -341,6 +348,7 @@ An \textbf{elementary family} is a collection $\scriptE$ of subsets of $\Omega$ 
 \item if $E,F \in \scriptE$ then $\scriptE \cap \F \in \scriptE$
 \item if $E \in \scriptE$, then $E^c$ is a finite disjoint union of members of $\scriptE$.	
 \end{alphabate}
+\label{def:elementary_family}
 \end{definition}
 
 \begin{proposition}
@@ -779,7 +787,7 @@ However, $\F_0$ is not a $\sigma$-field.   So how can we extend this function to
 
 \begin{itemize}
 \item \textit{We need to show that $\mu$ is countably additive.} We will do this in Section ?.   Moreover, in that section, we will generalize our problem to set functions given by $\mu(a,b] = F(b)-F(a)$, where $F$ is an increasing right-continuous function from $\R$ to $\R$.
-\item \textit{We need to extend $\mu$ to $\sigma(\F_0)$, the minimal $\sigma$-field containing $\F_0$.} In other words, we need to extend $\mu$ to the Borel sets.  We will handle the problem in this section more generally.  In this section, we will deal with the problem of extending a measure on $\F_0$ to a measure on $\sigma(\F_0)$. We do so using Carath\'eodory's Theorem  (Theorem \ref{thm:caratheodory_extension}).  Along the way, we will use Theorem \ref{thm:extension_of_finite_measure} and Theorem \ref{thm:monotone_class_theorem} to prove Theorem \ref{thm:caratheodory_extension}. 
+\item \textit{We need to extend $\mu$ to $\sigma(\F_0)$, the minimal $\sigma$-field containing $\F_0$.} In other words, we need to extend $\mu$ to the Borel sets.  We will handle the problem in this section more generally.  In this section, we will deal with the problem of extending a measure on $\F_0$ to a measure on $\sigma(\F_0)$. We do so using \Caratheodory's Theorem  (Theorem \ref{thm:caratheodory_extension}).  Along the way, we will use Theorem \ref{thm:extension_of_finite_measure} and Theorem \ref{thm:monotone_class_theorem} to prove Theorem \ref{thm:caratheodory_extension}. 
 % We refer to a countably additive set function $\mu$ on a field $\F_0$ as a \textit{pre-measure}
 \end{itemize}
 
@@ -826,10 +834,10 @@ The strategy is then to simply
 The strategy in Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy} is very much like induction.  Step \#1 is the ``base" step and step \#2 is the ``induction" step.
 \end{remark}
 
-For an example of where the strategy in Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy} is used, see the proof of uniqueness in the Caratheodory Extension Theorem (Theorem \ref{thm:caratheodory_extension}).  It is also used extensively to show that Borel sets have some property; see Section \ref{sec:properties_of_borel_sets}.
+For an example of where the strategy in Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy} is used, see the proof of uniqueness in the \Caratheodory~Extension Theorem (Theorem \ref{thm:caratheodory_extension}).  It is also used extensively to show that Borel sets have some property; see Section \ref{sec:properties_of_borel_sets}.
 
 
-\begin{theorem}{\textbf{(Carath\'eodory Extension Theorem)}} Let $\mu$ be a measure on a field $\F_0$ of subsets of $\Omega$, and assume that $\mu$ is $\sigma$-finite on $\F_0$, so that $\Omega$ can be decomposed as $\cup_{n=1}^\infty A_n$ where $A_n \in \F_0$ and $\mu(A_n) < \infty$ for all $n$.  Then $\mu$ has a unique extension to a measure on $\F := \sigma(\F_0)$, the minimal $\sigma$-field over $\F_0$. 
+\begin{theorem}{\textbf{(\Caratheodory~Extension Theorem)}} Let $\mu$ be a measure on a field $\F_0$ of subsets of $\Omega$, and assume that $\mu$ is $\sigma$-finite on $\F_0$, so that $\Omega$ can be decomposed as $\cup_{n=1}^\infty A_n$ where $A_n \in \F_0$ and $\mu(A_n) < \infty$ for all $n$.  Then $\mu$ has a unique extension to a measure on $\F := \sigma(\F_0)$, the minimal $\sigma$-field over $\F_0$. 
  \label{thm:caratheodory_extension}
 \end{theorem}
 
@@ -869,9 +877,24 @@ So
 \end{proof}
 
 
+\begin{remark}{\remarktitle{Folland's statement of \Caratheodory's extension theorem, with explicit construction of the measure.}}
+\cite[Thm.~1.14]{folland1999real} gives a useful version of Theorem \ref{thm:caratheodory_extension},  which provides an explicit construction of the measure extended from a pre-measure. {\tiny (The constructiveness will be useful e.g. for product measures (see Sec.~\ref{sec:product_measure}; in particular see the product measure of the unit square diagonal under lebesgue and counting measure factors Ex.~\ref{ex:lebesgue_counting_measure_on_the_unit_square_diagonal}.)}
+
+Folland's construction is as follows:  Let $\F_0 \subset \mathcal{P}(\Omega)$ be a field, $\mu_0$ be a premeasure on $\F_0$, and $\F = \sigma(\F_0)$.   Then there exists a measure $\mu$ on $\F$ such that $\mu |_{\F_0} = \mu_0$, namely
+%
+\begin{align}
+\mu(A) = \inf \bigg\{ \ds\sum_{j=1}^\infty \mu_0(A) : A_j \in \F_0, \bigcup_{j=1}^\infty A_j \supset A  \bigg\} \quad \quad \quad \forall A \in \F
+\label{eqn:explicit_construction_of_measure_extended_from_premeasure}	
+\end{align}
+%
+Folland's construction also highlights that the $\sigma$-finite assumption in Theorem \ref{thm:caratheodory_extension} is only necessary for uniqueness. 
+\end{remark}
+
 \begin{remark}
 The proof of Theorem \ref{thm:caratheodory_extension} reveals the appeal of $\sigma$-finite measures -- they can be decomposed as the countable sum of finite measures (and the order of summation of double series can be reversed for nonnegative series, so countable additivity still holds). 
 \end{remark}
+
+
 
 
 In Remark \ref{rk:monotone_classes_and_sigma_fields} (b), we observed that minimal $\sigma$-fields over a field can be characterized as the minimal monotone classes over a field -- so we merely need to close the field over increasing and decreasing sequences of sets.   This idea suggests that if $\F_0$ is a field and $\F = \sigma(\F_0)$, sets in $\F$ can be approximated in some sense by sets in $\F_0$.  The following result formalizes this notion. 
@@ -5016,16 +5039,77 @@ We have
 \end{itemize}
 \end{proof}
 
-\subsection{Product measure}
+\subsection{Product measure} \label{sec:product_measure}
+
+Here we follow \cite[pp.64]{folland1999real}.  Let $(X,\M, \mu)$ and $(Y,\N, \nu)$ be measure spaces. We have already discussed the product $\sigma$-algebra $\M \otimes \N$ on $X \times Y$.  Now we construct a measure on $\M \otimes \N$ that is, in an obvious sense, the product of $\mu$ and $\nu$. 
+
+\subsubsection{Preliminaries}
+
+\begin{remark}{\remarktitle{Measurable rectangles are an elementary family.}}
+
+The set of measurable rectangles is an elementary family (Def.~\ref{def:elementary_family}).  First, we see that rectangles are closed under intersection.
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=.4\textwidth, angle=90]{images/rectangles_are_closed_under_intersection}	
+\end{figure}
+
+{\tiny We can formally prove this as follows:
+
+\begin{align*}
+(A \times B) \cap (E \times F)	&= \set{ (x,y) : x \in A, y \in B} \cap \set{ (x,y) : x \in E, y \in F} \\
+&= \set{ (x,y) : x \in A \cap E , y \in B \cap F} \\
+= (A \cap E) \times (B \cap F)
+\end{align*}
+}
+
+Similarly, the complement of a rectangle is a disjoint union of rectangles:
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=.4\textwidth, angle=90]{images/complement_of_a_rectangle_is_a_disjoint_union_of_rectangles}	
+\end{figure}
+\label{rk:measurable_rectangles_are_an_elementary_family}
+\end{remark}
+
+\begin{remark}{\remarktitle{The collection of finite disjoint unions of rectangles is a field.}}
+	
+This follows immediately from Remark~\ref{rk:measurable_rectangles_are_an_elementary_family} and Proposition~\ref{prop:from_elementary_families_to_fields}.
+
+Note that this collection now includes sets that aren't rectangles 
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=.4\textwidth, angle=90]{images/disjoint_union_of_rectangles_neednt_be_a_rectangle}	
+\end{figure}
+\label{rk:the_collection_of_finite_disjoint__unions_of_rectangles_is_a_field}
+\end{remark}
 
 
-\red{TODO: Fill in, using the arguments of Folland. Be sure to give the reader a pointer that we're using \cite[pp.68]{folland1999real}.  Give the definitional construction along with the simplified construction.}
+\subsubsection{Construction of the product measure}
 
+Let $C \in F_0$ be a disjoint union of rectangles $A_1 \times B_1, A_2 \times B_2, \hdots A_n \times B_n$.  {\tiny  (By Remark Rk.~\ref{rk:the_collection_of_finite_disjoint__unions_of_rectangles_is_a_field},  $F_0$ is a field. ) }
 
+Define the set function 
+\[ \pi_0 (C) := \ds\sum_{i=1}^n \mu(A_i) \nu(B_i) \]
+Then $\pi_0$ is well-defined, and a premeasure on $\F_0$ (see \cite[pp.64]{folland1999real} for a brief argument). 
+
+By the \Caratheodory~Extension Theorem, $\pi_0$ extends to a measure $\pi$ on $\F:=\sigma(\F_0)$.  Moroever, it can be given constructively (see \eqref{eqn:explicit_construction_of_measure_extended_from_premeasure}) as follows:
+\begin{subequations}
+\begin{align}
+\pi(E) &= \inf \bigg\{ \ds\sum_{i=1}^\infty \pi_0 (C_j) : C_j \in \F_0,  E \subset \cup_{j=1}^\infty C_j \bigg\} && \tinytext{} \label{eqn:direct_def_of_product_measure} \\	
+& \quad \quad \quad \quad  \quad \quad \quad  \text{ where }  \pi_0 (C_j) = \ds\sum_{i=1}^{n_j} \mu(A_{ji}) \nu(B_{ji})  \nonumber \\
+&=\inf \bigg\{ \ds\sum_{k=1}^\infty \mu(A_k) \nu(B_k) : A_k \in \M, B_k \in \N, \;  E \subset \cup_{k=1}^\infty (A_k \times B_k) \bigg \} && \tinytext{by reindexing} \label{eqn:computational_def_of_product_measure}	
+\end{align}
+\end{subequations}
+
+{\tiny Eq.~\eqref{eqn:direct_def_of_product_measure} is the \textit{direct} definition of product measure, given directly by the explicit construction of a measure extended from a pre-measure.   Eq.~\ref{eqn:computational_def_of_product_measure} can be considered the \textit{computational} definition of product measure; the reindexing simplifies the infimum to be directly over rectangles rather than over disjoint unions of them. For an application of \eqref{eqn:computational_def_of_product_measure}, see Ex.~\ref{ex:lebesgue_counting_measure_on_the_unit_square_diagonal}.) }
+
+The measure $\pi$ is called the product of $\mu$ and $\nu$, and is written $\pi = \mu \times \nu$.  Note that by \Caratheodory~Extension theorem {\tiny (or direct manipulation of the infimum)}, $\pi|_{\F_0} = \pi_0$.  Note also that (obviously) $\sigma(\F_0) = \M \otimes \N$, the product sigma-field.  
 
 \subsection{Extended product measure theorem}
 
-\red{TODO: Add narrative about how we get an alternate view on the product measure, or even on a new thing (which seems like it will be useful for conditional probabilities) which we currently call an "extended product measure".}
+Below we get an alternate view on the product measure as integrated measures of sections (see Cor.~\ref{cor:classical_product_measure_theorem}).   But \cite{ash2000probability} actually works with a more general construction, which we might call an ``extended product measure".  This extended product measure seems like it will be useful for conditional probabilities. 
 
 \begin{theorem}\textbf{(Extended product measure theorem.)} \cite[Thm.~2.6.2]{ash2000probability}
 Consider the measure spaces $(X, \M, \mu), (Y, \N, \nu(x, \cdot))$, where 
@@ -5096,10 +5180,10 @@ I'm not sure that $\lambda$ in Thm~\ref{thm:extended_product_measure_theorem} sh
 
 \begin{corollary}\textbf{(Classical product measure theorem.)}
 Let $(X, \M, \mu)$ and $(Y, \N, \nu)$ be $\sigma$-finite measure spaces.  Then the set function given by 
-\[ \lambda(E) := \int \nu(E_x) \mu(dx) = \int \mu(E^y) \nu(dy) \]
+\[ \pi(E) := \int \nu(E_x) \mu(dx) = \int \mu(E^y) \nu(dy) \]
 is the unique measure on $\M \otimes \N$ such that 
-\[ \lambda(A \times B) = \mu(A) \nu(B) \]
-for all $A \in \M, B \in \N$.  Moreover, $\lambda$ is $\sigma$-finite on $\M \otimes \N$, and is a probability measure if $\mu$ and $\nu$ are.  The measure $\lambda$ is called the product of $\mu$ and $\nu$, and is written $\lambda = \mu \times \nu$.
+\[ \pi(A \times B) = \mu(A) \nu(B) \]
+for all $A \in \M, B \in \N$.  Moreover, $\pi$ is $\sigma$-finite on $\M \otimes \N$, and is a probability measure if $\mu$ and $\nu$ are.  The measure $\pi$ is called the product of $\mu$ and $\nu$, and is written $\pi = \mu \times \nu$.
 \label{cor:classical_product_measure_theorem}
 \end{corollary}
 
@@ -5129,7 +5213,7 @@ since by definition, $E_x := \set{y \in Y : (x,y) \in E}$.
 \end{example}
 
 
-The classical Fubini-Tonelli Theorem says that for $\sigma$-finite measure spaces, integrating against product measure is the same as iterated integration in either order. 
+The classical Fubini-Tonelli Theorem tells us when integrating against product measure is the same as iterated integration in either order. 
 
 \begin{theorem}\textbf{Classical Fubini-Tonelli Theorem.}   Suppose that $(X,\M,\mu)$ and $(Y, \N, \nu)$ are $\sigma$-finite measure spaces.  
 \begin{alphabate}
@@ -5175,7 +5259,7 @@ We begin with Tonelli's, which covers the first three steps.
 	which is the first equality of \eqref{eqn:classical_fubini_tonelli_equation}.  The second equality is obtained by applying the same logic to $h$. 
 	\end{itemize}
 \end{enumerate}
-\red{TODO: Finish with Fubini}
+\red{TODO: Finish proof of Fubini part of Fubini-Tonelli}
 \end{proof}
 
 \subsection{Examples}
@@ -5185,10 +5269,15 @@ The example below shows that the classical Fubini-Tonelli Theorem (Thm.~\ref{thm
 \begin{example}{\remarktitle{Lebesgue-counting measure of the diagonal of the unit square.}}
 \cite[Exercise 2.46, pp.68]{folland1999real} Let $X=Y=[0,1], \M =\N = \B_{[0,1]}, \mu = \text{Lebesgue measure}$ and $\nu = \text{counting measure}$.  If $D:=\set{(x,x) : x \in [0,1]}$ is the diagonal in $X \times Y$, then 
 \[\int \int \indicate{D} \wrt{\mu} \wrt{\nu}\neq \int \int \indicate{D} \wrt{\nu} \wrt{\mu} \neq \int \int \indicate{D} \wrt{(\mu \times \nu)} \]
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=.4\textwidth, angle=90]{images/lebesgue_counting_measure_on_unit_square_diagonal}	
+\end{figure}
+\label{ex:lebesgue_counting_measure_on_the_unit_square_diagonal}
 \end{example}
 
 \begin{proof}
-\red
 
 \begin{alphabate}
 \item First we show $\int \int \indicate{D} \wrt{\mu} \wrt{\nu} = 0$.
@@ -5208,7 +5297,7 @@ The example below shows that the classical Fubini-Tonelli Theorem (Thm.~\ref{thm
 &= \int_{[0,1]} 1 \wrt{\mu(x)} = \mu([0,1]) = 1
 \end{align*}
 
-\item Now we show $\int \int \indicate{D} \wrt{(\mu \times \nu)} = \infty$. By the definition of integrals of simple functions, we have $\int \int \indicate{D} \wrt{(\mu \times \nu)} = \mu \times \nu(D)$.  So applying the (computational) definition of product measure \red{TODO: Need to add this in}, we want to show 
+\item Now we show $\int \int \indicate{D} \wrt{(\mu \times \nu)} = \infty$. By the definition of integrals of simple functions, we have $\int \int \indicate{D} \wrt{(\mu \times \nu)} = \mu \times \nu(D)$.  So applying the (computational) definition of product measure \eqref{eqn:computational_def_of_product_measure}, we want to show 
 \begin{align}
 \mu \times \nu(D): = \inf \bigg\{ \ds\sum_{n=1}^\infty \mu(A_n) \nu(B_n) : \cup_{n=1}^\infty (A_n \times B_n) \supseteq D, \; A_n \in \B(\R), B_n \subseteq [0,1] \bigg\} = \infty 
 \label{eqn:lesbegue_counting_product_measure_of_diagonal_of_unit_square_is_infinity}
