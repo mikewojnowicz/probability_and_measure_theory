@@ -5262,6 +5262,16 @@ We begin with Tonelli's, which covers the first three steps.
 \red{TODO: Finish proof of Fubini part of Fubini-Tonelli}
 \end{proof}
 
+When integrating a function $f$ which is not necessarily non-negative, verifying that Fubini's theorem applies requires integrating against product measure.  Integrating against product measure can be difficult -- product measure is defined in terms of an infimum.  Remark~\ref{rk:using_fubini_and_tonelli_theorems_in_tandem_to_avoid_integrating_against_product_measure_when_verifying_interchange_of_order_of_integration} shows us a way out of this quandry. 
+
+\begin{remark}{\remarktitle{Using Fubini and Tonelli theorems in tandem in order to avoid integrating against product measure to verify interchanging the order of integration .}}
+The Fubini and Tonelli theorems are frequently used in tandem.  Typically one wishes to reverse the order of integration in a double integral $\int \int f \wrt{\mu} \wrt{\nu}$.  \textit{First} one verifies that $ \int |f| \wrt{(\mu \times \nu)} < \infty$ by using Tonelli's theorem to evaluate this integral as an iterated integral; \textit{then} one applies Fubini's theorem to conclude that $\int \int f \wrt{\mu} \wrt{\nu} = \int \int f  \wrt{\nu} \wrt{\mu}$.
+{\tiny (This remark is taken verbatim from \cite[pp.68]{folland1999real}.) }
+
+\label{rk:using_fubini_and_tonelli_theorems_in_tandem_to_avoid_integrating_against_product_measure_when_verifying_interchange_of_order_of_integration}
+\end{remark}
+
+
 \subsection{Examples}
 
 The example below shows that the classical Fubini-Tonelli Theorem (Thm.~\ref{thm:classical_fubini_tonelli}) can fail when at least one factor in the product measure is not $\sigma$-finite.  In fact, in the example below, the three kinds of integrals yield \textit{three} distinct values!\footnote{I like this example because it illustrates how integrating against product measure is conceptually \textit{distinct} from iterated integrals, rather than defined in terms of them (as sometimes seems to be the case in calculus).}
