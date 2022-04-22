@@ -5016,7 +5016,16 @@ We have
 \end{itemize}
 \end{proof}
 
+\subsection{Product measure}
+
+
+\red{TODO: Fill in, using the arguments of Folland. Be sure to give the reader a pointer that we're using \cite[pp.68]{folland1999real}.  Give the definitional construction along with the simplified construction.}
+
+
+
 \subsection{Extended product measure theorem}
+
+\red{TODO: Add narrative about how we get an alternate view on the product measure, or even on a new thing (which seems like it will be useful for conditional probabilities) which we currently call an "extended product measure".}
 
 \begin{theorem}\textbf{(Extended product measure theorem.)} \cite[Thm.~2.6.2]{ash2000probability}
 Consider the measure spaces $(X, \M, \mu), (Y, \N, \nu(x, \cdot))$, where 
@@ -5119,6 +5128,9 @@ since by definition, $E_x := \set{y \in Y : (x,y) \in E}$.
 }
 \end{example}
 
+
+The classical Fubini-Tonelli Theorem says that for $\sigma$-finite measure spaces, integrating against product measure is the same as iterated integration in either order. 
+
 \begin{theorem}\textbf{Classical Fubini-Tonelli Theorem.}   Suppose that $(X,\M,\mu)$ and $(Y, \N, \nu)$ are $\sigma$-finite measure spaces.  
 \begin{alphabate}
 \item (Tonelli.) If $f$ is a non-negative measurable function on $X \times Y$ then
@@ -5130,11 +5142,12 @@ are non-negative measurable functions on $X$ and $Y$, respectively, and
 \end{align}
 \item (Fubini.) If $f \in L^1(\mu \times \nu)$ then 
 	\begin{enumerate}
-		\item $f_x \in L^1(\nu)$ for a.e. $x \in X$, \quad $f^y \in L^1(\mu)$ for a.e. $y \in Y$
-		\item $g(x) = \int f_x \wrt{\nu} \in L^1(\mu),  \quad h(y) = \int f^y \wrt{\mu} \in L^1(\nu)$
-		\item \eqref{eqn:classical_fubini_tonelli_equation} holds.
+		\item[i)] $f_x \in L^1(\nu)$ for a.e. $x \in X$, \quad $f^y \in L^1(\mu)$ for a.e. $y \in Y$
+		\item[ii)] $g(x) = \int f_x \wrt{\nu} \in L^1(\mu),  \quad h(y) = \int f^y \wrt{\mu} \in L^1(\nu)$
 	\end{enumerate}
+and \eqref{eqn:classical_fubini_tonelli_equation} holds.
 \end{alphabate}	
+\label{thm:classical_fubini_tonelli}
 \end{theorem}
 
 \begin{proof}
@@ -5161,11 +5174,82 @@ We begin with Tonelli's, which covers the first three steps.
 	\end{align*}
 	which is the first equality of \eqref{eqn:classical_fubini_tonelli_equation}.  The second equality is obtained by applying the same logic to $h$. 
 	\end{itemize}
-
 \end{enumerate}
+\red{TODO: Finish with Fubini}
 \end{proof}
 
+\subsection{Examples}
 
+The example below shows that the classical Fubini-Tonelli Theorem (Thm.~\ref{thm:classical_fubini_tonelli}) can fail when at least one factor in the product measure is not $\sigma$-finite.  In fact, in the example below, the three kinds of integrals yield \textit{three} distinct values!\footnote{I like this example because it illustrates how integrating against product measure is conceptually \textit{distinct} from iterated integrals, rather than defined in terms of them (as sometimes seems to be the case in calculus).}
+  
+\begin{example}{\remarktitle{Lebesgue-counting measure of the diagonal of the unit square.}}
+\cite[Exercise 2.46, pp.68]{folland1999real} Let $X=Y=[0,1], \M =\N = \B_{[0,1]}, \mu = \text{Lebesgue measure}$ and $\nu = \text{counting measure}$.  If $D:=\set{(x,x) : x \in [0,1]}$ is the diagonal in $X \times Y$, then 
+\[\int \int \indicate{D} \wrt{\mu} \wrt{\nu}\neq \int \int \indicate{D} \wrt{\nu} \wrt{\mu} \neq \int \int \indicate{D} \wrt{(\mu \times \nu)} \]
+\end{example}
+
+\begin{proof}
+\red
+
+\begin{alphabate}
+\item First we show $\int \int \indicate{D} \wrt{\mu} \wrt{\nu} = 0$.
+%
+\begin{align*}
+\int \int \indicate{D} \wrt{\mu} \wrt{\nu} & = \int \int \indicate{ \set{(x,y) \, : \, y \in [0,1], x=y}} \wrt{\mu(x)} \wrt{\nu(y)} \\
+& = \int_{[0,1]} \int_{\set{x: x=y}} 1 \wrt{\mu(x)} \wrt{\nu(y)} \\
+& = \int_{[0,1]} \mu(\set{x: x=y}) \wrt{\nu(y)} \\
+&= \int_{[0,1]} 0 \wrt{\nu(y)} = 0
+\end{align*}
+\item Next, we show $\int \int \indicate{D} \wrt{\nu} \wrt{\mu}  = 1$.
+%
+\begin{align*}
+\int \int \indicate{D}  \wrt{\nu} \wrt{\mu} & = \int \int \indicate{ \set{(x,y) \, : \, x \in [0,1], y=x}} \wrt{\nu(y)} \wrt{\mu(x)}  \\
+& = \int_{[0,1]} \int_{\set{y: y=x}} 1  \wrt{\nu(y)} \wrt{\mu(x)} \\
+& = \int_{[0,1]} \nu(\set{y: y=x}) \wrt{\mu(x)} \\
+&= \int_{[0,1]} 1 \wrt{\mu(x)} = \mu([0,1]) = 1
+\end{align*}
+
+\item Now we show $\int \int \indicate{D} \wrt{(\mu \times \nu)} = \infty$. By the definition of integrals of simple functions, we have $\int \int \indicate{D} \wrt{(\mu \times \nu)} = \mu \times \nu(D)$.  So applying the (computational) definition of product measure \red{TODO: Need to add this in}, we want to show 
+\begin{align}
+\mu \times \nu(D): = \inf \bigg\{ \ds\sum_{n=1}^\infty \mu(A_n) \nu(B_n) : \cup_{n=1}^\infty (A_n \times B_n) \supseteq D, \; A_n \in \B(\R), B_n \subseteq [0,1] \bigg\} = \infty 
+\label{eqn:lesbegue_counting_product_measure_of_diagonal_of_unit_square_is_infinity}
+\end{align}
+
+
+To do this, we first observe that
+\[\cup_{n=1}^\infty (A_n \times B_n) \supseteq D \implies \cup_{n=1}^\infty A_n \cap B_n \supseteq [0,1] \quad \quad \quad \tinycircled{1}. \]
+%
+{\tiny $\tinycircled{1}$ holds because
+\[\cup_{n=1}^\infty (A_n \times B_n) = \set{(x,y) : x \in A_n \text{ and } y \in B_n \text{ for some } n } \] 
+So if $\cup_{n=1}^\infty (A_n \times B_n) \supseteq D:=\set{(x,x) : x \in [0,1]}$, then 
+\[ \forall x \in [0,1], \exists n : x \in A_n \text{ and } y \in B_n \]
+In other words, the implication holds. }
+
+Next we observe that
+\[\cup_{n=1}^\infty (A_n \times B_n) \supseteq D \implies \exists N : \mu(A_N), \mu(B_N) \geq \epsilon > 0 \quad \quad \quad \tinycircled{2}. \]
+%
+{\tiny $\tinycircled{2}$ holds because
+
+\begin{align*}
+\tinytext{$\tinycircled{1}$} \implies & \mu([0,1]) \stackexplain{monotonicity}{\leq} \mu(\cup_{n=1}^\infty A_n \cap B_n) \stackexplain{subadditivity}{\leq} \ds\sum_{n=1}^\infty \mu(A_n \cap B_n) 	&& \\
+\implies & \exists N : \mu(A_N \cap B_N) \geq \epsilon > 0 && \tinytext{True by contraposition} \\
+\implies & \exists N : \mu(A_N), \mu(B_N) \geq \epsilon > 0  && \tinytext{by monotonicity, since $A_N \cap B_N \subseteq A_N, B_N$}
+\end{align*}
+}
+Finally we prove \eqref{eqn:lesbegue_counting_product_measure_of_diagonal_of_unit_square_is_infinity}. For any $\cup_{n=1}^\infty (A_n \times B_n) \supseteq D$, we have 
+
+{\tiny 
+\begin{align*}
+ \mu(B_N) \stackexplain{\tinycircled{2}}{\geq} \epsilon > 0 & \implies B_N \text{ has (uncountably) infinitely many points }	&& \tinytext{ By contraposition.  Otherwise $\mu(B_N) =0$.} \\
+ &\implies \nu(B_N) = \infty && \tinytext{ Def. counting measure $\nu$}. \\
+ & \implies \mu(A_N) \nu(B_N) \geq \epsilon \cdot \infty = \infty && \tinytext{ $\mu(A_N) \geq \epsilon$ by $\tinycircled{2}$}. \\
+& \implies \ds\sum_{n=1}^\infty \mu(A_n) \nu(B_n) = \infty && \tinytext{non-negativity of measure}\\
+& \implies \eqref{eqn:lesbegue_counting_product_measure_of_diagonal_of_unit_square_is_infinity} \text { holds } && \tinytext{Infimum in \eqref{eqn:lesbegue_counting_product_measure_of_diagonal_of_unit_square_is_infinity} must be lower bound on the set $\set{\infty}$ }
+\end{align*}
+}
+
+\end{alphabate}
+	
+\end{proof}
 
 
 
