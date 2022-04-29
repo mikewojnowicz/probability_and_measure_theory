@@ -5087,7 +5087,7 @@ Note that this collection now includes sets that aren't rectangles
 \end{remark}
 
 
-\subsubsection{Construction of the product measure}
+\subsubsection{Construction of the product measure} \label{sec:construction_of_the_product_measure}
 
 Let $C \in F_0$ be a finite disjoint union of rectangles $A_1 \times B_1, A_2 \times B_2, \hdots A_n \times B_n$.  {\tiny  (By Remark Rk.~\ref{rk:the_collection_of_finite_disjoint__unions_of_rectangles_is_a_field},  $F_0$ is a field. ) }
 
@@ -5291,7 +5291,7 @@ The Fubini and Tonelli theorems are frequently used in tandem.  Typically one wi
 
 \subsection{Examples}
 
-The example below shows that the classical Fubini-Tonelli Theorem (Thm.~\ref{thm:classical_fubini_tonelli}) can fail when at least one factor in the product measure is not $\sigma$-finite.  In fact, in the example below, the three kinds of integrals yield \textit{three} distinct values!\footnote{I like this example because it illustrates how integrating against product measure is conceptually \textit{distinct} from iterated integrals, rather than defined in terms of them (as sometimes seems to be the case in calculus).}. % MTW: I've commented this out because the example doesn't show that the relation fails to hold for sigma-finite spaces.  {\tiny (Moreover, an iterated integral can be finite even when the integral against product measure is infinite.  So when verifying the conditions for exchanging the order of integration, it's not sufficient to just show that one iterated integral is finite.  We actually need to integrate against product measure, or use the strategy of Remark~\ref{rk:using_fubini_and_tonelli_theorems_in_tandem_to_avoid_integrating_against_product_measure_when_verifying_interchange_of_order_of_integration}).} 
+The example below shows that the classical Fubini-Tonelli Theorem (Thm.~\ref{thm:classical_fubini_tonelli}) can fail when at least one factor in the product measure is not $\sigma$-finite.  In fact, in the example below, the three kinds of integrals yield \textit{three} distinct values!\footnote{I like this example because it illustrates how integrating against product measure is conceptually \textit{distinct} from iterated integrals, rather than defined in terms of them (as sometimes seems to be the case in calculus).} % MTW: I've commented this out because the example doesn't show that the relation fails to hold for sigma-finite spaces.  {\tiny (Moreover, an iterated integral can be finite even when the integral against product measure is infinite.  So when verifying the conditions for exchanging the order of integration, it's not sufficient to just show that one iterated integral is finite.  We actually need to integrate against product measure, or use the strategy of Remark~\ref{rk:using_fubini_and_tonelli_theorems_in_tandem_to_avoid_integrating_against_product_measure_when_verifying_interchange_of_order_of_integration}).} 
   
 \begin{example}{\remarktitle{Lebesgue-counting measure of the diagonal of the unit square.}}
 \cite[Exercise 2.46, pp.68]{folland1999real} Let $X=Y=[0,1], \M =\N = \B_{[0,1]}, \mu = \text{Lebesgue measure}$ and $\nu = \text{counting measure}$.  If $D:=\set{(x,x) : x \in [0,1]}$ is the diagonal in $X \times Y$, then 
@@ -5299,7 +5299,7 @@ The example below shows that the classical Fubini-Tonelli Theorem (Thm.~\ref{thm
 
 \begin{figure}[H]
 \centering 
-\includegraphics[width=.4\textwidth, angle=90]{images/lebesgue_counting_measure_on_unit_square_diagonal}	
+\includegraphics[width=.4\textwidth]{images/lebesgue_counting_measure_on_unit_square_diagonal}	
 \end{figure}
 \label{ex:lebesgue_counting_measure_on_the_unit_square_diagonal}
 \end{example}
@@ -5363,6 +5363,45 @@ Finally we prove \eqref{eqn:lesbegue_counting_product_measure_of_diagonal_of_uni
 \end{align*}
 }
 
+\end{alphabate}
+	
+\end{proof}
+
+
+The example below demonstrates a case where we are unable to swap the order of a series. We can read this example through Fubini-Tonelli by seeing each series as an integral against counting measure. 
+
+\begin{example}{\remarktitle{A function defined on a bivariate grid of natural numbers for which the Fubini-Tonelli Theorem fails.}}
+\cite[Exercise 2.48, pp.69]{folland1999real} Let $X=Y=\mathbb{N}, \M =\N = \mathcal{P}(\mathbb{N}), \mu = \nu = \text{counting measure}$.  Define $f(m,n)=1$ if $m=n$, $f(m,n)=-1$ if $m=n+1$, and $f(m,n)=0$ otherwise.  Then $\int |f| d(\mu \times \nu) = \infty$, and $\int \int f \wrt{\mu} \wrt{\nu}$ and $\int \int f \wrt{\nu} \wrt{\mu} $ exist and are unequal. 
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=.4\textwidth]{images/durretts_function_on_a_grid_of_natural_numbers_for_which_fubini_tonelli_fails}	
+\caption{A function defined on a bivariate grid of natural numbers for which the Fubini-Tonelli Theorem fails.  When integrating against counting measure, the two iterated integrals have the form of sums. In the words of \cite{durrett2010probability}, "[...] If we sum the columns first, the first one gives us a 1 and the others 0, while if we sum the rows each one gives us a 0." Hence,  $\sum_m \sum_n f(m,n) = 1$, but  $\sum_n \sum_m f(m,n) = 0.$  Image from \cite{durrett2010probability}.}
+\label{fig:durretts_function_on_a_grid_of_natural_numbers_for_which_fubini_tonelli_fails}
+\end{figure}
+\label{ex:NAME_ME}
+\end{example}
+
+\begin{proof}
+\begin{alphabate}
+\item First we show $\int \int f \wrt{\mu}\wrt{\nu} =0$.
+\begin{align*}
+\int \int f(m,n) \wrt{\mu(m)}\wrt{\nu(n)} &= \int 0 \wrt{\nu(n)} \\
+& = 0 \cdot \nu(\mathbb{N}) = 0 \cdot \infty = 0.
+\end{align*}
+\item Next we show $\int \int f \wrt{\nu} \wrt{\mu} =1$.
+\begin{align*}
+\int \int f(m,n) \wrt{\nu(n)} \wrt{\mu(m)} &= \int (1 \cdot \indicate{m=1} + 0 \cdot  \indicate{m>1}) \wrt{\mu(m)} \\
+& \stackexplain{int. simple functions}{=} 1 \cdot \mu(m=1) + 0 \cdot \mu(m>1) = 1. 
+\end{align*}
+\item Finally, we show $\int |f| \wrt{(\mu \times \nu)} = \infty$, which is why Fubini-Tonelli does not apply. 
+\begin{align*}
+\int |f| \wrt{(\mu \times \nu)} &= \int \indicate{m=n \; \text{ or} \; m=n+1}  \wrt{(\mu \times \nu)} \\
+&= (\mu \times \nu)\set{(m,n) : m=n \; \text{ or} \; m=n+1} \\
+& = \ds\sum_{m=1}^\infty (\mu \times \nu)\set{(m,m)} +  \ds\sum_{m=2}^\infty (\mu \times \nu)\set{(m,m-1)} && \tinytext{countable additivity}\\
+&= \ds\sum_{m=1}^\infty \mu \set{m} \nu \set{m} +  \ds\sum_{m=2}^\infty \mu \set{m} \nu \set{m-1}  && \tinytext{$\mu \times \nu$ factorizes across rectangles by construction; see Sec.\ref{sec:construction_of_the_product_measure} } \\
+&= \ds\sum_{m=1}^\infty 1 \cdot 1 + \ds\sum_{m=2}^\infty 1 \cdot 1 = \infty 
+\end{align*}
 \end{alphabate}
 	
 \end{proof}
