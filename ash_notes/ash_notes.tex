@@ -1249,20 +1249,23 @@ and so $\mu$ is not a Lebesgue-Stieltjes measure.
 \subsection{Lebesgue measurable sets} \label{sec:Lebesgue measurable sets}
 
 \begin{definition}
-The completion of Lebesgue measure relative to $\B(\R)$ gives what is known as the \textit{Lebesgue measurable sets}, denoted $\overline{\B}(\R)$.\footnote{See Section \ref{sec:completion_of_measure_spaces} for the definition of the completion of a measure space.}   
+The completion of Lebesgue measure relative to $\B(\R)$ gives what is known as the \textit{Lebesgue measurable sets}, denoted $\L(\R)$.\footnote{See Section \ref{sec:completion_of_measure_spaces} for the definition of the completion of a measure space.}   
 \end{definition}
 
 Each Lebesgue measurable set is the union of a Borel set and a subset of a Borel set with Lebesgue measure zero.
 
 \begin{remark}
-Sometimes people use the term ``Lebesgue measure" to refer to
+The term ``Lebesgue measure" can be used to refer to
 
 \begin{align*}
-\mu : \; & \overline{\B}(\R) \to \R^+
+\mu : \; & \L(\R) \to \R^+
 \intertext{as well as}
 \mu : \; & \B(\R) \to \R^+
 \end{align*}
+\cite[pp.~37]{folland1999real},\cite{ash2000probability}.
+\label{rk:lebesgue_measure_can_refer_to_the_function_whose_domain_is_the_borel_sets_or_whose_domain_is_the_lebesgue_measurable_sets}
 \end{remark}
+
 
 \subsection{$\S$ 1.4.6 Lebesgue-Stieltjes Measures on $\R^n$}
 
@@ -1578,12 +1581,12 @@ For more details, Equation (1) holds since, by monotonicity, the LHS is a lower 
 %\subsubsection{Translation Invariance of Lebesgue Measure}
 
 \begin{proposition}
-\textbf{(Translation Invariance of Lebesgue Measure.)} Lebesgue measure is translation invariant.  That is, if $B \in \overline{\B}(\R^n)$ and $c \in \R^n$, then $B+c \in  \overline{\B}(\R^n)$ and $\mu(B+c)=\mu(B)$, where $\mu$ is Lebesgue measure.	
+\textbf{(Translation Invariance of Lebesgue Measure.)} Lebesgue measure is translation invariant.  That is, if $B \in \L(\R^n)$ and $c \in \R^n$, then $B+c \in  \L(\R^n)$ and $\mu(B+c)=\mu(B)$, where $\mu$ is Lebesgue measure.	
 \label{prop:Lebesgue_measure_is_translation_invariant}
 \end{proposition}
 
 \begin{proof}
-We prove the statement for $\B(\R^n)$ and leave the extension to $\overline{\B}(\R^n)$ to the reader. We shall use the Monotone Class Theorem as our vehicle for executing the Good Sets Strategy (see Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy}).  That is, we will let $\G$ be the class of ``good sets" that have the desired property. Then we must show: (a) that $\G$ is a monotone class and (b) that $\G$ contains $\F_0 = \set{\text{disjoint union of sets of the form } (a,b], a, b \in \R^n}$. We will use this strategy twice, to show: (1) that $B \in \B(\R^n)$ and $c \in \R^n$ implies $B+c \in  \B(\R^n)$  (2) that $\mu(B+c)=\mu(B)$ for all $B \in \B(\R^n)$.  
+We prove the statement for $\B(\R^n)$ and leave the extension to $\L(\R^n)$ to the reader. We shall use the Monotone Class Theorem as our vehicle for executing the Good Sets Strategy (see Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy}).  That is, we will let $\G$ be the class of ``good sets" that have the desired property. Then we must show: (a) that $\G$ is a monotone class and (b) that $\G$ contains $\F_0 = \set{\text{disjoint union of sets of the form } (a,b], a, b \in \R^n}$. We will use this strategy twice, to show: (1) that $B \in \B(\R^n)$ and $c \in \R^n$ implies $B+c \in  \B(\R^n)$  (2) that $\mu(B+c)=\mu(B)$ for all $B \in \B(\R^n)$.  
 
 \begin{enumerate}
 \item We want to show that $B \in \B(\R^n) \implies B+c \in \B(R^n)$.  Let $\G$ be the sets where the property holds.
@@ -2348,7 +2351,7 @@ The monotone convergence theorem can actually be used to make it easier to do co
 \end{remark}
 
 \begin{remark}{\remarktitle{Monotone convergence theorem fails for the Riemann integral.}}
-Using an enumeration of the rational numbers between 0 and 1, we define the function $f_n$ (for all nonnegative integer $n$) as the indicator function of the set of the first $n$ terms of this sequence of rational numbers. The increasing sequence of functions $f_n$ (which are nonnegative, Riemann-integrable with a vanishing integral\redfootnote{TODO: Justify that each $f_n$ is Reimann integrable.}) pointwise converges to the Dirichlet function which is not Riemann-integrable (see Remark \ref{rk:dirichlet_function_is_not_Riemann_integrable}).
+Using an enumeration of the rational numbers between 0 and 1, we define the function $f_n$ (for all nonnegative integer $n$) as the indicator function of the set of the first $n$ terms of this sequence of rational numbers. The increasing sequence of functions $f_n$ (which are nonnegative, Riemann-integrable with a vanishing integral\redfootnote{TODO: Justify that each $f_n$ is Riemann integrable.}) pointwise converges to the Dirichlet function which is not Riemann-integrable (see Remark \ref{rk:dirichlet_function_is_not_Riemann_integrable}).
 \end{remark}
 
 \paragraphnewline{Properties of integral of non-negative Borel measurable functions (Part II)}
@@ -3176,7 +3179,7 @@ In the proof of the monotonicity converse, we derived an ``a.e. contradiction" t
 \end{remark}
 
 \begin{remark}
-This remark could be made in many places, but note from the proof of the monotonicity converse how convenient it is to work with Lebesgue integrals rather than than Reimann integrals for proving integral properties.  We can define some set $A$ in the domain to have any desired property, and then proceed to work with it. 
+This remark could be made in many places, but note from the proof of the monotonicity converse how convenient it is to work with Lebesgue integrals rather than than Riemann integrals for proving integral properties.  We can define some set $A$ in the domain to have any desired property, and then proceed to work with it. 
 \end{remark}
 
 
@@ -3500,7 +3503,7 @@ If
 
 \paragraph{The criterion for Riemann integrability criterion in terms of Lebesgue integration.}
 
-Now consider the measure space $(\Omega, \F, \mu) = ([a,b], \overline{\B}([a,b]), \text{Lebesgue measure})$, where $\overline{\B}([a,b])$ are the Lebesgue measurable sets (see Section \ref{sec:Lebesgue measurable sets}).  Let $P_k$ be a sequence of partitions described earlier, with $\alpha_k$ and $\beta_k$ the corresponding upper and lower functions.  Now since $\alpha_k$ and $\beta_k$ are simple functions, we can express the upper and lower sums \eqref{eqn:upper_and_lower_sums} as integrals with respect to Lebesgue measure $\mu$:
+Now consider the measure space $(\Omega, \F, \mu) = ([a,b], \L([a,b]), \text{Lebesgue measure})$, where $\L([a,b])$ are the Lebesgue measurable sets (see Section \ref{sec:Lebesgue measurable sets}).  Let $P_k$ be a sequence of partitions described earlier, with $\alpha_k$ and $\beta_k$ the corresponding upper and lower functions.  Now since $\alpha_k$ and $\beta_k$ are simple functions, we can express the upper and lower sums \eqref{eqn:upper_and_lower_sums} as integrals with respect to Lebesgue measure $\mu$:
 \begin{align*}
 U(P_k) &= \ds\int_{[a,b]} \alpha_k \dmu \\
 L(P_k) &= \ds\int_{[a,b]} \beta_k \dmu \\		
@@ -3574,6 +3577,7 @@ Let $f$ be a bounded real-valued function on $[a,b]$.
 \item The function $f$ is Riemann integrable on $[a,b]$ iff $f$ is continuous almost everywhere on $[a,b]$ (with respect to Lebesgue measure).
 \item If $f$ is Riemann integrable on $[a,b]$, then $f$ is integrable with respect to Lebesgue measure on $[a,b]$, and the two integrals are equal.	
 \end{alphabate}
+\label{thm:relating_lebesgue_and_riemann_integrals}
 \end{theorem}
 
 \begin{proof}
@@ -3586,7 +3590,7 @@ By linearity {\tiny (which holds immediately since $\alpha$, $\beta$ are integra
 \[  \ds\int_{[a,b]} (\alpha-\beta) \dmu =0  \]
 Since $\beta \leq f \leq \alpha$ {\tiny (since each $\beta_k$ and $\alpha_k$ are lower and upper bounds by construction, and limits preserve non-strict inequalities)}, we have $\alpha-\beta \geq 0$, so by Theorem \ref{thm:properties_of_functions_derived_from_properties_of_integrals} (b), $\alpha-\beta =0$ a.e.  So {\tiny (by sandwiching)} $\alpha=\beta=f$ a.e.   So by Lemma \ref{lemma:continuity_at_a_point_as_equality_of_upper_and_lower_functions}, $f$ is continuous a.e.\footnote{Implicit in this last statement, I think, is that the endpoints are are set of measure 0, even in the limit.  If $E_k$ denotes the set of endpoints of the subintervals of $P_k$, and $E_{ik}$ denotes the $i$th such endpoint for $i=1,...,N_k$, then $\mu(\lim_{k \to \infty} E_k) \stackrel{1}{=} \lim_{k \to \infty} \mu(E_k) = \lim_k \mu(\cup_{i=1}^{N_k} E_{ik}) \stackrel{2}{=} 0$, where (1) holds by continuity of measure (from below; recall each successive partition is a refinement of the previous) and (2) holds since by additivity of measure, since each $E_{ik}$ is a singleton and the Lebesgue measure of any singleton is 0.
 }
-\item $\boxed{\impliedby}$.  By hypothesis and Lemma  \ref{lemma:continuity_at_a_point_as_equality_of_upper_and_lower_functions}, $\alpha = f = \beta$ a.e.   As a result, $f$ is measurable.   {\tiny ($\alpha, \beta$ are limits of simple functions, and hence measurable by closure properties of simple functions.  Thus, $f$ differs from a measurable function only on a subset of a set of measure 0.   Since the Lebesgue measurable sets $\overline{\B}([a,b])$ are complete, $f$ must be measurable by Problem \ref{prob:in_a_complete_metric_space_you_are_a_measurable_function_if_you_are_equal_to_some_other_measurable_function_ae}.)}\footnote{After this line \cite{ash2000probability} also adds that $f$ is integrable. {\tiny (Since $f$ is bounded, say $|f| \leq L$, we have $\int_{[a,b]} f \dmu \leq \int_{[a,b]} L \dmu = L (b-a) < \infty $.) } But on my reading, we can just use the a.e. theorem directly after arguing that $f$ is measurable.} Since $\alpha=f=\beta$ a.e., by Theorem \ref{thm:almost_everywhere} (b),  we have
+\item $\boxed{\impliedby}$.  By hypothesis and Lemma  \ref{lemma:continuity_at_a_point_as_equality_of_upper_and_lower_functions}, $\alpha = f = \beta$ a.e.   As a result, $f$ is measurable.   {\tiny ($\alpha, \beta$ are limits of simple functions, and hence measurable by closure properties of simple functions.  Thus, $f$ differs from a measurable function only on a subset of a set of measure 0.   Since the Lebesgue measurable sets $\L([a,b])$ are complete, $f$ must be measurable by Problem \ref{prob:in_a_complete_metric_space_you_are_a_measurable_function_if_you_are_equal_to_some_other_measurable_function_ae}.)}\footnote{After this line \cite{ash2000probability} also adds that $f$ is integrable. {\tiny (Since $f$ is bounded, say $|f| \leq L$, we have $\int_{[a,b]} f \dmu \leq \int_{[a,b]} L \dmu = L (b-a) < \infty $.) } But on my reading, we can just use the a.e. theorem directly after arguing that $f$ is measurable.} Since $\alpha=f=\beta$ a.e., by Theorem \ref{thm:almost_everywhere} (b),  we have
 \begin{align}
 \ds\int_{[a,b]} \alpha \dmu =  \ds\int_{[a,b]} f \dmu  = \ds\int_{[a,b]} \beta \dmu  
 \label{eqn:lebesgue_integral_of_riemann_integral_fucntion_equals_the_lebesgue_integral_of_the_limits_of_the_upper_and_lower_functions}
@@ -4380,7 +4384,7 @@ If we define equivalence classes $f \sim g$ iff $f=g$ a.e. $[\mu]$, then $||\cdo
 
 
 
-\subsection{Approximation Theorems on $L^p$ spaces $(0<p<\infty)$}
+\subsection{Approximation Theorems on $L^p$ spaces $(0<p<\infty)$} \label{sec:approximation_theorems_on_Lp_spaces}
 
 Functions in $L^p$ for $0<p<\infty$ can be approximated nicely.  We point out two basic approximation theorems.
 
@@ -5405,6 +5409,43 @@ The example below demonstrates a case where we are unable to swap the order of a
 \end{alphabate}
 	
 \end{proof}
+
+\begin{example}{\remarktitle{Area under the curve can be obtained by either horizontal or vertical sections.}}\;\cite[Exercise~1.7.2]{durrett2010probability}
+Let $g \geq 0$ be a measurable function on a sigma-finite measure space $(\Omega, \F, \mu)$.  Use the classical Fubini-Tonelli Theorem (Thm.~\ref{thm:classical_fubini_tonelli}) to conclude that
+
+\[  \int_\Omega g \dmu = (\mu \times \lambda)\set{(x,y): 0 \leq y < g(x)} = \int_0^\infty \mu(\set{x : g(x) > y}) \wrt{y} \]
+\label{ex:area_under_the_curve_via_horizontal_sections}
+\end{example}
+
+\begin{proof}
+Let $\lambda$ be Lebesgue measure on $\R$.  Then 
+
+\begin{align*}
+(\mu \times \lambda)\set{(x,y): 0 \leq y < g(x)} &= \int \int \indicate{\set{(x,y): 0 \leq y < g(x)}} \wrt{\mu(x)} \wrt{\lambda(y)} && \tinytext{Fubini-Tonelli} \\
+&= \int \indicate{\set{y: y \geq 0}} \int \indicate{\set{x: g(x) >y}}  \wrt{\mu(x)} \wrt{\lambda(y)} && \tinytext{Rewrite indicator; constant multiple} \\
+ &= \int \indicate{\set{y: y \geq 0}}  \mu(x: g(x) > y) \wrt{\lambda(y)} && \tinytext{Integral of indicator} \\
+ & \stackrel{1}{=} \int_0^\infty \mu(x: g(x) > y) dy && \tinytext{$\lambda$ is Lebesgue measure} \\
+\end{align*}
+In (1), we reduce the Lebesgue integral to a Riemann integral. By Thm.~\ref{thm:relating_lebesgue_and_riemann_integrals}, this is possible iff $\mu(x: g(x) > y)$ is continuous for a.e. y. {\tiny (I believe we could show this by continuity of measure.)}   
+
+On the other hand,
+\begin{align*}
+(\mu \times \lambda)\set{(x,y): 0 \leq y < g(x)} &= \int \int \indicate{\set{(x,y): 0 \leq y < g(x)}}  \wrt{\lambda(y)} \wrt{\mu(x)} && \tinytext{Fubini-Tonelli} \\
+ &= \int   \lambda(y: 0 \leq y < g(x)) \wrt{\mu(x)} && \tinytext{Integral of indicator} \\
+&= \int   g(x) \wrt{\mu(x)} && \tinytext{$\lambda$ is Lebesgue measure} \\
+\end{align*}	
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.4\textwidth, angle=90]{images/auc_through_horizontal_or_vertical_sections}	
+\end{figure}
+\end{proof}
+
+
+\begin{remark}
+In probability theory, the argument of Example~\ref{ex:area_under_the_curve_via_horizontal_sections} can be used to show that if $X$ is a non-negative random variable, then its expected value equals the integral of its survival function, i.e. 
+\[ \E[X[ = \int_0^\infty P(X > x) dx \]
+\end{remark}
 
 
 
