@@ -837,7 +837,7 @@ The strategy in Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_st
 For an example of where the strategy in Remark \ref{rk:monotone_class_theorem_for_executing_good_sets_strategy} is used, see the proof of uniqueness in the \Caratheodory~Extension Theorem (Theorem \ref{thm:caratheodory_extension}).  It is also used extensively to show that Borel sets have some property; see Section \ref{sec:properties_of_borel_sets}.
 
 
-\begin{theorem}{\textbf{(\Caratheodory~Extension Theorem)}} Let $\mu$ be a measure on a field $\F_0$ of subsets of $\Omega$, and assume that $\mu$ is $\sigma$-finite on $\F_0$, so that $\Omega$ can be decomposed as $\cup_{n=1}^\infty A_n$ where $A_n \in \F_0$ and $\mu(A_n) < \infty$ for all $n$.  Then $\mu$ has a unique extension to a measure on $\F := \sigma(\F_0)$, the minimal $\sigma$-field over $\F_0$. 
+\begin{theorem}{\textbf{(\Caratheodory~Extension Theorem)}} Let $\mu$ be a pre-measure on a field $\F_0$ of subsets of $\Omega$, and assume that $\mu$ is $\sigma$-finite on $\F_0$, so that $\Omega$ can be decomposed as $\cup_{n=1}^\infty A_n$ where $A_n \in \F_0$ and $\mu(A_n) < \infty$ for all $n$.  Then $\mu$ has a unique extension to a measure on $\F := \sigma(\F_0)$, the minimal $\sigma$-field over $\F_0$. 
  \label{thm:caratheodory_extension}
 \end{theorem}
 
@@ -889,6 +889,11 @@ for all $A \in \F$,
 \end{align}
 %
 Folland's construction also highlights that the $\sigma$-finite assumption in Theorem \ref{thm:caratheodory_extension} is only necessary for uniqueness. 
+\end{remark}
+
+\begin{remark}{\remarktitle{Folland's statement of \Caratheodory's extension theorem does not require $\sigma$-finite pre-measures.}}
+In \cite[Thm.~1.14]{folland1999real}, we see that the extension theorem also applies to non-$\sigma$-finite pre-measures, but in that case, we lose uniqueness.
+\label{rk:extension_theorem_gives_uniqueness_iff_the_premeasure_is_sigma_finite} 
 \end{remark}
 
 \begin{remark}
@@ -5112,6 +5117,11 @@ By the \Caratheodory~Extension Theorem, $\pi_0$ extends to a measure $\pi$ on $\
 
 The measure $\pi$ is called the product of $\mu$ and $\nu$, and is written $\pi = \mu \times \nu$.  Note that by \Caratheodory~Extension theorem {\tiny (or direct manipulation of the infimum)}, $\pi|_{\F_0} = \pi_0$.  Note also that (obviously) $\sigma(\F_0) = \M \otimes \N$, the product sigma-field.  
 
+\begin{remark}
+When $(X,\M, \mu)$ and $(Y,\N, \nu)$ are $\sigma$-finite measure spaces, the product measure is uniquely determined \cite[pp.64]{folland1999real}
+\end{remark}
+ 
+
 \subsection{Extended product measure theorem}
 
 Below we get an alternate view on the product measure as integrated measures of sections (see Cor.~\ref{cor:classical_product_measure_theorem}).   But \cite{ash2000probability} actually works with a more general construction, which we might call an ``extended product measure".  This extended product measure seems like it will be useful for conditional probabilities. 
@@ -5193,7 +5203,7 @@ for all $A \in \M, B \in \N$.  Moreover, $\pi$ is $\sigma$-finite on $\M \otimes
 \end{corollary}
 
 \begin{proof}
-In Theorem~\ref{thm:extended_product_measure_theorem}, take $\nu(x, \cdot) = \nu$ for all $x \in X$.  The second formula for $\lambda$ is obtained by interchanging $\mu$ and $\nu$.	
+In Theorem~\ref{thm:extended_product_measure_theorem}, take $\nu(x, \cdot) = \nu$ for all $x \in X$.  The second formula for $\pi$ is obtained by interchanging $\mu$ and $\nu$.	
 \end{proof}
 
 \subsection{Classical Fubini-Tonelli theorem}
@@ -5401,7 +5411,7 @@ The example below demonstrates a case where we are unable to swap the order of a
 \item Finally, we show $\int |f| \wrt{(\mu \times \nu)} = \infty$, which is why Fubini-Tonelli does not apply. 
 \begin{align*}
 \int |f| \wrt{(\mu \times \nu)} &= \int \indicate{m=n \; \text{ or} \; m=n+1}  \wrt{(\mu \times \nu)} \\
-&= (\mu \times \nu)\set{(m,n) : m=n \; \text{ or} \; m=n+1} \\
+&= (\mu \times \nu)\set{(m,n) : m=n \; \text{ or} \; m=n+1} && \tinytext{integral of indicator} \\
 & = \ds\sum_{m=1}^\infty (\mu \times \nu)\set{(m,m)} +  \ds\sum_{m=2}^\infty (\mu \times \nu)\set{(m,m-1)} && \tinytext{countable additivity}\\
 &= \ds\sum_{m=1}^\infty \mu \set{m} \nu \set{m} +  \ds\sum_{m=2}^\infty \mu \set{m} \nu \set{m-1}  && \tinytext{$\mu \times \nu$ factorizes across rectangles by construction; see Sec.\ref{sec:construction_of_the_product_measure} } \\
 &= \ds\sum_{m=1}^\infty 1 \cdot 1 + \ds\sum_{m=2}^\infty 1 \cdot 1 = \infty 
@@ -5411,9 +5421,16 @@ The example below demonstrates a case where we are unable to swap the order of a
 \end{proof}
 
 \begin{example}{\remarktitle{Area under the curve can be obtained by either horizontal or vertical sections.}}\;\cite[Exercise~1.7.2]{durrett2010probability}
-Let $g \geq 0$ be a measurable function on a sigma-finite measure space $(\Omega, \F, \mu)$.  Use the classical Fubini-Tonelli Theorem (Thm.~\ref{thm:classical_fubini_tonelli}) to conclude that
+Let $g \geq 0$ be a measurable function on a sigma-finite measure space $(\Omega, \F, \mu)$. Use the classical Fubini-Tonelli Theorem (Thm.~\ref{thm:classical_fubini_tonelli}) to conclude that
 
 \[  \int_\Omega g \dmu = (\mu \times \lambda)\set{(x,y): 0 \leq y < g(x)} = \int_0^\infty \mu(\set{x : g(x) > y}) \wrt{y} \]
+for some choice of measure $\lambda$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.4\textwidth, angle=90]{images/auc_through_horizontal_or_vertical_sections}	
+\end{figure}
+
 \label{ex:area_under_the_curve_via_horizontal_sections}
 \end{example}
 
@@ -5421,7 +5438,7 @@ Let $g \geq 0$ be a measurable function on a sigma-finite measure space $(\Omega
 Let $\lambda$ be Lebesgue measure on $\R$.  Then 
 
 \begin{align*}
-(\mu \times \lambda)\set{(x,y): 0 \leq y < g(x)} &= \int \int \indicate{\set{(x,y): 0 \leq y < g(x)}} \wrt{\mu(x)} \wrt{\lambda(y)} && \tinytext{Fubini-Tonelli} \\
+(\mu \times \lambda)\set{(x,y): 0 \leq y < g(x)} &= \int \int \indicate{\set{(x,y): 0 \leq y < g(x)}} \wrt{\mu(x)} \wrt{\lambda(y)} && \tinytext{Tonelli} \\
 &= \int \indicate{\set{y: y \geq 0}} \int \indicate{\set{x: g(x) >y}}  \wrt{\mu(x)} \wrt{\lambda(y)} && \tinytext{Rewrite indicator; constant multiple} \\
  &= \int \indicate{\set{y: y \geq 0}}  \mu(x: g(x) > y) \wrt{\lambda(y)} && \tinytext{Integral of indicator} \\
  & \stackrel{1}{=} \int_0^\infty \mu(x: g(x) > y) dy && \tinytext{$\lambda$ is Lebesgue measure} \\
@@ -5430,22 +5447,97 @@ In (1), we reduce the Lebesgue integral to a Riemann integral. By Thm.~\ref{thm:
 
 On the other hand,
 \begin{align*}
-(\mu \times \lambda)\set{(x,y): 0 \leq y < g(x)} &= \int \int \indicate{\set{(x,y): 0 \leq y < g(x)}}  \wrt{\lambda(y)} \wrt{\mu(x)} && \tinytext{Fubini-Tonelli} \\
+(\mu \times \lambda)\set{(x,y): 0 \leq y < g(x)} &= \int \int \indicate{\set{(x,y): 0 \leq y < g(x)}}  \wrt{\lambda(y)} \wrt{\mu(x)} && \tinytext{Tonelli} \\
  &= \int   \lambda(y: 0 \leq y < g(x)) \wrt{\mu(x)} && \tinytext{Integral of indicator} \\
 &= \int   g(x) \wrt{\mu(x)} && \tinytext{$\lambda$ is Lebesgue measure} \\
 \end{align*}	
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=.4\textwidth, angle=90]{images/auc_through_horizontal_or_vertical_sections}	
-\end{figure}
 \end{proof}
 
 
 \begin{remark}
 In probability theory, the argument of Example~\ref{ex:area_under_the_curve_via_horizontal_sections} can be used to show that if $X$ is a non-negative random variable, then its expected value equals the integral of its survival function, i.e. 
-\[ \E[X[ = \int_0^\infty P(X > x) dx \]
+\[ \E[X] = \int_0^\infty P(X > x) dx \]
 \end{remark}
+
+
+\subsection{The n-fold product measure}
+
+\subsubsection{Construction}
+
+The construction of the n-fold product measure \cite[pp.65]{folland1999real} is obtained through the virtually the same procedure as the construction of the 2-fold product measure.
+
+Let $(\Omega_j, \F_j, \mu_j)$ be measure spaces for $j=1,\hdots,n$. Let a rectangle be $A_1 \times \hdots \times A_n$ for $A_j \in \F_j$. Then the collection of finite disjoint union of rectangles is a field, using a similar argument as given in Remark~\ref{rk:the_collection_of_finite_disjoint__unions_of_rectangles_is_a_field}.  So following the same procedure as in the construction of the 2-fold product measure (Sec.~\ref{sec:construction_of_the_product_measure}), we obtain a measure $\mu_1 \times \hdots \times \mu_n$ on $\F_1 \otimes \hdots \otimes \F_n$ such that
+\[ \mu_1 \times \hdots \times \mu_n (A_1 \times \hdots \times A_n) = \prod_{j=1}^n \mu_j(A_j) \]  
+
+\subsection{Lebesgue measure on $\R^n$}
+As an example of an n-fold product measure, Lebesgue measure on $\R^n$ is the $n$-fold product of Lebesgue measure on $\R$ with itself. For convenience, it is sometimes instead defined as the completion of that n-fold product.  
+
+\begin{example}{\remarktitle{Lebesgue measure on $\R^n$.}} When $(\Omega_j, \F_j, \mu_j) = (\R, \B(\R) \text{ or } \L(\R), \text{Lebesgue measure})$, the n-fold product measure  $\mu_1 \times \hdots \times \mu_n$ on $\B(\R) \otimes \hdots \otimes  \B(\R)$ (or equivalently $\L(\R) \otimes \hdots \otimes  \L(\R)$) is called \textit{Lebesgue measure on $\R^n$}.  
+\end{example}
+
+It is often convenient to define Lebesgue measure as the \textit{completion} of this n-fold product. The domain of the resulting measure is the class of \textit{Lebesgue measurable sets} in $\R^n$, and is denoted $\L^n$. 
+
+\begin{question}
+It is interesting that the product of complete measures is not necessarily complete (and so must be completed again).  Give an example illustrating why this is necessary. 	
+\end{question}
+
+\subsubsection{Approximation properties}
+
+Here we show that we can approximate \textit{any} Lebesgue measurable set in $\R^n$ with simpler sets: open sets, compact sets, of finite collections of disjoint rectangles. 
+
+\begin{theorem}\cite[Thm 2.40a,c]{folland1999real}.
+Let $m$ be Lebesgue measure on $\R^n$.  Let $E \in \L^n$.  Then 
+\begin{alphabate}
+\item $m(E) = \inf \set{m(U) : U \supset E, U \text{ open }} = \sup \set{m(K) : K \subset E, K \text{ compact }}$.
+\item If $m(E) < \infty$ for any $\epsilon > 0$, there is a finite collection $\set{R_j}_{1}^N$ of disjoint rectangles whose sides are intervals such that $m(E \triangle  \cup_{j=1}^N R_j) < \epsilon$.  
+\end{alphabate}
+\end{theorem}
+
+\begin{proof}
+We prove the first equality of part (a).  For the remainder of the proof, see \cite[pp.70]{folland1999real}.  
+
+Our strategy is summarized in the Figure below.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.4\textwidth]{images/another_pic_for_proof_of_approximation_of_lebesgue_measurable_sets_in_Rn}	
+\end{figure}
+
+First, we note that by monotonicity, $m(E)$ is a lower bound on the set $\set{m(U) : U \supset E, U \text{ open }}$.  So it remains to show that $m(E)$ is the \textit{greatest} lower bound. We proceed in steps.
+
+\begin{enumerate}
+\item \textit{Each $E \in \L^n$ can be approximated by a cover of countable rectangles.}
+
+By definition of the product measure {\tiny (as the \textit{infimum} of measures of countable rectangle covers; see \eqref{eqn:computational_def_of_product_measure}; also see Remark~\ref{rk:usage_of_alternate_characterization_of_inf_and_sup} for a refresher on infima)}, we have $\forall \epsilon >0$, there is a countable family $\set{T_j}_{j=1}^\infty$ of rectangles such that $\set{T_j}_{j=1}^\infty \supset E$ and
+\[\explaintermbrace{... 2) and there is a countable union of rectangles with smaller measure}{\ds\sum_{j=1}^\infty m(T_j)}\leq m(E) + \explaintermbrace{1) bump a little bit up from infimum}{\epsilon} \] 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.2\textwidth, angle=90]{images/pic_for_proof_of_approximation_of_lebesgue_measurable_sets_in_Rn}	
+\end{figure}
+
+\item \textit{Each such rectangle can be approximated by a covering open rectangle (by applying the 1-dim case to each side).}
+ 
+ Now for each rectangle $T_j$ apply the one-dimensional theorem allowing open-set-approximations \cite[Thm~1.18]{folland1999real} to each side to find a rectangle $U_j \supset T_j$ whose sides are open sets such that  
+ \[ m(U_j) \leq m(T_j) + \epsilon 2^{-j} \]
+
+\item \textit{The lower bound $m(E)$ is the greatest lower bound.}
+
+First note that the countable union of open rectangle covers $U := \cup_{j=1}^\infty U_j$ is an open set.  Moreover $U \supset E$.  For all $\epsilon>0$, we have 
+
+\begin{align*}
+m(U) \stackexplain{subadditivity}{\leq} \sum_{j=1}^\infty m(U_j) \stackexplain{Step 2}{\leq} \sum_{j=1}^\infty m(T_j) + \epsilon  \stackexplain{Step 1}{\leq} m(E) + 2\epsilon,
+\end{align*} 
+which by Remark~\ref{rk:usage_of_alternate_characterization_of_inf_and_sup} proves that the lower bound is the greatest lower bound. 
+\end{enumerate}
+	
+\end{proof}
+
+
+%{prop:supremum_and_infimum_alternate_characterization}
+
+
 
 
 
@@ -5479,6 +5571,8 @@ We sometimes use an alternate characterization of infimum and supremum.
 \begin{proposition}
 
 If $A \subset \R$, then $M = \sup A$ if and only if (a) $M$ is an upper bound of $A$; (b) for every $M' < M$, there exists an $a \in A$ such that $a>M'$.  Similarly, $m = \inf A$ if and only if (a) $m$ is a lower bound of $A$; (b) for all $m'>m$, there exists an $a \in A$ such that $a<m'$.
+\label{prop:supremum_and_infimum_alternate_characterization}
+\end{proposition}
 
 \begin{proof}
 We prove the alternate characterization for the supremum only, as the proof for infimum is similar.    We only need to show equivalence for the part (b)'s, as the part (a)'s are identical. 
@@ -5487,8 +5581,6 @@ We first show that the definition implies part the proposition.  We proceed by w
 
 Now we show that the proposition implies the definition. Part (b) of the proposition implies that if $M' < M$, then $M'$ is not an upper bound. Thus part (b) of the definition is satisfied.
 \end{proof}
-\label{prop:supremum_and_infimum_alternate_characterization}
-\end{proposition}
 
 
 
@@ -5500,6 +5592,11 @@ The (b) statement in Proposition \ref{prop:supremum_and_infimum_alternate_charac
 Another way to write Proposition \ref{prop:supremum_and_infimum_alternate_characterization} is as follows:	
 
 If $A \subset \R$, then $M = \sup A$ if and only if (a) $M$ is an upper bound of $A$; (b) for all $\epsilon >0$, there exists an $a \in A$ such that $a>M-\epsilon$.  Similarly, $m = \inf A$ if and only if (a) $m$ is a lower bound of $A$; (b) for all $\epsilon >0$, there exists an $a \in A$ such that $a<m+\epsilon$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[angle=90, width=.5\textwidth]{images/infimum_and_supremum}
+\end{figure}
 \label{rk:usage_of_alternate_characterization_of_inf_and_sup}
 \end{remark}
 
