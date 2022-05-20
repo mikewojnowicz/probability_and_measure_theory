@@ -5538,6 +5538,69 @@ which by Remark~\ref{rk:usage_of_alternate_characterization_of_inf_and_sup} prov
 %{prop:supremum_and_infimum_alternate_characterization}
 
 
+\section{$\S$ 2.7 Measures on infinite product spaces}
+
+\subsection{$\S$ 2.7.1-2.7.3: Measures on countably infinite product spaces (i.e., on \textit{sequences})}
+
+Throughout, for each $j=1,2,\hdots$, let $(\Omega_j, \F_j)$ be a measurable space.  Let $\Omega := \prod_{j=1}^\infty \Omega_j$, the set of all sequences $(\omega_1, \omega_2, \hdots)$ such that $\omega_j \in \Omega_j$. 
+
+
+
+% HOW TO MAKE FOOTNOTES IN THE DEFINITION
+% Reference: https://tex.stackexchange.com/questions/6505/footnote-marker-placement-in-heading-of-theorem-definition-etc/200445#200445
+% Note that we have to wrap the whole construction in \begingroup and \endgroup
+\begingroup
+\makeatletter
+\apptocmd{\thedefinition}{\unless\ifx\protect\@unexpandable@protect\protect\footnote{Note that in $\S$2.7.1-2.7.3, \cite{ash2000probability} uses $B_n$ for cylinder and $B^n$ for base.  However, I find the superscript/subscript notation confusing.  Therefore, I use a different notation, which actually comes from $\S$2.7.4-2.7.5, the uncountable product section of \cite{ash2000probability}. The notation $B^n(v)$ for a cylinder can be interpreted as the set $B^n$ located at coordinates $v=(t_1, \hdots, t_n)$.}\fi}{}{}
+\makeatother
+
+\begin{definition}
+Given $v:=(t_1, \hdots, t_n)$, a finite subset of $\set{1,2,\hdots}$, and a set $B^n \in \Omega_v := \prod_{i=1}^n \Omega_{t_i}$, we define a \textbf{cylinder} as
+\begin{align}
+ \explaintermbrace{cylinder}{B^n(v)} := \set{\omega \in \Omega : (\omega_{t_1}, \hdots \omega_{t_n}) \in \explaintermbrace{base}{B^n}}  
+\label{eqn:cylinder_in_sequence_space}	
+\end{align}
+If $B^n \in \F_v := \prod_{i=1}^n \F_{t_i}$, we call this a \textbf{measurable cylinder}.
+\end{definition}
+\endgroup
+
+\begin{definition}
+A cylinder whose base is a rectangle with $n$ sides (i.e. $B^n = A_i \times \hdots \times A_n$ with $A_i \in \Omega_{t_i}$ for all $i$) is called a \textbf{rectangle}.   If $A_i \in \F_{t_i}$ for each $i$, the cylinder is called a \textbf{measurable rectangle}. 
+\end{definition}
+
+
+
+\begin{example}
+
+Let $B^2$ be the base given in Fig.~\ref{fig:cylinder_base_in_2_coordinates}.  The corresponding cylinder is 
+\begin{align}
+B^2(v) := \set{ \omega \in \Omega : (\omega_{t_1}, \omega_{t_2}) \in B^2 }  
+\end{align}
+For instance, $(1.5, 1.5, \omega_3, \omega_4, \hdots) \in B^2(1,2)$, and  $(1.5, \omega_2, 1.5, \omega_4, \omega_5, \hdots) \in B^2(2,4)$.
+
+The projection of the cylinder $B^2(t_1, t_2)$ onto $(\omega_{t_1}, \omega_{t_2}, \omega_{t_3})$ is given in Fig.~\ref{fig:cylinder_projected_to_first_three_coordinates}.  
+
+\begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+\includegraphics[width=\textwidth]{images/cylinder_base_in_2_coordinates} 
+         \caption{A base (in 2 coordinates) for a cylinder.}
+\label{fig:cylinder_base_in_2_coordinates}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{images/cylinder_projected_to_first_three_coordinates}
+         \caption{The cylinder projected to the first three coordinates.}
+\label{fig:cylinder_projected_to_first_three_coordinates}
+     \end{subfigure}
+     \hfill
+ \caption{A cylinder in a countably infinite product space (i.e., a sequence space).}
+\label{fig:cylinders_in_sequence_space}
+\end{figure}
+
+\end{example}
 
 
 
