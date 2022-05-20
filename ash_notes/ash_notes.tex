@@ -5542,6 +5542,7 @@ which by Remark~\ref{rk:usage_of_alternate_characterization_of_inf_and_sup} prov
 
 \subsection{$\S$ 2.7.1-2.7.3: Measures on countably infinite product spaces (i.e., on \textit{sequences})}
 
+\subsubsection{Cylinders and rectangles}
 Throughout, for each $j=1,2,\hdots$, let $(\Omega_j, \F_j)$ be a measurable space.  Let $\Omega := \prod_{j=1}^\infty \Omega_j$, the set of all sequences $(\omega_1, \omega_2, \hdots)$ such that $\omega_j \in \Omega_j$. 
 
 
@@ -5572,7 +5573,7 @@ A cylinder whose base is a rectangle with $n$ sides (i.e. $B^n = A_i \times \hdo
 
 \begin{example}
 
-Let $B^2$ be the base given in Fig.~\ref{fig:cylinder_base_in_2_coordinates}.  The corresponding cylinder is 
+Let $\Omega_i = \R$ for all $i$ (written $\Omega = \R^\mathbb{N}$), and let $B^2$ be the base given in Fig.~\ref{fig:cylinder_base_in_2_coordinates}. A cylinder can be defined for any choice of $v=(t_1, t_2)$ by
 \begin{align}
 B^2(v) := \set{ \omega \in \Omega : (\omega_{t_1}, \omega_{t_2}) \in B^2 }  
 \end{align}
@@ -5602,7 +5603,50 @@ The projection of the cylinder $B^2(t_1, t_2)$ onto $(\omega_{t_1}, \omega_{t_2}
 
 \end{example}
 
+\subsubsection{Measurable cylinders are a field.}
 
+\begin{remark}{\remarktitle{A cylinder can always be regarded as having a higher dimensional base.}}
+For example, given a base $B^3$, we can write:
+\[ \explaintermbrace{base}{B^3}(1,2,3) = [\explaintermbrace{base}{B^3 \times \Omega_4}] (1,2,3,4) \]
+since
+\begin{align*}
+B^3(1,2,3)&=\set{\omega \in \Omega : (\omega_1, \omega_2, \omega_3) \in B^3} \\
+&=\set{\omega \in \Omega : (\omega_1, \omega_2, \omega_3) \in B^3, \omega_4 \in \Omega_4} \\
+&=\set{\omega \in \Omega : (\omega_1, \omega_2, \omega_3, \omega_4) \in B^3 \times \Omega_4} \\	
+&= [B_3 \times \Omega_4](1,2,3,4)
+\end{align*}
+\label{rk:cylinder_can_always_be_regarded_as_having_a_higher_dimensional_base}
+\end{remark}
+
+
+\red{TODO [WIP]: I think the preceding exposition and notation implicitly assumes each set $\Omega_i$ is identical; I seem to be assuming that the base $B^n$ can be put along\textit{any} coordinates by choice of $v$, but this clearly isn't true (e.g. suppose $\Omega_i=\R$ if $i$ odd and $\Omega_i=\mathbb{N}$ if $i$ even).  I need to review this and re-notate.}
+
+\begin{remark}{\remarktitle{Measurable cylinders are an elementary family.}}
+	
+Let $\C \subset \Omega$ be the measurable cylinders. We verify $\C$ satisfies the definition of an elementary family (Def.~\ref{def:elementary_family}):
+
+
+ 
+\begin{alphabate}
+\item $\emptyset \in \C$? \greencheck
+\item if $B^n(v) \in \C$, then $B^n(v)^c$ is a finite disjoint union of members of $\C$? \greencheck  In fact, if $B^n(v) \in \C$, then $B^n(v)^c \in \C$.  To see this, observe that given a base $B^n \in \F_v$, we have
+\begin{align*}
+(B^n(v))^c &= \set{\omega \in \Omega : (\omega_{t_1}, \hdots \omega_{t_n}) \in B^n}^c \\
+&= \set{\omega \in \Omega : (\omega_{t_1}, \hdots \omega_{t_n}) \in \explaintermbrace{$\in \F_v$, since $\F_v$ is a $\sigma$-field}{(B^n)^c}}
+\end{align*}
+\item if $B^n(v),A^m(w) \in \C$ then $B^n(v) \cap A^m(w) \in \C$? \greencheck  By Remark~\ref{rk:cylinder_can_always_be_regarded_as_having_a_higher_dimensional_base}, we can assume that $m=n$ and $v=w$, so it remains to show that if $B^n(v),A^n(v) \in \C$ then $B^n(v) \cap A^n(v) \in \C$.  This holds because 
+\[ B^n(v) \cap A^n(v) = \set{\omega \in \Omega : (\omega_{t_1}, \hdots \omega_{t_n}) \in \explaintermbrace{$\in \F_v$, since $\F_v$ is a $\sigma$-field}{B^n \cap A^n}}
+ \]
+
+\end{alphabate}
+\label{rk:measurable_cylinders_are_an_elementary_family}
+\end{remark}
+
+\begin{remark}{\remarktitle{Measurable cylinders are a field.}} 
+By Remark~\ref{rk:measurable_cylinders_are_an_elementary_family}, measurable cylinders are an elementary family.  So by Prop.~\ref{prop:from_elementary_families_to_fields}, the collection of finite disjoint unions of measurable cylinders are a field.  But finite disjoint unions of measurable cylinders are just measurable cylinders. (This can be seen by a similar argument as in part c) of 	Remark~\ref{rk:measurable_cylinders_are_an_elementary_family}.). Hence, the measurable cylinders are a field. 	
+\end{remark}
+
+\red{TODO: Add a meta-commentary about how we're doing something similar to what we did when constructing the Borel sets -- define an elementary family, extend to a field, define a measure on the field, use Caratheodory to extend to a measure on a sigma field.} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
