@@ -5542,6 +5542,21 @@ which by Remark~\ref{rk:usage_of_alternate_characterization_of_inf_and_sup} prov
 
 \subsection{$\S$ 2.7.1-2.7.3: Measures on countably infinite product spaces (i.e., on \textit{sequences})}
 
+In this section, we define a measure on countably infinite product spaces.  
+
+The construction is syntactically similar to how we constructed Lebesgue measure.   Recall that for Lebesgue measure, we defined a pre-measure on an elementary family (the r.s.c intervals), which gave us a pre-measure on a field (finite disjoint unions of r.s.c intervals), and then we used the \Caratheodory extension theorem to obtain a measure on a $\sigma$-field.  
+
+We followed a similar process when constructing the product measure.   
+
+Similarly, here, we:
+\begin{itemize}
+\item Define an elementary family that is convenient to work with.
+\item Extend that elementary family to a field.
+\item Define a pre-measure on the field.
+\item Use the \Caratheodory extension theorem to extend the pre-measure to a measure on a $\sigma$-field. 	
+\end{itemize}
+
+
 \subsubsection{Cylinders and rectangles}
 Throughout, for each $j=1,2,\hdots$, let $(\Omega_j, \F_j)$ be a measurable space.  Let $\Omega := \prod_{j=1}^\infty \Omega_j$, the set of all sequences $(\omega_1, \omega_2, \hdots)$ such that $\omega_j \in \Omega_j$. 
 
@@ -5552,34 +5567,34 @@ Throughout, for each $j=1,2,\hdots$, let $(\Omega_j, \F_j)$ be a measurable spac
 % Note that we have to wrap the whole construction in \begingroup and \endgroup
 \begingroup
 \makeatletter
-\apptocmd{\thedefinition}{\unless\ifx\protect\@unexpandable@protect\protect\footnote{Note that in $\S$2.7.1-2.7.3, \cite{ash2000probability} uses $B_n$ for cylinder and $B^n$ for base.  However, I find the superscript/subscript notation confusing.  Therefore, I use a different notation, which actually comes from $\S$2.7.4-2.7.5, the uncountable product section of \cite{ash2000probability}. The notation $B^n(v)$ for a cylinder can be interpreted as the set $B^n$ located at coordinates $v=(t_1, \hdots, t_n)$.}\fi}{}{}
+\apptocmd{\thedefinition}{\unless\ifx\protect\@unexpandable@protect\protect\footnote{Note that in $\S$2.7.1-2.7.3, \cite{ash2000probability} uses $B_n$ for cylinder and $B_n$ for base.  However, I find the superscript/subscript notation confusing.  Therefore, I use a different notation, which actually comes from $\S$2.7.4-2.7.5, the uncountable product section of \cite{ash2000probability}. The notation $B_n(v)$ for a cylinder can be interpreted as the set $B_n$ located at coordinates $v=(t_1, \hdots, t_n)$.}\fi}{}{}
 \makeatother
 
 \begin{definition}
-Given $v:=(t_1, \hdots, t_n)$, a finite subset of $\set{1,2,\hdots}$, and a set $B^n \in \Omega_v := \prod_{i=1}^n \Omega_{t_i}$, we define a \textbf{cylinder} as
+Given $v:=(t_1, \hdots, t_n)$, a finite subset of $\set{1,2,\hdots}$, and a set $B_n \in \Omega_v := \prod_{i=1}^n \Omega_{t_i}$, we define a \textbf{cylinder} as
 \begin{align}
- \explaintermbrace{cylinder}{B^n(v)} := \set{\omega \in \Omega : (\omega_{t_1}, \hdots \omega_{t_n}) \in \explaintermbrace{base}{B^n}}  
+ \explaintermbrace{cylinder}{B_n(v)} := \set{\omega \in \Omega : (\omega_{t_1}, \hdots \omega_{t_n}) \in \explaintermbrace{base}{B_n}}  
 \label{eqn:cylinder_in_sequence_space}	
 \end{align}
-If $B^n \in \F_v := \prod_{i=1}^n \F_{t_i}$, we call this a \textbf{measurable cylinder}.
+If $B_n \in \F_v := \prod_{i=1}^n \F_{t_i}$, we call this a \textbf{measurable cylinder}.
 \end{definition}
 \endgroup
 
 \begin{definition}
-A cylinder whose base is a rectangle with $n$ sides (i.e. $B^n = A_i \times \hdots \times A_n$ with $A_i \in \Omega_{t_i}$ for all $i$) is called a \textbf{rectangle}.   If $A_i \in \F_{t_i}$ for each $i$, the cylinder is called a \textbf{measurable rectangle}. 
+A cylinder whose base is a rectangle with $n$ sides (i.e. $B_n = A_i \times \hdots \times A_n$ with $A_i \in \Omega_{t_i}$ for all $i$) is called a \textbf{rectangle}.   If $A_i \in \F_{t_i}$ for each $i$, the cylinder is called a \textbf{measurable rectangle}. 
 \end{definition}
 
 
 
 \begin{example}
 
-Let $\Omega_i = \R$ for all $i$ (written $\Omega = \R^\mathbb{N}$), and let $B^2$ be the base given in Fig.~\ref{fig:cylinder_base_in_2_coordinates}. A cylinder can be defined for any choice of $v=(t_1, t_2)$ by
+Let $\Omega_i = \R$ for all $i$ (written $\Omega = \R^\mathbb{N}$), and let $B_2$ be the base given in Fig.~\ref{fig:cylinder_base_in_2_coordinates}. A cylinder can be defined for any choice of $v=(t_1, t_2)$ by
 \begin{align}
-B^2(v) := \set{ \omega \in \Omega : (\omega_{t_1}, \omega_{t_2}) \in B^2 }  
+B_2(v) := \set{ \omega \in \Omega : (\omega_{t_1}, \omega_{t_2}) \in B_2 }  
 \end{align}
-For instance, $(1.5, 1.5, \omega_3, \omega_4, \hdots) \in B^2(1,2)$, and  $(1.5, \omega_2, 1.5, \omega_4, \omega_5, \hdots) \in B^2(2,4)$.
+For instance, $(1.5, 1.5, \omega_3, \omega_4, \hdots) \in B_2(1,2)$, and  $(1.5, \omega_2, 1.5, \omega_4, \omega_5, \hdots) \in B_2(2,4)$.
 
-The projection of the cylinder $B^2(t_1, t_2)$ onto $(\omega_{t_1}, \omega_{t_2}, \omega_{t_3})$ is given in Fig.~\ref{fig:cylinder_projected_to_first_three_coordinates}.  
+The projection of the cylinder $B_2(t_1, t_2)$ onto $(\omega_{t_1}, \omega_{t_2}, \omega_{t_3})$ is given in Fig.~\ref{fig:cylinder_projected_to_first_three_coordinates}.  
 
 \begin{figure}
      \centering
@@ -5606,20 +5621,20 @@ The projection of the cylinder $B^2(t_1, t_2)$ onto $(\omega_{t_1}, \omega_{t_2}
 \subsubsection{Measurable cylinders are a field.}
 
 \begin{remark}{\remarktitle{A cylinder can always be regarded as having a higher dimensional base.}}
-For example, given a base $B^3$, we can write:
-\[ \explaintermbrace{base}{B^3}(1,2,3) = [\explaintermbrace{base}{B^3 \times \Omega_4}] (1,2,3,4) \]
+For example, given a base $B_3$, we can write:
+\[ \explaintermbrace{base}{B_3}(1,2,3) = [\explaintermbrace{base}{B_3 \times \Omega_4}] (1,2,3,4) \]
 since
 \begin{align*}
-B^3(1,2,3)&=\set{\omega \in \Omega : (\omega_1, \omega_2, \omega_3) \in B^3} \\
-&=\set{\omega \in \Omega : (\omega_1, \omega_2, \omega_3) \in B^3, \omega_4 \in \Omega_4} \\
-&=\set{\omega \in \Omega : (\omega_1, \omega_2, \omega_3, \omega_4) \in B^3 \times \Omega_4} \\	
+B_3(1,2,3)&=\set{\omega \in \Omega : (\omega_1, \omega_2, \omega_3) \in B_3} \\
+&=\set{\omega \in \Omega : (\omega_1, \omega_2, \omega_3) \in B_3, \omega_4 \in \Omega_4} \\
+&=\set{\omega \in \Omega : (\omega_1, \omega_2, \omega_3, \omega_4) \in B_3 \times \Omega_4} \\	
 &= [B_3 \times \Omega_4](1,2,3,4)
 \end{align*}
 \label{rk:cylinder_can_always_be_regarded_as_having_a_higher_dimensional_base}
 \end{remark}
 
 
-\red{TODO [WIP]: I think the preceding exposition and notation implicitly assumes each set $\Omega_i$ is identical; I seem to be assuming that the base $B^n$ can be put along\textit{any} coordinates by choice of $v$, but this clearly isn't true (e.g. suppose $\Omega_i=\R$ if $i$ odd and $\Omega_i=\mathbb{N}$ if $i$ even).  I need to review this and re-notate.}
+%\red{TODO [WIP]: I think the preceding exposition and notation implicitly assumes each set $\Omega_i$ is identical; I seem to be assuming that the base $B_n$ can be put along\textit{any} coordinates by choice of $v$, but this clearly isn't true (e.g. suppose $\Omega_i=\R$ if $i$ odd and $\Omega_i=\mathbb{N}$ if $i$ even).  I need to review this and re-notate.}
 
 \begin{remark}{\remarktitle{Measurable cylinders are an elementary family.}}
 	
@@ -5629,13 +5644,13 @@ Let $\C \subset \Omega$ be the measurable cylinders. We verify $\C$ satisfies th
  
 \begin{alphabate}
 \item $\emptyset \in \C$? \greencheck
-\item if $B^n(v) \in \C$, then $B^n(v)^c$ is a finite disjoint union of members of $\C$? \greencheck  In fact, if $B^n(v) \in \C$, then $B^n(v)^c \in \C$.  To see this, observe that given a base $B^n \in \F_v$, we have
+\item if $B_n(v) \in \C$, then $B_n(v)^c$ is a finite disjoint union of members of $\C$? \greencheck  In fact, if $B_n(v) \in \C$, then $B_n(v)^c \in \C$.  To see this, observe that given a base $B_n \in \F_v$, we have
 \begin{align*}
-(B^n(v))^c &= \set{\omega \in \Omega : (\omega_{t_1}, \hdots \omega_{t_n}) \in B^n}^c \\
-&= \set{\omega \in \Omega : (\omega_{t_1}, \hdots \omega_{t_n}) \in \explaintermbrace{$\in \F_v$, since $\F_v$ is a $\sigma$-field}{(B^n)^c}}
+(B_n(v))^c &= \set{\omega \in \Omega : (\omega_{t_1}, \hdots \omega_{t_n}) \in B_n}^c \\
+&= \set{\omega \in \Omega : (\omega_{t_1}, \hdots \omega_{t_n}) \in \explaintermbrace{$\in \F_v$, since $\F_v$ is a $\sigma$-field}{(B_n)^c}}
 \end{align*}
-\item if $B^n(v),A^m(w) \in \C$ then $B^n(v) \cap A^m(w) \in \C$? \greencheck  By Remark~\ref{rk:cylinder_can_always_be_regarded_as_having_a_higher_dimensional_base}, we can assume that $m=n$ and $v=w$, so it remains to show that if $B^n(v),A^n(v) \in \C$ then $B^n(v) \cap A^n(v) \in \C$.  This holds because 
-\[ B^n(v) \cap A^n(v) = \set{\omega \in \Omega : (\omega_{t_1}, \hdots \omega_{t_n}) \in \explaintermbrace{$\in \F_v$, since $\F_v$ is a $\sigma$-field}{B^n \cap A^n}}
+\item if $B_n(v),A_m(w) \in \C$ then $B_n(v) \cap A_m(w) \in \C$? \greencheck  By Remark~\ref{rk:cylinder_can_always_be_regarded_as_having_a_higher_dimensional_base}, we can assume that $m=n$ and $v=w$, so it remains to show that if $B_n(v),A_n(v) \in \C$ then $B_n(v) \cap A_n(v) \in \C$.  This holds because 
+\[ B_n(v) \cap A_n(v) = \set{\omega \in \Omega : (\omega_{t_1}, \hdots \omega_{t_n}) \in \explaintermbrace{$\in \F_v$, since $\F_v$ is a $\sigma$-field}{B_n \cap A_n}}
  \]
 
 \end{alphabate}
@@ -5643,10 +5658,93 @@ Let $\C \subset \Omega$ be the measurable cylinders. We verify $\C$ satisfies th
 \end{remark}
 
 \begin{remark}{\remarktitle{Measurable cylinders are a field.}} 
-By Remark~\ref{rk:measurable_cylinders_are_an_elementary_family}, measurable cylinders are an elementary family.  So by Prop.~\ref{prop:from_elementary_families_to_fields}, the collection of finite disjoint unions of measurable cylinders are a field.  But finite disjoint unions of measurable cylinders are just measurable cylinders. (This can be seen by a similar argument as in part c) of 	Remark~\ref{rk:measurable_cylinders_are_an_elementary_family}.). Hence, the measurable cylinders are a field. 	
+By Remark~\ref{rk:measurable_cylinders_are_an_elementary_family}, measurable cylinders are an elementary family.  So by Prop.~\ref{prop:from_elementary_families_to_fields}, the collection of finite disjoint unions of measurable cylinders are a field.  But finite disjoint unions of measurable cylinders are just measurable cylinders. (This can be seen by a similar argument as in part c) of 	Remark~\ref{rk:measurable_cylinders_are_an_elementary_family}.) Hence, the measurable cylinders are a field. 	
 \end{remark}
 
-\red{TODO: Add a meta-commentary about how we're doing something similar to what we did when constructing the Borel sets -- define an elementary family, extend to a field, define a measure on the field, use Caratheodory to extend to a measure on a sigma field.} 
+\subsubsection{(Extended) product measure theorem over countably infinite factors}
+
+Now we provide a version of the (extended) product measure theorem over countably many factors.  This extends Theorem~\ref{thm:extended_product_measure_theorem}, which worked with 2 factors, and \cite[Thm 2.6.7]{ash2000probability}, which worked with $n$ factors. 
+
+We restrict consideration here to \textit{probability} measures.  The theorem does not hold for arbitrary measures. 
+
+We let $\prod_{i=1}^\infty \F_i$ be the smallest $\sigma$-field over measurable cylinders.  (This is also the smallest $\sigma$-field over measurable rectangles; see \cite[Sec 2.7, Problem 1]{ash2000probability}.) 
+
+Due to Remark~\ref{rk:cylinder_can_always_be_regarded_as_having_a_higher_dimensional_base}, we will assume WLOG in the Theorem that $v=(1,\hdots,n)$. 
+
+\begin{theorem}
+Let $(\Omega_j, \F_j)$, $j=1,2,\hdots$ be arbitrary measurable spaces.  Let $\Omega = \prod_{j=1}^\infty \Omega_j$ and   $\F = \prod_{j=1}^\infty \F_j$.  Suppose we are given an arbitrary probability measure $P_1$ on $\F_1$, and for each $j=1,2,\hdots$ and each $(\omega_1, \hdots, \omega_j) \in \Omega_1 \times \cdots \Omega_j$ we are given a probability measure $P(\omega_1, \hdots, \omega_j; \cdot)$ on $\F_{j+1}$.  Assume that for each fixed $C \in \F_{j+1}$ the function $P(\cdot, \hdots, \cdot; C) : (\prod_{i=1}^j \Omega_i, \prod_{i=1}^j \F_i, ) \to (\R, \B(\R))$ is measurable.  
+
+For $B_n \in \prod_{j=1}^n \F_j$, define  
+\begin{align}
+P_n(B_n) &= \int_{\Omega_1} P_1(\wrt{\omega_1}) \int_{\Omega_2} P_2(\omega_1; \wrt{\omega_2}) \cdots \int_{\Omega_{n-1}} P_{n-1}(\omega_1, \hdots \omega_{n-2}; \wrt{\omega_{n-1}})  \\&\quad \int_{\Omega_{n}} P_{n}(\omega_1, \hdots \omega_{n-1}; \wrt{\omega_{n}}) \;\indicate{(\omega_1,\hdots, \omega_n) \in B_n}  
+\label{eqn:product_measure_in_n_coordinates}
+\end{align}	
+Note that $P_n$ is a probability measure by \cite[Thm.~2.6.7]{ash2000probability}.
+
+Then there is a unique probability measure $P$ on $\F$ such that for all $n$, $P$ agrees with $P_n$ on $n$-dimensional cylinders; that is $P\set{\omega \in \Omega : (\omega_1, \hdots, \omega_n) \in B_n} = P_n(B_n)$ for all $n=1,2,\hdots$ and $B_n \in \prod_{j=1}^n \F_j$. 
+\end{theorem}
+
+\begin{proof}
+\begin{enumerate}
+\item \textit{We first show that $P$ is well-defined on measurable cylinders.}
+
+Recall from Remark~\ref{rk:cylinder_can_always_be_regarded_as_having_a_higher_dimensional_base} that a cylinder can have multiple representations (since we can always increase the dimensionality of the base).  
+
+Suppose $B_n(1:n)=C_m(1:m)$ for $m<n$.\footnote{Recall from the definition of cylinders that 
+\begin{align*}
+ B_n(1:n) &= \set{\omega \in \Omega : (\omega_1, \hdots, \omega_n) \in B_n}, \quad B_n \in \prod_{i=1}^n \F_i \\
+ C_m(1:m) &= \set{\omega \in \Omega : (\omega_1, \hdots, \omega_n) \in  C_m}, \quad  C_m \in \prod_{i=1}^m \F_i 
+\end{align*}
+} Then we can relate the bases of the cylinders by $B_n = C_m \times \Omega_{m+1} \times \cdots \times \Omega_n$.
+
+We need to show that the probability mass assigned to the cylinder is invariant to representation, i.e. $P(B_n(1:n))=P(C_m(1:m)) \stackexplain{(def P)}{\iff} P_n(B_n)=P_m(C_m)$. 
+
+Observe\footnote{Here we use the fact that $P(\omega_1, \hdots, \omega_j; \cdot)$ are probability measures.  This theorem does not hold for arbitrary measures}:
+\begin{align*}
+P_n(B_n) &= \int_{\Omega_{1:m}}  \bigg[ \int_{\Omega_{m+1:n}}   \; \indicate{\omega_{1:m} \in C_m} \; \cancel{\indicate{\omega_{m+1:n} \in \Omega_{m+1:n}}} P(\omega_{1:m}; \wrt{\omega_{m+1:n}}) \bigg]  P(\wrt{\omega_{1:m}}) && \tinytext{def $P_n$, Tonelli compression} \\
+&= \int_{\Omega_{1:m}}  \indicate{\omega_{1:m} \in C_m} \explaintermbrace{$=1$}{\bigg[ \int_{\Omega_{m+1:n}}   P(\omega_{1:m}; \wrt{\omega_{m+1:n}}) \bigg]}  P(\wrt{\omega_{1:m}}) && \tinytext{constant multiple} \\
+&= P_m(C_m) && \tinytext{Tonelli expansion, def $P_m$} 
+\end{align*}
+
+\item \textit{$P$ is finitely additive on the field $\F_0$ of measurable cylinders.}
+
+Consider a collection of finitely many disjoint cylinders.  Represent the bases in a common number of factors, $n$, using Remark~\ref{rk:cylinder_can_always_be_regarded_as_having_a_higher_dimensional_base}.  Now disjoint cylinders have disjoint bases, so apply the finite additivity of $P_n$ obtain the finite additivity of $P$.
+
+\item \textit{If we can show that $P$ is countably additive on $\F_0$, then the \Caratheodory~extension theorem extends $P$ to a probability measure on $\prod_{j=1}^\infty \F_j$ which agrees with $P_n$ on $n$-dimensional cylinders. }
+\begin{enumerate}
+\item \textit{$P$ is countably additive on $\F_0$.}  Since $P$ is finitely additive on $\F_0$, Thm.~\ref{thm:finite_additivity_plus_continuity_gives_countable_additivity} tells us that it suffices to show that $P$ is continuous from above at $\emptyset$. 
+
+Let $\set{B_n(1:n)}, n=n_1,n_2,\hdots$ be a sequence of measurable cylinders decreasing to $\emptyset$.  We may assume $n_1 < n_2 < \hdots$\footnote{Note that the base growing in dimension from $n$ to $n+1$ means that we \textit{restrict} the extra coordinates relative to $\Omega_{n+1}$.}, and in fact nothing is lost if we assume $n_i=i$ for all $i$.  
+
+For each $n>1$, decompose \eqref{eqn:product_measure_in_n_coordinates} to write
+\[ P(B_n) = \int_{\Omega_1} g_n(\omega_1) P_1(\wrt{\omega_1}) \]
+where
+\begin{align}
+g_n(\omega_1) = \int_{\Omega_2} P_2(\omega_1; \wrt{\omega_2}) \int_{\Omega_{n}} P_{n}(\omega_1, \hdots \omega_{n-1}; \wrt{\omega_{n}}) \;\indicate{(\omega_1,\hdots, \omega_n) \in B_n}  
+\label{eqn:def_of_gn_in_proof_of_infinite_product_measure}	
+\end{align}
+
+
+Now we have 
+
+\begin{align*}
+B_{n+1}(:n+1) & \subset B_n(:n) && \tinytext{decreasing seq of cylinders} \\
+\implies B_{n+1} & \subset B_n \times \Omega_{n+1} && \tinytext{Remark~\ref{rk:cylinder_can_always_be_regarded_as_having_a_higher_dimensional_base}, and cylinder subset $\implies$ base subset} \\
+\implies \indicate{(\omega_1, \hdots, \omega_{n+1}) \in B_{n+1}} & \leq \indicate{(\omega_1, \hdots, \omega_{n+1}) \in  B_n \times \Omega_{n+1}}  \\
+\implies g_n(\omega_1) & \leq g_{n+1}(\omega_1) && \tinytext{monotonicity of $\int$, and using an argument like Step 1 to align dimensions in def. $g_n$, \eqref{eqn:def_of_gn_in_proof_of_infinite_product_measure} }
+\end{align*}
+
+Since $g_n$ is a decreasing sequence of functions, it has a limit; say $h$.  Thus, by monotone convergence theorem,
+\[ P(B_n) \to \int h(\omega_1) P(\wrt{\omega_1}) \]
+
+Now BWOC, assume that $\lim_{n \to \infty} P(B_n) > 0$.  Then (by monotonicity) $h(\omega_1')>0$ for some $\omega_1' \in \Omega_1$.  In fact, $\omega_1' \in B_1$.  (See \cite{ash2000probability} for a one sentence argument.)
+
+Repeat this inductively (See \cite{ash2000probability}) to obtain points $(\omega_1', \omega_2', \hdots)$ such that for each $n$, $(\omega_1', \hdots, \omega_n') \in B_n$.  Hence $(\omega_1', \omega_2', \hdots) \in \cap_{n=1}^\infty B_n(:n) = \emptyset$, a contradiction. 
+\end{enumerate}
+\item \textit{$P$ is unique.} This follows immediately from the \Caratheodory~extension theorem. See \cite{ash2000probability}.
+\end{enumerate}
+
+\end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
