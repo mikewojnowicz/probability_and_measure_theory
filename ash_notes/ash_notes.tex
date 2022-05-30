@@ -2342,7 +2342,7 @@ Now since the equality holds for all $\alpha <1$, it holds for $\alpha =1$, and 
 \[   \ds\lim_{n \to \infty}  \ds\int h_n  \geq \ds\int s \]
 Since the LHS is an upper bound on the set in the RHS, it must be greater than the least upper bound, so 
 \[   \ds\lim_{n \to \infty}  \ds\int h_n  \geq \ds\int h \]
-\item Now we know that \eqref{eqn:monotone_convergence_theorem_pre_conclusion} holds.  It just remains to show that \eqref{eqn:monotone_convergence_theorem_pre_conclusion} $\implies$ \eqref{eqn:monotone_convergence_theorem_conclusion}.  By monotonicity, $\int h_{n+1} \wrt{\mu}  \geq \int h_{n} \wrt{\mu}$ for all $n$, and since the limit of an increasing sequence is its supremum (Prop. \ref{prop:limit_of_monotone_sequences}), $\int h \wrt{\mu}  \geq \int h_{n} \wrt{\mu}$ for all $n$.
+\item Now we know that \eqref{eqn:monotone_convergence_theorem_pre_conclusion} holds.  It just remains to show that \eqref{eqn:monotone_convergence_theorem_pre_conclusion} $\implies$ \eqref{eqn:monotone_convergence_theorem_conclusion}.  By monotonicity, $\int h_{n+1} \wrt{\mu}  \geq \int h_{n} \wrt{\mu}$ for all $n$, and since the limit of an increasing sequence is its supremum (Prop. \ref{prop:limit_of_monotone_sequences_as_inf_and_sup}), $\int h \wrt{\mu}  \geq \int h_{n} \wrt{\mu}$ for all $n$.
 \end{itemize}
 \end{proof}
 
@@ -3230,7 +3230,7 @@ Let $f_1, f_2, ..., f, g$ be Borel measurable
 %Now we have $f_n - g \geq 0$ and $f_n -g \uparrow f-g$, so by Monotone Convergence Theorem, 
 Now
 \begin{align*}
-& f_n - g \geq 0 \quad \text{ and } \quad f_n -g \uparrow f-g && \tinytext{Hypothesis (and Prop \ref{prop:limit_of_monotone_sequences})} \\
+& f_n - g \geq 0 \quad \text{ and } \quad f_n -g \uparrow f-g && \tinytext{Hypothesis (and Prop \ref{prop:limit_of_monotone_sequences_as_inf_and_sup})} \\
 \implies & \ds\int (f_n - g) \dmu \uparrow \ds\int (f-g) \dmu && \tinytext{Monotone Convergence Theorem}\\
 \stackrel{\tinycircled{1}}{\implies} & \ds\int f_n \dmu - \ds\int g \dmu \uparrow \ds\int f \dmu - \ds\int g \dmu && \tinytext{Linearity}\\
 \implies & \dint f_n \dmu \uparrow \dint f \dmu && \tinytext{Since $\int g$ is finite} 
@@ -5884,10 +5884,58 @@ If $A, B \subset \R$ are non-empty, then
 Proposition \ref{prop:sup_and_inf_for_minkowski_sum_and_diff} can be informally described as saying that the infimum and supremum distribute over addition and subtraction, but negative signs ``flip" infima to suprema, and vice versa. 
 \end{remark}
 
+
+
+\subsection{Limits of monotone real-valued sequences}
+
 \begin{proposition}
-Let $\set{x_n}$ be a sequence of real numbers.  If $\set{x_n}$ is increasing, then its supremum is the limit. 	If $\set{x_n}$ is decreasing, then its infimum is the limit.
-\label{prop:limit_of_monotone_sequences}
+Let $\set{x_n}$ be a sequence of real numbers.  
+\begin{alphabate}
+\item If $\set{x_n}$ is decreasing, then its infimum is the limit, i.e.
+\[ \text{If } x_n \downarrow x, \text{ then } x = \inf x_n \]
+\item If $\set{x_n}$ is increasing, then its supremum is the limit, i.e. 
+\[ \text{If } x_n \uparrow x, \text{ then } x = \sup x_n \] 	
+\end{alphabate}
+\label{prop:limit_of_monotone_sequences_as_inf_and_sup}
 \end{proposition}
+
+\begin{proof}
+First note that if $\set{x_n}$ is a monotone sequence of real-numbers, then it always has a limit (possibly $\pm \infty$). 
+
+\begin{alphabate}
+\item By the definition of the infimum, we need to show:
+
+\begin{itemize}
+\item[i)] $x$ is a lower bound? \greencheck.
+\item[ii)]	$x$ is the greatest lower bound (i.e. for all $\epsilon > 0$, $x+ \epsilon$ is \textit{not} a lower bound;  see Remark~\ref{rk:usage_of_alternate_characterization_of_inf_and_sup})? 
+
+So we need to show 
+\begin{align}
+ \forall \epsilon > 0, \exists\, x_n :  \quad x_n < x + \epsilon
+\label{eqn:glb_property_for_decreasing_sequences}
+\end{align}
+
+\begin{center}
+\includegraphics[width=.4\linewidth]{images/lim_of_decreasing_sequence_is_infimum}
+\end{center}
+
+Well, note that $\lim_{n \to \infty} x_n = x$ means that 
+%
+\begin{align*}
+\forall \epsilon>0 , \exists N : \forall n \geq N, \quad 
+ |x_n - x | < \epsilon && \tinycircled{\ast} 
+\end{align*} 
+Since $(x_n)$ is decreasing, the conclusion of  $\tinycircled{\ast}$ becomes 
+\begin{align*}
+x_n - x  < \epsilon && \tinycircled{\ast}\tinycircled{\ast} 
+\end{align*} 
+So given $\epsilon$, choose $x_N$ in $\tinycircled{\ast} \tinycircled{\ast}$ to obtain a sequence element satisfying \eqref{eqn:glb_property_for_decreasing_sequences}.
+\end{itemize}
+
+\item Can be argued similarly as part (a).
+\end{alphabate}
+  
+\end{proof}
 
 
 \subsection{Limit inferior and limit superior of real valued sequences}
@@ -5897,7 +5945,9 @@ If $a_n$ is a sequence of real numbers, then  we define its limit inferior and l
 \[ \liminf_{n \to \infty} a_n := \lim_{n \to \infty} \inf_{m \geq n} a_m, \quad \quad \limsup_{n \to \infty} a_n := \lim_{n \to \infty} \sup_{m \geq n} a_m \]	
 \end{definition}
 
-\begin{remark}
+Unlike the limit, the limit inferior and limit superior always exist, although they may be $\pm \infty$.
+
+\begin{remark}{\remarktitle{Definitions of limit inferior and limit superior in quantified form.}}
 The definitions can be presented in quantified form.  For example, \cite{apostol1974mathematical} defines the limit superior as follows. Suppose there is a real number $S$ satisfying the following two conditions
 \begin{enumerate}
 \item \begin{align*}
@@ -5913,7 +5963,27 @@ The definitions can be presented in quantified form.  For example, \cite{apostol
 then $S$ is the limit superior of $\set{x_n}$.  We can think of (1) as stating that $S$ is an asymptotic upper bound;  ultimately \textit{all} terms of the sequence lie to the left of $S + \epsilon$.  We can think of the additional condition (2) as then guaranteeing that $S$ is an asymptotic least upper bound; \textit{infinitely many} terms lie to the right of $U - \epsilon$ (so $U - \epsilon$ cannot be an upper bound for any $n$). 
 \end{remark}
 
-Unlike the limit, the limit inferior and limit superior always exist, although they may be $\pm \infty$. 
+Now we give an alternate characterization of the limit superior and limit inferior
+
+\begin{proposition}
+If $x_n$ is a sequence of real numbers, then we can express its limit inferior and limit superior as follows:
+\begin{alphabate}
+	
+\item $\liminf_{n \to \infty} x_n = \sup_n \inf_{k \geq n} x_k$
+\item $\limsup_{n \to \infty} x_n = \inf_n \sup_{k \geq n} x_k$ 
+\end{alphabate}
+\end{proposition}
+
+\begin{proof}
+
+\begin{alphabate}
+\item Define $X_n := (x_k)_{k \geq n}$ as the tail of the sequence beginning at index $n$.  Then clearly $X_{n+1} \subset X_n$. So by Proposition~\ref{prop:sup_and_inf_for_subsets_are_tighter}, 
+\[ \explaintermbrace{$:= y_{n+1}$}{\inf X_{n+1}} \geq \explaintermbrace{$:= y_{n}$}{\inf X_n} \]
+Hence, $(y_n)$ is an increasing sequence.  So by Prop.~\ref{prop:limit_of_monotone_sequences_as_inf_and_sup}, $\lim y_n = \sup y_n$. 
+\item Can be argued similarly as in (a).  
+\end{alphabate}
+\end{proof}
+
 
 \begin{proposition}
 \[ \liminf_{n \to \infty} a_n  \leq \limsup_{n \to \infty} a_n  \]
