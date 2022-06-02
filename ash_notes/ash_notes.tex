@@ -6216,5 +6216,132 @@ And if $f_n \to f$ uniformly on $A$ then $A=U$.
 \label{rk:set_theoretic_definition_of_uniform_convergence}
 \end{remark}
 
+\subsection{Semicontinuous functions\footnotemark}
+\footnotetext{This section follows \cite[Appendix 2]{ash2000probability}.}
+
+Semicontinuity is a weaker notion than continuity.   Below we give the definition of \cite[Appendix 2]{ash2000probability}.
+
+\begin{definition}
+Let $\Omega$ be a metric space. The function $\Omega \to \overline{\R}$ is said to be:
+\begin{itemize}
+\item  \textbf{lower semi-continuous} (LSC) if $\set{x \in \Omega: f(x) < a}$ is open for all $a \in \overline{R}$.
+\item \textbf{upper semi-continuous} (USC) if $\set{x \in \Omega: f(x) > a}$ is open for all $a \in \overline{R}$.
+\end{itemize}
+\label{def:semi_continuous_functions}
+\end{definition}
+
+\begin{remark}
+
+An alternate characterization of semi-continuity is as follows:
+
+\begin{itemize}
+\item  A function $f: \Omega \to \overline{\R}$ is LSC at $x_0 \in \Omega$ if for all $c < f(x_0)$, there is a neighborhood $U$ of $x_0$ such that $f(x) > c$ for all $x \in U$. 
+\item  A function $f: \Omega \to \overline{\R}$ is USC at $x_0 \in \Omega$ if for all $c > f(x_0)$, there is a neighborhood $U$ of $x_0$ such that $f(x) < c$ for all $x \in U$. 
+\end{itemize}
+
+\begin{center}
+\includegraphics[angle=90, width=.4\linewidth]{images/lsc_and_usc_function_examples}	
+\end{center}
+
+The alternate characterization clarifies the intuition behind the names:
+\begin{itemize}
+\item  LSC functions have function values near $x$ which are not much \textit{lower} than $f(x)$ (so big jumps up are allowed, but not big jumps down).
+\item  USC functions have function values near $x$ which are not much \textit{higher} than $f(x)$ (so big jumps down are allowed, but not big jumps up).
+\end{itemize}
+\label{rk:semi_continuous_functions_alternate_characterization}
+\end{remark} 
+
+
+\begin{exercise}
+Prove that the two characterizations of semicontinuity given in Def.~\ref{def:semi_continuous_functions} and Remark~\ref{rk:semi_continuous_functions_alternate_characterization} are equivalent.
+\end{exercise}
+
+Now we give some useful properties of semicontinuous functions.
+
+\begin{proposition}
+If $f$ is LSC and USC, then $f$ is continuous.
+\end{proposition}
+
+\begin{proof}
+Continuous functions are characterized by the property that the inverse image of any open set $A$ is open.  Now since $A \subset \overline{\R}$, we can write it as a countable union of open intervals $A = \cup_{i=1}^\infty (a_i, b_i)$. So we have
+%
+\begin{align*}
+f^{-1}\bigg( \bigcup_{i=1}^\infty (a_i, b_i) \bigg) &= \bigcup_{i=1}^\infty f^{-1}(a_i,b_i) && \tinytext{Inverse images preserve set operations; see Sec.~\ref{sec:why_define_measurability_this_way}} \\
+&=	\bigcup_{i=1}^\infty \explaintermbrace{open by LSC}{f^{-1}(y>a_i)} \; \bigcap \; \explaintermbrace{open by USC}{f^{-1}(y<b_i)}  
+\end{align*} 
+which is open by the closure properties of open sets (finite intersections, countable unions)
+\end{proof}
+
+\begin{proposition}
+$f$ is LSC iff $-f$ is USC.
+\label{prop:f_is_LSC_if_negative_f_is_USC}
+\end{proposition}
+
+\begin{proof}
+\begin{align*}
+-f \text{ is USC} &\iff \set{x: -f(x) < c} \text { is open } \forall c \in \overline{\R} && \tinytext{def. USC}\\
+&\iff \set{x: f(x) > -c} \text { is open } \forall c \in \overline{\R}  &&\tinytext{multiply by -1}\\
+&\iff \set{x: f(x) > c} \text { is open } \forall c \in \overline{\R}  &&\tinytext{relabel}\\
+&\iff f \text{ is LSC}  && \tinytext{def. LSC}
+\end{align*}	
+\end{proof}
+
+% Third characterization via theorem. 
+
+Now we give yet a third characterization of semicontinuous functions, which is useful when discussing weak convergence.
+
+\begin{theorem}
+The function $f : \Omega \to \overline{\R}$ is 
+\begin{alphabate}
+\item LSC iff \quad $\liminf_{n \to \infty} f(x_n) \geq f(x)$. 
+\item USC iff \quad $\limsup_{n \to \infty} f(x_n) \leq f(x)$. 
+\end{alphabate}
+for all sequences $\set{x_n} \subset \Omega$ converging to a point $x \in \Omega$.
+\end{theorem}
+
+\begin{proof}
+\begin{alphabate}
+\item 
+\begin{itemize}
+\item $\boxed{\implies}$. Let (1) f be LSC, (2) $x_n \to x$, (3) $c<f(x)$.
+ 
+Since $x_n \to x$, eventually $x_n \in N_\epsilon(x)$ for any $\epsilon$, where $N_\epsilon(x)$ denotes a neighborhood of radius $\epsilon$ centered on $x$.
+
+Thus, eventually
+\[ \explaintermbrace{open}{f^{-1}(c,\infty]} \supset N_\epsilon(x) \ni x_n\]
+where the openness holds since by (3), $x \in f^{-1}(c,\infty]$, which by (1) is an open subset of $\Omega$. 
+
+
+So eventually, 
+\[f(x_n) \in (c,\infty] \quad \text{ for any } c<f(x)\]
+That is, eventually
+\[f(x_n) > c  \quad \text{ for any } c<f(x)\]
+
+So by characterization of the infimum (Remark~\ref{rk:usage_of_alternate_characterization_of_inf_and_sup}), we have
+\[ \liminf_{n \to \infty} f(x_n) \geq f(x) \]
+
+ 	
+\item $\boxed{\impliedby}$.	 Suppose that (1) $x_n \to x$ implies $\liminf_{n \to \infty} f(x_n) \geq f(x)$.  We need to show that $V:=\set{x: f(x) >c}$ is open $\forall c \in \overline{\R}$.  Let $x_n \to x$ for any $x$ where (2) $f(x)>c$.  Then
+\[ \liminf_{n \to \infty} f(x_n) \stackrel{(1)}{\geq} f(x) \stackrel{(2)}{>} c\]
+So 
+\[ f(x_n) > \explaintermbrace{eventual lower bound}{c}  \quad \text{eventually} \]
+ So $x_n \in V$ eventually.  So $V$ is open.\footnote{This is a characterization of open sets: the tail of any sequence $\set{x_n}$ converging to $x \in V$ lies in $V$.}      
+\end{itemize}
+\item By Prop.~\ref{prop:f_is_LSC_if_negative_f_is_USC}, we have that
+\[ f \text{ is USC } \iff  -f \text{ is LSC. } \]
+Therefore, by part (a), we have 
+\begin{align*}
+\liminf_{n \to \infty} -f(x_n) &\geq -f(x) \\
+\lim_{n \to \infty} \inf_{k \geq n} -f(x_k) &\geq -f(x) && \tinytext{def. liminf} \\
+\lim_{n \to \infty} - \sup_{k \geq n} f(x_k) &\geq -f(x) && \tinytext{Infimum of negated set; Prop.~\ref{prop:supremum_and_infimum_under_constant_multiples_of_sets}} \\
+- \lim_{n \to \infty} \sup_{k \geq n} f(x_k) &\geq -f(x) && \tinytext{Limit properties} \\
+- \limsup_{n \to \infty} f(x_n) &\geq -f(x) && \tinytext{def. limsup} \\
+\limsup_{n \to \infty} f(x_n) &\leq f(x) && \tinytext{multiply by -1} \\
+\end{align*}
+
+\end{alphabate}
+
+\end{proof}
+
 
 \end{document}
