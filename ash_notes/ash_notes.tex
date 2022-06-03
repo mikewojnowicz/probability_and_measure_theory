@@ -83,8 +83,8 @@
 % MAKE INTO A CYLINDER
 \newcommand{\cylinder}[1]{\widehat{#1}}
 
-% ALLOW STRIKEOUT
-\usepackage[normalem]{ulem} %\sout 
+% INTERIOR
+\newcommand{\interior}[1]{{#1}^\circ}
 
 \begin{document}
 
@@ -5793,11 +5793,11 @@ Let $\mu, \mu_1, \mu_2, \hdots$ be finite measures on the Borel sets of a metric
 \end{theorem}
 
 
-\red{TODO: Fill in}
-% Add proof
-% Add definition of weak convergence.
+\red{TODO: Add proof}
 
-\begin{theorem}\textnormal{(Weak convergence as convergence of distribution functions at points of continuity.)} Let $\mu, \mu_1, \mu_2, \hdots$ be finite measures on $\B(\R)$, with corresponding distribution functions $F, F_1, F_2, \hdots$.\footnote{Note that any finite measure is a Lebesgue-Stieltjes measure, and hence has a corresponding distribution function.} The following are equivalent:
+\red{TODO: Add def weak convergence}
+
+\begin{theorem}\textnormal{(Characterizing weak convergence via distribution functions.)} Let $\mu, \mu_1, \mu_2, \hdots$ be finite measures on $\B(\R)$, with corresponding distribution functions $F, F_1, F_2, \hdots$.\footnote{Note that any finite measure is a Lebesgue-Stieltjes measure, and hence has a corresponding distribution function.} The following are equivalent:
 
 \begin{alphabate}
 \item $\mu_n \weakConvergence \mu$
@@ -5811,20 +5811,30 @@ If all distribution functions are 0 at $-\infty$, condition (b) is equivalent to
 \begin{remark}
 Here, we sketch the proof of Thm~\ref{thm:weak_convergence_as_convergence_of_distribution_function_at_points_of_continuity}.  For a full proof, see \cite{ash2000probability}.	
 \begin{itemize}
-\item $\boxed{(a) \implies (b)}$.	\red{TODO: Fill in}
+\item $\boxed{(a) \implies (b)}$. This follows almost immediately from the characterization given by  Thm.~\ref{thm:weak_convergence} (e). First note that by Example~\ref{ex:boundary_of_rsc_interval}, the boundary of $(a,b]$ is given by $\partial (a,b] = \set{a} \cupdot \set{b}$.  Next, we show that $\mu(\partial (a,b]) =0$ if $a,b$ are continuity points of $F$.   Note that $\mu(\set{a} \cupdot \set{b}) \stackexplain{countable additivity}{=} \mu(\set{a}) + \mu(\set{b})$, so it suffices to show that $\mu(\set{c})=0$ at any continuity point $c$ of $F$. 
+\begin{align*}
+\mu(\set{c}) &= F(c) - \ds\lim_{x \uparrow c} F(x) && \tinytext{Properties of Lebesgue-Stieltjes measures; see Prop~\ref{prop:properties_of_LS_measures} (e) } \\
+&= F(c) - F(c) && \tinytext{$c$ is a point of continuity of $F$} \\
+&=0.
+\end{align*}
+
 \item $\boxed{(b) \implies (a)}$. Weak convergence is proved using the characterization given by  Thm.~\ref{thm:weak_convergence} (d).  We note:
 \begin{enumerate}
 	\item[1.)] Any open set $A \subset \R$ can be written as a countable union of disjoint open intervals, $A = \cupdot_{k=1}^\infty I_k$.
 	\item[2.)] $F$ can only have at most countably many discontinuities (see \cite[Sec.~1.5, HW~9]{ash2000probability}).
 	\begin{enumerate}
-	\item[2i.)] Thus, we can approximate any open interval $I_k=(a_k,b_k)$ arbitrarily well by a right semi-closed subinterval $I_k'=(a_k',b_k']$ whose endpoints are continuity points of $F$.  \red{TODO: Add picture}
+	\item[2i.)] Thus, we can approximate any open interval $I_k=(a_k,b_k)$ arbitrarily well by a right semi-closed subinterval $I_k'=(a_k',b_k']$ whose endpoints are continuity points of $F$.  
+	
+	\begin{center}
+	\includegraphics[width=.3\textwidth, angle=90]{images/weak_convergence_via_distribution_functions_step_in_proof}	
+	\end{center}
+	\item[2ii.)] And so $\mu_n(I_k') \to \mu(I_k')$ by (b).
 	\end{enumerate}
-	\item[3.)] $\mu_n(I_k') \to \mu(I_k')$ by (b).
-	\item[4.)] Now we prove weak convergence (characterization  Thm.~\ref{thm:weak_convergence} (d))  by
+	\item[3.)] Now we prove weak convergence (characterization  Thm.~\ref{thm:weak_convergence} (d))  by
 	\begin{align*}
 		\liminf_{n \to \infty} \mu_n(A) &\stackexplain{(1.)}{=} \liminf_{n \to \infty} \sum_{k=1}^\infty \mu_n(I_k) \\& \geq \sum_{k=1}^\infty \liminf_{n \to \infty} \mu_n(I_k) && \tinytext{Fatou's Lemma for series; Rk.~\ref{rk:fatous_lemma_for_series}}\\
 	&\stackexplain{(2i.)}{\approx}\sum_{k=1}^\infty \liminf_{n \to \infty} \mu_n(I_k') \\
-	&\stackexplain{(3.)}{=} \sum_{k=1}^\infty \mu(I_k') \\
+	&\stackexplain{(2ii.)}{=} \sum_{k=1}^\infty \mu(I_k') \\
 	&\stackexplain{(2i.)}{\approx} \sum_{k=1}^\infty \mu(I_k) \\
 	&\stackexplain{(1.)}{=} \mu(A)
 	 	\end{align*} 
@@ -5833,9 +5843,6 @@ Here, we sketch the proof of Thm~\ref{thm:weak_convergence_as_convergence_of_dis
 \end{remark}
 
 
-%Proof of b \implies a:
-%\label{eqn:fatous_lemma_applied_to_series},
-%\label{rk:fatous_lemma_for_series}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
@@ -6427,6 +6434,51 @@ Therefore, by part (a), we have
 \end{alphabate}
 
 \end{proof}
+
+\subsection{Interior, boundary, and closure \footnotemark} \footnotetext{Large chunks of this section are lifted verbatim or almost verbatim from \url{http://math.stanford.edu/~conrad/diffgeomPage/handouts/closure.pdf}.}
+
+\begin{definitions}
+Let $X$ be a metric space and $A \subseteq X$ a subset.  
+\begin{itemize}
+\item We define the \textbf{interior} of $A$ to be the set
+\[\interior{A} = \set{a \in A | \text{ some } B_{r_a} \subseteq A, r_a > 0} \]
+consisting of points for which $A$ is a "neighborhood". 
+\item We define the \textbf{closure} of $A$ to be the set 
+\[ \overline{A} = \set{x \in X | x = \ds\lim_{n \to \infty} a_n, \text{ with } a_n \in A \text{ for all } n} \]
+consisting of limits of sequences in $A$. 	
+\end{itemize}
+\end{definitions}
+
+\begin{remark}{\remarktitle{Comments on interior and closure.}}
+In words, the interior consists of points in $A$ for which all nearby points of $X$ are also in $A$, whereas the closure allows for "points on the edge of A".  Note that obviously
+\[ \interior{A} \subseteq A \subseteq \overline{A}. \]
+It can be shown that $\interior{A}$ is the largest open set inside of $A$ - that is, it is open and contains any open set lying inside of $A$ (so in fact $A$ is open if and only if $A = \interior{A}$) - while $\overline{A}$ is the smallest closed set containing $A$, i.e. $\overline(A)$ is closed and lies inside of any closed set containing $A$ (so in fact $A$ is closed if and only if $A = \overline{A}$). 
+\end{remark}
+
+\begin{definition}
+Let $A$ be a subset of a metric space $X$.  We define the $\textbf{boundary}$ $\partial A$ of $A$ to be $\overline{A} - \interior{A}$.	
+\end{definition}
+
+\begin{center}
+\includegraphics[angle=90,width=.3\linewidth]{images/boundary_closure_and_interior}	
+\end{center}
+
+
+\begin{example}{\remarktitle{Boundary of a right semi-closed interval.}} The right semi-closed interval $I=(a,b]$ has boundary given by
+\begin{align*}
+\partial I &= \overline{I} - \interior{I} \\
+&= [a,b] - (a,b) \\
+& = \set{a} \cupdot \set{b}
+\end{align*}
+%The right semi-closed interval $I=(a,b]$ has boundary $\partial I = \set{a} \cupdot \set{b}$. 
+% Proof:
+%
+%\begin{align*}
+%\overline{I} &= [a,b] \\
+%\interior{I} &= (a,b)
+%\end{align*}
+\label{ex:boundary_of_rsc_interval}	
+\end{example}
 
 
 \end{document}
