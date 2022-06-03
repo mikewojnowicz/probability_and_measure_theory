@@ -5804,6 +5804,7 @@ So $\mu(\overline{A}) = \mu(A)$.
 \end{proof}
 
 
+Now we provide the various characterizations of weak convergence.\footnote{For a bit of intuition, see \url{https://math.stackexchange.com/questions/3497341/example-of-weak-convergence}.}
 
 \begin{theorem}
 Let $\mu, \mu_1, \mu_2, \hdots$ be finite measures on the Borel sets of a metric space $\Omega$. The following conditions are equivalent:
@@ -5822,7 +5823,58 @@ Let $\mu, \mu_1, \mu_2, \hdots$ be finite measures on the Borel sets of a metric
 \begin{proof}
 We prove the implications in a cycle.
 \begin{itemize}
-\item [\boxed{(d) $\implies$ (e).}]  We will show that if (d) hold and $\mu(\partial A) =0$, then
+\item [$\boxed{(a) \implies (b).}$]  Let $f$ be a bounded LSC function. By \cite[Theorem A2.6]{ash2000probability}, there is a sequence of continuous functions $\set{g_k}$ such that 
+\begin{align*}
+\explaintermbrace{continuous}{g_k} \uparrow \explaintermbrace{LSC}{f}. && \tinycircled{1} 
+\end{align*} 
+ Now since each $g_k \leq f$, we have for fixed $k$ that
+ \begin{align*}
+ \int g_k \wrt{\mu_n} & \leq \int f \wrt{\mu_n} \quad \text{ for any measure } \mu_n && \tinytext{monotonicity of integral} \\
+\liminf_{n \to \infty} \int g_k \wrt{\mu_n} & \leq \liminf_{n \to \infty}  \int f \wrt{\mu_n} && \tinytext{order preserved by asymptotics} \\
+\int g_k \wrt{\mu} & \leq \liminf_{n \to \infty}  \int f \wrt{\mu_n} && \tinytext{by (a), $\liminf_{n \to \infty} \int g_k \wrt{\mu_n}= \lim_{n \to \infty} \int g_k \wrt{\mu_n} =  \int g_k \wrt{\mu}$} \\
+ \end{align*} 
+ Taking the limit as $k \to \infty$ in the equation immediately above, we obtain 
+ \[ \liminf_{n \to \infty}  \int f \wrt{\mu_n} \geq \lim_{k \to \infty} \int g_k \wrt{\mu} \stackexplain{extended MCT}{=} \int \lim_{k \to \infty}  g_k \wrt{\mu}  \stackexplain{\tinycircled{1}}{=} \int f \wrt{\mu} \] 
+where the criteria for the extended MCT are met since $\mu$ is finite.\footnote{\cite{ash2000probability} does not use MCT, but rather takes a supremum along with an additional boundedness argument. I'm not sure why he does it this way; it seems more obscure and convoluted to me than just using MCT. }
+%\red{REMOVE REST} that $\int g_k \wrt{\mu_n} \leq \int f \wrt{\mu_n}$ for any measure $\mu_n$.  Hence $\liminf_{n \to \infty} \int g_k \wrt{\mu_n} \leq \liminf_{n \to \infty}  \int f \wrt{\mu_n}$.
+\item [$\boxed{(b) \iff (b').}$]  Let $f$ be a bounded LSC function.   Then we have 
+\begin{align*}
+\liminf_{n \to \infty} \int f \wrt{\mu_n} & \geq \int f \wrt{\mu} && \tinytext{Characterization (b)}  \\
+- \liminf_{n \to \infty} \int f \wrt{\mu_n} & \leq - \int f \wrt{\mu} && \tinytext{Multiply both sides by -1}  \\
+\limsup_{n \to \infty} \int - f \wrt{\mu_n} & \leq  \int - f \wrt{\mu} && \tinytext{Prop.~\ref{prop:liminf_and_limsup_of_negated_sequences}, constant multiple prop of $\int$}  \\
+\end{align*}
+Now use that $f$ is LSC if and only if $-f$ is USC (Prop.~\ref{prop:f_is_LSC_if_negative_f_is_USC}); the negation doesn't affect boundedness. 
+\item [$\boxed{(b) \implies (c).}$] See \cite{ash2000probability}.
+\item [$\boxed{(c) \implies (d).}$] Clearly (c) implies (a), which in turn implies (b).  If $A$ is open, then $f=\indicate{A}$ is LSC (Def. ~\ref{def:semi_continuous_functions}), since
+\[ 
+\set{f^{-1}(y > a)} = 
+\begin{cases}
+\emptyset, & \text { if } a > 1 \\
+A, &\text{ if } 0 < a \leq 1\\
+\Omega, &\text{ if } a \leq 0	
+\end{cases},
+\]
+\begin{center}
+\includegraphics[angle=90, width=.3\textwidth]{images/indicator_of_open_interval}	
+\end{center}
+all of which are open. So by (b) $\liminf_{n \to \infty} \mu_n(A) \geq \mu(A)$.  Now $\indicate{\Omega} \equiv 1$, so $\mu_n(\Omega) \to \mu(\Omega)$ by (c). 
+\item [$\boxed{(d) \iff (d').}$]  We argue that $(d) \implies (d')$, but the argument goes both ways.  Let $B \subseteq \Omega$ be closed.  Then $\Omega - B := A$ is open, and any finite measure $\nu$, we have 
+\begin{align*}
+\nu(A) &= \nu(\Omega) - \nu(B) && \tinycircled{1} 	
+\end{align*}
+\tinytext{(This equation holds by the piece-and-difference decomposition of Thm.~\ref{thm:basic_properties_of_finitely_additive_set_functions}, with the finiteness of $\nu$ allowing subtraction.)}
+
+So
+\begin{align*}
+\liminf_{n \to \infty } \mu_n(A) &= \liminf_{n \to \infty } [\mu_n (\Omega) - \mu_n(B)] && \tinytext{by \tinycircled{1}} \\
+\mu(A) & \leq  \liminf_{n \to \infty } [\mu_n (\Omega) - \mu_n(B)] && \tinytext{by (d)} \\
+& = \liminf_{n \to \infty } \mu_n (\Omega) - \limsup_{n \to \infty } \mu_n(B) && \tinytext{Prop.~\ref{prop:sup_and_inf_for_minkowski_sum_and_diff} and def. liminf} \\
+& = \mu (\Omega) - \limsup_{n \to \infty } \mu_n(B) && \tinytext{Since $\mu_n(\Omega) \to \mu(\Omega)$} \\
+\implies \mu(\Omega) - \mu(B) &	\leq \mu (\Omega) - \limsup_{n \to \infty } \mu_n(B) && \tinytext{by \tinycircled{1}} \\
+\implies \mu(B) &\geq \limsup_{n \to \infty} \mu_n(B) && \tinytext{Subtract off $\mu(\Omega)$ (ok since $\mu$ finite); multiply by -1} 
+\end{align*}
+
+\item [$\boxed{(d) \implies (e).}$]  We will show that if (d) hold and $\mu(\partial A) =0$, then
 \[ \mu(A) \stackexplain{(1)}{\leq} \liminf_{n \to \infty} \mu_n(A) \stackexplain{Prop.~\ref{prop:liminf_upper_bounded_by_limsup}}{\leq} \limsup_{n \to \infty} \mu_n(A)  \stackexplain{(2)}{\leq} \mu(A).  \] 
 
 	\begin{itemize}
@@ -5839,10 +5891,8 @@ We prove the implications in a cycle.
 	So 
 	\[ \limsup_n \mu_n(A) \stackexplain{\tinycircled{+}}{\leq} \liminf_n \mu_n(\overline{A}) \stackexplain{(d')}{\leq} \mu(\overline{A}) \stackexplain{hypothesis, Lemma~\ref{lemma:null_boundaries_mean_that_a_set_has_the_same_measure_as_its_interior_and_its_closure}}{=} \mu(A) \]	
 	\end{itemize}
+\item [$\boxed{(e) \implies (a).}$] See \cite{ash2000probability}. 
 \end{itemize}
-
-\red{TODO: Finish proof}
-
 \end{proof}
 
 
@@ -6110,13 +6160,13 @@ then $S$ is the limit superior of $\set{x_n}$.  We can think of (1) as stating t
 
 Now we give an alternate characterization of the limit superior and limit inferior
 
-\begin{proposition}
-If $x_n$ is a sequence of real numbers, then we can express its limit inferior and limit superior as follows:
+\begin{proposition}{\textnormal{(Alternate characterization of the limit superior and limit inferior.)}} If $x_n$ is a sequence of real numbers, then we can express its limit inferior and limit superior as follows:
 \begin{alphabate}
 	
 \item $\liminf_{n \to \infty} x_n = \sup_n \inf_{k \geq n} x_k$
 \item $\limsup_{n \to \infty} x_n = \inf_n \sup_{k \geq n} x_k$ 
 \end{alphabate}
+\label{prop:alt_characterization_liminf_and_limsup}
 \end{proposition}
 
 \begin{proof}
@@ -6127,6 +6177,22 @@ If $x_n$ is a sequence of real numbers, then we can express its limit inferior a
 Hence, $(y_n)$ is an increasing sequence.  So by Prop.~\ref{prop:limit_of_monotone_sequences_as_inf_and_sup}, $\lim y_n = \sup y_n$. 
 \item Can be argued similarly as in (a).  
 \end{alphabate}
+\end{proof}
+
+\begin{proposition}
+\begin{alphabate}
+\item $\liminf_{n \to \infty} - x_n = -\limsup_{n \to \infty} x_n $
+\item $\limsup_{n \to \infty} - x_n = -\liminf_{n \to \infty} x_n $ 
+\end{alphabate}	
+\label{prop:liminf_and_limsup_of_negated_sequences}
+\end{proposition}
+
+\begin{proof}
+\begin{alphabate}
+\item 
+\[\liminf_{n \to \infty} - x_n \stackexplain{Prop.~\ref{prop:alt_characterization_liminf_and_limsup}}{=}  \lim_{n \to \infty} \inf_{k \geq n} -x_k \stackexplain{Prop.~\ref{prop:supremum_and_infimum_under_constant_multiples_of_sets}}{=}   \lim_{n \to \infty} -\sup_{k \geq n} x_k \stackexplain{limit properties}{=} -\lim_{n \to \infty} \sup_{k \geq n} x_k \stackexplain{Prop.~\ref{prop:alt_characterization_liminf_and_limsup}}{=}  -\limsup_{n \to \infty} x_n. \]
+\item Set $y_n=-x_n$ in (a) to obtain  $\liminf_{n \to \infty} y_n = -\limsup_{n \to \infty} -y_n $. Then negate both sides of the equation. 
+\end{alphabate}	
 \end{proof}
 
 
