@@ -1046,6 +1046,7 @@ In this Section, we show that the formula $\mu(a,b] = F(b) - F(a)$ sets up a one
  
  \begin{theorem}
  Let $\mu$ be a Lebesgue-Stietljes measure on $\R$.  Let $F : \R \to \R$ be defined (up to additive constant) by $F(b)-F(a) = \mu(a,b]$ for $a<b$. Then $F$ is a distribution function.
+\label{thm:from_ls_measure_to_distribution_function}
  \end{theorem}
 
 \begin{proof}
@@ -5974,6 +5975,62 @@ Here, we sketch the proof of Thm~\ref{thm:weak_convergence_as_convergence_of_dis
 \end{itemize}
 \end{remark}
 
+
+\section{$\S$ 4 Basic Concepts of Probability}
+
+\subsection{Introduction}
+
+\begin{definitions}
+Let $(\Omega, \F, P)$ be a probability space. We refer to $\Omega$ as the \textbf{sample space} and sets in $\F$ as \textbf{events}.
+\end{definitions}
+
+\subsection{$\S$ 4.6 Random variables}
+
+\begin{definition}
+A \textbf{random variable} $X$ on a probability space $(\Omega, \F, P)$ is a Borel measurable function from $(\Omega, \F)$ to $(\R, \B(\R))$.\footnote{Ash expresses random variables as $X : (\Omega, \F) \to (\R, \B(\R))$, and he interprets this notation as implying that the measurability condition $X^{-1}(B) \in \F, \quad \forall \; B \in \B(\R)$ is satisfied (e.g. see \cite[pp.176, top paragraph before Sec 4.7]{ash2000probability}). However, I find this notation to be unclear; to me it suggests that the \textit{direct} images of $X$ are in $\B(\R)$ for each set in $\F$.}   $X$ is said to be an \textbf{extended random variable}  if it is a Borel measurable function from $(\Omega, \F)$ to $(\overline{R}, \B(\overline{\R}))$. 
+\end{definition}
+
+\begin{definition}
+If $X$ is a random variable on  $(\Omega, \F, P)$, the \textbf{probability measure induced} by $X$ is the probability measure $P_X$ on $\B(\R)$ given by
+\[  P_X(B) := P\set{\omega : X(\omega) \in B}, \quad B \in \B(\R). \] 
+\end{definition}
+
+The numbers $P_X(B), \; B \in \B(\R)$ completely characterize the random variable $X$ in the sense that they provide the probabilities of all events involving $X$.  It is useful to know that this information may be captured by a single function from $\R$ to $\R$.
+
+\begin{definition}
+The \textbf{distribution function} of a random variable $X$ is the function $F_X$ from $\R$ to $[0,1]$ given by 
+\[F_X(x) = P\set{\omega : X(\omega) \leq x}, \quad x \in \R.\]
+\label{def:distribution_function_of_random_variable}
+\end{definition}
+
+ 
+%{thm:extension_for_Lebesgue_stietljes_measure}
+There is a correspondence between distribution functions of random variables $F_X$ and probability measures induced by random variables $P_X$.  In essence, this holds due to the results of Sec.~\ref{sec:ls_measures_and_distribution_functions}, where we found a correspondence between distribution functions $F$ (not necessarily of random variables) and Lebesgue-Stieltjes measures, since $P_X$ is a Lebesgue-Stieltjes measure. 
+\begin{itemize}
+\item \textit{Let $X$ be a random variable with induced probability measure $P_X$.  Let $F_X$ be a distribution of a random variable (see Def.~\ref{def:distribution_function_of_random_variable}).   Then $F=F_X$ is the distribution function corresponding to the Lebesgue-Stieltjes measure $P_X$.} 
+
+We have
+\begin{align*}
+F_X(b)-F_X(a) &\stackexplain{def}{=} P \set{\omega : X(\omega) \leq b} - P\set{\omega : X(\omega) \leq a} \\
+& \stackexplain{piece-and-diff}{=} P\set{\omega : a < X(\omega) \leq b} \\
+&\stackexplain{def}{=} P_X(a,b]
+\end{align*}
+And so the result holds by Thm~\ref{thm:from_ls_measure_to_distribution_function}.
+\item \textit{If $F: \R \to [0,1]$ is increasing and right-continuous, with $F(\infty)=1$ and $F(-\infty)=0$, then $F$ is the distribution function of some random variable.}
+
+By Theorem~\ref{thm:extension_for_Lebesgue_stietljes_measure}, there is a Lebesgue-Stieltjes measure $P$ corresponding to any distribution function $F$,  $P(\R) = F(\infty) - F(-\infty) \stackexplain{hypoth.}{=} 1 - 0 = 1$, and so $P$ must further be a probability measure.   Now by taking $X$ to be the identity function (see Remark~\ref{rk:canonical_underlying_probability_space_for_a_random_variable}), we have $P_X =P$, and we are done.  
+\end{itemize}
+
+
+\begin{remark}{\remarktitle{Canonical method for constructing an underlying probability space.}} 
+
+A beautiful quote from \cite[pp.174]{ash2000probability}.
+
+\begin{quotation}
+Very often, the following statement is made: ``Let $X$ be a random variable with distribution function $F$," where $F$ is a given function from $\R$ to $[0,1]$ that is increasing and right continuous, with $F(\infty)=1$ and $F(-\infty)=0$.  There is no reference to the underlying probability space $(\Omega, \F, P)$, and actually the nature of the underlying probability space is not important.  The distribution function $F$ determines the probability measure $P_X$, which in turn determines the probability of all events involving $X$.  The only thing we have to check is that there be at least one $(\Omega, \F, P)$ on which a random variable $X$ with distribution function $F$ can be defined.  In fact, we can always supply the probability space in a canonical way; take $\Omega = \R, \F = \B(\R)$, with $P$ the Lebesgue-Stieltjes measure corresponding to $F$, and define $X(\omega) = \omega, \omega \in \Omega$, that is, $X$ is the identity map.   Since $P_X(B) = P\set{\omega: X(\omega) \in \B}=P(B)$, $X$ has induced probability measure $P$ and therefore distribution function $F$.
+\end{quotation}
+\label{rk:canonical_underlying_probability_space_for_a_random_variable}
+\end{remark}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
