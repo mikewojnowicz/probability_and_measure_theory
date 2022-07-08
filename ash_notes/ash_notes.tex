@@ -1953,12 +1953,55 @@ are all measurable. Thus, if $h(\omega) = \lim_{n \to \infty} h_n(\omega)$ exist
 See \cite{folland1999real} Proposition 2.7.
 \end{proof}
 
+\begin{proposition} 
+A composition of Borel measurable functions is measurable.
+\label{prop:a_composition_of_Borel_measurable_functions_is_measurable}
+\end{proposition}
+
+\begin{proof}
+See \cite{ash2000probability} Lemma 1.5.7.
+\end{proof}
+
+
+Below we see that Borel measurability of a multivariate function is equivalent to the Borel measurability of all the component functions.
+
+\begin{proposition}
+\cite[Thm.~1.5.8]{ash2000probability}.   Let $h : \Omega \to \overline{\R}^n$.  So $h=(h_1(\omega), \hdots, h_n(\omega))$.  Then $h$ is Borel measurable iff $h_i$ is Borel measurable for all $i=1,\hdots n$.  
+\label{prop:multivariate_function_is_Borel_measurbale_iff_component_functions_are_Borel_measurable}
+\end{proposition}
+
+\begin{proof}
+First, some notation.  Let $p_i : \overline{\R}^n \to \overline{\R}$ be the projection map taking $(x_1,\hdots, x_n)$ to $x_i$.   Then each component function can be written as $h_i = p_i \circ h$.
+
+Now we prove each direction
+\begin{itemize}
+\item $\boxed{\implies}$.  Let $h$ be Borel measurable. We need to show that
+\[ h_i^{-1}(B) \in \B(\overline{\R}), \quad \forall B \in \B(\overline{\R}). \]
+By the computational def. of measurable functions (see Remark~\ref{rk:computational_definition_of_Borel_measurability}), it suffices to show that 
+\[ h_i^{-1}(I) \in \B(\overline{\R}), \quad \forall I = [a,b] \subset \overline{\R}.\]
+So note that each $p_i$ is Borel measurable, since 
+ \[ p_i^{-1} \set{x_i \in \overline{\R} : a_i \leq x_i \leq b_i} = \set{x \in \overline{\R}^n : a_i \leq x_i \leq b_i,  -\infty \leq x_j \leq \infty, \quad j \neq i }\]
+ which is an interval of $\overline{\R}^n$.  So $h_i = p_i \circ h$ is the composition of measurable functions, which is measurable by Proposition~\ref{prop:a_composition_of_Borel_measurable_functions_is_measurable}.
+
+\item $\boxed{\impliedby}$. Let each $h_i$ be Borel measurable.   Again using Remark~\ref{rk:computational_definition_of_Borel_measurability}, we have
+\begin{align*}
+h^{-1} \set{x \in \overline{\R}^n : a \leq x \leq b} &= \bigcap_{i=1}^n \set{\omega \in \Omega : a_i \leq h_i(\omega) \leq b_i} \explaintermbrace{by hypoth.}{\in \F}.
+\end{align*}
+  
+\end{itemize}
+ 	
+\end{proof}
+
+%{rk:computational_definition_of_Borel_measurability}
+
 \subsection{$\S$ 1.5.2-1.5.3 Integrating  Borel measurable functions}
 
 In this section, we define integral of a Borel measurable function $h : (\Omega, \F) \to (\overline{\R}, \B(\overline{\R}))$ against arbitrary measure $\mu$.  The integral can be written as:
 \[ \ds\int_{\Omega} h \wrt{\mu}, \quad \quad \ds\int_{\Omega} h(\omega) \wrt{\mu(\omega)}, \quad \text{ or } \quad \ds\int_{\Omega} h(\omega) \mu(d \, \omega) \]
  
  We proceed in three steps: first, we consider where $h$ is simple, then we consider $h$ non-negative, then we consider $h$ arbitrary. 
+
+
 
 \subsubsection{Integrals of simple functions}
 
@@ -5990,6 +6033,11 @@ Let $(\Omega, \F, P)$ be a probability space. We refer to $\Omega$ as the \textb
 A \textbf{random variable} $X$ on a probability space $(\Omega, \F, P)$ is a Borel measurable function from $(\Omega, \F)$ to $(\R, \B(\R))$.\footnote{Ash expresses random variables as $X : (\Omega, \F) \to (\R, \B(\R))$, and he interprets this notation as implying that the measurability condition $X^{-1}(B) \in \F, \quad \forall \; B \in \B(\R)$ is satisfied (e.g. see \cite[pp.176, top paragraph before Sec 4.7]{ash2000probability}). However, I find this notation to be unclear; to me it suggests that the \textit{direct} images of $X$ are in $\B(\R)$ for each set in $\F$.}   $X$ is said to be an \textbf{extended random variable}  if it is a Borel measurable function from $(\Omega, \F)$ to $(\overline{R}, \B(\overline{\R}))$. 
 \end{definition}
 
+\begin{example}
+If $(\Omega, \F, P)$ corresponds to a sequence of Bernoulli trials \cite[Sec.~4.4]{ash2000probability} and $X$ is the number of successes, then $X(1 0 1 1) =3, X(0 1 0 0 ) = 1$, and so on.	
+\end{example}
+
+
 \begin{definition}
 If $X$ is a random variable on  $(\Omega, \F, P)$, the \textbf{probability measure induced} by $X$ is the probability measure $P_X$ on $\B(\R)$ given by
 \[  P_X(B) := P\set{\omega : X(\omega) \in B}, \quad B \in \B(\R). \] 
@@ -6018,7 +6066,7 @@ F_X(b)-F_X(a) &\stackexplain{def}{=} P \set{\omega : X(\omega) \leq b} - P\set{\
 And so the result holds by Thm~\ref{thm:from_ls_measure_to_distribution_function}.
 \item \textit{If $F: \R \to [0,1]$ is increasing and right-continuous, with $F(\infty)=1$ and $F(-\infty)=0$, then $F$ is the distribution function of some random variable.}
 
-By Theorem~\ref{thm:extension_for_Lebesgue_stietljes_measure}, there is a Lebesgue-Stieltjes measure $P$ corresponding to any distribution function $F$,  $P(\R) = F(\infty) - F(-\infty) \stackexplain{hypoth.}{=} 1 - 0 = 1$, and so $P$ must further be a probability measure.   Now by taking $X$ to be the identity function (see Remark~\ref{rk:canonical_underlying_probability_space_for_a_random_variable}), we have $P_X =P$, and we are done.  
+By Theorem~\ref{thm:extension_for_Lebesgue_stietljes_measure}, there is a Lebesgue-Stieltjes measure $P$ corresponding to any distribution function $F$,  and $P(\R) = F(\infty) - F(-\infty) \stackexplain{hypoth.}{=} 1 - 0 = 1$, and so $P$ must further be a probability measure.   Now by taking $X$ to be the identity function (see Remark~\ref{rk:canonical_underlying_probability_space_for_a_random_variable}), we have $P_X =P$, and we are done.  
 \end{itemize}
 
 
@@ -6030,6 +6078,56 @@ A beautiful quote from \cite[pp.174]{ash2000probability}.
 Very often, the following statement is made: ``Let $X$ be a random variable with distribution function $F$," where $F$ is a given function from $\R$ to $[0,1]$ that is increasing and right continuous, with $F(\infty)=1$ and $F(-\infty)=0$.  There is no reference to the underlying probability space $(\Omega, \F, P)$, and actually the nature of the underlying probability space is not important.  The distribution function $F$ determines the probability measure $P_X$, which in turn determines the probability of all events involving $X$.  The only thing we have to check is that there be at least one $(\Omega, \F, P)$ on which a random variable $X$ with distribution function $F$ can be defined.  In fact, we can always supply the probability space in a canonical way; take $\Omega = \R, \F = \B(\R)$, with $P$ the Lebesgue-Stieltjes measure corresponding to $F$, and define $X(\omega) = \omega, \omega \in \Omega$, that is, $X$ is the identity map.   Since $P_X(B) = P\set{\omega: X(\omega) \in \B}=P(B)$, $X$ has induced probability measure $P$ and therefore distribution function $F$.
 \end{quotation}
 \label{rk:canonical_underlying_probability_space_for_a_random_variable}
+\end{remark}
+
+\subsection{$\S$ 4.7 Random vectors}
+
+\begin{definition}
+Let $(\Omega, \F, P)$ be a probability space.  A \textbf{ $n$-dimensional random vector} is a Borel measurable map from $\Omega$ to $\R^n$.
+\end{definition}
+
+
+\begin{remark}
+A random vector $X$ may be regarded as an $n$-tuple $(X_1, \hdots X_n)$ of random variables.  This is because $X$ is Borel measurable iff each $X_i$ is Borel measurable (see Prop.~\ref{prop:multivariate_function_is_Borel_measurbale_iff_component_functions_are_Borel_measurable}).
+\end{remark}
+
+\subsection{$\S$ 4.8 Independent random variables}
+
+Independence of random events is defined in \cite[Sec.~4.3]{ash2000probability}.   Here we define independence of random variables.
+
+\begin{definition}
+Let $X_1,\hdots, X_n$ be random variables on $(\Omega, \F, P)$.  Then $X_1,\hdots, X_n$ are said to be \textbf{independent} if for all sets $B_1, \hdots, B_n \in \B(\R)$, we have 
+\[P_X[X_1 \in B_1, \hdots, X_n \in B_n] = P_{X_1}[X_1 \in B_1] \cdots P_{X_n}[X_n \in B_n]. \]	
+\label{def:independence_of_random_variables}
+\end{definition}
+
+
+\begin{remark}
+By \cite[2.6.8(b)]{ash2000probability} (the classical product measure theorem over $n$ factors), independence of $X_1,\hdots, X_n$  may be expressed by saying that if $X=(X_1,\hdots,X_n)$, then $P_X$ is the product of the $P_{X_i}, i=1,\hdots, n$.
+\end{remark}
+
+\begin{proposition}
+\textnormal{(Functions of independent random variables are independent.)}
+Let $X_1,\hdots, X_n$ be independent random variables on $(\Omega, \F, P)$.  Let $g_i: (\R, \B(\R)) \to (\R, \B(\R))$ be measurable functions for $i=1,\hdots,n$.  Then $g_1(X_1),\hdots, g_n(X_n)$ are independent random variables.
+\label{prop:functions_of_independent_random_variables_are_independent}
+\end{proposition}
+
+\begin{proof}
+Let $X=(X_1, \hdots, X_n)$ be the $n$-dimensional random vector with independent components.  Let  $g \circ X : (\Omega, \F, P) \to (\R^n, \B(\R^n))$ be defined by  $g \circ X = (g_1 \circ X_1, \hdots g_n \circ X_n)$.  Then for any $B_1, \hdots, B_n \in \B(\R)$,
+%
+\begin{align*}
+P_{g(X)}&[g_1(X_1) \in B_1, \hdots g_n(X_n) \in B_n]\\
+&= P_\Omega[\omega \in \Omega : (g_1 \circ X_1)(\omega) \in B_1, \hdots, (g_n \circ X_n)(\omega) \in B_n]  &&\tinytext{Def. prob measure induced by $g(X)$} \\
+&= P_\Omega[\omega \in \Omega : X_1(\omega) \in g_1^{-1}(B_1), \hdots, X_n(\omega) \in g_n^{-1}(B_n)]  &&\tinytext{Def. inverse image} \\
+&= P_X[X_1 \in \explaintermbrace{$\in \B(\R)$ since $g$ measurable}{g_1^{-1}(B_1)}, \hdots, X_n \in \explaintermbrace{$\in \B(\R)$ since $g$ measurable}{g_n^{-1}(B_n)}]  &&\tinytext{Def. prob measure induced by $X$} \\
+&= P_{X_1}[X_1 \in g_1^{-1}(B_1)] \cdots   P_{X_n}[X_n  \in g_n^{-1}(B_n)]  &&\tinytext{Independence of X} \\
+&= P_{g_1(X_1)}[g_1(X_1) \in B_1] \cdots  P_{g_n(X_n)}[g_n(X_n)\in B_n]  &&\tinytext{Def. inverse image, def.  prob measure induced by g(X)} 
+\end{align*}
+\end{proof}
+
+
+\begin{remark}{\remarktitle{Functions of independent random \textnormal{objects} are independent.}}
+The conclusion of Prop.~\ref{prop:functions_of_independent_random_variables_are_independent} applies more generally even if each $X_i$ is a  \textit{random object}.  Random objects are relaxations of random variables that allow $X_i$ to map to any measurable space (not just the reals equipped with the Borel sets).  In this context, we have $(\Omega, \F, P) \stackrel{X_i}{\to} (\Omega_i, \F_i) \stackrel{g_i}{\to} (\Omega_i', \F_i')$.
 \end{remark}
 
 
