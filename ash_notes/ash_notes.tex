@@ -6171,17 +6171,22 @@ Independence of random events is defined in \cite[Sec.~4.3]{ash2000probability}.
 
 \begin{definition}
 Let $X_1,\hdots, X_n$ be random variables on $(\Omega, \F, P)$.  Then $X_1,\hdots, X_n$ are said to be \textbf{independent} if for all sets $B_1, \hdots, B_n \in \B(\R)$, we have 
-\[P_X[X_1 \in B_1, \hdots, X_n \in B_n] = P_{X_1}[X_1 \in B_1] \cdots P_{X_n}[X_n \in B_n]. \]	
+\begin{align}
+P_X[X_1 \in B_1, \hdots, X_n \in B_n] = P_{X_1}[X_1 \in B_1] \cdots P_{X_n}[X_n \in B_n].	
+\label{eqn:independence_of_random_variables}	
+\end{align}
+
 \label{def:independence_of_random_variables}
 \end{definition}
 
 
-\begin{remark}
-By \cite[2.6.8(b)]{ash2000probability} (the classical product measure theorem over $n$ factors), independence of $X_1,\hdots, X_n$  may be expressed by saying that if $X=(X_1,\hdots,X_n)$, then $P_X$ is the product of the $P_{X_i}, i=1,\hdots, n$.
+\begin{remark}{\remarktitle{Independence as induced product measure: A collection of independent RV's has an induced probability measure which is the product of the individual induced probability measures.}}
+Note that independent random variables are defined according to a constraint that the (induced) probability measure must satisfy \textit{only for measurable rectangles} (sets of the form $B=B_1 \times \cdots \times B_n$);   see the left hand side of Eq.~\eqref{eqn:independence_of_random_variables}.  However, this definition automatically determines the probability measure on \textit{all} sets (see the classical product measure theorem as given in Cor.~\ref{cor:classical_product_measure_theorem}, or in \cite[2.6.8(b)]{ash2000probability} for a corresponding statement over $n$ factors).  Hence, independence of $X_1,\hdots, X_n$  may be expressed by saying that if $X=(X_1,\hdots,X_n)$ is a collection of independent random variables, then $P_X$ is the product of the $P_{X_i}, i=1,\hdots, n$.  We write $P_X = \prod_{i=1}^n P_{X_i}.$
+\label{rk:independent_random_variables_induce_product_measures}
 \end{remark}
 
 \begin{proposition}
-\textnormal{(Functions of independent random variables are independent.)}
+\textbf{(Functions of independent random variables are independent.)}
 Let $X_1,\hdots, X_n$ be independent random variables on $(\Omega, \F, P)$.  Let $g_i: (\R, \B(\R)) \to (\R, \B(\R))$ be measurable functions for $i=1,\hdots,n$.  Then $g_1(X_1),\hdots, g_n(X_n)$ are independent random variables.
 \label{prop:functions_of_independent_random_variables_are_independent}
 \end{proposition}
@@ -6302,6 +6307,111 @@ LOTUS (Theorem~\ref{thm:LOTUS}) still holds if
 The proof is exactly as in Theorem~\ref{thm:LOTUS}, with $\R^n$ replacing $\R$ for (a) and $(\Omega', \F')$ replacing $\R, \B(\R)$ for (b).
 \label{rk:LOTUS_applies_for_random_vectors_and_random_objects}
 \end{remark}
+
+\subsubsection{Moments}
+
+We now investigate moments, which are special cases of expectations from which we can build means, variances, and so forth.
+
+\begin{definition}
+Let $X$ be a random variable.  If $k>0$, then 
+\begin{itemize}
+\item $E(X^k)$  is called the $k$-th  \textbf{moment} of $X$
+\item $E(|X|^k)$  is called the $k$-th  \textbf{absolute moment} of $X$	
+\end{itemize}
+\end{definition}
+
+\begin{proposition}\textbf{A moment is finite iff the absolute moment is finite.}
+Let $X$ be a random variable and $k>0$. Then $E(X^k)$ is finite iff  	$E(|X|^k)$ is finite.
+\label{prop:moment_is_finite_iff_absolute_moment_is_finite}
+\end{proposition}
+
+\begin{proof}
+This is a special case of Cor.~\ref{cor:additivity_corollaries} (a).
+\end{proof}
+
+\begin{proposition}\textbf{Finiteness of moments implies finiteness of lower moments.}
+If $k>0$ and $E(X^k)$ is finite, then $E(X^j)$ is finite for $0 < j < k$.
+\label{prop:finiteness_of_moments_implies_finiteness_of_lower_moments}
+\end{proposition}
+
+\begin{proof}
+\begin{align*}
+E[|X|^j] &= \int_\Omega |X|^j \; dP && \tinytext{def. expectation} \\
+&= 	\int_{\set{|X|^j < 1}} |X|^j \; dP + \int_{\set{|X|^j \geq 1}} |X|^j \; dP&& \tinytext{countable additivity of measure (recall Cor.~\ref{cor:indefinite_integrals_as_measures}) :-)} \\
+&\leq \; \explaintermbrace{(A)}{P(|X|^j < 1)} + \explaintermbrace{(B)}{\int_\Omega |X|^k \, dP} && \tinytext{see below}\\
+&< \infty. && \tinytext{since probabilities are less than one (left) and by assumption (right)}
+\end{align*}
+
+{\scriptsize  
+
+Some Details: To justify that the inequality holds for term (A), note
+\[ \int_{\set{|X|^j < 1}} |X|^j \; dP \stackexplain{monotonicity of integral}{\leq}  \int_{\set{|X|^j < 1}} 1 \; dP \stackexplain{integral of indicator}{=} P(|X|^j < 1) \] 
+To justify that the inequality holds for term (B), note
+\[ \int_{\set{|X|^j \geq 1}} |X|^j \; dP \stackexplain{*}{\leq}  \int_{\set{|X|^j < 1}} |X|^k \; dP \stackexplain{monotonicity}{=} \int_{\Omega} |X|^k \; dP  \]
+where (*) holds since $|X|^k \geq |X|^j$ on the set $\set{|X|^j \geq 1}$, because $|X|^k = (|X|^j)^{k/j}$ and the exponent $>1$ by assumption and the base $\geq 1$ on the given set. 
+}
+
+\end{proof}
+	
+
+% MTW: I have commented this out because I think it's wrong; we could have just used linearity (with the indicator functions), which would have been finite since the summed integral exists.  I think the real use of working with absolute moments is to simplify the bounds. This is worth thinking about a bit more, probably.
+ 
+%\begin{remark}
+%I believe the proof of Prop.~\ref{prop:finiteness_of_moments_implies_finiteness_of_lower_moments} provides an example of the utility of Prop.~\ref{prop:moment_is_finite_iff_absolute_moment_is_finite} (a moment is finite iff the absolute moment is finite.) Since the integrand is non-negative, we can interpret the integrals as measures (Cor.~\ref{cor:indefinite_integrals_as_measures}) and so apply countable additivity to split up the integral into integrals over disjoint sets.  Another way to see this step is via linearity (expressing the domain of integration in terms of indicator functions), but 
+%\end{remark}
+
+
+\begin{theorem}
+Let $X_1, \hdots, X_n$ be independent random variables on $(\Omega, \F, P)$.   If all the $X_i$ are nonnegative or if $E(X_i)$ is finite for all $i$, then $E(X_1 \cdots X_n)$ exists and equals $E(X_1)E(X_2)\cdots E(X_n)$.  
+\end{theorem}
+
+\begin{proof}
+\begin{align*}
+E(X_1 \cdots X_n) &= \int_{\R^n} x_1 \cdots x_n \, dP_X && \tinytext{LOTUS for random vectors (Remark~\ref{rk:LOTUS_applies_for_random_vectors_and_random_objects})} \\
+&=\int_{\R^n} x_1 \cdots x_n \, \wrt{\big(\prod_{i=1}^n P_{X_i}(x_i)\big)} && \tinytext{Independence as induced product measure (Remark~\ref{rk:independent_random_variables_induce_product_measures})} \\
+&= \int_{\R} \cdots \int_{\R} x_1 \cdots x_n \, \wrt{P_{X_1}(x_1)} \cdots \wrt{P_{X_n}(x_n)}  && \tinytext{Fubini's theorem} \\
+&= \int_{\R} x_1 \, \wrt{P_{X_1}(x_1)} \cdots \int_{\R} x_n \, \wrt{P_{X_n}(x_n)} && \tinytext{Constant multiple property (Cor.~\ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} (a))} \\
+&= E(X_1) \cdots E(X_n) && \tinytext{LOTUS (Theorem~\ref{thm:LOTUS})}
+\end{align*}
+To see why Fubini's theorem applies when $E(X_i)$ is finite for all $i$, recall first that $E(X_i)$ is finite iff $E(|X_i|)$ is finite (by Prop~\ref{prop:moment_is_finite_iff_absolute_moment_is_finite}), in which case we can justify Fubini using the strategy of Remark~\ref{rk:using_fubini_and_tonelli_theorems_in_tandem_to_avoid_integrating_against_product_measure_when_verifying_interchange_of_order_of_integration}. 
+\end{proof}
+
+\begin{definition}
+Let $X$ be a random variable.  Then 
+\begin{itemize}
+\item The \textbf{mean} of $X$ is $E[X]$.
+\item The \textbf{variance} of $X$ is given by $\sigma^2_X:=E[(X-E[X])^2]$.
+\item The \textbf{standard deviation} of $X$ is given by $\sigma_X:=+\sqrt{\sigma^2_X}$.
+\end{itemize}
+\end{definition}
+
+\begin{definition}
+Let $X, Y$ be random variables with finite expectation, and assume $E[XY]$ is also finite.  Then 
+\begin{itemize}
+\item The \textbf{covariance} of $X$ and $Y$ is given by
+\[ \Cov(X,Y) := E[(X-E[X])(Y-E(Y)]\]
+\item If the variances $\sigma^2_X, \sigma^2_Y$ are finite, the \textbf{correlation coefficient} between $X$ and $Y$ are defined by
+\[ \rho(X,Y):= \df{\Cov(X,Y)}{\sigma_X \sigma_Y}\]
+\end{itemize}
+\end{definition}
+
+\begin{proposition}
+The correlation coefficient between $X$ and $Y$ satisfies
+\[-1 \leq \rho(X,Y) \leq 1  \]	
+when it exists.
+\end{proposition}
+
+\begin{proof}
+Apply the Cauchy-Schwarz inequality to $X-E(X)$ and $Y-E(Y)$.\\
+
+{\scriptsize Recall \cite[pp.85]{ash2000probability} that the Cauchy-Schwarz inequality (in the case of real-valued functions) says that if $f,g \in L^2$ and $fg \in L^1$, then 
+\[ \int_\Omega fg \wrt{\mu} \leq \bigg( \int_\Omega |f|^2 \wrt{\mu} \int_\Omega |g|^2 \wrt{\mu} \bigg)^{1/2}.\]
+When $\mu=P$ is a probability measure, and using the stated substitutions, this becomes
+\[ \Cov(X,Y) \leq \bigg(\Var(X) \Var(Y) \bigg)^{1/2} \]
+}
+
+\end{proof}
+
 
 
 
