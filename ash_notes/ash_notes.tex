@@ -109,7 +109,7 @@ What are some motivations for measure theory?
 
 \begin{itemize}
 \item Measure theory underpins some of the most interesting research in Bayesian statistics and probabilistic machine learning (see work from Stephen G. Walker, Michael Jordan, Tamara Broderick, David Dunson, and so on).   Thus, fluency with measure theory opens doors to a higher level of research consumption. 
-\item Measure theory underpins research on stochastic processes (as used in Bayesian nonparametrics) and stochastic differential equations (useful for continuous-time time series models, a current topic of active research interest in machine learning). 
+\item Measure theory underpins research on stochastic processes (as used in Bayesian nonparametrics) and stochastic differential equations (useful for continuous-time time series models, a current topic of active research interest in machine learning).\footnote{For instance, Gaussian processes do not have densities, and so the common presentation of basic tools (e.g., Bayes theorem, KL divergence) no longer applies.} 
 \item Measure theory is convenient in unifying various kinds of random variables.\footnote{For example, it allows one to work with discrete and absolutely continuous random variables in a unified way.  For example, the exponential family includes both types of random variables.}
 \item Lebesgue integration provide nice limit theorems, e.g. clarifying when one can interchange integrals and limits (such as derivatives).   
 \item Lebesgue integrals can be seen as the completion of Riemann integrals (in the same way that the real numbers complete the rationals).
@@ -1402,6 +1402,13 @@ Repeating this, we obtain
 
 \end{proof}
 
+\begin{notation}
+What I call $\Delta_{(a,b]} F$ in \eqref{eqn:measure_of_rsc_interval_in_Rn_via_distribution_function} is called $F(a,b]$ by \cite{ash2000probability}.  See e.g. \cite[pp.28, or pp.149]{ash2000probability}.  I find Ash's notation completely puzzling.
+\label{notation:ash_notation_for_multivariate_distribution_function_applied_to_an_rsc_interval}
+\end{notation}
+
+
+
 \begin{remark}
 Note from the proof of Theorem \ref{thm:measure_of_rsc_interval_in_Rn_via_distribution_function} part (a) that the application of the $n$th difference operator restricts the set being measured to the bounds given in the $n$th dimension.  See Figure \ref{fig:applying_the_difference_operator_to_distribution_functions_in_R2}.
 
@@ -1459,7 +1466,7 @@ When defining distribution functions on $\R^n$,  we must alter our notion of \te
  See text. 	
  \end{proof}
 
-\subsubsection{Examples}
+\subsubsection{Examples} \label{sec:examples_of_how_to_construct_lebesgue_stieltjes_measures_from_distribution_functions}
 
 Here we provide some examples of how Lebesgue-Stieltjes measures can be constructed on $\R^n$ via distribution functions.
 
@@ -1495,7 +1502,7 @@ It may seem hard to verify \eqref{eqn:increasing_condition_for_distribution_func
 
 \subsubsection{Summary}
 
-Let us summarize.\footnote{This passage is basically a paragraph from \cite{ash2000probability} pp. 32 verbatim. However, we alter it slightly here to match our notation.} We have seen that if $F$ is a distribution function on $\R^n$, then there is a unique Lebesgue-Stieltjes measure determined by $\mu(a,b] = \Delta_{(a,b]} F, a \leq b$.  Also, if $\mu$ is a finite measure on $\B(\R^n)$ and $F(x) = \mu(-\infty, x], x \in \R^n$, then $F$ is a distribution function on $\R^n$ and $\mu(a,b] =  \Delta_{(a,b]} F, a \leq b$.   It is possible to associate a distribution function with arbitrary Lebesgue-Stieltjes measure on $\R^n$, and thus to establish a one-to-one correspondence between Lebesgue-Stieltjes measures and distribution fucntions (provided distribution functions with the same increments $\Delta_{(a,b)} F, a,b \in \R^n, a \leq b$ are identified).  However, the result will not be needed, and the details are quite tedious. 
+Let us summarize.\footnote{This passage is basically a paragraph from \cite{ash2000probability} pp. 32 verbatim. However, we alter it slightly here to match our notation.} We have seen that if $F$ is a distribution function on $\R^n$, then there is a unique Lebesgue-Stieltjes measure determined by $\mu(a,b] = \Delta_{(a,b]} F, a \leq b$.  Also, if $\mu$ is a finite measure on $\B(\R^n)$ and $F(x) = \mu(-\infty, x], x \in \R^n$, then $F$ is a distribution function on $\R^n$ and $\mu(a,b] =  \Delta_{(a,b]} F, a \leq b$.   It is possible to associate a distribution function with arbitrary Lebesgue-Stieltjes measure on $\R^n$, and thus to establish a one-to-one correspondence between Lebesgue-Stieltjes measures and distribution functions (provided distribution functions with the same increments $\Delta_{(a,b)} F, a,b \in \R^n, a \leq b$ are identified).  However, the result will not be needed, and the details are quite tedious. 
 
 %applying_the_difference_operator_to_distribution_functions_in_R2
 
@@ -3013,7 +3020,7 @@ Because $\infty - \infty$ is undefined. {\tiny (To reinforce the undefinedness o
 \end{non-example}
 
 
-\begin{remark}{\remarktitle{From additivity to linearity}}
+\begin{remark}{\remarktitle{From additivity to linearity.}}
 The conditions of the additivity theorem imply the conditions of the scalar multiple property (Prop \ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} (a)).  Thus, linearity holds whenever additivity holds.
 \label{rk:linearity_holds_if_additivity_holds}	
 \end{remark}
@@ -3923,7 +3930,7 @@ The integral is finite if both $\int f d\nu^+$ and $\int f d\nu^+$ are finite.
 
 This section plays the same role as Section 2.2 of \cite{ash2000probability}, although the primary reference here is Section 3.2 of \cite{folland1999real}.
 
-\subsection{Absolute continuity}
+\subsection{Absolute continuity} \label{sec:absolute_continuity}
 
 In this section, we define absolute continuity and give some useful properties.
 
@@ -6030,11 +6037,11 @@ Let $(\Omega, \F, P)$ be a probability space. We refer to $\Omega$ as the \textb
 \subsection{$\S$ 4.6 Random variables}
 
 \begin{definition}
-A \textbf{random variable} $X$ on a probability space $(\Omega, \F, P)$ is a Borel measurable function from $(\Omega, \F)$ to $(\R, \B(\R))$.\footnote{Ash expresses random variables as $X : (\Omega, \F) \to (\R, \B(\R))$, and he interprets this notation as implying that the measurability condition $X^{-1}(B) \in \F, \quad \forall \; B \in \B(\R)$ is satisfied (e.g. see \cite[pp.176, top paragraph before Sec 4.7]{ash2000probability}). However, I find this notation to be unclear; to me it suggests that the \textit{direct} images of $X$ are in $\B(\R)$ for each set in $\F$.}   $X$ is said to be an \textbf{extended random variable}  if it is a Borel measurable function from $(\Omega, \F)$ to $(\overline{R}, \B(\overline{\R}))$. 
+A \textbf{random variable} $X$ on a probability space $(\Omega, \F, P)$ is a Borel measurable function from $(\Omega, \F)$ to $(\R, \B(\R))$.\footnote{Ash expresses random variables as $X : (\Omega, \F) \to (\R, \B(\R))$, and he interprets this notation as implying that the measurability condition $X^{-1}(B) \in \F, \quad \forall \; B \in \B(\R)$ is satisfied (e.g. see \cite[pp.176, top paragraph before Sec 4.7]{ash2000probability}). However, I find this notation to be unclear; to me it suggests that the \textit{direct} images of $X$ are in $\B(\R)$ for each set in $\F$.}   $X$ is said to be an \textbf{extended random variable}  if it is a Borel measurable function from $(\Omega, \F)$ to $(\overline{\R}, \B(\overline{\R}))$. 
 \end{definition}
 
 \begin{example}
-If $(\Omega, \F, P)$ corresponds to a sequence of Bernoulli trials \cite[Sec.~4.4]{ash2000probability} and $X$ is the number of successes, then $X(1 0 1 1) =3, X(0 1 0 0 ) = 1$, and so on.	
+If $(\Omega, \F, P)$ corresponds to a sequence of 4 Bernoulli trials \cite[Sec.~4.4]{ash2000probability} and $X$ is the number of successes, then $X(1 0 1 1) =3, X(0 1 0 0 ) = 1$, and so on.	
 \end{example}
 
 
@@ -6046,16 +6053,16 @@ If $X$ is a random variable on  $(\Omega, \F, P)$, the \textbf{probability measu
 The numbers $P_X(B), \; B \in \B(\R)$ completely characterize the random variable $X$ in the sense that they provide the probabilities of all events involving $X$.  It is useful to know that this information may be captured by a single function from $\R$ to $\R$.
 
 \begin{definition}
-The \textbf{distribution function} of a random variable $X$ is the function $F_X$ from $\R$ to $[0,1]$ given by 
+The \textbf{distribution function} of a random variable $X$ is the function $F$ from $\R$ to $[0,1]$ given by 
 \[F_X(x) = P\set{\omega : X(\omega) \leq x}, \quad x \in \R.\]
 \label{def:distribution_function_of_random_variable}
 \end{definition}
 
  
-%{thm:extension_for_Lebesgue_stietljes_measure}
+ \begin{remark}{\remarktitle{Correspondence between distribution functions of random variables and probability measures induced by random variables.}}
 There is a correspondence between distribution functions of random variables $F_X$ and probability measures induced by random variables $P_X$.  In essence, this holds due to the results of Sec.~\ref{sec:ls_measures_and_distribution_functions}, where we found a correspondence between distribution functions $F$ (not necessarily of random variables) and Lebesgue-Stieltjes measures, since $P_X$ is a Lebesgue-Stieltjes measure. 
 \begin{itemize}
-\item \textit{Let $X$ be a random variable with induced probability measure $P_X$.  Let $F_X$ be a distribution of a random variable (see Def.~\ref{def:distribution_function_of_random_variable}).   Then $F=F_X$ is the distribution function corresponding to the Lebesgue-Stieltjes measure $P_X$.} 
+\item \textit{Let $X$ be a random variable with induced probability measure $P_X$.  Let $F_X$ be a distribution of a random variable (see Def.~\ref{def:distribution_function_of_random_variable}).   Then $F_X$ is one of the distribution functions $F$ corresponding to the Lebesgue-Stieltjes measure $P_X$, and we choose the one where $F(\infty)=1$ and $F(-\infty)=0$.} 
 
 We have
 \begin{align*}
@@ -6063,11 +6070,18 @@ F_X(b)-F_X(a) &\stackexplain{def}{=} P \set{\omega : X(\omega) \leq b} - P\set{\
 & \stackexplain{piece-and-diff}{=} P\set{\omega : a < X(\omega) \leq b} \\
 &\stackexplain{def}{=} P_X(a,b]
 \end{align*}
-And so the result holds by Thm~\ref{thm:from_ls_measure_to_distribution_function}.
+And so by Thm~\ref{thm:from_ls_measure_to_distribution_function}, $F_X$ is one of the distribution functions $F$ corresponding to the Lebesgue-Stieltjes measure $P_X$. 
+
+Now note that $\lim_{x \to \infty} F_X(x) =1$ and $\lim_{x \to -\infty} F_X(x) =0$. We prove the first of these. For $x \in \R$, define $A_x := \set{X \leq x}$. Then $A_x \uparrow A := \set{X \in \R}$. So
+\[ 1 \stackexplain{prob space}{=} P(A) \stackexplain{cty of measure}{=} \lim_{x \to \infty} P(A_x) \stackexplain{L-S}{=} \lim_{x \to \infty} F_X(x).   \]
+ 
+For this reason, out of all the distribution functions $F$ corresponding to the Lebesgue-Stieltjes measure $P_X$, we choose the one where $F(\infty)=1$ and $F(-\infty)=0$.
 \item \textit{If $F: \R \to [0,1]$ is increasing and right-continuous, with $F(\infty)=1$ and $F(-\infty)=0$, then $F$ is the distribution function of some random variable.}
 
 By Theorem~\ref{thm:extension_for_Lebesgue_stietljes_measure}, there is a Lebesgue-Stieltjes measure $P$ corresponding to any distribution function $F$,  and $P(\R) = F(\infty) - F(-\infty) \stackexplain{hypoth.}{=} 1 - 0 = 1$, and so $P$ must further be a probability measure.   Now by taking $X$ to be the identity function (see Remark~\ref{rk:canonical_underlying_probability_space_for_a_random_variable}), we have $P_X =P$, and we are done.  
 \end{itemize}
+\label{rk:correspondence_between_distribution_functions_of_random_variables_and_probability_measures_induced_by_random_variables}
+\end{remark}
 
 
 \begin{remark}{\remarktitle{Canonical method for constructing an underlying probability space.}} 
@@ -6080,6 +6094,39 @@ Very often, the following statement is made: ``Let $X$ be a random variable with
 \label{rk:canonical_underlying_probability_space_for_a_random_variable}
 \end{remark}
 
+\begin{definition}{\remarktitle{Absolutely continuous random variable.}}
+A random variable $X$ is said to be \textbf{absolutely continuous} if there is a non-negative real-valued Borel measurable function $f$ on $\R$ such that its distribution function $F$ is given by
+\[ F(x) = \int_{-\infty}^x f(t) \wrt{t}, \quad x \in \R.\]
+We call $f$ the \textit{density} or \textit{density function} of $X$. 
+\label{def:absolutely_continuous_random_variable}
+\end{definition}
+
+\begin{remark}\remarktitle{Density functions integrate to 1.}
+Because $F(x) \to 1$ as $x \to \infty$ (see Remark~\ref{rk:correspondence_between_distribution_functions_of_random_variables_and_probability_measures_induced_by_random_variables} for the brief argument), we have 
+$\int_{-\infty}^\infty f(x) \wrt{x} = 1.$ 	
+\end{remark}
+
+\begin{remark}\remarktitle{The probability induced by an absolutely continuous random variable can be determined by integrating its density function.}
+If $X$ is absolutely continuous with density $f$, it follows that
+\begin{align}
+P_X(B) = \int_B f(x) \wrt{x}, \quad \forall B \in \B(\R).
+\label{eqn:probability_for_an_absolutely_continuous_rv_is_determined_by_integrating_the_density_function}	
+\end{align}
+
+This is due to the uniqueness of the L-S measure.  In particular, by Cor.~\ref{cor:indefinite_integrals_as_measures}, $\mu : \mu(B) = \int_B f(x) \wrt{x}, B \in \B(\R)$ is a measure.  Moreover, this measure satisfies $\mu(a,b] = F(b) - F(a)$ by the Fundamental Theorem of Calculus.  So by Thm.~\ref{thm:extension_for_Lebesgue_stietljes_measure},  $\mu$ is the unique Lebesgue-Stieltjes measure corresponding to $F$. Hence, $\mu=P_X$.
+\label{rk:probability_for_an_absolutely_continuous_random_variable_is_determined_by_integrating_the_density_function}	
+\end{remark}
+
+\begin{remark}\remarktitle{Justifying the name of absolutely continuous random variables.}
+Recall from Sec.~\ref{sec:absolute_continuity} that absolutely continuity was defined in terms of (signed) measures.  So what justifies the name absolutely continuous \textit{random variables}?  Recall from Remark~\ref{rk:indefinite_integrals_are_absolutely_continuous} that indefinite integrals give new measures that are absolutely continuous with respect to the original measure.  But we saw in Remark~\ref{rk:probability_for_an_absolutely_continuous_random_variable_is_determined_by_integrating_the_density_function} that the probability $P_X$ induced by an absolutely continuous random variable is determined by integrating its density functions (i.e, it can be expressed as an indefinite integral with respect to Lebesgue measure).   Thus, $P_X \ll \text{Lebesgue measure}$.\footnote{For an alternate view, $F_X$ is an absolutely continuous function, as mentioned by \cite[p.175]{ash2000probability}. However, Ash defines absolutely continuous functions in \cite[Sec.~2.3]{ash2000probability}, and that material is not (yet) covered in these notes.}
+\end{remark}
+
+\begin{question}
+Eq.~\eqref{eqn:probability_for_an_absolutely_continuous_rv_is_determined_by_integrating_the_density_function} implies that for any Borel set $B$ and density function $f$, the function $\indicate{B} f$ is continuous a.e. with respect to Lebesgue measure. (Why this implication? Because a function is Reimann integrable iff it is continuous a.e.; see Thm.~\ref{thm:relating_lebesgue_and_riemann_integrals}.) This fact is surprising to me;  How to see this?
+\end{question}
+
+
+
 \subsection{$\S$ 4.7 Random vectors}
 
 \begin{definition}
@@ -6090,6 +6137,33 @@ Let $(\Omega, \F, P)$ be a probability space.  A \textbf{ $n$-dimensional random
 \begin{remark}
 A random vector $X$ may be regarded as an $n$-tuple $(X_1, \hdots X_n)$ of random variables.  This is because $X$ is Borel measurable iff each $X_i$ is Borel measurable (see Prop.~\ref{prop:multivariate_function_is_Borel_measurbale_iff_component_functions_are_Borel_measurable}).
 \end{remark}
+
+\begin{definition}{\remarktitle{Absolutely continuous random vector.}}
+A random vector $X=(X_1,\hdots,X_n)$ is said to be \textbf{absolutely continuous} if there is a non-negative real-valued Borel measurable function $f$ on $\R^n$, called the \textit{density} or \textit{density function} of $X$, such that its distribution function $F$ is given by
+\[ F(x) = \int_{-(\infty,x]} f(t) \wrt{t}, \quad x \in \R^n.\]
+\label{def:absolutely_continuous_random_variable}
+\end{definition}
+
+\begin{remark}
+By Tonelli's Theorem, we can also express the distribution function of an absolutely continuous random vector via
+\[F(x) = \int_{-\infty}^{x_1} \cdots \int_{-\infty}^{x_n} f(t_1, \hdots, t_n) \wrt{t_1} \cdots \wrt{t_n} \]
+\end{remark}
+
+
+\begin{remark}\remarktitle{The probability induced by an absolutely continuous random vector can be determined by integrating its density function.}
+If $X$ is absolutely continuous with density $f$, it follows that
+\begin{align}
+P_X(B) = \int_B f(x) \wrt{x}, \quad \forall B \in \B(\R^n).
+\label{eqn:probability_for_an_absolutely_continuous_rv_is_determined_by_integrating_the_density_function}	
+\end{align}
+
+This is due to the uniqueness of the L-S measure. The argument parallels that of Remark~\ref{rk:probability_for_an_absolutely_continuous_random_variable_is_determined_by_integrating_the_density_function}.	 In particular, by Cor.~\ref{cor:indefinite_integrals_as_measures}, $\mu : \mu(B) = \int_B f(x) \wrt{x}, B \in \B(\R^n)$ is a measure.  Moreover, this measure satisfies $\mu(a,b] = \int_{(a,b]} f(x) \wrt{x} = \Delta_{(a,b]} F$ (See Sec.~\ref{sec:examples_of_how_to_construct_lebesgue_stieltjes_measures_from_distribution_functions}, Example 2).  So by Thm.~\ref{thm:extension_for_Lebesgue_stietljes_measure},  $\mu$ is the unique Lebesgue-Stieltjes measure corresponding to $F$. Hence, $\mu=P_X$.
+\label{rk:probability_for_an_absolutely_continuous_random_vector_is_determined_by_integrating_the_density_function}	
+\end{remark}
+
+%{sec:examples_of_how_to_construct_lebesgue_stieltjes_measures_from_distribution_functions}
+
+% \Delta_{(a,b]}
 
 \subsection{$\S$ 4.8 Independent random variables}
 
@@ -6129,6 +6203,106 @@ P_{g(X)}&[g_1(X_1) \in B_1, \hdots g_n(X_n) \in B_n]\\
 \begin{remark}{\remarktitle{Functions of independent random \textnormal{objects} are independent.}}
 The conclusion of Prop.~\ref{prop:functions_of_independent_random_variables_are_independent} applies more generally even if each $X_i$ is a  \textit{random object}.  Random objects are relaxations of random variables that allow $X_i$ to map to any measurable space (not just the reals equipped with the Borel sets).  In this context, we have $(\Omega, \F, P) \stackrel{X_i}{\to} (\Omega_i, \F_i) \stackrel{g_i}{\to} (\Omega_i', \F_i')$.
 \end{remark}
+
+\subsection{$\S$ 4.10 Expectation}
+
+\begin{definition}
+If $X$ is a random variable on $(\Omega, \F, P)$, then the \textbf{expectation} of $X$ is defined by
+\[  E(X) = \int_\Omega X \; dP,\] 
+provided the integral exists.
+\end{definition}
+
+\begin{theorem}{\textbf{The Law of the Unconscious Statistician (LOTUS).}}
+Let $X$ be a random variable on $(\Omega, \F, P)$.  Let $g$ be a Borel measurable function from $\R$ to $\R$.  If $Y = g \circ X$, then 
+\begin{align}
+ E(Y) = \int_\R g \; dP_X
+\label{eqn:expectation_as_integral_wrt_induced_probability_measure}	
+\end{align}
+
+in the sense that if either of the two sides exist, so does the other, and the two sides are equal.
+\label{thm:LOTUS}	
+\end{theorem}
+
+\begin{proof}
+We use the basic technique of starting with indicators and proceeding to more complicated functions.
+
+\begin{itemize}
+\item $\boxed{\text{Step 1: Indicator functions.}}$  Let $g$ be an indicator function, $g=\indicate{B}, B \in \B(\R)$. Then
+\begin{align*}
+E(Y) &= E(\indicate{B} \circ X) && \tinytext{def. $Y$} \\
+&= P(\set{\omega : X(\omega) \in B}) && \tinytext{Integral of indicator} \\
+&= P_X(B) && \tinytext{def. $P_X$} \\
+&= \int_R \indicate{B} \; dP_X && \tinytext{integral of indicator} \\ 
+&= \int_R g \; dP_X && \tinytext{def. $g$} 
+\end{align*}
+ so if one side exists, so does the other, and the two sides are equal.
+\item $\boxed{\text{Step 2: Non-negative simple functions.}}$  Let $g$ be a non-negative simple function, $g(x) = \sum_{j=1}^n x_j \indicate{B_j}(x)$, with $B_j$ disjoint sets in $\B(\R)$.   
+
+Then
+\[g \circ X = \bigg( \sum_{j=1}^n x_j \indicate{B_j}(x) \bigg) \circ X = \sum_{j=1}^n x_j \bigg( \indicate{B_j}(x) \circ X \bigg) \quad \quad \quad \tinycircled{a}\]
+
+So
+\begin{align*}
+E(g \circ X) &= \sum_{j=1}^n x_j E(\indicate{B_j}(x) \circ X ) && \tinytext{by \tinycircled{a}, linearity of integral}	\\
+&= \sum_{j=1}^n x_j \int_\R \indicate{B_j}(x) \; dP_X && \tinytext{Step 1} \\
+&=  \int_\R \sum_{j=1}^n x_j \indicate{B_j}(x) \; dP_X && \tinytext{linearity of integral} \\
+&= \int_R g \; dP_X && \tinytext{def. $g$}
+\end{align*}
+where linearity of the integral holds due to non-negativity (see Remark~\ref{rk:linearity_holds_if_additivity_holds}).    Thus, if one side exists, so does the other, and the two sides are equal.
+\item $\boxed{\text{Step 3: Non-negative Borel measurable functions.}}$ Let $g$ be a non-negative Borel measurable function.  Let $g_1, g_2, \hdots$ be non-negative simple functions with $g_n \uparrow g$.  We have
+\begin{align*}
+\lim_{n \to \infty} E[g_n \circ X] & \stackexplain{MCT}{=} 	 E[ \lim_{n \to \infty} (g_n \circ X)] \stackexplain{*}{=} E[ g \circ X] 
+\end{align*}
+where in justifying the MCT and in (*) we used that if $g_n \uparrow g$, then $(g_n \circ f) \uparrow (g \circ f)$.\footnote{Justification: $\lim_{n \to \infty} (g_n \circ f) (x) = \lim_{n \to \infty} g_n(f(x)) = g(f(x)).$}   
+
+At the same time, though, we have
+\begin{align*}
+\lim_{n \to \infty} E[g_n \circ X] & \stackexplain{Step 2}{=} 	 \lim_{n \to \infty} \int_\R g_n \; dP_X  \stackexplain{MCT}{=}  \int_\R g \; dP_X 
+\end{align*}
+Thus, $ E[ g \circ X] = \int_\R g \; dP_X $; if one side exists, so does the other, and the two sides are equal. 
+\item $\boxed{\text{Step 4: Arbitrary Borel measurable functions.}}$ Let $g = g^+ - g^-$ be an arbitrary Borel measurable function and $Y = g \circ X$.  Then 
+\begin{align*}
+E[Y] & = E[Y^+] - E[Y^-] && \tinytext{def. integral of arbitrary Borel measurable function}\\
+& = E[g^+ \circ X] - E[g^- \circ X] && \tinytext{positive, negative parts are determined by outer layer of composition}\\
+& = \int_\R g^+ \; dP_X - \int_\R g^- \; dP_X && \tinytext{by Step 3 }\\
+&= \int_\R g \; dP_X && \tinytext{def. integral of arbitrary Borel measurable function}\\
+\end{align*}
+If $E(Y)$ exists and, say, $E(Y^-)$ is finite, then $\int_\R g^- \; dP_X$ is finite, and hence $\int_\R g \; dP_X$ exists; by the same reasoning, the existence of $\int_\R g \; dP_X$ implies the existence of $E(Y)$.  
+\end{itemize}
+	
+\end{proof}
+%{thm:additivity}
+
+
+
+
+\begin{remark}{\remarktitle{Motivating LOTUS.}} 
+In many situations, it may be inconvenient to compute $E(X)$ by integrating over $\Omega$.  LOTUS allows us to write the integral with respect to the induced probability measure $P_X$, therefore integrating over $\R$ (or $\R^n$ for random vectors).   In other words, LOTUS converts an integral over $(\Omega, \F, P)$ into an integral over $(\R, \B(\R), P_X)$.\footnote{For an example of where this conversion is useful, consider that independence of random variables is \textit{defined} in terms of $P_X$, not $P$ (see Def.~\ref{def:independence_of_random_variables}).  So we use LOTUS when proving that the expectation of the product of independent RV's is equal to the product of the expectations.}
+\end{remark}
+
+\begin{question}{\remarktitle{An alternate notation for LOTUS.}}	
+\cite[pp.188]{ash2000probability} writes Eq.~\eqref{eqn:expectation_as_integral_wrt_induced_probability_measure} as 
+\[  E(Y)= \int_\R g(x) dF(x) (= \int_\R g \; dP_X), \]
+where $F$ is the distribution function of X.  He states that $\int_\R g(x) dF(x)$ \textit{means} $\int_\R g \; dP_X$; it is \textit{not} a Riemann-Stieltjes integral.\footnote{Which, interestingly, contradicts the current statement of LOTUS on Wikipedia, as of 08/05/2022.} This raises two questions
+
+\begin{enumerate}
+	\item Why introduce the new, indirect notation at all?
+	\item What does it mean to say that this is \textit{not} a Riemann-Stieltjes integral?  
+\end{enumerate} 
+
+
+\end{question}
+
+\begin{remark}{\remarktitle{LOTUS also applies for random vectors and random objects}}
+LOTUS (Theorem~\ref{thm:LOTUS}) still holds if 
+\begin{alphabate}
+\item $X$ is a random vector, i.e. $X : (\Omega, \F) \to (\R^n, \B(\R^n)$
+\item $X$ is a random object, i.e $X: (\Omega, \F) \to (\Omega', \F')$.
+\end{alphabate}
+The proof is exactly as in Theorem~\ref{thm:LOTUS}, with $\R^n$ replacing $\R$ for (a) and $(\Omega', \F')$ replacing $\R, \B(\R)$ for (b).
+\label{rk:LOTUS_applies_for_random_vectors_and_random_objects}
+\end{remark}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
