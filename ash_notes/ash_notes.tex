@@ -6091,7 +6091,7 @@ By Theorem~\ref{thm:extension_for_Lebesgue_stietljes_measure}, there is a Lebesg
 A beautiful quote from \cite[pp.174]{ash2000probability}.
 
 \begin{quotation}
-Very often, the following statement is made: ``Let $X$ be a random variable with distribution function $F$," where $F$ is a given function from $\R$ to $[0,1]$ that is increasing and right continuous, with $F(\infty)=1$ and $F(-\infty)=0$.  There is no reference to the underlying probability space $(\Omega, \F, P)$, and actually the nature of the underlying probability space is not important.  The distribution function $F$ determines the probability measure $P_X$, which in turn determines the probability of all events involving $X$.  The only thing we have to check is that there be at least one $(\Omega, \F, P)$ on which a random variable $X$ with distribution function $F$ can be defined.  In fact, we can always supply the probability space in a canonical way; take $\Omega = \R, \F = \B(\R)$, with $P$ the Lebesgue-Stieltjes measure corresponding to $F$, and define $X(\omega) = \omega, \omega \in \Omega$, that is, $X$ is the identity map.   Since $P_X(B) = P\set{\omega: X(\omega) \in \B}=P(B)$, $X$ has induced probability measure $P$ and therefore distribution function $F$.
+Very often, the following statement is made: ``Let $X$ be a random variable with distribution function $F$," where $F$ is a given function from $\R$ to $[0,1]$ that is increasing and right continuous, with $F(\infty)=1$ and $F(-\infty)=0$.  There is no reference to the underlying probability space $(\Omega, \F, P)$, and actually the nature of the underlying probability space is not important.  The distribution function $F$ determines the probability measure $P_X$, which in turn determines the probability of all events involving $X$.  The only thing we have to check is that there be at least one $(\Omega, \F, P)$ on which a random variable $X$ with distribution function $F$ can be defined.  In fact, we can always supply the probability space in a canonical way; take $\Omega = \R, \F = \B(\R)$, with $P$ the Lebesgue-Stieltjes measure corresponding to $F$, and define $X(\omega) = \omega, \omega \in \Omega$, that is, $X$ is the identity map.   Since $P_X(B) = P\set{\omega: X(\omega) \in B}=P(B)$, $X$ has induced probability measure $P$ and therefore distribution function $F$.
 \end{quotation}
 \label{rk:canonical_underlying_probability_space_for_a_random_variable}
 \end{remark}
@@ -6126,6 +6126,25 @@ Recall from Sec.~\ref{sec:absolute_continuity} that absolutely continuity was de
 \begin{question}
 Eq.~\eqref{eqn:probability_for_an_absolutely_continuous_rv_is_determined_by_integrating_the_density_function} implies that for any Borel set $B$ and density function $f$, the function $\indicate{B} f$ is continuous a.e. with respect to Lebesgue measure. (Why this implication? Because a function is Reimann integrable iff it is continuous a.e.; see Thm.~\ref{thm:relating_lebesgue_and_riemann_integrals}.) This fact is surprising to me;  How to see this?
 \end{question}
+
+\begin{terminology}
+The \textbf{distribution} of a random variable is a generic term; to say that we know the distribution of a random variable $X$ means that we know how to calculate $P\set{X \in B}$ for all Borel sets $B$ \cite[pp.185]{ash2000probability}.  Based on the material in this section, we therefore need one of the following pieces of information:
+\begin{alphabate}
+\item The \textit{induced probability measure}, 
+ \[P_X(B) := P\set{\omega : X(\omega) \in B}\]
+\item The \textit{distribution function}, 
+ 	\[F_X(x) := P\set{\omega : X(\omega) \leq x}, x \in \R.\]  (The distribution function fully specifies the induced probability measure; see Remark~\ref{rk:correspondence_between_distribution_functions_of_random_variables_and_probability_measures_induced_by_random_variables}.)		
+\end{alphabate}
+	
+In particular, we have the following special cases:
+\begin{enumerate}
+\item If $X$ is an absolutely continuous random variable, then it suffices to know its density $f_X$, since by \eqref{eqn:probability_for_an_absolutely_continuous_rv_is_determined_by_integrating_the_density_function},
+	\[ P_X(B) = \int_B f(x) \wrt{x}, \quad \forall B \in \B(\R)\]	
+\item If $X$ is a discrete random variable (taking on values in a countable set $S$), then it suffices to know its probability mass function $p_X$, since then\redfootnote{Justify this explicitly.  See e.g. \cite[pp.174]{ash2000probability}.} 
+     \[ P_X(B) = \sum_{x \in B} p_X(x), \quad \forall B \in \P(S).\]	
+\end{enumerate}
+	
+\end{terminology}
 
 
 
@@ -6433,28 +6452,28 @@ for all $i_0, i_1, \hdots, i_n \in S$ and all $n=0,1,\hdots$.
 \begin{proof}
 We prove existence as an application of Thm.~\ref{thm:extended_product_measure_theorem_over_countably_infinite_spaces}. Let $\Omega=S^\infty, \F = \Power(S)^\infty$.\footnote{We use $\Power(S)$ to denote the power set of $S$.} 
 
-Define a probability measure on $\F_1 = \Power(S)$ by 
+Define a probability measure on $\F_0 = \Power(S)$ by 
 \[ P_0(B) = \sum_{j \in B} \pi_j \quad \text{for all} \quad B \in \Power(S) \]
-For each $n=0,1,2,\hdots$ and each $(k_0, k_1, \hdots, k_n) \in S^{n+1}$, we define a probability measure $P_{n+1}(k_0, k_1, \hdots, k_n; B)$ on $\F_{n+1}=\Power(S)$ by 
-\[ P_{n+1}(k_0, k_1, \hdots, k_n; B) = \sum_{j \in B} a_{(k_n, j)} \quad \text{for all} \quad B \in \Power(S).\]
+For each $n=0,1,2,\hdots$ and each $(i_0, i_1, \hdots, i_n) \in S^{n+1}$, we define a probability measure $P_{n+1}(i_0, i_1, \hdots, i_n; B)$ on $\F_{n+1}=\Power(S)$ by 
+\[ P_{n+1}(i_0, i_1, \hdots, i_n; B) = \sum_{j \in B} a_{(i_n, j)} \quad \text{for all} \quad B \in \Power(S).\]
 Now for each $B \in \Power(S)$, the function $P_{n+1}(\cdot, \cdot, \hdots, \cdot; B): (S^{n+1}, \Power(S)^{n+1}) \to (\R, \B(\R))$ is automatically measurable.\footnote{The product of power sets $\Power(S)^{n+1}$ contains all subsets of $S^{n+1}$ and is a sigma field (Example~\ref{ex:the_largest_sigma_field_is_the_power_set}). Thus, the definition of measurable functions (Def.~\ref{def:measurable_function}) is automatically satisfied.}
 
 Now for $\omega \in \Omega$ and $n=0,1, \hdots$, define the random variable $X_n$ by
 %
 \[ X_n(\omega) = \omega_n. \]
 %
-Then we can use \eqref{eqn:product_measure_in_n_coordinates}  to evaluate $P_{0:n}$, the extended product measure on $\prod_{i=0}^n \F_i$, at the singleton set $B_n := (\omega : X_0(\omega)=k_0, \hdots, X_n(\omega)=k_n)$ to obtain
+Then we can use \eqref{eqn:product_measure_in_n_coordinates}  to evaluate $P_{0:n}$, the extended product measure on $\prod_{i=0}^n \F_i$, at the singleton set $B_n := (\omega : X_0(\omega)=i_0, \hdots, X_n(\omega)=i_n)$ to obtain
 %
 \begin{align*}
-P_{0:n}(X_0(\omega)=k_0, & \hdots, X_n(\omega)=k_n) \stackexplain{\eqref{eqn:product_measure_in_n_coordinates}}{=} \\
+P_{0:n}(X_0(\omega)=i_0, & \hdots, X_n(\omega)=i_n) \stackexplain{\eqref{eqn:product_measure_in_n_coordinates}}{=} \\
 & \int_S P_0(\wrt{\omega_0}) \; \int_S P_1(\omega_0; \wrt{\omega_1})	\; \cdots \int_S P_{n-1}(\omega_0, \omega_1, \hdots, \omega_{n-2}; \wrt{\omega_{n-1}}) \\
-& \quad \cdot \explaintermbrace{(A)}{\int_S \indicatebrackets{(\omega_1,\hdots, \omega_n) = (k_1,\hdots k_n)} \; P_n(\omega_0, \omega_1, \hdots, \omega_{n-1}; \wrt{\omega_{n}})}
+& \quad \cdot \explaintermbrace{(A)}{\int_S \indicatebrackets{(\omega_1,\hdots, \omega_n) = (i_1,\hdots i_n)} \; P_n(\omega_0, \omega_1, \hdots, \omega_{n-1}; \wrt{\omega_{n}})}
 \end{align*}
 %
 Now by Example~\ref{ex:integrals_as_sums}, we can reduce 
-\[\explaintermbrace{(A)}{\int_S \indicatebrackets{(\omega_1,\hdots, \omega_n) = (k_1,\hdots k_n)} \; P_n(\omega_0, \omega_1, \hdots, \omega_{n-1}; \wrt{\omega_{n}})} = \indicatebrackets{(\omega_1,\hdots, \omega_n) = (k_1,\hdots k_n)} \; a_{\omega_{n-1}, k_n}. \]
+\[\explaintermbrace{(A)}{\int_S \indicatebrackets{(\omega_1,\hdots, \omega_n) = (i_1,\hdots i_n)} \; P_n(\omega_0, \omega_1, \hdots, \omega_{n-1}; \wrt{\omega_{n}})} = \indicatebrackets{(\omega_1,\hdots, \omega_n) = (i_1,\hdots i_n)} \; a_{\omega_{n-1}, i_n}. \]
 
-{\scriptsize [Specifically, recall from Example~\ref{ex:integrals_as_sums} that if $f$ is a function on a countably infinite set and $\mu$ is the counting measure on that set, then the Lebesgue integral is just a sum: $\int f \wrt{\mu} = \sum_{n=1}^\infty f(n)$.  Similarly, if $P$ is a discrete probability measure with probability mass function $p$, then $\int f \wrt{P} = \int fp \wrt{\mu} = \sum_{n=1}^\infty f(n)p(n)$.]}
+{\scriptsize [Specifically, recall from Example~\ref{ex:integrals_as_sums} that if $f$ is a function on a countably infinite set and $\mu$ is the counting measure on that set, then the Lebesgue integral is just a sum: $\int f \wrt{\mu} = \sum_{n=1}^\infty f(n)$.  Similarly, if $P$ is a discrete probability measure with probability mass function $p$, then $\int f \wrt{P} = \int fp \wrt{\mu} = \sum_{n=1}^\infty f(n)p(n)$.  See also \cite[4.10.3(d)]{ash2000probability}.]}
 
 Continuing this process gives
 \[P_{0:n}(X_0=i_0, X_1=i_1, \hdots, X_n=i_n) = \pi_{i_0} a_{i_0i_1} \cdots a_{i_{n-1}i_n}\]
