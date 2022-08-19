@@ -97,11 +97,11 @@
 \section{Overview}
 
 \subsection{References}
-The primary reference here is \cite{ash2000probability}.   The book is wonderful for statistical machine learning – it is rigorous,  but also accessible (prerequisites are undergrad-level real analysis and mathematical probability).  Most importantly, it is structured to build towards the kinds of applications in probability that we care about.   (A point of contrast would be a book like that of Stein and Shakarchi, which tends to dwell heavily on things that are of higher interest to pure mathematicians – Cantor sets and fractals, etc.) 
+These notes are geared towards statisticians, computer scientists, engineers, and others who are interested in measure theory in the service of data science (specifically, statistics or statistical machine learning).  The primary reference is \cite{ash2000probability}.   The book is wonderful for statistical machine learning – it is rigorous,  but also accessible (prerequisites are undergrad-level real analysis and mathematical probability).  Most importantly, it is structured to build towards the kinds of applications in probability that we care about.   (A point of contrast would be a book like that of Stein and Shakarchi, which tends to dwell heavily on things that are of higher interest to pure mathematicians – Cantor sets and fractals, etc.) 
 
  Unless otherwise specified, all references to the ``text" refers to this textbook.  Likewise the symbol $\S$ refers to a Section of that textbook.
  
- Other useful references are \cite{folland1999real} and \cite{rudin1987real}. 
+ Other useful references are \cite{folland1999real} and \cite{rudin1987real} for filling in depth.  \citet{durrett2010probability} has nice examples and high-level overviews, but in my view does not provide enough detail to become fluent in the topic.
  
 \subsection{Motivation for topic} \label{sec:motivation_for_topic}
 
@@ -128,7 +128,8 @@ It is hard to beat directly consulting a textbook (such as \cite{ash2000probabil
 \item Curate the text.\footnote{We highlight some of the main themes (and cores of proofs), offloading additional detail to the text.} 
 \item Provide additional detail in proofs.  Sometimes alternate paths have been given that seemed ``nicer" to me. 
 \item Add remarks (illustrating the need for propositions, the utility of theorems, or connections between things).
-\item Incorporate supporting material from outside sources or worked homework problems.
+\item Incorporate supporting material from outside sources (or worked homework problems).
+\item Give some examples and notes for data scientists.\footnote{This is a work in progress.}
 \end{itemize}
 
 
@@ -5747,19 +5748,19 @@ We let $\prod_{i=1}^\infty \F_i$ be the smallest $\sigma$-field over measurable 
 Due to Remark~\ref{rk:cylinder_can_always_be_regarded_as_having_a_higher_dimensional_base}, we will assume WLOG in the Theorem that $v=(1,\hdots,n)$, and we will write $B_{1:n} (\in \prod_{j=1}^n \Omega_j)$ simply as $B_n$.  
 
 \begin{theorem}
-Let $(\Omega_j, \F_j)$, $j=1,2,\hdots$ be arbitrary measurable spaces.  Let $\Omega = \prod_{j=1}^\infty \Omega_j$ and   $\F = \prod_{j=1}^\infty \F_j$.  Suppose we are given an arbitrary probability measure $P_1$ on $\F_1$, and for each $j=1,2,\hdots$ and each $(\omega_1, \hdots, \omega_j) \in \Omega_1 \times \cdots \Omega_j$ we are given a probability measure $P(\omega_1, \hdots, \omega_j; \cdot)$ on $\F_{j+1}$.  Assume that for each fixed $C \in \F_{j+1}$ the function $P(\cdot, \hdots, \cdot; C) : (\prod_{i=1}^j \Omega_i, \prod_{i=1}^j \F_i, ) \to (\R, \B(\R))$ is measurable.  
+Let $(\Omega_j, \F_j)$, $j=1,2,\hdots$ be arbitrary measurable spaces.  Let $\Omega = \prod_{j=1}^\infty \Omega_j$ and   $\F = \prod_{j=1}^\infty \F_j$.  Suppose we are given an arbitrary probability measure $P_1$ on $\F_1$, and for each $j=1,2,\hdots$ and each $(\omega_1, \hdots, \omega_j) \in \Omega_1 \times \cdots \Omega_j$ we are given a probability measure $P_{j+1}(\omega_1, \hdots, \omega_j; \cdot)$ on $\F_{j+1}$.  Assume that for each fixed $C \in \F_{j+1}$ the function $P_{j+1}(\cdot, \hdots, \cdot; C) : (\prod_{i=1}^j \Omega_i, \prod_{i=1}^j \F_i, ) \to (\R, \B(\R))$ is measurable.\footnote{Unlike \cite{ash2000probability}, we use a subscript (e.g. $P_{n}$) to differentiate the probability measures over different spaces. We justify this because sometimes these probability measures become independent of certain parameters; e.g. for Markov kernels, $P_n(\omega_1, \hdots \omega_{n-1}; \wrt{\omega_{n}})$ would simplify to $P_n(\omega_{n-1}; \wrt{\omega_{n}})$; without the subscript, one could perhaps mistakenly believe that the quantity represented an evaluation of $P_2(\cdot, \cdot)$.}  
 
 For $B_n \in \prod_{j=1}^n \F_j$, define  
 \begin{align}
-P_n(B_n) &= \int_{\Omega_1} P_1(\wrt{\omega_1}) \int_{\Omega_2} P(\omega_1; \wrt{\omega_2}) \cdots \int_{\Omega_{n-1}} P(\omega_1, \hdots \omega_{n-2}; \wrt{\omega_{n-1}})  
+P_{1:n}(B_n) &= \int_{\Omega_1} P_1(\wrt{\omega_1}) \int_{\Omega_2} P_2(\omega_1; \wrt{\omega_2}) \cdots \int_{\Omega_{n-1}} P_{n-1}(\omega_1, \hdots \omega_{n-2}; \wrt{\omega_{n-1}})  
 \nonumber 
  \\
-& \quad \quad \quad \int_{\Omega_{n}} P(\omega_1, \hdots \omega_{n-1}; \wrt{\omega_{n}}) \;\indicate{(\omega_1,\hdots, \omega_n) \in B_n}  
+& \quad \quad \quad \int_{\Omega_{n}} P_n(\omega_1, \hdots \omega_{n-1}; \wrt{\omega_{n}}) \;\indicate{(\omega_1,\hdots, \omega_n) \in B_n}  
 \label{eqn:product_measure_in_n_coordinates}
 \end{align}	
-Note that $P_n$ is a probability measure by \cite[Thm.~2.6.7]{ash2000probability}.
+Note that $P_{1:n}$ is a probability measure (on $(\prod_{j=1}^n \Omega_j, \prod_{j=1}^n \F_j)$) by \cite[Thm.~2.6.7]{ash2000probability}.
 
-Then there is a unique probability measure $P$ on $\F$ such that for all $n$, $P$ agrees with $P_n$ on $n$-dimensional cylinders; that is $P(\explaintermbrace{cylinder}{\cylinder{B_n}}) = P_n(\explaintermbrace{base}{B_n})$ for all $B_n \in \prod_{j=1}^n \F_j$ and $n=1,2,\hdots$. 
+Then there is a unique probability measure $P$ on $\F$ such that for all $n$, $P$ agrees with $P_{1:n}$ on $n$-dimensional cylinders; that is $P(\explaintermbrace{cylinder}{\cylinder{B_n}}) = P_{1:n}(\explaintermbrace{base}{B_n})$ for all $B_n \in \prod_{j=1}^n \F_j$ and $n=1,2,\hdots$. 
 \label{thm:extended_product_measure_theorem_over_countably_infinite_spaces}
 \end{theorem}
 
@@ -5776,30 +5777,30 @@ Suppose $\cylinder{B_n}=\cylinder{C_m}$ for $m<n$.\footnote{Recall from the defi
 \end{align*}
 } Then we can relate the bases of the cylinders by $B_n = C_m \times \Omega_{m+1} \times \cdots \times \Omega_n$.
 
-We need to show that the probability mass assigned to the cylinder is invariant to representation, i.e. $P(\cylinder{B_n})=P(\cylinder{C_m}) \stackexplain{(def P)}{\iff} P_n(B_n)=P_m(C_m)$. 
+We need to show that the probability mass assigned to the cylinder is invariant to representation, i.e. $P(\cylinder{B_n})=P(\cylinder{C_m}) \stackexplain{(def P)}{\iff} P_{1:n}(B_n)=P_{1:m}(C_m)$. 
 
 Observe\footnote{Here we use the fact that $P(\omega_1, \hdots, \omega_j; \cdot)$ are probability measures.  This theorem does not hold for arbitrary measures}:
 \begin{align*}
-P_n(B_n) &= \int_{\Omega_{1:m}}  \bigg[ \int_{\Omega_{m+1:n}}   \; \indicate{\omega_{1:m} \in C_m} \; \cancel{\indicate{\omega_{m+1:n} \in \Omega_{m+1:n}}} P(\omega_{1:m}; \wrt{\omega_{m+1:n}}) \bigg]  P(\wrt{\omega_{1:m}}) && \tinytext{def $P_n$, Tonelli compression} \\
-&= \int_{\Omega_{1:m}}  \indicate{\omega_{1:m} \in C_m} \explaintermbrace{$=1$}{\bigg[ \int_{\Omega_{m+1:n}}   P(\omega_{1:m}; \wrt{\omega_{m+1:n}}) \bigg]}  P(\wrt{\omega_{1:m}}) && \tinytext{constant multiple} \\
-&= P_m(C_m) && \tinytext{Tonelli expansion, def $P_m$} 
+P_{1:n}(B_n) &= \int_{\Omega_{1:m}}  \bigg[ \int_{\Omega_{m+1:n}}   \; \indicate{\omega_{1:m} \in C_m} \; \cancel{\indicate{\omega_{m+1:n} \in \Omega_{m+1:n}}} P_{m+1:n}(\omega_{1:m}; \wrt{\omega_{m+1:n}}) \bigg]  P_{1:m}(\wrt{\omega_{1:m}}) && \tinytext{def $P_n$, Tonelli compression} \\
+&= \int_{\Omega_{1:m}}  \indicate{\omega_{1:m} \in C_m} \explaintermbrace{$=1$}{\bigg[ \int_{\Omega_{m+1:n}}   P_{m+1:n}(\omega_{1:m}; \wrt{\omega_{m+1:n}}) \bigg]}  P_{1:m}(\wrt{\omega_{1:m}}) && \tinytext{constant multiple} \\
+&= P_{1:m}(C_m) && \tinytext{Tonelli expansion, def $P_m$} 
 \end{align*}
 
 \item \textit{$P$ is finitely additive on the field $\F_0$ of measurable cylinders.}
 
-Consider a collection of finitely many disjoint cylinders.  Represent the bases in a common number of factors, $n$, using Remark~\ref{rk:cylinder_can_always_be_regarded_as_having_a_higher_dimensional_base}.  Now disjoint cylinders have disjoint bases, so apply the finite additivity of $P_n$ obtain the finite additivity of $P$.
+Consider a collection of finitely many disjoint cylinders.  Represent the bases in a common number of factors, $n$, using Remark~\ref{rk:cylinder_can_always_be_regarded_as_having_a_higher_dimensional_base}.  Now disjoint cylinders have disjoint bases, so apply the finite additivity of $P_{1:n}$ obtain the finite additivity of $P$.
 
-\item \textit{If we can show that $P$ is countably additive on $\F_0$, then the \Caratheodory~extension theorem extends $P$ to a probability measure on $\prod_{j=1}^\infty \F_j$ which agrees with $P_n$ on $n$-dimensional cylinders. }
+\item \textit{If we can show that $P$ is countably additive on $\F_0$, then the \Caratheodory~extension theorem extends $P$ to a probability measure on $\prod_{j=1}^\infty \F_j$ which agrees with $P_{1:n}$ on $n$-dimensional cylinders. }
 \begin{enumerate}
 \item \textit{$P$ is countably additive on $\F_0$.}  Since $P$ is finitely additive on $\F_0$, Thm.~\ref{thm:finite_additivity_plus_continuity_gives_countable_additivity} tells us that it suffices to show that $P$ is continuous from above at $\emptyset$. 
 
 Let $\set{\cylinder{B_n}}, n=n_1,n_2,\hdots$ be a sequence of measurable cylinders decreasing to $\emptyset$.  We may assume $n_1 < n_2 < \hdots$\footnote{Note that the base growing in dimension from $n$ to $n+1$ means that we \textit{restrict} the extra coordinates relative to $\Omega_{n+1}$.}, and in fact nothing is lost if we assume $n_i=i$ for all $i$.  
 
 For each $n>1$, decompose \eqref{eqn:product_measure_in_n_coordinates} to write
-\[ P(B_n) = \int_{\Omega_1} g_n(\omega_1) P_1(\wrt{\omega_1}) \]
+\[ P_{1:n}(B_n) = \int_{\Omega_1} g_n(\omega_1) P_1(\wrt{\omega_1}) \]
 where
 \begin{align}
-g_n(\omega_1) = \int_{\Omega_2} P(\omega_1; \wrt{\omega_2}) \int_{\Omega_{n}} P(\omega_1, \hdots \omega_{n-1}; \wrt{\omega_{n}}) \;\indicate{(\omega_1,\hdots, \omega_n) \in B_n}  
+g_n(\omega_1) = \int_{\Omega_2} P_2(\omega_1; \wrt{\omega_2}) \int_{\Omega_{n}} P_{n-1}(\omega_1, \hdots \omega_{n-1}; \wrt{\omega_{n}}) \;\indicate{(\omega_1,\hdots, \omega_n) \in B_n}  
 \label{eqn:def_of_gn_in_proof_of_infinite_product_measure}	
 \end{align}
 
@@ -5814,9 +5815,9 @@ Now we have
 \end{align*}
 
 Since $g_n$ is a decreasing sequence of functions, it has a limit; say $h$.  Thus, by monotone convergence theorem,
-\[ P(B_n) \to \int h(\omega_1) P(\wrt{\omega_1}) \]
+\[ P(B_n) \to \int h(\omega_1) P_1(\wrt{\omega_1}) \]
 
-Now BWOC, assume that $\lim_{n \to \infty} P(B_n) > 0$.  Then (by monotonicity) $h(\omega_1')>0$ for some $\omega_1' \in \Omega_1$.  In fact, $\omega_1' \in B_1$.  (See \cite{ash2000probability} for a one sentence argument.)
+Now BWOC, assume that $\lim_{n \to \infty} P_{1:n}(B_n) > 0$.  Then (by monotonicity) $h(\omega_1')>0$ for some $\omega_1' \in \Omega_1$.  In fact, $\omega_1' \in B_1$.  (See \cite{ash2000probability} for a one sentence argument.)
 
 Repeat this inductively (See \cite{ash2000probability}) to obtain points $(\omega_1', \omega_2', \hdots)$ such that for each $n$, $(\omega_1', \hdots, \omega_n') \in B_n$.  Hence $(\omega_1', \omega_2', \hdots) \in \cap_{n=1}^\infty \cylinder{B_n} = \emptyset$, a contradiction. 
 \end{enumerate}
@@ -5824,6 +5825,10 @@ Repeat this inductively (See \cite{ash2000probability}) to obtain points $(\omeg
 \end{enumerate}
 
 \end{proof}
+
+\begin{remark-for-data-scientists}\remarktitle{Application to Markov processes.}
+Consider the setting of Thm.~\ref{thm:extended_product_measure_theorem_over_countably_infinite_spaces}, where we build up joint probability measures on multivariate or infinite dimensional spaces by chaining together probability measures parametrized by the preceding coordinates.   When those probability measures are parametrized by only the immediately preceding coordinate -- that is, when $P_n(\omega_1, \hdots \omega_{n-1}; \wrt{\omega_{n}})$ simplifies to $P_n(\omega_{n-1}; \wrt{\omega_{n}})$ for all $n$ -- these probability measures are called \textbf{Markov kernels} or \textbf{transition functions}.  Thus, one way to define joint measures is by taking products of Markov kernels.\footnote{See \url{https://mathoverflow.net/questions/369747/defining-measures-through-products-of-markov-kernels}.}
+\end{remark-for-data-scientists}
 
 \subsection{$\S$ 2.7.4 - 2.7.5: Measures on uncountably infinite product spaces}
 
