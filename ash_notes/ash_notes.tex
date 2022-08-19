@@ -5825,6 +5825,8 @@ Repeat this inductively (See \cite{ash2000probability}) to obtain points $(\omeg
 
 \end{proof}
 
+\red{TODO:The notation $P_n$ is overloaded in the proof above.  Fix.  Perhaps the left-hand side could be written $P_{0:n}$}
+
 \subsection{$\S$ 2.7.4 - 2.7.5: Measures on uncountably infinite product spaces}
 
 Now for $t$ in the arbitrary index set $T$, let $(\Omega_t, \F_t)$ be a measurable space.  Let $\prod_{t \in T} \Omega_t$ be the set of all functions $\omega(t), t \in T$ such that $\omega(t) \in \Omega_t$ for each $t \in T$.  
@@ -6466,6 +6468,28 @@ And by Thm.~\ref{thm:extended_product_measure_theorem_over_countably_infinite_sp
 The sequence of random variables $(X_n)$ satisfying \eqref{eqn:markov_chain_head_probability} in Thm.~\ref{thm:markov_chains_exist} is called a \textbf{Markov chain} corresponding to \textbf{transition matrix} $A$ and \textbf{initial distribution} $\pi$. The set $S$ is called the \textbf{state space} of the chain.  The values $a_{ij}$ are called the \textbf{transition probabilities}.
 \end{remark}
 
+\begin{theorem}\textbf{Weak law of large numbers.} Let $X_1, X_2, \hdots$ be independent random variables (not necessarily with the same distribution), each with finite mean and variance. Assume the variances to be uniformly bounded by $M < \infty$.  Let $S_n = X_1 + \hdots X_n$. Then $(S_n - \E[S_n])/n$ converges in probability to 0. That is, given $\epsilon > 0$,
+\[  P \bigg(\bigg|\df{S_n - E[S_n]}{n} \bigg|\geq \epsilon \bigg) \to 0 \quad \text{as} \quad n \to \infty \]
+\label{thm:weak_law_of_large_numbers}
+\end{theorem}
+
+\begin{proof}
+\begin{align*}
+P \bigg(\bigg|\df{S_n - E[S_n]}{n} \bigg|\geq \epsilon \bigg) &\leq  \df{\E(S_n - \E S_n)^2}{n^2 \epsilon^2} && \tinytext{Chebyshev's inequality}	\\
+&= \frac{1}{n^2 \epsilon^2} \Var S_n && \tinytext{Def. variance} \\
+&= \frac{1}{n^2 \epsilon^2} \sum_{i=1}^n \Var S_i && \tinytext{See 4.10.11 of \cite{ash2000probability}} \\
+& \leq \frac{M}{n \epsilon^2}&& \tinytext{Hypothesis}
+& \to 0
+\end{align*}
+
+\end{proof}
+
+\begin{remark}\remarktitle{Concentration of sample mean.}
+In the special case where $\E[X_i]=m$ for all $i$, Thm.~\ref{thm:weak_law_of_large_numbers} says that $\frac{S_n}{n} \to m$ in probability.  That is, for large $n$, the arithmetic average of $n$ independent random variables each with finite expectation $m$ (and with the variances uniformly bounded) is quite likely to be very close to $m$.
+\end{remark}
+
+\begin{remark}\remarktitle{Weak vs strong law of large numbers.} See \cite[pp.199]{ash2000probability} for a discussion of WLLN vs SLLN.  Essentially, the WLLN is a statement about what happens for repeated experiments with fixed $n$. SLLN is a statement about what happens for a single experiment as $n$ increases. 
+\end{remark}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
