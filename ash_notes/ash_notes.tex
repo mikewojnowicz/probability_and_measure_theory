@@ -285,6 +285,7 @@ $\F =\set{\emptyset, \Omega}$ is the smallest \sf\ on $\Omega$.
 
 \begin{example}
 	$\F =2^\Omega$, i.e. the set of all subsets of $\Omega$, is the largest \sf\ on $\Omega$.
+\label{ex:the_largest_sigma_field_is_the_power_set}
 \end{example}
 
 \begin{example}
@@ -5759,6 +5760,7 @@ P_n(B_n) &= \int_{\Omega_1} P_1(\wrt{\omega_1}) \int_{\Omega_2} P_2(\omega_1; \w
 Note that $P_n$ is a probability measure by \cite[Thm.~2.6.7]{ash2000probability}.
 
 Then there is a unique probability measure $P$ on $\F$ such that for all $n$, $P$ agrees with $P_n$ on $n$-dimensional cylinders; that is $P(\explaintermbrace{cylinder}{\cylinder{B_n}}) = P_n(\explaintermbrace{base}{B_n})$ for all $B_n \in \prod_{j=1}^n \F_j$ and $n=1,2,\hdots$. 
+\label{thm:extended_product_measure_theorem_over_countably_infinite_spaces}
 \end{theorem}
 
 \begin{proof}
@@ -6412,7 +6414,57 @@ When $\mu=P$ is a probability measure, and using the stated substitutions, this 
 
 \end{proof}
 
+\section{$\S$ 4.11 Infinite Sequences of Random Variables}
 
+\cite[Thm.~4.11.1]{ash2000probability} gives the existence of a single probability space on which one can define an infinite sequence of \textit{independent} random variables.  Now we move to construct a probability space for a \textit{Markov chain}.
+
+\begin{theorem}\textnormal{(Markov chains exist.)}
+Let $S$ be a finite or countably infinite set.  Let $A=(a_{ij})$ be a stochastic matrix, and let $\pi_i, i \in S$ be a probability distribution.  Then there is a sequence of random variables $X_0, X_1, \hdots$, all defined on the same probability space and taking values in $S$ such that
+%
+\begin{align}
+P(X_0=i_0, X_1=i_1, \hdots, X_n=i_n) = \pi_{i_0} a_{i_0i_1} \cdots a_{i_{n-1}i_n} 
+\label{eqn:markov_chain_head_probability}	
+\end{align}
+%
+for all $i_0, i_1, \hdots, i_n \in S$ and all $n=0,1,\hdots$.
+\label{thm:markov_chains_exist}
+\end{theorem}
+
+\begin{proof}
+We prove existence as an application of Thm.~\ref{thm:extended_product_measure_theorem_over_countably_infinite_spaces}. Let $\Omega=S^\infty, \F = \Power(S)^\infty$.\footnote{We use $\Power(S)$ to denote the power set of $S$.} 
+
+Define a probability measure on $\F_1 = \Power(S)$ by 
+\[ P_0(B) = \sum_{j \in B} \pi_j \quad \text{for all} \quad B \in \Power(S) \]
+For each $n=0,1,2,\hdots$ and each $(k_0, k_1, \hdots, k_n) \in S^{n+1}$, we define a probability measure $P_{n+1}(k_0, k_1, \hdots, k_n; B)$ on $\F_{n+1}=\Power(S)$ by 
+\[ P_{n+1}(k_0, k_1, \hdots, k_n; B) = \sum_{j \in B} a_{(k_n, j)} \quad \text{for all} \quad B \in \Power(S).\]
+Now for each $B \in \Power(S)$, the function $P_{n+1}(\cdot, \cdot, \hdots, \cdot; B): (S^{n+1}, \Power(S)^{n+1}) \to (\R, \B(\R))$ is automatically measurable.\footnote{The product of power sets $\Power(S)^{n+1}$ contains all subsets of $S^{n+1}$ and is a sigma field (Example~\ref{ex:the_largest_sigma_field_is_the_power_set}). Thus, the definition of measurable functions (Def.~\ref{def:measurable_function}) is automatically satisfied.}
+
+Now for $\omega \in \Omega$ and $n=0,1, \hdots$, define the random variable $X_n$ by
+%
+\[ X_n(\omega) = \omega_n. \]
+%
+Then we can use \eqref{eqn:product_measure_in_n_coordinates}  to evaluate $P_{0:n}$, the extended product measure on $\prod_{i=0}^n \F_i$, at the singleton set $B_n := (\omega : X_0(\omega)=k_0, \hdots, X_n(\omega)=k_n)$ to obtain
+%
+\begin{align*}
+P_{0:n}(X_0(\omega)=k_0, & \hdots, X_n(\omega)=k_n) \stackexplain{\eqref{eqn:product_measure_in_n_coordinates}}{=} \\
+& \int_S P_0(\wrt{\omega_0}) \; \int_S P_1(\omega_0; \wrt{\omega_1})	\; \cdots \int_S P_{n-1}(\omega_0, \omega_1, \hdots, \omega_{n-2}; \wrt{\omega_{n-1}}) \\
+& \quad \cdot \explaintermbrace{(A)}{\int_S \indicatebrackets{(\omega_1,\hdots, \omega_n) = (k_1,\hdots k_n)} \; P_n(\omega_0, \omega_1, \hdots, \omega_{n-1}; \wrt{\omega_{n}})}
+\end{align*}
+%
+Now by Example~\ref{ex:integrals_as_sums}, we can reduce 
+\[\explaintermbrace{(A)}{\int_S \indicatebrackets{(\omega_1,\hdots, \omega_n) = (k_1,\hdots k_n)} \; P_n(\omega_0, \omega_1, \hdots, \omega_{n-1}; \wrt{\omega_{n}})} = \indicatebrackets{(\omega_1,\hdots, \omega_n) = (k_1,\hdots k_n)} \; a_{\omega_{n-1}, k_n}. \]
+
+{\scriptsize [Specifically, recall from Example~\ref{ex:integrals_as_sums} that if $f$ is a function on a countably infinite set and $\mu$ is the counting measure on that set, then the Lebesgue integral is just a sum: $\int f \wrt{\mu} = \sum_{n=1}^\infty f(n)$.  Similarly, if $P$ is a discrete probability measure with probability mass function $p$, then $\int f \wrt{P} = \int fp \wrt{\mu} = \sum_{n=1}^\infty f(n)p(n)$.]}
+
+Continuing this process gives
+\[P_{0:n}(X_0=i_0, X_1=i_1, \hdots, X_n=i_n) = \pi_{i_0} a_{i_0i_1} \cdots a_{i_{n-1}i_n}\]
+
+And by Thm.~\ref{thm:extended_product_measure_theorem_over_countably_infinite_spaces}, there is a probability measure $P$ on $\F$ such that for all $n$, $P$ agrees with $P_{0:n}$ on all $n$-dimensional cylinders.
+\end{proof}
+
+\begin{remark}
+The sequence of random variables $(X_n)$ satisfying \eqref{eqn:markov_chain_head_probability} in Thm.~\ref{thm:markov_chains_exist} is called a \textbf{Markov chain} corresponding to \textbf{transition matrix} $A$ and \textbf{initial distribution} $\pi$. The set $S$ is called the \textbf{state space} of the chain.  The values $a_{ij}$ are called the \textbf{transition probabilities}.
+\end{remark}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
