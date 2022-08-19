@@ -5751,10 +5751,10 @@ Let $(\Omega_j, \F_j)$, $j=1,2,\hdots$ be arbitrary measurable spaces.  Let $\Om
 
 For $B_n \in \prod_{j=1}^n \F_j$, define  
 \begin{align}
-P_n(B_n) &= \int_{\Omega_1} P_1(\wrt{\omega_1}) \int_{\Omega_2} P_2(\omega_1; \wrt{\omega_2}) \cdots \int_{\Omega_{n-1}} P_{n-1}(\omega_1, \hdots \omega_{n-2}; \wrt{\omega_{n-1}})  
+P_n(B_n) &= \int_{\Omega_1} P_1(\wrt{\omega_1}) \int_{\Omega_2} P(\omega_1; \wrt{\omega_2}) \cdots \int_{\Omega_{n-1}} P(\omega_1, \hdots \omega_{n-2}; \wrt{\omega_{n-1}})  
 \nonumber 
  \\
-& \quad \quad \quad \int_{\Omega_{n}} P_{n}(\omega_1, \hdots \omega_{n-1}; \wrt{\omega_{n}}) \;\indicate{(\omega_1,\hdots, \omega_n) \in B_n}  
+& \quad \quad \quad \int_{\Omega_{n}} P(\omega_1, \hdots \omega_{n-1}; \wrt{\omega_{n}}) \;\indicate{(\omega_1,\hdots, \omega_n) \in B_n}  
 \label{eqn:product_measure_in_n_coordinates}
 \end{align}	
 Note that $P_n$ is a probability measure by \cite[Thm.~2.6.7]{ash2000probability}.
@@ -5799,7 +5799,7 @@ For each $n>1$, decompose \eqref{eqn:product_measure_in_n_coordinates} to write
 \[ P(B_n) = \int_{\Omega_1} g_n(\omega_1) P_1(\wrt{\omega_1}) \]
 where
 \begin{align}
-g_n(\omega_1) = \int_{\Omega_2} P_2(\omega_1; \wrt{\omega_2}) \int_{\Omega_{n}} P_{n}(\omega_1, \hdots \omega_{n-1}; \wrt{\omega_{n}}) \;\indicate{(\omega_1,\hdots, \omega_n) \in B_n}  
+g_n(\omega_1) = \int_{\Omega_2} P(\omega_1; \wrt{\omega_2}) \int_{\Omega_{n}} P(\omega_1, \hdots \omega_{n-1}; \wrt{\omega_{n}}) \;\indicate{(\omega_1,\hdots, \omega_n) \in B_n}  
 \label{eqn:def_of_gn_in_proof_of_infinite_product_measure}	
 \end{align}
 
@@ -5824,8 +5824,6 @@ Repeat this inductively (See \cite{ash2000probability}) to obtain points $(\omeg
 \end{enumerate}
 
 \end{proof}
-
-\red{TODO:The notation $P_n$ is overloaded in the proof above.  Fix.  Perhaps the left-hand side could be written $P_{0:n}$}
 
 \subsection{$\S$ 2.7.4 - 2.7.5: Measures on uncountably infinite product spaces}
 
