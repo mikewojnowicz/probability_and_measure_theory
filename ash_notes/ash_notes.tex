@@ -6438,7 +6438,7 @@ When $\mu=P$ is a probability measure, and using the stated substitutions, this 
 
 \end{proof}
 
-\section{$\S$ 4.11 Infinite Sequences of Random Variables}
+\subsection{$\S$ 4.11 Infinite Sequences of Random Variables}
 
 \cite[Thm.~4.11.1]{ash2000probability} gives the existence of a single probability space on which one can define an infinite sequence of \textit{independent} random variables.  Now we move to construct a probability space for a \textit{Markov chain}.
 
@@ -6512,6 +6512,74 @@ In the special case where $\E[X_i]=m$ for all $i$, Thm.~\ref{thm:weak_law_of_lar
 
 \begin{remark}\remarktitle{Weak vs strong law of large numbers.} See \cite[pp.199]{ash2000probability} for a discussion of WLLN vs SLLN.  Essentially, the WLLN is a statement about what happens for repeated experiments with fixed $n$. SLLN is a statement about what happens for a single experiment as $n$ increases. 
 \end{remark}
+
+\section{$\S$ Conditional Probability and Expectation}
+
+\subsection{Introduction} \label{sec:intro_to_conditional_probability}
+
+Let us start with a simple motivating example.
+
+Consider the measurable space $(\Omega,\F) = (\R^2, \B(\R^2))$ with measurable functions $X(x,y)=x$ and $Y(x,y)=y$.  Instead of directly specifying the joint distribution of $X$ and $Y$, we specify the marginal distribution $P_X$ and a set of probability measures $\set{P(x, \cdot)}$ defined on $\B(\R)$ for all $x \in \R$. As we will see, $\set{P(x, \cdot)}$ are the conditional probabilities. 
+
+By the extended product measure theorem, the probability of any event of the form $\set{(X,Y) \in C}$ is determined:
+%
+\begin{align}
+P(C) &= \int_{-\infty}^\infty P(x, C(x)) \, dP_X(x)
+\label{eqn:probability_of_joint_event}	
+\end{align}
+%
+where $C(x)$ the section of $C$ at $x$. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[angle=90, width=.6\textwidth]{images/cross_section_of_rectangle}
+\caption{\textit{Cross section of a measurable rectangle.} Let $(\mathcal{X} \times \mathcal{Y}, \mathcal{A} \times \mathcal{B})$ be a measurable space. Let $C=A \times B$ be a measurable rectangle, where $A \in \mathcal{A}$ and $B \in \mathcal{B}$.  Then the cross section of $C$ at point $x \in \mathcal{X}$ has the special form $C(x) = 
+\begin{cases}
+B, &  x \in A \\
+\emptyset, & x \not\in A 	
+ \end{cases}$.}
+\label{fig:cross_sections_of_rectangles}
+\end{figure}
+
+ In the special case where $C=A \times B$ is a measurable rectangle, the cross section $C(x)$ has a special form (see Fig.~\ref{fig:cross_sections_of_rectangles}), which implies that $P(x,C(x))=P(x,B)\indicatebrackets{x \in A}$. Thus,  \eqref{eqn:probability_of_joint_event}	 becomes 
+%
+\begin{align}
+P(A \times B) &= \int_B P(x, B) \, dP_X(x)
+\label{eqn:probability_of_rectangle}	
+\end{align}
+
+
+Thus, we see that we can specify a joint distribution $P$ on $\F=\B(\R^2)$ by specifying a marginal distribution $P_X$ and a set of measures $\set{P(x,\cdot), x \in \R}$. Intuitively, this set of measures gives the conditional probabilities $P(Y \in B \cond X = x)$. 
+%\red{TODO: Absorb the below.}
+%
+%By specifying a marginal distribution and a set of conditional probabilities, we specify the joint.  
+
+\subsection{$\S$ 5.3 General Concept of Conditional Probability}
+
+In Sec.~\ref{sec:intro_to_conditional_probability}, we illustrated how the extended product measure theorem plays out in the context of random variables.  Namely, we can construct a joint distribution from a marginal distribution $P_X$ and a set of distributions parameterized by $X=x$.  Intuitively, this set of distributions gives the conditional probabilities.
+
+In this section, we work \textit{the other way}.  Here, given the marginal distribution  $P_X$ and the joint distribution, we will determine the conditional distribution.
+
+
+\begin{theorem}\textbf{Existence of conditional probability measure.}
+Let $X: (\Omega, \F) \to  (\Omega', \F')$ be a random object on $(\Omega, \F, P)$.  Let $B$ be a fixed set in $\F$.   Then there is a real-valued Borel measurable function $g$ on $(\Omega', \F')$ such that for each $A \in \F'$, 
+\begin{align}
+P( \set{X \in A} \cap B) = \int_A g(x) \, dP_X(x)
+\label{eqn:existence_of_conditional_probability_measure}	
+\end{align}
+Furthermore, if $h$ is another such function, then $g=h$ a.e. $[P_X]$.  We define the \textbf{conditional pribability measure} by $P(B \cond X=x) = g(x)$; it is essentially unique \textnormal{for a given $B$}.
+\end{theorem}
+
+\begin{proof}
+Let $\lambda(A) := 	P( \set{X \in A} \cap B) $ for all $A \in \F'$.\footnote{Here is an interesting case of a measure (besides Lebesgue) which is not a probability measure but which we care about.}  
+
+Then $\lambda$ is
+\begin{itemize}
+\item a finite measure on $\F'$
+\item absolutely continuous with respect to $P_X$. {\scriptsize (That is, $P_X(A) =0 \implies \lambda(A)=0$. This property holds since indefinite integrals are absolutely continuous; see Remark~\ref{rk:indefinite_integrals_are_absolutely_continuous}).}
+\end{itemize}
+The result then follows from the Radon-Nikodym theorem. 
+\end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
