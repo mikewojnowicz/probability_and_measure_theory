@@ -1,0 +1,86 @@
+\documentclass[10pt]{beamer}
+
+%STANDARD PREAMBLE
+%https://tex.stackexchange.com/questions/68821/is-it-possible-to-create-a-latex-preamble-header
+\usepackage{/Users/mwojno01/Repos/latex_preamble/beamer_preamble}
+
+% DOCUMENT SPECIFIC STUFF
+% using default arg uments; see https://stackoverflow.com/questions/1812214/latex-optional-arguments
+
+
+
+
+%%%% Citations should be rendered differently in beamer -- ADD TO BEAMER
+
+\title{Review of measures}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Definition}
+
+
+\begin{definition}
+Let $\F$ be a collection of subsets of a set $\Omega$.  Then $\F$ is called a \textbf{sigma-field} (or \textit{sigma-algebra}) if it satisfies
+
+\begin{enumerate}
+	\item $\Omega \in \F$ 
+	\item If $A \in \F$, then $A^c \in \F$.
+	\item If $A_1,A_2, ... \in \F$ then $\cup_{i=1}^\infty A_i \in \F$.  
+\end{enumerate}
+that is, if $\Omega \in \F$ and $\F$ is closed under complementation and countable unions.
+\label{def:sigma_field}	
+\end{definition}
+\pause 
+\begin{definition}
+A \textbf{measure} on a $\sigma$-field $\F$ is a non-negative, extended real-valued function $\mu$ on $\F$ such that whenever $A_1, A_2, ...$ form a finite or countably infinite collection of disjoint sets in $\F$, we have countable additivity; that is,
+\[ \mu \bigg( \dot\bigcup_n A_n \bigg) = \ds\sum_n \mu(A_n) \]
+\label{def:measure}	
+\end{definition}
+
+
+\end{frame}
+
+\begin{frame}{Examples}
+
+\begin{example}
+Let $\Omega$ be any set.  Fix $x_0 \in \Omega$. For any $A \in \F$ define $\mu(A) = 1$ if $x_0 \in A$ and $\mu(A) = 0$ if $x_0 \not\in A$.  Then $\mu$ may be called the \textbf{unit mass} concentrated at $x_0$.
+\end{example}
+\pause 
+\begin{example}
+Let $\Omega = \set{x_1,x_2,...}$ be a finite or countably infinite set.  Let $p_1, p_2,...$ be non-negative reals.  Define
+\[\mu(A) = \ds\sum_{x_i \in A} p_i \quad \text{ for all } A \in \F\]
+Then $\mu$ is a measure on $\F$. We might call it the ``point weighting" measure. 
+\begin{itemize}
+\item If $p_i \equiv 1 \; \forall \, i$, then $\mu$ is called the \textbf{counting measure}.
+\item If $\sum_i p_i =1$, then $\mu$ is a \textbf{discrete probability measure}.	
+\end{itemize}
+	
+\end{example}
+\end{frame}
+
+\begin{frame}{More examples}
+\begin{example}
+Define $\mu$ such that 
+\[ \mu(a,b] = b-a \quad \forall \, a,b \in \R : b>a \]
+This requirement determines $\mu$ on a large collection of sets, a sigma-field called the Borel Sets $\B(\R)$, defined as the smallest $\sigma$-field of subsets of $\R$ containing all intervals.  The measure is called \textbf{Lesbesgue measure}.
+\end{example}
+\pause 
+\begin{example}
+Let $F$ be a \textit{distribution function} on $\R$; that is, $F: \R \to \R$ is a map which is increasing and right continuous.
+
+%Let $F$ be a \textit{distribution function} on $\R$; that is, $F: \R \to \R$ is a map which is that is increasing [ $a<b$ implies $F(a) \leq F(b)$] and right continuous [ $\lim_{x \downarrow x_0} F(x) = F(x_0)$].
+
+Define 
+\[ \mu(a,b] = F(b) - F(a) \]
+
+This is called a \textbf{Lesbesgue-Stieltjes measure}.
+\end{example}
+\end{frame}
+
+
+\end{document}
+
+
+
