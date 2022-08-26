@@ -6539,15 +6539,19 @@ where $C(x)$ the section of $C$ at $x$.
 \begin{figure}[H]
 \centering
 \includegraphics[angle=90, width=.6\textwidth]{images/cross_section_of_rectangle}
-\caption{\textit{Cross section of a measurable rectangle.} Let $(\mathcal{X} \times \mathcal{Y}, \mathcal{A} \times \mathcal{B})$ be a measurable space. Let $C=A \times B$ be a measurable rectangle, where $A \in \mathcal{A}$ and $B \in \mathcal{B}$.  Then the cross section of $C$ at point $x \in \mathcal{X}$ has the special form $C(x) = 
-\begin{cases}
-B, &  x \in A \\
-\emptyset, & x \not\in A 	
- \end{cases}$.}
+\caption{\textit{Cross section of a measurable rectangle.} Let $(\mathcal{X} \times \mathcal{Y}, \mathcal{A} \times \mathcal{B})$ be a measurable space. Let $C=A \times B$ be a measurable rectangle, where $A \in \mathcal{A}$ and $B \in \mathcal{B}$. .}
 \label{fig:cross_sections_of_rectangles}
 \end{figure}
 
- In the special case where $C=A \times B$ is a measurable rectangle, the cross section $C(x)$ has a special form (see Fig.~\ref{fig:cross_sections_of_rectangles}), which implies that $P(x,C(x))=P(x,B)\indicatebrackets{x \in A}$. Thus,  \eqref{eqn:probability_of_joint_event}	 becomes 
+ In the special case where $C=A \times B$ is a measurable rectangle, the cross section $C(x)$ has a special form (see Fig.~\ref{fig:cross_sections_of_rectangles}):
+  Then the cross section of $C$ at point $x \in \mathcal{X}$ has the special form 
+\[C(x) = 
+\begin{cases}
+B, &  x \in A \\
+\emptyset, & x \not\in A 	
+ \end{cases}
+ \]
+This special form implies that $P(x,C(x))=P(x,B)\indicatebrackets{x \in A}$. Thus,  \eqref{eqn:probability_of_joint_event}	 becomes 
 %
 \begin{align}
 P(A \times B) &= \int_B P(x, B) \, dP_X(x)
@@ -6574,6 +6578,7 @@ P( \set{X \in A} \cap B) = \int_A g(x) \, dP_X(x)
 \label{eqn:existence_of_conditional_probability_measure}	
 \end{align}
 Furthermore, if $h$ is another such function, then $g=h$ a.e. $[P_X]$.  We define the \textbf{conditional pribability measure} by $P(B \cond X=x) = g(x)$; it is essentially unique \textnormal{for a given $B$}.
+\label{thm:existence_of_conditional_probability_measure}
 \end{theorem}
 
 \begin{proof}
@@ -6591,6 +6596,15 @@ Then $\lambda$ is
 \end{itemize}
 The result then follows from the Radon-Nikodym theorem.
 \end{proof}
+
+\begin{remark}
+If we choose $A = \Omega'$ in Theorem~\ref{thm:existence_of_conditional_probability_measure}, then \eqref{eqn:existence_of_conditional_probability_measure} becomes
+\begin{align}
+P(B) = \int_{\Omega'} g(x) \, dP_X(x),	
+\end{align}
+which is the \textbf{law of total probability}.
+\end{remark}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
