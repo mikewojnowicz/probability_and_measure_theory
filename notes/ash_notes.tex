@@ -4307,6 +4307,7 @@ So $\int_A f \dmu =0$.  Negating this and applying the scalar multiple property,
 \end{align}
 
 \end{alphabate}
+\label{prop:calculus_with_radon_nikodym_derivatives}
 \end{proposition}
 
 \begin{proof}
@@ -6135,10 +6136,10 @@ Recall from Sec.~\ref{sec:absolute_continuity} that absolutely continuity was de
 \end{remark}
 
 \begin{question}
-Eq.~\Eqref{eqn:probability_for_an_absolutely_continuous_rv_is_determined_by_integrating_the_density_function} implies that for any Borel set $B$ and density function $f$, the function $\indicate{B} f$ is continuous a.e. with respect to Lebesgue measure. (Why this implication? Because a function is Reimann integrable iff it is continuous a.e.; see Thm.~\ref{thm:relating_lebesgue_and_riemann_integrals}.) This fact is surprising to me;  How to see this?
+\Eqref{eqn:probability_for_an_absolutely_continuous_rv_is_determined_by_integrating_the_density_function} implies that for any Borel set $B$ and density function $f$, the function $\indicate{B} f$ is continuous a.e. with respect to Lebesgue measure. (Why this implication? Because a function is Reimann integrable iff it is continuous a.e.; see Thm.~\ref{thm:relating_lebesgue_and_riemann_integrals}.) This fact is surprising to me;  How to see this?
 \end{question}
 
-\begin{terminology}
+\begin{remark}\remarktitle{What a \textnormal{distribution} is}
 The \textbf{distribution} of a random variable is a generic term; to say that we know the distribution of a random variable $X$ means that we know how to calculate $P\set{X \in B}$ for all Borel sets $B$ \cite[pp.185]{ash2000probability}.  Based on the material in this section, we therefore need one of the following pieces of information:
 \begin{alphabate}
 \item The \textit{induced probability measure}, 
@@ -6154,8 +6155,8 @@ In particular, we have the following special cases:
 \item If $X$ is a discrete random variable (taking on values in a countable set $S$), then it suffices to know its probability mass function $p_X$, since then\redfootnote{Justify this explicitly.  See e.g. \cite[pp.174]{ash2000probability}.} 
      \[ P_X(B) = \sum_{x \in B} p_X(x), \quad \forall B \in \P(S).\]	
 \end{enumerate}
-	
-\end{terminology}
+\label{rk:distribution_of_a_random_variable}
+\end{remark}
 
 
 
@@ -6186,7 +6187,7 @@ By Tonelli's Theorem, we can also express the distribution function of an absolu
 If $X$ is absolutely continuous with density $f$, it follows that
 \begin{align}
 P_X(B) = \int_B f(x) \wrt{x}, \quad \forall B \in \B(\R^n).
-\label{eqn:probability_for_an_absolutely_continuous_rv_is_determined_by_integrating_the_density_function}	
+\label{eqn:probability_for_an_absolutely_continuous_random_vector_is_determined_by_integrating_the_density_function}	
 \end{align}
 
 This is due to the uniqueness of the L-S measure. The argument parallels that of Remark~\ref{rk:probability_for_an_absolutely_continuous_random_variable_is_determined_by_integrating_the_density_function}.	 In particular, by Cor.~\ref{cor:indefinite_integrals_as_measures}, $\mu : \mu(B) = \int_B f(x) \wrt{x}, B \in \B(\R^n)$ is a measure.  Moreover, this measure satisfies $\mu(a,b] = \int_{(a,b]} f(x) \wrt{x} = \Delta_{(a,b]} F$ (See Sec.~\ref{sec:examples_of_how_to_construct_lebesgue_stieltjes_measures_from_distribution_functions}, Example 2).  So by Thm.~\ref{thm:extension_for_Lebesgue_stietljes_measure},  $\mu$ is the unique Lebesgue-Stieltjes measure corresponding to $F$. Hence, $\mu=P_X$.
@@ -6213,7 +6214,7 @@ P_X[X_1 \in B_1, \hdots, X_n \in B_n] = P_{X_1}[X_1 \in B_1] \cdots P_{X_n}[X_n 
 
 
 \begin{remark}{\remarktitle{Independence as induced product measure: A collection of independent RV's has an induced probability measure which is the product of the individual induced probability measures.}}
-Note that independent random variables are defined according to a constraint that the (induced) probability measure must satisfy \textit{only for measurable rectangles} (sets of the form $B=B_1 \times \cdots \times B_n$);   see the left hand side of Eq.~\Eqref{eqn:independence_of_random_variables}.  However, this definition automatically determines the probability measure on \textit{all} sets (see the classical product measure theorem as given in Cor.~\ref{cor:classical_product_measure_theorem}, or in \cite[2.6.8(b)]{ash2000probability} for a corresponding statement over $n$ factors).  Hence, independence of $X_1,\hdots, X_n$  may be expressed by saying that if $X=(X_1,\hdots,X_n)$ is a collection of independent random variables, then $P_X$ is the product of the $P_{X_i}, i=1,\hdots, n$.  We write $P_X = \prod_{i=1}^n P_{X_i}.$
+Note that independent random variables are defined according to a constraint that the (induced) probability measure must satisfy \textit{only for measurable rectangles} (sets of the form $B=B_1 \times \cdots \times B_n$);   see the left hand side of \Eqref{eqn:independence_of_random_variables}.  However, this definition automatically determines the probability measure on \textit{all} sets (see the classical product measure theorem as given in Cor.~\ref{cor:classical_product_measure_theorem}, or in \cite[2.6.8(b)]{ash2000probability} for a corresponding statement over $n$ factors).  Hence, independence of $X_1,\hdots, X_n$  may be expressed by saying that if $X=(X_1,\hdots,X_n)$ is a collection of independent random variables, then $P_X$ is the product of the $P_{X_i}, i=1,\hdots, n$.  We write $P_X = \prod_{i=1}^n P_{X_i}.$
 \label{rk:independent_random_variables_induce_product_measures}
 \end{remark}
 
@@ -6322,12 +6323,52 @@ In many situations, it may be inconvenient to compute $E(X)$ by integrating over
 \end{remark}
 
 \begin{remark}\remarktitle{Writing an expectation as an integral against the -induced- probability measure.}
-Although the definition of expectation expresses it as an integral against a probability measure $P$ defined on (events within) outcome space $\Omega$ (see Def.~\ref{def:expectation}), we may express it instead as an integral against the induced probability measure $P_X$ defined on (Borel subsets of) the reals.  Consider the Law of the Unconscious Statistician (Theorem~\ref{thm:LOTUS}), take $g$ to be the identity, and then one sees that
+Let $X: (\Omega, \F, P) \to (\R, \B(\R), P_X)$ be a random variable.  Although the definition of expectation (Def.~\ref{def:expectation}) expresses it as an integral against a probability measure $P$ defined on (events within) outcome space $\Omega$ , we may express it instead as an integral against the induced probability measure $P_X$ defined on (Borel subsets of) the reals.  Consider the Law of the Unconscious Statistician (Theorem~\ref{thm:LOTUS}), take $g$ to be the identity, and then one sees that
 \[ \int_\Omega X(\omega) \wrt{P(\omega)} = \int_\R x \wrt{P_X(x)} \] 
 \end{remark}
 
+\begin{examples}\remarktitle{Applying LOTUS to absolutely continuous or discrete random variables.}
+
+Let the hypotheses of LOTUS hold. 
+
+\begin{alphabate}
+\item $\boxed{\text{Absolutely continuous random variable.}}$ If $X$ is a random variable with density $f$, then 
+\[\int g(x) \wrt{P_X} = \int g(x) f(x) \wrt{x}\]
+(with integration over $\R$).
+\item $\boxed{\text{Discrete random variable.}}$ If $X$ is a discrete random variable with probability mass function $p$, then 
+\[\int g(x) \wrt{P_X} = \sum_{x} g(x) p(x)\]
+\end{alphabate}
+
+%{prop:calculus_with_radon_nikodym_derivatives}
+\label{ex:applying_LOTUS_to_absolutely_continuous_or_discrete_random_variables}
+\end{examples}
+
+\begin{proof} 
+The proof hinges on change of variables with Radon-Nikodym derivatives.\footnote{To my surprise, \cite[Sec.~4.10.3(c),(d)]{ash2000probability} justifies these claims by suggesting that one work from indicators to simple functions to nonnegative Borel measurable functions to arbitrary Borel measurable functions.  Applying calculus with Radon-Nikodym derivatives seems much more expedient and insightful.} For any $B \in \B(\R)$, we have
+\[ \arraycolsep=20pt
+\begin{array}{ccr}
+\textbf{Absolutely continuous case} & \textbf{Discrete case} & \textbf{Justification} \\	
+P_X(B) = \int_B f(x) \wrt{x} & P_X(B) = \sum_x p(x) & \text{see Remark}~\ref{rk:distribution_of_a_random_variable} \\
+i.e. \; \frac{dP_X}{d\mu} = f & i.e. \; \frac{dP_X}{d\lambda} = p & \text{and Radon-Nikodym derivs.}\\
+\text{($\mu$ is Lebesgue  measure)} & \text{($\lambda$ is counting  measure)} & \\
+& & \\ 
+\hline
+& & \\  
+\multicolumn{2}{c}{\boxed{E[Y] = \int g \wrt{P_X}}} & \text{LOTUS} \\
+& & \\ 
+\hline
+& & \\  
+\implies E[Y] = \int g \, f \wrt{\mu} & \implies E[Y] = \int g \, p \wrt{\lambda} & \text{calculus w/ Radon-Nikodym}  \\
+\stackexplain{Thm.~\ref{thm:relating_lebesgue_and_riemann_integrals}}{=} \int g(x) f(x) \wrt{x} & \stackexplain{Ex.~\ref{ex:integrals_as_sums}}{=} \sum_x g(x) p(x) & \text{derivatives (Prop.~\ref{prop:calculus_with_radon_nikodym_derivatives})}
+\end{array}
+\]
+Note that applying Thm.~\ref{thm:relating_lebesgue_and_riemann_integrals} would require that $gf$ be continuous a.e.; check whether this is true.
+	
+\end{proof}
+
+
 \begin{question}{\remarktitle{An alternate notation for LOTUS.}}	
-\cite[pp.188]{ash2000probability} writes Eq.~\Eqref{eqn:expectation_as_integral_wrt_induced_probability_measure} as 
+\cite[pp.188]{ash2000probability} writes \Eqref{eqn:expectation_as_integral_wrt_induced_probability_measure} as 
 \[  E(Y)= \int_\R g(x) dF(x) (= \int_\R g \; dP_X), \]
 where $F$ is the distribution function of X.  He states that $\int_\R g(x) dF(x)$ \textit{means} $\int_\R g \; dP_X$; it is \textit{not} a Riemann-Stieltjes integral.\footnote{Which, interestingly, contradicts the current statement of LOTUS on Wikipedia, as of 08/05/2022.} This raises two questions
 
