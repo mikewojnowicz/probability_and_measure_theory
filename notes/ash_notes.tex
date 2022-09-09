@@ -2006,7 +2006,11 @@ h^{-1} \set{x \in \overline{\R}^n : a \leq x \leq b} &= \bigcap_{i=1}^n \set{\om
 \subsection{$\S$ 1.5.2-1.5.3 Integrating  Borel measurable functions}
 
 In this section, we define integral of a Borel measurable function $h : (\Omega, \F) \to (\overline{\R}, \B(\overline{\R}))$ against arbitrary measure $\mu$.  The integral can be written as:
-\[ \ds\int_{\Omega} h \wrt{\mu}, \quad \quad \ds\int_{\Omega} h(\omega) \wrt{\mu(\omega)}, \quad \text{ or } \quad \ds\int_{\Omega} h(\omega) \mu(d \, \omega) \]
+\begin{align}
+ \ds\int_{\Omega} h \wrt{\mu}, \quad \quad \ds\int_{\Omega} h(\omega) \wrt{\mu(\omega)}, \quad \text{ or } \quad \ds\int_{\Omega} h(\omega) \mu(d \, \omega) 
+\label{eq:notation_for_Borel_measurable_functions}
+\end{align}
+
  
  We proceed in three steps: first, we consider where $h$ is simple, then we consider $h$ non-negative, then we consider $h$ arbitrary. 
 
@@ -3682,6 +3686,17 @@ Thus $f$ is Riemann integrable by \Eqref{eqn:criterion_for_riemann_integrability
 \item If $f$ is Riemann integrable, then $f$ is continuous a.e. by part (a).   So \Eqref{eqn:lebesgue_integral_of_riemann_integral_fucntion_equals_the_lebesgue_integral_of_the_limits_of_the_upper_and_lower_functions} holds.  Then, by \Eqref{eqn:criterion_for_riemann_integrability_in_terms_of_lebesgue_integral}, $\int_{[a,b]} f \dmu = r$, the value of the Riemann integral. 
 \end{alphabate}
 \end{proof}
+
+\begin{notation}\remarktitle{Reusing Riemann notation for Lebesgue integrals.}
+Let $f$ be a measurable function on a measure space $(\Omega, \F, \lambda)$, where $\lambda$ is Lebesgue measure. 
+Although this integral exists for a broader class of functions than Riemann integrable functions (see Theorem~\ref{thm:relating_lebesgue_and_riemann_integrals}), it is nevertheless common to designate it as 
+\begin{align}
+\int f(x) \wrt{x},
+\label{eqn:reimann_notation_for_lebesgue_integral}	
+\end{align}
+although of course one could also use $\int f \wrt{\lambda}$ or any of the other notations given in \eqref{eq:notation_for_Borel_measurable_functions}. The interpretation of \Eqref{eqn:reimann_notation_for_lebesgue_integral} is a Lebesgue integral whenever the integrand is not Riemann but still Lebesgue integrable. 
+\label{notation:reusing_Reimann_notation_for_Lebesgue_integrals}
+\end{notation}
 
 \section{$\S$ 2.1 Signed measures} \label{sec:signed_measures}
 
@@ -5518,9 +5533,9 @@ Let $\lambda$ be Lebesgue measure on $\R$.  Then
 (\mu \times \lambda)\set{(x,y): 0 \leq y < g(x)} &= \int \int \indicate{\set{(x,y): 0 \leq y < g(x)}} \wrt{\mu(x)} \wrt{\lambda(y)} && \tinytext{Tonelli} \\
 &= \int \indicate{\set{y: y \geq 0}} \int \indicate{\set{x: g(x) >y}}  \wrt{\mu(x)} \wrt{\lambda(y)} && \tinytext{Rewrite indicator; constant multiple} \\
  &= \int \indicate{\set{y: y \geq 0}}  \mu(x: g(x) > y) \wrt{\lambda(y)} && \tinytext{Integral of indicator} \\
- & \stackrel{1}{=} \int_0^\infty \mu(x: g(x) > y) dy && \tinytext{$\lambda$ is Lebesgue measure} \\
+ &= \int_0^\infty \mu(x: g(x) > y) dy && \tinytext{$\lambda$ is Lebesgue measure} \\
 \end{align*}
-In (1), we reduce the Lebesgue integral to a Riemann integral. By Thm.~\ref{thm:relating_lebesgue_and_riemann_integrals}, this is possible iff $\mu(x: g(x) > y)$ is continuous for a.e. y. {\tiny (I believe we could show this by continuity of measure.)}   
+%In (1), we reduce the Lebesgue integral to a Riemann integral. By Thm.~\ref{thm:relating_lebesgue_and_riemann_integrals}, this is possible iff $\mu(x: g(x) > y)$ is continuous for a.e. y. {\tiny (I believe we could show this by continuity of measure.)}   
 
 On the other hand,
 \begin{align*}
@@ -6136,9 +6151,9 @@ This is due to the uniqueness of the L-S measure.  In particular, by Cor.~\ref{c
 Recall from Sec.~\ref{sec:absolute_continuity} that absolutely continuity was defined in terms of (signed) measures.  So what justifies the name absolutely continuous \textit{random variables}?  Recall from Remark~\ref{rk:indefinite_integrals_are_absolutely_continuous} that indefinite integrals give new measures that are absolutely continuous with respect to the original measure.  But we saw in Remark~\ref{rk:probability_for_an_absolutely_continuous_random_variable_is_determined_by_integrating_the_density_function} that the probability $P_X$ induced by an absolutely continuous random variable is determined by integrating its density functions (i.e, it can be expressed as an indefinite integral with respect to Lebesgue measure).   Thus, $P_X \ll \text{Lebesgue measure}$.\footnote{For an alternate view, $F_X$ is an absolutely continuous function, as mentioned by \cite[p.175]{ash2000probability}. However, Ash defines absolutely continuous functions in \cite[Sec.~2.3]{ash2000probability}, and that material is not (yet) covered in these notes.}
 \end{remark}
 
-\begin{question}
-\Eqref{eqn:probability_for_an_absolutely_continuous_rv_is_determined_by_integrating_the_density_function} implies that for any Borel set $B$ and density function $f$, the function $\indicate{B} f$ is continuous a.e. with respect to Lebesgue measure. (Why this implication? Because a function is Reimann integrable iff it is continuous a.e.; see Thm.~\ref{thm:relating_lebesgue_and_riemann_integrals}.) This fact is surprising to me;  How to see this?
-\end{question}
+%\begin{question}
+%\Eqref{eqn:probability_for_an_absolutely_continuous_rv_is_determined_by_integrating_the_density_function} implies that for any Borel set $B$ and density function $f$, the function $\indicate{B} f$ is continuous a.e. with respect to Lebesgue measure. (Why this implication? Because a function is Reimann integrable iff it is continuous a.e.; see Thm.~\ref{thm:relating_lebesgue_and_riemann_integrals}.) This fact is surprising to me;  How to see this?
+%\end{question}
 
 \begin{remark}\remarktitle{What a \textnormal{distribution} is}
 The \textbf{distribution} of a random variable is a generic term; to say that we know the distribution of a random variable $X$ means that we know how to calculate $P\set{X \in B}$ for all Borel sets $B$ \cite[pp.185]{ash2000probability}.  Based on the material in this section, we therefore need one of the following pieces of information:
@@ -6344,7 +6359,7 @@ Let the hypotheses of LOTUS hold.  Then:
 \label{ex:applying_LOTUS_to_absolutely_continuous_or_discrete_random_variables}
 \end{examples}
 
-\begin{proof} (Sketch). The proof hinges on change of variables with Radon-Nikodym derivatives.\footnote{To my surprise, \cite[Sec.~4.10.3(c),(d)]{ash2000probability} justifies these claims by suggesting that one work from indicators to simple functions to nonnegative Borel measurable functions to arbitrary Borel measurable functions.  Applying calculus with Radon-Nikodym derivatives seems much more expedient and insightful.} For any $B \in \B(\R)$, we have
+\begin{proof} The proof hinges on change of variables with Radon-Nikodym derivatives.\footnote{To my surprise, \cite[Sec.~4.10.3(c),(d)]{ash2000probability} justifies these claims by suggesting that one work from indicators to simple functions to nonnegative Borel measurable functions to arbitrary Borel measurable functions.  Applying calculus with Radon-Nikodym derivatives seems much more expedient and insightful.} For any $B \in \B(\R)$, we have
 \[ \arraycolsep=20pt
 \begin{array}{ccr}
 \textbf{Absolutely continuous case} & \textbf{Discrete case} & \textbf{Justification} \\	
@@ -6359,11 +6374,9 @@ i.e. \; \frac{dP_X}{d\mu} = f & i.e. \; \frac{dP_X}{d\lambda} = p & \text{and Ra
 \hline
 & & \\  
 \implies E[Y] = \int g \, f \wrt{\mu} & \implies E[Y] = \int g \, p \wrt{\lambda} & \text{calculus w/ Radon-Nikodym}  \\
-\stackexplain{Thm.~\ref{thm:relating_lebesgue_and_riemann_integrals}}{=} \int g(x) f(x) \wrt{x} & \stackexplain{Ex.~\ref{ex:integrals_as_sums}}{=} \sum_x g(x) p(x) & \text{derivatives (Prop.~\ref{prop:calculus_with_radon_nikodym_derivatives})}
+= \int g(x) f(x) \wrt{x} & \stackexplain{Ex.~\ref{ex:integrals_as_sums}}{=} \sum_x g(x) p(x) & \text{derivatives (Prop.~\ref{prop:calculus_with_radon_nikodym_derivatives})}
 \end{array}
 \]
-Note that applying Thm.~\ref{thm:relating_lebesgue_and_riemann_integrals} would require that $gf$ be continuous a.e.; I am not sure how this can hold if we only know that $g$ is measurable.
-	
 \end{proof}
 
 
