@@ -3683,7 +3683,7 @@ Thus $f$ is Riemann integrable by \eqref{eqn:criterion_for_riemann_integrability
 \end{alphabate}
 \end{proof}
 
-\section{\S 2.1 Signed measures} \label{sec:signed_measures}
+\section{$\S$ 2.1 Signed measures} \label{sec:signed_measures}
 
 This section plays the same role as Section 2.1 of \cite{ash2000probability}, although the primary reference here is Section 3.1 of \cite{folland1999real}.
 
@@ -3928,7 +3928,7 @@ The integral is finite if both $\int f d\nu^+$ and $\int f d\nu^+$ are finite.
 
 
 
-\section{\S 2.2 Lebesgue-Radon-Nikodym Theorem}
+\section{$\S$ 2.2 Lebesgue-Radon-Nikodym Theorem}
 
 This section plays the same role as Section 2.2 of \cite{ash2000probability}, although the primary reference here is Section 3.2 of \cite{folland1999real}.
 
@@ -6245,8 +6245,12 @@ The conclusion of Prop.~\ref{prop:functions_of_independent_random_variables_are_
 
 \begin{definition}
 If $X$ is a random variable on $(\Omega, \F, P)$, then the \textbf{expectation} of $X$ is defined by
-\[  E(X) = \int_\Omega X \; dP,\] 
+\begin{align}
+E(X) = \int_\Omega X \; dP,
+\label{eqn:def_expectation}
+\end{align}
 provided the integral exists.
+\label{def:expectation}
 \end{definition}
 
 \begin{theorem}{\textbf{The Law of the Unconscious Statistician (LOTUS).}}
@@ -6315,6 +6319,11 @@ If $E(Y)$ exists and, say, $E(Y^-)$ is finite, then $\int_\R g^- \; dP_X$ is fin
 
 \begin{remark}{\remarktitle{Motivating LOTUS.}} 
 In many situations, it may be inconvenient to compute $E(X)$ by integrating over $\Omega$.  LOTUS allows us to write the integral with respect to the induced probability measure $P_X$, therefore integrating over $\R$ (or $\R^n$ for random vectors).   In other words, LOTUS converts an integral over $(\Omega, \F, P)$ into an integral over $(\R, \B(\R), P_X)$.\footnote{For an example of where this conversion is useful, consider that independence of random variables is \textit{defined} in terms of $P_X$, not $P$ (see Def.~\ref{def:independence_of_random_variables}).  So we use LOTUS when proving that the expectation of the product of independent RV's is equal to the product of the expectations.}
+\end{remark}
+
+\begin{remark}\remarktitle{Writing an expectation as an integral against the -induced- probability measure.}
+Although the definition of expectation expresses it as an integral against a probability measure $P$ defined on (events within) outcome space $\Omega$ (see Def.~\ref{def:expectation}), we may express it instead as an integral against the induced probability measure $P_X$ defined on (Borel subsets of) the reals.  Consider the Law of the Unconscious Statistician (Theorem~\ref{thm:LOTUS}), take $g$ to be the identity, and then one sees that
+\[ \int_\Omega X(\omega) \wrt{P(\omega)} = \int_\R x \wrt{P_X(x)} \] 
 \end{remark}
 
 \begin{question}{\remarktitle{An alternate notation for LOTUS.}}	
@@ -6519,7 +6528,7 @@ In the special case where $\E[X_i]=m$ for all $i$, Thm.~\ref{thm:weak_law_of_lar
 \begin{remark}\remarktitle{Weak vs strong law of large numbers.} See \cite[pp.199]{ash2000probability} for a discussion of WLLN vs SLLN.  Essentially, the WLLN is a statement about what happens for repeated experiments with fixed $n$. SLLN is a statement about what happens for a single experiment as $n$ increases. 
 \end{remark}
 
-\section{$\S$ Conditional Probability and Expectation}
+\section{$\S$ 5 Conditional Probability and Expectation}
 
 \subsection{Introduction} \label{sec:intro_to_conditional_probability}
 
