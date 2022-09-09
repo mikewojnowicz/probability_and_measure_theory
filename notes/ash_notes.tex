@@ -5535,6 +5535,7 @@ On the other hand,
 \begin{remark}
 In probability theory, the argument of Example~\ref{ex:area_under_the_curve_via_horizontal_sections} can be used to show that if $X$ is a non-negative random variable, then its expected value equals the integral of its survival function, i.e. 
 \[ \E[X] = \int_0^\infty P(X > x) dx \]
+\label{rk:expected_value_equals_integral_of_its_survival_function}
 \end{remark}
 
 
@@ -6376,8 +6377,43 @@ where $F$ is the distribution function of X.  He states that $\int_\R g(x) dF(x)
 	\item What does it mean to say that this is \textit{not} a Riemann-Stieltjes integral?  
 \end{enumerate} 
 
-
 \end{question}
+
+\begin{remark}\remarktitle{Using LOTUS to see that the expected value equals the integral of the survival function.}\;
+In an application of Fubini-Tonelli (see Example~\ref{ex:area_under_the_curve_via_horizontal_sections}), we observed that the areas under the curve could be obtained via integrating either vertical or horizontal cross-sections.\footnote{For intuition, see the figure in Example~\ref{ex:area_under_the_curve_via_horizontal_sections}.} 
+\begin{align}
+ \int_\Omega g \dmu = \int_0^\infty \mu(\set{x : g(x) > y}) \wrt{y} 
+\label{eqn:area_under_curve_via_integrating_either_vertical_or_horizontal_cross_sections_restated}	
+\end{align}
+
+ In Remark~\ref{rk:expected_value_equals_integral_of_its_survival_function}, we stated that as a special case of \Eqref{eqn:area_under_curve_via_integrating_either_vertical_or_horizontal_cross_sections_restated}, we can obtain that the expected value of a random variable $X$ equals the integral of its survival function; i.e. 
+\begin{align}
+\E[X] := \int_\Omega X(\omega) \wrt{P(\omega)} =  \int_0^\infty P(\omega: X(\omega) > y) dy
+\label{eqn:expectation_as_integral_of_survival_function_restated}	
+\end{align}
+We can perhaps see this most clearly using LOTUS, which allows us to rewrite \Eqref{eqn:expectation_as_integral_of_survival_function_restated}	 in terms of the induced probability measure $P_X$: 
+\begin{align}
+\E[X] := \int_\R x \wrt{P_X(x)} =  \int_0^\infty P_X(x: x > y) dy
+\label{eqn:expectation_as_integral_of_survival_function_after_applying_LOTUS}	
+\end{align}
+%
+In particular, the integrals are both over the real line.
+
+Now \Eqref{eqn:expectation_as_integral_of_survival_function_after_applying_LOTUS} is obtained from \Eqref{eqn:area_under_curve_via_integrating_either_vertical_or_horizontal_cross_sections_restated} by simply taking the measure space to be $(\Omega, \F, \mu) = (\R,\B(\R), P_X)$ and the function of interest to be the identity, $g(x)=x$.   
+
+So \Eqref{eqn:expectation_as_integral_of_survival_function_restated}	 is just a special case of the fact (from Remark~\ref{rk:expected_value_equals_integral_of_its_survival_function}) that areas can be obtained either by integrating vertical or horizontal cross sections. For an illustration, see Fig.~\ref{fig:expected_value_equals_integral_of_survival_function}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{images/expected_value_equals_integral_of_survival_function}
+\caption{\textit{The expected value of a non-negative random variable equals the integral of its survival function.}  Note from the left that the expected value can be seen as the area under $y=x$ if the x-axis is measured with $P_X$.}
+\label{fig:expected_value_equals_integral_of_survival_function}
+\end{figure}
+
+\label{rk:expected_value_equals_integral_of_its_survival_function_more_detail}
+\end{remark}
+
+
 
 \begin{remark}{\remarktitle{LOTUS also applies for random vectors and random objects}}
 LOTUS (Theorem~\ref{thm:LOTUS}) still holds if 
