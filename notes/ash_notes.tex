@@ -6329,12 +6329,12 @@ Let $X: (\Omega, \F, P) \to (\R, \B(\R), P_X)$ be a random variable.  Although t
 
 \begin{examples}\remarktitle{Applying LOTUS to absolutely continuous or discrete random variables.}
 
-Let the hypotheses of LOTUS hold. 
+Let the hypotheses of LOTUS hold.  Then:
 
 \begin{alphabate}
 \item $\boxed{\text{Absolutely continuous random variable.}}$ If $X$ is a random variable with density $f$, then 
 \[\int g(x) \wrt{P_X} = \int g(x) f(x) \wrt{x}\]
-(with integration over $\R$).
+(with integration over $\R$) in the sense that if either integral exists, then so does the other, and the two are equal.
 \item $\boxed{\text{Discrete random variable.}}$ If $X$ is a discrete random variable with probability mass function $p$, then 
 \[\int g(x) \wrt{P_X} = \sum_{x} g(x) p(x)\]
 \end{alphabate}
@@ -6343,8 +6343,7 @@ Let the hypotheses of LOTUS hold.
 \label{ex:applying_LOTUS_to_absolutely_continuous_or_discrete_random_variables}
 \end{examples}
 
-\begin{proof} 
-The proof hinges on change of variables with Radon-Nikodym derivatives.\footnote{To my surprise, \cite[Sec.~4.10.3(c),(d)]{ash2000probability} justifies these claims by suggesting that one work from indicators to simple functions to nonnegative Borel measurable functions to arbitrary Borel measurable functions.  Applying calculus with Radon-Nikodym derivatives seems much more expedient and insightful.} For any $B \in \B(\R)$, we have
+\begin{proof} (Sketch). The proof hinges on change of variables with Radon-Nikodym derivatives.\footnote{To my surprise, \cite[Sec.~4.10.3(c),(d)]{ash2000probability} justifies these claims by suggesting that one work from indicators to simple functions to nonnegative Borel measurable functions to arbitrary Borel measurable functions.  Applying calculus with Radon-Nikodym derivatives seems much more expedient and insightful.} For any $B \in \B(\R)$, we have
 \[ \arraycolsep=20pt
 \begin{array}{ccr}
 \textbf{Absolutely continuous case} & \textbf{Discrete case} & \textbf{Justification} \\	
@@ -6362,7 +6361,7 @@ i.e. \; \frac{dP_X}{d\mu} = f & i.e. \; \frac{dP_X}{d\lambda} = p & \text{and Ra
 \stackexplain{Thm.~\ref{thm:relating_lebesgue_and_riemann_integrals}}{=} \int g(x) f(x) \wrt{x} & \stackexplain{Ex.~\ref{ex:integrals_as_sums}}{=} \sum_x g(x) p(x) & \text{derivatives (Prop.~\ref{prop:calculus_with_radon_nikodym_derivatives})}
 \end{array}
 \]
-Note that applying Thm.~\ref{thm:relating_lebesgue_and_riemann_integrals} would require that $gf$ be continuous a.e.; check whether this is true.
+Note that applying Thm.~\ref{thm:relating_lebesgue_and_riemann_integrals} would require that $gf$ be continuous a.e.; I am not sure how this can hold if we only know that $g$ is measurable.
 	
 \end{proof}
 
