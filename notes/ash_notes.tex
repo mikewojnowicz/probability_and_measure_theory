@@ -6703,6 +6703,44 @@ P(B) = \int_{\Omega'} g(x) \, dP_X(x),
 which is the \textbf{law of total probability}.
 \end{remark}
 
+\begin{corollary}
+Let $X: (\Omega, \F) \to  (\R, \B(\R))$ be a random variable on $(\Omega, \F, P)$.  Let $B$ be a fixed set in $\F$.
+
+\begin{alphabate}
+\item If $X$ is discrete and $P(X=x_i) >0$ for some $i$, then
+\[ P(B \cond X=x_i) = \df{P(B \cap \set{X=x_i}) }{P\set{X=x_i}} \]
+\item If $X,Y$ has has joint density $f_{X,Y}$, then 
+\[ P(B \cond X=x_i) = \int_{B(x)} \df{f_{X,Y}(x,y)}{f_X(x)} \; \wrt{y}, \]
+where $B(x)$ is the cross section of $B$ at $x$ and $f_X(x) := \int_{\infty}^\infty f(x,y) \wrt{y}$ is the density of $X$.
+\end{alphabate}
+\label{cor:conditional_probability_given_a_point_under_discrete_and_absolutely_continuous_settings}	
+\end{corollary}
+
+
+\begin{remark}
+Some points of interest of Cor.~\ref{cor:conditional_probability_given_a_point_under_discrete_and_absolutely_continuous_settings}:
+\begin{itemize}
+\item In (a), we see that if the event $\set{X=x}$ has positive probability, then our general definition of conditional probability in \Eqref{eqn:existence_of_conditional_probability_measure}	 agrees with the simpler definition of conditional probability \cite[Sec.4.5]{ash2000probability} that $P(B \cond A) = P(A \cap B) / P(A)$ provided $P(A) >0$.
+\item In (b), we see how our general definition of conditional probbaility can handle events $\set{X=x}$ of zero probability.
+\end{itemize}
+\end{remark}
+
+\begin{proof}
+\begin{alphabate}
+\item   We write $X: (\Omega, \F, P) \to (S, \mathcal{P}(S), P_X)$, where $S := \set{x_1, x_2,\hdots}$ is the set of countably many values that $X$ can take on. Since $X$ is discrete, we can write its induced probability measure in terms of a probability mass function $p_X$; namely, for any $B \in  \mathcal{P}(S)$, we have $P_X(B) = \sum_{x \in B} p_X(x)$. 
+
+Now
+\begin{align}
+P(B \cap \explaintermbrace{$:=A$}{\set{X=x_i}}) &\stackexplain{\Eqref{eqn:existence_of_conditional_probability_measure}}{=} \int_{ \set{X=x_i}} g(x) \wrt{P_X(x)} \\
+& \stackexplain{Ex.~\ref{ex:applying_LOTUS_to_absolutely_continuous_or_discrete_random_variables}}{=} g(x_i) p_X(x_i) 
+\end{align}
+So 
+\[ \df{P(B \cap \set{X=x_i}) }{P\set{X=x_i}} = \df{g(x_i) \cancel{p_X(x_i)}}{\cancel{p_X(x_i)}} \]
+and $g(x_i) = P(B \cond X=x_i)$ by definition.
+%	
+\item See \cite[pp.206-208]{ash2000probability}.
+\end{alphabate}	
+\end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
