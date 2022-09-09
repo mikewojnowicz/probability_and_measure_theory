@@ -231,7 +231,7 @@ In other words, any union can be re-represented as a disjoint union. This is use
 \end{remark}
 
 \begin{remark}
-If $A_n \uparrow A$, then \eqref{eqn:union_as_disjoint_union} becomes
+If $A_n \uparrow A$, then \Eqref{eqn:union_as_disjoint_union} becomes
 \begin{align*}
 	\bigcup_{n=1}^\infty A_n = \bigcupdot_{n=1}^\infty \bigg( A_n - A_{n-1} \bigg) 
 \labelit \label{eqn:union_as_disjoint_union_for_increasing_sequences}
@@ -464,7 +464,7 @@ To illustrate these equivalences, let us equate the first two conditions. That i
 \end{align}
 \label{eqn:open_intervals_as_rsc_intervals_and_vice_versa}
 \end{subequations}
-{\tiny For example, the first equation in \eqref{eqn:open_intervals_as_rsc_intervals_and_vice_versa} can be verified by the argument 
+{\tiny For example, the first equation in \Eqref{eqn:open_intervals_as_rsc_intervals_and_vice_versa} can be verified by the argument 
 \[x \in  \bigcap_{n=1}^\infty \bigg(a, b+\frac{1}{n}\bigg) \iff x \in (a,b-\frac{1}{n}) \; \forall n \iff x>a \; \text{and} \; x < b -\frac{1}{n} \; \forall n \iff x >a \; \text{and} \; x \leq b \iff x \in (a,b] \]
 .}
 
@@ -677,7 +677,7 @@ First let us assume that all $\signedmu(A_n)$ are finite (*). Then
 
 \else 
 \begin{align*}
-A &= A_1 \cupdot (A_2 - A_1) \cupdot (A_3 - A_2) \cupdot ... && 	\text{ by } \eqref{eqn:union_as_disjoint_union_for_increasing_sequences} \\
+A &= A_1 \cupdot (A_2 - A_1) \cupdot (A_3 - A_2) \cupdot ... && 	\text{ by } \Eqref{eqn:union_as_disjoint_union_for_increasing_sequences} \\
 \implies \signedmu(A) &= \signedmu(A_1) + \signedmu(A_2 - A_1) + \signedmu(A_3 - A_2) + ... && \text{(countable additivity)}\\ 
 &= \signedmu(A_1) + \signedmu(A_2) - \signedmu(A_1) + \signedmu(A_3) - \signedmu(A_2) + ... && \text{(Theorem \ref{thm:basic_properties_of_finitely_additive_set_functions} \ref{itm:piece-and-difference}, (*) }\\
 &= \ds\lim_{n \to \infty} \signedmu(A_n) && \text{(telescoping difference)}
@@ -852,7 +852,7 @@ For an example of where the strategy in Remark \ref{rk:monotone_class_theorem_fo
 \end{theorem}
 
 \begin{proof} (We follow the argument of \cite{ash2000probability}, but add some detail.) 
-First we prove existence.  {\footnotesize [Without loss of generality, we assume the $A_n$ are disjoint.  This is possible because we can use \eqref{eqn:union_as_disjoint_union} to re-express the countable union as a disjoint countable union:  $\Omega = \cup_{i=1}^\infty A_i = \cupdot_{i=1}^\infty B_i$, where $B_i := A_i \cap A_{i-1}^c ... \cap A_1^c$.]  } 
+First we prove existence.  {\footnotesize [Without loss of generality, we assume the $A_n$ are disjoint.  This is possible because we can use \Eqref{eqn:union_as_disjoint_union} to re-express the countable union as a disjoint countable union:  $\Omega = \cup_{i=1}^\infty A_i = \cupdot_{i=1}^\infty B_i$, where $B_i := A_i \cap A_{i-1}^c ... \cap A_1^c$.]  } 
 
 If we define $\mu_n(A)=\mu(A \cap A_n)$ for each $A \in \F_0$, then we can decompose $\mu$ into a countable sum of finite measures:
 \begin{itemize}
@@ -1104,7 +1104,7 @@ Let $A_n$ be a sequence of sets in $\F_0(\overline{\R})$ such that $A_n \downarr
 Thus, we can find sets $B_n \in \F_0(\overline{\R})$  where $\mu(B_n)$ approximates $\mu(A_n)$ to any desired $\epsilon > 0$ that satisfy $B_n \subset \overline{B}_n \subset A_n$.  By these inclusion properties and the decreasing nature of the sequence, we have:
 \begin{alphabate}
 \item $\cap_{n=1}^\infty \overline{B}_n = \emptyset$.	\quad  {[\footnotesize True because each $\overline{B}_n \subset A_n$, so $\cap_{n=1}^\infty \overline{B}_n \subset \cap_{n=1}^\infty A_n = \emptyset$.  ]} 
-\item $\cap_{k=1}^n \overline{B}_k = \emptyset$ for sufficiently large $n$.	\quad  {\footnotesize [We have $\overline{\R} \; \stackrel{ \text{item a)}}{=} \; (\overline{\R} - \cap_{n=1}^\infty \overline{B}_n) \; \stackrel{\text{DeMorgan } \eqref{eqn:demorgan_for_relative_complements}}{=} \; \cup_{n=1}^\infty (\overline{\R} - \overline{B}_n)$.   So $\set{\overline{\R} - \overline{B}_n}$ is an open cover of the compact space $\overline{\R}$. By the Heine-Borel theorem, there must be a finite subcover.  So for sufficiently large $n$, we have $\cup_{k=1}^n (\overline{\R} - \overline{B}_k) = \overline{\R}$.  Taking complements of both sides, and once again applying DeMorgan's law \eqref{eqn:demorgan_for_relative_complements} to the relative complement, we find $\cap_{k=1}^n \overline{B}_k = \emptyset$.  ]}
+\item $\cap_{k=1}^n \overline{B}_k = \emptyset$ for sufficiently large $n$.	\quad  {\footnotesize [We have $\overline{\R} \; \stackrel{ \text{item a)}}{=} \; (\overline{\R} - \cap_{n=1}^\infty \overline{B}_n) \; \stackrel{\text{DeMorgan } \Eqref{eqn:demorgan_for_relative_complements}}{=} \; \cup_{n=1}^\infty (\overline{\R} - \overline{B}_n)$.   So $\set{\overline{\R} - \overline{B}_n}$ is an open cover of the compact space $\overline{\R}$. By the Heine-Borel theorem, there must be a finite subcover.  So for sufficiently large $n$, we have $\cup_{k=1}^n (\overline{\R} - \overline{B}_k) = \overline{\R}$.  Taking complements of both sides, and once again applying DeMorgan's law \Eqref{eqn:demorgan_for_relative_complements} to the relative complement, we find $\cap_{k=1}^n \overline{B}_k = \emptyset$.  ]}
 \item $\cap_{k=1}^n B_k = \emptyset$ for sufficiently large $n$. {\footnotesize [This follow from item b) and the fact that each $B_k \subset \overline{B}_k$.]}
 \end{alphabate}
 
@@ -1144,7 +1144,7 @@ essentially directly applies Carathe\'odory's Extension Theorem, since we know f
 \end{remark}
 
   \subsection{$\S$ 1.4.5 Properties of Lebesgue-Stietljes measures}
- Before extension, we had $\mu(a,b] =F(b) - F(a)$ for $a < b$ where $F$ is a distribution function. The set function $\mu$ was defined only on $\F_0(\R)$, the field of disjoint unions of r.s.c interval.  But after extension, $\mu$ is defined on $\B(\R) = \sigma(\F_0(\R))$, which allows us to measure other types of intervals as well (by expressing those intervals as countable unions or intersections of r.s.c intervals; recall \eqref{eqn:open_intervals_as_rsc_intervals_and_vice_versa}).
+ Before extension, we had $\mu(a,b] =F(b) - F(a)$ for $a < b$ where $F$ is a distribution function. The set function $\mu$ was defined only on $\F_0(\R)$, the field of disjoint unions of r.s.c interval.  But after extension, $\mu$ is defined on $\B(\R) = \sigma(\F_0(\R))$, which allows us to measure other types of intervals as well (by expressing those intervals as countable unions or intersections of r.s.c intervals; recall \Eqref{eqn:open_intervals_as_rsc_intervals_and_vice_versa}).
  
  \begin{proposition}
  Let $\mu$ be a Lebesgue-Stieltjes measure, and let $F$ be its associated distribution function.    Let $F(x^-) = \lim_{y \uparrow x} F(y)$. Then 
@@ -1218,7 +1218,7 @@ which holds by Proposition \ref{prop:properties_of_LS_measures} part e) and the 
 \end{remark}
 
 \begin{remark}
-The characterization of continuity in Remark \ref{rk:continuity_at_a_point_iffi_measure_zero_at_a_point} in terms of measure zero can be an interesting way to prove continuity, or prove the existence of functions with interesting properties.   For instance, take a countable set $S = \set{x_1, x_2, ...}$ and non-negative weights $\set{w_1, w_2, ...}.$ such that $\sum_i w_i < \infty$.   Then define $\mu(A) = \sum_{i} \set{w_i : x_i \in A}$.  Now $\mu$ is a Lebesgue-Stietljes measure (and is in fact a finite measure), since $\mu(I) < \infty$ for each bounded interval $I$. By taking $S$ to be the rationals, we have proven the existence of an increasing function $F : \R \to \R$ that is continuous on the irrationals and discontinuous on the rationals {\footnotesize [since each Lebesgue-Stieltjes measure determines a distribution function $F$ (up to additive constant), and the set of continuities is given by \eqref{eqn:continuity_at_a_point_iffi_measure_zero_at_a_point}]}.
+The characterization of continuity in Remark \ref{rk:continuity_at_a_point_iffi_measure_zero_at_a_point} in terms of measure zero can be an interesting way to prove continuity, or prove the existence of functions with interesting properties.   For instance, take a countable set $S = \set{x_1, x_2, ...}$ and non-negative weights $\set{w_1, w_2, ...}.$ such that $\sum_i w_i < \infty$.   Then define $\mu(A) = \sum_{i} \set{w_i : x_i \in A}$.  Now $\mu$ is a Lebesgue-Stietljes measure (and is in fact a finite measure), since $\mu(I) < \infty$ for each bounded interval $I$. By taking $S$ to be the rationals, we have proven the existence of an increasing function $F : \R \to \R$ that is continuous on the irrationals and discontinuous on the rationals {\footnotesize [since each Lebesgue-Stieltjes measure determines a distribution function $F$ (up to additive constant), and the set of continuities is given by \Eqref{eqn:continuity_at_a_point_iffi_measure_zero_at_a_point}]}.
 \end{remark}
 
 \begin{remark}{\remarktitle{Lebesgue-Stieltjes measures of intervals for continuous distribution functions}}
@@ -1363,7 +1363,7 @@ Now consider Figure \ref{fig:distribution_functions_in_Rn}. We see that if $(a,b
 \end{align*}
 (Note that we add back in the region that we had double subtracted.)
 
-Now we generalize \eqref{eqn:measure_of_rsc_interval_in_R2} to a formula for measuring r.s.c. intervals in $n$ dimensions, rather than just $2$ dimensions.
+Now we generalize \Eqref{eqn:measure_of_rsc_interval_in_R2} to a formula for measuring r.s.c. intervals in $n$ dimensions, rather than just $2$ dimensions.
 
 \begin{theorem}
 Let $\mu$ be a finite measure on $\B(\R^n)$. Define  $F : \R^n \to \R$ via $F(x) = \mu(-\infty, x] = \mu(\omega \in \R^n : \omega_1 \leq x_1, ..., \omega_n \leq x_n)$. Then 
@@ -1405,7 +1405,7 @@ Repeating this, we obtain
 \end{proof}
 
 \begin{notation}
-What I call $\Delta_{(a,b]} F$ in \eqref{eqn:measure_of_rsc_interval_in_Rn_via_distribution_function} is called $F(a,b]$ by \cite{ash2000probability}.  See e.g. \cite[pp.28, or pp.149]{ash2000probability}.  I find Ash's notation completely puzzling.
+What I call $\Delta_{(a,b]} F$ in \Eqref{eqn:measure_of_rsc_interval_in_Rn_via_distribution_function} is called $F(a,b]$ by \cite{ash2000probability}.  See e.g. \cite[pp.28, or pp.149]{ash2000probability}.  I find Ash's notation completely puzzling.
 \label{notation:ash_notation_for_multivariate_distribution_function_applied_to_an_rsc_interval}
 \end{notation}
 
@@ -1425,7 +1425,7 @@ Note from the proof of Theorem \ref{thm:measure_of_rsc_interval_in_Rn_via_distri
 \end{remark}
 
 \begin{remark}
-Equation \eqref{eqn:computing_area_of_a_rectangle_via_a_distribution} tells us that we can measure any $n$-dimensional rectangle in $\R^n$ via $2^n$ evaluations of the distribution function. 
+\Eqref{eqn:computing_area_of_a_rectangle_via_a_distribution} tells us that we can measure any $n$-dimensional rectangle in $\R^n$ via $2^n$ evaluations of the distribution function. 
 \end{remark}
 
 
@@ -1499,7 +1499,7 @@ Then $F$ is a distribution function. It is continuous by the fundamental theorem
 
 \begin{remark}
 
-It may seem hard to verify \eqref{eqn:increasing_condition_for_distribution_functions_on_Rn}, the condition that a distribution function on $\R^n$ must be increasing.  Not to worry, the recipes above provide straightforward mechanisms for constructing distribution functions on $\R^n$ in which the condition will automatically be verified.
+It may seem hard to verify \Eqref{eqn:increasing_condition_for_distribution_functions_on_Rn}, the condition that a distribution function on $\R^n$ must be increasing.  Not to worry, the recipes above provide straightforward mechanisms for constructing distribution functions on $\R^n$ in which the condition will automatically be verified.
 \end{remark}
 
 \subsubsection{Summary}
@@ -2193,7 +2193,7 @@ Let $g$ and $h$  be simple functions.  Then
 	\ds\int g \wrt{\mu}  = \ds\sum_{i=1}^r \ds\sum_{j=1}^s x_i \, \mu(A_i \cap B_j)  \leq \ds\sum_{i=1}^r \ds\sum_{j=1}^s y_i \, \mu(A_i \cap B_j) = \ds\int h \wrt{\mu}.
 	\end{align*}
 \fi 
-\item We sum the two forms in \eqref{eqn:two_simple_functions_with_common_partition} and apply the definition of integral of simple functions to obtain
+\item We sum the two forms in \Eqref{eqn:two_simple_functions_with_common_partition} and apply the definition of integral of simple functions to obtain
 \begin{align*}
 \ds\int (g+h) \wrt{\mu} = \ds\sum_{i=1}^r \ds\sum_{j=1}^s (x_i + y_j) \, \mu(A_i \cap B_j)
 \labelit \label{eqn:intermediate_result_addivity_of_simple_functions}
@@ -2208,7 +2208,7 @@ And so
 \ds\int g \wrt{\mu} &= \ds\sum_{i=1}^r x_i \mu(A_i) = \ds\sum_{i=1}^r x_i \bigg(\sum_{j=1}^s \mu(A_i \cap B_j)\bigg) \\	
 \ds\int h \wrt{\mu} &= \ds\sum_{j=1}^s y_i \mu(B_i) = \ds\sum_{j=1}^s y_i \bigg(\sum_{i=1}^r \mu(A_i \cap B_j)\bigg) \\	
 \end{align*}
-and summing these together yields \eqref{eqn:intermediate_result_addivity_of_simple_functions}.
+and summing these together yields \Eqref{eqn:intermediate_result_addivity_of_simple_functions}.
 \item This follows immediately from the distributive property.
 \[ c \ds\int g \wrt{\mu} = c \ds\sum_{i=1}^r x_i \mu(A_i) =  \ds\sum_{i=1}^r c \, x_i \mu(A_i) = \ds\int cg \wrt{\mu} \]
 \end{alphabate}
@@ -2383,12 +2383,12 @@ We break the proof into four parts.  Consider
 \end{align*}
 
 \begin{itemize}
-\item We first show that both quantities in \eqref{eqn:monotone_convergence_theorem_pre_conclusion} exist. First, recall from Remark \ref{rk:when_does_integral_of_non_negative_Borel_measurable_function_exist} that the integral of a non-negative Borel measurable function always exists. So the LHS exists because $h$ is Borel measurable (by Proposition \ref{prop:borel_measurability_closed_under_inf_sup_liminf_limsup}) and non-negative.  The RHS exists since each $\int h_n$ exists and is increasing (by monotonicity; see Prop. \ref{prop:properties_of_integrals_of_non_negative_borel_measurable_functions}), and therefore has a limit (possibly $\infty$). 
+\item We first show that both quantities in \Eqref{eqn:monotone_convergence_theorem_pre_conclusion} exist. First, recall from Remark \ref{rk:when_does_integral_of_non_negative_Borel_measurable_function_exist} that the integral of a non-negative Borel measurable function always exists. So the LHS exists because $h$ is Borel measurable (by Proposition \ref{prop:borel_measurability_closed_under_inf_sup_liminf_limsup}) and non-negative.  The RHS exists since each $\int h_n$ exists and is increasing (by monotonicity; see Prop. \ref{prop:properties_of_integrals_of_non_negative_borel_measurable_functions}), and therefore has a limit (possibly $\infty$). 
 
-\item Next, we show $\geq$ for \eqref{eqn:monotone_convergence_theorem_pre_conclusion}; that is we show $\lim_{n \to \infty} \int h_n \leq \int h$.
+\item Next, we show $\geq$ for \Eqref{eqn:monotone_convergence_theorem_pre_conclusion}; that is we show $\lim_{n \to \infty} \int h_n \leq \int h$.
 \[ h_n \leq h \stackreltext{monotonicity}{\implies} \ds\int h_n \leq \ds\int h \stackreltext{limits preserve (non-strict) inequalities}{\implies} \ds\lim_{n \to \infty} \ds\int h_n \leq \ds\int h \]
 
-\item Now, we show $\leq$ for \eqref{eqn:monotone_convergence_theorem_pre_conclusion}; that is we show $\lim_{n \to \infty} \int h_n \geq \int h$.   Let $\alpha \in (0,1)$ and $s$ be a simple function such that $0 \leq s \leq h$.  Now define 
+\item Now, we show $\leq$ for \Eqref{eqn:monotone_convergence_theorem_pre_conclusion}; that is we show $\lim_{n \to \infty} \int h_n \geq \int h$.   Let $\alpha \in (0,1)$ and $s$ be a simple function such that $0 \leq s \leq h$.  Now define 
 \[ A_n := \set{\omega : h_n(\omega) \geq \alpha s(\omega) }\]
 And note that $A_n \uparrow \Omega$.
 
@@ -2397,13 +2397,13 @@ So
  \ds\int h_n  \stackreltext{monotonicity}{\geq} \ds\int_{A_n} h_n \stackreltext{def. $A_n$, monotonicity}{\geq} \ds\int_{A_n} \alpha s \stackreltext{linearity}{=} \alpha   \ds\int_{A_n} s 
  \labelit \label{eqn:intermediate_eqn_from_proof_mct} 
  \end{align*}
-   Now we recognize the right hand side as a measure on $A_n$, and since $A_n \uparrow \Omega$, we can apply continuity from below (see Remark \ref{rk:continuity_of_measure_applied_to_measures_given_by_integrals_of_simple_functions_over_sets}), so taking the limit as $n \to \infty$, Equation \eqref{eqn:intermediate_eqn_from_proof_mct} becomes
+   Now we recognize the right hand side as a measure on $A_n$, and since $A_n \uparrow \Omega$, we can apply continuity from below (see Remark \ref{rk:continuity_of_measure_applied_to_measures_given_by_integrals_of_simple_functions_over_sets}), so taking the limit as $n \to \infty$, Equation \Eqref{eqn:intermediate_eqn_from_proof_mct} becomes
 \[  \ds\lim_{n \to \infty} \ds\int h_n  \geq \alpha \ds\int s \]
 Now since the equality holds for all $\alpha <1$, it holds for $\alpha =1$, and so we have
 \[   \ds\lim_{n \to \infty}  \ds\int h_n  \geq \ds\int s \]
 Since the LHS is an upper bound on the set in the RHS, it must be greater than the least upper bound, so 
 \[   \ds\lim_{n \to \infty}  \ds\int h_n  \geq \ds\int h \]
-\item Now we know that \eqref{eqn:monotone_convergence_theorem_pre_conclusion} holds.  It just remains to show that \eqref{eqn:monotone_convergence_theorem_pre_conclusion} $\implies$ \eqref{eqn:monotone_convergence_theorem_conclusion}.  By monotonicity, $\int h_{n+1} \wrt{\mu}  \geq \int h_{n} \wrt{\mu}$ for all $n$, and since the limit of an increasing sequence is its supremum (Prop. \ref{prop:limit_of_monotone_sequences_as_inf_and_sup}), $\int h \wrt{\mu}  \geq \int h_{n} \wrt{\mu}$ for all $n$.
+\item Now we know that \Eqref{eqn:monotone_convergence_theorem_pre_conclusion} holds.  It just remains to show that \Eqref{eqn:monotone_convergence_theorem_pre_conclusion} $\implies$ \Eqref{eqn:monotone_convergence_theorem_conclusion}.  By monotonicity, $\int h_{n+1} \wrt{\mu}  \geq \int h_{n} \wrt{\mu}$ for all $n$, and since the limit of an increasing sequence is its supremum (Prop. \ref{prop:limit_of_monotone_sequences_as_inf_and_sup}), $\int h \wrt{\mu}  \geq \int h_{n} \wrt{\mu}$ for all $n$.
 \end{itemize}
 \end{proof}
 
@@ -2472,9 +2472,9 @@ That is, if $a_{ij} \geq 0$ for $i$ and $j = 1, 2, 3, ...$, then
 
 {\tiny More explicitly, on $\Omega =\set{1,2,3,...}$, we define sequence $\set{f_i}$ such that $f_i(j) = a_{ij}$.  Then we define $f = \sum_{i=1}^\infty f_i$, so $f(j) = \sum_{i=1}^\infty f_i(j) = \sum_{i=1}^\infty a_{ij}$.
 
-Then, since $\mu$ is the counting measure, the LHS of  \eqref{eqn:consequence_of_linearity_with_countably_infinite_sums_of_non_negative_measurable_functions} becomes 
+Then, since $\mu$ is the counting measure, the LHS of  \Eqref{eqn:consequence_of_linearity_with_countably_infinite_sums_of_non_negative_measurable_functions} becomes 
 \[  \dint_\Omega f(j) \dmu(j) = \dsum_{j=1}^\infty f(j) = \ds\sum_{j=1}^\infty \ds\sum_{i=1}^\infty a_{ij}\]	
-and the RHS of \eqref{eqn:consequence_of_linearity_with_countably_infinite_sums_of_non_negative_measurable_functions} is 
+and the RHS of \Eqref{eqn:consequence_of_linearity_with_countably_infinite_sums_of_non_negative_measurable_functions} is 
 \[ \ds\sum_{i=1}^\infty \ds\int_\Omega f_i \dmu = \ds\sum_{i=1}^\infty \ds\sum_{j=1}^\infty a_{ij}. \]
 }
 
@@ -2570,7 +2570,7 @@ Let $\Omega = \set{1,2,3, ...}$, $\F=2^\Omega$ (i.e. all subsets of $\Omega$), a
 	%
 	where the series is interpreted as $\sum_{n=1}^\infty a_n^+ - \sum_{n=1}^\infty a_n^-$ if this is not of the form $\infty - \infty$ (if it is, the integral does not exist).\footnote{Recall that $a_n^+ := \max(a_n,0)$ and $a_n^- := \max(-a_n,0)$.}
 	
-	To justify \eqref{eqn:sums_as_integrals}, let us first assume that $a_n \geq 0$ for each $n$.  We define a sequence of non-negative functions $\set{f_k}$ by $f_k : n \mapsto f(n) \indicate{n \leq k}$, i.e. $f_k = (a_1, a_2, \hdots, a_k, 0, 0, \hdots)$.   
+To justify \Eqref{eqn:sums_as_integrals}, let us first assume that $a_n \geq 0$ for each $n$.  We define a sequence of non-negative functions $\set{f_k}$ by $f_k : n \mapsto f(n) \indicate{n \leq k}$, i.e. $f_k = (a_1, a_2, \hdots, a_k, 0, 0, \hdots)$.   
 	
 	We know how to integrate each $f_k$, since by the definition of integrals of simple functions, we have
 	%
@@ -2581,7 +2581,7 @@ Let $\Omega = \set{1,2,3, ...}$, $\F=2^\Omega$ (i.e. all subsets of $\Omega$), a
 	%
 	Since $f_k \uparrow f$, we apply Monotone Convergence Theorem to obtain
 	\begin{align}
-	\ds\int f \dmu \stackexplain{def $f$}{=} \ds\int \lim_{k \to \infty} f_k \dmu \stackexplain{MCT}{=}    \ds\lim_{k \to \infty} \ds\int  f_k \dmu \stackexplain{\eqref{eqn:intermediate_quantity_in_proof_of_integrals_as_sums}}{=} \ds\lim_{k \to \infty}  \ds\sum_{i=1}^k a_i = \ds\sum_{i=1}^\infty a_i 
+	\ds\int f \dmu \stackexplain{def $f$}{=} \ds\int \lim_{k \to \infty} f_k \dmu \stackexplain{MCT}{=}    \ds\lim_{k \to \infty} \ds\int  f_k \dmu \stackexplain{\Eqref{eqn:intermediate_quantity_in_proof_of_integrals_as_sums}}{=} \ds\lim_{k \to \infty}  \ds\sum_{i=1}^k a_i = \ds\sum_{i=1}^\infty a_i 
 	\label{eqn:second_intermediate_quantity_in_proof_of_integrals_as_sums}
 	\end{align}
 	%
@@ -2589,7 +2589,7 @@ Let $\Omega = \set{1,2,3, ...}$, $\F=2^\Omega$ (i.e. all subsets of $\Omega$), a
 	%
 	\begin{align*}
 	\int f \dmu &= \int f^+ \dmu - \int f^- \dmu && \tinytext{Def. integral of arbitrary measurable functions}\\
-	&= \ds\sum_{i=1}^\infty a_i^+  - \ds\sum_{i=1}^\infty a_i^- && \tinytext{Result with non-negative functions, \eqref{eqn:second_intermediate_quantity_in_proof_of_integrals_as_sums}}
+	&= \ds\sum_{i=1}^\infty a_i^+  - \ds\sum_{i=1}^\infty a_i^- && \tinytext{Result with non-negative functions, \Eqref{eqn:second_intermediate_quantity_in_proof_of_integrals_as_sums}}
 	\end{align*}
 	%
 	which exists whenever this does not take the form $\infty - \infty$. 
@@ -2602,7 +2602,7 @@ Let $\Omega = \set{1,2,3, ...}$, $\F=2^\Omega$ (i.e. all subsets of $\Omega$), a
 \begin{remark}{\remarktitle{Conditionally convergent sums are not integrals.}}
 When summation is considered from the point of Lebesgue integration theory, series that converge conditionally but not absolutely are ignored.\footnote{The alternating harmonic series $\sum_{n=1}^\infty \frac{(-1)^{n-1}}{n}$ is an example of a series that converges conditionally but not absolutely. It is (potentially) easier for series with both negative and positive terms to converge, because terms with different signs may partially cancel or compensate.  See \url{https://www.sfu.ca/math-coursenotes/Math\%20158\%20Course\%20Notes/sec\_AbsoluteConvergence.html}.} 
 
-To see this, note that the expression $\int f \dmu = \sum_{n=1}^\infty a_n^+ - \sum_{n=1}^\infty a_n^-$ from \eqref{eqn:sums_as_integrals} yields four cases
+To see this, note that the expression $\int f \dmu = \sum_{n=1}^\infty a_n^+ - \sum_{n=1}^\infty a_n^-$ from \Eqref{eqn:sums_as_integrals} yields four cases
 
 \begin{enumerate}
 \item 	$\sum_{n=1}^\infty a_n^+ = \infty,  \sum_{n=1}^\infty a_n^- < \infty$.  The series diverges to $\infty$ and the integrals is $\infty$.
@@ -2657,7 +2657,7 @@ Now we will use the fact that if $f$ is non-negative Borel measurable and $c \ge
 So if $c\geq 0$
 \begin{align*}
 \ds\int cf \wrt{\mu} &= \ds\int (cf)^+ \wrt{\mu} - \ds\int (cf)^- \wrt{\mu} && \tinytext{Def. \ref{def:integral_of_arbitrary_borel_measurable_function}} \\
-&= \ds\int cf^+ \wrt{\mu} - \ds\int cf^- \wrt{\mu} && \tinytext{\eqref{eqn:decomposing_scalar_multiple_of_borel_measurable_function_into_two_nonnegative_functions_when_scalar_multiple_is_nonnegative}} \\ 
+&= \ds\int cf^+ \wrt{\mu} - \ds\int cf^- \wrt{\mu} && \tinytext{\Eqref{eqn:decomposing_scalar_multiple_of_borel_measurable_function_into_two_nonnegative_functions_when_scalar_multiple_is_nonnegative}} \\ 
 & \stackrel{*}{=} c \ds\int f^+ \wrt{\mu} - c \ds\int f^- \wrt{\mu} && \tinytext{ Prop. \ref{prop:properties_of_integrals_of_non_negative_borel_measurable_functions} (b)} \\ %\labelit \label{eqn:expanding_integral_of_nonnegative_scalar_times_function} \\
 & = c \ds\int f \wrt{\mu} && \tinytext{Def. \ref{def:integral_of_arbitrary_borel_measurable_function}} 
 \end{align*}
@@ -2665,7 +2665,7 @@ So if $c\geq 0$
 Likewise if $c < 0$
 \begin{align*}
 \ds\int cf \wrt{\mu} &= \ds\int (cf)^+ \wrt{\mu} - \ds\int (cf)^- \wrt{\mu} && \tinytext{Def. \ref{def:integral_of_arbitrary_borel_measurable_function}} \\
-&= \ds\int -cf^- \wrt{\mu} - \ds\int -cf^+ \wrt{\mu} && \tinytext{\eqref{eqn:decomposing_scalar_multiple_of_borel_measurable_function_into_two_nonnegative_functions_when_scalar_multiple_is_negative}} \\ 
+&= \ds\int -cf^- \wrt{\mu} - \ds\int -cf^+ \wrt{\mu} && \tinytext{\Eqref{eqn:decomposing_scalar_multiple_of_borel_measurable_function_into_two_nonnegative_functions_when_scalar_multiple_is_negative}} \\ 
 & \stackrel{**}{=} -c \ds\int f^- \wrt{\mu} + c \ds\int f^+ \wrt{\mu} && \tinytext{ Prop. \ref{prop:properties_of_integrals_of_non_negative_borel_measurable_functions} (b)}  \\ %\labelit \label{eqn:expanding_integral_of_positive_scalar_times_function} \\
 & = c \ds\int f \wrt{\mu} && \tinytext{Def. \ref{def:integral_of_arbitrary_borel_measurable_function}} \\
 \end{align*}	
@@ -2684,7 +2684,7 @@ So by monotonicity for non-negative functions (Prop. \ref{prop:properties_of_int
 So
 \begin{align*}
 \ds\int g \wrt{\mu} &= 	\ds\int g^+ \wrt{\mu} - \ds\int g^- \wrt{\mu} && \tinytext{(def. integral; existence assumed)} \\
-&\geq \ds\int h^+ \wrt{\mu} - \ds\int h^- \wrt{\mu} &&  \tinytext{\eqref{eqn:monotonicity_for_positive_and_negative_parts_separately}} \\
+&\geq \ds\int h^+ \wrt{\mu} - \ds\int h^- \wrt{\mu} &&  \tinytext{\Eqref{eqn:monotonicity_for_positive_and_negative_parts_separately}} \\
 &=\ds\int g \wrt{\mu} && \tinytext{(def. integral;  existence assumed)}
 \end{align*}
 
@@ -2733,7 +2733,7 @@ By assuming the conditional holds for at least one $i \in \set{1,2}$, we prove t
 
 
 \begin{remark}{\remarktitle{Why the monotonicity property is concerned with existence.}}
-Why is Proposition \ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} \ref{item:monotonicity} concerned with monotonicity? Answer: even if $\ds\int g \wrt{\mu}$ exists and $g \geq h$, we can still have $\ds\int h \wrt{\mu}$ not exist, because of \eqref{eqn:monotonicity_for_positive_and_negative_parts_separately}.  For example, we can have 
+Why is Proposition \ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_functions} \ref{item:monotonicity} concerned with monotonicity? Answer: even if $\ds\int g \wrt{\mu}$ exists and $g \geq h$, we can still have $\ds\int h \wrt{\mu}$ not exist, because of \Eqref{eqn:monotonicity_for_positive_and_negative_parts_separately}.  For example, we can have 
 \begin{align}
 \ds\int g^+ \wrt{\mu} &= \ds\int h^+ \wrt{\mu} = \infty  \\
 \ds\int g^- \wrt{\mu} & < \ds\int h^- \wrt{\mu} = \infty 	
@@ -2758,8 +2758,8 @@ Proposition \ref{prop:properties_of_integrals_of_arbitrary_borel_measurable_func
 
 What does each say?
 \begin{itemize}
-\item \eqref{eqn:integral_over_subset_according_to_definition} : truncate first, then ``simplify"
-\item \eqref{eqn:integral_over_subset_according_to_delayed_truncation_property} ``simplify" first, then truncate
+\item \Eqref{eqn:integral_over_subset_according_to_definition} : truncate first, then ``simplify"
+\item \Eqref{eqn:integral_over_subset_according_to_delayed_truncation_property} ``simplify" first, then truncate
 \end{itemize}
 
 
@@ -2916,11 +2916,11 @@ The Radon-Nikodym theorem (to be covered later in the document) provides an impo
 %
 %
 %As pointed out by \cite[pp.~24]{rudin1987real}, we assign no independent meaning to the symbols 
-%$d\lambda$ and $d\mu$; \eqref{eqn:indefinite_integral_in_differential_form} simply means that \eqref{eqn:indefinite_integral_again} (and therefore \eqref{eqn:change_of_differential}) holds for every measurable $f$. 
+%$d\lambda$ and $d\mu$; \Eqref{eqn:indefinite_integral_in_differential_form} simply means that \Eqref{eqn:indefinite_integral_again} (and therefore \Eqref{eqn:change_of_differential}) holds for every measurable $f$. 
 %
 %The Radon-Nikodym theorem (to be covered later in the document) provides an important converse:  instead of obtaining a signed measure $\lambda$ from a measure $\mu$ and function $f$, we will be given signed measure $\lambda$ and measure $\mu$, and will obtain the \textit{Radon-Nikodym derivative} $f$.
 %
-%{\tiny Let us prove \eqref{eqn:change_of_differential} from Theorem \ref{thm:integrals_are_countably_additive_set_functions} in the special case where $f,g \geq 0$.
+%{\tiny Let us prove \Eqref{eqn:change_of_differential} from Theorem \ref{thm:integrals_are_countably_additive_set_functions} in the special case where $f,g \geq 0$.
 %
 %\begin{itemize}
 %	\item First let $g$ be a simple function, which we write as $s= \sum_{i=1}^r x_i \indicate{E_i}$.   Then 
@@ -2960,7 +2960,7 @@ for every measurable function $g$ on $\Omega$.\footnote{Note that if also $g \ge
 
 
 As pointed out by \cite[pp.~24]{rudin1987real}, we assign no independent meaning to the symbols 
-$d\lambda$ and $d\mu$; \eqref{eqn:indefinite_integral_in_differential_form} simply means that \eqref{eqn:indefinite_integral_again} (and therefore \eqref{eqn:change_of_differential}) holds for every measurable $f \geq 0$. 
+$d\lambda$ and $d\mu$; \Eqref{eqn:indefinite_integral_in_differential_form} simply means that \Eqref{eqn:indefinite_integral_again} (and therefore \Eqref{eqn:change_of_differential}) holds for every measurable $f \geq 0$. 
 
 \label{rk:change_of_measure_and_differential_notation}
 \end{remark}
@@ -2974,7 +2974,7 @@ An example for statisticians: Jeffreys prior for observation noise in linear reg
 %
 What does this mean?  First off, the $\sim$ notation means that the random variable $\sigma^2$ has the probability distribution $P$ described by
 \[  dP = \sigma^{-2} \wrt{\mu(\sigma^2)} \]
-where $\mu$ is Lebesgue measure. This is differential notation of the form \eqref{eqn:indefinite_integral_in_differential_form}.  Unpacking back to 	\eqref{eqn:indefinite_integral_again}, this is saying that
+where $\mu$ is Lebesgue measure. This is differential notation of the form \Eqref{eqn:indefinite_integral_in_differential_form}.  Unpacking back to 	\Eqref{eqn:indefinite_integral_again}, this is saying that
 %\[  P(A) = \ds\int_A \sigma^{-2} \dmu  = \ds\int_A \sigma^{-2} \wrt{\sigma^2} \]	
 \[  P(A) = \ds\int_A \sigma^{-2} \dmu  = \ds\int_A \sigma^{-2} \wrt{\sigma^2} \]
 for all measurable sets $A$.
@@ -3146,19 +3146,19 @@ Let $f,g,h$ be Borel measurable functions.
 	\int_{A^c} g \dmu =0, \quad  \int_{A^c} h \dmu =0
 	\labelit\label{eqn:integrals_on_set_of_measure_zero}	
 	\end{align*}
-	And so we can apply additivity to \eqref{eqn:decompose_h_by_domain} and \eqref{eqn:decompose_g_by_domain}, since:
+	And so we can apply additivity to \Eqref{eqn:decompose_h_by_domain} and \Eqref{eqn:decompose_g_by_domain}, since:
 		\begin{itemize}
 		\item $\int g \dmu, \int h \dmu$ exist, so since existence transfers to subsets (see Prop. \ref{prop:properties_of_LS_measures}\ref{item:existence_transfers_to_subsets}), $\int_A g \dmu, \int_{A^c} g \dmu, \int_A h \dmu, \int_{A^c} h \dmu $ exist.  
-		\item By \eqref{eqn:integrals_on_set_of_measure_zero},
+		\item By \Eqref{eqn:integrals_on_set_of_measure_zero},
 		\begin{align*}
 		\int_A g \dmu + \int_{A^c} g \dmu & \neq \infty - \infty \\
 		\int_A h \dmu + \int_{A^c} h \dmu  & \neq \infty - \infty \\	
 		\end{align*}
 		\end{itemize}
-		So applying linearity to \eqref{eqn:decompose_h_by_domain} and \eqref{eqn:decompose_g_by_domain}, we get 
+		So applying linearity to \Eqref{eqn:decompose_h_by_domain} and \Eqref{eqn:decompose_g_by_domain}, we get 
 		\begin{align*}
-		\int h \dmu &= 	\int_A g \dmu + 	\cancelto{0}{\int_{A^c} h \dmu} && \tinytext{cancelation by \eqref{eqn:integrals_on_set_of_measure_zero}.} \\
-		\int g \dmu &= 	\int_A g \dmu + 		\cancelto{0}{\int_{A^c} g \dmu} && \tinytext{cancelation by \eqref{eqn:integrals_on_set_of_measure_zero}.} \\
+		\int h \dmu &= 	\int_A g \dmu + 	\cancelto{0}{\int_{A^c} h \dmu} && \tinytext{cancelation by \Eqref{eqn:integrals_on_set_of_measure_zero}.} \\
+		\int g \dmu &= 	\int_A g \dmu + 		\cancelto{0}{\int_{A^c} g \dmu} && \tinytext{cancelation by \Eqref{eqn:integrals_on_set_of_measure_zero}.} \\
 		\end{align*}
 		And so $\int h \dmu = \int g \dmu$
 		\end{enumerate}
@@ -3360,14 +3360,14 @@ We can interpret Fatou's lemma as \textit{integrals of asymptotics give more ext
 If $|f_n| \leq g$ where $\int_\Omega g \dmu$ is finite, we have 
 
 \begin{align} 
-\ds\int_\Omega \bigg( \liminf_{n \to \infty} f_n \bigg) \dmu  \stackexplain{\eqref{eqn:fatous_lemma_with_infs}}{\leq} \liminf_{n \to \infty} \dint_\Omega f_n \dmu \stackexplain{\eqref{eqn:liminf_upper_bounded_by_limsup_for_functions}}{\leq} \limsup_{n \to \infty} \dint_\Omega f_n \dmu \stackexplain{\eqref{eqn:fatous_lemma_with_sups}}{\leq} \ds\int_\Omega \bigg( \limsup_{n \to \infty} f_n \bigg) \dmu  
+\ds\int_\Omega \bigg( \liminf_{n \to \infty} f_n \bigg) \dmu  \stackexplain{\Eqref{eqn:fatous_lemma_with_infs}}{\leq} \liminf_{n \to \infty} \dint_\Omega f_n \dmu \stackexplain{\Eqref{eqn:liminf_upper_bounded_by_limsup_for_functions}}{\leq} \limsup_{n \to \infty} \dint_\Omega f_n \dmu \stackexplain{\Eqref{eqn:fatous_lemma_with_sups}}{\leq} \ds\int_\Omega \bigg( \limsup_{n \to \infty} f_n \bigg) \dmu  
 \label{eqn:fatous_lemma_big_picture_view}
 \end{align}
 
 \end{remark}
 
 \begin{example}{\remarktitle{Strict inequalities can occur in Fatou's lemma}}
-We show that that strict inequalities can occur in the expanded view of Fatou's lemma, \eqref{eqn:fatous_lemma_big_picture_view}.  
+We show that that strict inequalities can occur in the expanded view of Fatou's lemma, \Eqref{eqn:fatous_lemma_big_picture_view}.  
 
 Consider a measure space $(\Omega, \F, \mu)$ and set $B \in \F$ such that $0 < \mu(B^c) < \mu(B) < \mu(\Omega)$. 
 Define a sequence of functions $\set{f_n}$ such that
@@ -3400,7 +3400,7 @@ Define a sequence of functions $\set{f_n}$ such that
  \end{tabular}
  \end{table}
 
-And so we see that strict inequalities occur in the expanded view of Fatou's lemma, \eqref{eqn:fatous_lemma_big_picture_view}. 
+And so we see that strict inequalities occur in the expanded view of Fatou's lemma, \Eqref{eqn:fatous_lemma_big_picture_view}. 
 
 \begin{align*}
 \explaintermbrace{0}{\ds\int_\Omega \bigg( \liminf_{n \to \infty} f_n \bigg) \dmu}  < \explaintermbrace{$\mu(B^c)$}{\liminf_{n \to \infty} \dint_\Omega f_n \dmu} < \explaintermbrace{$\mu(B)$}{\limsup_{n \to \infty} \dint_\Omega f_n \dmu} <  \explaintermbrace{$\mu(\Omega)$}{\ds\int_\Omega \bigg( \limsup_{n \to \infty} f_n \bigg) \dmu}  
@@ -3412,7 +3412,7 @@ The example captures the fact that \textit{integrals of asymptotics give more ex
 
 \begin{remark}{\remarktitle{Fatou's Lemma for series.}} In the special case where $\Omega = \set{1,2,3, ...}$, $\F=2^\Omega$ (i.e. all subsets of $\Omega$), and $\mu$ is the counting measure, Example~\ref{ex:integrals_as_sums} tells us that the integrals are series. That is, we can write $\sum_{k=1}^\infty x_k = \int f \wrt{\mu}$, where $f : \Omega \to \mathcal{X}$ maps $\omega_1, \omega_2, \hdots$ to $x_1, x_2, \hdots$. 
 
-In this setting, the big picture conclusion of Fatou's lemma  \eqref{eqn:fatous_lemma_big_picture_view} specializes to: \textit{\sout{integrals} series of asymptotics give more extreme values than asymptotics of series \sout{integrals}}:
+In this setting, the big picture conclusion of Fatou's lemma  \Eqref{eqn:fatous_lemma_big_picture_view} specializes to: \textit{\sout{integrals} series of asymptotics give more extreme values than asymptotics of series \sout{integrals}}:
 %
 \begin{align} 
 \sum_{k=1}^\infty  \liminf_{n \to \infty} x_{nk}  \leq \liminf_{n \to \infty} \sum_{k=1}^\infty  x_{nk} \leq  \limsup_{n \to \infty} \sum_{k=1}^\infty  x_{nk} \leq \sum_{k=1}^\infty  \limsup_{n \to \infty} x_{nk}   
@@ -3475,7 +3475,7 @@ The dominated convergence theorem says that if all functions in a sequence are d
 \begin{proof}
 We have $|f| \leq g$ a.e. {\tiny (In detail, $|f_n| \leq g$ can be unpacked into $f_n \leq g$ and $f_n \geq -g$.  Since limits preserve non-strict inequalities, we have ($f \leq g$ and $f \geq -g$) a.e.   So repacking the absolute value operator, the conclusion follows.)}, hence $f$ is integrable by Cor. \ref{cor:additivity_corollaries} (b).   
 
-By hypothesis, both sides of the expanded Fatou's lemma apply, and so we have \eqref{eqn:fatous_lemma_big_picture_view}:
+By hypothesis, both sides of the expanded Fatou's lemma apply, and so we have \Eqref{eqn:fatous_lemma_big_picture_view}:
 
 \begin{align*} 
 \explaintermbrace{\tinycircled{1}}{\ds\int_\Omega \bigg( \liminf_{n \to \infty} f_n \bigg) \dmu}  \leq \explaintermbrace{\tinycircled{2}}{\liminf_{n \to \infty} \dint_\Omega f_n \dmu} \leq  \explaintermbrace{\tinycircled{3}}{\limsup_{n \to \infty} \dint_\Omega f_n \dmu} \leq \explaintermbrace{\tinycircled{4}}{\ds\int_\Omega \bigg( \limsup_{n \to \infty} f_n \bigg) \dmu}   
@@ -3584,7 +3584,7 @@ If
 
 \paragraph{The criterion for Riemann integrability criterion in terms of Lebesgue integration.}
 
-Now consider the measure space $(\Omega, \F, \mu) = ([a,b], \L([a,b]), \text{Lebesgue measure})$, where $\L([a,b])$ are the Lebesgue measurable sets (see Section \ref{sec:Lebesgue measurable sets}).  Let $P_k$ be a sequence of partitions described earlier, with $\alpha_k$ and $\beta_k$ the corresponding upper and lower functions.  Now since $\alpha_k$ and $\beta_k$ are simple functions, we can express the upper and lower sums \eqref{eqn:upper_and_lower_sums} as integrals with respect to Lebesgue measure $\mu$:
+Now consider the measure space $(\Omega, \F, \mu) = ([a,b], \L([a,b]), \text{Lebesgue measure})$, where $\L([a,b])$ are the Lebesgue measurable sets (see Section \ref{sec:Lebesgue measurable sets}).  Let $P_k$ be a sequence of partitions described earlier, with $\alpha_k$ and $\beta_k$ the corresponding upper and lower functions.  Now since $\alpha_k$ and $\beta_k$ are simple functions, we can express the upper and lower sums \Eqref{eqn:upper_and_lower_sums} as integrals with respect to Lebesgue measure $\mu$:
 \begin{align*}
 U(P_k) &= \ds\int_{[a,b]} \alpha_k \dmu \\
 L(P_k) &= \ds\int_{[a,b]} \beta_k \dmu \\		
@@ -3596,7 +3596,7 @@ so $\alpha_k$ and $\beta_k$ approach limit functions $\alpha$ and $\beta$.   Thu
 \ds\lim_{k \to \infty} U(P_k) &= \ds\lim_{k \to \infty} \ds\int_{[a,b]} \alpha_k \dmu \stackexplain{(LDCT)}{=}  \ds\int_{[a,b]} \alpha \dmu  \\
 \ds\lim_{k \to \infty} L(P_k) &= \ds\lim_{k \to \infty} \ds\int_{[a,b]} \beta_k \dmu \stackexplain{(LDCT)}{=}  \ds\int_{[a,b]} \beta \dmu   \\	
 \end{align*}
-Thus, we can write the criterion for Riemann integrability \eqref{eqn:criterion_for_riemann_integrability} in terms of the Lebesgue integral.  In particular, $f$ is Riemann integrable over $[a,b]$ with value $r$ iff 
+Thus, we can write the criterion for Riemann integrability \Eqref{eqn:criterion_for_riemann_integrability} in terms of the Lebesgue integral.  In particular, $f$ is Riemann integrable over $[a,b]$ with value $r$ iff 
 \begin{align}
 \ds\int_{[a,b]} \alpha \dmu = \ds\int_{[a,b]} \beta \dmu  = r
 \label{eqn:criterion_for_riemann_integrability_in_terms_of_lebesgue_integral}
@@ -3665,7 +3665,7 @@ Let $f$ be a bounded real-valued function on $[a,b]$.
 \begin{alphabate}
 \item
 \begin{itemize}
-\item $\boxed{\implies}$.  By \eqref{eqn:criterion_for_riemann_integrability_in_terms_of_lebesgue_integral}, if $f$ is Riemann integrable, then 
+\item $\boxed{\implies}$.  By \Eqref{eqn:criterion_for_riemann_integrability_in_terms_of_lebesgue_integral}, if $f$ is Riemann integrable, then 
 \[ \ds\int_{[a,b]} \alpha \dmu = \ds\int_{[a,b]} \beta \dmu = r\]
 By linearity {\tiny (which holds immediately since $\alpha$, $\beta$ are integrable by the above equation; see Remark \ref{rk:additivity_holds_automatically_for_integrable_functions})}, 
 \[  \ds\int_{[a,b]} (\alpha-\beta) \dmu =0  \]
@@ -3677,9 +3677,9 @@ Since $\beta \leq f \leq \alpha$ {\tiny (since each $\beta_k$ and $\alpha_k$ are
 \label{eqn:lebesgue_integral_of_riemann_integral_fucntion_equals_the_lebesgue_integral_of_the_limits_of_the_upper_and_lower_functions}
 \end{align}
 
-Thus $f$ is Riemann integrable by \eqref{eqn:criterion_for_riemann_integrability_in_terms_of_lebesgue_integral}.\footnote{Presumably the ``independent of the sequence of partitions" condition of \eqref{eqn:criterion_for_riemann_integrability_in_terms_of_lebesgue_integral} is met here, since the argument -- in particular, Lemma  \ref{lemma:continuity_at_a_point_as_equality_of_upper_and_lower_functions} -- does not seem to depend on the sequence of partitions.}
+Thus $f$ is Riemann integrable by \Eqref{eqn:criterion_for_riemann_integrability_in_terms_of_lebesgue_integral}.\footnote{Presumably the ``independent of the sequence of partitions" condition of \Eqref{eqn:criterion_for_riemann_integrability_in_terms_of_lebesgue_integral} is met here, since the argument -- in particular, Lemma  \ref{lemma:continuity_at_a_point_as_equality_of_upper_and_lower_functions} -- does not seem to depend on the sequence of partitions.}
 \end{itemize}
-\item If $f$ is Riemann integrable, then $f$ is continuous a.e. by part (a).   So \eqref{eqn:lebesgue_integral_of_riemann_integral_fucntion_equals_the_lebesgue_integral_of_the_limits_of_the_upper_and_lower_functions} holds.  Then, by \eqref{eqn:criterion_for_riemann_integrability_in_terms_of_lebesgue_integral}, $\int_{[a,b]} f \dmu = r$, the value of the Riemann integral. 
+\item If $f$ is Riemann integrable, then $f$ is continuous a.e. by part (a).   So \Eqref{eqn:lebesgue_integral_of_riemann_integral_fucntion_equals_the_lebesgue_integral_of_the_limits_of_the_upper_and_lower_functions} holds.  Then, by \Eqref{eqn:criterion_for_riemann_integrability_in_terms_of_lebesgue_integral}, $\int_{[a,b]} f \dmu = r$, the value of the Riemann integral. 
 \end{alphabate}
 \end{proof}
 
@@ -4276,7 +4276,7 @@ In the Lebesgue-Radon-Nikodym theorem, set $\rho=\nu$ and $\lambda=0$.
 
 
 \begin{terminology}
-We refer to $f$ in \eqref{eqn:radon_nikodym} as the \textbf{Radon-Nikodym derivative} or \textbf{density} of $\nu$ with respect to $\mu$.   We denote it by $d\nu/d\mu$.  (Strictly speaking, $d\nu/d\mu$ should be construed as a class of functions equal to $f$ $\mu$-a.e.). When $\mu$ is the Lebesgue measure, then $f$ is often simply called the density of $\nu$.
+We refer to $f$ in \Eqref{eqn:radon_nikodym} as the \textbf{Radon-Nikodym derivative} or \textbf{density} of $\nu$ with respect to $\mu$.   We denote it by $d\nu/d\mu$.  (Strictly speaking, $d\nu/d\mu$ should be construed as a class of functions equal to $f$ $\mu$-a.e.). When $\mu$ is the Lebesgue measure, then $f$ is often simply called the density of $\nu$.
 \end{terminology}
 
 Below we note that in the special case where $\nu$ is a measure, the Radon-Nikodym derivative must be non-negative almost everywhere. (Hence, it can be taken to be non-negative everywhere.)
@@ -4325,7 +4325,7 @@ So $f_1+f_2$ must be a Radon-Nikodym derivative of $\nu$ w.r.t to $\mu$.   Linea
 
 Let us show that if the identity holds in the $\nu \geq 0$ case, it must hold for general $\nu$.  We have 
 \begin{align*}
-\int g \, d\nu &= \int g \, d\nu^+ - \int g \, d\nu^- &&\tinytext{Def. integrals of signed measure \eqref{def:integration_against_signed_measure}} \\
+\int g \, d\nu &= \int g \, d\nu^+ - \int g \, d\nu^- &&\tinytext{Def. integrals of signed measure \Eqref{def:integration_against_signed_measure}} \\
 & \stackrel{1}{=} \int g f^+ d\mu - \int g f^- d\mu && \tinytext{by hypothesis, where $f^+, f^-$ are RN derivatives of $\nu^+, \nu^-$}\\
 & \stackrel{2}{=}  \int g (f^+ - f^-) d\mu && \tinytext{linearity applies (see below)}
 \end{align*}
@@ -4344,7 +4344,7 @@ On the other hand, we have $\nu \ll \lambda$. ($\ll$ can be seen to be transitiv
 \label{eqn:RN_chain_rule_LHS}	
 \end{align}
 
-Since \eqref{eqn:RN_chain_rule_RHS}  and \eqref{eqn:RN_chain_rule_LHS} both hold for all $A \in \F$, then by Cor.~\ref{cor:equal_integrals_for_all_measurable_sets_implies_the_functions_are_equal_ae} , 
+Since \Eqref{eqn:RN_chain_rule_RHS}  and \Eqref{eqn:RN_chain_rule_LHS} both hold for all $A \in \F$, then by Cor.~\ref{cor:equal_integrals_for_all_measurable_sets_implies_the_functions_are_equal_ae} , 
 \[ \df{d\nu}{d\lambda} = \df{d\nu}{d\mu}  \df{d\mu}{d\lambda} \quad \lambda-\text{a.e.} \]	
 
 \end{alphabate}
@@ -4363,7 +4363,7 @@ Let $a,b,c,d,e,f \in \R \setminus \set{0}$. Then by cross-multiplying, we of cou
 \[ \df{a}{b} = \df{c}{d} \df{e}{f} \iff \df{b}{a} = \df{d}{c} \df{f}{e} \]
 However, note that for Radon-Nikodym derivatives, we have 
 \[ \df{d\nu}{d\lambda} = \df{d\nu}{d\mu}  \df{d\mu}{d\lambda}   \red{\notiff} \df{d\mu}{d\nu} = \df{d\mu}{d\lambda}  \df{d\lambda}{d\nu} \]
-The first trouble is that for the expression on the left side of $\red{\notiff}$ to exist, the chain rule \eqref{eqn:chain_rule} requires that $\nu \ll \mu, \mu \ll \lambda$.  But absolute continuity is not a symmetric relation (recall Example~\ref{ex:examples_with_absolute_continuity}), and if the dominance relations do not hold in the other direction, then the Radon-Nikodym derivatives on the right hand side of $\red{\notiff}$ may not exist.   A second trouble is that the left side does not apply everywhere, but $\lambda$-a.e.; one might be tempted to flip the fractions on each side of the equality without taking care of the constraints on where the equality applies.
+The first trouble is that for the expression on the left side of $\red{\notiff}$ to exist, the chain rule \Eqref{eqn:chain_rule} requires that $\nu \ll \mu, \mu \ll \lambda$.  But absolute continuity is not a symmetric relation (recall Example~\ref{ex:examples_with_absolute_continuity}), and if the dominance relations do not hold in the other direction, then the Radon-Nikodym derivatives on the right hand side of $\red{\notiff}$ may not exist.   A second trouble is that the left side does not apply everywhere, but $\lambda$-a.e.; one might be tempted to flip the fractions on each side of the equality without taking care of the constraints on where the equality applies.
 \end{remark}
 
 \section{$\S$ 2.4 $L^p$ spaces}
@@ -4390,7 +4390,7 @@ Let $f$ be a complex-valued Borel measurable function on $(\Omega, \F)$.  Then $
 \begin{proof}
 First, a note.  By definition, $|f|$ being integrable means that $|\int |f| \dmu| < \infty$. But the integral of a non-negative function can only be non-negative (by monotonicity of the integral of real valued functions), so this is equivalent to $\int |f| \dmu < \infty$.
 
-We will apply the strategy of bounding the complex modulus by real moduli \eqref{eqn:bounding_the_complex_modulus_by_real_moduli_appendix}, which in the case of functions can be written as 
+We will apply the strategy of bounding the complex modulus by real moduli \Eqref{eqn:bounding_the_complex_modulus_by_real_moduli_appendix}, which in the case of functions can be written as 
 \begin{align}
 |\Re f|, |\Im f| \; \stackrel{A}{\leq} |f| \; \stackrel{B}{\leq} |\Re f|+|\Im f|
 \label{eqn:bounding_the_complex_modulus_by_real_moduli_for_functions} 
@@ -4712,7 +4712,7 @@ We have
 \begin{proof}
 \begin{alphabate}
 \item TBD.
-\item We take the definition of $\convergenceAU$ in quantified form \eqref{eqn:def_of_convergence_almost_uniformly_in_quantified_form} 
+\item We take the definition of $\convergenceAU$ in quantified form \Eqref{eqn:def_of_convergence_almost_uniformly_in_quantified_form} 
 \begin{align*}
 &\forall \, \epsilontilde >0, \exists \, A \in \F : \mu(A) < \epsilontilde \quad \text{and} \quad \forall \, \epsilon >0, \, \exists \, N : \forall \, n \geq N, \omega \in A^c \\
 & |f_n(\omega) - f(\omega) | < \epsilon 
@@ -5108,7 +5108,7 @@ We apply the ``Good sets strategy" (Sec.~\ref{sec:good_sets_strategy}).   Let
 \[  \G := \{ E \subset X \times Y : E_x \in \N \text{ for all} \; x \in X \quad \text{and} \quad E^y \in \M \text{ for all} \; y \in Y \}. \]
 We have
 \begin{itemize}
-\item $\G$ contains all measurable rectangles, since the sections of $A \times B$ are given by \eqref{eqn:sections_of_rectangles}.
+\item $\G$ contains all measurable rectangles, since the sections of $A \times B$ are given by \Eqref{eqn:sections_of_rectangles}.
 \item $\G$ is a $\sigma$-field, since, for example, if $E,E_i \subset X \times Y$ and $x \in X$, then 
 \begin{align}
 \explaintermbrace{section of complement}{(E^c)_x} = \explaintermbrace{complement of section}{(E_x)^c}, \quad \quad \quad \explaintermbrace{section of union}{\bigg(
@@ -5180,7 +5180,7 @@ Define the set function
 \[ \pi_0 (C) := \ds\sum_{i=1}^n \mu(A_i) \nu(B_i) \]
 Then $\pi_0$ is well-defined, and a premeasure on $\F_0$ (see \cite[pp.64]{folland1999real} for a brief argument). 
 
-By the \Caratheodory~Extension Theorem, $\pi_0$ extends to a measure $\pi$ on $\F:=\sigma(\F_0)$.  Moroever, it can be given constructively (see \eqref{eqn:explicit_construction_of_measure_extended_from_premeasure}) as follows:
+By the \Caratheodory~Extension Theorem, $\pi_0$ extends to a measure $\pi$ on $\F:=\sigma(\F_0)$.  Moroever, it can be given constructively (see \Eqref{eqn:explicit_construction_of_measure_extended_from_premeasure}) as follows:
 \begin{subequations}
 \begin{align}
 \pi(E) &= \inf \bigg\{ \ds\sum_{i=1}^\infty \pi_0 (C_j) : C_j \in \F_0,  E \subset \cup_{j=1}^\infty C_j \bigg\} && \tinytext{} \label{eqn:direct_def_of_product_measure} \\	
@@ -5189,7 +5189,7 @@ By the \Caratheodory~Extension Theorem, $\pi_0$ extends to a measure $\pi$ on $\
 \end{align}
 \end{subequations}
 
-{\tiny Eq.~\eqref{eqn:direct_def_of_product_measure} is the \textit{direct} definition of product measure, given directly by the explicit construction of a measure extended from a pre-measure.   Eq.~\ref{eqn:computational_def_of_product_measure} can be considered the \textit{computational} definition of product measure; the reindexing simplifies the infimum to be directly over rectangles rather than over disjoint unions of them. For an application of \eqref{eqn:computational_def_of_product_measure}, see Ex.~\ref{ex:lebesgue_counting_measure_on_the_unit_square_diagonal}.) }
+{\tiny \Eqref{eqn:direct_def_of_product_measure} is the \textit{direct} definition of product measure, given directly by the explicit construction of a measure extended from a pre-measure.   \Eqref{eqn:computational_def_of_product_measure} can be considered the \textit{computational} definition of product measure; the reindexing simplifies the infimum to be directly over rectangles rather than over disjoint unions of them. For an application of \Eqref{eqn:computational_def_of_product_measure}, see Ex.~\ref{ex:lebesgue_counting_measure_on_the_unit_square_diagonal}.) }
 
 The measure $\pi$ is called the product of $\mu$ and $\nu$, and is written $\pi = \mu \times \nu$.  Note that by \Caratheodory~Extension theorem {\tiny (or direct manipulation of the infimum)}, $\pi|_{\F_0} = \pi_0$.  Note also that (obviously) $\sigma(\F_0) = \M \otimes \N$, the product sigma-field.  
 
@@ -5245,7 +5245,7 @@ The integral exists by (1.) {\tiny(since the integral of a non-negative Borel me
 	\end{align*}
 	To justify (+), we have 
 	\begin{align*}
-	(\cupdot_{n=1}^\infty E_n)_x &= \cupdot_{n=1}^\infty (E_n)_x && \tinytext{sections commute with unions, \eqref{eqn:sections_commute_with_complements_and_unions}} \\
+	(\cupdot_{n=1}^\infty E_n)_x &= \cupdot_{n=1}^\infty (E_n)_x && \tinytext{sections commute with unions, \Eqref{eqn:sections_commute_with_complements_and_unions}} \\
 	\implies \nu\bigg(x,(\cupdot_{n=1}^\infty E_n)_x\bigg) &= \nu\bigg(x,\cupdot_{n=1}^\infty (E_n)_x\bigg)  && \tinytext{substitution} \\
 	&= \sum_{n=1}^\infty \nu \bigg(x, (E_n)_x\bigg) && \tinytext{countable additivity. each $(E_n)_x$ is measurable by   Prop.~\ref{prop:sections_of_a_measurable_set_are_measurable}, hence so is the union}
 	\end{align*}
@@ -5320,7 +5320,7 @@ are non-negative measurable functions on $X$ and $Y$, respectively, and
 		\item[i)] $f_x \in L^1(\nu)$ for a.e. $x \in X$, \quad $f^y \in L^1(\mu)$ for a.e. $y \in Y$
 		\item[ii)] $g(x) = \int f_x \wrt{\nu} \in L^1(\mu),  \quad h(y) = \int f^y \wrt{\mu} \in L^1(\nu)$
 	\end{enumerate}
-and \eqref{eqn:classical_fubini_tonelli_equation} holds.
+and \Eqref{eqn:classical_fubini_tonelli_equation} holds.
 \end{alphabate}	
 \label{thm:classical_fubini_tonelli}
 \end{theorem}
@@ -5330,7 +5330,7 @@ Our proof of Fubini-Tonelli mimics the construction of the integral.
 
 We begin with Tonelli's, which covers the first three steps.
 \begin{enumerate}
-\item \textit{Step 1: $f$ is an indicator function}.   Here, Tonelli's theorem reduces to the classical product measure theorem {\tiny  [If $f=\indicate{E}$, then \eqref{eqn:classical_fubini_tonelli_equation} becomes $\pi(E) := \int \nu(E_x) \mu(dx) = \int \mu(E^y) \nu(dy) $, which holds by   Cor.~\ref{cor:classical_product_measure_theorem}.]}   % Note that when integrating $f(x,y)$ against one variable, the function becomes a section.  So when integrating $f(x,y)$ against a measure on $y$, it becomes $f_x(y)$.]}  
+\item \textit{Step 1: $f$ is an indicator function}.   Here, Tonelli's theorem reduces to the classical product measure theorem {\tiny  [If $f=\indicate{E}$, then \Eqref{eqn:classical_fubini_tonelli_equation} becomes $\pi(E) := \int \nu(E_x) \mu(dx) = \int \mu(E^y) \nu(dy) $, which holds by   Cor.~\ref{cor:classical_product_measure_theorem}.]}   % Note that when integrating $f(x,y)$ against one variable, the function becomes a section.  So when integrating $f(x,y)$ against a measure on $y$, it becomes $f_x(y)$.]}  
 \item \textit{Step 2: $f$ is a non-negative simple function.}  Here, Tonelli's theorem follows from step 1 and linearity. {\tiny (Recall linearity always applies for non-negative simple functions; see Remark~\ref{rk:integrals_are_linear_over_non_negative_Borel_measurable_function}.)}  
 \item \textit{Step 3: $f$ is a general non-negative measurable function}.  We can find a sequence of simple functions $\set{f_n} \uparrow f$ by Prop.~\ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function}.   We now show two things:
 	\begin{itemize}
@@ -5347,10 +5347,10 @@ We begin with Tonelli's, which covers the first three steps.
 	& \stackexplain{Step 2}{=} \lim_n \int f_n \wrt{(\mu \times \nu)} \\
 	& \stackexplain{MCT}{=} \int f \wrt{(\mu \times \nu)}
 	\end{align*}
-	which is the first equality of \eqref{eqn:classical_fubini_tonelli_equation}.  The second equality is obtained by applying the same logic to $h$. 
+	which is the first equality of \Eqref{eqn:classical_fubini_tonelli_equation}.  The second equality is obtained by applying the same logic to $h$. 
 	\end{itemize}
 \end{enumerate}
-Now we do Fubini's part of the theorem.  We start by verifying the conditions (i),(ii), and then show that \eqref{eqn:classical_fubini_tonelli_equation} holds (which parallels ``Step 4" in the construction of the integral).
+Now we do Fubini's part of the theorem.  We start by verifying the conditions (i),(ii), and then show that \Eqref{eqn:classical_fubini_tonelli_equation} holds (which parallels ``Step 4" in the construction of the integral).
 
 \begin{itemize}
 \item[i)] 
@@ -5414,7 +5414,7 @@ The example below shows that the classical Fubini-Tonelli Theorem (Thm.~\ref{thm
 &= \int_{[0,1]} 1 \wrt{\mu(x)} = \mu([0,1]) = 1
 \end{align*}
 
-\item Now we show $\int \indicate{D} \wrt{(\mu \times \nu)} = \infty$. By the definition of integrals of simple functions, we have $\int \indicate{D} \wrt{(\mu \times \nu)} = \mu \times \nu(D)$.  So applying the (computational) definition of product measure \eqref{eqn:computational_def_of_product_measure}, we want to show 
+\item Now we show $\int \indicate{D} \wrt{(\mu \times \nu)} = \infty$. By the definition of integrals of simple functions, we have $\int \indicate{D} \wrt{(\mu \times \nu)} = \mu \times \nu(D)$.  So applying the (computational) definition of product measure \Eqref{eqn:computational_def_of_product_measure}, we want to show 
 \begin{align}
 \mu \times \nu(D): = \inf \bigg\{ \ds\sum_{n=1}^\infty \mu(A_n) \nu(B_n) : \cup_{n=1}^\infty (A_n \times B_n) \supseteq D, \; A_n, B_n \in \B(\R)\bigg\} = \infty 
 \label{eqn:lesbegue_counting_product_measure_of_diagonal_of_unit_square_is_infinity}
@@ -5441,7 +5441,7 @@ Next we observe that
 \implies & \exists N : \mu(A_N), \mu(B_N) \geq \epsilon > 0  && \tinytext{by monotonicity, since $A_N \cap B_N \subseteq A_N, B_N$}
 \end{align*}
 }
-Finally we prove \eqref{eqn:lesbegue_counting_product_measure_of_diagonal_of_unit_square_is_infinity}. For any $\cup_{n=1}^\infty (A_n \times B_n) \supseteq D$, we have 
+Finally we prove \Eqref{eqn:lesbegue_counting_product_measure_of_diagonal_of_unit_square_is_infinity}. For any $\cup_{n=1}^\infty (A_n \times B_n) \supseteq D$, we have 
 
 {\tiny 
 \begin{align*}
@@ -5449,7 +5449,7 @@ Finally we prove \eqref{eqn:lesbegue_counting_product_measure_of_diagonal_of_uni
  &\implies \nu(B_N) = \infty && \tinytext{ Def. counting measure $\nu$}. \\
  & \implies \mu(A_N) \nu(B_N) \geq \epsilon \cdot \infty = \infty && \tinytext{ $\mu(A_N) \geq \epsilon$ by $\tinycircled{2}$}. \\
 & \implies \ds\sum_{n=1}^\infty \mu(A_n) \nu(B_n) = \infty && \tinytext{non-negativity of measure}\\
-& \implies \eqref{eqn:lesbegue_counting_product_measure_of_diagonal_of_unit_square_is_infinity} \text { holds } && \tinytext{Infimum in \eqref{eqn:lesbegue_counting_product_measure_of_diagonal_of_unit_square_is_infinity} must be lower bound on the set $\set{\infty}$ }
+& \implies \Eqref{eqn:lesbegue_counting_product_measure_of_diagonal_of_unit_square_is_infinity} \text { holds } && \tinytext{Infimum in \Eqref{eqn:lesbegue_counting_product_measure_of_diagonal_of_unit_square_is_infinity} must be lower bound on the set $\set{\infty}$ }
 \end{align*}
 }
 
@@ -5585,7 +5585,7 @@ First, we note that by monotonicity, $m(E)$ is a lower bound on the set $\set{m(
 \begin{enumerate}
 \item \textit{Each $E \in \L^n$ can be approximated by a cover of countable rectangles.}
 
-By definition of the product measure {\tiny (as the \textit{infimum} of measures of countable rectangle covers; see \eqref{eqn:computational_def_of_product_measure}; also see Remark~\ref{rk:usage_of_alternate_characterization_of_inf_and_sup} for a refresher on infima)}, we have $\forall \epsilon >0$, there is a countable family $\set{T_j}_{j=1}^\infty$ of rectangles such that $\set{T_j}_{j=1}^\infty \supset E$ and
+By definition of the product measure {\tiny (as the \textit{infimum} of measures of countable rectangle covers; see \Eqref{eqn:computational_def_of_product_measure}; also see Remark~\ref{rk:usage_of_alternate_characterization_of_inf_and_sup} for a refresher on infima)}, we have $\forall \epsilon >0$, there is a countable family $\set{T_j}_{j=1}^\infty$ of rectangles such that $\set{T_j}_{j=1}^\infty \supset E$ and
 \[\explaintermbrace{... 2) and there is a countable union of rectangles with smaller measure}{\ds\sum_{j=1}^\infty m(T_j)}\leq m(E) + \explaintermbrace{1) bump a little bit up from infimum}{\epsilon} \] 
 
 \begin{figure}[H]
@@ -5796,7 +5796,7 @@ Consider a collection of finitely many disjoint cylinders.  Represent the bases 
 
 Let $\set{\cylinder{B_n}}, n=n_1,n_2,\hdots$ be a sequence of measurable cylinders decreasing to $\emptyset$.  We may assume $n_1 < n_2 < \hdots$\footnote{Note that the base growing in dimension from $n$ to $n+1$ means that we \textit{restrict} the extra coordinates relative to $\Omega_{n+1}$.}, and in fact nothing is lost if we assume $n_i=i$ for all $i$.  
 
-For each $n>1$, decompose \eqref{eqn:product_measure_in_n_coordinates} to write
+For each $n>1$, decompose \Eqref{eqn:product_measure_in_n_coordinates} to write
 \[ P_{1:n}(B_n) = \int_{\Omega_1} g_n(\omega_1) P_1(\wrt{\omega_1}) \]
 where
 \begin{align}
@@ -5811,7 +5811,7 @@ Now we have
 \cylinder{B_{n+1}}& \subset \cylinder{B_n} && \tinytext{decreasing seq. of cylinders} \\
 \implies B_{n+1} & \subset B_n \times \Omega_{n+1} && \tinytext{Remark~\ref{rk:cylinder_can_always_be_regarded_as_having_a_higher_dimensional_base}, and cylinder subset $\implies$ base subset} \\
 \implies \indicate{(\omega_1, \hdots, \omega_{n+1}) \in B_{n+1}} & \leq \indicate{(\omega_1, \hdots, \omega_{n+1}) \in  B_n \times \Omega_{n+1}}  \\
-\implies g_n(\omega_1) & \leq g_{n+1}(\omega_1) && \tinytext{monotonicity of $\int$, and using an argument like Step 1 to align dimensions in def. $g_n$, \eqref{eqn:def_of_gn_in_proof_of_infinite_product_measure} }
+\implies g_n(\omega_1) & \leq g_{n+1}(\omega_1) && \tinytext{monotonicity of $\int$, and using an argument like Step 1 to align dimensions in def. $g_n$, \Eqref{eqn:def_of_gn_in_proof_of_infinite_product_measure} }
 \end{align*}
 
 Since $g_n$ is a decreasing sequence of functions, it has a limit; say $h$.  Thus, by monotone convergence theorem,
@@ -6135,7 +6135,7 @@ Recall from Sec.~\ref{sec:absolute_continuity} that absolutely continuity was de
 \end{remark}
 
 \begin{question}
-Eq.~\eqref{eqn:probability_for_an_absolutely_continuous_rv_is_determined_by_integrating_the_density_function} implies that for any Borel set $B$ and density function $f$, the function $\indicate{B} f$ is continuous a.e. with respect to Lebesgue measure. (Why this implication? Because a function is Reimann integrable iff it is continuous a.e.; see Thm.~\ref{thm:relating_lebesgue_and_riemann_integrals}.) This fact is surprising to me;  How to see this?
+Eq.~\Eqref{eqn:probability_for_an_absolutely_continuous_rv_is_determined_by_integrating_the_density_function} implies that for any Borel set $B$ and density function $f$, the function $\indicate{B} f$ is continuous a.e. with respect to Lebesgue measure. (Why this implication? Because a function is Reimann integrable iff it is continuous a.e.; see Thm.~\ref{thm:relating_lebesgue_and_riemann_integrals}.) This fact is surprising to me;  How to see this?
 \end{question}
 
 \begin{terminology}
@@ -6149,7 +6149,7 @@ The \textbf{distribution} of a random variable is a generic term; to say that we
 	
 In particular, we have the following special cases:
 \begin{enumerate}
-\item If $X$ is an absolutely continuous random variable, then it suffices to know its density $f_X$, since by \eqref{eqn:probability_for_an_absolutely_continuous_rv_is_determined_by_integrating_the_density_function},
+\item If $X$ is an absolutely continuous random variable, then it suffices to know its density $f_X$, since by \Eqref{eqn:probability_for_an_absolutely_continuous_rv_is_determined_by_integrating_the_density_function},
 	\[ P_X(B) = \int_B f(x) \wrt{x}, \quad \forall B \in \B(\R)\]	
 \item If $X$ is a discrete random variable (taking on values in a countable set $S$), then it suffices to know its probability mass function $p_X$, since then\redfootnote{Justify this explicitly.  See e.g. \cite[pp.174]{ash2000probability}.} 
      \[ P_X(B) = \sum_{x \in B} p_X(x), \quad \forall B \in \P(S).\]	
@@ -6213,7 +6213,7 @@ P_X[X_1 \in B_1, \hdots, X_n \in B_n] = P_{X_1}[X_1 \in B_1] \cdots P_{X_n}[X_n 
 
 
 \begin{remark}{\remarktitle{Independence as induced product measure: A collection of independent RV's has an induced probability measure which is the product of the individual induced probability measures.}}
-Note that independent random variables are defined according to a constraint that the (induced) probability measure must satisfy \textit{only for measurable rectangles} (sets of the form $B=B_1 \times \cdots \times B_n$);   see the left hand side of Eq.~\eqref{eqn:independence_of_random_variables}.  However, this definition automatically determines the probability measure on \textit{all} sets (see the classical product measure theorem as given in Cor.~\ref{cor:classical_product_measure_theorem}, or in \cite[2.6.8(b)]{ash2000probability} for a corresponding statement over $n$ factors).  Hence, independence of $X_1,\hdots, X_n$  may be expressed by saying that if $X=(X_1,\hdots,X_n)$ is a collection of independent random variables, then $P_X$ is the product of the $P_{X_i}, i=1,\hdots, n$.  We write $P_X = \prod_{i=1}^n P_{X_i}.$
+Note that independent random variables are defined according to a constraint that the (induced) probability measure must satisfy \textit{only for measurable rectangles} (sets of the form $B=B_1 \times \cdots \times B_n$);   see the left hand side of Eq.~\Eqref{eqn:independence_of_random_variables}.  However, this definition automatically determines the probability measure on \textit{all} sets (see the classical product measure theorem as given in Cor.~\ref{cor:classical_product_measure_theorem}, or in \cite[2.6.8(b)]{ash2000probability} for a corresponding statement over $n$ factors).  Hence, independence of $X_1,\hdots, X_n$  may be expressed by saying that if $X=(X_1,\hdots,X_n)$ is a collection of independent random variables, then $P_X$ is the product of the $P_{X_i}, i=1,\hdots, n$.  We write $P_X = \prod_{i=1}^n P_{X_i}.$
 \label{rk:independent_random_variables_induce_product_measures}
 \end{remark}
 
@@ -6327,7 +6327,7 @@ Although the definition of expectation expresses it as an integral against a pro
 \end{remark}
 
 \begin{question}{\remarktitle{An alternate notation for LOTUS.}}	
-\cite[pp.188]{ash2000probability} writes Eq.~\eqref{eqn:expectation_as_integral_wrt_induced_probability_measure} as 
+\cite[pp.188]{ash2000probability} writes Eq.~\Eqref{eqn:expectation_as_integral_wrt_induced_probability_measure} as 
 \[  E(Y)= \int_\R g(x) dF(x) (= \int_\R g \; dP_X), \]
 where $F$ is the distribution function of X.  He states that $\int_\R g(x) dF(x)$ \textit{means} $\int_\R g \; dP_X$; it is \textit{not} a Riemann-Stieltjes integral.\footnote{Which, interestingly, contradicts the current statement of LOTUS on Wikipedia, as of 08/05/2022.} This raises two questions
 
@@ -6482,10 +6482,10 @@ Now for $\omega \in \Omega$ and $n=0,1, \hdots$, define the random variable $X_n
 %
 \[ X_n(\omega) = \omega_n. \]
 %
-Then we can use \eqref{eqn:product_measure_in_n_coordinates}  to evaluate $P_{0:n}$, the extended product measure on $\prod_{i=0}^n \F_i$, at the singleton set $B_n := (\omega : X_0(\omega)=i_0, \hdots, X_n(\omega)=i_n)$ to obtain
+Then we can use \Eqref{eqn:product_measure_in_n_coordinates}  to evaluate $P_{0:n}$, the extended product measure on $\prod_{i=0}^n \F_i$, at the singleton set $B_n := (\omega : X_0(\omega)=i_0, \hdots, X_n(\omega)=i_n)$ to obtain
 %
 \begin{align*}
-P_{0:n}(X_0(\omega)=i_0, & \hdots, X_n(\omega)=i_n) \stackexplain{\eqref{eqn:product_measure_in_n_coordinates}}{=} \\
+P_{0:n}(X_0(\omega)=i_0, & \hdots, X_n(\omega)=i_n) \stackexplain{\Eqref{eqn:product_measure_in_n_coordinates}}{=} \\
 & \int_S P_0(\wrt{\omega_0}) \; \int_S P_1(\omega_0; \wrt{\omega_1})	\; \cdots \int_S P_{n-1}(\omega_0, \omega_1, \hdots, \omega_{n-2}; \wrt{\omega_{n-1}}) \\
 & \quad \cdot \explaintermbrace{(A)}{\int_S \indicatebrackets{(\omega_1,\hdots, \omega_n) = (i_1,\hdots i_n)} \; P_n(\omega_0, \omega_1, \hdots, \omega_{n-1}; \wrt{\omega_{n}})}
 \end{align*}
@@ -6502,7 +6502,7 @@ And by Thm.~\ref{thm:extended_product_measure_theorem_over_countably_infinite_sp
 \end{proof}
 
 \begin{remark}
-The sequence of random variables $(X_n)$ satisfying \eqref{eqn:markov_chain_head_probability} in Thm.~\ref{thm:markov_chains_exist} is called a \textbf{Markov chain} corresponding to \textbf{transition matrix} $A$ and \textbf{initial distribution} $\pi$. The set $S$ is called the \textbf{state space} of the chain.  The values $a_{ij}$ are called the \textbf{transition probabilities}.
+The sequence of random variables $(X_n)$ satisfying \Eqref{eqn:markov_chain_head_probability} in Thm.~\ref{thm:markov_chains_exist} is called a \textbf{Markov chain} corresponding to \textbf{transition matrix} $A$ and \textbf{initial distribution} $\pi$. The set $S$ is called the \textbf{state space} of the chain.  The values $a_{ij}$ are called the \textbf{transition probabilities}.
 \end{remark}
 
 \begin{theorem}\textbf{Weak law of large numbers.} Let $X_1, X_2, \hdots$ be independent random variables (not necessarily with the same distribution), each with finite mean and variance. Assume the variances to be uniformly bounded by $M < \infty$.  Let $S_n = X_1 + \hdots X_n$. Then $(S_n - \E[S_n])/n$ converges in probability to 0. That is, given $\epsilon > 0$,
@@ -6560,7 +6560,7 @@ B, &  x \in A \\
 \emptyset, & x \not\in A 	
  \end{cases}
  \]
-This special form implies that $P(x,C(x))=P(x,B)\indicatebrackets{x \in A}$. Thus,  \eqref{eqn:probability_of_joint_event}	 becomes 
+This special form implies that $P(x,C(x))=P(x,B)\indicatebrackets{x \in A}$. Thus,  \Eqref{eqn:probability_of_joint_event}	 becomes 
 %
 \begin{align}
 P(A \times B) &= \int_B P(x, B) \, dP_X(x)
@@ -6591,7 +6591,7 @@ Furthermore, if $h$ is another such function, then $g=h$ a.e. $[P_X]$.  We defin
 \end{theorem}
 
 \begin{proof}
-Let $\lambda(A) := 	P( \set{X \in A} \cap B) $ for all $A \in \F'$.\footnote{Here is an interesting case of a measure (besides Lebesgue) which is not a probability measure but which we care about.} \footnote{To make the two probabililty measures in \eqref{eqn:existence_of_conditional_probability_measure} more directly comparable, note that
+Let $\lambda(A) := 	P( \set{X \in A} \cap B) $ for all $A \in \F'$.\footnote{Here is an interesting case of a measure (besides Lebesgue) which is not a probability measure but which we care about.} \footnote{To make the two probabililty measures in \Eqref{eqn:existence_of_conditional_probability_measure} more directly comparable, note that
 \begin{align*}
 P_X(A) & := P\set{\omega : X(\omega) \in A} \\
 P(\set{X \in A} \cap B ) &= P\set{\omega : X(\omega) \in A \text{ and } \omega \in B} 
@@ -6607,7 +6607,7 @@ The result then follows from the Radon-Nikodym theorem.
 \end{proof}
 
 \begin{remark}
-If we choose $A = \Omega'$ in Theorem~\ref{thm:existence_of_conditional_probability_measure}, then \eqref{eqn:existence_of_conditional_probability_measure} becomes
+If we choose $A = \Omega'$ in Theorem~\ref{thm:existence_of_conditional_probability_measure}, then \Eqref{eqn:existence_of_conditional_probability_measure} becomes
 \begin{align}
 P(B) = \int_{\Omega'} g(x) \, dP_X(x),	
 \end{align}
@@ -6795,7 +6795,7 @@ Since $(x_n)$ is decreasing, the conclusion of  $\tinycircled{\ast}$ becomes
 \begin{align*}
 x_n - x  < \epsilon && \tinycircled{\ast}\tinycircled{\ast} 
 \end{align*} 
-So given $\epsilon$, choose $x_N$ in $\tinycircled{\ast} \tinycircled{\ast}$ to obtain a sequence element satisfying \eqref{eqn:glb_property_for_decreasing_sequences}.
+So given $\epsilon$, choose $x_N$ in $\tinycircled{\ast} \tinycircled{\ast}$ to obtain a sequence element satisfying \Eqref{eqn:glb_property_for_decreasing_sequences}.
 \end{itemize}
 
 \item Can be argued similarly as part (a).
@@ -6975,7 +6975,7 @@ We can define the modulus of $z \in \Com$ by $|z| = + \sqrt{x^2 + y^2}$.   We in
 \end{align}
 where the latter inequality is the triangle inequality. 
 
-The bounds \eqref{eqn:bounding_the_complex_modulus_by_real_moduli}  are very useful.  For instance, from them, we can quickly deduce that the problem of finding limits of sequences of complex numbers can be reduced directly to the real case.
+The bounds \Eqref{eqn:bounding_the_complex_modulus_by_real_moduli}  are very useful.  For instance, from them, we can quickly deduce that the problem of finding limits of sequences of complex numbers can be reduced directly to the real case.
 
 \begin{lemma}
 \cite[Lemma~3.2]{stewart2018complex} Let $(z_n)$ be a sequence of complex numbers, with $z_n = x_n + i y_n, (x_n, y_n \in \R)$.  Let $z=x+iy, 	(x, y \in \R)$.  Then 
