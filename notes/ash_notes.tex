@@ -6559,13 +6559,13 @@ for all $i_0, i_1, \hdots, i_n \in S$ and all $n=0,1,\hdots$.
 \end{theorem}
 
 \begin{proof}
-We prove existence as an application of Thm.~\ref{thm:extended_product_measure_theorem_over_countably_infinite_spaces}. Let $\Omega=S^\infty, \F = \Power(S)^\infty$.\footnote{We use $\Power(S)$ to denote the power set of $S$.} 
+We prove existence as an application of Thm.~\ref{thm:extended_product_measure_theorem_over_countably_infinite_spaces}. Let $\Omega=S^\infty, \F = \PowerSet(S)^\infty$.\footnote{We use $\PowerSet(S)$ to denote the power set of $S$.} 
 
-Define a probability measure on $\F_0 = \Power(S)$ by 
-\[ P_0(B) = \sum_{j \in B} \pi_j \quad \text{for all} \quad B \in \Power(S) \]
-For each $n=0,1,2,\hdots$ and each $(i_0, i_1, \hdots, i_n) \in S^{n+1}$, we define a probability measure $P_{n+1}(i_0, i_1, \hdots, i_n; B)$ on $\F_{n+1}=\Power(S)$ by 
-\[ P_{n+1}(i_0, i_1, \hdots, i_n; B) = \sum_{j \in B} a_{(i_n, j)} \quad \text{for all} \quad B \in \Power(S).\]
-Now for each $B \in \Power(S)$, the function $P_{n+1}(\cdot, \cdot, \hdots, \cdot; B): (S^{n+1}, \Power(S)^{n+1}) \to (\R, \B(\R))$ is automatically measurable.\footnote{The product of power sets $\Power(S)^{n+1}$ contains all subsets of $S^{n+1}$ and is a sigma field (Example~\ref{ex:the_largest_sigma_field_is_the_power_set}). Thus, the definition of measurable functions (Def.~\ref{def:measurable_function}) is automatically satisfied.}
+Define a probability measure on $\F_0 = \PowerSet(S)$ by 
+\[ P_0(B) = \sum_{j \in B} \pi_j \quad \text{for all} \quad B \in \PowerSet(S) \]
+For each $n=0,1,2,\hdots$ and each $(i_0, i_1, \hdots, i_n) \in S^{n+1}$, we define a probability measure $P_{n+1}(i_0, i_1, \hdots, i_n; B)$ on $\F_{n+1}=\PowerSet(S)$ by 
+\[ P_{n+1}(i_0, i_1, \hdots, i_n; B) = \sum_{j \in B} a_{(i_n, j)} \quad \text{for all} \quad B \in \PowerSet(S).\]
+Now for each $B \in \PowerSet(S)$, the function $P_{n+1}(\cdot, \cdot, \hdots, \cdot; B): (S^{n+1}, \PowerSet(S)^{n+1}) \to (\R, \B(\R))$ is automatically measurable.\footnote{The product of power sets $\PowerSet(S)^{n+1}$ contains all subsets of $S^{n+1}$ and is a sigma field (Example~\ref{ex:the_largest_sigma_field_is_the_power_set}). Thus, the definition of measurable functions (Def.~\ref{def:measurable_function}) is automatically satisfied.}
 
 Now for $\omega \in \Omega$ and $n=0,1, \hdots$, define the random variable $X_n$ by
 %
@@ -6662,7 +6662,7 @@ Thus, we see that we can specify a joint distribution $P$ on $\F=\B(\R^2)$ by sp
 %
 %By specifying a marginal distribution and a set of conditional probabilities, we specify the joint.  
 
-\subsection{$\S$ 5.3 General Concept of Conditional Probability}
+\subsection{$\S$ 5.3.1-5.3.2 General Concept of Conditional Probability}
 
 In Sec.~\ref{sec:intro_to_conditional_probability}, we illustrated how the extended product measure theorem plays out in the context of random variables.  Namely, we can construct a joint distribution from a marginal distribution $P_X$ and a set of distributions parameterized by $X=x$.  Intuitively, this set of distributions gives the conditional probabilities.
 
@@ -6688,7 +6688,12 @@ P(\set{X \in A} \cap B ) &= P\set{\omega : X(\omega) \in A \text{ and } \omega \
 
 Then $\lambda$ is
 \begin{itemize}
-\item a finite measure on $\F'$
+\item a finite measure on $\F'$.  {\scriptsize [The countable additivity of $\lambda$ is inherited from $P$.   Namely:
+
+\begin{align*}
+\lambda(\cup_{i=1}^\infty A_i) := P[\set{X \in \cup_{i=1}^\infty A_i} \cap B]= P[(\cup_{i=1}^\infty \set{X \in  A_i}) \cap B]&=  P[ \cup_{i=1}^\infty (\set{X \in  A_i} \cap B)] \\
+\stackexplain{ctble additivity of P}{=} \sum_{i=1}^\infty P[\set{X \in  A_i} \cap B] = \sum_{i=1}^\infty \lambda(A_i).]
+\end{align*} }
 \item absolutely continuous with respect to $P_X$. {\scriptsize (That is, $P_X(A) =0 \implies \lambda(A)=0$.   This follows since $P(\set{X \in A} \cap B ) =  P\set{\omega : X(\omega) \in A \text{ and } \omega \in B} 
   \stackexplain{monotonicity}{\leq} P\set{\omega : X(\omega) \in A} := P_X(A)$.)} 
 \end{itemize}
@@ -6708,9 +6713,18 @@ Let $X: (\Omega, \F) \to  (\R, \B(\R))$ be a random variable on $(\Omega, \F, P)
 
 \begin{alphabate}
 \item If $X$ is discrete and $P(X=x_i) >0$ for some $i$, then
-\[ P(B \cond X=x_i) = \df{P(B \cap \set{X=x_i}) }{P\set{X=x_i}} \]
+%
+\begin{align}
+ P(B \cond X=x_i) = \df{P(B \cap \set{X=x_i}) }{P\set{X=x_i}} 
+\label{eqn:conditional_probability_when_conditioning_variable_is_discrete}	
+\end{align}
+%
 \item If $X,Y$ has has joint density $f_{X,Y}$, then 
-\[ P(B \cond X=x_i) = \int_{B(x)} \df{f_{X,Y}(x,y)}{f_X(x)} \; \wrt{y}, \]
+%
+\begin{align}
+P(B \cond X=x_i) = \int_{B(x)} \df{f_{X,Y}(x,y)}{f_X(x)} \; \wrt{y}, 
+\end{align}
+%
 where $B(x)$ is the cross section of $B$ at $x$ and $f_X(x) := \int_{\infty}^\infty f(x,y) \wrt{y}$ is the density of $X$.
 \end{alphabate}
 \label{cor:conditional_probability_given_a_point_under_discrete_and_absolutely_continuous_settings}	
@@ -6721,7 +6735,7 @@ where $B(x)$ is the cross section of $B$ at $x$ and $f_X(x) := \int_{\infty}^\in
 Some points of interest of Cor.~\ref{cor:conditional_probability_given_a_point_under_discrete_and_absolutely_continuous_settings}:
 \begin{itemize}
 \item In (a), we see that if the event $\set{X=x}$ has positive probability, then our general definition of conditional probability in \Eqref{eqn:existence_of_conditional_probability_measure}	 agrees with the simpler definition of conditional probability \cite[Sec.4.5]{ash2000probability} that $P(B \cond A) = P(A \cap B) / P(A)$ provided $P(A) >0$.
-\item In (b), we see how our general definition of conditional probbaility can handle events $\set{X=x}$ of zero probability.
+\item In (b), we see how our general definition of conditional probability can handle events $\set{X=x}$ of zero probability.
 \end{itemize}
 \end{remark}
 
@@ -6741,6 +6755,147 @@ and $g(x_i) = P(B \cond X=x_i)$ by definition.
 \item See \cite[pp.206-208]{ash2000probability}.
 \end{alphabate}	
 \end{proof}
+
+
+\subsection{$\S$ 5.3.3-5.3.5 Conditional Expectation}
+
+\begin{theorem}\textbf{Existence of conditional expectation.} \\
+Let
+\begin{align*}
+(\Omega, &\F, P) \; \text{ be a probability space}	\\
+X : & (\, \Omega, \F) \to (\Omega', \F')  \quad \text{(a random object) }\\
+Y : & \, (\Omega, \F) \to (\overline{\R}, \B) \quad \text{(an extended random variable) }\\
+\E[Y] & = \int_\Omega Y \wrt{P} \quad \text{exist}
+\end{align*}
+Then 
+\begin{align*}
+\exists g : (\Omega', \F')   & \to (\overline{\R}, \B) \text{ such that }\forall \, A \in \F',\\
+&\int_{\set{X \in A}} Y \wrt{P} = \int_A g(x) \wrt{P_X(x)}.
+\end{align*}
+Furthermore, if $h$ is another such function, then $g=h$ a.e. $[P_X]$.  We define $\E[Y \cond X = x]$ as $g(x)$; it is essentially unique for a given $Y$.
+\label{thm:existence_of_conditional_expectation}
+\end{theorem}
+
+\begin{remark}
+Thm.~\ref{thm:existence_of_conditional_expectation} is summarized in the diagram below 
+\begin{figure}[H]
+\centering
+\includegraphics[width=.4\textwidth]{images/existence_of_conditional_expectation}
+\end{figure}
+By the interpretation of $g(x)$, we can write the conclusion as 
+\[ \E[Y \indicate{\set{X \in A}}] = \int_{A} \E[Y \indicate{\set{X \in A}} \cond X=x] \wrt{P_X(x)} \]
+If $A=\Omega'$, this reduces to 
+\[ \E[Y] = \int_{\Omega'} \E[Y \cond X=x] \wrt{P_X(x)}. \] 
+\end{remark}
+
+
+\begin{proof}
+Let $\lambda(A) := \int_{\set{X \in A}} Y \wrt{P}$.
+Then 
+\begin{itemize}
+\item $\lambda$ is a countably additive set function on $\F'$ by Thm.~\ref{thm:integrals_are_countably_additive_set_functions}. 
+\item 	$\lambda$ is also absolutely continuous w.r.t $P_X$. \\
+
+\scriptsize{
+We need to show that $P_X = 0 \implies \lambda = 0$.
+
+\begin{align*}
+\text{ Suppose } & P_X(A) := P\set{\omega : X(\omega) \in A} = 0 \\
+\implies &  \indicate{\set{\omega : X(\omega) \in A}} = 0 \quad  a.e. [P] \\
+\implies &  Y \; \indicate{\set{\omega : X(\omega) \in A}} = 0 \quad a.e. [P] \\
+\stackrel{Thm.~\ref{thm:almost_everywhere} (a)}{\implies} &  \int Y \; \indicate{\set{\omega : X(\omega) \in A}} \wrt{P} = 0  \\
+\end{align*}
+}
+\end{itemize}
+Thus, $g$ exists (uniquely a.e. $P_X$) by the Radon-Nikodym Theorem.
+\end{proof}
+
+
+\begin{question}
+Can we better motivate the equality defining conditional expectation in Thm.~\ref{thm:existence_of_conditional_expectation}?  For example, why do we not define $\E[Y \cond X=x]$ as the function $g(x)$ satisfying 
+\[ \E[Y] = \int_{\Omega'} g(x) \wrt{P_X(x)} \]
+rather than 
+\[ \E[Y \indicate{\set{X \in A}}] = \int_{A} g(x) \wrt{P_X(x)} \quad ? \]	
+\end{question}
+
+\begin{corollary}
+\textbf{Conditional expectation includes conditional probability as a special case.}
+If $X$ is a random object on $(\Omega, \F, P)$ and $B \in \F$, then 
+\[ \E[\indicate{B} \cond X=x] = P(B \cond X=x) \quad \text{a.e.} [P_X]. \]
+\end{corollary}
+
+\begin{proof}
+In Theorem~\ref{thm:existence_of_conditional_expectation}, set $Y=\indicate{B}$; the defining equation for conditional expectation becomes
+\[ P(\set{X \in A} \cap B) = \int_A \E[\indicate{B} \cond X=x] \wrt{P_X(x)}. \]
+The result now follows from Theorem~\ref{thm:existence_of_conditional_probability_measure}.
+\end{proof}
+
+\begin{examples}\textbf{(Conditional expectation when the random variables are discrete or absolutely continuous.)}
+The conditional expectation $\E[Y \cond X=x]$ is defined (in Theorem~\ref{thm:existence_of_conditional_expectation}) only \textit{implicitly} (as an integrand).  In these examples, we show how to get 	$\E[Y \cond X=x]$  on the LHS for special cases.   Recall from Theorem~\ref{thm:existence_of_conditional_expectation} that we assume that $\E[Y]$ exists for all examples.
+
+\begin{alphabate}
+\item  If $X$ takes on countably many values $x_1, x_2, \hdots$ (assume WLOG that $P(X=x_i)>0$ for all $i$), then 
+\begin{align}
+\E[Y \cond X=x] = \df{1}{P\set{X=x_i}} \int_{\set{X=x_i}} Y \wrt{P} 
+\label{eqn:conditional_expectation_with_discrete_conditioning_variable}
+\end{align}
+If $Y$ is also discrete, then 
+\begin{align}
+\E[Y \cond X=x] = \sum_j y_j P(Y=y_j \cond X=x_i)
+\label{eqn:conditional_expectation_with_discrete_conditioning_variable_and_discrete_mainvariable}
+\end{align}
+\item Let $X,Y$ be random variables with joint density $f$.  Let $h=h(y|x)$ be the conditional density of $Y$ given $X$.\footnote{The conditional density is defined from the joint density by $h(y|x) = \frac{f(x,y)}{f_1(x)} = \frac{f(x,y)}{\int_{-\infty}^\infty f(x,y) \wrt{y}}$. See \cite[Sec.~5.3.2]{ash2000probability}.} Then 
+\begin{align}
+\E[Y \cond X=x] = \int_{-\infty}^\infty y h(y \cond x) \wrt{y}
+\label{eqn:conditional_expectation_when_joint_density_exists}
+\end{align}
+\end{alphabate}
+\label{ex:conditional_expectation_with_random_variables_that_are_discrete_or_absolutely_continuous}
+\end{examples}
+
+\begin{proof}
+\begin{alphabate}
+\item 
+ First we prove \Eqref{eqn:conditional_expectation_with_discrete_conditioning_variable}. Let $X$ be a discrete random variable taking on values in $S=\set{x_1, x_2, \hdots}$.  Let $\PowerSet(S)$ be the power set of $S$. For any $A \in \PowerSet(S)$, we have
+\begin{align*}
+\int_{\set{X \in A}} Y \wrt{P} &= \sum_{x_i \in A} \int_{\set{X=x_i}} Y \wrt{P} && \tinytext{Countable additivity of integral (Thm.~\ref{thm:integrals_are_countably_additive_set_functions})} \\
+&= \sum_{x_i \in A} P(X=x_i) \explaintermbrace{:=g(x)}{\frac{1}{ P(X=x_i)} \int_{\set{X=x_i}} Y \wrt{P}} && \tinytext{Multiply and divide by 1} \\
+&= \int_A g(x) \wrt{P_X(x)} && \tinytext{LOTUS expectations for discrete RVs (Ex.~\ref{ex:applying_LOTUS_to_absolutely_continuous_or_discrete_random_variables})}
+\end{align*}
+Thus $g(x) := \frac{1}{ P(X=x_i)} \int_{\set{X=x_i}} Y \wrt{P}$ satisfies the definition of $\E[Y \cond X=x]$ given in Theorem~\ref{thm:existence_of_conditional_expectation}.
+
+Now we prove \Eqref{eqn:conditional_expectation_with_discrete_conditioning_variable_and_discrete_mainvariable}.  Here, we additionally assume that $Y$ is discrete.  We have
+\begin{align*}
+\E[Y \cond X=x] &= \df{1}{P\set{X=x_i}} \int_{\set{X=x_i}} Y \wrt{P} && \tinytext{\Eqref{eqn:conditional_expectation_with_discrete_conditioning_variable}} \\
+&= \df{1}{P\set{X=x_i}} \sum_j y_j P(\set{X=x_i} \cap \set{Y=y_j}) && \tinytext{Integral of simple function} \\
+&=  \sum_j y_j \frac{P(\set{X=x_i} \cap \set{Y=y_j})}{P\set{X=x_i}} && \tinytext{Constant multiple} \\
+&=  \sum_j y_j P(Y=y_j \cond X=x_i) && \tinytext{Def. conditional probability for sets} \\
+\end{align*}
+\item For all $A \in \F'$ (the target sigma-field of $X$), we have\redfootnote{In using Fubini, I am following \cite[pp.212]{ash2000probability}. But all we know is that $\E[Y]$ \textit{exists}. We don't know that $\E|Y| < \infty$, which is I think what is required to use Fubini. How to reconcile?  Note, perhaps relatedly, that we might want to clarify the statement and the application of LOTUS for abs continuous random \textit{vectors}.  It really gives us an integral with respect to the vector $\+z:=(x,y)$, whereas the way I've written it up seems to have already reduced the product Lebesgue measure into an iterated integral.} 
+\begin{align*}
+\int_{\set{X \in A}} Y \wrt{P} &= \iint\limits_{\set{(x,y) : x \in A}} y f(x,y) \wrt{x} \wrt{y} && \tinytext{LOTUS Expectations for abs. cts RVs (Ex.~\ref{ex:applying_LOTUS_to_absolutely_continuous_or_discrete_random_variables})} \\
+&= \iint\limits_{\set{(x,y) : x \in A}} y f_1(x) \explaintermbrace{$:=h(y \cond x)$}{\df{f(x,y)}{f_1(x)}} \wrt{x} \wrt{y} && \tinytext{Mult. and divide by 1; here $f_1(x) := \int_{-\infty}^\infty f(x,y) \wrt{y}$} \\
+&= \int_{x \in A} f_1(x) \; \bigg[ y \, h(y \cond x) \wrt{y} \bigg] \wrt{x} && \tinytext{Constant multiple, Fubini} \\
+&= \int_A \bigg[ y \, h(y \cond x) \wrt{y} \bigg] \wrt{P_X(x)} && \tinytext{LOTUS expectations for abs. cts RV's (Ex.~\ref{ex:applying_LOTUS_to_absolutely_continuous_or_discrete_random_variables})} 
+\end{align*}
+\end{alphabate}	
+\end{proof}
+
+\begin{remark}
+Some remarks on Example~\ref{ex:conditional_expectation_with_random_variables_that_are_discrete_or_absolutely_continuous} (a):
+\begin{enumerate}
+\item We can motivate \Eqref{eqn:conditional_expectation_with_discrete_conditioning_variable} as follows.  First, recall from the section with conditional \textit{probability}, that  \Eqref{eqn:conditional_probability_when_conditioning_variable_is_discrete} gave the following result when the conditioning variable is discrete.  For all $B \in \F$,
+\[ P(B \cond X=x_i) = \df{P(B \cap \set{X=x_i})}{P\set{X=x_i}}.\]
+We would therefore expect that the expectation of the indicator function $\indicate{B}$ would be given by 
+\[ \E[\indicate{B} \cond X=x_i] = \df{1}{P\set{X=x_i}} \int_{\set{X=x_i}} \indicate{B} \wrt{P}.\]
+Proceeding from indicators to simple functions to non-negative Borel measurable functions to arbitrary Borel measurable functions, we expect
+\[ \E[Y \cond X=x_i] = \df{1}{P\set{X=x_i}} \int_{\set{X=x_i}} Y \wrt{P}.\]
+\item Let $B \in \F$ and assume $P(B)>0$.  If $\E[Y]$ exists, we can define the \textbf{conditional expectation of Y given B} as follows.  Set $X=\indicate{B}$, and set $E[Y \cond X=1]$.  Then by a special case of Example~\ref{ex:conditional_expectation_with_random_variables_that_are_discrete_or_absolutely_continuous} (a), we obtain 
+\[ \E[Y \cond B] = \frac{1}{P(B)} \int_B Y \wrt{P}  = \frac{\E[Y \indicate{B}]}{P(B)} \]
+\end{enumerate}
+\end{remark}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
