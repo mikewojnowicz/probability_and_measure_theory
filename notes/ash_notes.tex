@@ -6673,7 +6673,7 @@ where $C(x)$ the section of $C$ at $x$.
 \begin{figure}[H]
 \centering
 \includegraphics[angle=90, width=.6\textwidth]{images/cross_section_of_rectangle}
-\caption{\textit{Cross section of a measurable rectangle.} Let $(\mathcal{X} \times \mathcal{Y}, \mathcal{A} \times \mathcal{B})$ be a measurable space. Let $C=A \times B$ be a measurable rectangle, where $A \in \mathcal{A}$ and $B \in \mathcal{B}$. .}
+\caption{\textit{Cross section of a measurable rectangle.} Let $(\mathcal{X} \times \mathcal{Y}, \mathcal{A} \times \mathcal{B})$ be a measurable space. Let $C=A \times B$ be a measurable rectangle, where $A \in \mathcal{A}$ and $B \in \mathcal{B}$.}
 \label{fig:cross_sections_of_rectangles}
 \end{figure}
 
@@ -7080,6 +7080,24 @@ where
 \end{figure}
 
 
+\begin{proof} 
+We verify the two conditions for conditional expectation with respect to a $\sigma$-field.
+
+\begin{enumerate}
+	\item $X$ is measurable with respect to $\sigma(X)$ by definition, and $g$ is measurable with respect to $\F'$ by Thm.~\ref{thm:existence_of_conditional_expectation}. So $h=g \circ X$ is measurable w.r.t $\sigma(X)$ since the composition of two measurable functions is measurable (Prop.~\ref{prop:a_composition_of_Borel_measurable_functions_is_measurable}). 
+\item \;
+%
+\begin{align*}
+\int_{\set{X \in A}} h(\omega) \wrt{P(\omega)} &= \int_{\set{X \in A}} g(X(\omega)) \wrt{P(\omega)} && \tinytext{def. $h$} \\
+&= \int_A g(x) \wrt{P_X(x)} && \tinytext{LOTUS} \\
+&= \int_{\set{X \in A}} Y \wrt{P} && \tinytext{Assumption that $g$ satisfies Thm.~\ref{thm:existence_of_conditional_expectation}.} 	
+\end{align*}
+\end{enumerate}
+
+
+\end{proof}
+
+
 \begin{notation}
 In Prop.~\ref{prop:conditional_expectation_wrt_sigma_field_induced_by_another_random_variable}, we take the conditional expectation with respect to a particular choice of $\sigma$-field $\G = \sigma(X)$.  In this case, we notate
 \[ \E[Y \cond \G] = \E[Y \cond \sigma(X)]  \quad \text{by} \quad \E[Y \cond X].\]
@@ -7092,9 +7110,6 @@ Note that $\E[Y \cond X]$ and $\E[Y \cond X=x]$ both give the conditional expect
 
 \end{notation}
 
-\begin{proof}
-See \cite[pp.216]{ash2000probability}. \red{TODO: Give proof. It's just LOTUS.}
-\end{proof}
 
 \begin{example}
 \begin{align*}
