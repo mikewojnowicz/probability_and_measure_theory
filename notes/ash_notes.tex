@@ -6258,6 +6258,41 @@ P_{g(X)}&[g_1(X_1) \in B_1, \hdots g_n(X_n) \in B_n]\\
 The conclusion of Prop.~\ref{prop:functions_of_independent_random_variables_are_independent} applies more generally even if each $X_i$ is a  \textit{random object}.  Random objects are relaxations of random variables that allow $X_i$ to map to any measurable space (not just the reals equipped with the Borel sets).  In this context, we have $(\Omega, \F, P) \stackrel{X_i}{\to} (\Omega_i, \F_i) \stackrel{g_i}{\to} (\Omega_i', \F_i')$.
 \end{remark}
 
+We now turn to independence of random variables and $\sigma$-fields, which will we important when we discuss conditional expectations with respect to a $\sigma$-field.
+
+\begin{definition}\remarktitle{Independence of a random variable and a $\sigma$-field.}
+We say that a random variable $Y$ on $(\Omega, \F)$ and a $\sigma$-field $\G \subset \F$ are independent (denoted $Y \indep \G$) if 
+\begin{align*}
+\forall B \in \B(\R), \quad G \in \G: & \\
+P\big(\set{Y \in B} \cap G \big) = P\big(\set{Y \in B}) \; P(G)
+\end{align*}
+\label{def:independence_of_random_variable_and_sigma_field}
+\end{definition}
+
+\begin{proposition}\remarktitle{A random variable is independent from an indicator for any set belonging to a sigma field that is independent from that random variable.}
+If $Y \indep \G$, then $Y \indep \indicate{G}$ \; for all $G \in \G$.
+\label{prop:a_random_variable_is_independent_from_an_indicator_for_any_set_belonging_to_a_sigma_field_that_is_independent_from_the_random_variable}
+\end{proposition}
+
+\begin{proof}
+By Def.~\ref{def:independence_of_random_variables}, we need to show that for all sets $B_1, B_2 \in \B(\R)$, we have 
+\begin{align*}
+P\set{Y \in B_1, \indicate{G} \in B_2} = P\set{Y \in B_1} P\set{\indicate{G} \in B_2} && (*)
+\end{align*}	
+But
+\begin{align*}
+\set{\indicate{G} \in B} &= 
+\begin{cases}
+\Omega, & \text{ if } 0 \in B, 1 \in B \\	
+G, & \text{ if } 0 \not\in B, 1 \in B \\	
+G^c, & \text{ if } 0 \in B, 1 \not\in B \\	
+\emptyset, & \text{ if } 0 \not\in B, 1 \not\in B 
+\end{cases}
+\end{align*}
+So (*) holds by the definition of independence of a random variable and a $\sigma$-field (Def.~\ref{def:independence_of_random_variable_and_sigma_field}).
+\end{proof}
+
+
 \subsection{$\S$ 4.10 Expectation}
 
 \begin{definition}
@@ -6492,7 +6527,8 @@ where (*) holds since $|X|^k \geq |X|^j$ on the set $\set{|X|^j \geq 1}$, becaus
 
 
 \begin{theorem}
-Let $X_1, \hdots, X_n$ be independent random variables on $(\Omega, \F, P)$.   If all the $X_i$ are nonnegative or if $E(X_i)$ is finite for all $i$, then $E(X_1 \cdots X_n)$ exists and equals $E(X_1)E(X_2)\cdots E(X_n)$.  
+Let $X_1, \hdots, X_n$ be independent random variables on $(\Omega, \F, P)$.   If all the $X_i$ are nonnegative or if $E(X_i)$ is finite for all $i$, then $E(X_1 \cdots X_n)$ exists and equals $E(X_1)E(X_2)\cdots E(X_n)$.
+\label{thm:expectations_of_independent_random_variables_factorize}  
 \end{theorem}
 
 \begin{proof}
@@ -6942,18 +6978,12 @@ Note that the theorem actually gives \textit{two} conditions for a function $h$ 
 	\item $\int_G Y \wrt{P} = \int_G h \wrt{P}$ for all $G \in \G$.
 \end{enumerate}
 
-Although condition (2) always holds for $h=Y$, condition (1) does not generally hold for a   sub-$\sigma$-field $\G \subset \F$. For instance, let $(\Omega, \F) = (\overline{\R}, \B(\overline{\R}))$, and let $Y$ be the identity function.  Define $\G \subsetneq \F$ by $\G = \set{\emptyset, A, A^c, \overline{\R}}$ for $A \subsetneq \overline{\R}$.  Let $B$ be any Borel set that is not in $\G$.  Then $Y^{-1}(B) = B \not\in \G$ and so condition (1) fails. 
+Although condition (2) always holds for $h=Y$, condition (1) does not generally hold for a $\sigma$-field $\G \subset \F$. That is, $Y$ will not in general be measurable w.r.t a $\sigma$-field $\G \subset \F$. 
+
+{\scriptsize (For instance, let $(\Omega, \F) = (\overline{\R}, \B(\overline{\R}))$, and let $Y$ be the identity function.  Define $\G \subsetneq \F$ by $\G = \set{\emptyset, A, A^c, \overline{\R}}$ for $A \subsetneq \overline{\R}$.  Let $B$ be any Borel set that is not in $\G$.  Then $Y^{-1}(B) = B \not\in \G$ and so condition (1) fails.)} 
 \label{rk:two_conditions_for_existence_of_conditional_expectation_with_respect_to_a_sigma_field} 
 \end{remark}
 
-\begin{definition}\remarktitle{Independence of a random variable and a $\sigma$-field.}
-We say that a random variable $Y$ and a $\sigma$-field $\F$ are independent if 
-\begin{align*}
-\forall B \in \B(\R), \quad A \in \F: & \\
-P\big(\set{Y \in B} \cap A \big) = P\big(\set{Y \in B}) \; P(A)
-\end{align*}
-\label{def:independence_of_random_variable_and_sigma_field}
-\end{definition}
 
 \begin{examples}
 Now we give some examples of conditional expectation with respect to a $\sigma$-field.
@@ -6962,7 +6992,7 @@ Now we give some examples of conditional expectation with respect to a $\sigma$-
 \item \textit{No information}.\footnote{See \cite[pp.223]{durrett2010probability}.} If $Y$ is independent of a $\sigma$-field $\G \subsetneq \F$ (see Def.~\ref{def:independence_of_random_variable_and_sigma_field}), then $\E[Y \cond \G] = \E[Y]$.  (That is, if we don't know anything about $Y$, then our best guess is the mean $\E[Y]$.)
 \item  \red{TODO: Add the Ash example of vertical stripes.}
 \end{alphabate}
-
+\label{ex:examples_with_conditional_expectation_wrt_sigma_field}
 \end{examples}
 
 \begin{proof}
@@ -6985,10 +7015,38 @@ Condition (2) is satisfied since $\forall G \in \G$,
 & \stackexplain{constant multiple}{=}  \int_\Omega \E[Y] \indicate{G} \wrt{P}  \\
 & \stackexplain{notation}{=}  \int_G \E[Y] \wrt{P}
 \end{align*}
-\red{TODO: Explain why independence holds here.  State failure cases for the other examples.}
+In particular, the equality involving independence holds by Prop.~\ref{prop:a_random_variable_is_independent_from_an_indicator_for_any_set_belonging_to_a_sigma_field_that_is_independent_from_the_random_variable} and Thm.~\ref{thm:expectations_of_independent_random_variables_factorize}.
 \end{alphabate}	
 \end{proof}
 
+\begin{remark}
+Here we provide further insight on conditional expectations with respect to $\sigma$-fields in the \textit{perfect information} and \textit{no information} cases.  In particular, we show that the solutions for each doesn't work for the other case. 
+
+That is, if $Y$ is a random variable on $(\Omega, \F)$, we show that in general
+\begin{enumerate}
+	\item $\E[Y \cond \G] \neq Y$ for $\sigma$-field $\G \subset \F$. 
+	\item $\E[Y \cond \F] \neq \E[Y]$.
+\end{enumerate}
+For (1), see Remark~\ref{rk:two_conditions_for_existence_of_conditional_expectation_with_respect_to_a_sigma_field}.  In particular, condition (1) fails: $Y$ will not in general be $\G$-measurable in general.
+
+For (2), condition (2) fails in general.  For instance, let $(\Omega, \F)=(\R, \B(\R))$.  We will show that, in general,
+\[ \int_B Y \wrt{P} \neq \int_B \E[Y] \wrt{P} \quad \quad (*) \]  
+
+First we analyze the RHS.  Note that $\int_B \E[Y] \wrt{P} = \E[Y] P(B)$ by the constant multiple property. 
+
+Now we analyze the LHS. Take $B=\set{x}, x \in \R$.  By integrals for simple functions, we obtain $\int_B Y \wrt{P} = Y(x) P\set{x}$.
+
+So all together, (*) becomes 
+\begin{align*}
+(*) \implies & Y(x) P\set{x} = \E[Y] P\set{x} \quad \quad \forall x \in \R \\
+\implies  & Y(x)= \E[Y]  \quad \quad  \forall x \in \R.	
+\end{align*}
+which holds only if $Y$ is constant.
+\end{remark}
+
+%{ex:examples_with_conditional_expectation_wrt_sigma_field}
+
+%{rk:two_conditions_for_existence_of_conditional_expectation_with_respect_to_a_sigma_field} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
