@@ -6936,14 +6936,59 @@ The result follows by Radon-Nikodym.
 One might wonder why Thm.~\ref{thm:existence_of_conditional_expectation_given_a_sigma_field} doesn't always yield that $\E[Y \cond \G] = Y$, since after all it is always true that
 \[  \int_G Y \wrt{P} = \int_G Y \wrt{P}.\]
 
-Note that the theorem actually gives \textit{two} conditions for $h$ to be the conditional expectation given a $\sigma$-field $\G$:
+Note that the theorem actually gives \textit{two} conditions for a function $h$ on $(\Omega, \G)$ to be the conditional expectation given a $\sigma$-field $\G$:
 \begin{enumerate}
 	\item $h$ is measurable with respect to $\G$.  {\scriptsize (That is, we must have $h^{-1}(B) \in \G$ for all $B \in \B(\overline{\R})$).}
 	\item $\int_G Y \wrt{P} = \int_G h \wrt{P}$ for all $G \in \G$.
 \end{enumerate}
 
-Although condition (2) always holds for $h=Y$, condition (1) does not generally hold for a   sub-$\sigma$-field $\G \subset \F$. For instance, let $(\Omega, \F) = (\overline{\R}, \B(\overline{\R}))$, and let $Y$ be the identity function.  Define $\G \subsetneq \F$ by $\G = \set{\emptyset, A, A^c, \overline{\R}}$ for $A \subsetneq \overline{\R}$.  Let $B$ be any Borel set that is not in $\G$.  Then $Y^{-1}(B) = B \not\in \G$ and so condition (1) fails.  
+Although condition (2) always holds for $h=Y$, condition (1) does not generally hold for a   sub-$\sigma$-field $\G \subset \F$. For instance, let $(\Omega, \F) = (\overline{\R}, \B(\overline{\R}))$, and let $Y$ be the identity function.  Define $\G \subsetneq \F$ by $\G = \set{\emptyset, A, A^c, \overline{\R}}$ for $A \subsetneq \overline{\R}$.  Let $B$ be any Borel set that is not in $\G$.  Then $Y^{-1}(B) = B \not\in \G$ and so condition (1) fails. 
+\label{rk:two_conditions_for_existence_of_conditional_expectation_with_respect_to_a_sigma_field} 
 \end{remark}
+
+\begin{definition}\remarktitle{Independence of a random variable and a $\sigma$-field.}
+We say that a random variable $Y$ and a $\sigma$-field $\F$ are independent if 
+\begin{align*}
+\forall B \in \B(\R), \quad A \in \F: & \\
+P\big(\set{Y \in B} \cap A \big) = P\big(\set{Y \in B}) \; P(A)
+\end{align*}
+\label{def:independence_of_random_variable_and_sigma_field}
+\end{definition}
+
+\begin{examples}
+Now we give some examples of conditional expectation with respect to a $\sigma$-field.
+\begin{alphabate}
+\item \textit{Perfect information}.\footnote{See \cite[pp.223]{durrett2010probability}.} $\E[Y \cond \F] =Y$.  (That is, if we know $Y$, then our ``best guess" is Y itself.)
+\item \textit{No information}.\footnote{See \cite[pp.223]{durrett2010probability}.} If $Y$ is independent of a $\sigma$-field $\G \subsetneq \F$ (see Def.~\ref{def:independence_of_random_variable_and_sigma_field}), then $\E[Y \cond \G] = \E[Y]$.  (That is, if we don't know anything about $Y$, then our best guess is the mean $\E[Y]$.)
+\item  \red{TODO: Add the Ash example of vertical stripes.}
+\end{alphabate}
+
+\end{examples}
+
+\begin{proof}
+For each example, we check that the two conditions of  Remark~\ref{rk:two_conditions_for_existence_of_conditional_expectation_with_respect_to_a_sigma_field} are satisfied.
+\begin{alphabate}
+\item Condition (1) is satisfied automatically, since $Y$ is a random variable, and therefore measurable by definition.  
+
+Condition (2) is satisfied since $\int_F Y \wrt{P} = \int_F Y \wrt{P}$ for all $F \in \F$.
+\item Condition (1) is satisfied.  $h(\omega) = \E[Y] :=c$ is constant in $\omega$.  So for all $B \in \B(\overline{\R})$, 
+\[h^{-1}(B) = 
+\begin{cases}
+\Omega, & \text{ if } \; c \in B \\
+\emptyset, & \text{ if } \; c \not\in B	
+\end{cases}. \]
+Now $\set{\emptyset, \Omega}$ are contained in \textit{any} $\sigma$-field, so $h(\omega)=\E[Y]$ is measurable with respect to \textit{any} $\G \subset \F$. 
+
+Condition (2) is satisfied since $\forall G \in \G$,
+\begin{align*}
+\int_G Y \wrt{P} & \stackexplain{notation}{=} \E[Y \indicate{G}] \stackexplain{independence}{=} \E[Y] \E[\indicate{G}] \stackexplain{notation}{=} \E[Y] \int_\Omega \indicate{G} \wrt{P}   \\
+& \stackexplain{constant multiple}{=}  \int_\Omega \E[Y] \indicate{G} \wrt{P}  \\
+& \stackexplain{notation}{=}  \int_G \E[Y] \wrt{P}
+\end{align*}
+\red{TODO: Explain why independence holds here.  State failure cases for the other examples.}
+\end{alphabate}	
+\end{proof}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
