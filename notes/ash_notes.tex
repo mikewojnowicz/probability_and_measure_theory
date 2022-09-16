@@ -2799,7 +2799,7 @@ where $f$ is a Borel measurable function and where $\int_\Omega f \dmu$ exists.
 \end{definition}
 
 \begin{theorem}{\textbf{Indefinite integrals are countably additive set functions.}}
-Let $f$ be a Borel measurable function such that $\int_\Omega f \wrt{\mu}$ exists.  Define $\lambda(B) = \int_B f \wrt{\mu}$, $B \in \F$.  Then $\lambda$ is countably additive on $\F$; thus if $f \geq 0$, $\lambda$ is a measure.	
+Let $f$ be a Borel measurable function on $(\Omega, \F)$ such that $\int_\Omega f \wrt{\mu}$ exists.  Define $\lambda(B) = \int_B f \wrt{\mu}$, $B \in \F$.  Then $\lambda$ is countably additive on $\F$; thus if $f \geq 0$, $\lambda$ is a measure.	
 \label{thm:integrals_are_countably_additive_set_functions}
 \end{theorem}
 
@@ -6076,7 +6076,7 @@ If $X$ is a random variable on  $(\Omega, \F, P)$, the \textbf{probability measu
 \end{definition}
 
 \begin{remark}{\remarktitle{Random variables induce pushforward measures.}}
-The probability measure induced by a random variable, as described in  Def.~\ref{def:probability_measure_induced_by_a_random_variable}, is known as a pushforward measure.  Other ways to denote $P_X$ are therefore $X_*(P)$, $X\#P$, or $P \circ X^{-1}$.  	
+The probability measure induced by a random variable, as described in  Def.~\ref{def:probability_measure_induced_by_a_random_variable}, is also known as a \textit{pushforward measure} (or sometimes \textit{image measure}).  Other ways to denote $P_X$ which tend to correspond the ``pushforward" terminology are $X_*(P)$, $X\#P$, or $P \circ X^{-1}$.  	
 \end{remark}
 
 
@@ -6669,13 +6669,13 @@ In Sec.~\ref{sec:intro_to_conditional_probability}, we illustrated how the exten
 In this section, we work \textit{the other way}.  Here, given the marginal distribution  $P_X$ and the joint distribution, we will determine the conditional distribution.
 
 
-\begin{theorem}\textbf{Existence of conditional probability measure.}
+\begin{theorem}\textbf{Conditional probability measure exists and is essentially unique.}
 Let $X: (\Omega, \F) \to  (\Omega', \F')$ be a random object on $(\Omega, \F, P)$.  Let $B$ be a fixed set in $\F$.   Then there is a real-valued Borel measurable function $g$ on $(\Omega', \F')$ such that for each $A \in \F'$, 
 \begin{align}
 P( \set{X \in A} \cap B) = \int_A g(x) \, dP_X(x)
 \label{eqn:existence_of_conditional_probability_measure}	
 \end{align}
-Furthermore, if $h$ is another such function, then $g=h$ a.e. $[P_X]$.  We define the \textbf{conditional pribability measure} by $P(B \cond X=x) = g(x)$; it is essentially unique \textnormal{for a given $B$}.
+Furthermore, if $h$ is another such function, then $g=h$ a.e. $[P_X]$.  We define the \textbf{conditional probability measure} by $P(B \cond X=x) = g(x)$; it is essentially unique \textnormal{for a given $B$}.
 \label{thm:existence_of_conditional_probability_measure}
 \end{theorem}
 
@@ -6699,6 +6699,14 @@ Then $\lambda$ is
 \end{itemize}
 The result then follows from the Radon-Nikodym theorem.
 \end{proof}
+
+\begin{notation}
+In Theorem~\ref{thm:existence_of_conditional_probability_measure}, given a random object $X:(\Omega, \F, P) \to (\Omega', \F')$ and some set $A \in \F'$, we use the notation $\set{X \in A}$. 
+
+The interpretation is:
+\[ \set{X \in A} := X^{-1}(A) = \set{\omega \in \Omega : X(\omega) \in A}\]	
+\end{notation}
+
 
 \begin{remark}
 If we choose $A = \Omega'$ in Theorem~\ref{thm:existence_of_conditional_probability_measure}, then \Eqref{eqn:existence_of_conditional_probability_measure} becomes
@@ -6759,7 +6767,7 @@ and $g(x_i) = P(B \cond X=x_i)$ by definition.
 
 \subsection{$\S$ 5.3.3-5.3.5 Conditional Expectation}
 
-\begin{theorem}\textbf{Existence of conditional expectation.} \\
+\begin{theorem}\textbf{The conditional expectation exists and is essentially unique.} \\
 Let
 \begin{align*}
 (\Omega, &\F, P) \; \text{ be a probability space}	\\
@@ -6812,7 +6820,7 @@ Thus, $g$ exists (uniquely a.e. $P_X$) by the Radon-Nikodym Theorem.
 
 
 \begin{question}
-Can we better motivate the equality defining conditional expectation in Thm.~\ref{thm:existence_of_conditional_expectation}?  For example, why do we not define $\E[Y \cond X=x]$ as the function $g(x)$ satisfying 
+Can we better motivate the equality defining conditional expectation in Thm.~\ref{thm:existence_of_conditional_expectation}?\footnote{I find the motivation provided by \cite[pp.209, bottom]{ash2000probability} to be confusing.}  For example, why do we not define $\E[Y \cond X=x]$ as the function $g(x)$ satisfying 
 \[ \E[Y] = \int_{\Omega'} g(x) \wrt{P_X(x)} \]
 rather than 
 \[ \E[Y \indicate{\set{X \in A}}] = \int_{A} g(x) \wrt{P_X(x)} \quad ? \]	
@@ -6892,10 +6900,50 @@ Proceeding from indicators to simple functions to non-negative Borel measurable 
 \[ \E[Y \cond X=x_i] = \df{1}{P\set{X=x_i}} \int_{\set{X=x_i}} Y \wrt{P}.\]
 \item Let $B \in \F$ and assume $P(B)>0$.  If $\E[Y]$ exists, we can define the \textbf{conditional expectation of Y given B} as follows.  Set $X=\indicate{B}$, and set $E[Y \cond X=1]$.  Then by a special case of Example~\ref{ex:conditional_expectation_with_random_variables_that_are_discrete_or_absolutely_continuous} (a), we obtain 
 \[ \E[Y \cond B] = \frac{1}{P(B)} \int_B Y \wrt{P}  = \frac{\E[Y \indicate{B}]}{P(B)} \]
+We can interpret this quantity as the average value of $Y$ over $B$ \cite[pp.224]{durrett2010probability}.
 \end{enumerate}
 \end{remark}
 
 
+\subsection{$\S$ 5.4 Conditional expectation given a $\sigma$-field}
+
+\begin{theorem}\textbf{(Conditional expectation given a $\sigma$-field exists and is essentially unique.)} \\
+Let 
+\begin{align*}
+	Y: & \quad (\Omega, \F, P) \to \big(\overline{\R}, \B(\overline{\R}) \big) \\
+	\E[Y] & \quad \text{exist}. 
+\end{align*}
+Then for all $\sigma$-fields $\G \subseteq \F$,
+\begin{align*}	
+\exists \quad \text{ function } \quad & \E[Y \cond \G]	: (\Omega, \G) \to \big(\overline{\R}, \B(\overline{\R}) \big)  : \\
+& \int_G Y \wrt{P} = \int_G \E[Y \cond \G] \wrt{P} \quad \quad \forall G \in \G.  
+\end{align*}
+Moreover, any two such functions coincide a.e. $[P]$.
+\label{thm:existence_of_conditional_expectation_given_a_sigma_field}
+\end{theorem}
+
+\begin{proof}
+Define $\lambda(G) = \int_G Y \wrt{P}$ for all $G \in \G$. Then 
+\begin{itemize}
+\item $\lambda$ is a countably additive set function \underline{on $\G$}. \footnote{Note that if we had defined $\lambda$ on $\F$ instead of  $\G (\subseteq \F)$, the definition of $\E[Y \cond \F]$ just gives $Y$ back; see the example below.}   {\scriptsize (Indefinite integrals are countably additive set functions.  See Thm~\ref{thm:integrals_are_countably_additive_set_functions}.)}
+\item $\lambda \ll P$.  {\scriptsize (Indefinite integrals are absolutely continuous. See Remark~\ref{rk:indefinite_integrals_are_absolutely_continuous}.)}
+\end{itemize}
+The result follows by Radon-Nikodym.
+\end{proof}
+
+
+\begin{remark}\remarktitle{The \underline{two} conditions for existence of conditional expectation with respect to a $\sigma$-field.}
+One might wonder why Thm.~\ref{thm:existence_of_conditional_expectation_given_a_sigma_field} doesn't always yield that $\E[Y \cond \G] = Y$, since after all it is always true that
+\[  \int_G Y \wrt{P} = \int_G Y \wrt{P}.\]
+
+Note that the theorem actually gives \textit{two} conditions for $h$ to be the conditional expectation given a $\sigma$-field $\G$:
+\begin{enumerate}
+	\item $h$ is measurable with respect to $\G$.  {\scriptsize (That is, we must have $h^{-1}(B) \in \G$ for all $B \in \B(\overline{\R})$).}
+	\item $\int_G Y \wrt{P} = \int_G h \wrt{P}$ for all $G \in \G$.
+\end{enumerate}
+
+Although condition (2) always holds for $h=Y$, condition (1) does not generally hold for a   sub-$\sigma$-field $\G \subset \F$. For instance, let $(\Omega, \F) = (\overline{\R}, \B(\overline{\R}))$, and let $Y$ be the identity function.  Define $\G \subsetneq \F$ by $\G = \set{\emptyset, A, A^c, \overline{\R}}$ for $A \subsetneq \overline{\R}$.  Let $B$ be any Borel set that is not in $\G$.  Then $Y^{-1}(B) = B \not\in \G$ and so condition (1) fails.  
+\end{remark}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
