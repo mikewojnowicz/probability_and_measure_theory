@@ -7087,7 +7087,8 @@ where
 \begin{figure}[H]
 \centering
 \includegraphics[width=.6\linewidth]{images/conditional_expectation_wrt_sigma_field_induced_by_RV}
-\caption{\textit{The conditional expectation of $Y$ with respect to $\sigma(X)$, the $\sigma$-field induced by the random variable $X$.} Note that $\sigma(X) \subset \F$. The two functions on the diagonals must integrate to the same value over sets in $\sigma(X)$, but the conditional expectation must also be measurable with respect to $\sigma(X)$.}	
+\caption{\textit{The conditional expectation of $Y$ with respect to $\sigma(X)$, the $\sigma$-field induced by the random variable $X$.} Note that $\sigma(X) \subset \F$. The two functions on the diagonals must integrate to the same value over sets in $\sigma(X)$, but the conditional expectation must also be measurable with respect to $\sigma(X)$.}
+\label{fig:conditional_expectation_with_respect_to_a_sigma_field_induced_by_another_random_variable}	
 \end{figure}
 
 
@@ -7134,7 +7135,7 @@ By the same argument, we can also write:
 \E[Y \cond \sigma(Y)] = Y
 \label{eqn:perfect_information_a_stronger_statement}	
 \end{align}
-\Eqref{eqn:perfect_information_a_stronger_statement}	is stronger than \Eqref{eqn:perfect_information_again}; all knowledge about $Y$ is encoded in $\sigma(Y)$; any other set in $\F$ provides no value.  
+\Eqref{eqn:perfect_information_a_stronger_statement}	is stronger than \Eqref{eqn:perfect_information_again}; all knowledge about $Y$ is encoded in $\sigma(Y)$; any other set in $\F$ provides no value.\footnote{Similarly, if some other $\sigma$-field $\F' \supset \F$, then $\E[Y \cond \F'] = Y$.  That is, we already know everything there is to know about $Y$ from $\F$, no knowledge can be added (or lost) by moving to the larger $\sigma$-field $\F'$.  This fact can be proven immediately by verifying the two conditions in the definition of conditional expectation given a $\sigma$-field.  Or, the argument can be made more compact by noting simply that if $Y$ is a random variable on $(\Omega, \F, P)$, then it is also a random variable on $(\Omega, \F', P)$.} 
 
 Using Notation~\ref{notation:conditional_expectation_of_random_variable_given_another_random_variable}, \Eqref{eqn:perfect_information_a_stronger_statement} would be expressed in self-suggestive manner: $\E[Y \cond Y] = Y$.
 \end{remark}
@@ -7162,8 +7163,39 @@ By Prop.~\ref{prop:conditional_expectation_wrt_sigma_field_induced_by_another_ra
 \[g(x) = \E[Y \cond X=x] = \int_{-\infty}^\infty y h(y \cond x) \wrt{y}\]
 where $h(y \cond x)=\frac{f(x,y)}{f_1(x)} = \frac{f(x,y)}{\int_{-\infty}^\infty f(x,y) \wrt{y} }$ is the conditional density of $y$ given $x$. } \] 
 
-So $\E[Y \cond X]$ is constant on vertical strips of $\Omega=\R^2$,\redfootnote{But when is this \textit{not} true?} and the only sets $G \in \sigma(X)$ that we would want to interrogate to obtain knowledge about $Y$ are singleton sets of the form $G=\set{x}, x \in \R$.
+So $\E[Y \cond X]$ is constant on vertical strips of $\Omega=\R^2$, and the only sets $G \in \sigma(X)$ that we would want to interrogate to obtain knowledge about $Y$ are sets of the form $\set{x \times \R, x \in \R}$.\redfootnote{But when is this \textit{not} true?  Is this just a true statement in general, or is there something about having a joint density that matters here?}  
 \end{example}
+
+\subsection{$\S$ 5.5 Properties of conditional expectation}
+
+Here we provide some properties of conditional expectation.  Let $Y$ be an extended random variable on $(\Omega, \F, P)$  with $\E[Y]$ assumed to exist, $X : (\Omega, \F) \to  (\Omega', \F')$ be a random object, and $\G$ a sub-$\sigma$-field of $\F$.   \citet{ash2000probability} presents properties of conditional expectation in pairs, so that we can work with either $\E[Y \cond \G]$ (which has $\E[Y \cond X]$ as a special case)   or $\E[Y \cond X = x]$.  To represent the distinction between $\E[Y \cond X]$ and $\E[Y \cond X = x]$ , we give a small variant of Fig.~\ref{fig:conditional_expectation_with_respect_to_a_sigma_field_induced_by_another_random_variable} below in Fig.~\ref{fig:two_types_of_conditional_expectation_given_another_random_variable}.  We can consider $\E[Y \cond X=x]$ as our ``best guess" of $Y$ given that $X=x$, and $\E[Y \cond X]$ as our ``best guess" of $Y$ given that all we know about observed outcome $\omega$ is whether or not $\omega$ belongs to each set in $\sigma(X)$.
+
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.6\linewidth]{images/two_types_of_conditional_expectation_given_a_random_object}
+\caption{\textit{Two types of conditional expectation given a random object.}   Given a random variable $Y$ and random object $X$ defined on the same probability space, we can consider the conditional expectation to be either  $\E[Y \cond X]$ or $\E[Y \cond X=x]$.   These functions are defined on different spaces: $\E[Y \cond X]$ is defined on $\Omega$ and $\E[Y \cond X=x]$ is defined on $\Omega'$.  They share that they both must be measurable, and both must match integrals of $Y$: (1)  Comparing the two diagonal lines, we need $\int_A \E[Y \cond X] \wrt{P} = \int_A Y \wrt{P}$  for all $A \in \sigma(X)$. (2) Comparing the vertical line to the top diagonal, we need $\int_B \E[Y \cond X=x] \wrt{P_X} = \int_{X^{-1}(B)} Y \wrt{P}$ for any $B \in \F'$.  We can consider $\E[Y \cond X=x]$ as our ``best guess" of $Y$ given that $X=x$, and $\E[Y \cond X]$ as our ``best guess" of $Y$ given that all we know about observed outcome $\omega$ is whether or not $\omega$ belongs to each set in $\sigma(X)$.}
+\label{fig:two_types_of_conditional_expectation_given_another_random_variable}	
+\end{figure}
+
+
+Although the functions $\E[Y \cond \G]$ and $\E[Y \cond X = x]$ were defined implicitly as integrands, the expectation notation is presumably justified by the fact that they ``behave" like expectations.  In particular, we have
+\begin{itemize}
+\item Monotonicity \cite[Thm. 5.5.1b]{ash2000probability}.
+\item Linearity \cite[Thm. 5.5.2]{ash2000probability}.	
+\item Monotone convergence theorem, and the fact that non-negative series can be integrated term-by-term  \cite[Thm. 5.5.3]{ash2000probability}.
+\item Dominated convergence theorem \cite[Thm. 5.5.5]{ash2000probability}.
+\item Extended monotone convergence theorem, and Fatou's lemma \cite[Thm. 5.5.6]{ash2000probability}.
+\end{itemize}
+
+Conditional expectations also have properties that have no analogue for ``ordinary" expectation:
+
+\begin{itemize}
+\item The law of iterated expectation \cite[Thm. 5.5.4]{ash2000probability}.	
+\item \red{Needs name} \cite[Thm. 5.5.10]{ash2000probability}.
+\item  \red{Needs name}  \cite[Thm. 5.5.11]{ash2000probability}.
+\end{itemize}
 
 
 
