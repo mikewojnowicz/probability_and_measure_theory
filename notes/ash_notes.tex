@@ -7166,9 +7166,11 @@ where $h(y \cond x)=\frac{f(x,y)}{f_1(x)} = \frac{f(x,y)}{\int_{-\infty}^\infty 
 So $\E[Y \cond X]$ is constant on vertical strips of $\Omega=\R^2$, and the only sets $G \in \sigma(X)$ that we would want to interrogate to obtain knowledge about $Y$ are sets of the form $\set{x \times \R, x \in \R}$.\redfootnote{But when is this \textit{not} true?  Is this just a true statement in general, or is there something about having a joint density that matters here?}  
 \end{example}
 
-\subsection{$\S$ 5.5 Properties of conditional expectation}
+\subsection{$\S$ 5.5 Properties of conditional expectation} \label{sec:properties_of_conditional_expectation}
 
-Here we provide some properties of conditional expectation.  Let $Y$ be an extended random variable on $(\Omega, \F, P)$  with $\E[Y]$ assumed to exist, $X : (\Omega, \F) \to  (\Omega', \F')$ be a random object, and $\G$ a sub-$\sigma$-field of $\F$.   \citet{ash2000probability} presents properties of conditional expectation in pairs, so that we can work with either $\E[Y \cond \G]$ (which has $\E[Y \cond X]$ as a special case)   or $\E[Y \cond X = x]$.  To represent the distinction between $\E[Y \cond X]$ and $\E[Y \cond X = x]$ , we give a small variant of Fig.~\ref{fig:conditional_expectation_with_respect_to_a_sigma_field_induced_by_another_random_variable} below in Fig.~\ref{fig:two_types_of_conditional_expectation_given_another_random_variable}.  We can consider $\E[Y \cond X=x]$ as our ``best guess" of $Y$ given that $X=x$, and $\E[Y \cond X]$ as our ``best guess" of $Y$ given that all we know about observed outcome $\omega$ is whether or not $\omega$ belongs to each set in $\sigma(X)$.
+\subsubsection{Overview}
+
+Here in Sec.~\ref{sec:properties_of_conditional_expectation} we provide some properties of conditional expectation.  Let $Y$ be an extended random variable on $(\Omega, \F, P)$  with $\E[Y]$ assumed to exist, $X : (\Omega, \F) \to  (\Omega', \F')$ be a random object, and $\G$ a sub-$\sigma$-field of $\F$.   \citet{ash2000probability} presents properties of conditional expectation in pairs, so that we can work with either $\E[Y \cond \G]$ (which has $\E[Y \cond X]$ as a special case)   or $\E[Y \cond X = x]$.  To represent the distinction between $\E[Y \cond X]$ and $\E[Y \cond X = x]$ , we give a small variant of Fig.~\ref{fig:conditional_expectation_with_respect_to_a_sigma_field_induced_by_another_random_variable} below in Fig.~\ref{fig:two_types_of_conditional_expectation_given_another_random_variable}.  We can consider $\E[Y \cond X=x]$ as our ``best guess" of $Y$ given that $X=x$, and $\E[Y \cond X]$ as our ``best guess" of $Y$ given that all we know about observed outcome $\omega$ is whether or not $\omega$ belongs to each set in $\sigma(X)$.
 
 
 
@@ -7184,6 +7186,7 @@ Although the functions $\E[Y \cond \G]$ and $\E[Y \cond X = x]$ were defined imp
 \begin{itemize}
 \item Monotonicity \cite[Thm. 5.5.1b]{ash2000probability}.
 \item Linearity \cite[Thm. 5.5.2]{ash2000probability}.	
+\item The triangle inequality for integrals \cite[Thm. 5.5.1c]{ash2000probability}.
 \item Monotone convergence theorem, and the fact that non-negative series can be integrated term-by-term  \cite[Thm. 5.5.3]{ash2000probability}.
 \item Dominated convergence theorem \cite[Thm. 5.5.5]{ash2000probability}.
 \item Extended monotone convergence theorem, and Fatou's lemma \cite[Thm. 5.5.6]{ash2000probability}.
@@ -7197,10 +7200,115 @@ Conditional expectations also have properties that have no analogue for ``ordina
 \item  \red{Needs name}  \cite[Thm. 5.5.11]{ash2000probability}.
 \end{itemize}
 
+\subsubsection{Results}
 
+In the results to follow, $Y, Y_1, Y_2, \hdots$ are extended random variables on $(\Omega, \F,P)$ with all expectations assumed to exist; $X: (\Omega, \F) \to (\Omega', \F')$ is a random object; and $\G$ is a sub $\sigma$-field of $\F$. The phrase ``a.e." with no measure specified will always mean a.e. $[P]$.  If $Z:(\Omega, \G) \to (\overline{R}, \B)$, we say that $Z$ is $\G$-measurable, and if $g:(\Omega', \F') \to (\overline{R}, \B)$, we say that $g$ is $\F'$-measurable.
 
-%{ex:conditional_expectation_with_random_variables_that_are_discrete_or_absolutely_continuous}
+\begin{theorem}
+If $Y$ is a constant $k$ a.e., then
+\begin{itemize}
+	\item[(a)] \textit{(Constant property.)} $\E[Y \cond \G]=k$ a.e
+	\item[(a')] \textit{(Constant property.)} $\E[Y \cond X=x]=k$ a.e. $[P_X]$
+\end{itemize}
+If $Y_1 \leq Y_2$ a.e., then
+\begin{itemize}
+	\item[(b)] \textit{(Monotonicity.)} $\E[Y_1 \cond \G] \leq \E[Y_2 \cond \G]$ a.e.
+	\item[(b')] \textit{(Monotonicity.)} $\E[Y_1 \cond X=x] \leq \E[Y_2 \cond X=x]$ a.e. $[P_X]$
+\end{itemize}
+If $a,b \in \R$ and $a \E[Y_1] + b \E[Y_2]$ is well-defined (not of the form $\infty-\infty$), then 
+\begin{itemize}
+	\item[(c)] \textit{(Linearity.)} $\E[aY_1 + bY_2 \cond \G] = a \E[Y_1 \cond \G] + b\E[Y_2 \cond \G] $
+	\item[(c')] \textit{(Linearity.)}  $\E[aY_1 + bY_2 \cond X=x] = a \E[Y_1 \cond X=x] + b\E[Y_2 \cond X=x] $ 
+\end{itemize}
+Finally, we have
+\begin{itemize}
+	\item[(d)] \textit{(Triangle inequality.)} $| \E[Y \cond \G]| \leq \E[|Y| \cond \G]$ a.e.
+	\item[(d')] \textit{(Triangle inequality.)}  $| \E[Y \cond X=x]| \leq \E[|Y| \cond X=x]$ a.e. $[P_X]$
+\end{itemize}
+\end{theorem}
 
+\begin{proof}
+\begin{itemize}
+\item[(a)] Let $h=\E[Y \cond \G]:  \Omega \to \R$ be defined a.e. by $h(\omega)=k$. We verify the two conditions for the existence (and essential uniqueness) of conditional expectation.
+	\begin{enumerate}
+		\item $h^{-1} (B) \in \G$ for all $B \in \B(\overline{\R}))$? \greencheck. We have 
+		\[ h^{-1}(B) = 
+		\begin{cases}
+		\Omega, & \text{if} \; k \in B \\
+		\emptyset, & \text{if} \; k \notin B,	
+		\end{cases} \]
+		and $\Omega, \emptyset \in \G$.
+		 
+		\begin{figure}[H]
+		\centering	
+		% Reference: https://tikz.dev/tikz-plots
+		\scalebox{.5}{
+		\begin{tikzpicture}[domain=0:4]
+		  \draw[->] (-0.2,0) -- (4.2,0) node[right] {};
+		  \draw[->] (0,-1.2) -- (0,4.2) node[above] {};
+		  \draw[color=red]    plot (\x,3)             node[right] {$h(\omega) =k$};
+		\end{tikzpicture}
+		}
+		\end{figure}
+		
+		\item $\int_G Y \wrt{P} =  \int_G h \wrt{P}$ for all $G \in \G$? \greencheck.   By hypothesis on $Y$ and our guess on $h$, the condition becomes $\int_G k \wrt{P} =  \int_G k \wrt{P}$, which obviously holds.
+	\end{enumerate} 
+\item[(a')] Let $g=\E[Y \cond X=x]:  \Omega' \to \R$ be defined a.e. by $g(x)=k$. We verify the two conditions for the existence (and essential uniqueness) of conditional expectation.
+
+	\begin{enumerate}
+		\item $g^{-1} (B) \in \F'$ for all $B \in \B(\overline{\R}))$? \greencheck.  By a similar argument as in (a), $\set{g^{-1} (B): B \in \B(\overline{\R})} = \set{\Omega', \emptyset}$.
+		\item $\int_{\set{X \in A}} Y \wrt{P} =  \int_A g \wrt{P_X}$ for all $A \in \F'$? \greencheck.   By hypothesis on $Y$ and our guess on $g$, the condition to be verified becomes $\int_{\set{X \in A}} k \wrt{P} =  \int_A k \wrt{P_X}$.  By integrals of indicators, LHS gives $k P\set{X \in A}$ and the RHS gives $k P_X(A)$. Recalling that $P_X(A) \defeq \set{X \in A}$, the proof is complete.
+	\end{enumerate} 
+\item[(b)] If $Y_1 \leq Y_2$ a.e., then 
+\[\begin{array}{rrlll}
+& Y_1 \indicate{G} &\leq Y_2 \indicate{G} & \text{a.e. } \, \forall G \in \G  & \tinytext{obvious} \\
+\implies & \int_G Y_1 \wrt{P} & \leq  \int_G Y_2 \wrt{P} & \forall G \in \G & \tinytext{by monotonicity} \\
+\implies & \int_G \E[Y_1 \cond \G] \wrt{P} & \leq  \int_G \E[Y_2 \cond \G] \wrt{P} &  \forall G \in \G & \tinytext{by def. cond'l expect.} \\
+\implies & \E[Y_1 \cond \G]  & \leq  \E[Y_2 \cond \G]  &  \text{a.e.}  & \tinytext{by monotonicity converse; Thm.~\ref{thm:monotonicity_converse}} \\
+\end{array}
+\]
+\item[(b')] The argument is almost identical to that given by (b). If $Y_1 \leq Y_2$ a.e., then 
+\[\begin{array}{rrlll}
+& Y_1 \indicate{\set{X \in A}} &\leq Y_2 \indicate{\set{X \in A}}  & \text{a.e. } \, \forall A \in \F'  & \tinytext{obvious} \\
+\implies & \int_{\set{X \in A}} Y_1 \wrt{P} & \leq  \int_{\set{X \in A}} Y_2 \wrt{P} & \forall A \in \F' & \tinytext{by monotonicity} \\
+\implies & \int_A \E[Y_1 \cond X=x] \wrt{P_X} & \leq  \int_A \E[Y_2 \cond X=x] \wrt{P_X} &  \forall A \in \F' & \tinytext{by def. cond'l expect.} \\
+\implies & \E[Y_1 \cond X=x]  & \leq  \E[Y_2 \cond X=x]  &  \text{a.e.}-[P_X]  & \tinytext{by monotonicity converse; Thm.~\ref{thm:monotonicity_converse}} \\
+\end{array}
+\]
+\item[(c)] 
+By the definition 
+of conditional expectation,
+%
+\[ \int_G (a Y_1 + b Y_2 ) \wrt{P} = \int_G \E[a Y_1 + b Y_2 \cond \G ]\wrt{P} \quad \quad \forall G \in \G \quad \quad \quad \quad \tinycircled{1} \]
+On the other hand, $\forall \, G \in \G$, we have 
+\begin{align*}
+\int_G (a Y_1 + b Y_2 ) \wrt{P} &= a \int_G Y_1 \wrt{P} + b \int_G Y_2  \wrt{P}  && \tinytext{linearity} \\
+&= a \int_G \E[Y_1 \cond \G] \wrt{P} + b \int_G \E[Y_2 \cond \G]  \wrt{P}  && \tinytext{def. cond'l expect.} \\
+&= \int_G  \big( a\E[Y_1 \cond \G]  + b \E[Y_2 \cond \G]  \big) \wrt{P}  && \tinytext{linearity} \quad \quad \tinycircled{2} \\  
+\end{align*}
+Combining $\tinycircled{1}$ and $\tinycircled{2}$, we obtain
+\[ \int_G \E[a Y_1 + b Y_2 \cond \G ]\wrt{P}  = \int_G  \big( a\E[Y_1 \cond \G]  + b \E[Y_2 \cond \G]  \big) \wrt{P} \quad \quad \forall G \in \G  \] 
+Since the integrands are equal for all measurable sets,  Cor.~\ref{cor:equal_integrals_for_all_measurable_sets_implies_the_functions_are_equal_ae} yields the conclusion
+\[ \E[a Y_1 + b Y_2 \cond \G ]\wrt{P}  =  a\E[Y_1 \cond \G]  + b \E[Y_2 \cond \G]   \quad \quad a.e.  \]
+\item[(c')] Similar to (c).
+\item[(d)]\footnotemark
+\[\begin{array}{rcccccl}
+& -|Y| &\leq & Y &\leq & Y &\tinytext{obvious} \\
+\implies & \explaintermbrace{$=-\E[|Y| \cond \G]$ by part (c)}{\E[-|Y| \cond \G]} &\leq & \E[Y \cond \G]  &\leq & \E[|Y| \cond \G]  &\tinytext{monotonicity (part b)} \\
+&&&&&&\\
+ \implies & \big| \E[Y \cond \G] \big| &\leq & \E[|Y| \cond \G] & & & \tinytext{def. absolute value}
+\end{array}\]
+\item[(d')] Same as (d), but replacing the conditioning set, and using (c') instead of (c).
+\end{itemize}
+\footnotetext{\cite[pp.220-221]{ash2000probability} proves (d) before (c).  I am not sure how this is possible. }
+\end{proof}
+
+%
+%	\begin{enumerate}
+%		\item 
+%		\item 
+%	\end{enumerate} 
+%	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
 \bibliographystyle{apalike}
