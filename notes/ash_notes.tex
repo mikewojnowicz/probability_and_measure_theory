@@ -101,7 +101,7 @@ These notes are geared towards statisticians, computer scientists, engineers, an
 
  Unless otherwise specified, all references to the ``text" refers to this textbook.  Likewise the symbol $\S$ refers to a Section of that textbook.
  
- Other useful references are \cite{folland1999real} and \cite{rudin1987real} for filling in depth.  \citet{durrett2010probability} has nice examples and high-level overviews, but in my view does not provide enough detail to become fluent in the topic.
+ Other useful references are \cite{folland1999real} and \cite{rudin1987real} for filling in depth.  \citet{durrett2010probability} has excellent examples and high-level overviews, but in my view does not provide enough detail to become fluent in the topic.
  
 \subsection{Motivation for topic} \label{sec:motivation_for_topic}
 
@@ -113,7 +113,7 @@ What are some motivations for measure theory?
 \item Measure theory is convenient in unifying various kinds of random variables.\footnote{For example, it allows one to work with discrete and absolutely continuous random variables in a unified way.  For example, the exponential family includes both types of random variables.}
 \item Lebesgue integration provide nice limit theorems, e.g. clarifying when one can interchange integrals and limits (such as derivatives).   
 \item Lebesgue integrals can be seen as the completion of Riemann integrals (in the same way that the real numbers complete the rationals).
-\item Abstract Lebesgue integration allows one to integrate over spaces more general than the reals. 
+\item General integration allows one to integrate over spaces more general than the reals. 
 
 \end{itemize}
 
@@ -6058,7 +6058,7 @@ Here, we sketch the proof of Thm~\ref{thm:weak_convergence_as_convergence_of_dis
 Let $(\Omega, \F, P)$ be a probability space. We refer to $\Omega$ as the \textbf{sample space} and sets in $\F$ as \textbf{events}.
 \end{definitions}
 
-\subsection{$\S$ 4.6 Random variables}
+\subsection{$\S$ 4.6 Random variables} \label{sec:random_variables}
 
 \begin{definition}
 A \textbf{random variable} $X$ on a probability space $(\Omega, \F, P)$ is a Borel measurable function from $(\Omega, \F)$ to $(\R, \B(\R))$.\footnote{Ash expresses random variables as $X : (\Omega, \F) \to (\R, \B(\R))$, and he interprets this notation as implying that the measurability condition $X^{-1}(B) \in \F, \quad \forall \; B \in \B(\R)$ is satisfied (e.g. see \cite[pp.176, top paragraph before Sec 4.7]{ash2000probability}). However, I find this notation to be unclear; to me it suggests that the \textit{direct} images of $X$ are in $\B(\R)$ for each set in $\F$.}   $X$ is said to be an \textbf{extended random variable}  if it is a Borel measurable function from $(\Omega, \F)$ to $(\overline{\R}, \B(\overline{\R}))$. 
@@ -6176,12 +6176,27 @@ In particular, we have the following special cases:
 
 
 
-\subsection{$\S$ 4.7 Random vectors}
+\subsection{$\S$ 4.7 Random objects}
+
+We now generalize random variables to random objects, which includes random vectors as a special case. 
 
 \begin{definition}
-Let $(\Omega, \F, P)$ be a probability space.  A \textbf{ $n$-dimensional random vector} is a Borel measurable map from $\Omega$ to $\R^n$.
+Let $(\Omega, \F, P)$ be a probability space.  Let $(\Omega', \F')$ be a measurable space.  A \textbf{random object} (sometimes called a random element) is a $(\F,\F')$-measurable map from $\Omega$ to $\Omega'$.
+\label{def:random_object}
 \end{definition}
 
+\begin{examples}
+Let $(\Omega, \F, P)$ be a probability space.
+\begin{enumerate}
+\item A \textit{random variable} (Sec.~\ref{sec:random_variables}) is a random object where $(\Omega',\F') = (\R, \B(\R))$.
+\item  A \textbf{ $n$-dimensional random vector} is a random object where $(\Omega',\F') = (\R^n, \B(\R^n))$.  That is, an $n$-dimensional random-vector is a Borel measurable map from $\Omega$ to $\R^n$.
+\item A \textbf{discrete-time stochastic process} is a random object where $(\Omega',\F') = (\R^{\mathbb{N}}, \prod_{n \in \mathbb{N}} \B(\R))$.\footnote{For more information, see \cite{zitkovic2013lecture6}.}
+\end{enumerate}
+\end{examples}
+
+\subsubsection{Random vectors}
+
+Here we focus specifically on random vectors. 
 
 \begin{remark}
 A random vector $X$ may be regarded as an $n$-tuple $(X_1, \hdots X_n)$ of random variables.  This is because $X$ is Borel measurable iff each $X_i$ is Borel measurable (see Prop.~\ref{prop:multivariate_function_is_Borel_measurbale_iff_component_functions_are_Borel_measurable}).
@@ -6213,6 +6228,8 @@ This is due to the uniqueness of the L-S measure. The argument parallels that of
 %{sec:examples_of_how_to_construct_lebesgue_stieltjes_measures_from_distribution_functions}
 
 % \Delta_{(a,b]}
+
+
 
 \subsection{$\S$ 4.8 Independent random variables}
 
@@ -6255,7 +6272,7 @@ P_{g(X)}&[g_1(X_1) \in B_1, \hdots g_n(X_n) \in B_n]\\
 
 
 \begin{remark}{\remarktitle{Functions of independent random \textnormal{objects} are independent.}}
-The conclusion of Prop.~\ref{prop:functions_of_independent_random_variables_are_independent} applies more generally even if each $X_i$ is a  \textit{random object}.  Random objects are relaxations of random variables that allow $X_i$ to map to any measurable space (not just the reals equipped with the Borel sets).  In this context, we have $(\Omega, \F, P) \stackrel{X_i}{\to} (\Omega_i, \F_i) \stackrel{g_i}{\to} (\Omega_i', \F_i')$.
+The conclusion of Prop.~\ref{prop:functions_of_independent_random_variables_are_independent} applies more generally even if each $X_i$ is a  \textit{random object}.  Recall from Def.~\ref{def:random_object} that random objects are relaxations of random variables that allow $X_i$ to map to any measurable space (not just the reals equipped with the Borel sets).  In this context, we have $(\Omega, \F, P) \stackrel{X_i}{\to} (\Omega_i, \F_i) \stackrel{g_i}{\to} (\Omega_i', \F_i')$.
 \end{remark}
 
 We now turn to independence of random variables and $\sigma$-fields, which will we important when we discuss conditional expectations with respect to a $\sigma$-field.
@@ -7166,7 +7183,7 @@ where $h(y \cond x)=\frac{f(x,y)}{f_1(x)} = \frac{f(x,y)}{\int_{-\infty}^\infty 
 So $\E[Y \cond X]$ is constant on vertical strips of $\Omega=\R^2$, and the only sets $G \in \sigma(X)$ that we would want to interrogate to obtain knowledge about $Y$ are sets of the form $\set{x \times \R, x \in \R}$.\redfootnote{But when is this \textit{not} true?  Is this just a true statement in general, or is there something about having a joint density that matters here?}  
 \end{example}
 
-\subsection{$\S$ 5.5 Properties of conditional expectation} \label{sec:properties_of_conditional_expectation}
+\subsection{$\S$ 5.5 Properties and perspectives of conditional expectation} \label{sec:properties_of_conditional_expectation}
 
 \subsubsection{Overview}
 
@@ -7182,7 +7199,12 @@ Here in Sec.~\ref{sec:properties_of_conditional_expectation} we provide some pro
 \end{figure}
 
 
-Although the functions $\E[Y \cond \G]$ and $\E[Y \cond X = x]$ were defined implicitly as integrands, the expectation notation is presumably justified by the fact that they ``behave" like expectations.  In particular, we have
+Since the functions $\E[Y \cond \G]$ and $\E[Y \cond X = x]$ were defined implicitly as integrands, what justifies the expectation notation?  Some thoughts:
+
+\begin{enumerate}
+\item 
+Theorem~\ref{thm:conditional_expectation_as_average_over_atoms} shows us how can view conditional expectations as averages when we apply it to ``atoms" of a probability space. 	
+\item Conditional expectations ``behave" like expectations.  In particular, we have
 \begin{itemize}
 \item Monotonicity \cite[Thm. 5.5.1b]{ash2000probability}.
 \item Linearity \cite[Thm. 5.5.2]{ash2000probability}.	
@@ -7191,8 +7213,12 @@ Although the functions $\E[Y \cond \G]$ and $\E[Y \cond X = x]$ were defined imp
 \item Dominated convergence theorem \cite[Thm. 5.5.5]{ash2000probability}.
 \item Extended monotone convergence theorem, and Fatou's lemma \cite[Thm. 5.5.6]{ash2000probability}.
 \end{itemize}
+\end{enumerate}
 
-Conditional expectations also have properties that have no analogue for ``ordinary" expectation:
+\red{TODO: Give other reasons -- e.g., probably, projection.}
+
+
+Although we noted above that conditional expectations ``behave" like expectations, they also have properties that have no analogue for ``ordinary" expectation:
 
 \begin{itemize}
 \item The law of iterated expectation \cite[Thm. 5.5.4]{ash2000probability}.	
@@ -7200,9 +7226,11 @@ Conditional expectations also have properties that have no analogue for ``ordina
 \item  \red{Needs name}  \cite[Thm. 5.5.11]{ash2000probability}.
 \end{itemize}
 
-\subsubsection{Results}
+\paragraph{Notation.} In the results to follow, $Y, Y_1, Y_2, \hdots$ are extended random variables on $(\Omega, \F,P)$ with all expectations assumed to exist; $X: (\Omega, \F) \to (\Omega', \F')$ is a random object; and $\G$ is a sub $\sigma$-field of $\F$. The phrase ``a.e." with no measure specified will always mean a.e. $[P]$.  If $Z:(\Omega, \G) \to (\overline{\R}, \B)$, we say that $Z$ is $\G$-measurable, and if $g:(\Omega', \F') \to (\overline{\R}, \B)$, we say that $g$ is $\F'$-measurable.
 
-In the results to follow, $Y, Y_1, Y_2, \hdots$ are extended random variables on $(\Omega, \F,P)$ with all expectations assumed to exist; $X: (\Omega, \F) \to (\Omega', \F')$ is a random object; and $\G$ is a sub $\sigma$-field of $\F$. The phrase ``a.e." with no measure specified will always mean a.e. $[P]$.  If $Z:(\Omega, \G) \to (\overline{R}, \B)$, we say that $Z$ is $\G$-measurable, and if $g:(\Omega', \F') \to (\overline{R}, \B)$, we say that $g$ is $\F'$-measurable.
+
+
+\subsubsection{Basic properties}
 
 \begin{theorem}
 If $Y$ is a constant $k$ a.e., then
@@ -7303,12 +7331,117 @@ Since the integrands are equal for all measurable sets,  Cor.~\ref{cor:equal_int
 \footnotetext{\cite[pp.220-221]{ash2000probability} proves (d) before (c).  I am not sure how this is possible. }
 \end{proof}
 
+\subsubsection{Conditional expectation as averages over atoms}
+
+\begin{definition}
+Let $(\Omega, \F, 
+\mu)$ be a measure space.  Then $A$ is an \textbf{atom} of $\F$ relative to $\mu$ if
+\begin{enumerate}
+	\item $A \in \F$, $\mu(A) > 0$
+	\item For all $B \in \F, B \subset A$, either $\mu(B)=0$ or $\mu(B-A)=0$.
+\end{enumerate} 
+\label{def:atoms}
+\end{definition}
+
+
+\begin{example}\remarktitle{A measurable partition \textnormal{(whose cells all have positive probability)} is composed of atoms \textnormal{(of the minimal $\sigma$-field containing them)}.}    Let $(\Omega, \F, 
+\mu)$ be a measure space. Let $A_1, A_2, \hdots$ be disjoint sets in $\F$ whose union is $\Omega$.  Let $\mu(A_n) >0$ for all $n$.  Let $\G$ be the minimal $\sigma$-field over $\set{A_n}$ (i.e. $\G$ is the collection of all unions formed from the $A_n$).\redfootnote{TODO: Add a small proof.}  Then $A_1, A_2, \hdots$ are atoms of $\G$ relative to $\mu$.
+\label{ex:measurable_partition_has_cells_which_are_atoms}
+\end{example}
+	
+\begin{proof} We verify the two conditions in Def.~\ref{def:atoms}.
+\begin{enumerate}
+	\item This condition holds by hypothesis. 
+	\item The $\sigma$-field $\G$ is the collection of all unions formed from the $A_n$.  Thus, each $A_n$ has no proper subset.  There is nothing to verify. 
+\end{enumerate} 
+\end{proof}
+
+\begin{lemma}\textnormal{(Measurable functions are almost everywhere constant on atoms.)}
+If $f: (\Omega, \G) \to \overline{\R}, \B)$, $\mu$ is a measure on $\G$, and $A$ is an atom of $\G$ relative to $\mu$, then $f$ is a.e. constant on $A$.
+\label{lemma:measurable_functions_are_almost_everywhere_constant_on_atoms}
+\end{lemma}
+
+\begin{proof}
+See \cite[Lemma 5.5.8, pp. 225]{ash2000probability}.	
+\end{proof}
+
+Now we show that conditional expectation is an ``averaging" or ``smoothing" operation; if $A$ is an atom of $\G$, then $ \E[Y \cond \G]  = k$ a.e. on $A$, where $k$ is the average value of $Y$ on $A$.
+\begin{theorem}
+\textnormal{(Conditional expectation gives averages over atoms.)}
+Let $A$ be an atom of $\G$ relative to $P$. Then 
+\[ \E[Y \cond \G] = \frac{1}{P(A)} \int_A Y \wrt{P} = \frac{\E[Y \indicate{A}]}{P(A)}   \quad \quad \text{ a.e. on } A \]	
+\label{thm:conditional_expectation_as_average_over_atoms}
+\end{theorem}
+
+\begin{proof}
+The function $f \defeq \E[Y \cond \G]$ on $\Omega$ is measurable with respect to $\G$ by definition of conditional expectation.  Thus, if $A$ is an atom of $\G$ relative to $P$, Lemma~\ref{lemma:measurable_functions_are_almost_everywhere_constant_on_atoms} tells us that $f \indicate{A} = k$ a.e. for some constant $k$.  Now we appeal to the definition of conditional expectation to obtain
 %
-%	\begin{enumerate}
-%		\item 
-%		\item 
-%	\end{enumerate} 
-%	
+\begin{align*}
+\int_A Y \wrt{P} &= \int_A f \wrt{P}	&& \tinytext{def. conditional expect.} \\
+&= \int_A k \wrt{P} && \tinytext{see above} \\
+&= k P(A) && \tinytext{integral of indicator}
+\end{align*}
+Dividing gives
+\[ k=\frac{1}{P(A)} \int_A Y \wrt{P}\]
+\end{proof}
+
+\begin{example}\remarktitle{A simple example of conditional expectation as averaging over atoms.}
+\cite{zitkovic2013lecture10}. Let $(\Omega, \F, P)$ be a probability space where $\Omega =\set{a,b,c,d,e,f}, \F=2^\Omega$ and $P$ is uniform.  Let $X,Y$ and $Z$ be random variables given by 
+\begin{align*}
+X \sim 
+\begin{pmatrix}
+a & b & c & d & e & f \\
+1 & 3 & 3 & 5 & 5 & 7	
+\end{pmatrix}, &
+\\
+Y \sim 
+\begin{pmatrix}
+a & b & c & d & e & f \\
+2 & 2 & 1 & 1 & 7 & 7	
+\end{pmatrix}, & \quad \text{and} \quad 
+Z \sim 
+\begin{pmatrix}
+a & b & c & d & e & f \\
+3 & 3 & 3 & 3 & 2 & 2
+\end{pmatrix}. 	
+\end{align*}
+Then 
+\[ \sigma(Y) = \set{Y^{-1}(B) : B \in \B(\R)} = \sigma \big(\set{a,b}, \set{c,d}, \set{e,f} \big) \]
+\red{TODO: Justify the last equality.}
+Hence, by Example~\ref{ex:measurable_partition_has_cells_which_are_atoms}, the atoms of $\sigma(Y)$ are given by $A_1 \defeq \set{a,b}, A_2 \defeq \set{c,d}, A_3 \defeq \set{e,f}$.
+So by Theorem~\ref{thm:conditional_expectation_as_average_over_atoms}, 
+\[ \E[X \cond \sigma(Y)] = \frac{1}{P(A_n)} \int_{A_n} X \wrt{P}   \quad \quad \text{ a.e. on } A_n. \]
+%
+We can compute this function explicitly:
+\begin{itemize}
+\item \textit{Denominator.}  Since $P$ is uniform, we compute the denominator as $P(A_1)=P(A_2)=P(A_3) = \frac{1}{3}$.
+\item \textit{Numerator.}
+\[ \int_{A_1} X \wrt{P} \stackexplain{(simple function)}{=} X(\set{a}) P\set{a} + X(\set{b}) P\set{b} = 1 \cdot \frac{1}{6} +  3 \cdot \frac{1}{6} = \frac{4}{6},   \] 
+and similarly for $A_2, A_3$.	
+\end{itemize}
+%
+Thus, all together, we have
+\[ \E[X \cond \sigma(Y)] = 
+\begin{cases}
+ 2 & \text{ on } \set{a,b} \\
+ 4 & \text{ on } \set{c,d} \\
+ 6 & \text{ on } \set{e,f} \\
+\end{cases}
+\]
+A similar computation gives $\E[Z \cond \sigma(Y)]$. See Fig.~\ref{fig:zitkovic_example_conditional_expectation_as_averaging_over_atoms}. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.4\linewidth]{images/zitokovic_example_conditional_expectation_as_average_over_atoms}
+\caption{ \textit{A simple example of conditional expectation as averaging over atoms.} Image credit: \cite{zitkovic2013lecture10}.}
+\label{fig:zitkovic_example_conditional_expectation_as_averaging_over_atoms}	
+\end{figure}
+
+\end{example}
+
+
+\red{TODO: Can we decompose any probability space into atoms? I think no.}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
 \bibliographystyle{apalike}
