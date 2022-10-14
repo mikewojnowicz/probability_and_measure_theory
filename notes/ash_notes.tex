@@ -7225,7 +7225,7 @@ Theorem~\ref{thm:conditional_expectation_as_average_over_atoms} shows us how can
 \end{itemize}
 \end{enumerate}
 
-\red{TODO: Give other reasons -- e.g., probably, projection.}
+\blue{DISCUSS: Are there other reasons?}
 
 
 Although we noted above that conditional expectations ``behave" like expectations, they also have properties that have no analogue for ``ordinary" expectation:
@@ -7354,7 +7354,7 @@ Let $(\Omega, \F,
 \end{definition}
 
 
-\begin{example}\remarktitle{A measurable partition \textnormal{(whose cells all have positive probability)} is composed of atoms \textnormal{(of the minimal $\sigma$-field containing them)}.}    Let $(\Omega, \F, 
+\begin{example}\remarktitle{A measurable partition is composed of atoms.}\footnote{More precisely, we could say that a measurable partition (whose cells all have positive probability) is composed of atoms (of the minimal $\sigma$-field containing them).}    Let $(\Omega, \F, 
 \mu)$ be a measure space. Let $A_1, A_2, \hdots$ be disjoint sets in $\F$ whose union is $\Omega$.  Let $\mu(A_n) >0$ for all $n$.  Let $\G$ be the minimal $\sigma$-field over $\set{A_n}$ (i.e. $\G$ is the collection of all unions formed from the $A_n$).\redfootnote{TODO: Add a small proof.}  Then $A_1, A_2, \hdots$ are atoms of $\G$ relative to $\mu$.
 \label{ex:measurable_partition_has_cells_which_are_atoms}
 \end{example}
@@ -7446,7 +7446,7 @@ A similar computation gives $\E[Z \cond \sigma(Y)]$. See Fig.~\ref{fig:zitkovic_
 \caption{ \textit{A simple example of conditional expectation as averaging over atoms.} Image credit: \cite{zitkovic2013lecture10}.}
 \label{fig:zitkovic_example_conditional_expectation_as_averaging_over_atoms}	
 \end{figure}
-
+\label{ex:zitkovic_example_conditional_expectation_as_averaging_over_atoms}
 \end{example}
 
 
@@ -7504,6 +7504,71 @@ Now since $\G_1 \subset \G_2$, equation $\tinycircled{2}$ also applies to all $G
 
 \end{proof}
 
+\begin{exercise}
+\cite[Exercise 5.1.6]{durrett2010probability} Give an example on $\Omega=\set{a,b,c}$ in which
+\[ \E[\E[Y \mid \G_2] \mid \G_1]  \neq \E[\E[Y \mid \G_1] \mid \G_2]. \]
+\end{exercise}
+
+\begin{proof}[Solution.]
+Similarly to Example~\ref{ex:zitkovic_example_conditional_expectation_as_averaging_over_atoms}, let $(\Omega, \F, P)$ be a probability space where $\Omega =\set{a,b,c}, \F=2^\Omega$ and $P$ is uniform.  Let $X$ be a random variable defined by 
+\begin{align*}
+X \sim 
+\begin{pmatrix}
+a & b & c \\
+2 & 4 & 6 	
+\end{pmatrix}
+\end{align*}
+Define
+\begin{align*}
+\G_1 &= \set{\emptyset, \set{a}, \set{b,c}, \Omega} \\
+\G_2 &= \set{\emptyset, \set{a,b}, \set{c}, \Omega} \\
+\end{align*}
+Then we have 
+\begin{align*}
+\E[X \mid \G_1] &= 
+\begin{cases}
+2 & \text{on} \; \set{a} \\
+5 & \text{on} \; \set{b,c} \\	
+\end{cases}
+\\
+\E[X \mid \G_2] &=
+\begin{cases}
+4 & \text{on} \; \set{b} \\
+4 & \text{on} \; \set{a,c} \\	
+\end{cases}
+\end{align*}
+
+by Theorem~\ref{thm:conditional_expectation_as_average_over_atoms}, since $\set{a}, \set{b,c}$ are atoms of $\G_1$ w.r.t $P$ and $\set{a,b}, \set{c}$ are atoms of $\G_2$ w.r.t $P$.
+
+We now have constructed three random variables on $\Omega$:
+\[\begin{array}{c|ccc}
+\Omega & a & b & c \\
+\hline 
+X & 2 & 4 & 6 \\
+\E[X \cond \G_1] & 2 & 5 & 5 \\
+\E[X \cond \G_2] & 4 & 4 & 4  
+\end{array}\]
+Applying the same logic again (i.e. taking averages over atoms, per Theorem~\ref{thm:conditional_expectation_as_average_over_atoms}), we obtain 
+%
+\begin{align*}
+\E[\E[X \mid \G_1] \mid \G_2] &= 
+\begin{cases}
+5 & \text{on} \; \set{b} \\
+3.5 & \text{on} \; \set{a,c} \\	
+\end{cases}
+\\
+\E[\E[X \mid \G_2]\mid \G_1] &=
+\begin{cases}
+4 & \text{on} \; \set{a} \\
+4 & \text{on} \; \set{b,c} \\	
+\end{cases}
+\end{align*}
+%
+Clearly $\E[\E[X \mid \G_1] \mid \G_2] \neq \E[\E[X \mid \G_2] \mid \G_1]$.
+\end{proof}
+
+
+
 The next result shows that for conditional expectation with respect to $\G$, random variables $X \in \G$ (i.e. $\G$-measurable random variables) are like constants. They can be brought outside the integral.
 
 \begin{theorem}
@@ -7522,7 +7587,7 @@ We N.T.S. that the two conditions defining conditional expectation $\E[YZ \cond 
 \int_{G} YZ \wrt{P} = \int_{G} Z \, \E[Y \cond \G]\wrt{P} \quad \forall \; G \in \G \quad\quad \tinycircled{1}
 \end{align*}
 %
- This is the harder one.  We proceed by mimicking the construction of the integral. 
+We proceed by mimicking the construction of the integral. 
 %
 \begin{alphabate}
 \item \boxed{\textnormal{Indicator functions.}} Let $Z = \indicate{\wt{G}}$ be an indicator function for $\wt{G} \in G$.  Then 
