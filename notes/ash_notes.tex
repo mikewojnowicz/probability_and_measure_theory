@@ -7232,8 +7232,8 @@ Although we noted above that conditional expectations ``behave" like expectation
 
 \begin{itemize}
 \item The law of iterated expectation \cite[Thm. 5.5.4]{ash2000probability}.	
-\item \red{Needs name} \cite[Thm. 5.5.10]{ash2000probability}.
-\item  \red{Needs name}  \cite[Thm. 5.5.11]{ash2000probability}.
+\item Iterated expectation with nested $\sigma$-fields \cite[Thm. 5.5.10]{ash2000probability}.
+\item Random variables behaving like constants with respect to conditional expectations  \cite[Thm. 5.5.11]{ash2000probability}.
 \end{itemize}
 
 \paragraph{Notation.} In the results to follow, $Y, Y_1, Y_2, \hdots$ are extended random variables on $(\Omega, \F,P)$ with all expectations assumed to exist; $X: (\Omega, \F) \to (\Omega', \F')$ is a random object; and $\G$ is a sub $\sigma$-field of $\F$. The phrase ``a.e." with no measure specified will always mean a.e. $[P]$.  If $Z:(\Omega, \G) \to (\overline{\R}, \B)$, we say that $Z$ is $\G$-measurable, and if $g:(\Omega', \F') \to (\overline{\R}, \B)$, we say that $g$ is $\F'$-measurable.
@@ -7454,6 +7454,18 @@ A similar computation gives $\E[Z \cond \sigma(Y)]$. See Fig.~\ref{fig:zitkovic_
 
 
 \subsubsection{Other properties}
+
+If we take the expectation of a conditional expectation, the result is the same as if we were to take the expectation directly. \red{TODO: Add intuition.}
+
+\begin{theorem} \textbf{The law of iterated expectation (LIE), a.k.a the law of total expectation.} 
+\[ \E[\E[Y \cond \G]] = \E[Y]\]
+\end{theorem}
+
+\begin{proof}
+By the definition of conditional expectation for $\E[Y \cond \G]$, we have
+\[ \int_\Omega \E[Y \cond \G] \wrt{P} = \int_\Omega Y \wrt{P}.  \]	
+\end{proof}
+
 
 We now consider successive conditioning with respect to two sigma-fields, one of which is coarser than (that is, a subset of) the other.
 
