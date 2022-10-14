@@ -2327,7 +2327,7 @@ The following proposition may provide additional confidence in Definition \ref{d
 
 \begin{proposition}\textbf{(Any non-negative Borel measurable function is the pointwise limit of a sequence of simple functions.)}
 Let $h$ be a non-negative Borel measurable function.  Then there is a sequence $\set{s_n}$ of simple functions such that $0 \leq s_1 \leq s_2 \leq ... \leq h$, $s_n \to h$ pointwise, and $s_n \to h$ uniformly on any set on which $h$ is bounded.	
-\label{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function}
+\label{prop:there_is_a_sequence_of_simple_functions_that_increases_to_any_non_negative_borel_measurable_function}
 \end{proposition}
 
 \begin{proof}
@@ -2354,17 +2354,8 @@ Then
 \end{proof}
 
 \begin{question}
-When working with $\overline{\R}$, how does one check convergence of a function at a point $\omega$ such that $h(\omega)=\infty$?  Does the proof of Proposition \ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function} still work at such points?
+When working with $\overline{\R}$, how does one check convergence of a function at a point $\omega$ such that $h(\omega)=\infty$?  Does the proof of Proposition \ref{prop:there_is_a_sequence_of_simple_functions_that_increases_to_any_non_negative_borel_measurable_function} still work at such points?
 \end{question}
-
-\begin{corollary}{\remarktitle{A Borel measurable function is the limit of a sequence of simple functions which it dominates.}}
-An arbitrary Borel measurable function $f$ is the limit of a sequence of finite-valued simple functions $s_n$, with $|s_n|<|f|$ for all $n$.
-\label{cor:measurable_function_is_limit_of_simple_functions_which_it_dominates}
-\end{corollary}
-
-\begin{proof}
-Straightforward. See \cite[Theorem 1.5.5b]{ash2000probability}.	
-\end{proof}
 
 
 Now we establish one of the fundamental convergence theorems. 
@@ -2416,7 +2407,7 @@ Since the LHS is an upper bound on the set in the RHS, it must be greater than t
 The monotone convergence theorem can actually be used to make it easier to do computations with integrals of non-negative Borel measurable functions!  Let us quote \cite{folland1999real} (except with changes of notation and references)
 
 \begin{quotation}
- The definition of $\int h$  involves the supremum over a huge (usually uncountable) family of simple functions, so it may be difficult to evaluate $\int h$ directly from the definition (see Definition \ref{def:integral_of_non_negative_Borel_measurable_function}).  The monotone convergence theorem, however, assures us that to compute $\int h$, it is enough to compute $\lim \int s_n$, where $\set{s_n}$ is any sequence of simple functions that increase to $h$, and Proposition \ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function} guarantees that such sequences exist. 
+ The definition of $\int h$  involves the supremum over a huge (usually uncountable) family of simple functions, so it may be difficult to evaluate $\int h$ directly from the definition (see Definition \ref{def:integral_of_non_negative_Borel_measurable_function}).  The monotone convergence theorem, however, assures us that to compute $\int h$, it is enough to compute $\lim \int s_n$, where $\set{s_n}$ is any sequence of simple functions that increase to $h$, and Proposition \ref{prop:there_is_a_sequence_of_simple_functions_that_increases_to_any_non_negative_borel_measurable_function} guarantees that such sequences exist. 
 \end{quotation}
 \end{remark}
 
@@ -2435,7 +2426,7 @@ Let $f, g$ be non-negative Borel measurable functions. Then
 \end{proposition}
 
 \begin{proof}
-By Proposition \ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function}, there are sequences of simple functions $\set{s_n}, \set{t_n}$ such that $s_n \uparrow f$ and $t_n \uparrow g$.   Thus, by limit properties, $(s_n + t_n) \uparrow (f+g)$.  So we have
+By Proposition \ref{prop:there_is_a_sequence_of_simple_functions_that_increases_to_any_non_negative_borel_measurable_function}, there are sequences of simple functions $\set{s_n}, \set{t_n}$ such that $s_n \uparrow f$ and $t_n \uparrow g$.   Thus, by limit properties, $(s_n + t_n) \uparrow (f+g)$.  So we have
 \begin{align*}
 	\ds\int f + \ds\int g &=\ds\lim_{n \to \infty} \ds\int s_n + \ds\lim_{n \to \infty} \ds\int t_n && \tinytext{Monotone convergence theorem} \\
 	&= \ds\lim_{n \to \infty} ( \ds\int s_n +  \ds\int t_n ) && \tinytext{Sum of limits is limit of sum} \\
@@ -2780,6 +2771,20 @@ The basic idea is that integrating over a function $h$ that can take on both pos
 \label{ex:simple_example_of_triangle_inequality}
 \end{example}
 
+\begin{proposition}\textbf{(A Borel measurable function is the limit of a sequence of simple functions which it dominates.)}
+An arbitrary Borel measurable function $f$ is the limit of a sequence of finite-valued simple functions $s_n$, with $|s_n|<|f|$ for all $n$.
+\label{prop:measurable_function_is_limit_of_simple_functions_which_it_dominates}
+\end{proposition}
+
+\begin{proof}
+This follows straightforwardly from Prop~\ref{prop:there_is_a_sequence_of_simple_functions_that_increases_to_any_non_negative_borel_measurable_function}.  Write $f = f^+ - f^-$.  By Prop~\ref{prop:there_is_a_sequence_of_simple_functions_that_increases_to_any_non_negative_borel_measurable_function}, we can find sequences of simple functions $(s_n^+)_n$ and $(s_n^-)_n$  such that $s_n^+ \uparrow f^+$ and $s_n^- \uparrow f^-$.   Therefore,
+\begin{align*}
+s_n \defeq (s_n^+ - s_n^-) &\to f^+ - f^- = f && \tinytext{by additivity of limits} \\ 
+|s_n| \leq |f| & \text { for all } n && \tinytext{by definition of absolute value}	
+\end{align*}
+
+\end{proof}
+
  
 \section{$\S$ 1.6 Basic Integration Theorems}
 
@@ -2929,7 +2934,7 @@ The Radon-Nikodym theorem (to be covered later in the document) provides an impo
 %\begin{itemize}
 %	\item First let $g$ be a simple function, which we write as $s= \sum_{i=1}^r x_i \indicate{E_i}$.   Then 
 %\[ \int s \wrt{\lambda} \stackexplain{simple f'n}{=} \sum_{i=1}^r x_i \lambda(E_i) \stackexplain{hypothesis}{=}  \sum_{i=1}^r x_i \int_{E_i} f \dmu \stackexplain{linearity}{=} \int \sum_{i=1}^r x_i \indicate{E_i} f \dmu \stackexplain{def. $s$}{=} \int sf \dmu    \]
-%\item Now let $g$ be a non-negative measurable function. By Prop \ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function}, there exists a sequence of simple functions $\set{s_n}$ such that $s_n \uparrow g$.  Since  $s_n \uparrow g$, then also $s_n f \uparrow fg$.  So applying Monotone Convergence Theorem to both, we obtain $\int s_n d\lambda \uparrow \int g d\lambda$ and  $\int s_n f d\mu \uparrow \int fg d\mu$.  But since $\int s_n d\lambda  =\int s_n f d\mu$ for all $n$ by the previous bullet point, the sequences must have the same limit (by uniqueness of limits), so $\int g d\lambda = \int gf d\mu$.
+%\item Now let $g$ be a non-negative measurable function. By Prop \ref{prop:there_is_a_sequence_of_simple_functions_that_increases_to_any_non_negative_borel_measurable_function}, there exists a sequence of simple functions $\set{s_n}$ such that $s_n \uparrow g$.  Since  $s_n \uparrow g$, then also $s_n f \uparrow fg$.  So applying Monotone Convergence Theorem to both, we obtain $\int s_n d\lambda \uparrow \int g d\lambda$ and  $\int s_n f d\mu \uparrow \int fg d\mu$.  But since $\int s_n d\lambda  =\int s_n f d\mu$ for all $n$ by the previous bullet point, the sequences must have the same limit (by uniqueness of limits), so $\int g d\lambda = \int gf d\mu$.
 %\end{itemize}
 %} 
 %\label{rk:change_of_measure_and_differential_notation}
@@ -3052,7 +3057,7 @@ We proceed through the steps in constructing the integral.
 \begin{alphabate}
 	\item \textit{Simple functions.} First let $g$ be a simple function, which we write as $s= \sum_{i=1}^r x_i \indicate{E_i}$.   Then 
 \[ \int s \wrt{\lambda} \stackexplain{$\int$ for simple f'n}{=} \sum_{i=1}^r x_i \lambda(E_i) \stackexplain{hypothesis}{=}  \sum_{i=1}^r x_i \int_{E_i} f \dmu \stackexplain{linearity}{=} \int \sum_{i=1}^r x_i \indicate{E_i} f \dmu \stackexplain{def. $s$}{=} \int sf \dmu    \]
-\item \textit{Non-negative Borel measurable functions.} Now let $g$ be a non-negative Borel measurable function. By Prop \ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function}, there exists a sequence of simple functions $\set{s_n}$ such that $s_n \uparrow g$.  Since  $s_n \uparrow g$, then also $s_n f \uparrow fg$.  So applying Monotone Convergence Theorem to both, we obtain $\int s_n d\lambda \uparrow \int g d\lambda$ and  $\int s_n f d\mu \uparrow \int fg d\mu$.  But since $\int s_n d\lambda  =\int s_n f d\mu$ for all $n$ by the previous bullet point, the sequences must have the same limit (by uniqueness of limits), so $\int g d\lambda = \int gf d\mu$.
+\item \textit{Non-negative Borel measurable functions.} Now let $g$ be a non-negative Borel measurable function. By Prop \ref{prop:there_is_a_sequence_of_simple_functions_that_increases_to_any_non_negative_borel_measurable_function}, there exists a sequence of simple functions $\set{s_n}$ such that $s_n \uparrow g$.  Since  $s_n \uparrow g$, then also $s_n f \uparrow fg$.  So applying Monotone Convergence Theorem to both, we obtain $\int s_n d\lambda \uparrow \int g d\lambda$ and  $\int s_n f d\mu \uparrow \int fg d\mu$.  But since $\int s_n d\lambda  =\int s_n f d\mu$ for all $n$ by the previous bullet point, the sequences must have the same limit (by uniqueness of limits), so $\int g d\lambda = \int gf d\mu$.
 \item \textit{Arbitrary Borel measurable functions.} Now let $g$ be an arbitrary Borel measurable function.
 \begin{align*}
  \int g \wrt{\lambda} &\stackexplain{$\int$ for general f'n}{=} \int g^+ \wrt{\lambda} - \int g^- \wrt{\lambda}  \stackexplain{part (b)}{=}  \int g^+ f \wrt{\mu} - \int g^- f \wrt{\mu} \\
@@ -4835,7 +4840,7 @@ Let $f \in L^p, \; (0 < p < \infty)$. If $\epsilon >0$, there is a simple functi
 \end{theorem}
 
 \begin{proof}
-First note that Cor \ref{cor:measurable_function_is_limit_of_simple_functions_which_it_dominates} states that any measurable function  is the limit of a sequence of simple functions which it dominates.   In particular, we have
+First note that Theorem \ref{prop:measurable_function_is_limit_of_simple_functions_which_it_dominates} states that any measurable function  is the limit of a sequence of simple functions which it dominates.   In particular, we have
 \[s_n \to f \quad \text{everywhere}, \quad\quad |s_n| < f \]
 where $s_n$ is a sequence of finite-valued simple functions.
 
@@ -5348,7 +5353,7 @@ We begin with Tonelli's, which covers the first three steps.
 \begin{enumerate}
 \item \textit{Step 1: $f$ is an indicator function}.   Here, Tonelli's theorem reduces to the classical product measure theorem {\tiny  [If $f=\indicate{E}$, then \Eqref{eqn:classical_fubini_tonelli_equation} becomes $\pi(E) := \int \nu(E_x) \mu(dx) = \int \mu(E^y) \nu(dy) $, which holds by   Cor.~\ref{cor:classical_product_measure_theorem}.]}   % Note that when integrating $f(x,y)$ against one variable, the function becomes a section.  So when integrating $f(x,y)$ against a measure on $y$, it becomes $f_x(y)$.]}  
 \item \textit{Step 2: $f$ is a non-negative simple function.}  Here, Tonelli's theorem follows from step 1 and linearity. {\tiny (Recall linearity always applies for non-negative simple functions; see Remark~\ref{rk:integrals_are_linear_over_non_negative_Borel_measurable_function}.)}  
-\item \textit{Step 3: $f$ is a general non-negative measurable function}.  We can find a sequence of simple functions $\set{f_n} \uparrow f$ by Prop.~\ref{prop:there_is_a_sequence_of_simple_fucntions_that_increases_to_any_non_negative_borel_measurable_function}.   We now show two things:
+\item \textit{Step 3: $f$ is a general non-negative measurable function}.  We can find a sequence of simple functions $\set{f_n} \uparrow f$ by Prop.~\ref{prop:there_is_a_sequence_of_simple_functions_that_increases_to_any_non_negative_borel_measurable_function}.   We now show two things:
 	\begin{itemize}
 	\item The inner integrands $g, h$ are measurable. To see this, define corresponding sequences $\set{g_n}, \set{h_n}$ via 
 	\[ g_n(x) = \int (f_n)_x \wrt{\nu}, \quad \quad h_n(y) = \int (f_n)^y \wrt{\mu} \]
@@ -6063,6 +6068,11 @@ Let $(\Omega, \F, P)$ be a probability space. We refer to $\Omega$ as the \textb
 \begin{definition}
 A \textbf{random variable} $X$ on a probability space $(\Omega, \F, P)$ is a Borel measurable function from $(\Omega, \F)$ to $(\R, \B(\R))$.\footnote{Ash expresses random variables as $X : (\Omega, \F) \to (\R, \B(\R))$, and he interprets this notation as implying that the measurability condition $X^{-1}(B) \in \F, \quad \forall \; B \in \B(\R)$ is satisfied (e.g. see \cite[pp.176, top paragraph before Sec 4.7]{ash2000probability}). However, I find this notation to be unclear; to me it suggests that the \textit{direct} images of $X$ are in $\B(\R)$ for each set in $\F$.}   $X$ is said to be an \textbf{extended random variable}  if it is a Borel measurable function from $(\Omega, \F)$ to $(\overline{\R}, \B(\overline{\R}))$. 
 \end{definition}
+
+\begin{notation}
+To emphasize the $\sigma$-field $\F$ with which the random variable is measurable, some authors (e.g. \cite{durrett2010probability}) write $X \in \F$.  (This notation will be useful when we get to conditional expectation.)	
+\end{notation}
+
 
 \begin{example}
 If $(\Omega, \F, P)$ corresponds to a sequence of 4 Bernoulli trials \cite[Sec.~4.4]{ash2000probability} and $X$ is the number of successes, then $X(1 0 1 1) =3, X(0 1 0 0 ) = 1$, and so on.	
@@ -7479,6 +7489,52 @@ Now since $\G_1 \subset \G_2$, equation $\tinycircled{2}$ also applies to all $G
 \item[2.] $\int_{G_2} \E[Y \cond \G_1] \wrt{P} = \int_{G_2} \E[Y \cond \G_1] \wrt{P} \quad \forall \; G_2 \in \G_2$?  \greencheck. Obvious.
 \end{itemize}	
 \end{alphabate}	
+
+\end{proof}
+
+The next result shows that for conditional expectation with respect to $\G$, random variables $X \in \G$ (i.e. $\G$-measurable random variables) are like constants. They can be brought outside the integral.
+
+\begin{theorem}
+If $Z \in \G$ and $\E|Y|, \E|YZ| < \infty$, then 
+\[  \E[YZ \cond \G] = Z \, \E[Y \cond \G] \quad \text{a.e.} \; .\]
+\label{thm:measurable_random_variables_behave_like_constants_with_respect_to_conditional_expectations}
+\end{theorem}
+
+\begin{proof}
+We N.T.S. that the two conditions defining conditional expectation $\E[YZ \cond \G]$ hold.  
+\begin{itemize}
+\item[1.] $Z \, \E[Y \cond \G]$ is $\G$ measurable?  \greencheck. True since each term is $\G$ measurable individually, and the product of measurable functions is measurable.  
+\item[2.] We need to show 
+%
+\begin{align*}
+\int_{G} YZ \wrt{P} = \int_{G} Z \, \E[Y \cond \G]\wrt{P} \quad \forall \; G \in \G \quad\quad \tinycircled{1}
+\end{align*}
+%
+ This is the harder one.  We proceed by mimicking the construction of the integral. 
+%
+\begin{alphabate}
+\item \boxed{\textnormal{Indicator functions.}} Let $Z = \indicate{\wt{G}}$ be an indicator function for $\wt{G} \in G$.  Then 
+\begin{align*}
+\explaintermbrace{LHS of \tinycircled{1}}{\int_{G} YZ \wrt{P}} & \stackexplain{def. Z}{=} \int_{G} Y \indicate{\wt{G}} \wrt{P} = \int_{G \cap \wt{G}} Y \wrt{P} \\
+\explaintermbrace{RHS of \tinycircled{1}}{\int_{G} Z \, \E[Y \cond \G]\wrt{P}} & \stackexplain{def. Z}{=}  \int_{G} \indicate{\wt{G}} \, \E[Y \cond \G]\wrt{P} = \int_{G \cap \wt{G}}  \E[Y \cond \G] \wrt{P}
+\end{align*}
+and the right hand sides of the two equations above are equal a.e. by the definition of $ \E[Y \cond \G]$ (note that $G \cap \wt{G} \in \G$).  Thus  \tinycircled{1} holds. 
+%
+\item \boxed{\textnormal{Simple functions.}} Let $Z$ be simple, i.e $Z = \sum_{i=1}^r a_i \indicate{G_i}$ for $G_i \in \G$. Then again
+\begin{align*}
+\explaintermbrace{LHS of \tinycircled{1}}{\int_{G} YZ \wrt{P}} & \stackexplain{def. Z}{=} \int_{G} Y (\sum_{i=1}^r a_i \indicate{G_i}) \wrt{P} \stackexplain{linearity}{=} \sum_{i=1}^r a_i  \int_{G \cap G_i} Y \wrt{P} \\
+\explaintermbrace{RHS of \tinycircled{1}}{\int_{G} Z \, \E[Y \cond \G]\wrt{P}} & \stackexplain{def. Z}{=}  \int_{G} (\sum_{i=1}^r a_i \indicate{G_i}) \, \E[Y \cond \G]\wrt{P} \stackexplain{linearity}{=} \sum_{i=1}^r a_i \int_{G \cap G_i}  \E[Y \cond \G] \wrt{P}
+\end{align*} 
+and again the right hand sides of the two equations above are equal a.e. by the definition of $ \E[Y \cond \G]$ (note that $G \cap \wt{G} \in \G$).  Thus  \tinycircled{1} holds. 
+%
+\item \boxed{\textnormal{Arbitrary measurable functions.}}  By Prop.~\ref{prop:measurable_function_is_limit_of_simple_functions_which_it_dominates},  there exists a sequence of $\G$-measurable simple functions $(S_n)$ such that 
+\[  |S_n| \leq Z \quad \quad \text{and} \quad \quad S_n \to Z \]
+where the limit is pointwise.  Now by step (b), we have 
+\[  \E[Y S_n \cond \G] = S_n \, \E[Y \cond \G] \quad \text{a.e.} \; .\]
+But the LHS $\to \E[Y Z \cond \G]$ by the dominated convergence theorem for conditional expectation \cite[Thm.~5.5.5]{ash2000probability} (noting that since $S_n \to Z$, then $Y S_n \to YZ$), and the RHS $\to Z  \E[Y \cond \G] $ by limit properties.
+\end{alphabate}
+\end{itemize}		
+
 
 \end{proof}
 
