@@ -7457,7 +7457,7 @@ A similar computation gives $\E[Z \cond \sigma(Y)]$. See Fig.~\ref{fig:zitkovic_
 
 If we take the expectation of a conditional expectation, the result is the same as if we were to take the expectation directly. \red{TODO: Add intuition.}
 
-\begin{theorem} \textbf{The law of iterated expectation (LIE), a.k.a the law of total expectation.} 
+\begin{theorem} \textbf{The law of total expectation.} 
 \[ \E[\E[Y \cond \G]] = \E[Y]\]
 \end{theorem}
 
@@ -7571,7 +7571,7 @@ Clearly $\E[\E[X \mid \G_1] \mid \G_2] \neq \E[\E[X \mid \G_2] \mid \G_1]$.
 
 The next result shows that for conditional expectation with respect to $\G$, random variables $X \in \G$ (i.e. $\G$-measurable random variables) are like constants. They can be brought outside the integral.
 
-\begin{theorem}
+\begin{theorem}\textbf{``Taking out what is known."}
 If $Z \in \G$ and $\E|Y|, \E|YZ| < \infty$, then 
 \[  \E[YZ \cond \G] = Z \, \E[Y \cond \G] \quad \text{a.e.} \; .\]
 \label{thm:measurable_random_variables_behave_like_constants_with_respect_to_conditional_expectations}
@@ -7613,6 +7613,46 @@ But the LHS $\to \E[Y Z \cond \G]$ by the dominated convergence theorem for cond
 \end{itemize}		
 
 
+\end{proof}
+
+\subsubsection{Conditional expectation as projection}
+
+\begin{theorem}
+\cite[Thm.~5.1.8]{durrett2010probability} Suppose $\E[X^2] < \infty$. Then $\E[X \cond \G]$ is the variable $Y \in \G$ that minimizes the ``mean squared error" $\E(X - Y)^2$. 
+\label{thm:conditional_expectation_minimizes_the_mean_squard_error}	
+\end{theorem}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.5\textwidth]{images/conditional_expectation_as_projection}
+\caption{Conditional expectation as projection in $L^2$.}
+\label{fig:conditional_expectation_as_projection}
+\end{figure}
+
+\begin{remark}
+\cite[pp.229]{durrett2010probability} This result gives a ``geometric interpretation" of $\E[X \cond \G]$ (see Figure~\ref{fig:conditional_expectation_as_projection}).  In particular, $L^2(\Omega, \F, P)$ is a Hilbert space, and $L^2(\Omega, \G, P)$ is a closed subspace.\redfootnote{TODO: Give a proof of this.}  Since $Y=\E[X \cond \G]$ minimizes the (squared) distance function $E(X-Y)^2$, it is the projection of $X$ onto $L^2(\Omega, \G, P)$. That is, it is the point in the subspace closest to $X$. 
+\end{remark}
+
+\begin{proof}
+Let $Y \in L^2(\Omega, \G, P)$ and define the ``residual" as $Z \defeq E[X \cond \G]-Y$.  We will show that the mean squared error is optimized when $Z=0$.
+%
+\begin{align*}
+\E(X-Y)^2 &= \E(X- E[X \cond \G] + Z)^2 && \scripttext{def. Z} \\
+&= \E(X- E[X \cond \G])^2 + \E[Z^2] + 2\E[(X- E[X \cond \G])Z] && \scripttext{FOIL} \\
+&\stackrel{1}{=} \E(X- E[X \cond \G])^2 + \E[Z^2] + 2 \cancelto{0}{\E[(X- E[X \cond \G])Z]}
+\end{align*}
+which is clearly minimized when $Z = 0$.
+
+It remains to verify Equation (1).  Now $Z \in L^2(\Omega, \G, P)$ since it is a subspace, so by Theorem~\ref{thm:measurable_random_variables_behave_like_constants_with_respect_to_conditional_expectations}, we have
+\begin{align*}
+\vertequalto{\E[ZX \cond \G]}{\E[ZX]} = Z \, \E[X \cond \G].
+\end{align*} 
+%
+The vertical equality holds by the law of total expectation.
+
+Applying linearity, we obtain
+\[ \E\big[Z(X - \E[X \cond \G])\big] = 0, \]
+which justifies Equation (1).
 \end{proof}
 
 
