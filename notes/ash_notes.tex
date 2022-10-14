@@ -7197,6 +7197,7 @@ So $\E[Y \cond X]$ is constant on vertical strips of $\Omega=\R^2$, and the only
 
 \subsubsection{Overview}
 
+
 Here in Sec.~\ref{sec:properties_of_conditional_expectation} we provide some properties of conditional expectation.  Let $Y$ be an extended random variable on $(\Omega, \F, P)$  with $\E[Y]$ assumed to exist, $X : (\Omega, \F) \to  (\Omega', \F')$ be a random object, and $\G$ a sub-$\sigma$-field of $\F$.   \citet{ash2000probability} presents properties of conditional expectation in pairs, so that we can work with either $\E[Y \cond \G]$ (which has $\E[Y \cond X]$ as a special case)   or $\E[Y \cond X = x]$.  To represent the distinction between $\E[Y \cond X]$ and $\E[Y \cond X = x]$ , we give a small variant of Fig.~\ref{fig:conditional_expectation_with_respect_to_a_sigma_field_induced_by_another_random_variable} below in Fig.~\ref{fig:two_types_of_conditional_expectation_given_another_random_variable}.  We can consider $\E[Y \cond X=x]$ as our ``best guess" of $Y$ given that $X=x$, and $\E[Y \cond X]$ as our ``best guess" of $Y$ given that all we know about observed outcome $\omega$ is whether or not $\omega$ belongs to each set in $\sigma(X)$.
 
 
@@ -7233,37 +7234,57 @@ Although we noted above that conditional expectations ``behave" like expectation
 \begin{itemize}
 \item The law of iterated expectation \cite[Thm. 5.5.4]{ash2000probability}.	
 \item Iterated expectation with nested $\sigma$-fields \cite[Thm. 5.5.10]{ash2000probability}.
-\item Random variables behaving like constants with respect to conditional expectations  \cite[Thm. 5.5.11]{ash2000probability}.
+\item ``Taking out what is known" \cite[Thm. 5.5.11]{ash2000probability}.
 \end{itemize}
+
+
 
 \paragraph{Notation.} In the results to follow, $Y, Y_1, Y_2, \hdots$ are extended random variables on $(\Omega, \F,P)$ with all expectations assumed to exist; $X: (\Omega, \F) \to (\Omega', \F')$ is a random object; and $\G$ is a sub $\sigma$-field of $\F$. The phrase ``a.e." with no measure specified will always mean a.e. $[P]$.  If $Z:(\Omega, \G) \to (\overline{\R}, \B)$, we say that $Z$ is $\G$-measurable, and if $g:(\Omega', \F') \to (\overline{\R}, \B)$, we say that $g$ is $\F'$-measurable.
 
 
 
-\subsubsection{Basic properties}
+\subsubsection{Properties}
+
+\begin{remark}
+Below we provide some properties of conditional expectation.  These properties are stated in terms of $\E[Y|X]$. \citet[Sec.~5.5]{ash2000probability} instead gives a ``pairing" structure to provide these properties in terms of both $\E[Y|X]$ and  $\E[Y|X=x]$, which are different objects on different spaces.  For a similar (partial) construction on our end, see Theorem~\ref{thm:conditional_expectation_properties_paired}.  However, I don't think that it is necessary to use the pairing structure; other authors don't, and there seems to be a generic way to obtain theorems about $E[Y | X=x]$ given a corresponding theorem about $E[Y \cond X]$; see \cite[Sec.~5.5, Problem 3]{ash2000probability}.
+\end{remark}
+
 
 \begin{theorem}
-If $Y$ is a constant $k$ a.e., then
-\begin{itemize}
-	\item[(a)] \textit{(Constant property.)} $\E[Y \cond \G]=k$ a.e
-	\item[(a')] \textit{(Constant property.)} $\E[Y \cond X=x]=k$ a.e. $[P_X]$
+The following properties hold for conditional expectation given a $\sigma$-field
+\begin{itemize} 
+\item[(a)] \textit{(Constant property.)} If $Y$ is a constant $k$ a.e., then $\E[Y \cond \G]=k$ a.e
+\item[(b)] \textit{(Monotonicity.)} If $Y_1 \leq Y_2$ a.e., then $\E[Y_1 \cond \G] \leq \E[Y_2 \cond \G]$ a.e.
+\item[(c)] \textit{(Linearity.)} If $a,b \in \R$ and $a \E[Y_1] + b \E[Y_2]$ is well-defined (not of the form $\infty-\infty$), then 
+\[\E[aY_1 + bY_2 \cond \G] = a \E[Y_1 \cond \G] + b\E[Y_2 \cond \G]. \]
+\item[(d)] \textit{(Triangle inequality.)} 
+\[ \bigg| \E[Y \cond \G]\bigg| \leq \E\bigg[|Y| \cond \G\bigg] \text{a.e.} \]
+\item[(e)] \textit{(The law of total expectation.)}
+\[ \E[\E[Y \cond \G]] = \E[Y]\]
+\item[(f)] \textit{(Tower property.)}
+If $\G_1 \subset \G_2$, then 
+	\begin{itemize}
+	\item[(i)] $\E[\E[Y \mid \G_2] \mid \G_1] = \E[Y \mid \G_1]$ a.e.
+	\item[(ii)] $\E[\E[Y \mid \G_1] \mid \G_2] = \E[Y \mid \G_1]$ a.e.
+	\end{itemize}
+\item[(g)] \textit{(``Taking out what is known.")}
+If $Z \in \G$ and $\E|Y|, \E|YZ| < \infty$, then 
+\[  \E[YZ \cond \G] = Z \, \E[Y \cond \G] \quad \text{a.e.} \]	
 \end{itemize}
-If $Y_1 \leq Y_2$ a.e., then
-\begin{itemize}
-	\item[(b)] \textit{(Monotonicity.)} $\E[Y_1 \cond \G] \leq \E[Y_2 \cond \G]$ a.e.
-	\item[(b')] \textit{(Monotonicity.)} $\E[Y_1 \cond X=x] \leq \E[Y_2 \cond X=x]$ a.e. $[P_X]$
-\end{itemize}
-If $a,b \in \R$ and $a \E[Y_1] + b \E[Y_2]$ is well-defined (not of the form $\infty-\infty$), then 
-\begin{itemize}
-	\item[(c)] \textit{(Linearity.)} $\E[aY_1 + bY_2 \cond \G] = a \E[Y_1 \cond \G] + b\E[Y_2 \cond \G] $
-	\item[(c')] \textit{(Linearity.)}  $\E[aY_1 + bY_2 \cond X=x] = a \E[Y_1 \cond X=x] + b\E[Y_2 \cond X=x] $ 
-\end{itemize}
-Finally, we have
-\begin{itemize}
-	\item[(d)] \textit{(Triangle inequality.)} $| \E[Y \cond \G]| \leq \E[|Y| \cond \G]$ a.e.
-	\item[(d')] \textit{(Triangle inequality.)}  $| \E[Y \cond X=x]| \leq \E[|Y| \cond X=x]$ a.e. $[P_X]$
-\end{itemize}
+\label{thm:conditional_expectation_properties}
 \end{theorem}
+
+\red{TODO: Explicitly add to the list the conditional versions of dominated convergence, monotone convergence, Fatou's, etc.}
+
+\begin{remark}
+Some verbal description of these properties:
+\begin{itemize}
+\item[(e)] If we take the expectation of a conditional expectation, the result is the same as if we were to take the expectation directly. \red{TODO: Add intuition.}
+\item[(f)] This property handles a scenario where we do successive conditioning with respect to two sigma-fields, one of which is coarser than (that is, a subset of) the other.  The observation is that \textit{the smaller $\sigma$-field always wins.}
+\item[(g)] This result shows that for conditional expectation with respect to $\G$, random variables $X \in \G$ (i.e. $\G$-measurable random variables) are like constants. They can be brought outside the integral.
+\end{itemize}	
+\end{remark}
+
 
 \begin{proof}
 \begin{itemize}
@@ -7291,12 +7312,6 @@ Finally, we have
 		
 		\item $\int_G Y \wrt{P} =  \int_G h \wrt{P}$ for all $G \in \G$? \greencheck.   By hypothesis on $Y$ and our guess on $h$, the condition becomes $\int_G k \wrt{P} =  \int_G k \wrt{P}$, which obviously holds.
 	\end{enumerate} 
-\item[(a')] Let $g=\E[Y \cond X=x]:  \Omega' \to \R$ be defined a.e. by $g(x)=k$. We verify the two conditions for the existence (and essential uniqueness) of conditional expectation.
-
-	\begin{enumerate}
-		\item $g^{-1} (B) \in \F'$ for all $B \in \B(\overline{\R}))$? \greencheck.  By a similar argument as in (a), $\set{g^{-1} (B): B \in \B(\overline{\R})} = \set{\Omega', \emptyset}$.
-		\item $\int_{\set{X \in A}} Y \wrt{P} =  \int_A g \wrt{P_X}$ for all $A \in \F'$? \greencheck.   By hypothesis on $Y$ and our guess on $g$, the condition to be verified becomes $\int_{\set{X \in A}} k \wrt{P} =  \int_A k \wrt{P_X}$.  By integrals of indicators, LHS gives $k P\set{X \in A}$ and the RHS gives $k P_X(A)$. Recalling that $P_X(A) \defeq \set{X \in A}$, the proof is complete.
-	\end{enumerate} 
 \item[(b)] If $Y_1 \leq Y_2$ a.e., then 
 \[\begin{array}{rrlll}
 & Y_1 \indicate{G} &\leq Y_2 \indicate{G} & \text{a.e. } \, \forall G \in \G  & \tinytext{obvious} \\
@@ -7305,17 +7320,8 @@ Finally, we have
 \implies & \E[Y_1 \cond \G]  & \leq  \E[Y_2 \cond \G]  &  \text{a.e.}  & \tinytext{by monotonicity converse; Thm.~\ref{thm:monotonicity_converse}} \\
 \end{array}
 \]
-\item[(b')] The argument is almost identical to that given by (b). If $Y_1 \leq Y_2$ a.e., then 
-\[\begin{array}{rrlll}
-& Y_1 \indicate{\set{X \in A}} &\leq Y_2 \indicate{\set{X \in A}}  & \text{a.e. } \, \forall A \in \F'  & \tinytext{obvious} \\
-\implies & \int_{\set{X \in A}} Y_1 \wrt{P} & \leq  \int_{\set{X \in A}} Y_2 \wrt{P} & \forall A \in \F' & \tinytext{by monotonicity} \\
-\implies & \int_A \E[Y_1 \cond X=x] \wrt{P_X} & \leq  \int_A \E[Y_2 \cond X=x] \wrt{P_X} &  \forall A \in \F' & \tinytext{by def. cond'l expect.} \\
-\implies & \E[Y_1 \cond X=x]  & \leq  \E[Y_2 \cond X=x]  &  \text{a.e.}-[P_X]  & \tinytext{by monotonicity converse; Thm.~\ref{thm:monotonicity_converse}} \\
-\end{array}
-\]
 \item[(c)] 
-By the definition 
-of conditional expectation,
+By the definition  of conditional expectation,
 %
 \[ \int_G (a Y_1 + b Y_2 ) \wrt{P} = \int_G \E[a Y_1 + b Y_2 \cond \G ]\wrt{P} \quad \quad \forall G \in \G \quad \quad \quad \quad \tinycircled{1} \]
 On the other hand, $\forall \, G \in \G$, we have 
@@ -7328,7 +7334,6 @@ Combining $\tinycircled{1}$ and $\tinycircled{2}$, we obtain
 \[ \int_G \E[a Y_1 + b Y_2 \cond \G ]\wrt{P}  = \int_G  \big( a\E[Y_1 \cond \G]  + b \E[Y_2 \cond \G]  \big) \wrt{P} \quad \quad \forall G \in \G  \] 
 Since the integrands are equal for all measurable sets,  Cor.~\ref{cor:equal_integrals_for_all_measurable_sets_implies_the_functions_are_equal_ae} yields the conclusion
 \[ \E[a Y_1 + b Y_2 \cond \G ]\wrt{P}  =  a\E[Y_1 \cond \G]  + b \E[Y_2 \cond \G]   \quad \quad a.e.  \]
-\item[(c')] Similar to (c).
 \item[(d)]\footnotemark
 \[\begin{array}{rcccccl}
 & -|Y| &\leq & Y &\leq & Y &\tinytext{obvious} \\
@@ -7336,7 +7341,62 @@ Since the integrands are equal for all measurable sets,  Cor.~\ref{cor:equal_int
 &&&&&&\\
  \implies & \big| \E[Y \cond \G] \big| &\leq & \E[|Y| \cond \G] & & & \tinytext{def. absolute value}
 \end{array}\]
-\item[(d')] Same as (d), but replacing the conditioning set, and using (c') instead of (c).
+\item[(e)] By the definition of conditional expectation for $\E[Y \cond \G]$, we have
+\[ \int_\Omega \E[Y \cond \G] \wrt{P} = \int_\Omega Y \wrt{P}.  \]
+\item[(f)]
+\begin{itemize}
+\item[(i)] We N.T.S. that the two conditions defining conditional expectation hold. 
+\begin{itemize}
+\item[1.] $\E[Y \cond \G_1]$ is $\G_1$ measurable? \greencheck. Automatic.
+\item[2.] $\int_{G_1} \E[Y \cond \G_2] \wrt{P} = \int_{G_1} \E[Y \cond \G_1] \wrt{P} \quad \forall \; G_1 \in \G_1$? \greencheck.
+By definitions of conditional expectation for $\E[Y \cond \G_1]$ and $\E[Y \cond \G_2]$, respectively, we have
+\begin{align*}
+\int_{G_1} \E[Y \cond \G_1] \wrt{P} &= \int_{G_1} Y \wrt{P} \quad \forall \; G_1 \in \G_1 && \tinycircled{1} \\
+\int_{G_2} \E[Y \cond \G_2] \wrt{P} &= \int_{G_2} Y \wrt{P} \quad \forall \; G_2 \in \G_2 && \tinycircled{2} \\
+\end{align*}
+Now since $\G_1 \subset \G_2$, equation $\tinycircled{2}$ also applies to all $G_1 \in \G_1$, so we have
+\[ \int_{G_1} \E[Y \cond \G_1] \wrt{P} \stackexplain{\tinycircled{1}}{=}  \int_{G_1} Y \wrt{P}  \stackexplain{\tinycircled{2}}{=}  \int_{G_1} \E[Y \cond \G_1] \wrt{P} \quad \forall \; G_1 \in \G_1. \]
+\end{itemize}
+\item[(ii)] We N.T.S. that the two conditions defining conditional expectation hold.  
+\begin{itemize}
+\item[1.] $\E[Y \cond \G_1]$ is $\G_2$ measurable? \greencheck. True since $\G_1 \subset \G_2$. 
+\item[2.] $\int_{G_2} \E[Y \cond \G_1] \wrt{P} = \int_{G_2} \E[Y \cond \G_1] \wrt{P} \quad \forall \; G_2 \in \G_2$?  \greencheck. Obvious.
+\end{itemize}	
+\end{itemize}
+
+\item[(g)] We N.T.S. that the two conditions defining conditional expectation $\E[YZ \cond \G]$ hold.  
+\begin{itemize}
+\item[1.] $Z \, \E[Y \cond \G]$ is $\G$ measurable?  \greencheck. True since each term is $\G$ measurable individually, and the product of measurable functions is measurable.  
+\item[2.] We need to show 
+%
+\begin{align*}
+\int_{G} YZ \wrt{P} = \int_{G} Z \, \E[Y \cond \G]\wrt{P} \quad \forall \; G \in \G \quad\quad \tinycircled{1}
+\end{align*}
+%
+We proceed by mimicking the construction of the integral. 
+%
+\begin{itemize}
+\item[(i)] \boxed{\textnormal{Indicator functions.}} Let $Z = \indicate{\wt{G}}$ be an indicator function for $\wt{G} \in G$.  Then 
+\begin{align*}
+\explaintermbrace{LHS of \tinycircled{1}}{\int_{G} YZ \wrt{P}} & \stackexplain{def. Z}{=} \int_{G} Y \indicate{\wt{G}} \wrt{P} = \int_{G \cap \wt{G}} Y \wrt{P} \\
+\explaintermbrace{RHS of \tinycircled{1}}{\int_{G} Z \, \E[Y \cond \G]\wrt{P}} & \stackexplain{def. Z}{=}  \int_{G} \indicate{\wt{G}} \, \E[Y \cond \G]\wrt{P} = \int_{G \cap \wt{G}}  \E[Y \cond \G] \wrt{P}
+\end{align*}
+and the right hand sides of the two equations above are equal a.e. by the definition of $ \E[Y \cond \G]$ (note that $G \cap \wt{G} \in \G$).  Thus  \tinycircled{1} holds. 
+%
+\item[(ii)] \boxed{\textnormal{Simple functions.}} Let $Z$ be simple, i.e $Z = \sum_{i=1}^r a_i \indicate{G_i}$ for $G_i \in \G$. Then again
+\begin{align*}
+\explaintermbrace{LHS of \tinycircled{1}}{\int_{G} YZ \wrt{P}} & \stackexplain{def. Z}{=} \int_{G} Y (\sum_{i=1}^r a_i \indicate{G_i}) \wrt{P} \stackexplain{linearity}{=} \sum_{i=1}^r a_i  \int_{G \cap G_i} Y \wrt{P} \\
+\explaintermbrace{RHS of \tinycircled{1}}{\int_{G} Z \, \E[Y \cond \G]\wrt{P}} & \stackexplain{def. Z}{=}  \int_{G} (\sum_{i=1}^r a_i \indicate{G_i}) \, \E[Y \cond \G]\wrt{P} \stackexplain{linearity}{=} \sum_{i=1}^r a_i \int_{G \cap G_i}  \E[Y \cond \G] \wrt{P}
+\end{align*} 
+and again the right hand sides of the two equations above are equal a.e. by the definition of $ \E[Y \cond \G]$ (note that $G \cap \wt{G} \in \G$).  Thus  \tinycircled{1} holds. 
+%
+\item[(iii)] \boxed{\textnormal{Arbitrary measurable functions.}}  By Prop.~\ref{prop:measurable_function_is_limit_of_simple_functions_which_it_dominates},  there exists a sequence of $\G$-measurable simple functions $(S_n)$ such that 
+\[  |S_n| \leq Z \quad \quad \text{and} \quad \quad S_n \to Z \]
+where the limit is pointwise.  Now by step (b), we have 
+\[  \E[Y S_n \cond \G] = S_n \, \E[Y \cond \G] \quad \text{a.e.} \; .\]
+But the LHS $\to \E[Y Z \cond \G]$ by the dominated convergence theorem for conditional expectation \cite[Thm.~5.5.5]{ash2000probability} (noting that since $S_n \to Z$, then $Y S_n \to YZ$), and the RHS $\to Z  \E[Y \cond \G] $ by limit properties.
+\end{itemize}
+\end{itemize}		
 \end{itemize}
 \footnotetext{\cite[pp.220-221]{ash2000probability} proves (d) before (c).  I am not sure how this is possible. }
 \end{proof}
@@ -7452,57 +7512,8 @@ A similar computation gives $\E[Z \cond \sigma(Y)]$. See Fig.~\ref{fig:zitkovic_
 
 \red{TODO: Can we decompose any probability space into atoms? I think no.}
 
+Considering conditional expectation as averages over atoms is useful for various exercises. For instance, below we show via a counterexample that the tower property does not hold when $\sigma$-fields are not nested. 
 
-\subsubsection{Other properties}
-
-If we take the expectation of a conditional expectation, the result is the same as if we were to take the expectation directly. \red{TODO: Add intuition.}
-
-\begin{theorem} \textbf{The law of total expectation.} 
-\[ \E[\E[Y \cond \G]] = \E[Y]\]
-\end{theorem}
-
-\begin{proof}
-By the definition of conditional expectation for $\E[Y \cond \G]$, we have
-\[ \int_\Omega \E[Y \cond \G] \wrt{P} = \int_\Omega Y \wrt{P}.  \]	
-\end{proof}
-
-
-We now consider successive conditioning with respect to two sigma-fields, one of which is coarser than (that is, a subset of) the other.
-
-\begin{theorem}
-If $\G_1 \subset \G_2$, then 
-\begin{alphabate}
-\item $\E[\E[Y \mid \G_2] \mid \G_1] = \E[Y \mid \G_1]$ a.e.
-\item $\E[\E[Y \mid \G_1] \mid \G_2] = \E[Y \mid \G_1]$ a.e.
-\end{alphabate}	
-\label{thm:conditional_expectation_property_that_the_smaller_sigma_field_always_wins}
-\end{theorem}
-
-In other words, the smaller $\sigma$-field always wins.
-
-\begin{proof}
-\begin{alphabate}
-\item We N.T.S. that the two conditions defining conditional expectation hold. 
-\begin{itemize}
-\item[1.] $\E[Y \cond \G_1]$ is $\G_1$ measurable? \greencheck. Automatic.
-\item[2.] $\int_{G_1} \E[Y \cond \G_2] \wrt{P} = \int_{G_1} \E[Y \cond \G_1] \wrt{P} \quad \forall \; G_1 \in \G_1$? \greencheck.
-By definitions of conditional expectation for $\E[Y \cond \G_1]$ and $\E[Y \cond \G_2]$, respectively, we have
-\begin{align*}
-\int_{G_1} \E[Y \cond \G_1] \wrt{P} &= \int_{G_1} Y \wrt{P} \quad \forall \; G_1 \in \G_1 && \tinycircled{1} \\
-\int_{G_2} \E[Y \cond \G_2] \wrt{P} &= \int_{G_2} Y \wrt{P} \quad \forall \; G_2 \in \G_2 && \tinycircled{2} \\
-\end{align*}
-Now since $\G_1 \subset \G_2$, equation $\tinycircled{2}$ also applies to all $G_1 \in \G_1$, so we have
-\[ \int_{G_1} \E[Y \cond \G_1] \wrt{P} \stackexplain{\tinycircled{1}}{=}  \int_{G_1} Y \wrt{P}  \stackexplain{\tinycircled{2}}{=}  \int_{G_1} \E[Y \cond \G_1] \wrt{P} \quad \forall \; G_1 \in \G_1. \]
- 
-\end{itemize}
-\item We N.T.S. that the two conditions defining conditional expectation hold.  
-\begin{itemize}
-\item[1.] $\E[Y \cond \G_1]$ is $\G_2$ measurable? \greencheck. True since $\G_1 \subset \G_2$. 
-\item[2.] $\int_{G_2} \E[Y \cond \G_1] \wrt{P} = \int_{G_2} \E[Y \cond \G_1] \wrt{P} \quad \forall \; G_2 \in \G_2$?  \greencheck. Obvious.
-\end{itemize}	
-\end{alphabate}	
-
-\end{proof}
 
 \begin{exercise}
 \cite[Exercise 5.1.6]{durrett2010probability} Give an example on $\Omega=\set{a,b,c}$ in which
@@ -7568,53 +7579,6 @@ Clearly $\E[\E[X \mid \G_1] \mid \G_2] \neq \E[\E[X \mid \G_2] \mid \G_1]$.
 \end{proof}
 
 
-
-The next result shows that for conditional expectation with respect to $\G$, random variables $X \in \G$ (i.e. $\G$-measurable random variables) are like constants. They can be brought outside the integral.
-
-\begin{theorem}\textbf{``Taking out what is known."}
-If $Z \in \G$ and $\E|Y|, \E|YZ| < \infty$, then 
-\[  \E[YZ \cond \G] = Z \, \E[Y \cond \G] \quad \text{a.e.} \; .\]
-\label{thm:measurable_random_variables_behave_like_constants_with_respect_to_conditional_expectations}
-\end{theorem}
-
-\begin{proof}
-We N.T.S. that the two conditions defining conditional expectation $\E[YZ \cond \G]$ hold.  
-\begin{itemize}
-\item[1.] $Z \, \E[Y \cond \G]$ is $\G$ measurable?  \greencheck. True since each term is $\G$ measurable individually, and the product of measurable functions is measurable.  
-\item[2.] We need to show 
-%
-\begin{align*}
-\int_{G} YZ \wrt{P} = \int_{G} Z \, \E[Y \cond \G]\wrt{P} \quad \forall \; G \in \G \quad\quad \tinycircled{1}
-\end{align*}
-%
-We proceed by mimicking the construction of the integral. 
-%
-\begin{alphabate}
-\item \boxed{\textnormal{Indicator functions.}} Let $Z = \indicate{\wt{G}}$ be an indicator function for $\wt{G} \in G$.  Then 
-\begin{align*}
-\explaintermbrace{LHS of \tinycircled{1}}{\int_{G} YZ \wrt{P}} & \stackexplain{def. Z}{=} \int_{G} Y \indicate{\wt{G}} \wrt{P} = \int_{G \cap \wt{G}} Y \wrt{P} \\
-\explaintermbrace{RHS of \tinycircled{1}}{\int_{G} Z \, \E[Y \cond \G]\wrt{P}} & \stackexplain{def. Z}{=}  \int_{G} \indicate{\wt{G}} \, \E[Y \cond \G]\wrt{P} = \int_{G \cap \wt{G}}  \E[Y \cond \G] \wrt{P}
-\end{align*}
-and the right hand sides of the two equations above are equal a.e. by the definition of $ \E[Y \cond \G]$ (note that $G \cap \wt{G} \in \G$).  Thus  \tinycircled{1} holds. 
-%
-\item \boxed{\textnormal{Simple functions.}} Let $Z$ be simple, i.e $Z = \sum_{i=1}^r a_i \indicate{G_i}$ for $G_i \in \G$. Then again
-\begin{align*}
-\explaintermbrace{LHS of \tinycircled{1}}{\int_{G} YZ \wrt{P}} & \stackexplain{def. Z}{=} \int_{G} Y (\sum_{i=1}^r a_i \indicate{G_i}) \wrt{P} \stackexplain{linearity}{=} \sum_{i=1}^r a_i  \int_{G \cap G_i} Y \wrt{P} \\
-\explaintermbrace{RHS of \tinycircled{1}}{\int_{G} Z \, \E[Y \cond \G]\wrt{P}} & \stackexplain{def. Z}{=}  \int_{G} (\sum_{i=1}^r a_i \indicate{G_i}) \, \E[Y \cond \G]\wrt{P} \stackexplain{linearity}{=} \sum_{i=1}^r a_i \int_{G \cap G_i}  \E[Y \cond \G] \wrt{P}
-\end{align*} 
-and again the right hand sides of the two equations above are equal a.e. by the definition of $ \E[Y \cond \G]$ (note that $G \cap \wt{G} \in \G$).  Thus  \tinycircled{1} holds. 
-%
-\item \boxed{\textnormal{Arbitrary measurable functions.}}  By Prop.~\ref{prop:measurable_function_is_limit_of_simple_functions_which_it_dominates},  there exists a sequence of $\G$-measurable simple functions $(S_n)$ such that 
-\[  |S_n| \leq Z \quad \quad \text{and} \quad \quad S_n \to Z \]
-where the limit is pointwise.  Now by step (b), we have 
-\[  \E[Y S_n \cond \G] = S_n \, \E[Y \cond \G] \quad \text{a.e.} \; .\]
-But the LHS $\to \E[Y Z \cond \G]$ by the dominated convergence theorem for conditional expectation \cite[Thm.~5.5.5]{ash2000probability} (noting that since $S_n \to Z$, then $Y S_n \to YZ$), and the RHS $\to Z  \E[Y \cond \G] $ by limit properties.
-\end{alphabate}
-\end{itemize}		
-
-
-\end{proof}
-
 \subsubsection{Conditional expectation as projection}
 
 \begin{theorem}
@@ -7643,7 +7607,7 @@ Let $Y \in L^2(\Omega, \G, P)$ and define the ``residual" as $Z \defeq E[X \cond
 \end{align*}
 which is clearly minimized when $Z = 0$.
 
-It remains to verify Equation (1).  Now $Z \in L^2(\Omega, \G, P)$ since it is a subspace, so by Theorem~\ref{thm:measurable_random_variables_behave_like_constants_with_respect_to_conditional_expectations}, we have
+It remains to verify Equation (1).  Now $Z \in L^2(\Omega, \G, P)$ since it is a subspace, so by the ``taking out what is known" property of conditional expectation (Thm.~\ref{thm:conditional_expectation_properties}), we have
 \begin{align*}
 \vertequalto{\E[ZX \cond \G]}{\E[ZX]} = Z \, \E[X \cond \G].
 \end{align*} 
@@ -8307,6 +8271,112 @@ Let $A$ be a subset of a metric space $X$.  We define the $\textbf{boundary}$ $\
 %\end{align*}
 \label{ex:boundary_of_rsc_interval}	
 \end{example}
+
+\section{Conditional Expectation: Supplemental}
+
+
+Below we provide another version of some properties of conditional expectation (Theorem~\ref{thm:conditional_expectation_properties}), but where we use the ``pairing" structure used by \cite[Sec.~5.5]{ash2000probability}.  I don't think that it is necessary to use the pairing structure; other authors don't, and there seems to be a generic way to obtain theorems about $E[Y | X=x]$ given a corresponding theorem about $E[Y \cond X]$; see \cite[Sec.~5.5, Problem 3]{ash2000probability}.
+
+\begin{theorem}
+If $Y$ is a constant $k$ a.e., then
+\begin{itemize}
+	\item[(a)] \textit{(Constant property.)} $\E[Y \cond \G]=k$ a.e
+	\item[(a')] \textit{(Constant property.)} $\E[Y \cond X=x]=k$ a.e. $[P_X]$
+\end{itemize}
+If $Y_1 \leq Y_2$ a.e., then
+\begin{itemize}
+	\item[(b)] \textit{(Monotonicity.)} $\E[Y_1 \cond \G] \leq \E[Y_2 \cond \G]$ a.e.
+	\item[(b')] \textit{(Monotonicity.)} $\E[Y_1 \cond X=x] \leq \E[Y_2 \cond X=x]$ a.e. $[P_X]$
+\end{itemize}
+If $a,b \in \R$ and $a \E[Y_1] + b \E[Y_2]$ is well-defined (not of the form $\infty-\infty$), then 
+\begin{itemize}
+	\item[(c)] \textit{(Linearity.)} $\E[aY_1 + bY_2 \cond \G] = a \E[Y_1 \cond \G] + b\E[Y_2 \cond \G] $
+	\item[(c')] \textit{(Linearity.)}  $\E[aY_1 + bY_2 \cond X=x] = a \E[Y_1 \cond X=x] + b\E[Y_2 \cond X=x] $ 
+\end{itemize}
+Finally, we have
+\begin{itemize}
+	\item[(d)] \textit{(Triangle inequality.)} $| \E[Y \cond \G]| \leq \E[|Y| \cond \G]$ a.e.
+	\item[(d')] \textit{(Triangle inequality.)}  $| \E[Y \cond X=x]| \leq \E[|Y| \cond X=x]$ a.e. $[P_X]$
+\end{itemize}
+\label{thm:conditional_expectation_properties_paired}
+\end{theorem}
+
+\begin{proof}
+\begin{itemize}
+\item[(a)] Let $h=\E[Y \cond \G]:  \Omega \to \R$ be defined a.e. by $h(\omega)=k$. We verify the two conditions for the existence (and essential uniqueness) of conditional expectation.
+	\begin{enumerate}
+		\item $h^{-1} (B) \in \G$ for all $B \in \B(\overline{\R}))$? \greencheck. We have 
+		\[ h^{-1}(B) = 
+		\begin{cases}
+		\Omega, & \text{if} \; k \in B \\
+		\emptyset, & \text{if} \; k \notin B,	
+		\end{cases} \]
+		and $\Omega, \emptyset \in \G$.
+		 
+		\begin{figure}[H]
+		\centering	
+		% Reference: https://tikz.dev/tikz-plots
+		\scalebox{.5}{
+		\begin{tikzpicture}[domain=0:4]
+		  \draw[->] (-0.2,0) -- (4.2,0) node[right] {};
+		  \draw[->] (0,-1.2) -- (0,4.2) node[above] {};
+		  \draw[color=red]    plot (\x,3)             node[right] {$h(\omega) =k$};
+		\end{tikzpicture}
+		}
+		\end{figure}
+		
+		\item $\int_G Y \wrt{P} =  \int_G h \wrt{P}$ for all $G \in \G$? \greencheck.   By hypothesis on $Y$ and our guess on $h$, the condition becomes $\int_G k \wrt{P} =  \int_G k \wrt{P}$, which obviously holds.
+	\end{enumerate} 
+\item[(a')] Let $g=\E[Y \cond X=x]:  \Omega' \to \R$ be defined a.e. by $g(x)=k$. We verify the two conditions for the existence (and essential uniqueness) of conditional expectation.
+
+	\begin{enumerate}
+		\item $g^{-1} (B) \in \F'$ for all $B \in \B(\overline{\R}))$? \greencheck.  By a similar argument as in (a), $\set{g^{-1} (B): B \in \B(\overline{\R})} = \set{\Omega', \emptyset}$.
+		\item $\int_{\set{X \in A}} Y \wrt{P} =  \int_A g \wrt{P_X}$ for all $A \in \F'$? \greencheck.   By hypothesis on $Y$ and our guess on $g$, the condition to be verified becomes $\int_{\set{X \in A}} k \wrt{P} =  \int_A k \wrt{P_X}$.  By integrals of indicators, LHS gives $k P\set{X \in A}$ and the RHS gives $k P_X(A)$. Recalling that $P_X(A) \defeq \set{X \in A}$, the proof is complete.
+	\end{enumerate} 
+\item[(b)] If $Y_1 \leq Y_2$ a.e., then 
+\[\begin{array}{rrlll}
+& Y_1 \indicate{G} &\leq Y_2 \indicate{G} & \text{a.e. } \, \forall G \in \G  & \tinytext{obvious} \\
+\implies & \int_G Y_1 \wrt{P} & \leq  \int_G Y_2 \wrt{P} & \forall G \in \G & \tinytext{by monotonicity} \\
+\implies & \int_G \E[Y_1 \cond \G] \wrt{P} & \leq  \int_G \E[Y_2 \cond \G] \wrt{P} &  \forall G \in \G & \tinytext{by def. cond'l expect.} \\
+\implies & \E[Y_1 \cond \G]  & \leq  \E[Y_2 \cond \G]  &  \text{a.e.}  & \tinytext{by monotonicity converse; Thm.~\ref{thm:monotonicity_converse}} \\
+\end{array}
+\]
+\item[(b')] The argument is almost identical to that given by (b). If $Y_1 \leq Y_2$ a.e., then 
+\[\begin{array}{rrlll}
+& Y_1 \indicate{\set{X \in A}} &\leq Y_2 \indicate{\set{X \in A}}  & \text{a.e. } \, \forall A \in \F'  & \tinytext{obvious} \\
+\implies & \int_{\set{X \in A}} Y_1 \wrt{P} & \leq  \int_{\set{X \in A}} Y_2 \wrt{P} & \forall A \in \F' & \tinytext{by monotonicity} \\
+\implies & \int_A \E[Y_1 \cond X=x] \wrt{P_X} & \leq  \int_A \E[Y_2 \cond X=x] \wrt{P_X} &  \forall A \in \F' & \tinytext{by def. cond'l expect.} \\
+\implies & \E[Y_1 \cond X=x]  & \leq  \E[Y_2 \cond X=x]  &  \text{a.e.}-[P_X]  & \tinytext{by monotonicity converse; Thm.~\ref{thm:monotonicity_converse}} \\
+\end{array}
+\]
+\item[(c)] 
+By the definition 
+of conditional expectation,
+%
+\[ \int_G (a Y_1 + b Y_2 ) \wrt{P} = \int_G \E[a Y_1 + b Y_2 \cond \G ]\wrt{P} \quad \quad \forall G \in \G \quad \quad \quad \quad \tinycircled{1} \]
+On the other hand, $\forall \, G \in \G$, we have 
+\begin{align*}
+\int_G (a Y_1 + b Y_2 ) \wrt{P} &= a \int_G Y_1 \wrt{P} + b \int_G Y_2  \wrt{P}  && \tinytext{linearity} \\
+&= a \int_G \E[Y_1 \cond \G] \wrt{P} + b \int_G \E[Y_2 \cond \G]  \wrt{P}  && \tinytext{def. cond'l expect.} \\
+&= \int_G  \big( a\E[Y_1 \cond \G]  + b \E[Y_2 \cond \G]  \big) \wrt{P}  && \tinytext{linearity} \quad \quad \tinycircled{2} \\  
+\end{align*}
+Combining $\tinycircled{1}$ and $\tinycircled{2}$, we obtain
+\[ \int_G \E[a Y_1 + b Y_2 \cond \G ]\wrt{P}  = \int_G  \big( a\E[Y_1 \cond \G]  + b \E[Y_2 \cond \G]  \big) \wrt{P} \quad \quad \forall G \in \G  \] 
+Since the integrands are equal for all measurable sets,  Cor.~\ref{cor:equal_integrals_for_all_measurable_sets_implies_the_functions_are_equal_ae} yields the conclusion
+\[ \E[a Y_1 + b Y_2 \cond \G ]\wrt{P}  =  a\E[Y_1 \cond \G]  + b \E[Y_2 \cond \G]   \quad \quad a.e.  \]
+\item[(c')] Similar to (c).
+\item[(d)]\footnotemark
+\[\begin{array}{rcccccl}
+& -|Y| &\leq & Y &\leq & Y &\tinytext{obvious} \\
+\implies & \explaintermbrace{$=-\E[|Y| \cond \G]$ by part (c)}{\E[-|Y| \cond \G]} &\leq & \E[Y \cond \G]  &\leq & \E[|Y| \cond \G]  &\tinytext{monotonicity (part b)} \\
+&&&&&&\\
+ \implies & \big| \E[Y \cond \G] \big| &\leq & \E[|Y| \cond \G] & & & \tinytext{def. absolute value}
+\end{array}\]
+\item[(d')] Same as (d), but replacing the conditioning set, and using (c') instead of (c).
+\end{itemize}
+\footnotetext{\cite[pp.220-221]{ash2000probability} proves (d) before (c).  I am not sure how this is possible. }
+\end{proof}
+
 
 
 \end{document}
