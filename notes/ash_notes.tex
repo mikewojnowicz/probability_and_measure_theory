@@ -7442,6 +7442,47 @@ A similar computation gives $\E[Z \cond \sigma(Y)]$. See Fig.~\ref{fig:zitkovic_
 
 \red{TODO: Can we decompose any probability space into atoms? I think no.}
 
+
+\subsubsection{Other properties}
+
+We now consider successive conditioning with respect to two sigma-fields, one of which is coarser than (that is, a subset of) the other.
+
+\begin{theorem}
+If $\G_1 \subset \G_2$, then 
+\begin{alphabate}
+\item $\E[\E[Y \mid \G_2] \mid \G_1] = \E[Y \mid \G_1]$ a.e.
+\item $\E[\E[Y \mid \G_1] \mid \G_2] = \E[Y \mid \G_1]$ a.e.
+\end{alphabate}	
+\label{thm:conditional_expectation_property_that_the_smaller_sigma_field_always_wins}
+\end{theorem}
+
+In other words, the smaller $\sigma$-field always wins.
+
+\begin{proof}
+\begin{alphabate}
+\item We N.T.S. that the two conditions defining conditional expectation hold. 
+\begin{itemize}
+\item[1.] $\E[Y \cond \G_1]$ is $\G_1$ measurable? \greencheck. Automatic.
+\item[2.] $\int_{G_1} \E[Y \cond \G_2] \wrt{P} = \int_{G_1} \E[Y \cond \G_1] \wrt{P} \quad \forall \; G_1 \in \G_1$? \greencheck.
+By definitions of conditional expectation for $\E[Y \cond \G_1]$ and $\E[Y \cond \G_2]$, respectively, we have
+\begin{align*}
+\int_{G_1} \E[Y \cond \G_1] \wrt{P} &= \int_{G_1} Y \wrt{P} \quad \forall \; G_1 \in \G_1 && \tinycircled{1} \\
+\int_{G_2} \E[Y \cond \G_2] \wrt{P} &= \int_{G_2} Y \wrt{P} \quad \forall \; G_2 \in \G_2 && \tinycircled{2} \\
+\end{align*}
+Now since $\G_1 \subset \G_2$, equation $\tinycircled{2}$ also applies to all $G_1 \in \G_1$, so we have
+\[ \int_{G_1} \E[Y \cond \G_1] \wrt{P} \stackexplain{\tinycircled{1}}{=}  \int_{G_1} Y \wrt{P}  \stackexplain{\tinycircled{2}}{=}  \int_{G_1} \E[Y \cond \G_1] \wrt{P} \quad \forall \; G_1 \in \G_1. \]
+ 
+\end{itemize}
+\item We N.T.S. that the two conditions defining conditional expectation hold.  
+\begin{itemize}
+\item[1.] $\E[Y \cond \G_1]$ is $\G_2$ measurable? \greencheck. True since $\G_1 \subset \G_2$. 
+\item[2.] $\int_{G_2} \E[Y \cond \G_1] \wrt{P} = \int_{G_2} \E[Y \cond \G_1] \wrt{P} \quad \forall \; G_2 \in \G_2$?  \greencheck. Obvious.
+\end{itemize}	
+\end{alphabate}	
+
+\end{proof}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
 \bibliographystyle{apalike}
