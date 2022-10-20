@@ -7253,35 +7253,45 @@ Below we provide some properties of conditional expectation.  These properties a
 \begin{theorem}
 The following properties hold for conditional expectation given a $\sigma$-field
 \begin{itemize} 
-\item[(a)] \textit{(Constant property.)} If $Y$ is a constant $k$ a.e., then $\E[Y \cond \G]=k$ a.e
+\item[(a)] \textit{(Constant property.)} If $Y$ is a constant $k$ a.e., then $\E[Y \cond \G]=k$  a.e
 \item[(b)] \textit{(Monotonicity.)} If $Y_1 \leq Y_2$ a.e., then $\E[Y_1 \cond \G] \leq \E[Y_2 \cond \G]$ a.e.
 \item[(c)] \textit{(Linearity.)} If $a,b \in \R$ and $a \E[Y_1] + b \E[Y_2]$ is well-defined (not of the form $\infty-\infty$), then 
-\[\E[aY_1 + bY_2 \cond \G] = a \E[Y_1 \cond \G] + b\E[Y_2 \cond \G]. \]
+\[\E[aY_1 + bY_2 \cond \G] = a \E[Y_1 \cond \G] + b\E[Y_2 \cond \G] \quad \text{a.e.}. \]
 \item[(d)] \textit{(Triangle inequality.)} 
-\[ \bigg| \E[Y \cond \G]\bigg| \leq \E\bigg[|Y| \cond \G\bigg] \text{a.e.} \]
-\item[(e)] \textit{(The law of total expectation.)}
+\[ \bigg| \E[Y \cond \G]\bigg| \leq \E\bigg[|Y| \cond \G\bigg] \quad \text{a.e.} \]
+\item[(e)] \textit{(Monotone convergence theorem.)} If $Y_n \geq 0$ for all $n$ and $Y_n \uparrow Y$ a.e., then 
+\[ \E[Y_n \mid \G] \uparrow \E[Y \mid G] \quad a.e. \]
+\item[(f)] \textit{(Non-negative series can be integrated term by term.)} If $Y_n \geq 0$, then 
+\[ \E \bigg[ \sum_{n=1}^\infty Y_n \mid \G \bigg] = \sum_{n=1}^\infty \E[Y_n \mid G] \quad a.e. \]
+\item[(g)] \textit{(Countable additivity of conditional probability.)} In particular, if $B_1, B_2, \hdots$ are disjoint sets in $\F$, then 
+\[ P \bigg( \bigcup_{n=1}^\infty B_n \mid \G \bigg) \uparrow \sum_{n=1}^\infty P(B_n \mid G) \quad a.e. \]
+\item[(h)] \textit{(Dominated convergence theorem.)} If $|Y_n| \leq Z$ for all $n$, with $\E[Z]$ finite and $Y_n \to Y$ a.e., then
+\[ \E[Y_n \cond \G] \to \E[Y \cond \G] \quad a.e.\]
+\item[(i)]   \textit{(Extended monotone convergence theorem.)} Assume $Y_n \geq Z$ for all $n$, where $\E[Z] > -\infty$.  If $Y_n \uparrow Y$ a.e., then 
+\[ \E[Y_n \cond \G] \uparrow \E[Y \cond \G] \quad a.e.\]
+\item[(j)]  \textit{(Fatou's lemma.)} Assume $Y_n \geq Z$ for all $n$, where $\E[Z] > -\infty$. Then
+\[ \liminf_{n \to \infty} \E[Y_n \cond \G] \geq \E[\liminf_{n \to \infty} Y_n \cond \G] \quad a.e \]
+\item[(k)] \textit{(The law of total expectation.)}
 \[ \E[\E[Y \cond \G]] = \E[Y]\]
-\item[(f)] \textit{(Tower property.)}
+\item[(l)] \textit{(Tower property.)}
 If $\G_1 \subset \G_2$, then 
 	\begin{itemize}
-	\item[(i)] $\E[\E[Y \mid \G_2] \mid \G_1] = \E[Y \mid \G_1]$ a.e.
-	\item[(ii)] $\E[\E[Y \mid \G_1] \mid \G_2] = \E[Y \mid \G_1]$ a.e.
+	\item[(I)] $\E[\E[Y \mid \G_2] \mid \G_1] = \E[Y \mid \G_1]$ a.e.
+	\item[(II)] $\E[\E[Y \mid \G_1] \mid \G_2] = \E[Y \mid \G_1]$ a.e.
 	\end{itemize}
-\item[(g)] \textit{(``Taking out what is known.")}
+\item[(m)] \textit{(``Taking out what is known.")}
 If $Z \in \G$ and $\E|Y|, \E|YZ| < \infty$, then 
 \[  \E[YZ \cond \G] = Z \, \E[Y \cond \G] \quad \text{a.e.} \]	
 \end{itemize}
 \label{thm:conditional_expectation_properties}
 \end{theorem}
 
-\red{TODO: Explicitly add to the list the conditional versions of dominated convergence, monotone convergence, Fatou's, etc.}
-
 \begin{remark}
 Some verbal description of these properties:
 \begin{itemize}
-\item[(e)] If we take the expectation of a conditional expectation, the result is the same as if we were to take the expectation directly. \red{TODO: Add intuition.}
-\item[(f)] This property handles a scenario where we do successive conditioning with respect to two sigma-fields, one of which is coarser than (that is, a subset of) the other.  The observation is that \textit{the smaller $\sigma$-field always wins.}
-\item[(g)] This result shows that for conditional expectation with respect to $\G$, random variables $X \in \G$ (i.e. $\G$-measurable random variables) are like constants. They can be brought outside the integral.
+\item[(k)] If we take the expectation of a conditional expectation, the result is the same as if we were to take the expectation directly. \red{TODO: Add intuition.}
+\item[(l)] This property handles a scenario where we do successive conditioning with respect to two sigma-fields, one of which is coarser than (that is, a subset of) the other.  The observation is that \textit{the smaller $\sigma$-field always wins.}
+\item[(m)] This result shows that for conditional expectation with respect to $\G$, random variables $X \in \G$ (i.e. $\G$-measurable random variables) are like constants. They can be brought outside the integral.
 \end{itemize}	
 \end{remark}
 
@@ -7335,17 +7345,56 @@ Combining $\tinycircled{1}$ and $\tinycircled{2}$, we obtain
 Since the integrands are equal for all measurable sets,  Cor.~\ref{cor:equal_integrals_for_all_measurable_sets_implies_the_functions_are_equal_ae} yields the conclusion
 \[ \E[a Y_1 + b Y_2 \cond \G ]\wrt{P}  =  a\E[Y_1 \cond \G]  + b \E[Y_2 \cond \G]   \quad \quad a.e.  \]
 \item[(d)]\footnotemark
+%
 \[\begin{array}{rcccccl}
 & -|Y| &\leq & Y &\leq & Y &\tinytext{obvious} \\
 \implies & \explaintermbrace{$=-\E[|Y| \cond \G]$ by part (c)}{\E[-|Y| \cond \G]} &\leq & \E[Y \cond \G]  &\leq & \E[|Y| \cond \G]  &\tinytext{monotonicity (part b)} \\
 &&&&&&\\
  \implies & \big| \E[Y \cond \G] \big| &\leq & \E[|Y| \cond \G] & & & \tinytext{def. absolute value}
 \end{array}\]
-\item[(e)] By the definition of conditional expectation for $\E[Y \cond \G]$, we have
+%
+\item[(e)] We have $Y_n \geq 0 \, \forall \, n$ and $Y_n \uparrow Y$ a.e.  By monotonicity of conditional expectation [part (b)], $\set{\E[Y_n \mid \G]}_n$ is an increasing sequence of non-negative functions.  Since also measurable functions are closed under limits, find
+\[ \E[Y_n \mid \G] \uparrow h \quad\quad\quad \tinycircled{1} \]
+where $h$ is $\G$-measurable and non-negative. 
+
+Now applying MCT to the hypothesis, we see
+%
+\[ \int_G \E[Y_n \mid \G] \wrt{P} \stackexplain{def. cond. expect.}{=} \int_G Y_n \wrt{P} \stackexplain{MCT}{\uparrow} \int_G Y \wrt{P} \quad \quad \forall G \in \G.\]
+%
+But applying MCT to \tinycircled{1}, we also see 
+%
+\[ \int_G \E[Y_n \mid \G] \wrt{P} \stackexplain{MCT}{\uparrow} \int_G h \wrt{P} \quad \quad \forall G \in \G.\]
+%
+So by uniqueness of limits, we have 
+\[ \int_G h \wrt{P} = \int_G Y \wrt{P} \quad \quad \forall G \in \G \quad \quad \tinycircled{2}\]
+%
+Result \tinycircled{2} and the $\G$-measurability of $h$ reveal that $h=\E[Y \cond \G]$ by the definition of conditional expectation.  Hence, we can rewrite \tinycircled{1} as
+\[\E[Y_n \mid \G] \uparrow \E[Y \mid \G].\]   
+and we are done.
+%
+\item[(f)]  Let all $Y_n \geq 0$. We have 
+\begin{align*}
+\E[ \sum_{k=1}^n Y_k \cond \G ] &=  \sum_{k=1}^n \E[  Y_k \cond \G ] \quad a.e.  && \smalltext{by linearity [part (c)]}	 \\
+\implies \lim_{n \to \infty }\E[ \sum_{k=1}^n Y_k \cond \G ] &=  \sum_{k=1}^\infty \E[  Y_k \cond \G ] \quad a.e. && \smalltext{Take $n \to \infty$} \\
+\stackexplain{1}{\implies}  \E[ \sum_{k=1}^\infty Y_k \cond \G ] &=  \sum_{k=1}^\infty \E[  Y_k \cond \G ]
+\end{align*}
+where (1) holds by applying MCT for conditional expectation [part (e)] to the sequence of partial sums, since $(S_n := \sum_{k=1}^n Y_k) \uparrow (S:= \sum_{k=1}^\infty Y_k)$ and each $S_n \geq 0$.
+%
+\item[(g)] Let $B_1, B_2, \hdots$ be disjoint sets in $\F$.  We will apply the result that non-negative series can be integrated term by term [part (f)] in the special case where $Y_n \defeq \indicate{B_n}$.   Note that in this case 
+%
+\[  \sum_{n=1}^\infty Y_n \stackexplain{def.}{=}  \sum_{n=1}^\infty  \indicate{B_n} = \indicate{\cup_{n=1}^\infty B_n}\]
+%
+The left and right hand sides of part (f) become expectations of indicators, and therefore probabilities.  So part (f) becomes
+\[ P \bigg( \bigcup_{n=1}^\infty B_n \mid \G \bigg) \uparrow \sum_{n=1}^\infty P(B_n \mid G) \quad a.e. \]
+and we are done.
+\item[(h)] See \cite[Thm.~5.5.5]{ash2000probability}.
+\item[(i)] See \cite[Thm.~5.5.6a]{ash2000probability}.
+\item[(j)] See \cite[Thm.~5.5.6b]{ash2000probability}.
+\item[(k)] By the definition of conditional expectation for $\E[Y \cond \G]$, we have
 \[ \int_\Omega \E[Y \cond \G] \wrt{P} = \int_\Omega Y \wrt{P}.  \]
-\item[(f)]
+\item[(l)]
 \begin{itemize}
-\item[(i)] We N.T.S. that the two conditions defining conditional expectation hold. 
+\item[(I)] We N.T.S. that the two conditions defining conditional expectation hold. 
 \begin{itemize}
 \item[1.] $\E[Y \cond \G_1]$ is $\G_1$ measurable? \greencheck. Automatic.
 \item[2.] $\int_{G_1} \E[Y \cond \G_2] \wrt{P} = \int_{G_1} \E[Y \cond \G_1] \wrt{P} \quad \forall \; G_1 \in \G_1$? \greencheck.
@@ -7357,14 +7406,14 @@ By definitions of conditional expectation for $\E[Y \cond \G_1]$ and $\E[Y \cond
 Now since $\G_1 \subset \G_2$, equation $\tinycircled{2}$ also applies to all $G_1 \in \G_1$, so we have
 \[ \int_{G_1} \E[Y \cond \G_1] \wrt{P} \stackexplain{\tinycircled{1}}{=}  \int_{G_1} Y \wrt{P}  \stackexplain{\tinycircled{2}}{=}  \int_{G_1} \E[Y \cond \G_1] \wrt{P} \quad \forall \; G_1 \in \G_1. \]
 \end{itemize}
-\item[(ii)] We N.T.S. that the two conditions defining conditional expectation hold.  
+\item[(II)] We N.T.S. that the two conditions defining conditional expectation hold.  
 \begin{itemize}
 \item[1.] $\E[Y \cond \G_1]$ is $\G_2$ measurable? \greencheck. True since $\G_1 \subset \G_2$. 
 \item[2.] $\int_{G_2} \E[Y \cond \G_1] \wrt{P} = \int_{G_2} \E[Y \cond \G_1] \wrt{P} \quad \forall \; G_2 \in \G_2$?  \greencheck. Obvious.
 \end{itemize}	
 \end{itemize}
 
-\item[(g)] We N.T.S. that the two conditions defining conditional expectation $\E[YZ \cond \G]$ hold.  
+\item[(m)] We N.T.S. that the two conditions defining conditional expectation $\E[YZ \cond \G]$ hold.  
 \begin{itemize}
 \item[1.] $Z \, \E[Y \cond \G]$ is $\G$ measurable?  \greencheck. True since each term is $\G$ measurable individually, and the product of measurable functions is measurable.  
 \item[2.] We need to show 
@@ -7376,21 +7425,21 @@ Now since $\G_1 \subset \G_2$, equation $\tinycircled{2}$ also applies to all $G
 We proceed by mimicking the construction of the integral. 
 %
 \begin{itemize}
-\item[(i)] \boxed{\textnormal{Indicator functions.}} Let $Z = \indicate{\wt{G}}$ be an indicator function for $\wt{G} \in G$.  Then 
+\item[(I)] \boxed{\textnormal{Indicator functions.}} Let $Z = \indicate{\wt{G}}$ be an indicator function for $\wt{G} \in G$.  Then 
 \begin{align*}
 \explaintermbrace{LHS of \tinycircled{1}}{\int_{G} YZ \wrt{P}} & \stackexplain{def. Z}{=} \int_{G} Y \indicate{\wt{G}} \wrt{P} = \int_{G \cap \wt{G}} Y \wrt{P} \\
 \explaintermbrace{RHS of \tinycircled{1}}{\int_{G} Z \, \E[Y \cond \G]\wrt{P}} & \stackexplain{def. Z}{=}  \int_{G} \indicate{\wt{G}} \, \E[Y \cond \G]\wrt{P} = \int_{G \cap \wt{G}}  \E[Y \cond \G] \wrt{P}
 \end{align*}
 and the right hand sides of the two equations above are equal a.e. by the definition of $ \E[Y \cond \G]$ (note that $G \cap \wt{G} \in \G$).  Thus  \tinycircled{1} holds. 
 %
-\item[(ii)] \boxed{\textnormal{Simple functions.}} Let $Z$ be simple, i.e $Z = \sum_{i=1}^r a_i \indicate{G_i}$ for $G_i \in \G$. Then again
+\item[(II)] \boxed{\textnormal{Simple functions.}} Let $Z$ be simple, i.e $Z = \sum_{i=1}^r a_i \indicate{G_i}$ for $G_i \in \G$. Then again
 \begin{align*}
 \explaintermbrace{LHS of \tinycircled{1}}{\int_{G} YZ \wrt{P}} & \stackexplain{def. Z}{=} \int_{G} Y (\sum_{i=1}^r a_i \indicate{G_i}) \wrt{P} \stackexplain{linearity}{=} \sum_{i=1}^r a_i  \int_{G \cap G_i} Y \wrt{P} \\
 \explaintermbrace{RHS of \tinycircled{1}}{\int_{G} Z \, \E[Y \cond \G]\wrt{P}} & \stackexplain{def. Z}{=}  \int_{G} (\sum_{i=1}^r a_i \indicate{G_i}) \, \E[Y \cond \G]\wrt{P} \stackexplain{linearity}{=} \sum_{i=1}^r a_i \int_{G \cap G_i}  \E[Y \cond \G] \wrt{P}
 \end{align*} 
 and again the right hand sides of the two equations above are equal a.e. by the definition of $ \E[Y \cond \G]$ (note that $G \cap \wt{G} \in \G$).  Thus  \tinycircled{1} holds. 
 %
-\item[(iii)] \boxed{\textnormal{Arbitrary measurable functions.}}  By Prop.~\ref{prop:measurable_function_is_limit_of_simple_functions_which_it_dominates},  there exists a sequence of $\G$-measurable simple functions $(S_n)$ such that 
+\item[(III)] \boxed{\textnormal{Arbitrary measurable functions.}}  By Prop.~\ref{prop:measurable_function_is_limit_of_simple_functions_which_it_dominates},  there exists a sequence of $\G$-measurable simple functions $(S_n)$ such that 
 \[  |S_n| \leq Z \quad \quad \text{and} \quad \quad S_n \to Z \]
 where the limit is pointwise.  Now by step (b), we have 
 \[  \E[Y S_n \cond \G] = S_n \, \E[Y \cond \G] \quad \text{a.e.} \; .\]
@@ -8376,7 +8425,5 @@ Since the integrands are equal for all measurable sets,  Cor.~\ref{cor:equal_int
 \end{itemize}
 \footnotetext{\cite[pp.220-221]{ash2000probability} proves (d) before (c).  I am not sure how this is possible. }
 \end{proof}
-
-
 
 \end{document}
