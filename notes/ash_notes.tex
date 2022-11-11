@@ -746,7 +746,7 @@ Taking $n \to \infty$ gives countable additivity.
 
 \begin{lemma}{\textbf{Borel Cantelli Lemma.}}
 If $A_1, A_2, ... \in \F$ and $\sum_{n=1}^\infty \mu(A_n) < \infty$, then $\mu(\limsup_{n \to \infty} A_n) = 0$.
-\label{lemma:borel_cantelli}
+\label{lemma:first_borel_cantelli}
 \end{lemma}
 
 \begin{proof}\footnote{\cite{ash2000probability} has a proof that does not require continuity of measure, although I currently personally enjoy its role here.}
@@ -765,7 +765,7 @@ Now $B_{k+1} \subset B_k$ and $\cap_{k=1}^\infty B_k =B$, so $B_k \downarrow B$.
 \end{proof}
 
 \begin{remark}{\remarktitle{Intuition for Borel-Cantelli.}}
-An attempt at a verbal description of the proof of Lemma \ref{lemma:borel_cantelli} follows:  Convergent series of real numbers have arbitrarily small tails. When the series is constructed of measures $(\sum_{n=1}^\infty \mu(A_n))$, this implies that the measure of the tail $(\cup_{n=k}^\infty A_n)$ is arbitrarily small (by subadditivity).  Now $\limsup_{n \to \infty} A_n$ is the set of points in $\set{A_n}$ i.o., so such points must be in \textit{all} tails $(\cap_{k=1}^\infty \cup_{n=k}^\infty A_n)$, and by continuity of measure (from above), the measure of such a set is the limit of the measure of the tail, i.e. 0.
+An attempt at a verbal description of the proof of Lemma \ref{lemma:first_borel_cantelli} follows:  Convergent series of real numbers have arbitrarily small tails. When the series is constructed of measures $(\sum_{n=1}^\infty \mu(A_n))$, this implies that the measure of the tail $(\cup_{n=k}^\infty A_n)$ is arbitrarily small (by subadditivity).  Now $\limsup_{n \to \infty} A_n$ is the set of points in $\set{A_n}$ i.o., so such points must be in \textit{all} tails $(\cap_{k=1}^\infty \cup_{n=k}^\infty A_n)$, and by continuity of measure (from above), the measure of such a set is the limit of the measure of the tail, i.e. 0.
 \end{remark}
 
 	
@@ -2589,7 +2589,7 @@ To justify \Eqref{eqn:sums_as_integrals}, let us first assume that $a_n \geq 0$ 
 	%
 	which exists whenever this does not take the form $\infty - \infty$. 
 \fi 
-\label{ex:integrals_as_sums}
+\label{ex:series_as_integrals}
 \end{example}
 
 
@@ -3419,7 +3419,7 @@ The example captures the fact that \textit{integrals of asymptotics give more ex
 
 \end{example}
 
-\begin{remark}{\remarktitle{Fatou's Lemma for series.}} In the special case where $\Omega = \set{1,2,3, ...}$, $\F=2^\Omega$ (i.e. all subsets of $\Omega$), and $\mu$ is the counting measure, Example~\ref{ex:integrals_as_sums} tells us that the integrals are series. That is, we can write $\sum_{k=1}^\infty x_k = \int f \wrt{\mu}$, where $f : \Omega \to \mathcal{X}$ maps $\omega_1, \omega_2, \hdots$ to $x_1, x_2, \hdots$. 
+\begin{remark}{\remarktitle{Fatou's Lemma for series.}} In the special case where $\Omega = \set{1,2,3, ...}$, $\F=2^\Omega$ (i.e. all subsets of $\Omega$), and $\mu$ is the counting measure, Example~\ref{ex:series_as_integrals} tells us that the integrals are series. That is, we can write $\sum_{k=1}^\infty x_k = \int f \wrt{\mu}$, where $f : \Omega \to \mathcal{X}$ maps $\omega_1, \omega_2, \hdots$ to $x_1, x_2, \hdots$. 
 
 In this setting, the big picture conclusion of Fatou's lemma  \Eqref{eqn:fatous_lemma_big_picture_view} specializes to: \textit{\sout{integrals} series of asymptotics give more extreme values than asymptotics of series \sout{integrals}}:
 %
@@ -4132,7 +4132,7 @@ To show \tinycircled{A}, recall from Remark \ref{rk:signed_measure_is_absolutely
 \[  \text{N.T.S.} \quad  \exists B \in \F : \; \mu(B) = 0 \quad \text{but} \quad |\nu|(B) \neq 0 \]
 Let $B_k = \cup_{n=k}^\infty A_n, \; B = \cap_{k=1}^\infty B_k$.  So 
 \[  B = \limsup A_n = \set{x : x \in A_n \text{ i.o. }}\]
-Then by the Borel-Cantelli Lemma (Lemma \ref{lemma:borel_cantelli}), $\mu(B)=0$.  But 
+Then by the Borel-Cantelli Lemma (Lemma \ref{lemma:first_borel_cantelli}), $\mu(B)=0$.  But 
 \[ |\nu|(B) \stackexplain{cty from above}{=} \ds\lim_{k \to \infty} |\nu| (B_k) \stackexplain{monotonicity, \tinycircled{+}}{\geq} \ds\lim_{k \to \infty} \epsilon = \epsilon.  \]
 where continuity from above holds because $B_k$ are decreasing, and $|\nu|(B_1)$ is finite because $\nu$ finite $\implies |\nu|$ finite.
 
@@ -6436,7 +6436,7 @@ i.e. \; \frac{dP_X}{d\mu} = f & i.e. \; \frac{dP_X}{d\lambda} = p & \text{and Ra
 \hline
 & & \\  
 \implies E[Y] = \int g \, f \wrt{\mu} & \implies E[Y] = \int g \, p \wrt{\lambda} & \text{calculus w/ Radon-Nikodym}  \\
-= \int g(x) f(x) \wrt{x} & \stackexplain{Ex.~\ref{ex:integrals_as_sums}}{=} \sum_x g(x) p(x) & \text{derivatives (Prop.~\ref{prop:calculus_with_radon_nikodym_derivatives})}
+= \int g(x) f(x) \wrt{x} & \stackexplain{Ex.~\ref{ex:series_as_integrals}}{=} \sum_x g(x) p(x) & \text{derivatives (Prop.~\ref{prop:calculus_with_radon_nikodym_derivatives})}
 \end{array}
 \]
 \end{proof}
@@ -6642,10 +6642,10 @@ P_{0:n}(X_0(\omega)=i_0, & \hdots, X_n(\omega)=i_n) \stackexplain{\Eqref{eqn:pro
 & \quad \cdot \explaintermbrace{(A)}{\int_S \indicatebrackets{(\omega_1,\hdots, \omega_n) = (i_1,\hdots i_n)} \; P_n(\omega_0, \omega_1, \hdots, \omega_{n-1}; \wrt{\omega_{n}})}
 \end{align*}
 %
-Now by Example~\ref{ex:integrals_as_sums}, we can reduce 
+Now by Example~\ref{ex:series_as_integrals}, we can reduce 
 \[\explaintermbrace{(A)}{\int_S \indicatebrackets{(\omega_1,\hdots, \omega_n) = (i_1,\hdots i_n)} \; P_n(\omega_0, \omega_1, \hdots, \omega_{n-1}; \wrt{\omega_{n}})} = \indicatebrackets{(\omega_1,\hdots, \omega_n) = (i_1,\hdots i_n)} \; a_{\omega_{n-1}, i_n}. \]
 
-{\scriptsize [Specifically, recall from Example~\ref{ex:integrals_as_sums} that if $f$ is a function on a countably infinite set and $\mu$ is the counting measure on that set, then the Lebesgue integral is just a sum: $\int f \wrt{\mu} = \sum_{n=1}^\infty f(n)$.  Similarly, if $P$ is a discrete probability measure with probability mass function $p$, then $\int f \wrt{P} = \int fp \wrt{\mu} = \sum_{n=1}^\infty f(n)p(n)$.  See also \cite[4.10.3(d)]{ash2000probability}.]}
+{\scriptsize [Specifically, recall from Example~\ref{ex:series_as_integrals} that if $f$ is a function on a countably infinite set and $\mu$ is the counting measure on that set, then the Lebesgue integral is just a sum: $\int f \wrt{\mu} = \sum_{n=1}^\infty f(n)$.  Similarly, if $P$ is a discrete probability measure with probability mass function $p$, then $\int f \wrt{P} = \int fp \wrt{\mu} = \sum_{n=1}^\infty f(n)p(n)$.  See also \cite[4.10.3(d)]{ash2000probability}.]}
 
 Continuing this process gives
 \[P_{0:n}(X_0=i_0, X_1=i_1, \hdots, X_n=i_n) = \pi_{i_0} a_{i_0i_1} \cdots a_{i_{n-1}i_n}\]
@@ -7688,6 +7688,28 @@ Let $\+A \defeq \set{a_{rc}}$ be an infinite matrix of real numbers.  Then $\+A$
 \label{def:regular_summability_method}
 \end{definition}
 
+\begin{example}
+An example is \textbf{Cesaro summation}, a matrix summability method with
+%
+\[ 
+a_{rc} = 
+\begin{cases}
+\frac{1}{r}, &  r \leq c \\ 
+0, &  r > c \\	
+ \end{cases}
+=
+\begin{bmatrix}[1.25]
+1 & 0 & 0 & 0 & 0 & \dots \\
+\frac{1}{2} & \frac{1}{2} & 0 & 0 & 0 & \dots \\
+\frac{1}{3} & \frac{1}{3} & \frac{1}{3} & 0 & 0 & \dots \\
+\frac{1}{4} & \frac{1}{4} & \frac{1}{4} & \frac{1}{4} & 0 & \dots \\
+\frac{1}{5} & \frac{1}{5} & \frac{1}{5} & \frac{1}{5} & \frac{1}{5} & \dots \\
+\vdots & \vdots &  \vdots &  \vdots &  \vdots & \ddots \\ 
+\end{bmatrix}
+\]	
+\end{example}
+
+
 \begin{theorem}\textbf{Silverman-Toeplitz Theorem.}
 Let $\+A \defeq \set{a_{rc}}$ be a regular matrix summability method (Def.~\ref{def:regular_summability_method}).  Let $\set{x_c}$ be real-valued sequence such that $x_c \to x$.  Define 
 \[ y_r \defeq \sum_{c=1}^\infty a_{rc} x_c \]
@@ -7716,7 +7738,7 @@ Where in 1, we
 \item choose $R$ so that $|a_{rc}| \leq \epsilon /2(C \sum_{c=1}^C |x_c|)$ for $r \geq R$ \quad {\scriptsize (possible by condition 1 on $\+A$)}.
 \end{itemize}
 
-{\scriptsize (The triangle inequality holds by considering the series as an integral against counting measure.)}
+{\scriptsize (The triangle inequality holds by considering the series as an integral against counting measure; see Example~\ref{ex:series_as_integrals}.)}
 
 \item 
 \[ \begin{array}{rcl}
@@ -7726,15 +7748,60 @@ Where in 1, we
 \]
 Now 
 \[\ds\sum_{c=1}^\infty a_{rc} (x_c - x)  \stackrel{1}{=} \ds\sum_{c=1}^\infty a_{rc} x_c - \cancelto{1}{\ds\sum_{c=1}^\infty a_{rc}} x  \]
-where (1) holds by linearity {\scriptsize (e.g. consider these as integrals against counting measure; this holds so long as the RHS does not have the form of  $\pm (\infty - \infty)$, which is avoided since the subtrahend equals $x \in \R$.) }
+where (1) holds by linearity {\scriptsize (e.g. consider these as integrals against counting measure, as in Example~\ref{ex:series_as_integrals}. Then linearity holds so long as the RHS does not have the form $\infty - \infty$, which is avoided since the subtrahend equals $x \in \R$.) }
 Thus 
 
 \[ \wt{y_r} \to 0 \implies \explaintermbrace{$\defeq y_r$}{\ds\sum_{c=1}^\infty a_{rc} x_c} - x \to 0 \implies  \explaintermbrace{$\defeq y_r$}{\ds\sum_{c=1}^\infty a_{rc} x_c} \to  x  \]
 \end{alphabate}
 	
-
-	
 \end{proof}
+
+Earlier, we presented the First Borel-Cantelli Lemma (Lemma~\ref{lemma:first_borel_cantelli}). In a probabilistic context, the Lemma is stated as
+\[ \textit{If } A_1, A_2, \hdots \textit{ are events s.t. } \sum_n P(A_n) < \infty, \textit{ then } P(\limsup_n An) = 0.\]
+The second Borel-Cantelli Lemma gives a partial converse. \red{TODO: How is this a converse?}
+
+\begin{lemma}\textbf{Second Borel-Cantelli Lemma.}
+Let $(\Omega, \F, P)$ be a probability space. If $A_1, A_2, \hdots$ are independent events in $\F$ such that $P(A_n) = \infty$, then $P(\limsup_n A_n) = 1$.
+\end{lemma}
+
+\begin{proof}
+We begin the argument similarly as in the first Borel-Cantelli Lemma (Lemma~\ref{lemma:first_borel_cantelli}	). 
+
+Recall from Definition \ref{def:upper_limit} that
+\[ \explaintermbrace{$:=B$}{\limsup_{n \to \infty} A_n} = \bigcap_{n=1}^\infty \explaintermbrace{$:=B_n$}{\bigcup_{k=n}^\infty A_k} = \set{x : x \in A_n \text{ i.o. }}  \]	
+where we have also introduced some notation for convenience.
+
+Thus 
+\begin{align*}
+P \bigg( \explaintermbrace{$:=B$}{\limsup_{n \to \infty} A_n} \bigg) &\stackrel{1}{=} P \bigg( \bigcup_{k=n}^\infty  \explaintermbrace{$:=B_n$}{\bigcap_{n=1}^\infty  A_k} \bigg) && \tinytext{def set limsup} \\
+& \stackrel{2}{=}  \lim_{n \to \infty} P\bigg( \explaintermbrace{$:=B_n$}{\bigcup_{k=n}^\infty  A_k}  \bigg) && \tinytext{cty from above}\\
+& \stackrel{3}{=}  \lim_{n \to \infty}  \lim_{m \to \infty}P\bigg( {\bigcup_{k=n}^{m}  A_k}  \bigg) && \tinytext{cty from below} \\
+\labelit \label{eqn:another_intermediate_equation_for_second_borel_equation_lemma}
+\end{align*}
+{ \scriptsize (The continuity from above in (2) follows since $B_{n+1} \subset B_n, \lim_n B_n = B$ and $P(B_1)<\infty$. The continuity from below in (3) follows by defining $C_m \defeq \cup_{k=n}^m A_k, C=\cup_{k=n}^\infty A_k$.  Then $C_{m+1} \supset C_m, \lim_m C_m = C$, so $P(C) = \lim_{m \to \infty} P(C_m)$    .)}
+
+Now we work with complements to apply independence 
+\begin{align*}
+ P\bigg( {\bigcup_{k=n}^{m}  A_k}  \bigg)^c & \stackexplain{De Morgan}{=}  P\bigg( {\bigcap_{k=n}^{m}  A_k^c}  \bigg) \stackexplain{indep}{=} \prod_{k=n}^m P(A_k^c) = \prod_{k=n}^m 1 - P(A_k) \\
+ & \stackrel{1}{\leq} \prod_{k=n}^m \exp(-P(A_k)) 
+ \labelit \label{eqn:intermediate_equation_for_second_borel_cantelli_lemma}	
+\end{align*}
+%
+{\scriptsize The inequality in (1) holds since $1-x \leq \exp(-x)$ on $[0,1]$.  This can easily be shown by derivatives. Set $\ell(x)=1-x, f(x) =\exp(-x)$. We have $\ell(x=0)=f(x=0)=1$. But $\ell'(x) = 1 \leq \exp(-x) = f'(x)$ on $[0,1]$. That is, the graph of $\ell(x)$ lies below the graph of $f(x)$ on [0,1]. We construct this equality to apply the below about infinite products.}
+
+Now we use a fact about infinite products:
+\begin{align}
+\sum_{k=1}^\infty \log b_k = \infty \implies \prod_{k=1}^\infty b_k = 0.
+\label{eqn:fact_about_infinite_products}
+\end{align}
+Setting $\set{b_k} = \set{\exp(-P(A_r))}_{r=n}^\infty$, the LHS of  \Eqref{eqn:fact_about_infinite_products} becomes $\sum_{k=1}^\infty -P(A_k) = -\infty$ which holds by hypothesis, so \Eqref{eqn:fact_about_infinite_products} gives that $\prod_{k=n}^\infty \exp(-P(A_k))=0$.  Applying this to \Eqref{eqn:intermediate_equation_for_second_borel_cantelli_lemma}, we find 
+\[ \lim_{m \to \infty} P\bigg( {\bigcup_{k=n}^{m}  A_k}  \bigg)^c  =  0 \implies \lim_{m \to \infty} P\bigg( {\bigcup_{k=n}^{m}  A_k}\bigg)  =  1\]
+{\scriptsize (The implication holds since $P( {\bigcup_{k=n}^{m}  A_k})^c = 1-P( {\bigcup_{k=n}^{m}  A_k})$ and by additivity of limits.)}
+
+We substitute this result into \Eqref{eqn:another_intermediate_equation_for_second_borel_equation_lemma} to prove the claim.
+\end{proof}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
