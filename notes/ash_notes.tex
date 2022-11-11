@@ -744,7 +744,7 @@ Taking $n \to \infty$ gives countable additivity.
 
 \subsection{Borel-Cantelli Lemma}
 
-\begin{lemma}{\textbf{Borel Cantelli Lemma}}
+\begin{lemma}{\textbf{Borel Cantelli Lemma.}}
 If $A_1, A_2, ... \in \F$ and $\sum_{n=1}^\infty \mu(A_n) < \infty$, then $\mu(\limsup_{n \to \infty} A_n) = 0$.
 \label{lemma:borel_cantelli}
 \end{lemma}
@@ -764,7 +764,7 @@ Now $B_{k+1} \subset B_k$ and $\cap_{k=1}^\infty B_k =B$, so $B_k \downarrow B$.
   
 \end{proof}
 
-\begin{remark}{\remarktitle{Intuition for Borel-Cantelli}}
+\begin{remark}{\remarktitle{Intuition for Borel-Cantelli.}}
 An attempt at a verbal description of the proof of Lemma \ref{lemma:borel_cantelli} follows:  Convergent series of real numbers have arbitrarily small tails. When the series is constructed of measures $(\sum_{n=1}^\infty \mu(A_n))$, this implies that the measure of the tail $(\cup_{n=k}^\infty A_n)$ is arbitrarily small (by subadditivity).  Now $\limsup_{n \to \infty} A_n$ is the set of points in $\set{A_n}$ i.o., so such points must be in \textit{all} tails $(\cap_{k=1}^\infty \cup_{n=k}^\infty A_n)$, and by continuity of measure (from above), the measure of such a set is the limit of the measure of the tail, i.e. 0.
 \end{remark}
 
@@ -2550,7 +2550,7 @@ This definition works because whenever $h$ is measurable, then so is $h \indicat
 \[\set{ \omega : h \indicate{A} (\omega) < c } =	\explaintermbrace{$\in \F$ since $h$ measurable}{\set{\omega :  h(\omega) < c }} \cap \explaintermbrace{$\in \F$ by assumption}{\set{\omega : \omega \in A }} \\  \]
 \end{remark}
 
-\begin{example}{\remarktitle{Sums as integrals against counting measure.}}
+\begin{example}{\remarktitle{Series as integrals against counting measure.}}
 \cite[pp.89 and Problem 1a (real part only) pp.94]{ash2000probability}.  
 Let $\Omega = \set{1,2,3, ...}$, $\F=2^\Omega$ (i.e. all subsets of $\Omega$), and $\mu$ be the counting measure. 
 \ifActive
@@ -2600,8 +2600,8 @@ When summation is considered from the point of Lebesgue integration theory, seri
 To see this, note that the expression $\int f \dmu = \sum_{n=1}^\infty a_n^+ - \sum_{n=1}^\infty a_n^-$ from \Eqref{eqn:sums_as_integrals} yields four cases
 
 \begin{enumerate}
-\item 	$\sum_{n=1}^\infty a_n^+ = \infty,  \sum_{n=1}^\infty a_n^- < \infty$.  The series diverges to $\infty$ and the integrals is $\infty$.
-\item  $\sum_{n=1}^\infty a_n^+ < \infty,  \sum_{n=1}^\infty a_n^- = \infty$. The series diverges to $-\infty$ and the integrals is $-\infty$.
+\item 	$\sum_{n=1}^\infty a_n^+ = \infty,  \sum_{n=1}^\infty a_n^- < \infty$.  The series diverges to $\infty$ and the integral is $\infty$.
+\item  $\sum_{n=1}^\infty a_n^+ < \infty,  \sum_{n=1}^\infty a_n^- = \infty$. The series diverges to $-\infty$ and the integral is $-\infty$.
 \item $\sum_{n=1}^\infty a_n^+ < \infty,  \sum_{n=1}^\infty a_n^- < \infty$. The series is absolutely convergent and the integral equals the sum of the series.
 \item  $\sum_{n=1}^\infty a_n^+ = \infty,  \sum_{n=1}^\infty a_n^- = \infty$. The series is not absolutely convergent; it may or may not converge conditionally.  Whether it does or not, the integral does not exist.
 \end{enumerate}
@@ -7009,7 +7009,10 @@ Note that the theorem actually gives \textit{two} conditions for a function $h$ 
 
 Although condition (2) always holds for $h=Y$, condition (1) does not generally hold for a $\sigma$-field $\G \subset \F$. That is, $Y$ will not in general be measurable w.r.t a $\sigma$-field $\G \subset \F$. 
 
-{\scriptsize (For instance, let $(\Omega, \F) = (\overline{\R}, \B(\overline{\R}))$, and let $Y$ be the identity function.  Define $\G \subsetneq \F$ by $\G = \set{\emptyset, A, A^c, \overline{\R}}$ for $A \subsetneq \overline{\R}$.  Let $B$ be any Borel set that is not in $\G$.  Then $Y^{-1}(B) = B \not\in \G$ and so condition (1) fails.)} 
+{\scriptsize (For instance, let $(\Omega, \F) = (\overline{\R}, \B(\overline{\R}))$, and let $Y$ be the identity function.  Define $\G \subsetneq \F$ by $\G = \set{\emptyset, A, A^c, \overline{\R}}$ for $A \subsetneq \overline{\R}$.  Let $B$ be any Borel set that is not in $\G$.  Then $Y^{-1}(B) = B \not\in \G$ and so condition (1) fails.)}
+
+Overall, we see that the two conditions of the definition present a tradeoff that must be balanced.  A flexible choice of $h$ (like $h=Y$) makes it easier to meet the integral condition, but harder to meet the measurability condition w.r.t $\G$.  An inflexible choice of $h$ (like $h=\E[Y]$) makes it easy to meet the measurability condition, but harder to meet the integral condition.
+
 \label{rk:two_conditions_for_existence_of_conditional_expectation_with_respect_to_a_sigma_field} 
 \end{remark}
 
@@ -7085,8 +7088,6 @@ Combining the LHS and RHS, (*) becomes
 \implies  & Y(x)= \E[Y]  \quad \quad  \forall x \in \R.	
 \end{align*}
 which holds only if $Y$ is constant.
-
-Overall, we see that the two conditions of the definition present a tradeoff that must be balanced.  A flexible choice of $h$ (like $h=Y$) makes it easier to meet the integral condition, but harder to meet the measurability condition w.r.t $\G$.  An inflexible choice of $h$ (like $h=\E[Y]$) makes it easy to meet the measurability condition, but harder to meet the integral condition.
 
 \end{remark}
 
@@ -7193,7 +7194,7 @@ where $h(y \cond x)=\frac{f(x,y)}{f_1(x)} = \frac{f(x,y)}{\int_{-\infty}^\infty 
 So $\E[Y \cond X]$ is constant on vertical strips of $\Omega=\R^2$, and the only sets $G \in \sigma(X)$ that we would want to interrogate to obtain knowledge about $Y$ are sets of the form $\set{x \times \R, x \in \R}$.\redfootnote{But when is this \textit{not} true?  Is this just a true statement in general, or is there something about having a joint density that matters here?}  
 \end{example}
 
-\subsection{$\S$ 5.5 Properties and perspectives of conditional expectation} \label{sec:properties_of_conditional_expectation}
+\subsection{$\S$ 5.5 Properties of and perspectives on conditional expectation} \label{sec:properties_of_conditional_expectation}
 
 \subsubsection{Overview}
 
@@ -7205,7 +7206,7 @@ Here in Sec.~\ref{sec:properties_of_conditional_expectation} we provide some pro
 \begin{figure}[H]
 \centering
 \includegraphics[width=.6\linewidth]{images/two_types_of_conditional_expectation_given_a_random_object}
-\caption{\textit{Two types of conditional expectation given a random object.}   Given a random variable $Y$ and random object $X$ defined on the same probability space, we can consider the conditional expectation to be either  $\E[Y \cond X]$ or $\E[Y \cond X=x]$.   These functions are defined on different spaces: $\E[Y \cond X]$ is defined on $\Omega$ and $\E[Y \cond X=x]$ is defined on $\Omega'$.  They share that they both must be measurable, and both must match integrals of $Y$: (1)  Comparing the two diagonal lines, we need $\int_A \E[Y \cond X] \wrt{P} = \int_A Y \wrt{P}$  for all $A \in \sigma(X)$. (2) Comparing the vertical line to the top diagonal, we need $\int_B \E[Y \cond X=x] \wrt{P_X} = \int_{X^{-1}(B)} Y \wrt{P}$ for any $B \in \F'$.  We can consider $\E[Y \cond X=x]$ as our ``best guess" of $Y$ given that $X=x$, and $\E[Y \cond X]$ as our ``best guess" of $Y$ given that all we know about observed outcome $\omega$ is whether or not $\omega$ belongs to each set in $\sigma(X)$.}
+\caption{\textit{Two types of conditional expectation given a random object.}   Given a random variable $Y$ and random object $X$ defined on the same probability space, we can consider the conditional expectation to be either  $\E[Y \cond X]$ or $\E[Y \cond X=x]$.   These functions are defined on different spaces: $\E[Y \cond X]$ is defined on $\Omega$ and $\E[Y \cond X=x]$ is defined on $\Omega'$.  They share that they both must be measurable, and both must match integrals of $Y$: (1)  Comparing the two diagonal lines, we need $\int_A \E[Y \cond X] \wrt{P} = \int_A Y \wrt{P}$  for all $A \in \sigma(X)$. (2) Comparing the vertical line to the top diagonal, we need $\int_B \E[Y \cond X=x] \wrt{P_X} = \int_{X^{-1}(B)} Y \wrt{P}$ for any $B \in \F'$. }
 \label{fig:two_types_of_conditional_expectation_given_another_random_variable}	
 \end{figure}
 
@@ -7353,11 +7354,11 @@ Since the integrands are equal for all measurable sets,  Cor.~\ref{cor:equal_int
  \implies & \big| \E[Y \cond \G] \big| &\leq & \E[|Y| \cond \G] & & & \tinytext{def. absolute value}
 \end{array}\]
 %
-\item[(e)] We have $Y_n \geq 0 \, \forall \, n$ and $Y_n \uparrow Y$ a.e.  By monotonicity of conditional expectation [part (b)], $\set{\E[Y_n \mid \G]}_n$ is an increasing sequence of non-negative functions.  Since also measurable functions are closed under limits, find
+\item[(e)] We have $Y_n \geq 0 \, \forall \, n$ and $Y_n \uparrow Y$ a.e.  By monotonicity of conditional expectation [part (b)], $\set{\E[Y_n \mid \G]}_n$ is an increasing sequence of non-negative functions.  Since also measurable functions are closed under limits, we find
 \[ \E[Y_n \mid \G] \uparrow h \quad\quad\quad \tinycircled{1} \]
 where $h$ is $\G$-measurable and non-negative. 
 
-Now applying MCT to the hypothesis, we see
+Now applying MCT to the hypothesis ($Y_n \uparrow Y$ a.e.), we see
 %
 \[ \int_G \E[Y_n \mid \G] \wrt{P} \stackexplain{def. cond. expect.}{=} \int_G Y_n \wrt{P} \stackexplain{MCT}{\uparrow} \int_G Y \wrt{P} \quad \quad \forall G \in \G.\]
 %
@@ -7394,7 +7395,7 @@ and we are done.
 \[ \int_\Omega \E[Y \cond \G] \wrt{P} = \int_\Omega Y \wrt{P}.  \]
 \item[(l)]
 \begin{itemize}
-\item[(I)] We N.T.S. that the two conditions defining conditional expectation hold. 
+\item[(I)] We want to prove that if $\G_1 \subset \G_2$, then  $\E[\E[Y \mid \G_2] \mid \G_1] = \E[Y \mid \G_1]$ a.e.  To do so, we N.T.S. that the two conditions defining conditional expectation hold. 
 \begin{itemize}
 \item[1.] $\E[Y \cond \G_1]$ is $\G_1$ measurable? \greencheck. Automatic.
 \item[2.] $\int_{G_1} \E[Y \cond \G_2] \wrt{P} = \int_{G_1} \E[Y \cond \G_1] \wrt{P} \quad \forall \; G_1 \in \G_1$? \greencheck.
@@ -7406,7 +7407,7 @@ By definitions of conditional expectation for $\E[Y \cond \G_1]$ and $\E[Y \cond
 Now since $\G_1 \subset \G_2$, equation $\tinycircled{2}$ also applies to all $G_1 \in \G_1$, so we have
 \[ \int_{G_1} \E[Y \cond \G_1] \wrt{P} \stackexplain{\tinycircled{1}}{=}  \int_{G_1} Y \wrt{P}  \stackexplain{\tinycircled{2}}{=}  \int_{G_1} \E[Y \cond \G_1] \wrt{P} \quad \forall \; G_1 \in \G_1. \]
 \end{itemize}
-\item[(II)] We N.T.S. that the two conditions defining conditional expectation hold.  
+\item[(II)] We want to prove that if $\G_1 \subset \G_2$, then  $\E[\E[Y \mid \G_1] \mid \G_2] = \E[Y \mid \G_1]$ a.e.  To do so, we N.T.S. that the two conditions defining conditional expectation hold.  
 \begin{itemize}
 \item[1.] $\E[Y \cond \G_1]$ is $\G_2$ measurable? \greencheck. True since $\G_1 \subset \G_2$. 
 \item[2.] $\int_{G_2} \E[Y \cond \G_1] \wrt{P} = \int_{G_2} \E[Y \cond \G_1] \wrt{P} \quad \forall \; G_2 \in \G_2$?  \greencheck. Obvious.
@@ -7613,8 +7614,8 @@ Applying the same logic again (i.e. taking averages over atoms, per Theorem~\ref
 \begin{align*}
 \E[\E[X \mid \G_1] \mid \G_2] &= 
 \begin{cases}
-5 & \text{on} \; \set{b} \\
-3.5 & \text{on} \; \set{a,c} \\	
+3.5 & \text{on} \; \set{a,b} \\
+5 & \text{on} \; \set{c} \\	
 \end{cases}
 \\
 \E[\E[X \mid \G_2]\mid \G_1] &=
@@ -7668,6 +7669,72 @@ Applying linearity, we obtain
 which justifies Equation (1).
 \end{proof}
 
+\section{$\S$ 6 Strong laws of large numbers and martingales}
+
+\subsection{$\S$ 6.1 Introduction}
+
+We begin by defining a regular matrix summability method (Def.~\ref{def:regular_summability_method}). This is a matrix transformation of a convergence sequence which preserves the limit (Thm.~\ref{thm:silverman_toeplitz}). 
+
+\begin{definition}
+Let $\+A \defeq \set{a_{rc}}$ be an infinite matrix of real numbers.  Then $\+A$ is a matrix summability method if 
+\[\begin{array}{rlcl}
+1. & \lim_{r \to \infty} a_{rc}=0, \quad \forall c \in \mathbb{N}&
+\qquad \qquad & \smalltext{(Each column sequence converges to 0.)} \\
+2. & \lim_{r \to \infty} \sum_{c=1}^\infty a_{rc}=1, \quad \forall c \in \mathbb{N}&
+\qquad \qquad & \smalltext{(The row sums converge to 1.)} \\
+3. & \sum_{c=1}^\infty |a_{rc}| \leq B < \infty, \quad \forall r \in \mathbb{N}&
+\qquad \qquad & \smalltext{(The absolute row sums are bounded.)}
+\end{array} \] 
+\label{def:regular_summability_method}
+\end{definition}
+
+\begin{theorem}\textbf{Silverman-Toeplitz Theorem.}
+Let $\+A \defeq \set{a_{rc}}$ be a regular matrix summability method (Def.~\ref{def:regular_summability_method}).  Let $\set{x_c}$ be real-valued sequence such that $x_c \to x$.  Define 
+\[ y_r \defeq \sum_{c=1}^\infty a_{rc} x_c \]
+Then $y_r \to x.$
+\label{thm:silverman_toeplitz}	
+\end{theorem}
+
+\begin{proof}
+
+We argue as follows.
+\begin{alphabate}
+\item Conditions 1, 3, $x_c \to 0$ implies $y_r \to 0$.
+\item Conditions 1, 2, 3, $x_c \to x$ implies $y_r \to x$.
+\end{alphabate}
+where the conditions refer to those of Def.~\ref{def:regular_summability_method}.
+
+Now we verify each step.
+\begin{alphabate}
+\item For any $\epsilon >0$, we have 
+\begin{align*}
+|y_r| = \bigg|\sum_{c=1}^\infty a_{rc} x_c \bigg| \stackexplain{tr. ineq.}{\leq}  \sum_{c=1}^\infty |a_{rc} x_c| \stackrel{1}{=} \explaintermbrace{$\leq \frac{C\, \epsilon \, \sum_{c=1}^C |x_c| }{2 C \sum_{c=1}^C |x_c|}= \frac{\epsilon}{2}$}{\sum_{c=1}^C |a_{rc}| |x_c|} +  \explaintermbrace{$\leq B \frac{\epsilon }{2B} = \frac{\epsilon}{2} $}{\sum_{c=C+1}^\infty |a_{rc}| |x_c|}
+\end{align*}
+Where in 1, we 
+\begin{itemize}
+\item choose $C$ so that $|x_c| \leq \epsilon /2B$ for $c \geq C$ \quad {\scriptsize (possible since $x_c$ converges)}
+\item choose $R$ so that $|a_{rc}| \leq \epsilon /2(C \sum_{c=1}^C |x_c|)$ for $r \geq R$ \quad {\scriptsize (possible by condition 1 on $\+A$)}.
+\end{itemize}
+
+{\scriptsize (The triangle inequality holds by considering the series as an integral against counting measure.)}
+
+\item 
+\[ \begin{array}{rcl}
+\text{Set} & \quad &	\wt{x_c} = x_c - x \\
+\text{Then by (a)} & \quad & \wt{y_r} \defeq \ds\sum_{c=1}^\infty a_{rc} (x_c - x) \to 0  
+\end{array}
+\]
+Now 
+\[\ds\sum_{c=1}^\infty a_{rc} (x_c - x)  \stackrel{1}{=} \ds\sum_{c=1}^\infty a_{rc} x_c - \cancelto{1}{\ds\sum_{c=1}^\infty a_{rc}} x  \]
+where (1) holds by linearity {\scriptsize (e.g. consider these as integrals against counting measure; this holds so long as the RHS does not have the form of  $\pm (\infty - \infty)$, which is avoided since the subtrahend equals $x \in \R$.) }
+Thus 
+
+\[ \wt{y_r} \to 0 \implies \explaintermbrace{$\defeq y_r$}{\ds\sum_{c=1}^\infty a_{rc} x_c} - x \to 0 \implies  \explaintermbrace{$\defeq y_r$}{\ds\sum_{c=1}^\infty a_{rc} x_c} \to  x  \]
+\end{alphabate}
+	
+
+	
+\end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
