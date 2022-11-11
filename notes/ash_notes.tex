@@ -1863,9 +1863,11 @@ Consider a constant function, i.e. $h: (\Omega_1, \F_1) \to (\Omega_2, \F_2)$ su
 \end{example}
 
 \begin{example}{\remarktitle{Any function is measurable with respect to the trivial $\sigma$-field.}}
-Consider any function $h : (\Omega_1, \F_1) \to (\Omega_2, \F_2)$, where $\F_2$ is the trivial $\sigma$-field: $\F_2 = \set{\emptyset, \Omega_2}$.  Then $h$ is measurable since $h^{-1}(\emptyset) = \emptyset \in \F_1$ and  $h^{-1}(\Omega_2) = \Omega_1 \in \F_1$
+Consider any function $h : (\Omega_1, \F_1) \to (\Omega_2, \F_2)$, where $\F_2$ is the trivial $\sigma$-field: $\F_2 = \set{\emptyset, \Omega_2}$.  Then $h$ is measurable since $h^{-1}(\emptyset) = \emptyset \in \F_1$ and  $h^{-1}(\Omega_2) = \Omega_1 \in \F_1$.
 \label{ex:any_function_is_measurable_with_respect_to_trivial_sigma_field}	
 \end{example}
+
+\red{TODO: Add: If $\Omega$ is countable, $\F=2^\Omega$ (i.e. the set of all subsets of $\Omega$) is a sigma-field, and hence any function is measurable. This construction comes up when viewing series as integrals against counting measure.}
 
 \begin{example}{\remarktitle{Indicators of Borel sets are Borel measurable.}}
 Let $A$ be a Borel subset of $\R$,\footnote{Recall Section \ref{sec:borel_sets}.  For instance, we might take $A$ to be an open interval, or a disjoint union of open intervals, or the Cantor set.} and let $I_A : \R \to \R$ be the indicator of $A$; that is $I_A(x)=1$ for $x \in A$ and $0$ for $x \not\in A$. Then $I_A$ is Borel measurable, since for all $B \in \B(\R)$, we have
@@ -2563,7 +2565,7 @@ Let $\Omega = \set{1,2,3, ...}$, $\F=2^\Omega$ (i.e. all subsets of $\Omega$), a
 	\label{eqn:sums_as_integrals}
 	\end{align}
 	%
-	where the series is interpreted as $\sum_{n=1}^\infty a_n^+ - \sum_{n=1}^\infty a_n^-$ if this is not of the form $\infty - \infty$ (if it is, the integral does not exist).\footnote{Recall that $a_n^+ := \max(a_n,0)$ and $a_n^- := \max(-a_n,0)$.}
+	where the series is interpreted as $\sum_{n=1}^\infty a_n^+ - \sum_{n=1}^\infty a_n^-$ if this is not of the form $\infty - \infty$ (if it is, the integral does not exist).\footnote{Recall that $a_n^+ := \max(a_n,0)$ and $a_n^- := \max(-a_n,0)$.} Note that every $f$ is automatically measurable since $\F=2^\Omega$. 
 	
 To justify \Eqref{eqn:sums_as_integrals}, let us first assume that $a_n \geq 0$ for each $n$.  We define a sequence of non-negative functions $\set{f_k}$ by $f_k : n \mapsto f(n) \indicate{n \leq k}$, i.e. $f_k = (a_1, a_2, \hdots, a_k, 0, 0, \hdots)$.   
 	
@@ -7712,10 +7714,19 @@ a_{rc} =
 
 \begin{theorem}\textbf{Silverman-Toeplitz Theorem.}
 Let $\+A \defeq \set{a_{rc}}$ be a regular matrix summability method (Def.~\ref{def:regular_summability_method}).  Let $\set{x_c}$ be real-valued sequence such that $x_c \to x$.  Define 
-\[ y_r \defeq \sum_{c=1}^\infty a_{rc} x_c \]
+\begin{align}
+y_r \defeq \sum_{c=1}^\infty a_{rc} x_c
+\label{eqn:new_sequence_obtained_by_applying_a_regular_infinite_matrix_to_an_old_sequence}	
+\end{align}
+
 Then $y_r \to x.$
 \label{thm:silverman_toeplitz}	
 \end{theorem}
+
+\begin{remark}
+For the sequence $\set{y_r}$ in \Eqref{eqn:new_sequence_obtained_by_applying_a_regular_infinite_matrix_to_an_old_sequence} to exist, it is sufficient for $\set{x_c}$ to be bounded.  Suppose $\set{x_c}$ is bounded by some number $M<\infty$.  Then $\sum_{c=1}^\infty |a_{rc} x_j| \leq BM < \infty$ (where $B$ was defined in Def.~\ref{def:regular_summability_method}). That is,  the series doesn't take the form of $\infty - \infty$. {\scriptsize (To verify existence,  consider the series as an integral against counting measure, as in Example~\ref{ex:series_as_integrals}, and then refer to the condition of the existence of the integral, as in Remark \ref{rk:when_does_integral_of_arbitary_Borel_measurable_function_exist}.)} In particular, $\set{y_r}$ exists whenever $\set{x_c}$ converges, since every convergent sequence is bounded. %In particular, the integral consider these as integrals against counting measure, as in Example~\ref{ex:series_as_integrals}
+\end{remark}
+
 
 \begin{proof}
 
@@ -7758,7 +7769,8 @@ Thus
 
 Earlier, we presented the First Borel-Cantelli Lemma (Lemma~\ref{lemma:first_borel_cantelli}). In a probabilistic context, the Lemma is stated as
 \[ \textit{If } A_1, A_2, \hdots \textit{ are events s.t. } \sum_n P(A_n) < \infty, \textit{ then } P(\limsup_n An) = 0.\]
-The second Borel-Cantelli Lemma gives a partial converse. \red{TODO: How is this a converse?}
+%
+According to \cite{ash2000probability}, the second Borel-Cantelli Lemma gives a partial converse. \red{TODO: How is this a converse?}
 
 \begin{lemma}\textbf{Second Borel-Cantelli Lemma.}
 Let $(\Omega, \F, P)$ be a probability space. If $A_1, A_2, \hdots$ are independent events in $\F$ such that $P(A_n) = \infty$, then $P(\limsup_n A_n) = 1$.
