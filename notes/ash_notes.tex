@@ -5557,6 +5557,7 @@ On the other hand,
 \begin{remark}
 In probability theory, the argument of Example~\ref{ex:area_under_the_curve_via_horizontal_sections} can be used to show that if $X$ is a non-negative random variable, then its expected value equals the integral of its survival function, i.e. 
 \[ \E[X] = \int_0^\infty P(X > x) dx \]
+For details, see Remark~\ref{rk:expected_value_equals_integral_of_its_survival_function_more_detail}. 
 \label{rk:expected_value_equals_integral_of_its_survival_function}
 \end{remark}
 
@@ -7813,6 +7814,33 @@ Setting $\set{b_k} = \set{\exp(-P(A_r))}_{r=n}^\infty$, the LHS of  \Eqref{eqn:f
 We substitute this result into \Eqref{eqn:another_intermediate_equation_for_second_borel_equation_lemma} to prove the claim.
 \end{proof}
 
+
+\subsection{$\S$ 6.2 Convergence Theorems}
+
+In Lemma~\ref{lemma:expectation_of_nonnegative_random_variable_can_be_bounded_by_Riemann_sum_appoximations_to_survival_function}, we show that the expectation of a non-negative random variable can be bounded by Riemann sum approximations to the survival function.\footnote{We give a proof that is both more compact and more conceptual than the proof given by \cite[Lemma~6.2.4]{ash2000probability}.}. This Lemma is used to prove the Strong Law of Large Numbers for the i.i.d case \cite[Thm~6.2.5]{ash2000probability}, which does not require finite variance.
+
+\begin{lemma}
+If $X$ is a non-negative random variable, then
+%
+\[ \sum_{n=1}^\infty P(X \geq n) \leq \E[X] \leq 1 + \sum_{n=1}^\infty P(X \geq n).\] 
+%
+\label{lemma:expectation_of_nonnegative_random_variable_can_be_bounded_by_Riemann_sum_appoximations_to_survival_function}	
+\end{lemma}
+
+\begin{proof}
+In Remark~\ref{rk:expected_value_equals_integral_of_its_survival_function}, we showed that 
+%
+\[ \E[X] = \int_0^\infty P(X > x) \wrt{x}. \]
+%
+Since the survival function $P(X > x)$ is non-increasing in $x$, its integral $\int_0^\infty P(X > x) \wrt{x}$ can be no greater than the left Riemann sum $\sum_{n=0}^\infty P(X \geq n) = 1 + \sum_{n=1}^\infty P(X \geq n)$ and no less than the right Riemann sum $\sum_{n=1}^\infty P(X \geq n)$. See Fig.~\ref{fig:approximating_area_under_survival_function}.
+\end{proof}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.4\linewidth]{images/approximating_area_under_survival_function}
+\caption{Approximating the area under a survival function with left and right Riemann sums.}
+\label{fig:approximating_area_under_survival_function}
+\end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
