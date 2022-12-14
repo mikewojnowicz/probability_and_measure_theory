@@ -7817,7 +7817,49 @@ We substitute this result into \Eqref{eqn:another_intermediate_equation_for_seco
 
 \subsection{$\S$ 6.2 Convergence Theorems}
 
-In Lemma~\ref{lemma:expectation_of_nonnegative_random_variable_can_be_bounded_by_Riemann_sum_appoximations_to_survival_function}, we show that the expectation of a non-negative random variable can be bounded by Riemann sum approximations to the survival function.\footnote{We give a proof that is both more compact and more conceptual than the proof given by \cite[Lemma~6.2.4]{ash2000probability}.}. This Lemma is used to prove the Strong Law of Large Numbers for the i.i.d case \cite[Thm~6.2.5]{ash2000probability}, which does not require finite variance.
+\begin{theorem}
+Let $X_1, X_2, \hdots$ be independent random variables with finite expectation.  If $\sum_{n=1}^\infty \Var[X_n] < \infty$, then $\sum_{n=1}^\infty (X_n - \E[X_n])$ converges a.e.
+\label{thm:if_a_sequence_of_RVs_has_a_finite_sum_of_variances_then_the_series_of_deviations_from_expected_value_converges_almost_everywhere}
+\end{theorem}
+
+\begin{proof}
+See \cite[Thm.~6.2.1]{ash2000probability}.	
+\end{proof}
+
+\begin{theorem}
+\textbf{(Kolmogorov Strong Law of Large Numbers.)} Let $X_1, X_2, \hdots$ be independent random variables with finite mean and variance.  Let $\set{b_n}$ be an increasing sequence of positive real numbers such that $b_n \to \infty$.  
+If
+\[  \sum_{n=1}^\infty \df{\Var[X_n]}{b_n^2} < \infty\]
+Then (with $S_n \defeq X_1 + \hdots X_n$)
+\[\df{S_n - \E[S_n]}{b_n} \to 0 \quad \text{a.e.} \] 	
+\label{thm:kolmogorov_SLLN}
+\end{theorem}
+
+\begin{proof}
+See \cite[Thm.~6.2.2]{ash2000probability}. The proof uses Theorem~\ref{thm:if_a_sequence_of_RVs_has_a_finite_sum_of_variances_then_the_series_of_deviations_from_expected_value_converges_almost_everywhere}.
+\end{proof}
+
+\begin{example}\remarktitle{Sample means converge to the population mean for independent random variables with finite means and variance.}
+Let $X_1, X_2, \hdots$ be independent random variables with finite mean $\mu$ and variance $\sigma^2$.  Then 
+\[ \df{S_n}{n} \to \mu \quad \text{a.e.} \] 
+\label{example:independent_rvs_with_finite_mean_and_variance_have_sample_means_which_converge_to_the_population_mean}
+\end{example}
+
+\begin{proof}
+Take $b_n = n$ in Theorem~\ref{thm:kolmogorov_SLLN}.  The hypothesis holds since
+%
+\[\sum_{n=1}^\infty \df{\Var[X_n]}{b_n^2} = \sum_{n=1}^\infty \df{\sigma^2}{n^2} = \sigma^2 \sum_{n=1}^\infty \df{1}{n^2} < \infty.\] 
+Applying the conclusion of the theorem, we obtain
+\[\df{S_n - \E[S_n]}{b_n}  = \df{S_n - n \mu}{n} = \df{S_n}{n} - \mu \to 0 \quad \text{a.e.} \]
+\end{proof}
+
+\begin{task}
+Compare the weak LLN to the strong LLN.	
+\end{task}
+
+
+
+In Lemma~\ref{lemma:expectation_of_nonnegative_random_variable_can_be_bounded_by_Riemann_sum_appoximations_to_survival_function}, we show that the expectation of a non-negative random variable can be bounded by Riemann sum approximations to the survival function.\footnote{We give a proof that is both more compact and more conceptual than the proof given by \cite[Lemma~6.2.4]{ash2000probability}.}. This lemma is used to prove the Strong Law of Large Numbers for the i.i.d case (Theorem~\ref{thm:SLLN_iid_case}), which does not require assumptions about variance.
 
 \begin{lemma}
 If $X$ is a non-negative random variable, then
@@ -7841,6 +7883,49 @@ Since the survival function $P(X > x)$ is non-increasing in $x$, its integral $\
 \caption{Approximating the area under a survival function with left and right Riemann sums.}
 \label{fig:approximating_area_under_survival_function}
 \end{figure}
+
+\begin{theorem}
+\textbf{(Strong Law of Large Numbers, iid case.)}. If $X_1, X_2, \hdots$ are iid random variables with finite expectation $\mu$, and $S_n \defeq X_1 + \hdots + X_n$, then $S_n/n \to \mu$ a.e.
+\label{thm:SLLN_iid_case}
+\end{theorem}
+
+\begin{remark}
+Theorem~\ref{thm:SLLN_iid_case} shows that in the i.i.d case, we don't need to make an assumption about variance (as we did in Example~\ref{example:independent_rvs_with_finite_mean_and_variance_have_sample_means_which_converge_to_the_population_mean}).	
+\end{remark}
+
+\begin{proof}
+ See \cite[Thm.~6.2.5]{ash2000probability}.	The proof uses Lemma~\ref{lemma:expectation_of_nonnegative_random_variable_can_be_bounded_by_Riemann_sum_appoximations_to_survival_function}.
+\end{proof}
+
+\begin{remark}
+Theorem~\ref{thm:SLLN_iid_case} still holds if the random variables have infinite expectation; see \cite[Theorem 2.4.5]{durrett2010probability}.
+\end{remark}
+
+\begin{example} 
+\textbf{Renewal theory.} \cite[pp.75]{durrett2010probability} Let $X_1, X_2, \hdots$ be i.i.d with $0 < X_i < \infty$.  In the context of a janitor replacing lightbulbs once they burn out, we have
+%
+\begin{align*}
+\explaintermbrace{time of $n$-th lightbulb burning out}{T_n} & \defeq X_1 + \hdots + \explaintermbrace{lifetime of $i$-th lightbulb}{X_i} + \hdots + X_n \\
+\explaintermbrace{\# of lightbulbs burned out at time $t$}{N_t} &\defeq \sup \set{n: T_n \leq t}
+\end{align*}
+%
+If $\E[X_i]=\mu < \infty$, then
+\[ \explaintermbrace{burnout rate}{\df{N_t}{t}} \to \df{1}{\mu} \quad \text{a.e.} \quad \text{as} \quad t \to \infty. \]
+\end{example}
+
+\begin{proof}
+By definition of $N_t$, we have
+\[ T_{N_t} \leq t < T_{N_t + 1}. \]	
+Dividing by $N_t$, we obtain
+\[ \explaintermbrace{$\to \mu$}{\df{T_{N_t}}{N_t}} \leq \df{t}{N_t} < \explaintermbrace{$\to \mu$}{\df{T_{N_t+1}}{N_t + 1}} \cdot \explaintermbrace{$\to$ 1}{\df{N_t+1}{N_t}}  \qquad \qquad \tinycircled{1}\]
+where the convergences hold because $X_i <\infty \implies T_n < \infty \implies N_t \to \infty \text{ as } t \to \infty$. Convergence follows immediately for the third term, and for the first two we apply the SLLN, $\frac{T_n}{n} \to \mu$ a.e.
+
+Thus, \tinycircled{1} gives us that
+\[ \df{t}{N_t} \to \mu \quad \text{a.e.},\]
+so by limit properties,
+\[ \df{N_t}{t} \to \frac{1}{\mu} \quad \text{a.e.}\]
+
+\end{proof}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
