@@ -7737,12 +7737,46 @@ We show that \tinycircled{1} cannot hold.
 \end{figure}
 
 
-\item But then when $x = 1 - \wt{\epsilon}$, the line takes value $\wt{y} = (1 - \wh{\epsilon}) - m \wt{\epsilon}$ (where we have defined $m \defeq m_n$).  At this point, the line is above 0 (violating the upper bound condition of the supremum) whenever 
+\item But then when $x = 1 - \wt{\epsilon}$, the line takes value $\wt{y} = (1 - \wh{\epsilon}) - m \wt{\epsilon}$ (where we have defined $m \defeq m_n$).  At this point, the\ line is above 0 (violating the upper bound condition of the supremum) whenever 
 \[ \wt{y} = (1 - \wh{\epsilon}) - m \wt{\epsilon} \; > 0 \implies \wh{\epsilon} + m \wt{\epsilon} < 1,\]
 which is always possible since $\wh{\epsilon}$ and $\wt{\epsilon}$ can be made arbitrarily small.   
 \end{enumerate}
 
 \end{remark}
+
+
+\begin{theorem}
+Let $g$ be a convex function from $I$ to $\R$, where $I$ is an open interval of reals, bounded or unbounded.  Let $X$ be random variable on $(\Omega, \F, P)$, with $X(\omega) \in I$ for all $\omega$.  Assume $E[X]$ to be finite. \red{why?} If $\mathcal{H}$ is a sub $\sigma$-field of $\F$, then   
+\[ \E[g(X \cond \mathcal{H})] \geq g(E[X \cond \mathcal{H}]) \quad a.e. \]
+In particular, $\E[g(X)] \geq g(E[X])$.
+\label{thm:jensens_inequality}	
+\end{theorem}
+
+\begin{remark}
+To recall the direction in which the inequality goes \cite[pp.28]{durrett2010probability}, take $P(X=x) = \lambda, P(X=y) = 1-\lambda$.  Then (see Figure~\ref{fig:jensens_inequality_per_durrett}) 
+\begin{align*}
+	E[g(x)] &= \lambda \, g(x) + (1-\lambda) \, g(y) && \smalltext{LOTUS} \\
+	& \geq g \big(\lambda x  + (1-\lambda) y  \big). && \smalltext{def. convexity}\\
+		&= g \big( \E[X] \big) && \smalltext{def. expectation} 
+\end{align*}
+%
+
+\begin{figure}[H] 
+\centering
+\includegraphics[width=.5\textwidth]{images/jensens_inequality_per_durrett}
+\caption{Jensen's inequality for $g(x) = x^2 - 3x + 3, P(X=1) = P(X=3) = 1/2$. Image credit: \cite[pp.28]{durrett2010probability}.}
+\label{fig:jensens_inequality_per_durrett}
+\end{figure}
+
+\end{remark}
+
+
+
+
+\begin{proof}
+
+\red{TODO: Justify the last sentence of the theorem.}	
+\end{proof}
 
 
 
