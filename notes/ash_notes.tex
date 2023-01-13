@@ -6292,12 +6292,23 @@ We now turn to independence of random variables and $\sigma$-fields, which will 
 
 \begin{definition}\remarktitle{Independence of a random variable and a $\sigma$-field.}
 We say that a random variable $Y$ on $(\Omega, \F)$ and a $\sigma$-field $\G \subset \F$ are independent (denoted $Y \indep \G$) if 
-\begin{align*}
+\begin{align}
 \forall B \in \B(\R), \quad G \in \G: & \\
 P\big(\set{Y \in B} \cap G \big) = P\big(\set{Y \in B}) \; P(G)
-\end{align*}
+\label{eqn:criterion_for_independence_of_rrandom_variable_and_sigma_field}
+\end{align}
 \label{def:independence_of_random_variable_and_sigma_field}
 \end{definition}
+
+\begin{example}	\remarktitle{Any random variable is independent of the trivial $\sigma$-field.}
+Let $Y$ be a random variable on $(\Omega, \F)$ and define the sub $\sigma$-field  $\G$ as the trivial $\sigma$-field, that is $\G \defeq \set{\emptyset, \Omega}$.  Then \Eqref{eqn:criterion_for_independence_of_rrandom_variable_and_sigma_field} holds.  For all $B \in \B(\R)$,
+%
+\begin{align*}
+\explaintermbrace{$=P(\emptyset)$}{P( \set{Y \in B} \cap \emptyset)} &= P( \set{Y \in B}) \; P(\emptyset) && \scripttext{since $P(\emptyset)$=0} \\
+\explaintermbrace{$=P( \set{Y \in B})$}{P( \set{Y \in B} \cap \Omega)} &= P( \set{Y \in B}) \; P(\Omega) && \scripttext{since $P(\Omega)$=1} \\
+\end{align*}
+\label{ex:any_random_variable_is_indepenent_of_the_trivial_sigma_field}
+\end{example}
 
 \begin{proposition}\remarktitle{A random variable is independent from an indicator for any set belonging to a sigma field that is independent from that random variable.}
 If $Y \indep \G$, then $Y \indep \indicate{G}$ \; for all $G \in \G$.
@@ -7677,7 +7688,7 @@ Applying linearity, we obtain
 which justifies Equation (1).
 \end{proof}
 
-\subsection{Jensen's Inequality \footnotemark}
+\subsubsection{Jensen's Inequality\footnotemark}
 
 \footnotetext{This material is covered in \cite[Thm 6.3.4, 6.3.5]{ash2000probability}.}
 
@@ -7746,8 +7757,13 @@ which is always possible since $\wh{\epsilon}$ and $\wt{\epsilon}$ can be made a
 
 
 \begin{theorem}
-Let $g$ be a convex function from $I$ to $\R$, where $I$ is an open interval of reals, bounded or unbounded.  Let $X$ be random variable on $(\Omega, \F, P)$, with $X(\omega) \in I$ for all $\omega$.  Assume $E[X]$ to be finite. \red{why?} If $\mathcal{H}$ is a sub $\sigma$-field of $\F$, then   
-\[ \E[g(X \cond \mathcal{H})] \geq g(E[X \cond \mathcal{H}]) \quad a.e. \]
+Let $g$ be a convex function from $I$ to $\R$, where $I$ is an open interval of reals, bounded or unbounded.  Let $X$ be random variable on $(\Omega, \F, P)$, with $X(\omega) \in I$ for all $\omega$.  Assume $E[X]$ to be finite.\redfootnote{Why do we make this assumption? See Question~\ref{qu:does_jensens_inequality_fail_for_infinite_expectations}.} If $\mathcal{H}$ is a sub $\sigma$-field of $\F$, then 
+%
+\begin{align}
+\E[g(X \cond \mathcal{H})] \geq g(E[X \cond \mathcal{H}]) \quad a.e. 
+\label{eqn:jensens_inequality_for_conditional_expectations}	
+\end{align}  
+
 In particular, $\E[g(X)] \geq g(E[X])$.
 \label{thm:jensens_inequality}	
 \end{theorem}
@@ -7756,8 +7772,8 @@ In particular, $\E[g(X)] \geq g(E[X])$.
 To recall the direction in which the inequality goes \cite[pp.28]{durrett2010probability}, take $P(X=x) = \lambda, P(X=y) = 1-\lambda$.  Then (see Figure~\ref{fig:jensens_inequality_per_durrett}) 
 \begin{align*}
 	E[g(x)] &= \lambda \, g(x) + (1-\lambda) \, g(y) && \smalltext{LOTUS} \\
-	& \geq g \big(\lambda x  + (1-\lambda) y  \big). && \smalltext{def. convexity}\\
-		&= g \big( \E[X] \big) && \smalltext{def. expectation} 
+	& \geq g \big(\lambda x  + (1-\lambda) y  \big) && \smalltext{def. convexity}\\
+		&= g \big( \E[X] \big). && \smalltext{def. expectation} 
 \end{align*}
 %
 
@@ -7775,8 +7791,49 @@ To recall the direction in which the inequality goes \cite[pp.28]{durrett2010pro
 
 \begin{proof}
 
-\red{TODO: Justify the last sentence of the theorem.}	
+\begin{enumerate}
+\item \textit{We show that the expression $g(\E[X \cond \mathcal{H}] )$ is well-defined.} First, note that  $\E[g(X \cond \mathcal{H})] \in I$ a.e. For if, say, $a$ is real and $X>a$, then $\E[g(X \cond \mathcal{H})] > a$ a.e. because
+%
+\begin{align*}
+0 & \geq \int_{\set{\E[X \cond \mathcal{H}]  \leq a}} \E[X -a \cond \mathcal{H}] \wrt{P} && \scripttext{linearity of C.E., set of integration} \\
+& \stackrel{1}{=} \int_{\set{\E[X \cond \mathcal{H}]  \leq a}} (X-a) \wrt{P} && \scripttext{def of C.E.} \\
+& \geq 0 && \scripttext{we assumed $X>a$} 
+\end{align*}
+
+{\scriptsize Note: To apply the def. of CE  in (1), we must justify that the set of integration satisfies $\set{\E[X \cond \mathcal{H}]  \leq a} \in \mathcal{H}$, but this follows immediately by the measurability condition $\E[X \cond \mathcal{H}] : (\Omega, \mathcal{H}) \to (\R, \B(\R))$.}
+
+Thus, $X=a$ a.e. on $\set{\E[X \cond \mathcal{H}]  \leq a}$. \quad \quad {\scriptsize (by Theorem~\ref{thm:properties_of_functions_derived_from_properties_of_integrals} b)}.
+
+But we assumed $X>a$, so $P\set{\E[X \cond \mathcal{H}]  \leq a} = 0$.  
+
+Thus, $g(\E[X \cond \mathcal{H}] )$ is well-defined.
+
+\item \textit{Now we show that Jensen's inequality (\Eqref{eqn:jensens_inequality_for_conditional_expectations}) holds.} We have 
+\begin{align*}
+&g(y) = \sup_n \, a_n y + b_n, \quad \forall y \in I && \scripttext{Line of Support Theorem (Theorem~\ref{thm:line_of_support})}\\
+\implies &g(y) \geq a_n y + b_n && \scripttext{sup is UB} \\
+\implies & g(X) = a_n X + b_n && \scripttext{$x \in I$} \\
+\implies & \E[g(X) \cond \mathcal{H}] \geq a_n \E[X \cond \mathcal{H}] + b_n \quad  a.e. &&\scripttext{monotonicity of C.E., linearity} \\
+\implies & \E[g(X) \cond \mathcal{H}] \geq \explaintermbrace{$=g(\E[X \cond \mathcal{H}])$ by LoS Thm.}{\sup_n \set{a_n \E[X \cond \mathcal{H}] + b_n}} \quad a.e. &&  \scripttext{take sup over $n$} 
+\end{align*}
+\item \textit{Now we show that the statement holds with unconditional expectations as a special case. } If we set $\mathcal{H} = \set{\emptyset, \Omega}$ to be the trivial $\sigma$-field, then the random variables are independent of $\mathcal{H}$ (see Example~\ref{ex:any_random_variable_is_indepenent_of_the_trivial_sigma_field}), and so the conditionals disappear by the ``no information" rule of conditional expectation (see Example~\ref{ex:examples_with_conditional_expectation_wrt_sigma_field}). 
+\end{enumerate}
+
 \end{proof}
+
+\begin{remark}\remarktitle{On representing convex functions with linear functions.}
+In the proof of Jensen's inequality, we see that the Line of Support Theorem (Theorem~\ref{thm:line_of_support}) allows us to take an arbitrary convex function and represent it in terms of linear functions (and therefore apply properties that hold under linearity).  
+\end{remark}
+
+\begin{remark}\remarktitle{Theorems about conditional expectations automatically apply to unconditional expectations.}
+Step 3 in the proof of Jensen's inequality gives a general strategy through which statements about conditional expectations will also hold for unconditional expectations.  
+\end{remark}
+
+
+\begin{question}
+Does Jensen's Inequality (Theorem~\ref{thm:jensens_inequality})	 fail for infinite expectations?  If so, why?
+\label{qu:does_jensens_inequality_fail_for_infinite_expectations}
+\end{question}
 
 
 
