@@ -7104,6 +7104,11 @@ Let $X: (\Omega, \F) \to (\Omega', \F')$ be a random object.  Then the \textbf{$
 \label{def:sigma_field_generated_by_a_random_object}
 \end{definition}
 
+\begin{remark}
+In particular, if $X = (X_1,\hdots,X_n)$ is a random vector, $\sigma(X)$ consists of all sets $\set{X^{-1}(B), B \in \B(\R^n)}$. %{def:sigma_field_generated_by_a_random_object} 	
+\end{remark}
+
+
 \begin{proposition}\textbf{(Conditional expectation with respect to a $\sigma$-field induced by another random variable.)}
 Let $Y: (\Omega, \F) \to (\overline{\R}, \B(\overline{\R}))$ be an extended random variable and  $X: (\Omega, \F) \to (\Omega', \F')$ be a random object.  Define the $\sigma$-field $\G \subset \F$ by $\G =\sigma(X)$.  
 Then 
@@ -7671,6 +7676,77 @@ Applying linearity, we obtain
 \[ \E\big[Z(X - \E[X \cond \G])\big] = 0, \]
 which justifies Equation (1).
 \end{proof}
+
+\subsection{Jensen's Inequality \footnotemark}
+
+\footnotetext{This material is covered in \cite[Thm 6.3.4, 6.3.5]{ash2000probability}.}
+
+In geometry, a \textbf{line of support} $L$ of a curve $C$ in the plane is a line that contains at least one point of $C$ and causes $C$ to lie completely in one of the two closed half planes defined by $L$.  Theorem \ref{thm:line_of_support} shows that given any real-valued convex function defined on an open interval, we can construct a sequence of lines of support such that the convex function evaluates to the supremum over the lines of support.  
+
+\begin{theorem}
+\textbf{Line of Support Theorem.}  Let $g : I \to \R$, where $I$ is an open interval of reals, bounded or unbounded. Assume $g$ is convex, that is,
+\[g \big(\alpha x + (1-\alpha) y \big) \leq \alpha g(x) + (1-\alpha) g(y) \]
+for all $x,y \in I$ and all $\alpha \in [0,1]$.  Then there are sequences $\set{a_n}, \set{b_n}$ of real numbers such that for all $x \in I$, 
+\[ g(x) = \sup_n \; (a_n x + b_n)\]
+\label{thm:line_of_support}
+\end{theorem}
+
+\begin{proof}
+See \cite[Theorem 6.3.4]{ash2000probability}.	
+\end{proof}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.5\textwidth]{images/line_of_support_theorem}
+\caption{\textit{Cartoon sketch of line of support theorem.}   Shown are a convex function $g$ and five elements of a sequence $\set{\ell_n}$ of lines of support.}
+\end{figure}
+
+
+\begin{question}
+How is a \textit{countable} number of lines sufficient to exactly match the \textit{uncountable} number of points on the curve?	(A study of the proof should reveal the answer.)
+\end{question}
+
+\begin{remark}
+\remarktitle{The line of support theorem does not hold for non-open domains.}
+For a counter-example, let $I = [0,1]$, and define $g : I \to \R$ by 
+\[ 
+g(x) = 
+\begin{cases}
+0, & x \in [0,1) \\
+1, & x = 1.	
+\end{cases}
+\]	
+
+\begin{figure}[H] 
+\centering
+\includegraphics[width=.3\textwidth]{images/line_of_support_counterexample}
+\caption{The function $g$ is convex (for any pair of points in the domain, the secant line lies above or on the graph of the function).  However, $g$ is defined on the interval $[0,1]$, which is not open.  Therefore, the line of support theorem not apply.}
+\end{figure}
+
+The line of support theorem would imply that there exists a sequence of lines $\ell_n$ (with slopes $m_n$ and intercepts $b_n$) such that 
+\[ g(x) = \sup_n \; (m_n x + b_n) \qquad \qquad \qquad \tinycircled{1} \] 
+We show that \tinycircled{1} cannot hold.
+
+\begin{enumerate}
+
+\item By the alternate characterization of the supremum (Prop~\ref{prop:supremum_and_infimum_alternate_characterization}), we can find some line in the sequence $\set{\ell_n}$ whose value at $x=1$ is arbitrarily close to $1$. That is, for any $\epsilon >0$, there is some $\wh{\epsilon}$ satisfying $0 < \wh{\epsilon} < \epsilon$ and some natural number $n$ such that $\ell_n(1) = 1 - \wh{\epsilon}$. 
+
+\begin{figure}[H] 
+\centering
+\includegraphics[width=.4\textwidth]{images/line_of_support_counterexample_2}
+\end{figure}
+
+
+\item But then when $x = 1 - \wt{\epsilon}$, the line takes value $\wt{y} = (1 - \wh{\epsilon}) - m \wt{\epsilon}$ (where we have defined $m \defeq m_n$).  At this point, the line is above 0 (violating the upper bound condition of the supremum) whenever 
+\[ \wt{y} = (1 - \wh{\epsilon}) - m \wt{\epsilon} \; > 0 \implies \wh{\epsilon} + m \wt{\epsilon} < 1,\]
+which is always possible since $\wh{\epsilon}$ and $\wt{\epsilon}$ can be made arbitrarily small.   
+\end{enumerate}
+
+\end{remark}
+
+
+
+
 
 \section{$\S$ 6 Strong laws of large numbers and martingales}
 
