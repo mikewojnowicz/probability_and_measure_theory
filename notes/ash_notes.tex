@@ -6307,7 +6307,7 @@ Let $Y$ be a random variable on $(\Omega, \F)$ and define the sub $\sigma$-field
 \explaintermbrace{$=P(\emptyset)$}{P( \set{Y \in B} \cap \emptyset)} &= P( \set{Y \in B}) \; P(\emptyset) && \scripttext{since $P(\emptyset)$=0} \\
 \explaintermbrace{$=P( \set{Y \in B})$}{P( \set{Y \in B} \cap \Omega)} &= P( \set{Y \in B}) \; P(\Omega) && \scripttext{since $P(\Omega)$=1} \\
 \end{align*}
-\label{ex:any_random_variable_is_indepenent_of_the_trivial_sigma_field}
+\label{ex:any_random_variable_is_independent_of_the_trivial_sigma_field}
 \end{example}
 
 \begin{proposition}\remarktitle{A random variable is independent from an indicator for any set belonging to a sigma field that is independent from that random variable.}
@@ -7760,18 +7760,18 @@ which is always possible since $\wh{\epsilon}$ and $\wt{\epsilon}$ can be made a
 Let $g$ be a convex function from $I$ to $\R$, where $I$ is an open interval of reals, bounded or unbounded.  Let $X$ be random variable on $(\Omega, \F, P)$, with $X(\omega) \in I$ for all $\omega$.  Assume $E[X]$ to be finite.\redfootnote{Why do we make this assumption? See Question~\ref{qu:does_jensens_inequality_fail_for_infinite_expectations}.} If $\mathcal{H}$ is a sub $\sigma$-field of $\F$, then 
 %
 \begin{align}
-\E[g(X \cond \mathcal{H})] \geq g(E[X \cond \mathcal{H}]) \quad a.e. 
+\E[g(X \cond \mathcal{H})] \geq g(\E[X \cond \mathcal{H}]) \quad a.e. 
 \label{eqn:jensens_inequality_for_conditional_expectations}	
 \end{align}  
 
-In particular, $\E[g(X)] \geq g(E[X])$.
+In particular, $\E[g(X)] \geq g(\E[X])$.
 \label{thm:jensens_inequality}	
 \end{theorem}
 
-\begin{remark}
+\begin{remark}\remarktitle{Remembering the direction of Jensen's inequality (via a discrete distribution over two outcomes).}
 To recall the direction in which the inequality goes \cite[pp.28]{durrett2010probability}, take $P(X=x) = \lambda, P(X=y) = 1-\lambda$.  Then (see Figure~\ref{fig:jensens_inequality_per_durrett}) 
 \begin{align*}
-	E[g(x)] &= \lambda \, g(x) + (1-\lambda) \, g(y) && \smalltext{LOTUS} \\
+	\E[g(X)] &= \lambda \, g(x) + (1-\lambda) \, g(y) && \smalltext{LOTUS} \\
 	& \geq g \big(\lambda x  + (1-\lambda) y  \big) && \smalltext{def. convexity}\\
 		&= g \big( \E[X] \big). && \smalltext{def. expectation} 
 \end{align*}
@@ -7812,11 +7812,11 @@ Thus, $g(\E[X \cond \mathcal{H}] )$ is well-defined.
 \begin{align*}
 &g(y) = \sup_n \, a_n y + b_n, \quad \forall y \in I && \scripttext{Line of Support Theorem (Theorem~\ref{thm:line_of_support})}\\
 \implies &g(y) \geq a_n y + b_n && \scripttext{sup is UB} \\
-\implies & g(X) = a_n X + b_n && \scripttext{$x \in I$} \\
+\implies & g(X) \geq a_n X + b_n && \scripttext{hypothesis ($X \in I$)} \\
 \implies & \E[g(X) \cond \mathcal{H}] \geq a_n \E[X \cond \mathcal{H}] + b_n \quad  a.e. &&\scripttext{monotonicity of C.E., linearity} \\
 \implies & \E[g(X) \cond \mathcal{H}] \geq \explaintermbrace{$=g(\E[X \cond \mathcal{H}])$ by LoS Thm.}{\sup_n \set{a_n \E[X \cond \mathcal{H}] + b_n}} \quad a.e. &&  \scripttext{take sup over $n$} 
 \end{align*}
-\item \textit{Now we show that the statement holds with unconditional expectations as a special case. } If we set $\mathcal{H} = \set{\emptyset, \Omega}$ to be the trivial $\sigma$-field, then the random variables are independent of $\mathcal{H}$ (see Example~\ref{ex:any_random_variable_is_indepenent_of_the_trivial_sigma_field}), and so the conditionals disappear by the ``no information" rule of conditional expectation (see Example~\ref{ex:examples_with_conditional_expectation_wrt_sigma_field}). 
+\item \textit{Now we show that the statement holds with unconditional expectations as a special case. } If we set $\mathcal{H} = \set{\emptyset, \Omega}$ to be the trivial $\sigma$-field, then any random variable\footnote{In particular, here we consider the random variables $X$ and $g(X)$.} is independent of $\mathcal{H}$ (see Example~\ref{ex:any_random_variable_is_independent_of_the_trivial_sigma_field}), and so the conditionals disappear by the ``no information" rule of conditional expectation (see Example~\ref{ex:examples_with_conditional_expectation_wrt_sigma_field}). 
 \end{enumerate}
 
 \end{proof}
