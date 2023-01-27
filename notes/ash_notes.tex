@@ -7033,6 +7033,89 @@ Overall, we see that the two conditions of the definition present a tradeoff tha
 \label{rk:two_conditions_for_existence_of_conditional_expectation_with_respect_to_a_sigma_field} 
 \end{remark}
 
+\begin{example}\remarktitle{Conditional expectation with respect to a simple $\sigma$-field on the unit square.}
+
+Consider the probability space given by 
+% Reference: TIKZ diagrams in math mode
+% https://tex.stackexchange.com/questions/11105/tikz-diagrams-in-math-mode
+\begin{align*}
+\Omega &= [0,1]^2 && \tinytext{(the unit square)} \\
+\F &= \B([0,1]^2) \\
+P &= \texttt{Uniform} 
+\end{align*}
+%
+and the random variable $Y$ on $(\Omega, \F, P)$ given by 
+\[  \begin{tikzpicture}[scale=0.5]
+   \draw         (0,0) rectangle  ++ (4,4);
+   \draw         (0,0) rectangle  ++ (2,4);
+   \draw         (2,0) rectangle  ++ (2,4);
+   \draw         (0,2) rectangle  ++ (4,2);
+   \node at (1,3) {3};
+   \node at (3,3) {1};
+   \node at (1,1) {5};
+   \node at (3,1) {3};
+ \end{tikzpicture} \] 
+ 
+ Now consider the sub $\sigma$-field $\G \subset \F$ given by 
+\[ \G = \Bigg\{ 
+ \begin{tikzpicture}[baseline=+2.0ex, scale=0.2]
+   \draw         (0,0) rectangle  ++ (4,4);
+ \end{tikzpicture},  \quad 
+ \begin{tikzpicture}[baseline=+2.0ex, scale=0.2]
+   \draw         (0,0) rectangle  ++ (4,4);
+  \fill[blue]    (0,0) rectangle  ++ (2,4);
+ \end{tikzpicture},  \quad 
+ \begin{tikzpicture}[baseline=+2.0ex, scale=0.2]
+  \draw         (0,0) rectangle  ++ (4,4);
+  \fill[blue]    (2,0) rectangle  ++ (2,4);
+  \end{tikzpicture}, \quad
+ \begin{tikzpicture}[baseline=+2.0ex, scale=0.2]
+  \draw         (0,0) rectangle  ++ (4,4);
+  \fill[blue]    (0,0) rectangle  ++ (4,4);
+  \end{tikzpicture} 
+ \Bigg\} \] 
+ We want to think about the conditional expectation $\E[Y \cond \G]$ given a $\sigma$-field.  In particular, we want to use this example to illuminate the two conditions for the conditional expectation, as discussed in Remark~\ref{rk:two_conditions_for_existence_of_conditional_expectation_with_respect_to_a_sigma_field}. 
+ 
+ We ask, can $\E[Y \cond \G]$ be ...
+ \[\begin{array}{cccc}
+  \begin{tikzpicture}[baseline=+3.0ex, scale=0.4]
+   \draw         (0,0) rectangle  ++ (4,4);
+   \draw         (0,0) rectangle  ++ (2,4);
+   \draw         (2,0) rectangle  ++ (2,4);
+   \node at (1,2) {9};
+   \node at (3,2) {20};
+ \end{tikzpicture} & ? & \text{\redx} & \text{This violates condition 2 (see Remark~\ref{rk:two_conditions_for_existence_of_conditional_expectation_with_respect_to_a_sigma_field}) of conditional expectation.} \\
+ &&& \\
+\begin{tikzpicture}[baseline=+3.0ex, scale=0.4]
+   \draw         (0,0) rectangle  ++ (4,4);
+   \draw         (0,0) rectangle  ++ (2,4);
+   \draw         (2,0) rectangle  ++ (2,4);
+   \draw         (0,2) rectangle  ++ (4,2);
+   \node at (1,3) {3};
+   \node at (3,3) {1};
+   \node at (1,1) {5};
+   \node at (3,1) {3};
+ \end{tikzpicture} & ? & \text{\redx} & \text{This violates condition 1 (see Remark~\ref{rk:two_conditions_for_existence_of_conditional_expectation_with_respect_to_a_sigma_field}) of conditional expectation.} \footnote{Condition 1 of conditional expectation - namely that $\E[Y \cond \G]$  must be $\G$-measurable - is violated for example because $\set{1} \in \B$, but the inverse image of $\set{1}$ is the top right square, which is not a member of $\G$.} \\
+  &&& \\
+    \begin{tikzpicture}[baseline=+3.0ex, scale=0.4]
+   \draw         (0,0) rectangle  ++ (4,4);
+   \draw         (0,0) rectangle  ++ (2,4);
+   \draw         (2,0) rectangle  ++ (2,4);
+   \node at (1,2) {4};
+   \node at (3,2) {2};
+ \end{tikzpicture} & ? & \text{\greencheck} & \text{This perfectly meets both conditions.} \\
+ \end{array}\]
+\label{ex:conditional_expectation_with_respect_to_a_simple_sigma_field_on_the_unit_square}
+\end{example}
+
+\begin{remark}\remarktitle{Seeing like a $\sigma$-field.}\footnote{I plan to make a slide deck called ``Seeing like a $\sigma$-field", a reference to James Scott's book \textit{Seeing like a state}.} Example~\ref{ex:conditional_expectation_with_respect_to_a_simple_sigma_field_on_the_unit_square} illustrates two fundamental points about conditional expectations:
+\begin{enumerate}
+\item The true primitive for (the conditioning set of) a conditional expectation is a $\sigma$-field, \textit{not} a random variable.  No additional random variable is mentioned in Example~\ref{ex:conditional_expectation_with_respect_to_a_simple_sigma_field_on_the_unit_square}!  Indeed, as we will see in Sec.~\ref{sec:conditional_expectation_wrt_a_sigma_field_induced_by_another_random_variable}, the conditional expectation with respect to a random variable $E[Y \cond X]$ is a special case of the conditional expectation with respect to a $\sigma$-field $E[Y \cond \G]$.  In case of $E[Y \cond X]$,  the additional random variable $X$ simply plays the intermediary role of \textit{inducing} a particular kind of $\sigma$-field over the sample space $\Omega$. 
+\item The notion of measurability is \textbf{not} needed simply to avoid odd pathological sets (like Lebesgue non-measurable sets); it is in fact fundamental to the notion of conditional expectation, even when dealing with very simple collections of sets.
+\end{enumerate}	
+\end{remark}
+
+
 \begin{remark}\remarktitle{Interpreting the conditional expectation with respect to a $\sigma$-field.}
 Since an event corresponds to a question that has a yes or no answer, $\E[Y \cond \G]$ can be interpreted as the average value of $Y(\omega)$, given that we know, for each $G \in \G$, whether or not $\omega \in G$ \cite[pp.218]{ash2000probability}.  
 \begin{itemize}
@@ -8207,7 +8290,7 @@ The general statement follows by induction.
 \end{proof}
 
 \begin{example}\remarktitle{Simple random walk.}
-Let $Y_1, Y_2, \hdots$ be independent random variables.   Define
+Let $Y_1, Y_2, \hdots$ be independent random variables.\footnote{Note that random walks are sometimes defined as sums of independent \textit{and identically distributed} random increments (e.g. see \cite[pp.179]{durrett2010probability}), whereas here we merely refer to sums of  independent random increments.  Since the identically distributed assumption is not needed here to construct a martingale,  we discard it here.}   Define
 \begin{align*}
 	X_n &= \sum_{k=1}^n Y_k\\
 	\F_n &=\sigma(Y_1, \hdots, Y_n)
@@ -8219,8 +8302,12 @@ Then $\set{X_n, \F_n}$ is a
 \text{submartingale}, & \text{if} \; \E[Y_k]>0 \\
 \end{array} \]
 for all $k=1,2,\hdots$.
-  
-To see this, note that
+\label{ex:simple_random_walk_as_example_of_martingale_submartingale_or_supermartingle}
+\end{example}
+
+\begin{proof}
+	
+The first two conditions of Def.~\ref{def:martingale_supermartingale_and_submartingale} follow immediately.  For Def.~\ref{def:martingale_supermartingale_and_submartingale} (c), we have 
 %
 \begin{align*}
 \E[X_{n+1} \cond \F_n] &= \E[X_n + Y_{n+1} \cond \F_n] && \tinytext{hypothesis} \\
@@ -8231,12 +8318,65 @@ To see this, note that
 &= X_n + \E[Y_{n+1}] && \tinytext{independence} 
 \end{align*}
 and the RHS is equal to, less than, or greater than $X_n$ depending on the signs of $\E[Y_k]$.
-\label{ex:simple_random_walk_as_example_of_martingale_submartingale_or_supermartingle}
+\end{proof}
+
+\begin{remark}\remarktitle{When betting, there is nothing ``super" about a supermartingale.}  If the increments $Y_k$ in Example~\ref{ex:simple_random_walk_as_example_of_martingale_submartingale_or_supermartingle} are taken to be returns in a betting game, then a supermartingale corresponds to an unfavorable game.  In this context, as \citet[pp.232]{durrett2010probability} says, \textit{there is nothing ``super" about a supermartingale.} 
+
+\end{remark}
+
+\begin{example}\remarktitle{An ``increasing information" process.}
+Let $Y$ be an integrable random variable and $\F_n$ be a filtration on $(\Omega, \F, P)$. 
+Define
+\[ X_n \defeq \E[Y \cond \F_n]\]
+Then $X_n$ is a martingale with respect to $\F_n$.
+\label{ex:increasing_information_process_is_a_martingale} 
 \end{example}
 
-\begin{remark}{When betting, there is nothing ``super" about a supermartingale.}
-If the increments $Y_k$ in Example~\ref{ex:simple_random_walk_as_example_of_martingale_submartingale_or_supermartingle} are taken to be returns in a betting game, then a supermartingale corresponds to an unfavorable game.  In this context, as \citet[pp.232]{durrett2010probability} says, \textit{there is nothing ``super" about a supermartingale.} 
+\begin{proof}
+The first two conditions of Def.~\ref{def:martingale_supermartingale_and_submartingale} follow immediately.  For Def.~\ref{def:martingale_supermartingale_and_submartingale} (c), note that 
+\begin{align*}
+\E[X_{n+1} \cond \F_n] &= \E \big[ \E[Y \cond \F_{n+1}] \cond \F_n \big] && \tinytext{def. $\set{X_n}$} \\
+&= \E[Y \cond \F_n] && \tinytext{``Smaller $\sigma$-field always wins", a.k.a. the tower property; see Theorem~\ref{thm:conditional_expectation_properties} (l).} \\
+&= X_n && \tinytext{def. $\set{X_n}$}
+\end{align*}	
+\end{proof}
+
+\begin{remark} \remarktitle{Concrete example of an increasing information process.}
+In Example~\ref{ex:increasing_information_process_is_a_martingale}, we constructed an ``increasing information process" and showed that it is a martingale.  Let us now give a concrete example of an increasing information process. 
+
+We define a probability space as follows:
+%
+\begin{align*}
+\Omega &= [0,1]^2 \quad \tinytext{(the unit square)} \\
+\F &= \B([0,1]^2) \\
+P &= \text{Uniform distribution}
+\end{align*}
+%
+To construct a filtration, we begin by constructing a sequence $\set{\Omega_n}$ of increasingly refined partitions of $\Omega$. We set
+%
+\begin{align*}
+\Omega_0 &= \bigg\{ \emptyset, \Omega \bigg\} \\
+\Omega_n & \; \text{as the partition of $\Omega$ formed by splitting cells of $\Omega_{n-1}$ in half, vertically if $n$ odd and horizontally if $n$ even} \\
+\end{align*} 	
+%
+\red{TODO: Refactor into the filtration section, so that we can more generally speak about filtrations generated by refinements of partitions.}
+
+We then define a filtration by setting $\F_n = \sigma(\Omega_n)$, i.e. each $\sigma$-field $\F_n$ consists of the sets that can be formed by taking unions of some subset of the cells in the partition $\Omega_n$.  
+
+Now let $Y$ be an integrable random variable on $(\Omega, \F, P)$, and define $X_n = \E[Y \cond \F_n]$.  An example of such a sequence $\set{X_n}$ of random variables is given in Fig.~\ref{fig:example_of_increasing_information_process}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.5\textwidth]{images/example_of_increasing_information_process.png}	
+\caption{ \textit{An example of an increasing information process.}  For the first few elements in the sequence ($n=1,\hdots,4$), we show the values of the random variable $X_n \defeq \E[Y \cond \F_n]$ over each element of a partition $\Omega_n$ from which the $\sigma$-field $\F_n$ is generated.}
+\label{fig:example_of_increasing_information_process}
+\end{figure}
+
+Note that as $n$ increases, $X_n$ gives more information about the values of $Y$ on the square $\Omega$. (In particular, $X_n$ gives us the average value of $Y$ over a grid of sub-rectangles that is a refinement of the corresponding grid over which $X_{n-1}$ gave averages.)  Every time we split a cell in half, the original value $a$ splits into two values $b$ and $c$ such that $a = \frac{b+c}{2}$.  There are of course infinitely many possible choices for $b$ and $c$ given $a$, and we don't know what those values are until we observe the next random variable in the sequence. 
+
+ Going the other way, as $n$ decreases (so we move \textit{up} along Fig.~\ref{fig:example_of_increasing_information_process}), the values of $X_{n-1}$  are \textit{determined} by the values of $X_n$. (In  Fig.~\ref{fig:example_of_increasing_information_process}, the values in a square are determined by the values in the square immediately beneath it.)  So there is no new information given.  This must be true by the definition of conditional probability, which demands both (a) $\int_A \E[X_{n+1} \cond \F_n] \wrt{P} = \int_A X_{n+1} dP$ for all $A \in \F_n$ and  (b) $\E[X_{n+1} \cond \F_n]$ must be $\F_n$-measurable.   In the Figure, the conditional expectation gives predictions about the cell values in the $(n+1)$-st subdivided square from the cell values in the $n$-th subdivided square. Criterion (b) requires that our predictions must be constant over the cell values in row $n$. Criterion (a) requires that our prediction for any cell must equal the average of the cell splits given in row $n+1$.   For this reason, our sequence $\set{X_n, \F_n}$ is a martingale; that is, $\E[X_{n+1} \cond \F_n] = X_n$. \red{TODO: Perhaps edit this paragraph.}  
 \end{remark}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bibliography{references_ash_notes.bib}
