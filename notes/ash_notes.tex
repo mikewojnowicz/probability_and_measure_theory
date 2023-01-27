@@ -6978,8 +6978,13 @@ We would therefore expect that the expectation of the indicator function $\indic
 \[ \E[\indicate{B} \cond X=x_i] = \df{1}{P\set{X=x_i}} \int_{\set{X=x_i}} \indicate{B} \wrt{P}.\]
 Proceeding from indicators to simple functions to non-negative Borel measurable functions to arbitrary Borel measurable functions, we expect
 \[ \E[Y \cond X=x_i] = \df{1}{P\set{X=x_i}} \int_{\set{X=x_i}} Y \wrt{P}.\]
-\item Let $B \in \F$ and assume $P(B)>0$.  If $\E[Y]$ exists, we can define the \textbf{conditional expectation of Y given B} as follows.  Set $X=\indicate{B}$, and set $E[Y \cond X=1]$.  Then by a special case of Example~\ref{ex:conditional_expectation_with_random_variables_that_are_discrete_or_absolutely_continuous} (a), we obtain 
-\[ \E[Y \cond B] = \frac{1}{P(B)} \int_B Y \wrt{P}  = \frac{\E[Y \indicate{B}]}{P(B)} \]
+\item Let $B \in \F$ and assume $P(B)>0$.  If $\E[Y]$ exists, we can define the \textbf{conditional expectation of Y given B} as follows.  Set $X=\indicate{B}$, and set $E[Y \cond X=1]$.  Then by a special case of Example~\ref{ex:conditional_expectation_with_random_variables_that_are_discrete_or_absolutely_continuous} (a), we obtain
+%
+\begin{align}
+\E[Y \cond B] = \frac{1}{P(B)} \int_B Y \wrt{P}  = \frac{\E[Y \indicate{B}]}{P(B)} 	
+\label{eqn:avg_value_of_Y_over_B}
+\end{align} 
+%
 We can interpret this quantity as the average value of $Y$ over $B$ \cite[pp.224]{durrett2010probability}.
 \end{enumerate}
 \end{remark}
@@ -7020,16 +7025,17 @@ One might wonder why Thm.~\ref{thm:existence_of_conditional_expectation_given_a_
 
 Note that the theorem actually gives \textit{two} conditions for a function $h$ on $(\Omega, \G)$ to be the conditional expectation given a $\sigma$-field $\G$:
 \begin{enumerate}
-	\item $h$ is measurable with respect to $\G$.  {\scriptsize (That is, we must have $h^{-1}(B) \in \G$ for all $B \in \B(\overline{\R})$).}
-	\item $\int_G Y \wrt{P} = \int_G h \wrt{P}$ for all $G \in \G$.
+	\item {[}\textit{``Measurability".}]  $h$ is measurable with respect to $\G$.\\ 
+	  
+	 {\scriptsize (That is, we must have $h^{-1}(B) \in \G$ for all $B \in \B(\overline{\R})$).}
+	\item {[}\textit{``Average matching".}] $\int_G Y \wrt{P} = \int_G h \wrt{P}$ for all $G \in \G$. \\
+	
+	{\scriptsize (We might call this this ``integral condition", but we have decided to call this condition average matching, since $\frac{\int_G Y \wrt{P}}{P(G)}$ is the average value of $Y$ over $G$ -- see \Eqref{eqn:avg_value_of_Y_over_B} -- and the condition above implies that $\frac{\int_G Y \wrt{P}}{P(G)} = \frac{\int_G h \wrt{P}}{P(G)}$ for all $G \in \G.$)}
 \end{enumerate}
 
-Although condition (2) always holds for $h=Y$, condition (1) does not generally hold for a $\sigma$-field $\G \subset \F$. That is, $Y$ will not in general be measurable w.r.t a $\sigma$-field $\G \subset \F$. 
+Although condition (2) always holds for $h=Y$, condition (1) does not generally hold for a $\sigma$-field $\G \subset \F$. That is, $Y$ will not in general be measurable w.r.t a $\sigma$-field $\G \subset \F$.\footnote{For instance, let $(\Omega, \F) = (\overline{\R}, \B(\overline{\R}))$, and let $Y$ be the identity function.  Define $\G \subsetneq \F$ by $\G = \set{\emptyset, A, A^c, \overline{\R}}$ for $A \subsetneq \overline{\R}$.  Let $B$ be any Borel set that is not in $\G$.  Then $Y^{-1}(B) = B \not\in \G$ and so condition (1) fails.  For a concrete illustration, see Example~\ref{ex:conditional_expectation_with_respect_to_a_simple_sigma_field_on_the_unit_square}.}
 
-{\scriptsize (For instance, let $(\Omega, \F) = (\overline{\R}, \B(\overline{\R}))$, and let $Y$ be the identity function.  Define $\G \subsetneq \F$ by $\G = \set{\emptyset, A, A^c, \overline{\R}}$ for $A \subsetneq \overline{\R}$.  Let $B$ be any Borel set that is not in $\G$.  Then $Y^{-1}(B) = B \not\in \G$ and so condition (1) fails.)}
-
-Overall, we see that the two conditions of the definition present a tradeoff that must be balanced.  A flexible choice of $h$ (like $h=Y$) makes it easier to meet the integral condition, but harder to meet the measurability condition w.r.t $\G$.  An inflexible choice of $h$ (like $h=\E[Y]$) makes it easy to meet the measurability condition, but harder to meet the integral condition.
-
+Overall, we see that the two conditions of the definition present a tradeoff that must be balanced.  A flexible choice of $h$ (like $h=Y$) makes it easier to meet the average-matching condition, but harder to meet the measurability condition w.r.t $\G$.  An inflexible choice of $h$ (like $h=\E[Y]$) makes it easy to meet the average-matching condition, but harder to meet the integral condition.  The conditional expectation is the sweet spot; it does \textit{measurable} average matching. 
 \label{rk:two_conditions_for_existence_of_conditional_expectation_with_respect_to_a_sigma_field} 
 \end{remark}
 
@@ -7084,7 +7090,7 @@ and the random variable $Y$ on $(\Omega, \F, P)$ given by
    \draw         (2,0) rectangle  ++ (2,4);
    \node at (1,2) {9};
    \node at (3,2) {20};
- \end{tikzpicture} & ? & \text{\redx} & \text{This violates condition 2 (see Remark~\ref{rk:two_conditions_for_existence_of_conditional_expectation_with_respect_to_a_sigma_field}) of conditional expectation.} \\
+ \end{tikzpicture} & ? & \text{\redx} & \text{This violates the \textit{average matching} condition of conditional expectation. {\tiny (Remark~\ref{rk:two_conditions_for_existence_of_conditional_expectation_with_respect_to_a_sigma_field}, condition 2)}} \\
  &&& \\
 \begin{tikzpicture}[baseline=+3.0ex, scale=0.4]
    \draw         (0,0) rectangle  ++ (4,4);
@@ -7095,7 +7101,8 @@ and the random variable $Y$ on $(\Omega, \F, P)$ given by
    \node at (3,3) {1};
    \node at (1,1) {5};
    \node at (3,1) {3};
- \end{tikzpicture} & ? & \text{\redx} & \text{This violates condition 1 (see Remark~\ref{rk:two_conditions_for_existence_of_conditional_expectation_with_respect_to_a_sigma_field}) of conditional expectation.} \footnote{Condition 1 of conditional expectation - namely that $\E[Y \cond \G]$  must be $\G$-measurable - is violated for example because $\set{1} \in \B$, but the inverse image of $\set{1}$ is the top right square, which is not a member of $\G$.} \\
+ \end{tikzpicture} & ? & \text{\redx} & \text{This violates the the \textit{measurability} condition of conditional expectation.\footnotemark {\tiny (Remark~\ref{rk:two_conditions_for_existence_of_conditional_expectation_with_respect_to_a_sigma_field}, condition 1)}} 
+  \\
   &&& \\
     \begin{tikzpicture}[baseline=+3.0ex, scale=0.4]
    \draw         (0,0) rectangle  ++ (4,4);
@@ -7105,6 +7112,9 @@ and the random variable $Y$ on $(\Omega, \F, P)$ given by
    \node at (3,2) {2};
  \end{tikzpicture} & ? & \text{\greencheck} & \text{This perfectly meets both conditions.} \\
  \end{array}\]
+ 
+\footnotetext{Condition 1 of conditional expectation - namely that $\E[Y \cond \G]$  must be $\G$-measurable - is violated for example because $\set{1} \in \B$, but the inverse image of $\set{1}$ is the top right square, which is not a member of $\G$.}
+ 
 \label{ex:conditional_expectation_with_respect_to_a_simple_sigma_field_on_the_unit_square}
 \end{example}
 
