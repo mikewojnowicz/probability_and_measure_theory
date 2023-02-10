@@ -8427,6 +8427,11 @@ Figure~\ref{fig:example_of_increasing_information_process} also illustrates the 
  \label{rk:concrete_example_of_increasing_information_process} 
 \end{remark}
 
+\begin{example}\remarktitle{Polya's Urn Scheme.}
+Polya's Urn Scheme is easily shown to be a martingale.  See \cite[pp.241, Sec 5.3.2, first paragraph]{durrett2010probability}.
+\end{example}
+
+
 The next two theorems tell us about what happens to martingales when they are transformed by convex functions.\footnote{Here I follow the presentation of \cite[pp.233]{durrett2010probability} over \cite{ash2000probability}.}
 
 \begin{theorem} 
@@ -8572,7 +8577,7 @@ Thus
 \[\E[Y_n \cond \F_{n-1}] \begin{cases} = Y_{n-1} & \text{ if } \set{X_n, \F_n} \text{ martingale} \\ \geq Y_{n-1} & \text{ if } \set{X_n, \F_n} \text{ submartingale}\\ \end{cases} \] 
 \end{alphabate}
 
-\underline{Second Result:} Now we show that $\E[Y_n] \leq E[X_n]$, with equality in the martingale case.  We proceed by induction.    The base case $\E[X_1] = \E[Y_1]$ holds by definition of $Y_n$.  Now perform the step. Suppose $\E[X_n] = \E[Y_n]$.  Then
+\underline{Second Result:} Now we show that $\E[Y_n] \leq E[X_n]$, with equality in the martingale case.  We proceed by induction.    The base case $\E[Y_1] = \E[X_1]$ holds by definition of $Y_1$.  Now suppose $\E[Y_n] \leq \E[X_n]$.  We have
 %
 \begin{align*}
 X_{n+1} - Y_{n+1} &= X_{n+1} - Y_n - \epsilon_n (X_{n+1} - X_n) && \tinytext{def. $Y_{n+1}$} \\
@@ -8584,12 +8589,101 @@ X_{n+1} - Y_{n+1} &= X_{n+1} - Y_n - \epsilon_n (X_{n+1} - X_n) && \tinytext{def
 %
 with equality in the martingale case. Taking expectations of both sides and using the law of total expectation, we obtain
 \[  \E[X_{n+1} - Y_{n+1}] \geq \E[X_n - Y_n] \geq 0 \]
-with the latter inequality holding by induction hypothesis (and linearity of expectation for integrable RV's).
+with the latter inequality holding by induction hypothesis (and linearity of expectation for integrable RV's).  Again, the inequalities become equalities in the martingale case.
 \end{proof}
 
 
+\subsubsection{Upcrossing Theorem}
 
-	 
+\begin{definition}
+Let $\set{X_n}$ be a sequence of random variables. Let $U_{ab}, \; a,b \in \R, a<b$ be the \textbf{number of upcrossings} of $(a,b)$ by $\set{X_n}$, defined as follows:
+
+\begin{itemize}
+\item Let $T_1 = T_1(\omega)$ be the first integer in $\set{1,\hdots,n}$ such that $X_{T_1} \leq a$.
+\item Let $T_2 = T_2(\omega)$ be the first integer greater than $T_1$ such that $X_{T_2} \geq b$.
+\item Let $T_3 = T_3(\omega)$ be the first integer greater than $T_2$ such that $X_{T_3} \leq a$.
+\item And so on.	
+\end{itemize}
+(Set $T_i = \infty$ if the condition is not satisfied.)
+
+Let $N$ be the number of finite $T_i$.  Then  we define 
+\[ U_{ab} = 
+\begin{cases}
+N/2, & N \text{ even} \\	
+(N-1)/2, & N \text{ odd} 
+ \end{cases}
+\]
+\end{definition}
+
+\begin{example}
+In Fig~\ref{fig:number_of_upcrossings}, we have 
+\begin{itemize}
+\item $T_1 = 4$
+\item $T_2 = 8$
+\item $T_3 = 10$
+\item $T_4 = 11$
+\item $T_5 = 14$
+\item $T_n = \infty$, $n \geq 5$
+\end{itemize}
+And the number of upcrossings of (a,b) by $\set{X_n}$ is given by $U_{ab}=2$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.6\textwidth]{images/upcrossings.png}
+\caption{\textit{Illustration of number of upcrossings.}  Shown is a realization of  $\set{X_k}_{k=1}^n$ for $n=15$.  The interval of interest $(a,b)$ is given such that $a=0$ and $b$ is designated by a horizontal line. Image credit: \cite[pp.259]{ash2000probability}.}
+\label{fig:number_of_upcrossings}
+\end{figure}
+\end{example}
+
+\begin{theorem}\textnormal{\textbf{[Upcrossing Theorem.]}}
+Let $\set{X_k, \F_k}_{k=1}^n$ be a submartingale.  Let $U_{ab}$ be the number of upcrossings of $(a,b)$ by $X_1, \hdots, X_n$.   Then
+\[ \E[U_{ab}] \leq \df{\E[(X_k - a)^+]}{b-a} \]	
+\label{thm:upcrossing}
+\end{theorem}
+
+\begin{proof}
+See \cite[pp.258]{ash2000probability}.\footnote{Note that the proof uses Theorem~\ref{thm:optional_skipping}.}
+\end{proof}
+
+\subsubsection{Submartingale Convergence Theorem}
+
+\begin{theorem}\textnormal{\textbf{[Submartingale Convergence Theorem.]}}
+Let $\set{X_n, \F_n}_{n=1}^\infty$ be a submartingale.  If $\sup_n \E[X_n^+] < \infty$, there is an integrable random variable $X_\infty$ such that $X_n \to X_\infty$ almost everywhere. 
+\end{theorem}
+
+\begin{proof}
+\underline{First Step:} We show convergence almost everywhere.  We proceed by contraposition.  If it does not hold that $X_n \to X_\infty$ almost everywhere, then
+%
+\begin{align*}
+0 & \leq P\set{\omega : X_n(\omega) \text{ does not converge to a finite or infinite limit}} && \tinytext{hypothesis} \\
+& = P\bigg[ \bigcup_{\substack{a<b \\ a,b \text{ rational }}} \bigg\{ \omega : \liminf_{n \to \infty} X_n(\omega) < a < b < \limsup_{n \to \infty} X_n(\omega) \bigg\} \bigg] && \tinytext{liminf $\leq$ limsup, with $=$ only if $\exists$ lim}  \\
+& \leq \sum_{\substack{a<b \\ a,b \text{ rational }}} P\bigg\{ \omega : \liminf_{n \to \infty} X_n(\omega) < a < b < \limsup_{n \to \infty} X_n(\omega) \bigg\} && \tinytext{subadditivity}
+\end{align*}
+%
+So for some $a<b$, we have $P\bigg\{ \omega : \liminf_{n \to \infty} X_n(\omega) < a < b < \limsup_{n \to \infty} X_n(\omega) \bigg\} >0$.
+
+But then there are infinitely many upcrossings on a set of positive probability,\footnote{See Fig~\ref{fig:number_of_upcrossings} for intuition. If there were some index $N$ after which either $a$ or $b$ was not exceeded, then the inequality $\liminf_{n \to \infty} X_n(\omega) < a < b < \limsup_{n \to \infty} X_n(\omega)$ would not hold, by definition of limit superior and limit inferior (Def.~\ref{def:liminf_and_limsup}).} and so $\E[U_{ab}]=\infty$ \qquad \tinycircled{*}.\footnote{We can write $\Omega=\Omega_1 \cupdot \Omega_2$, where $\Omega_1$ is the set where $X_n$ diverges and $\Omega_2$ is the set where $X_n$ converges.  Since integrals are countably additive set functions (see Theorem~\ref{thm:integrals_are_countably_additive_set_functions}), we have 
+\[ \E[U_{ab}] \defeq \int_{\Omega} U_{ab} \wrt{P}= \explaintermbrace{$= \infty \cdot P(\Omega_1)$, as simple function}{\int_{\Omega_1} U_{ab} \wrt{P}} + \explaintermbrace{non-negative}{\int_{\Omega_2} U_{ab} \wrt{P}} = \infty \]
+.}
+
+If we let $U_{ab;n}$ be the number of upcrossings of $(a,b)$ by $X_1, \hdots, X_n$, we have
+%
+\begin{align*}
+\E[U_{ab;n}] &\leq \df{\E[(X_n-a)^+]}{b-a} && \tinytext{Upcrossing Theorem} \\
+&\leq \df{\E[X_n^+ + a^-]}{b-a} && \tinytext{$(b-a)^+ \leq b^+ + a^-$, monotonicity} \\
+& \leq \explaintermbrace{$\defeq M$}{\df{\sup_n \E[X_n^+] + a^-}{b-a}} && \tinytext{supremum is UB; pull out constant} \\
+& < \infty && \tinytext{hypothesis (plus  arithmetic)} \\
+\implies \lim_{n \to \infty} \E[U_{ab;n}] & \leq M < \infty  && \tinytext{limits preserve inequalities}  \\
+\implies \E[U_{ab}] & \leq M < \infty \qquad \tinycircled{**} && \tinytext{Monotone convergence theorem}  
+\end{align*} 
+%
+where in the last line, we used that   $\E[U_{ab}] =\lim_{n \to \infty} \E[U_{ab;n}]$ by the monotone convergence theorem, since  $U_{ab;n} \uparrow U_{ab}$.
+
+Now \tinycircled{*} and \tinycircled{**} give a contradiction. 
+
+\underline{Second Step:} We show that $X_\infty$ is an integrable random variable.  See \cite[pp.260]{ash2000probability}.
+\end{proof}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -8786,6 +8880,7 @@ So given $\epsilon$, choose $x_N$ in $\tinycircled{\ast} \tinycircled{\ast}$ to 
 \begin{definition}
 If $a_n$ is a sequence of real numbers, then  we define its limit inferior and limit superior as 
 \[ \liminf_{n \to \infty} a_n := \lim_{n \to \infty} \inf_{m \geq n} a_m, \quad \quad \limsup_{n \to \infty} a_n := \lim_{n \to \infty} \sup_{m \geq n} a_m \]	
+\label{def:liminf_and_limsup}
 \end{definition}
 
 Unlike the limit, the limit inferior and limit superior always exist, although they may be $\pm \infty$.
