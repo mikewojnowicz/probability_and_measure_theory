@@ -7118,7 +7118,7 @@ and the random variable $Y$ on $(\Omega, \F, P)$ given by
 \label{ex:conditional_expectation_with_respect_to_a_simple_sigma_field_on_the_unit_square}
 \end{example}
 
-\begin{remark}\remarktitle{Seeing like a $\sigma$-field.}\footnote{I plan to make a slide deck called ``Seeing like a $\sigma$-field", a reference to James Scott's book \textit{Seeing like a state}.} Example~\ref{ex:conditional_expectation_with_respect_to_a_simple_sigma_field_on_the_unit_square} illustrates two fundamental points about conditional expectations:
+\begin{remark}\remarktitle{Seeing like a $\sigma$-field.}\footnote{I plan to make a slide deck called ``Seeing like a $\sigma$-field", a reference to James Scott's book \textit{Seeing like a state}.} Example~\ref{ex:conditional_expectation_with_respect_to_a_simple_sigma_field_on_the_unit_square} highlights two fundamental points about conditional expectations:
 \begin{enumerate}
 \item The true primitive for (the conditioning set of) a conditional expectation is a $\sigma$-field, \textit{not} a random variable.  No additional random variable is mentioned in Example~\ref{ex:conditional_expectation_with_respect_to_a_simple_sigma_field_on_the_unit_square}!  Indeed, as we will see in Sec.~\ref{sec:conditional_expectation_wrt_a_sigma_field_induced_by_another_random_variable}, the conditional expectation with respect to a random variable $E[Y \cond X]$ is a special case of the conditional expectation with respect to a $\sigma$-field $E[Y \cond \G]$.  In case of $E[Y \cond X]$,  the additional random variable $X$ simply plays the intermediary role of \textit{inducing} a particular kind of $\sigma$-field over the sample space $\Omega$. 
 \item The notion of measurability is \textbf{not} needed simply to avoid odd pathological sets (like Lebesgue non-measurable sets); it is in fact fundamental to the notion of conditional expectation, even when dealing with very simple collections of sets.
@@ -8506,6 +8506,86 @@ For any fixed $a \in \R$,
 For a rough summary, then  Theorem~\ref{thm:convex_functions_of_martingales_are_submartingales} says that convex functions of martingales are submartingales, whereas Theorem~\ref{thm:increasing_convex_functions_of_submartingales_are_submartingales} say that \textit{increasing} convex functions of \textit{sub}martingales are submartingales.	 Note that these conclusions only hold if the transformed sequence is integrable for all $n$.
 \end{remark}
 
+
+\subsection{ $\S$ 6.4 Martingale Convergence Theorems}
+
+\subsubsection{Optional Skipping Theorem}
+
+\begin{theorem}\textbf{[Optional Skipping Theorem (Halmos.)]}
+Let $\set{X_n, \F_n}$ be a submartingale.  Let $\epsilon_1, \epsilon_2, \hdots$ be random variables defined by 
+\[ \epsilon_k = 
+\begin{cases} 
+1, & \text{ if } (X_1, \hdots, X_k) \in B_k \\
+1, & \text{ if } (X_1, \hdots, X_k) \not\in B_k \\ 	
+\end{cases}
+\]
+where $B_k \in \B(\R^k)$.  
+
+Set
+%
+\begin{align*}
+	Y_1 &= X_1 \\
+	Y_2 &= X_1 + \epsilon_2 (X_2 - X_1) \\
+	&\vdots \\
+	Y_n &= X_1 + \epsilon_2 (X_2 - X_1)  + \hdots + \epsilon_n (X_n - X_{n-1})
+\end{align*}
+%
+Then $\set{Y_n, \F_n}$ is a submartingale and $\E[Y_n] \leq E[X_n]$ for all $n$.  If  $\set{X_n, \F_n}$ is a martingale, then so is   $\set{Y_n, \F_n}$, and $\E[Y_n] = E[X_n]$ for all $n$. 
+\label{thm:optional_skipping}	
+\end{theorem}
+
+\begin{remark}
+For a gambling interpretation of Theorem~\ref{thm:optional_skipping}, see \citet[pp. 257]{ash2000probability} or \cite{durrett2010probability}.
+\end{remark}
+
+\begin{proof}
+\underline{First Result:} First, we show  $\set{Y_n, \F_n}$ is a (sub)martingale.  To do so, we must verify the three conditions for a (sub)martingale, given in Def.~\ref{def:martingale_supermartingale_and_submartingale}:
+\begin{alphabate}
+\item Each ${Y_n}$ is $\F_n$-measurable. 
+\item Each $Y_n$ is integrable.
+\item $\E[Y_{n+1} \cond \F_n] \geq Y_n \quad \text{for all} \; n$, with equality in the martingale case.
+\end{alphabate}
+%
+We proceed to verify these conditions
+%
+\begin{alphabate}
+\item 
+\[ \begin{tikzcd}
+(\Omega, \F_n) \ar[r,"X_{1:n}"]\ar[rr,bend left = 50, "\wt{\epsilon}_n"] & \big(\R^n, \B(\R^n) \big) \ar[r,"\epsilon_n"] & \set{0,1}
+\end{tikzcd} \]
+where we know $X_{1:n}$ is measurable by hypothesis (it is adapted to the filtration) and $\epsilon_n$ is measurable by construction.  Thus, the composition $\wt{\epsilon}_n \defeq \epsilon \circ X_{1:n}$ of measurable functions is measurable.   Now $Y_n$ is defined by algebraic operations on measurable functions, and so is measurable.
+
+\item We use induction.  
+\begin{align*}
+	E|Y_1| &= \E|X_1| < \infty && \scripttext{Since $X_n$ is a (sub)martingale}\\
+	E|Y_n| &=  \E|Y_{n-1} + \epsilon_{n-1} (X_n - X_{n-1})|   \\
+	& \leq \E|Y_{n-1}| + \E|X_n - X_{n-1}| && \scripttext{triangle inequality, monotonicity} \\
+	& < \infty &&\scripttext{induction hypothesis, triangle inequality, each $X_n$ integrable}
+\end{align*}
+%
+\item For all $n$,
+\begin{align*}
+\E[Y_n \cond \F_{n-1}] &= \E[X_1 + \epsilon_2 (X_2 - X_1)  + \hdots + \epsilon_n (X_n - X_{n-1}) \cond \F_{n-1}] && \tinytext{def. $Y_n$} \\
+&= \explaintermbrace{$=Y_{n-1}$}{X_1 + \epsilon_2 (X_2 - X_1)  + \hdots} + \epsilon_n ( \explaintermbrace{$\begin{cases} = X_{n-1} & if\, martingale \\ \geq X_{n-1} & if\, submartingale \\ \end{cases}$}{\E[X_n \cond \F_{n-1}]} - X_{n-1})&& \tinytext{take out what is known} 
+\end{align*}
+Thus 
+\[\E[Y_n \cond \F_{n-1}] \begin{cases} = Y_{n-1} & \text{ if } \set{X_n, \F_n} \text{ martingale} \\ \geq Y_{n-1} & \text{ if } \set{X_n, \F_n} \text{ submartingale}\\ \end{cases} \] 
+\end{alphabate}
+
+\underline{Second Result:} Now we show that $\E[Y_n] \leq E[X_n]$, with equality in the martingale case.  We proceed by induction.    The base case $\E[X_1] = \E[Y_1]$ holds by definition of $Y_n$.  Now perform the step. Suppose $\E[X_n] = \E[Y_n]$.  Then
+%
+\begin{align*}
+X_{n+1} - Y_{n+1} &= X_{n+1} - Y_n - \epsilon_n (X_{n+1} - X_n) && \tinytext{def. $Y_{n+1}$} \\
+&= (1- \epsilon_n) (X_{n+1} -X_n) + X_n - Y_n && \tinytext{algebra} 
+\intertext{So taking conditional expectations}
+\E[X_{n+1} - Y_{n+1} \cond \F_n] &= (1- \epsilon_n) \bigg( \explaintermbrace{$\geq X_n$}{\E[X_{n+1} \cond \F_n]} -X_n \bigg) + X_n - Y_n \\
+&\geq X_n - Y_n
+\end{align*}
+%
+with equality in the martingale case. Taking expectations of both sides and using the law of total expectation, we obtain
+\[  \E[X_{n+1} - Y_{n+1}] \geq \E[X_n - Y_n] \geq 0 \]
+with the latter inequality holding by induction hypothesis (and linearity of expectation for integrable RV's).
+\end{proof}
 
 
 
