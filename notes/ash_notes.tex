@@ -8301,6 +8301,8 @@ If, in the last definition, $=$ is replaced by $\leq$ or $\geq$, then $\set{X_n}
 \begin{alphabate}
 \item \textnormal{(Multi-step expectations.)}  \; $\E[X_{n+k} \cond \F_n] = X_n$ \quad for \quad $n,k=1,2,\hdots$ \\
 (with corresponding statements for super- and sub-martingales).
+\item \textnormal{(Unconditional multi-step expectations.)} \; $\E[X_{n+k}] = \E[X_n]$ \quad for \quad $n,k=1,2,\hdots$ \\
+(with corresponding statements for super- and sub-martingales).
 \end{alphabate}
 \end{proposition}
 
@@ -8308,7 +8310,7 @@ If, in the last definition, $=$ is replaced by $\leq$ or $\geq$, then $\set{X_n}
 \begin{alphabate}
 \item (Multi-step expectations.) We prove the statement for martingales. We want to show that $\E[X_{n+k} \cond \F_n] = X_n$ for $n,k=1,2,\hdots$.  
 
-To see this, note that
+To see this note, that,   
 %
 \begin{align*}
 \E[X_{n+2} \cond \F_n] &= \E \big[\E[X_{n+1} \cond \F_{n+1}] \cond \F_{n}\big] && \tinytext{``Smaller $\sigma$-field always wins", a.k.a. the tower property; see Theorem~\ref{thm:conditional_expectation_properties} (l).} \\
@@ -8317,6 +8319,7 @@ To see this, note that
 \end{align*}
 %
 The general statement follows by induction.
+\item (Unconditional multi-step expectations.)  We prove the statement for martingales.   To do so, take the result of (a) and apply the law of total expectation (Thm.~\ref{thm:conditional_expectation_properties} (k)). 
 \end{alphabate}
 
 \end{proof}
