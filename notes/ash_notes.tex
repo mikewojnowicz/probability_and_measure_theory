@@ -8521,7 +8521,7 @@ For a rough summary, then  Theorem~\ref{thm:convex_functions_of_martingales_are_
 
 \begin{theorem}\textbf{[Optional Skipping Theorem (Halmos.)]}
 Let $\set{X_n, \F_n}$ be a submartingale.  Let $\epsilon_1, \epsilon_2, \hdots$ be random variables defined by 
-\[ \epsilon_k = 
+\[ \epsilon_{k+1} = 
 \begin{cases} 
 1, & \text{ if } (X_1, \hdots, X_k) \in B_k \\
 0, & \text{ if } (X_1, \hdots, X_k) \not\in B_k \\ 	
@@ -8542,10 +8542,6 @@ Then $\set{Y_n, \F_n}$ is a submartingale and $\E[Y_n] \leq E[X_n]$ for all $n$.
 \label{thm:optional_skipping}	
 \end{theorem}
 
-\begin{remark}
-For a gambling interpretation of Theorem~\ref{thm:optional_skipping}, see \citet[pp. 257]{ash2000probability} or \cite{durrett2010probability}.
-\end{remark}
-
 \begin{proof}
 \underline{First Result:} First, we show  $\set{Y_n, \F_n}$ is a (sub)martingale.  To do so, we must verify the three conditions for a (sub)martingale, given in Def.~\ref{def:martingale_supermartingale_and_submartingale}:
 \begin{alphabate}
@@ -8561,7 +8557,7 @@ We proceed to verify these conditions
 \[ \begin{tikzcd}
 (\Omega, \F_n) \ar[r,"X_{1:n}"]\ar[rr,bend left = 50, "\wt{\epsilon}_n"] & \big(\R^n, \B(\R^n) \big) \ar[r,"\epsilon_n"] & \set{0,1}
 \end{tikzcd} \]
-where we know $X_{1:n}$ is measurable by hypothesis (it is adapted to the filtration) and $\epsilon_n$ is measurable by construction.  Thus, the composition $\wt{\epsilon}_n \defeq \epsilon \circ X_{1:n}$ of measurable functions is measurable.   Now $Y_n$ is defined by algebraic operations on measurable functions, and so is measurable.
+where we know $X_{1:n}$ is $\F_n$-measurable by hypothesis (it is adapted to the filtration) and $\epsilon_n$ is $\F_n$-measurable by construction.\footnote{Specifically, $\epsilon_n$ is $\F_{n-1}$-measurable by construction and $\F_n \supset \F_{n-1}$ by the definition of filtration. Hence $\epsilon_n$ is $\F_n$-measurable.}  Thus, the composition $\wt{\epsilon}_n \defeq \epsilon_n \circ X_{1:n}$ of measurable functions is measurable.   Now $Y_n$ is defined by algebraic operations on measurable functions, and so is measurable.
 
 \item We use induction.  
 \begin{align*}
@@ -8594,6 +8590,55 @@ with equality in the martingale case. Taking expectations of both sides and usin
 \[  \E[X_{n+1} - Y_{n+1}] \geq \E[X_n - Y_n] \geq 0 \]
 with the latter inequality holding by induction hypothesis (and linearity of expectation for integrable RV's).  Again, the inequalities become equalities in the martingale case.
 \end{proof}
+
+\begin{remark}\remarktitle{Gambling interpretation of Optional Skipping Theorem.}
+ The Optional Skipping Theorem (Theorem~\ref{thm:optional_skipping}) has a gambling interpretation (see \cite[pp. 257]{ash2000probability}; see also  \cite{durrett2010probability}, or \cite[Prop 3.1]{brzezniak2000basic}).  In particular, interpret
+%
+\begin{itemize}
+\item  $(X_n-X_{n-1})$ as your \textit{winnings per unit stake} in game $n$.
+\item  $\epsilon_n$ as your \textit{gambling strategy}; in particular, it is a binary decision to bet or pass on game $n$ (with $\epsilon_n =1$ corresponding to betting), with the decision based on the outcomes of previous bets.\footnote{So $X_n$ can be taken as your total winnings after $n$ games if your strategy was to bet on each game.}
+\item $Y_n$ as your \textit{total winnings} after $n$ games.
+\end{itemize}
+
+Then the Optional Skipping Theorem says that no gambling strategy (in the  form of optional skipping -- i.e. skip vs. bet) can turn a fair game (a martingale) into a favorable or unfavorable one. Similarly, a favorable game (a submartingale) remains favorable, and no strategy of this type can increase the expected winning.
+
+ Now Theorem~\ref{thm:optional_skipping} would arguably be more informative about gambling if it spoke to \textit{super}martingales (rather than \textit{sub}martingales).  However, by simply flipping the inequalities as needed in the proof of Theorem~\ref{thm:optional_skipping}, we see that if  $\set{X_n, \F_n}$   is a supermartingale, then so is $\set{Y_n, \F_n}$ (and $\E[Y_n] \geq E[X_n]$).   In this way, we see that submartingales, supermartingales, and martingales are all preserved under the optional skipping strategy.  
+
+%or  \cite{durrett2010probability}.  In particular
+\label{rk:gambling_interpretation_of_optional_skipping_theorem}
+\end{remark}
+
+
+\paragraph{From optional skipping to generic gambling strategies.}
+
+It is in fact possible to extend the conclusions about gambling given in Remark~\ref{rk:gambling_interpretation_of_optional_skipping_theorem}  to essentially \textit{any} gambling strategy, as Prop~\ref{prop:gambling_strategies_cannot_flip_martingale_valence} shows.  First, we define a gambling strategy.
+
+\begin{definition}
+Let $\F_n, n \geq 0$ be a filtration.  (For convenience, we set $\F_0  = \set{\emptyset, \Omega}$). Then the sequence of random variables $\alpha_n$ for $n=1,2,\hdots$ is said to be a \textbf{gambling strategy} \cite[pp.52]{brzezniak2000basic} (or outside the context of gambling, a \textbf{predictable sequence} \cite[pp.234]{durrett2010probability} or a \textbf{previsible sequence} \cite[pp.52]{brzezniak2000basic}) if $\alpha_n$ is $\F_{n-1}$-measurable for each $n=1,2,\hdots$.
+\label{def:predictable_sequence}	
+\end{definition}
+
+\begin{proposition}
+\cite[Prop 3.1]{brzezniak2000basic}  Let $X_n, n \geq 0$ be a sequence of random variables adapted to a filtration $\F_n$.  (For convenience, we set $X_n =0$ and $\F_0 = \set{\emptyset, \Omega}$.) Let $\alpha_1, \alpha_2, \hdots$ be a gambling strategy.  
+
+Define 
+\[Y_n = \alpha_1 (X_1-X_0) + \hdots + \alpha_n (X_n - X_{n-1}) \]
+
+\begin{enumerate}
+	\item If $\alpha_n$ is a bounded sequence and $\set{X_n, \F_n}$ is a martingale, then so is $\set{Y_n, \F_n}$ (a fair game turns into a fair one no matter what you do)
+	\item If $\alpha_n$ is a non-negative bounded sequence and $\set{X_n, \F_n}$ is a supermartingale, then so is $\set{Y_n, \F_n}$ (an unfavorable game turns into an unfavorable one no matter what you do)
+	\item  If $\alpha_n$ is a non-negative bounded sequence and $\set{X_n, \F_n}$ is a submartingale, then so is $\set{Y_n, \F_n}$ (a favorable game turns into a favorable one no matter what you do)
+\end{enumerate} 
+\label{prop:gambling_strategies_cannot_flip_martingale_valence}	
+\end{proposition}
+
+\begin{proof}[Proof Sketch.]
+The proof is essentially identical to the proof of the "First Result" of  the Optional Skipping  Theorem (Theorem~\ref{thm:optional_skipping}). Note in particular from part c) that the condition that $\text{Range}(\epsilon_n)=\set{0,1}$ was not used. 
+\end{proof}
+
+\begin{exercise}
+Explain why the proof of Prop.~\ref{prop:gambling_strategies_cannot_flip_martingale_valence} requires that the sequences be bounded. 	
+\end{exercise}
 
 
 \subsubsection{Upcrossing Theorem}
