@@ -488,9 +488,6 @@ which is a countable number of intersections and unions of closed intervals, and
 
 \subsection{$\S$ 1.2.3-1.2.4: Measures}
 
-
-
-
 \begin{definition}
 A \textbf{measure} on a \sf\ $\F$ is a non-negative, extended real-valued function $\mu$ on $\F$ such that whenever $A_1, A_2, ...$ form a finite or countably infinite collection of disjoint sets in $\F$, we have countable additivity; that is,
 \[ \mu \bigg( \bigcupdot_n A_n \bigg) = \ds\sum_n \mu(A_n) \]
@@ -8500,13 +8497,14 @@ For any fixed $a \in \R$,
 &\implies   \set{ X_n \vee a}  \text{ is a submartingale\footnotemark }	\\
 \end{align*}
 \footnotetext{$X_n \vee a$ denotes $\max (X_n,a)$.}
+\label{cor:preservation_of_submartingale_under_maximum_with_constant_and_under_taking_the_positive_part_after_subtracting_a_constant}
 \end{corollary}
 
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=.5\textwidth]{images/when_convex_functions_of_random_variables_are_submartingales.png}	
-\caption{\textit{Increasing convex functions preserve submartingales.} For a precise statement, see Theorem~\ref{thm:increasing_convex_functions_of_submartingales_are_submartingales}.  Two examples of increasing convex functions are $f(X_n) = X_n-a$ and $g(X_n) = X_n \vee a$. Both $f$ and $g$ are increasing functions -- as the graph increases on the LHS, so does the graph on the RHS.  The only difference between the graphs of $f$ and $g$ are the vertical displacement by $a$ (see the two plots on the RHS). }
+\caption{\textit{Increasing convex functions preserve submartingales.} For a precise statement, see Theorem~\ref{thm:increasing_convex_functions_of_submartingales_are_submartingales}.  Two examples of increasing convex functions are $f(X_n) = (X_n-a)^+$ and $g(X_n) = X_n \vee a$. Both $f$ and $g$ are increasing functions -- as the graph increases on the LHS, so does the graph on the RHS.  The only difference between the graphs of $f$ and $g$ are the vertical displacement by $a$ (see the two plots on the RHS). }
 \end{figure}
 
 
@@ -8614,7 +8612,7 @@ Then the Optional Skipping Theorem says that no gambling strategy (in the  form 
 It is in fact possible to extend the conclusions about gambling given in Remark~\ref{rk:gambling_interpretation_of_optional_skipping_theorem}  to essentially \textit{any} gambling strategy, as Prop~\ref{prop:gambling_strategies_cannot_flip_martingale_valence} shows.  First, we define a gambling strategy.
 
 \begin{definition}
-Let $\F_n, n \geq 0$ be a filtration.  (For convenience, we set $\F_0  = \set{\emptyset, \Omega}$). Then the sequence of random variables $\alpha_n$ for $n=1,2,\hdots$ is said to be a \textbf{gambling strategy} \cite[pp.52]{brzezniak2000basic} (or outside the context of gambling, a \textbf{predictable sequence} \cite[pp.234]{durrett2010probability} or a \textbf{previsible sequence} \cite[pp.52]{brzezniak2000basic}) if $\alpha_n$ is $\F_{n-1}$-measurable for each $n=1,2,\hdots$.
+Let $\F_n, n \geq 0$ be a filtration.  (For convenience, we set $\F_0  = \set{\emptyset, \Omega}$.) Then the sequence of random variables $\alpha_n$ for $n=1,2,\hdots$ is said to be a \textbf{gambling strategy} \cite[pp.52]{brzezniak2000basic} (or outside the context of gambling, a \textbf{predictable sequence} \cite[pp.234]{durrett2010probability} or a \textbf{previsible sequence} \cite[pp.52]{brzezniak2000basic}) if $\alpha_n$ is $\F_{n-1}$-measurable for each $n=1,2,\hdots$.\footnote{Hence, $\alpha_1$ should be constant, as it must be $\F_0  = \set{\emptyset, \Omega}$ measurable.}
 \label{def:predictable_sequence}	
 \end{definition}
 
@@ -8644,7 +8642,7 @@ Explain why the proof of Prop.~\ref{prop:gambling_strategies_cannot_flip_marting
 \subsubsection{Upcrossing Theorem}
 
 \begin{definition}
-Let $\set{X_n}$ be a sequence of random variables. Let $U_{ab}, \; a,b \in \R, a<b$ be the \textbf{number of upcrossings} of $(a,b)$ by $\set{X_n}$, defined as follows:
+Let $\set{X_k}$ be a sequence of random variables. Let $U_n(a,b), \; a,b \in \R, a<b$ be the \textbf{number of upcrossings} of $(a,b)$ by $\set{X_k}$ made up to time $n$, defined as follows:
 
 \begin{itemize}
 \item Let $T_1 = T_1(\omega)$ be the first integer in $\set{1,\hdots,n}$ such that $X_{T_1} \leq a$.
@@ -8655,7 +8653,7 @@ Let $\set{X_n}$ be a sequence of random variables. Let $U_{ab}, \; a,b \in \R, a
 (Set $T_i = \infty$ if the condition is not satisfied.)
 
 Let $N$ be the number of finite $T_i$.  Then  we define 
-\[ U_{ab} = 
+\[ U_n(a,b) = 
 \begin{cases}
 N/2, & N \text{ even} \\	
 (N-1)/2, & N \text{ odd} 
@@ -8673,25 +8671,66 @@ In Fig~\ref{fig:number_of_upcrossings}, we have
 \item $T_5 = 14$
 \item $T_n = \infty$, $n \geq 5$
 \end{itemize}
-And the number of upcrossings of (a,b) by $\set{X_n}$ is given by $U_{ab}=2$.
+And the number of upcrossings of $(a,b)$ by $\set{X_k}$ up to time $n$ is given by $U_n(a,b)=2$.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=.6\textwidth]{images/upcrossings.png}
-\caption{\textit{Illustration of number of upcrossings.}  Shown is a realization of  $\set{X_k}_{k=1}^n$ for $n=15$.  The interval of interest $(a,b)$ is given such that $a=0$ and $b$ is designated by a horizontal line. Image credit: \cite[pp.259]{ash2000probability}.}
+\caption{\textit{Illustration of number of upcrossings.}  Shown is a realization of  $\set{X_k}$ up to time $n=15$.  The interval of interest $(a,b)$ is given such that $a=0$ and $b$ is designated by a horizontal line. Image credit: \cite[pp.259]{ash2000probability}.}
 \label{fig:number_of_upcrossings}
 \end{figure}
 \end{example}
 
-\begin{theorem}\textnormal{\textbf{[Upcrossing Theorem.]}}
-Let $\set{X_k, \F_k}_{k=1}^n$ be a submartingale.  Let $U_{ab}$ be the number of upcrossings of $(a,b)$ by $X_1, \hdots, X_n$.   Then
-\[ \E[U_{ab}] \leq \df{\E[(X_k - a)^+]}{b-a} \]	
+\begin{definition}
+Given an adapted sequence of random variables $X_1, X_2, \hdots$ and two real numbers $a < b$, we define a gambling strategy $\alpha_1, \alpha_2, \hdots$ by putting 
+\[ \alpha_1 = 0\]
+and for $n=1,2,\hdots$
+\[ \alpha_{n+1} = 
+\begin{cases}
+1, & \text{ if } \alpha_n=0 \text{ and } X_n \leq a \\
+1, & \text{ if } \alpha_n=1 \text{ and } X_n < b \\  
+0, & \text{ otherwise }	
+ \end{cases}
+ \]
+ This will be called the \textbf{upcrossing strategy}.\footnote{That the upcrossing strategy is a gambling strategy is immediate from Def.~\ref{def:predictable_sequence}.}
+\label{def:upcrossing_strategy}	
+\end{definition}
+
+\begin{remark}
+Using the upcrossing strategy from Def.~\ref{def:upcrossing_strategy}, we can easily characterize
+%
+\begin{itemize}
+	\item an \textit{upcrossing} of the interval $(a,b)$ as any timestep $k$ such that $\alpha_{k-1} = 1, \alpha_{k}=0$.   The upcrossings form a (finite or infinite) increasing sequence:
+		 \[u_1 < u_2 < \cdots .\]
+	\item The \textit{number of upcrossings} made up to time $n$ as the largest $k$ such that $u_k \leq n$.
+\end{itemize}	
+\end{remark}
+
+
+\begin{theorem}\theoremtitle{Upcrossing Theorem.}
+%\begin{theorem}\textnormal{\textbf{[Upcrossing Theorem.]}}
+Let $\set{X_k, \F_k}_{k=1}^\infty$ be a submartingale.  Let $U_n(a,b)$ be the number of upcrossings of $(a,b), a<b$ made by $\set{X_k}$ up to time $n$.   Then
+\[ \E \big[U_n(a,b) \big] \leq \df{\E[(X_n - a)^+]}{b-a} \]	
 \label{thm:upcrossing}
 \end{theorem}
 
 \begin{proof}
-See \cite[pp.258]{ash2000probability}.\footnote{Note that the proof uses Theorem~\ref{thm:optional_skipping}.}
+Let
+\[ Y_n \defeq \alpha_1 (X_1 - X_0) + \hdots + \alpha_n (X_n - X_{n-1})\]
+be the total winnings at time step $n=1,2,\hdots$ if the upcrossing strategy (Def.~\ref{def:upcrossing_strategy}) is followed. See Fig.~\ref{fig:upcrossing_strategy_per_yellow_book}. For convenience, we define $X_0 \defeq 0$. By Theorem~\ref{thm:optional_skipping} (optional skipping), $Y_n$ is a submartingale.   
+ 
+\begin{figure}[H]
+\centering
+\includegraphics[width=.7\textwidth]{images/upcrossing_theorem_per_yellow_book.png}
+\caption{Realizations of $X_n$, $\alpha_n$, and $Y_n$. Upcrossings are given by bold lines.  Image credit: \cite[pp.71]      {brzezniak2000basic}.}
+\label{fig:upcrossing_strategy_per_yellow_book}
+\end{figure}
+
+
+For the remainder of the proof, see \cite[pp.258]{ash2000probability} or \cite[pp.70]{brzezniak2000basic}.\footnote{The proof of \citet{ash2000probability} uses the fact that increasing convex functions preserve submartingales (specifically Cor.~\ref{cor:preservation_of_submartingale_under_maximum_with_constant_and_under_taking_the_positive_part_after_subtracting_a_constant}).}
 \end{proof}
+
+
 
 \subsubsection{Submartingale Convergence Theorem}
 
@@ -8732,6 +8771,130 @@ Now \tinycircled{*} and \tinycircled{**} give a contradiction.
 \underline{Second Step:} We show that $X_\infty$ is an integrable random variable.  See \cite[pp.260]{ash2000probability}.
 \end{proof}
 
+\subsection{ $\S$ 6.5 Uniform Integrability}
+
+By Cor.~\ref{cor:additivity_corollaries}, we can characterize the integrability of a Borel measurable function $f$ by 
+\[ \int |f| \wrt{\mu} < \infty.\]
+
+To define a notion of ``uniform integrability", we re-characterize integrability in terms of limits. 
+
+\begin{proposition}
+A Borel measurable function $f$ on a finite measure space is integrable iff 
+\begin{align*}
+\forall \; \epsilon >0, \quad  \exists \; C \in \R : \\
+\int_{\set{|f| \geq C}} \, |f| \wrt{\mu} < \epsilon \labelit \label{eqn:alternate_characterization_of_integrability}
+\end{align*}
+\label{prop:characterization_of_integrability_in_terms_of_limits}
+\end{proposition}
+
+
+
+\begin{remark}\remarktitle{Characterization of integrability in terms of limits.}
+\Eqref{eqn:alternate_characterization_of_integrability} can be expressed as 
+\[ \lim_{c \to \infty} \int_{\set{|f| \geq c}} \, |f| \wrt{\mu} = 0.\]
+
+\scriptsize{[Indeed, the definition of limit requires that 
+\begin{align*}
+\forall \; \epsilon >0, \quad  \exists \; C \in \R : \quad \redmathbox{\forall c \geq C}, \\
+\int_{\set{|f| \geq c}} \, |f| \wrt{\mu} < \epsilon
+\end{align*}
+but the part in the red box is automatically satisfied due to monotonicity of the integral. (That is, if the condition is satisfied for some $C$, it is automatically satisfied for all $c \geq C$.)]}
+\label{rk:characterization_of_integrability_as_vanishing_measure_of_upper_portion}
+\end{remark}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.7\textwidth]{images/alt_characterization_of_integrability.png}	
+\caption{An illustration for the alternative characterization of integrability.  Note that if $\mu$ is Lebesgue measure, then we have $\int \frac{1}{\sqrt{x}} \wrt{x} = 2 \sqrt{x} + C$ by Riemann integral properties.}
+\label{fig:alt_characterization_of_integrability}
+\end{figure}
+
+
+\begin{proof}[Proof of Prop.~\ref{prop:characterization_of_integrability_in_terms_of_limits}]
+\phantom{a}
+\begin{itemize}
+\item $\boxed{\impliedby}$.	
+%
+\begin{align*}
+\int_\Omega  |f| \wrt{\mu}	&= \explaintermbrace{$< \epsilon$}{\int_{\set{|f| \geq C}} \, |f| \wrt{\mu}} \quad + \quad  \explaintermbrace{$< C \mu(\Omega)$}{\int_{\set{|f| <C}} \, |f| \wrt{\mu}}  \\  
+&= \epsilon + C \mu(\Omega) \; < \infty \labelit \label{eqn:decomposing_an_integral_into_a_top_integral_and_bottom_integral}
+\end{align*}
+%
+\item $\boxed{\implies}$.\footnote{\citet{brzezniak2000basic} has this statement, but proves it using Monotone Convergence Theorem. I very much like proving things by considering integrals as measures (signed if necessary).} We have
+\[ \cup_{c=0}^\infty  \explaintermbrace{$\defeq A_c$}{\set{|f| \leq c }} = \Omega \]
+And since $A_c \subset A_{c+1}$, we have $A_c \uparrow \Omega$.   Thus, by continuity of measure (Thm.~\ref{thm:continuity_of_countably_additive_set_functions}), 
+\[  \nu(A_c) \uparrow \nu(\Omega) \qquad \qquad \tinycircled{*}\]
+for any measure $\nu$.
+% See \cite[Exercise 4.3]{brzezniak2000basic}.	
+Define $\nu(A) \defeq \int_A |f| \wrt{\mu}$, which is a measure since indefinite integrals of non-negative set functions are measures (Cor.~\ref{cor:indefinite_integrals_as_measures}).\footnote{The $\sigma$-field can be taken to be $\sigma(\set{A_c})$.}
+
+Then for all $c$, we have
+\begin{align*}
+\nu(\Omega) &= \nu(A_c) + \nu(A_c^c)  && \tinytext{by countable additivity}	\\
+\intertext{Taking the limit as $c \to \infty$, we obtain}
+\nu(\Omega) &= \nu(\Omega) + \lim_{c \to \infty} \nu(A_c^c)  && \tinytext{by \tinycircled{*}} \\
+\intertext{Since $\nu(\Omega) = M < \infty$ by integrability, we can subtract from both sides to obtain}
+&\lim_{c \to \infty} \nu(A_c^c) =0.
+\intertext{In other words, recalling the def of $A_c$,}
+ &\lim_{c \to \infty} \int_{\set{|f|>c}} |f| \wrt{\mu} =0.
+\end{align*}
+
+\end{itemize}
+
+\end{proof}
+
+
+
+\begin{definition}
+Let $f_1, f_2, \hdots$ be a sequence of real-valued Borel measurable functions on $(\Omega, \F, \mu)$, where $\mu$ is finite.
+
+The $f_n$ are \textbf{uniformly integrable} iff 
+\[ \int_{\set{|f_n| <C}} \, |f_n| \wrt{\mu} \to 0 \quad \text{ as } \quad c \to \infty \]
+uniformly in $n$.
+\label{def:uniform_integrability}
+\end{definition}
+
+\begin{remark}\remarktitle{Uniform integrability in quantified form.}
+In quantified form, the definition of uniform integrability is 
+%
+\begin{align*}
+\forall \; \epsilon >0, \quad  \exists \; C \in \R : \quad \forall \redmathbox{c \geq C}, \quad n \in \mathbb{N} \\
+\int_{\set{|f_n| \geq c}} \, |f_n| \wrt{\mu} < \epsilon,
+\end{align*}
+but as in Remark~\ref{rk:characterization_of_integrability_as_vanishing_measure_of_upper_portion}, the red part is not necessary due to monotonicity of the integral, so we can simply write
+%
+\begin{align*}
+\forall \; \epsilon >0, \quad  \exists \; C \in \R : \quad \forall \; n \in \mathbb{N} \\
+\int_{\set{|f_n| \geq C}} \, |f_n| \wrt{\mu} < \epsilon. \labelit \label{eqn:uniform_integrability_in_quantified_form}
+\end{align*}
+\end{remark}
+
+\begin{proposition}
+Some properties of uniform integrability are
+%
+\begin{alphabate}
+\item If the $f_n$ are uniformly integrable, each $f_n$ is integrable.
+\item If the $f_n$ are uniformly integrable, then $\sup_n \int_\Omega |f_n| \wrt{\mu} < \infty$.	
+\item If $|f_n| \leq g$ for all $n$, where $g$ is integrable, in particular, if the $f_n$ are uniformly bounded, then the $f_n$ are uniformly integrable.
+\end{alphabate}
+\end{proposition}
+
+\begin{proof}
+
+\begin{alphabate}
+\item The definition of uniform integrability in \Eqref{eqn:uniform_integrability_in_quantified_form} immediately yields the alternate characterization of integrability (\Eqref{eqn:alternate_characterization_of_integrability}) for each of the members in the sequence.  
+\item We can rewrite \Eqref{eqn:decomposing_an_integral_into_a_top_integral_and_bottom_integral} in terms of $f_n$ rather than $f$ to obtain a finite upper bound. Hence, the supremum is also finite.
+\item Since $|f_n| \leq g$, for all $c$ we have
+\[ \int_{\set{|f_n| \geq c}} \, |f_n| \wrt{\mu}  \leq \int_{\set{|g| \geq c}} \, |g| \wrt{\mu}   \]
+by monotonicity of the integral.
+
+{\scriptsize Specifically,
+\[|f_n| \leq g \quad \implies  \indicate{|f_n| \geq c} \; \leq  \; \indicate{|g| \geq c} \implies \implies  |f_n| \,  \indicate{|f_n| \geq c} \; \leq  \; |g| \, \indicate{|g| \geq c}  \]
+}
+
+In other words, for all $\epsilon$, we can choose $c$ which works for $g$ to meet the criterion, and that same $c$ will work for all $f_n$.
+\end{alphabate}	
+\end{proof}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
