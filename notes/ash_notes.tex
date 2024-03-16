@@ -4,7 +4,7 @@
 % STANDARD PREAMBLE
 %%%
 %https://tex.stackexchange.com/questions/68821/is-it-possible-to-create-a-latex-preamble-header
-\usepackage{/Users/mwojno01/Repos/latex_preamble/preamble}
+\usepackage{/Users/miw267/Repos/latex_preamble/preamble}
 
 %%% 
 % ACTIVE VS PASSIVE AUDIENCES
@@ -57,9 +57,8 @@
 \newcommand{\Caratheodory}{Carath\'eodory}
 
 
-
 % RATIONALS
-\renewcommand{\Q}{\mathbb{Q}}
+\newcommand{\Q}{\mathbb{Q}}
 
 
 % EPSILON TILDE
@@ -85,6 +84,9 @@
 
 % INTERIOR
 \newcommand{\interior}[1]{{#1}^\circ}
+
+% NOT SURE
+\newcommand{\M}{\mathcal{M}}
 
 \begin{document}
 
@@ -3559,6 +3561,9 @@ F'(t_0) &= \ds\lim_{n \to \infty} \df{F(t_n) - F(t_0)}{t_n-t_0} && \tinytext{def
 Theorem \ref{thm:continuity_and_differentiability_of_functions_defined_with_an_integral}  may seem overly restrictive, since the real-valued parameter has bounded support.  However, as noted by \cite{folland1999real} pp. 56, continuity and differentiability are \textit{local} in nature.  Thus, if the hypotheses of (a) or (b) hold for all $[a,b] \subset I$ of an open interval $I$ (which is perhaps $\R$ itself), perhaps with the dominating function $g$ depending on $a$ and $b$, one obtains the continuity and differentiability of the integrated function $F$ on all of $I$! 	
 \end{remark}
 
+\begin{example}
+See \url{https://math.stackexchange.com/questions/4719177/a-simple-example-to-practice-justifying-the-interchange-of-derivative-and-expect}.	
+\end{example}
 
 \section{$\S$ 1.7 Comparison of Lebesgue and Riemann integrals}
 
@@ -7309,7 +7314,7 @@ X &: (\R^2, \B(\R^2)) \to (\explaintermbrace{$=\Omega'$}{\R}, \explaintermbrace{
 Y &:  (\R^2, \B(\R^2)) \to (\R, \B(\R)) \\
 & X(x,y)=x \\
 & Y(x,y)=y \\
-P(B) &= \iint_B f(x,y) \wrt{x} \wrt{y} \quad \forall B \in \B(\R^2) 
+P(E) &= \iint_B f(x,y) \wrt{x} \wrt{y} \quad \forall E \in \B(\R^2) 
 \end{align*}
 Then the $\sigma$-field induced by $X$, i.e. $\sigma(X)=X^{-1}(\F')$, consists of the sets $\set{B \times \R, \; B \in \B(\R)}$.
 %
@@ -8237,7 +8242,7 @@ Some examples of filtrations formed by this strategy include:
 %
 \begin{enumerate}
 	\item Take $\Omega$ to be the unit square. Form increasingly refined partitions by splitting cells of $\Omega_{n-1}$ in half, vertically if $n$ odd and horizontally if $n$ even.  See Remark~\ref{rk:concrete_example_of_increasing_information_process}. 
-	\item  Let $\Omega$ be the space of binary-valued sequences. Form increasingly refined partitions by having $\Omega_{n}$ group together all sequences whose values match along the first $n$ coordinates. See Example \ref{ex:filtration_generated_by_projecting_random_sequences_of_binary_values_onto_their_first_n_coordinates}
+	\item  Let $\Omega$ be the space of binary-valued sequences. Form increasingly refined partitions by having $\Omega_{n}$ group together all sequences whose values match along the first $n$ coordinates. See Example \ref{ex:filtration_generated_by_projecting_random_sequences_of_binary_values_onto_their_first_n_coordinates}.
 \end{enumerate}
 
 
@@ -8880,7 +8885,7 @@ Some properties of uniform integrability are
 \end{proposition}
 
 \begin{proof}
-
+\phantom{a}
 \begin{alphabate}
 \item The definition of uniform integrability in \Eqref{eqn:uniform_integrability_in_quantified_form} immediately yields the alternate characterization of integrability (\Eqref{eqn:alternate_characterization_of_integrability}) for each of the members in the sequence.  
 \item We can rewrite \Eqref{eqn:decomposing_an_integral_into_a_top_integral_and_bottom_integral} in terms of $f_n$ rather than $f$ to obtain a finite upper bound. Hence, the supremum is also finite.
@@ -8889,7 +8894,7 @@ Some properties of uniform integrability are
 by monotonicity of the integral.
 
 {\scriptsize Specifically,
-\[|f_n| \leq g \quad \implies  \indicate{|f_n| \geq c} \; \leq  \; \indicate{|g| \geq c} \implies \implies  |f_n| \,  \indicate{|f_n| \geq c} \; \leq  \; |g| \, \indicate{|g| \geq c}  \]
+\[|f_n| \leq g \quad \implies  \indicate{|f_n| \geq c} \; \leq  \; \indicate{|g| \geq c} \implies  |f_n| \,  \indicate{|f_n| \geq c} \; \leq  \; |g| \, \indicate{|g| \geq c}  \]
 }
 
 In other words, for all $\epsilon$, we can choose $c$ which works for $g$ to meet the criterion, and that same $c$ will work for all $f_n$.
